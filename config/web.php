@@ -4,12 +4,21 @@ $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
 $config = [
-    'id' => 'basic',
+    'id' => 'workshop',
+    'name'=>'Workshop',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'layout' => 'index',
+    'language' => 'ru-RU',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
+        '@adminlte'   => '@vendor/almasaeed2010/adminlte',
+    ],
+    'modules' => [
+        'zhp' => [
+            'class' => 'app\modules\zhp\Module',
+        ],
     ],
     'components' => [
         'request' => [
@@ -49,6 +58,7 @@ $config = [
             'showScriptName' => false,
 
                 'rules' => [
+                    '<module:[\w-]+>/<controller:[\w-]+>/<action:[\w-]+>/<id:\d+>] => <module>/<controller>/<action>',
                     '<controller>/<action>' => '<controller>/<action>'
                 ]
 
