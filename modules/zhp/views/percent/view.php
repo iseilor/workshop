@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\modules\zhp\models\Percent */
 
-$this->title = $model->title;
+$this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Percents', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -30,8 +30,27 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'title',
-            'content:ntext',
+            'created_at',
+            'created_by',
+            'updated_at',
+            'updated_by',
+            'date_birth',
+            'gender',
+            'experience',
+            'year',
+            'date_pension',
+            'family_count',
+            'family_income',
+            'area_total',
+            'area_buy',
+            'cost_total',
+            'cost_user',
+            'bank_credit',
+            'loan',
+            'percent_count',
+            'percent_rate',
+            'compensation_count',
+            'compensation_years',
         ],
     ]) ?>
 

@@ -26,6 +26,7 @@ AppAssetAdminLTE::register($this);
     <?php $this->head() ?>
     <link href="/css/google_fonts.css" rel="stylesheet">
     <link href="/css/ionicons.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
 </head>
 <body class="hold-transition sidebar-mini">
 <?php $this->beginBody() ?>

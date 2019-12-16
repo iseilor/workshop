@@ -21,14 +21,14 @@ class AppAssetAdminLTE extends AssetBundle
 
     public $js
         = [
-            'plugins/jquery/jquery.js',
+            //'plugins/jquery/jquery.js',
             'plugins/bootstrap/js/bootstrap.bundle.js',
             'dist/js/adminlte.js',
             'dist/js/demo.js',
         ];
     public $depends
         = [
-            //'yii\web\YiiAsset',
+            'yii\web\YiiAsset',
             //'yii\bootstrap\BootstrapAsset',
         ];
 }

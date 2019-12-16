@@ -4,7 +4,7 @@ namespace app\modules\zhp\controllers;
 
 use Yii;
 use app\modules\zhp\models\Percent;
-use app\modules\zhp\PercentSearch;
+use app\modules\zhp\models\PercentSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;

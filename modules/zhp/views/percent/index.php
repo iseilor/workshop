@@ -4,12 +4,9 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\modules\zhp\PercentSearch */
+/* @var $searchModel app\modules\zhp\models\PercentSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->params['breadcrumbs'][] = [
-    'label' => 'Жилищная политика',
-    'url'=> '/zhp/'];
 $this->title = 'Percents';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -30,8 +27,27 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'title',
-            'content:ntext',
+            'created_at',
+            'created_by',
+            'updated_at',
+            'updated_by',
+            //'date_birth',
+            //'gender',
+            //'experience',
+            //'year',
+            //'date_pension',
+            //'family_count',
+            //'family_income',
+            //'area_total',
+            //'area_buy',
+            //'cost_total',
+            //'cost_user',
+            //'bank_credit',
+            //'loan',
+            //'percent_count',
+            //'percent_rate',
+            //'compensation_count',
+            //'compensation_years',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
