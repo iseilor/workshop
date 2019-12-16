@@ -3,35 +3,45 @@
 namespace app\modules\zhp\models;
 
 use Yii;
+use yii\behaviors\BlameableBehavior;
+use yii\behaviors\TimestampBehavior;
+use yii\db\BaseActiveRecord;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "zhp_percent".
  *
- * @property int $id
- * @property int|null $created_at Дата создания
- * @property int|null $created_by Кто создал
- * @property int|null $updated_at Дата изменения
- * @property int|null $updated_by Кто изменил
- * @property string $date_birth Дата рождения
- * @property string $gender Пол
- * @property int $experience Стаж работы в Ростелеком
- * @property int $year Год оказания помощи
- * @property string|null $date_pension Дата выхода на досрочную пенсию
- * @property int $family_count Количество членов семьи
- * @property int $family_income Среднемесячный доход на одного члена семьи, руб
- * @property int $area_total Общая площадь имеющегося жилья, м2
- * @property int $area_buy Общая площадь приобретаемого жилья, м2
- * @property int $cost_total Полная стоимость жилья, руб
- * @property int $cost_user Собственные средства работника, руб
- * @property int $bank_credit Размер кредита Банка, руб 
- * @property int $loan Размер займа , руб
- * @property int $percent_count Сумма процентов, руб
- * @property int $percent_rate %-ая ставка
- * @property int|null $compensation_count Максимальный размер компенсации процентов в год
- * @property int|null $compensation_years Максимальный срок компенсации процентов (лет)
+ * @property int         $id
+ * @property int|null    $created_at         Дата создания
+ * @property int|null    $created_by         Кто создал
+ * @property int|null    $updated_at         Дата изменения
+ * @property int|null    $updated_by         Кто изменил
+ * @property string      $date_birth         Дата рождения
+ * @property string      $gender             Пол
+ * @property int         $experience         Стаж работы в Ростелеком
+ * @property int         $year               Год оказания помощи
+ * @property string|null $date_pension       Дата выхода на досрочную пенсию
+ * @property int         $family_count       Количество членов семьи
+ * @property int         $family_income      Среднемесячный доход на одного
+ *           члена семьи, руб
+ * @property int         $area_total         Общая площадь имеющегося жилья, м2
+ * @property int         $area_buy           Общая площадь приобретаемого
+ *           жилья, м2
+ * @property int         $cost_total         Полная стоимость жилья, руб
+ * @property int         $cost_user          Собственные средства работника,
+ *           руб
+ * @property int         $bank_credit        Размер кредита Банка, руб
+ * @property int         $loan               Размер займа , руб
+ * @property int         $percent_count      Сумма процентов, руб
+ * @property int         $percent_rate       %-ая ставка
+ * @property int|null    $compensation_count Максимальный размер компенсации
+ *           процентов в год
+ * @property int|null    $compensation_years Максимальный срок компенсации
+ *           процентов (лет)
  */
 class Percent extends \yii\db\ActiveRecord
 {
+
     /**
      * {@inheritdoc}
      */
@@ -46,10 +56,48 @@ class Percent extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['created_at', 'created_by', 'updated_at', 'updated_by', 'experience', 'year', 'family_count', 'family_income', 'area_total', 'area_buy', 'cost_total', 'cost_user', 'bank_credit', 'loan', 'percent_count', 'percent_rate', 'compensation_count', 'compensation_years'], 'integer'],
-            [['date_birth', 'gender', 'experience', 'year', 'family_count', 'family_income', 'area_total', 'area_buy', 'cost_total', 'cost_user', 'bank_credit', 'loan', 'percent_count', 'percent_rate'], 'required'],
+            [
+                [
+                    'experience',
+                    'year',
+                    'family_count',
+                    'family_income',
+                    'area_total',
+                    'area_buy',
+                    'cost_total',
+                    'cost_user',
+                    'bank_credit',
+                    'loan',
+                    'percent_count',
+                    'percent_rate',
+                    'compensation_count',
+                    'compensation_years',
+                ],
+                'integer',
+            ],
+            [
+                [
+                    'date_birth',
+                    'gender',
+                    'experience',
+                    'year',
+                    'family_count',
+                    'family_income',
+                    'area_total',
+                    'area_buy',
+                    'cost_total',
+                    'cost_user',
+                    'bank_credit',
+                    'loan',
+                    'percent_count',
+                    'percent_rate',
+                ],
+                'required',
+            ],
             [['date_birth', 'date_pension'], 'string', 'max' => 255],
             [['gender'], 'string', 'max' => 1],
+            [['created_at', 'updated_at'], 'safe'],
+            [['created_by', 'updated_by'], 'safe'],
         ];
     }
 
@@ -81,6 +129,27 @@ class Percent extends \yii\db\ActiveRecord
             'percent_rate' => '%-ая ставка',
             'compensation_count' => 'Максимальный размер компенсации процентов в год',
             'compensation_years' => 'Максимальный срок компенсации процентов (лет)',
+        ];
+    }
+
+    public function behaviors()
+    {
+        return [
+            'timestamp' => [
+                'class' => TimestampBehavior::className(),
+                'attributes' => [
+                    BaseActiveRecord::EVENT_BEFORE_INSERT => ['created_at'],
+                    BaseActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
+                ],
+                'value' => function () {
+                    return new Expression('NOW()');
+                },
+            ],
+            [
+                'class' => BlameableBehavior::className(),
+                'createdByAttribute' => 'created_by',
+                'updatedByAttribute' => 'updated_by',
+            ],
         ];
     }
 }
