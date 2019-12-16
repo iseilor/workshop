@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\User;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -11,8 +12,12 @@ use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\EntryForm;
 
+use app\models\SignupForm;
+
 class SiteController extends Controller
 {
+    public $layout = 'index';
+    public $title = '123';
     /**
      * {@inheritdoc}
      */
@@ -146,5 +151,37 @@ class SiteController extends Controller
             // либо страница отображается первый раз, либо есть ошибка в данных
             return $this->render('entry', ['model' => $model]);
         }
+    }
+
+    public function actionAddAdmin() {
+        $model = User::find()->where(['username' => 'admin'])->one();
+        if (empty($model)) {
+            $user = new User();
+            $user->username = 'admin';
+            $user->email = 'admin@gmail.com';
+            $user->setPassword('admin');
+            $user->generateAuthKey();
+            if ($user->save()) {
+                echo 'good';
+            }
+        }
+    }
+
+
+    public function actionSignup()
+    {
+        $model = new SignupForm();
+
+        if ($model->load(Yii::$app->request->post())) {
+            if ($user = $model->signup()) {
+                if (Yii::$app->getUser()->login($user)) {
+                    return $this->goHome();
+                }
+            }
+        }
+
+        return $this->render('signup', [
+            'model' => $model,
+        ]);
     }
 }

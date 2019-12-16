@@ -1,53 +1,57 @@
 <?php
-
 /* @var $this yii\web\View */
-
-$this->title = 'My Yii Application';
+$this->title = 'Workshop / Ростелеком внутренние услуги 1.0';
 ?>
-<div class="site-index">
-
-    <div class="jumbotron">
-        <h1>Congratulations!</h1>
-
-        <p class="lead">You have successfully created your Yii-powered application.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
-    </div>
-
-    <div class="body-content">
-
-        <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
+<div class="row">
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-info">
+            <div class="inner">
+                <h3>ЖП</h3>
+                <p>Жилищная политика</p>
             </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
+            <div class="icon">
+                <i class="fas fa-home"></i>
             </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
-            </div>
+            <a href="/zhp/" class="small-box-footer">Перейти <i class="fas fa-arrow-circle-right"></i></a>
         </div>
-
+    </div>
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-info">
+            <div class="inner">
+                <h3>ДМС</h3>
+                <p>Медицинское страхование</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-heartbeat"></i>
+            </div>
+            <a href="/zhp/" class="small-box-footer">Перейти <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-info">
+            <div class="inner">
+                <h3>Путёвки</h3>
+                <p>Путёвки и лечение</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-plane"></i>
+            </div>
+            <a href="/zhp/" class="small-box-footer">Перейти <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div><div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-green">
+            <div class="inner">
+                <h3>Отчёты</h3>
+                <p>Еженедельные отчёты</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-file-alt"></i>
+            </div>
+            <a href="/zhp/" class="small-box-footer">Перейти <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
     </div>
 </div>

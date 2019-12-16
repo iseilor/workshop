@@ -4,12 +4,21 @@ $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
 $config = [
-    'id' => 'basic',
+    'id' => 'workshop',
+    'name'=>'Workshop',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'layout' => 'index',
+    'language' => 'ru-RU',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
+        '@adminlte'   => '@vendor/almasaeed2010/adminlte',
+    ],
+    'modules' => [
+        'zhp' => [
+            'class' => 'app\modules\zhp\Module',
+        ],
     ],
     'components' => [
         'request' => [
@@ -47,8 +56,12 @@ $config = [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => [
-            ],
+
+                'rules' => [
+                    '<module:[\w-]+>/<controller:[\w-]+>/<action:[\w-]+>/<id:\d+>] => <module>/<controller>/<action>',
+                    '<controller>/<action>' => '<controller>/<action>'
+                ]
+
         ],
     ],
     'params' => $params,
@@ -60,14 +73,14 @@ if (YII_ENV_DEV) {
     $config['modules']['debug'] = [
         'class' => 'yii\debug\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1'],
+        //'allowedIPs' => ['127.0.1.1', '::1','*'],
     ];
 
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
         'class' => 'yii\gii\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1'],
+        //'allowedIPs' => ['127.0.1.1', '::1','*'],
     ];
 }
 
