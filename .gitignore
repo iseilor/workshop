@@ -37,4 +37,4 @@ tests/_support/_generated
 /.github/
 /log/
 /vendor/
-/web/assets/
+/web/assets/*
