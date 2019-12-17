@@ -7,13 +7,13 @@ $this->title = 'Workshop / Ростелеком внутренние услуг�
         <!-- small box -->
         <div class="small-box bg-info">
             <div class="inner">
-                <h3>ЖП</h3>
-                <p>Жилищная политика</p>
+                <h3>ЖК</h3>
+                <p>Жилищная компания</p>
             </div>
             <div class="icon">
                 <i class="fas fa-home"></i>
             </div>
-            <a href="/zhp/" class="small-box-footer">Перейти <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="/jk/" class="small-box-footer">Перейти <i class="fas fa-arrow-circle-right"></i></a>
         </div>
     </div>
     <div class="col-lg-3 col-6">

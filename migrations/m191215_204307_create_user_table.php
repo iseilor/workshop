@@ -29,6 +29,7 @@ class m191215_204307_create_user_table extends Migration
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
         ], $tableOptions);
+        $this->execute($this->addData());
     }
 
     /**
@@ -39,5 +40,9 @@ class m191215_204307_create_user_table extends Migration
         $this->dropTable('{{%user}}');
     }
 
-
+    public function addData()
+    {
+        return "INSERT INTO {{%user}} (`id`,`username`,`auth_key`,`password_hash`,`password_reset_token`,`email`,`status`,`created_at`,`updated_at`)
+        VALUES (1,'admin', 'LUhzCoier87Bg2owV', 'UOpkior0DmlGY2', '$2y$13\$rnMlS7HIVR4mLhGu5To2y..mEWYQc4Y0Lxja0tHW/jZA81zO0RuV.', 'admin@gmail.com',	10,	1576581994,	1576581994)";
+    }
 }

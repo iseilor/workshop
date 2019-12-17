@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\zhp\models;
+namespace app\modules\jk\models;
 
 use Yii;
 use yii\behaviors\BlameableBehavior;

@@ -17,8 +17,8 @@ $config = [
 
     ],
     'modules' => [
-        'zhp' => [
-            'class' => 'app\modules\zhp\Module',
+        'jk' => [
+            'class' => 'app\modules\jk\Module',
         ],
     ],
     'components' => [
@@ -53,6 +53,20 @@ $config = [
             ],
         ],
         'db' => $db,
+
+        'i18n' => [
+            'translations' => [
+                'app*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    //'basePath' => '@app/messages',
+                    //'sourceLanguage' => 'en-US',
+                    'fileMap' => [
+                        'app'       => 'app.php',
+                        'app/jk' => 'app_jk.php',
+                    ],
+                ],
+            ],
+        ],
 
         'urlManager' => [
             'enablePrettyUrl' => true,
