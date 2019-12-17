@@ -51,7 +51,7 @@ class Percent extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['created_at', 'created_by', 'date_birth', 'gender', 'experience', 'year', 'family_count', 'family_income', 'area_total', 'area_buy', 'cost_total', 'cost_user', 'bank_credit'], 'required'],
+            [['date_birth', 'gender', 'experience', 'year', 'family_count', 'family_income', 'area_total', 'area_buy', 'cost_total', 'cost_user', 'bank_credit', 'loan', 'percent_count', 'percent_rate'], 'required'],
             [['created_at', 'updated_at', 'date_birth', 'date_pension'], 'safe'],
             [['created_by', 'updated_by', 'gender', 'experience', 'year', 'family_count', 'family_income', 'area_total', 'area_buy', 'cost_total', 'cost_user', 'bank_credit', 'loan', 'percent_count', 'percent_rate', 'compensation_result', 'compensation_count', 'compensation_years'], 'integer'],
         ];

@@ -83,6 +83,31 @@ AppAssetAdminLTE::register($this);
     <?= $this->render('assets/footer'); ?>
 </div>
 <?php $this->endBody() ?>
+
+
+<script>
+    $(document).ready(function () {
+        $('#percent-calc').click(function () {
+            var form = $('#percent-form');
+            form.yiiActiveForm('validate', true);
+
+        });
+
+        $('#percent-form').on("afterValidate", function (event, messages) {
+            var attributes = $(this).data().attributes; // to get the list of attributes that has been passed in attributes property
+            var settings = $(this).data().settings; // to get the settings
+
+            console.log(attributes);
+
+        });
+    });
+
+
+</script>
+
 </body>
 </html>
 <?php $this->endPage() ?>
+
+
+

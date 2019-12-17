@@ -1,6 +1,4 @@
 <?php
-use yii\helpers\Html;
-
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\jk\models\Percent */
@@ -9,7 +7,11 @@ $this->title = 'Калькулятор суммы компенсации про�
 $this->params['breadcrumbs'][] = ['label' => 'Жилищная политика', 'url' => ['/zhp/']];
 //$this->params['breadcrumbs'][] = ['label' => 'Percents', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
-?>
+
+use app\modules\jk\assets\JkAsset;
+JkAsset::register($this);
+
+ ?>
 <div class="row">
     <div class="col-md-12">
 
