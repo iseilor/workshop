@@ -5,7 +5,7 @@ use yii\db\Migration;
 /**
  * Handles the creation of table `{{%user}}`.
  */
-class m191215_204307_create_user_table extends Migration
+class m000000_000001_create_user_table extends Migration
 {
     /**
      * {@inheritdoc}
@@ -42,7 +42,7 @@ class m191215_204307_create_user_table extends Migration
 
     public function addData()
     {
-        return "INSERT INTO {{%user}} (`id`,`username`,`auth_key`,`password_hash`,`password_reset_token`,`email`,`status`,`created_at`,`updated_at`)
-        VALUES (1,'admin', 'LUhzCoier87Bg2owV', 'UOpkior0DmlGY2', '$2y$13\$rnMlS7HIVR4mLhGu5To2y..mEWYQc4Y0Lxja0tHW/jZA81zO0RuV.', 'admin@gmail.com',	10,	1576581994,	1576581994)";
+        return "INSERT INTO {{%user}} (`id`,`username`,`auth_key`,`password_hash`,`email`,`status`,`created_at`,`updated_at`)
+        VALUES (1,'admin', 'KhzwCjkdPWSW020jZfNU2FsQdJ03Ayai', '$2y$13$0m8vVgx3tqSJR1dmAZctU.feEXOerAG73vZA9BubTYQlo3BoUvEZi', 'admin@gmail.com',	10,	1576662481,	1576662481)";
     }
 }

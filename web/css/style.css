@@ -1,12 +1,17 @@
+/*Подсвечиваем поля краным при ошибках*/
 .form-group.has-error .help-block {
     color: #dd4b39;
 }
-
 .form-group.has-error .form-control, .form-group.has-error .input-group-addon {
     border-color: #dd4b39;
     box-shadow: none;
 }
-
 .form-group.has-error label {
     color: #dd4b39;
+}
+
+/*Отмечатем звёздочкой поля обязательные для заполнения*/
+div.required label:after {
+    content: " *";
+    color: red;
 }

@@ -29,6 +29,9 @@ $config = [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
+        'assetManager' => [
+            'linkAssets' => true
+        ],
         'user' => [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
@@ -73,7 +76,21 @@ $config = [
             'showScriptName' => false,
 
                 'rules' => [
-                    '<module:[\w-]+>/<controller:[\w-]+>/<action:[\w-]+>/<id:\d+>] => <module>/<controller>/<action>',
+                    'login'=>'site/login',
+                    'logout'=>'site/logout',
+                    'signup'=>'site/signup',
+
+                    '<_m:[\w\-]+>' => '<_m>/default/index',
+
+
+                    '<module:[\w-]+>/<controller:[\w-]+>/<action:[\w-]+>/<id:\d+>' => '<module>/<controller>/<action>',
+
+
+
+
+
+                    '<module:\w+>/<action:\w+>' => '<module>/default/<action>',
+
                     '<controller>/<action>' => '<controller>/<action>'
                 ]
 

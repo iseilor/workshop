@@ -17,4 +17,10 @@ class DefaultController extends Controller
     {
         return $this->render('index');
     }
+
+    public function actionFaq()
+    {
+        return $this->render('faq');
+    }
+
 }

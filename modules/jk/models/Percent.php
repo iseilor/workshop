@@ -19,8 +19,6 @@ use yii\db\Expression;
  * @property string $date_birth
  * @property int $gender
  * @property int $experience
- * @property int $year
- * @property string|null $date_pension
  * @property int $family_count
  * @property int $family_income
  * @property int $area_total
@@ -51,9 +49,29 @@ class Percent extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['date_birth', 'gender', 'experience', 'year', 'family_count', 'family_income', 'area_total', 'area_buy', 'cost_total', 'cost_user', 'bank_credit', 'loan', 'percent_count', 'percent_rate'], 'required'],
-            [['created_at', 'updated_at', 'date_birth', 'date_pension'], 'safe'],
-            [['created_by', 'updated_by', 'gender', 'experience', 'year', 'family_count', 'family_income', 'area_total', 'area_buy', 'cost_total', 'cost_user', 'bank_credit', 'loan', 'percent_count', 'percent_rate', 'compensation_result', 'compensation_count', 'compensation_years'], 'integer'],
+            [['date_birth', 'gender', 'experience',  'family_count', 'family_income', 'area_total', 'area_buy', 'cost_total', 'cost_user', 'bank_credit', 'percent_count', 'percent_rate'], 'required'],
+            [['created_at', 'updated_at', 'date_birth'], 'safe'],
+            [['created_by', 'updated_by', 'gender', 'experience', 'family_count', 'family_income', 'area_total', 'area_buy', 'cost_total', 'cost_user', 'bank_credit', 'loan', 'percent_count', 'percent_rate', 'compensation_result', 'compensation_count', 'compensation_years'], 'integer'],
+
+            // Стаж в компании
+            ['experience', 'compare', 'compareValue' => 1, 'operator' => '>=', 'type' => 'number'],
+            ['experience', 'compare', 'compareValue' => 50, 'operator' => '<=', 'type' => 'number'],
+
+            // Кол-во членов в семье
+            ['family_count', 'compare', 'compareValue' => 1, 'operator' => '>=', 'type' => 'number'],
+            ['family_count', 'compare', 'compareValue' => 10, 'operator' => '<=', 'type' => 'number'],
+
+            // Прожиточный минимум в сеьме
+            ['family_income', 'compare', 'compareValue' => 5000, 'operator' => '>=', 'type' => 'number'],
+            ['family_income', 'compare', 'compareValue' => 50000, 'operator' => '<=', 'type' => 'number'],
+
+
+            // Сумма процентов
+            ['percent_count', 'compare', 'compareValue' => 1, 'operator' => '>=', 'type' => 'number'],
+
+            // Процентная ставка
+            ['percent_rate', 'compare', 'compareValue' => 1, 'operator' => '>=', 'type' => 'number'],
+            ['percent_rate', 'compare', 'compareValue' => 100, 'operator' => '<=', 'type' => 'number'],
         ];
     }
 
@@ -71,8 +89,6 @@ class Percent extends \yii\db\ActiveRecord
             'date_birth' => Yii::t('app/jk', 'Date Birth'),
             'gender' => Yii::t('app/jk', 'Gender'),
             'experience' => Yii::t('app/jk', 'Experience'),
-            'year' => Yii::t('app/jk', 'Year'),
-            'date_pension' => Yii::t('app/jk', 'Date Pension'),
             'family_count' => Yii::t('app/jk', 'Family Count'),
             'family_income' => Yii::t('app/jk', 'Family Income'),
             'area_total' => Yii::t('app/jk', 'Area Total'),

@@ -1,12 +1,71 @@
-<div class="jk-default-index">
-    <h1><?= $this->context->action->uniqueId ?></h1>
-    <p>
-        This is the view content for action "<?= $this->context->action->id ?>".
-        The action belongs to the controller "<?= get_class($this->context) ?>"
-        in the "<?= $this->context->module->id ?>" module.
-    </p>
-    <p>
-        You may customize this page by editing the following file:<br>
-        <code><?= __FILE__ ?></code>
-    </p>
+<?php
+/* @var $this yii\web\View */
+$this->title = 'Жилищная компания';
+$this->params['breadcrumbs'][] = $this->title;
+
+use yii\helpers\Url; ?>
+<div class="row">
+    <div class="col-md-3">
+        <div class="small-box bg-info">
+
+            <div class="inner">
+                <h3>%</h3>
+                <p>Калькулятор процентов</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-home"></i>
+            </div>
+            <a href="<?=Url::to(['/jk/percent/create']);?>" class="small-box-footer">Перейти <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <!-- small box -->
+        <div class="small-box bg-info">
+            <div class="inner">
+                <h3>Займ</h3>
+                <p>Калькулятор займа</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-heartbeat"></i>
+            </div>
+            <a href="<?=Url::to(['site/dev']);?>" class="small-box-footer">Перейти <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="small-box bg-info">
+            <div class="inner">
+                <h3>F.A.Q</h3>
+                <p>Частые вопросы</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-question"></i>
+            </div>
+            <a href="<?=Url::to(['/jk/default/faq']);?>" class="small-box-footer">Перейти <i
+                        class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="small-box bg-info">
+            <div class="inner">
+                <h3>Документы</h3>
+                <p>Нормативная документация</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-file-word"></i>
+            </div>
+            <a href="/zhp/" class="small-box-footer">Перейти <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="small-box bg-green">
+            <div class="inner">
+                <h3>Куратор</h3>
+                <p>Горшкова Лада</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-user"></i>
+            </div>
+            <a href="<?=Url::to(['site/dev']);?>" class="small-box-footer">Перейти <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
 </div>

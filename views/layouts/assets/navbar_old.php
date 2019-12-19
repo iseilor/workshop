@@ -1,3 +1,8 @@
+<?php
+
+use yii\helpers\Url;
+
+?>
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
@@ -6,10 +11,10 @@
                         class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="index3.html" class="nav-link">Главная</a>
+            <a href="<?=Url::home()?>" class="nav-link">Главная</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="#" class="nav-link">О проекте</a>
+            <a href="<?=Url::home()?>" class="nav-link">О проекте</a>
         </li>
     </ul>
 
@@ -38,7 +43,7 @@
                 <a href="#" class="dropdown-item">
                     <!-- Message Start -->
                     <div class="media">
-                        <img src="/img/user1-128x128.jpg" alt="User Avatar"
+                        <img src="<?=Yii::$app->homeUrl?>img/user1-128x128.jpg" alt="User Avatar"
                              class="img-size-50 mr-3 img-circle">
                         <div class="media-body">
                             <h3 class="dropdown-item-title">
@@ -59,7 +64,7 @@
                 <a href="#" class="dropdown-item">
                     <!-- Message Start -->
                     <div class="media">
-                        <img src="/img/user8-128x128.jpg" alt="User Avatar"
+                        <img src="<?=Yii::$app->homeUrl?>img/user8-128x128.jpg" alt="User Avatar"
                              class="img-size-50 img-circle mr-3">
                         <div class="media-body">
                             <h3 class="dropdown-item-title">
@@ -79,7 +84,7 @@
                 <a href="#" class="dropdown-item">
                     <!-- Message Start -->
                     <div class="media">
-                        <img src="/img/user3-128x128.jpg" alt="User Avatar"
+                        <img src="<?=Yii::$app->homeUrl?>img/user3-128x128.jpg" alt="User Avatar"
                              class="img-size-50 img-circle mr-3">
                         <div class="media-body">
                             <h3 class="dropdown-item-title">

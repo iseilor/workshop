@@ -31,8 +31,6 @@ class m191214_194009_create_jk_percent_table extends Migration
             'date_birth' => Schema::TYPE_DATE . ' NOT NULL',
             'gender' => Schema::TYPE_BOOLEAN . ' NOT NULL',
             'experience' => Schema::TYPE_INTEGER . ' NOT NULL',
-            'year'=> Schema::TYPE_INTEGER . ' NOT NULL',
-            'date_pension'=> Schema::TYPE_DATE,
 
             'family_count'=> Schema::TYPE_INTEGER . ' NOT NULL',
             'family_income'=> Schema::TYPE_INTEGER . ' NOT NULL',
