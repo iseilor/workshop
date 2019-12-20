@@ -7,7 +7,7 @@ use yii\db\mysql\Schema;
 /**
  * Handles the creation of table `{{%jk_faq}}`.
  */
-class m191219_150827_create_jk_faq_table extends Migration
+class m000001_000003_create_jk_faq_table extends Migration
 {
     /**
      * {@inheritdoc}

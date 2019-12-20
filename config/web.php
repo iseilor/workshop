@@ -5,15 +5,15 @@ $db = require __DIR__ . '/db.php';
 
 $config = [
     'id' => 'workshop',
-    'name'=>'Workshop',
+    'name' => 'Workshop',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'layout' => 'index',
     'language' => 'ru-RU',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
-        '@npm'   => '@vendor/npm-asset',
-        '@adminlte'   => '@vendor/almasaeed2010/adminlte',
+        '@npm' => '@vendor/npm-asset',
+        '@adminlte' => '@vendor/almasaeed2010/adminlte',
 
     ],
     'modules' => [
@@ -64,7 +64,7 @@ $config = [
                     //'basePath' => '@app/messages',
                     //'sourceLanguage' => 'en-US',
                     'fileMap' => [
-                        'app'       => 'app.php',
+                        'app' => 'app.php',
                         'app/jk' => 'app_jk.php',
                     ],
                 ],
@@ -75,24 +75,21 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
 
-                'rules' => [
-                    'login'=>'site/login',
-                    'logout'=>'site/logout',
-                    'signup'=>'site/signup',
+            'rules' => [
+                'login' => 'site/login',
+                'logout' => 'site/logout',
+                'signup' => 'site/signup',
 
-                    '<_m:[\w\-]+>' => '<_m>/default/index',
-
-
-                    '<module:[\w-]+>/<controller:[\w-]+>/<action:[\w-]+>/<id:\d+>' => '<module>/<controller>/<action>',
+                '<_m:[\w\-]+>' => '<_m>/default/index',
 
 
+                '<module:[\w-]+>/<controller:[\w-]+>/<action:[\w-]+>/<id:\d+>' => '<module>/<controller>/<action>',
 
 
+                '<module:\w+>/<action:\w+>' => '<module>/default/<action>',
 
-                    '<module:\w+>/<action:\w+>' => '<module>/default/<action>',
-
-                    '<controller>/<action>' => '<controller>/<action>'
-                ]
+                '<controller>/<action>' => '<controller>/<action>'
+            ]
 
         ],
     ],

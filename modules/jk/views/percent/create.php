@@ -8,9 +8,6 @@ $this->title = "Калькулятор суммы компенсации про�
 $this->params['breadcrumbs'][] = ['label' => 'Жилищная политика', 'url' => ['/jk/']];
 //$this->params['breadcrumbs'][] = ['label' => 'Percents', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
-
-use app\modules\jk\assets\JkAsset;
-JkAsset::register($this);
 ?>
 
 <div id="result" class="alert alert-success alert-dismissible d-none">

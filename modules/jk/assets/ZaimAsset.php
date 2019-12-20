@@ -4,12 +4,12 @@ namespace app\modules\jk\assets;
 
 use yii\web\AssetBundle;
 
-class JkAsset extends AssetBundle
+class ZaimAsset extends AssetBundle
 {
     public $sourcePath = '@app/modules/jk/web';
     public $js
         = [
-            'js/jk.js',
+            'js/jk_zaim.js',
         ];
     public $depends
         = [

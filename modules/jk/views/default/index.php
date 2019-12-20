@@ -9,7 +9,7 @@ use yii\helpers\Url; ?>
         <div class="small-box bg-info">
 
             <div class="inner">
-                <h3>%</h3>
+                <h3>Калькулятор %</h3>
                 <p>Калькулятор процентов</p>
             </div>
             <div class="icon">
@@ -28,7 +28,9 @@ use yii\helpers\Url; ?>
             <div class="icon">
                 <i class="fas fa-heartbeat"></i>
             </div>
-            <a href="<?=Url::to(['site/dev']);?>" class="small-box-footer">Перейти <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="<?=Url::to(['/jk/zaim/create']);?>" class="small-box-footer">Перейти <i
+                        class="fas
+             fa-arrow-circle-right"></i></a>
         </div>
     </div>
     <div class="col-md-3">

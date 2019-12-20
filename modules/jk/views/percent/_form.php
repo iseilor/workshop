@@ -7,6 +7,10 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model app\modules\jk\models\Percent */
 /* @var $form yii\widgets\ActiveForm */
+
+
+use app\modules\jk\assets\PercentAsset;
+PercentAsset::register($this);
 ?>
 
 <?php $form = ActiveForm::begin(['id' => 'percent-form',]); ?>

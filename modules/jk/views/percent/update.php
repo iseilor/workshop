@@ -12,8 +12,8 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('app\jk', 'Percents'), 'url'
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app\jk', 'Update');
 
-use app\modules\jk\assets\JkAsset;
-JkAsset::register($this);
+use app\modules\jk\assets\PercentAsset;
+PercentAsset::register($this);
 ?>
 <div class="percent-update">
 

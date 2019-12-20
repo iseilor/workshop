@@ -4,23 +4,23 @@ use yii\db\Migration;
 use yii\db\Schema;
 
 /**
- * Handles the creation of table `{{%jk_percent}}`.
+ * Handles the creation of table `{{%jk_zaim}}`.
  */
-class m191214_194009_create_jk_percent_table extends Migration
+class m000001_000002_create_jk_zaim_table extends Migration
 {
-
     /**
      * {@inheritdoc}
      */
     public function safeUp()
     {
+
         $tableOptions = null;
         if ($this->db->driverName === 'mysql') {
             $tableOptions
                 = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         }
 
-        $this->createTable('{{%jk_percent}}', [
+        $this->createTable('{{%jk_zaim}}', [
             'id' => Schema::TYPE_PK,
 
             'created_at' => Schema::TYPE_DATETIME . ' NOT NULL',
@@ -41,10 +41,8 @@ class m191214_194009_create_jk_percent_table extends Migration
             'cost_total'=> Schema::TYPE_INTEGER . ' NOT NULL',
             'cost_user' => Schema::TYPE_INTEGER . ' NOT NULL',
             'bank_credit' => Schema::TYPE_INTEGER . ' NOT NULL',
-            'loan'=> Schema::TYPE_INTEGER,
 
-            'percent_count' => Schema::TYPE_INTEGER . ' NOT NULL',
-            'percent_rate' => Schema::TYPE_INTEGER . ' NOT NULL',
+            'rf_area'=> Schema::TYPE_INTEGER . ' NOT NULL',
 
             'compensation_result'=> Schema::TYPE_BOOLEAN,
             'compensation_count'=> Schema::TYPE_INTEGER,
@@ -58,6 +56,6 @@ class m191214_194009_create_jk_percent_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropTable('{{%jk_percent}}');
+        $this->dropTable('{{%jk_zaim}}');
     }
 }
