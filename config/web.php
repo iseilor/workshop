@@ -20,6 +20,10 @@ $config = [
         'jk' => [
             'class' => 'app\modules\jk\Module',
         ],
+
+        'simplechat' => [
+            'class' => 'bubasuma\simplechat\Module',
+        ],
     ],
     'components' => [
         'request' => [

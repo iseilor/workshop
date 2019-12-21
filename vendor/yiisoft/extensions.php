@@ -75,4 +75,13 @@ return array (
       '@yii/jui' => $vendorDir . '/yiisoft/yii2-jui',
     ),
   ),
+  'bubasuma/yii2-simplechat' => 
+  array (
+    'name' => 'bubasuma/yii2-simplechat',
+    'version' => '2.0.0.0',
+    'alias' => 
+    array (
+      '@bubasuma/simplechat' => $vendorDir . '/bubasuma/yii2-simplechat',
+    ),
+  ),
 );
