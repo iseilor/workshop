@@ -10,12 +10,16 @@ $config = [
     'bootstrap' => ['log'],
     'layout' => 'index',
     'language' => 'ru-RU',
+    'defaultRoute' => 'main/default/index',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm' => '@vendor/npm-asset',
         '@adminlte' => '@vendor/almasaeed2010/adminlte',
     ],
     'modules' => [
+        'main' => [
+            'class' => 'app\modules\main\Module',
+        ],
         'admin' => [
             'class' => 'app\modules\admin\Module',
         ],
@@ -41,10 +45,12 @@ $config = [
         'user' => [
             'identityClass' => 'app\modules\user\models\User',
             'enableAutoLogin' => true,
+            'loginUrl' => ['user/default/login'],
         ],
         'errorHandler' => [
-            'errorAction' => 'site/error',
+            'errorAction' => 'main/default/error',
         ],
+
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
             // send all mails to a file by default. You have to set

@@ -16,7 +16,7 @@ use yii\helpers\Url;
         <span class="brand-text font-weight-light">Workshop-2019</span>
     </a>
 
-    <?php echo Nav::widget([
+    <?php /*echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'activateParents' => true,
         'items' => array_filter([
@@ -43,7 +43,7 @@ use yii\helpers\Url;
                 ]] :
                 false,
         ]),
-    ]);?>
+    ]);*/?>
 
     <!-- Sidebar -->
     <div class="sidebar">

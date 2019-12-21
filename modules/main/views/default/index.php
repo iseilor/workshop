@@ -14,7 +14,7 @@ use yii\helpers\Url; ?>
             <div class="icon">
                 <i class="fas fa-home"></i>
             </div>
-            <a href="<?= Url::to(['jk/default/index']); ?>" class="small-box-footer">Перейти <i
+            <a href="<?= Url::to(['/jk/']); ?>" class="small-box-footer">Перейти <i
                         class="fas fa-arrow-circle-right"></i></a>
         </div>
     </div>
