@@ -16,12 +16,16 @@ $config = [
         '@adminlte' => '@vendor/almasaeed2010/adminlte',
     ],
     'modules' => [
-        'jk' => [
-            'class' => 'app\modules\jk\Module',
+        'admin' => [
+            'class' => 'app\modules\admin\Module',
         ],
         'user' => [
             'class' => 'app\modules\user\Module',
         ],
+        'jk' => [
+            'class' => 'app\modules\jk\Module',
+        ],
+
     ],
     'components' => [
         'request' => [
@@ -79,17 +83,21 @@ $config = [
             'showScriptName' => false,
 
             'rules' => [
-                '<_a:(login|logout|signup|email-confirm|request-password-reset|password-reset)>' => 'user/default/<_a>',
-
+                /*'<_a:(login|logout|signup|email-confirm|request-password-reset|password-reset)>' => 'user/default/<_a>',
                 '<_m:[\w\-]+>' => '<_m>/default/index',
-
-
                 '<module:[\w-]+>/<controller:[\w-]+>/<action:[\w-]+>/<id:\d+>' => '<module>/<controller>/<action>',
-
-
                 '<module:\w+>/<action:\w+>' => '<module>/default/<action>',
+                '<controller>/<action>' => '<controller>/<action>'*/
 
-                '<controller>/<action>' => '<controller>/<action>'
+                '' => 'main/default/index',
+                'contact' => 'main/contact/index',
+                '<_a:error>' => 'main/default/<_a>',
+                '<_a:(login|logout|signup|confirm-email|request-password-reset|reset-password)>' => 'user/default/<_a>',
+
+                '<_m:[\w\-]+>/<_c:[\w\-]+>/<id:\d+>' => '<_m>/<_c>/view',
+                '<_m:[\w\-]+>/<_c:[\w\-]+>/<id:\d+>/<_a:[\w\-]+>' => '<_m>/<_c>/<_a>',
+                '<_m:[\w\-]+>' => '<_m>/default/index',
+                '<_m:[\w\-]+>/<_c:[\w\-]+>' => '<_m>/<_c>/index',
             ]
 
         ],

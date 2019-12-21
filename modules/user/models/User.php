@@ -4,6 +4,7 @@ namespace app\modules\user\models;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
+use yii\helpers\ArrayHelper;
 use yii\web\IdentityInterface;
 
 /**

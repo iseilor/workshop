@@ -40,7 +40,11 @@ class ComposerStaticInitecbe9ee047cdfe8ad4a5b4da8c33329a
         ),
         'k' => 
         array (
+            'kartik\\helpers\\' => 15,
+            'kartik\\form\\' => 12,
+            'kartik\\field\\' => 13,
             'kartik\\datetime\\' => 16,
+            'kartik\\date\\' => 12,
             'kartik\\base\\' => 12,
         ),
         'c' => 
@@ -147,9 +151,25 @@ class ComposerStaticInitecbe9ee047cdfe8ad4a5b4da8c33329a
             1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
             2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
         ),
+        'kartik\\helpers\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-helpers/src',
+        ),
+        'kartik\\form\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-activeform/src',
+        ),
+        'kartik\\field\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-field-range/src',
+        ),
         'kartik\\datetime\\' => 
         array (
             0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-datetimepicker/src',
+        ),
+        'kartik\\date\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-datepicker/src',
         ),
         'kartik\\base\\' => 
         array (
