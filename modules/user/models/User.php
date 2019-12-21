@@ -26,7 +26,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     const STATUS_BLOCKED = 0;
     const STATUS_ACTIVE = 1;
     const STATUS_WAIT = 2;
-
+    const SCENARIO_PROFILE = 'profile';
     /**
      * {@inheritdoc}
      */
@@ -251,5 +251,13 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     public function removeEmailConfirmToken()
     {
         $this->email_confirm_token = null;
+    }
+
+    public function scenarios()
+    {
+        return [
+            self::SCENARIO_DEFAULT => ['username', 'email', 'status'],
+            self::SCENARIO_PROFILE => ['email'],
+        ];
     }
 }
