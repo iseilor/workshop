@@ -58,6 +58,7 @@ AppAssetAdminLTE::register($this);
                             'links' => isset($this->params['breadcrumbs'])
                                 ? $this->params['breadcrumbs'] : [],
                         ]) ?>
+                        <?= Alert::widget() ?>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->

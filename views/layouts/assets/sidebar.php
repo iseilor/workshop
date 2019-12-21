@@ -16,6 +16,22 @@ use yii\helpers\Url;
         <span class="brand-text font-weight-light">Workshop-2019</span>
     </a>
 
+    <?php echo Nav::widget([
+    'options' => ['class' => 'navbar-nav navbar-right'],
+    'items' => array_filter([
+    ['label' => 'Home', 'url' => ['/main/default/index']],
+    ['label' => 'Contact', 'url' => ['main/contact/index']],
+    Yii::$app->user->isGuest ?
+    ['label' => 'Sign Up', 'url' => ['/user/default/signup']] :
+    false,
+    Yii::$app->user->isGuest ?
+    ['label' => 'Login', 'url' => ['/user/default/login']] :
+    ['label' => 'Logout (' . Yii::$app->user->identity->username . ')',
+    'url' => ['/user/default/logout'],
+    'linkOptions' => ['data-method' => 'post']],
+    ]),
+    ]);?>
+
     <!-- Sidebar -->
     <div class="sidebar">
         <!-- Sidebar user panel (optional) -->

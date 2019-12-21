@@ -12640,3 +12640,3096 @@ $_SERVER = [
     'REQUEST_TIME_FLOAT' => 1576771656.7312
     'REQUEST_TIME' => 1576771656
 ]
+2019-12-20 20:48:39 [-][-][-][error][yii\db\Exception] PDOException: SQLSTATE[HY000] [1045] Access denied for user 'workshop'@'localhost' (using password: YES) in /var/www/workshop/vendor/yiisoft/yii2/db/Connection.php:698
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/db/Connection.php(698): PDO->__construct('mysql:host=loca...', 'workshop', 'k3BL1O%0k', NULL)
+#1 /var/www/workshop/vendor/yiisoft/yii2/db/Connection.php(624): yii\db\Connection->createPdoInstance()
+#2 /var/www/workshop/vendor/yiisoft/yii2/db/Connection.php(1015): yii\db\Connection->open()
+#3 /var/www/workshop/vendor/yiisoft/yii2/db/Connection.php(1002): yii\db\Connection->getMasterPdo()
+#4 /var/www/workshop/vendor/yiisoft/yii2/db/Command.php(253): yii\db\Connection->getSlavePdo()
+#5 /var/www/workshop/vendor/yiisoft/yii2/db/Command.php(1153): yii\db\Command->prepare(true)
+#6 /var/www/workshop/vendor/yiisoft/yii2/db/Command.php(399): yii\db\Command->queryInternal('fetchAll', NULL)
+#7 /var/www/workshop/vendor/yiisoft/yii2/db/mysql/Schema.php(319): yii\db\Command->queryAll()
+#8 /var/www/workshop/vendor/yiisoft/yii2/db/mysql/Schema.php(125): yii\db\mysql\Schema->findColumns(Object(yii\db\TableSchema))
+#9 /var/www/workshop/vendor/yiisoft/yii2/db/Schema.php(754): yii\db\mysql\Schema->loadTableSchema('migration')
+#10 /var/www/workshop/vendor/yiisoft/yii2/db/Schema.php(193): yii\db\Schema->getTableMetadata('{{%migration}}', 'schema', true)
+#11 /var/www/workshop/vendor/yiisoft/yii2/console/controllers/MigrateController.php(211): yii\db\Schema->getTableSchema('{{%migration}}', true)
+#12 /var/www/workshop/vendor/yiisoft/yii2/console/controllers/BaseMigrateController.php(242): yii\console\controllers\MigrateController->getMigrationHistory(3)
+#13 [internal function]: yii\console\controllers\BaseMigrateController->actionDown(3)
+#14 /var/www/workshop/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#15 /var/www/workshop/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#16 /var/www/workshop/vendor/yiisoft/yii2/console/Controller.php(164): yii\base\Controller->runAction('down', Array)
+#17 /var/www/workshop/vendor/yiisoft/yii2/base/Module.php(528): yii\console\Controller->runAction('down', Array)
+#18 /var/www/workshop/vendor/yiisoft/yii2/console/Application.php(180): yii\base\Module->runAction('migrate/down', Array)
+#19 /var/www/workshop/vendor/yiisoft/yii2/console/Application.php(147): yii\console\Application->runAction('migrate/down', Array)
+#20 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\console\Application->handleRequest(Object(yii\console\Request))
+#21 /var/www/workshop/yii(20): yii\base\Application->run()
+#22 {main}
+
+Next yii\db\Exception: SQLSTATE[HY000] [1045] Access denied for user 'workshop'@'localhost' (using password: YES) in /var/www/workshop/vendor/yiisoft/yii2/db/Connection.php:635
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/db/Connection.php(1015): yii\db\Connection->open()
+#1 /var/www/workshop/vendor/yiisoft/yii2/db/Connection.php(1002): yii\db\Connection->getMasterPdo()
+#2 /var/www/workshop/vendor/yiisoft/yii2/db/Command.php(253): yii\db\Connection->getSlavePdo()
+#3 /var/www/workshop/vendor/yiisoft/yii2/db/Command.php(1153): yii\db\Command->prepare(true)
+#4 /var/www/workshop/vendor/yiisoft/yii2/db/Command.php(399): yii\db\Command->queryInternal('fetchAll', NULL)
+#5 /var/www/workshop/vendor/yiisoft/yii2/db/mysql/Schema.php(319): yii\db\Command->queryAll()
+#6 /var/www/workshop/vendor/yiisoft/yii2/db/mysql/Schema.php(125): yii\db\mysql\Schema->findColumns(Object(yii\db\TableSchema))
+#7 /var/www/workshop/vendor/yiisoft/yii2/db/Schema.php(754): yii\db\mysql\Schema->loadTableSchema('migration')
+#8 /var/www/workshop/vendor/yiisoft/yii2/db/Schema.php(193): yii\db\Schema->getTableMetadata('{{%migration}}', 'schema', true)
+#9 /var/www/workshop/vendor/yiisoft/yii2/console/controllers/MigrateController.php(211): yii\db\Schema->getTableSchema('{{%migration}}', true)
+#10 /var/www/workshop/vendor/yiisoft/yii2/console/controllers/BaseMigrateController.php(242): yii\console\controllers\MigrateController->getMigrationHistory(3)
+#11 [internal function]: yii\console\controllers\BaseMigrateController->actionDown(3)
+#12 /var/www/workshop/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#13 /var/www/workshop/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#14 /var/www/workshop/vendor/yiisoft/yii2/console/Controller.php(164): yii\base\Controller->runAction('down', Array)
+#15 /var/www/workshop/vendor/yiisoft/yii2/base/Module.php(528): yii\console\Controller->runAction('down', Array)
+#16 /var/www/workshop/vendor/yiisoft/yii2/console/Application.php(180): yii\base\Module->runAction('migrate/down', Array)
+#17 /var/www/workshop/vendor/yiisoft/yii2/console/Application.php(147): yii\console\Application->runAction('migrate/down', Array)
+#18 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\console\Application->handleRequest(Object(yii\console\Request))
+#19 /var/www/workshop/yii(20): yii\base\Application->run()
+#20 {main}
+Additional Information:
+
+2019-12-20 20:48:38 [-][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'SHELL' => '/bin/bash'
+    'SESSION_MANAGER' => 'local/acer:@/tmp/.ICE-unix/20650,unix/acer:/tmp/.ICE-unix/20650'
+    'COLORTERM' => 'truecolor'
+    'XDG_CONFIG_DIRS' => '/etc/xdg/xdg-ubuntu:/etc/xdg'
+    'XDG_MENU_PREFIX' => 'gnome-'
+    'no_proxy' => 'localhost,127.0.0.0/8,::1'
+    'GNOME_DESKTOP_SESSION_ID' => 'this-is-deprecated'
+    'GTK_IM_MODULE' => 'ibus'
+    'GTK2_MODULES' => 'overlay-scrollbar'
+    'QT4_IM_MODULE' => 'ibus'
+    'MANDATORY_PATH' => '/usr/share/gconf/ubuntu.mandatory.path'
+    'LC_ADDRESS' => 'ru_RU.UTF-8'
+    'GNOME_SHELL_SESSION_MODE' => 'ubuntu'
+    'LC_NAME' => 'ru_RU.UTF-8'
+    'SSH_AUTH_SOCK' => '/run/user/1000/keyring/ssh'
+    'XMODIFIERS' => '@im=ibus'
+    'DESKTOP_SESSION' => 'ubuntu'
+    'LC_MONETARY' => 'ru_RU.UTF-8'
+    'SSH_AGENT_PID' => '20527'
+    'GTK_MODULES' => 'gail:atk-bridge'
+    'PWD' => '/var/www/workshop'
+    'XDG_SESSION_DESKTOP' => 'ubuntu'
+    'LOGNAME' => 'neiron'
+    'QT_QPA_PLATFORMTHEME' => 'appmenu-qt5'
+    'XDG_SESSION_TYPE' => 'x11'
+    'GPG_AGENT_INFO' => '/run/user/1000/gnupg/S.gpg-agent:0:1'
+    'XAUTHORITY' => '/run/user/1000/gdm/Xauthority'
+    'GJS_DEBUG_TOPICS' => 'JS ERROR;JS LOG'
+    'WINDOWPATH' => '3'
+    'HOME' => '/home/neiron'
+    'USERNAME' => 'neiron'
+    'IM_CONFIG_PHASE' => '1'
+    'LC_PAPER' => 'ru_RU.UTF-8'
+    'LANG' => 'en_US.UTF-8'
+    'LS_COLORS' => 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'
+    'XDG_CURRENT_DESKTOP' => 'ubuntu:GNOME'
+    'VTE_VERSION' => '5802'
+    'GNOME_TERMINAL_SCREEN' => '/org/gnome/Terminal/screen/a1959aca_9b7a_42fb_8d62_6368b716ad76'
+    'INVOCATION_ID' => '53d724e2b359404bac2de0a20d407ec6'
+    'MANAGERPID' => '20398'
+    'CLUTTER_IM_MODULE' => 'ibus'
+    'GJS_DEBUG_OUTPUT' => 'stderr'
+    'LESSCLOSE' => '/usr/bin/lesspipe %s %s'
+    'XDG_SESSION_CLASS' => 'user'
+    'TERM' => 'xterm-256color'
+    'LC_IDENTIFICATION' => 'ru_RU.UTF-8'
+    'DEFAULTS_PATH' => '/usr/share/gconf/ubuntu.default.path'
+    'LESSOPEN' => '| /usr/bin/lesspipe %s'
+    'USER' => 'neiron'
+    'NO_PROXY' => 'localhost,127.0.0.0/8,::1'
+    'GNOME_TERMINAL_SERVICE' => ':1.104'
+    'DISPLAY' => ':1'
+    'SHLVL' => '1'
+    'LC_TELEPHONE' => 'ru_RU.UTF-8'
+    'QT_IM_MODULE' => 'ibus'
+    'LC_MEASUREMENT' => 'ru_RU.UTF-8'
+    'XDG_RUNTIME_DIR' => '/run/user/1000'
+    'LC_TIME' => 'ru_RU.UTF-8'
+    'JOURNAL_STREAM' => '9:191857'
+    'XDG_DATA_DIRS' => '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop:/var/lib/snapd/desktop'
+    'PATH' => '/home/neiron/bin:/home/neiron/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin'
+    'GDMSESSION' => 'ubuntu'
+    'DBUS_SESSION_BUS_ADDRESS' => 'unix:path=/run/user/1000/bus'
+    'LC_NUMERIC' => 'ru_RU.UTF-8'
+    'OLDPWD' => '/home/neiron/Downloads/cades_linux_amd64/cades_linux_amd64'
+    '_' => '/usr/bin/php'
+    'PHP_SELF' => 'yii'
+    'SCRIPT_NAME' => 'yii'
+    'SCRIPT_FILENAME' => 'yii'
+    'PATH_TRANSLATED' => 'yii'
+    'DOCUMENT_ROOT' => ''
+    'REQUEST_TIME_FLOAT' => 1576874918.4749
+    'REQUEST_TIME' => 1576874918
+    'argv' => [
+        0 => 'yii'
+        1 => 'migrate/down'
+        2 => '3'
+    ]
+    'argc' => 3
+]
+2019-12-20 20:57:12 [-][-][-][error][yii\base\InvalidConfigException] ReflectionException: Class m191215_204307_create_user_table does not exist in /var/www/workshop/vendor/yiisoft/yii2/di/Container.php:447
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/di/Container.php(447): ReflectionClass->__construct('m191215_204307_...')
+#1 /var/www/workshop/vendor/yiisoft/yii2/di/Container.php(374): yii\di\Container->getDependencies('m191215_204307_...')
+#2 /var/www/workshop/vendor/yiisoft/yii2/di/Container.php(159): yii\di\Container->build('m191215_204307_...', Array, Array)
+#3 /var/www/workshop/vendor/yiisoft/yii2/BaseYii.php(351): yii\di\Container->get('m191215_204307_...', Array, Array)
+#4 /var/www/workshop/vendor/yiisoft/yii2/console/controllers/MigrateController.php(202): yii\BaseYii::createObject(Array)
+#5 /var/www/workshop/vendor/yiisoft/yii2/console/controllers/BaseMigrateController.php(751): yii\console\controllers\MigrateController->createMigration('m191215_204307_...')
+#6 /var/www/workshop/vendor/yiisoft/yii2/console/controllers/BaseMigrateController.php(262): yii\console\controllers\BaseMigrateController->migrateDown('m191215_204307_...')
+#7 [internal function]: yii\console\controllers\BaseMigrateController->actionDown(3)
+#8 /var/www/workshop/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#9 /var/www/workshop/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#10 /var/www/workshop/vendor/yiisoft/yii2/console/Controller.php(164): yii\base\Controller->runAction('down', Array)
+#11 /var/www/workshop/vendor/yiisoft/yii2/base/Module.php(528): yii\console\Controller->runAction('down', Array)
+#12 /var/www/workshop/vendor/yiisoft/yii2/console/Application.php(180): yii\base\Module->runAction('migrate/down', Array)
+#13 /var/www/workshop/vendor/yiisoft/yii2/console/Application.php(147): yii\console\Application->runAction('migrate/down', Array)
+#14 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\console\Application->handleRequest(Object(yii\console\Request))
+#15 /var/www/workshop/yii(20): yii\base\Application->run()
+#16 {main}
+
+Next yii\base\InvalidConfigException: Failed to instantiate component or class "m191215_204307_create_user_table". in /var/www/workshop/vendor/yiisoft/yii2/di/Container.php:449
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/di/Container.php(374): yii\di\Container->getDependencies('m191215_204307_...')
+#1 /var/www/workshop/vendor/yiisoft/yii2/di/Container.php(159): yii\di\Container->build('m191215_204307_...', Array, Array)
+#2 /var/www/workshop/vendor/yiisoft/yii2/BaseYii.php(351): yii\di\Container->get('m191215_204307_...', Array, Array)
+#3 /var/www/workshop/vendor/yiisoft/yii2/console/controllers/MigrateController.php(202): yii\BaseYii::createObject(Array)
+#4 /var/www/workshop/vendor/yiisoft/yii2/console/controllers/BaseMigrateController.php(751): yii\console\controllers\MigrateController->createMigration('m191215_204307_...')
+#5 /var/www/workshop/vendor/yiisoft/yii2/console/controllers/BaseMigrateController.php(262): yii\console\controllers\BaseMigrateController->migrateDown('m191215_204307_...')
+#6 [internal function]: yii\console\controllers\BaseMigrateController->actionDown(3)
+#7 /var/www/workshop/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#8 /var/www/workshop/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#9 /var/www/workshop/vendor/yiisoft/yii2/console/Controller.php(164): yii\base\Controller->runAction('down', Array)
+#10 /var/www/workshop/vendor/yiisoft/yii2/base/Module.php(528): yii\console\Controller->runAction('down', Array)
+#11 /var/www/workshop/vendor/yiisoft/yii2/console/Application.php(180): yii\base\Module->runAction('migrate/down', Array)
+#12 /var/www/workshop/vendor/yiisoft/yii2/console/Application.php(147): yii\console\Application->runAction('migrate/down', Array)
+#13 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\console\Application->handleRequest(Object(yii\console\Request))
+#14 /var/www/workshop/yii(20): yii\base\Application->run()
+#15 {main}
+2019-12-20 20:57:09 [-][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'SHELL' => '/bin/bash'
+    'SESSION_MANAGER' => 'local/acer:@/tmp/.ICE-unix/20650,unix/acer:/tmp/.ICE-unix/20650'
+    'COLORTERM' => 'truecolor'
+    'XDG_CONFIG_DIRS' => '/etc/xdg/xdg-ubuntu:/etc/xdg'
+    'XDG_MENU_PREFIX' => 'gnome-'
+    'no_proxy' => 'localhost,127.0.0.0/8,::1'
+    'GNOME_DESKTOP_SESSION_ID' => 'this-is-deprecated'
+    'GTK_IM_MODULE' => 'ibus'
+    'GTK2_MODULES' => 'overlay-scrollbar'
+    'QT4_IM_MODULE' => 'ibus'
+    'MANDATORY_PATH' => '/usr/share/gconf/ubuntu.mandatory.path'
+    'LC_ADDRESS' => 'ru_RU.UTF-8'
+    'GNOME_SHELL_SESSION_MODE' => 'ubuntu'
+    'LC_NAME' => 'ru_RU.UTF-8'
+    'SSH_AUTH_SOCK' => '/run/user/1000/keyring/ssh'
+    'XMODIFIERS' => '@im=ibus'
+    'DESKTOP_SESSION' => 'ubuntu'
+    'LC_MONETARY' => 'ru_RU.UTF-8'
+    'SSH_AGENT_PID' => '20527'
+    'GTK_MODULES' => 'gail:atk-bridge'
+    'PWD' => '/var/www/workshop'
+    'XDG_SESSION_DESKTOP' => 'ubuntu'
+    'LOGNAME' => 'neiron'
+    'QT_QPA_PLATFORMTHEME' => 'appmenu-qt5'
+    'XDG_SESSION_TYPE' => 'x11'
+    'GPG_AGENT_INFO' => '/run/user/1000/gnupg/S.gpg-agent:0:1'
+    'XAUTHORITY' => '/run/user/1000/gdm/Xauthority'
+    'GJS_DEBUG_TOPICS' => 'JS ERROR;JS LOG'
+    'WINDOWPATH' => '3'
+    'HOME' => '/home/neiron'
+    'USERNAME' => 'neiron'
+    'IM_CONFIG_PHASE' => '1'
+    'LC_PAPER' => 'ru_RU.UTF-8'
+    'LANG' => 'en_US.UTF-8'
+    'LS_COLORS' => 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'
+    'XDG_CURRENT_DESKTOP' => 'ubuntu:GNOME'
+    'VTE_VERSION' => '5802'
+    'GNOME_TERMINAL_SCREEN' => '/org/gnome/Terminal/screen/a1959aca_9b7a_42fb_8d62_6368b716ad76'
+    'INVOCATION_ID' => '53d724e2b359404bac2de0a20d407ec6'
+    'MANAGERPID' => '20398'
+    'CLUTTER_IM_MODULE' => 'ibus'
+    'GJS_DEBUG_OUTPUT' => 'stderr'
+    'LESSCLOSE' => '/usr/bin/lesspipe %s %s'
+    'XDG_SESSION_CLASS' => 'user'
+    'TERM' => 'xterm-256color'
+    'LC_IDENTIFICATION' => 'ru_RU.UTF-8'
+    'DEFAULTS_PATH' => '/usr/share/gconf/ubuntu.default.path'
+    'LESSOPEN' => '| /usr/bin/lesspipe %s'
+    'USER' => 'neiron'
+    'NO_PROXY' => 'localhost,127.0.0.0/8,::1'
+    'GNOME_TERMINAL_SERVICE' => ':1.104'
+    'DISPLAY' => ':1'
+    'SHLVL' => '1'
+    'LC_TELEPHONE' => 'ru_RU.UTF-8'
+    'QT_IM_MODULE' => 'ibus'
+    'LC_MEASUREMENT' => 'ru_RU.UTF-8'
+    'XDG_RUNTIME_DIR' => '/run/user/1000'
+    'LC_TIME' => 'ru_RU.UTF-8'
+    'JOURNAL_STREAM' => '9:191857'
+    'XDG_DATA_DIRS' => '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop:/var/lib/snapd/desktop'
+    'PATH' => '/home/neiron/bin:/home/neiron/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin'
+    'GDMSESSION' => 'ubuntu'
+    'DBUS_SESSION_BUS_ADDRESS' => 'unix:path=/run/user/1000/bus'
+    'LC_NUMERIC' => 'ru_RU.UTF-8'
+    'OLDPWD' => '/home/neiron/Downloads/cades_linux_amd64/cades_linux_amd64'
+    '_' => '/usr/bin/php'
+    'PHP_SELF' => 'yii'
+    'SCRIPT_NAME' => 'yii'
+    'SCRIPT_FILENAME' => 'yii'
+    'PATH_TRANSLATED' => 'yii'
+    'DOCUMENT_ROOT' => ''
+    'REQUEST_TIME_FLOAT' => 1576875429.5691
+    'REQUEST_TIME' => 1576875429
+    'argv' => [
+        0 => 'yii'
+        1 => 'migrate/down'
+        2 => '3'
+    ]
+    'argc' => 3
+]
+2019-12-20 21:40:10 [-][-][-][error][yii\console\UnknownCommandException] yii\base\InvalidRouteException: Unable to resolve the request "simplechat". in /var/www/workshop/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/console/Application.php(180): yii\base\Module->runAction('simplechat', Array)
+#1 /var/www/workshop/vendor/yiisoft/yii2/console/Application.php(147): yii\console\Application->runAction('simplechat', Array)
+#2 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\console\Application->handleRequest(Object(yii\console\Request))
+#3 /var/www/workshop/yii(20): yii\base\Application->run()
+#4 {main}
+
+Next yii\console\UnknownCommandException: Unknown command "simplechat". in /var/www/workshop/vendor/yiisoft/yii2/console/Application.php:183
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/console/Application.php(147): yii\console\Application->runAction('simplechat', Array)
+#1 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\console\Application->handleRequest(Object(yii\console\Request))
+#2 /var/www/workshop/yii(20): yii\base\Application->run()
+#3 {main}
+2019-12-20 21:40:10 [-][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'SHELL' => '/bin/bash'
+    'SESSION_MANAGER' => 'local/acer:@/tmp/.ICE-unix/20650,unix/acer:/tmp/.ICE-unix/20650'
+    'COLORTERM' => 'truecolor'
+    'XDG_CONFIG_DIRS' => '/etc/xdg/xdg-ubuntu:/etc/xdg'
+    'XDG_MENU_PREFIX' => 'gnome-'
+    'no_proxy' => 'localhost,127.0.0.0/8,::1'
+    'GNOME_DESKTOP_SESSION_ID' => 'this-is-deprecated'
+    'GTK_IM_MODULE' => 'ibus'
+    'GTK2_MODULES' => 'overlay-scrollbar'
+    'QT4_IM_MODULE' => 'ibus'
+    'MANDATORY_PATH' => '/usr/share/gconf/ubuntu.mandatory.path'
+    'LC_ADDRESS' => 'ru_RU.UTF-8'
+    'GNOME_SHELL_SESSION_MODE' => 'ubuntu'
+    'LC_NAME' => 'ru_RU.UTF-8'
+    'SSH_AUTH_SOCK' => '/run/user/1000/keyring/ssh'
+    'XMODIFIERS' => '@im=ibus'
+    'DESKTOP_SESSION' => 'ubuntu'
+    'LC_MONETARY' => 'ru_RU.UTF-8'
+    'SSH_AGENT_PID' => '20527'
+    'GTK_MODULES' => 'gail:atk-bridge'
+    'PWD' => '/var/www/workshop'
+    'XDG_SESSION_DESKTOP' => 'ubuntu'
+    'LOGNAME' => 'neiron'
+    'QT_QPA_PLATFORMTHEME' => 'appmenu-qt5'
+    'XDG_SESSION_TYPE' => 'x11'
+    'GPG_AGENT_INFO' => '/run/user/1000/gnupg/S.gpg-agent:0:1'
+    'XAUTHORITY' => '/run/user/1000/gdm/Xauthority'
+    'GJS_DEBUG_TOPICS' => 'JS ERROR;JS LOG'
+    'WINDOWPATH' => '3'
+    'HOME' => '/home/neiron'
+    'USERNAME' => 'neiron'
+    'IM_CONFIG_PHASE' => '1'
+    'LC_PAPER' => 'ru_RU.UTF-8'
+    'LANG' => 'en_US.UTF-8'
+    'LS_COLORS' => 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'
+    'XDG_CURRENT_DESKTOP' => 'ubuntu:GNOME'
+    'VTE_VERSION' => '5802'
+    'GNOME_TERMINAL_SCREEN' => '/org/gnome/Terminal/screen/a1959aca_9b7a_42fb_8d62_6368b716ad76'
+    'INVOCATION_ID' => '53d724e2b359404bac2de0a20d407ec6'
+    'MANAGERPID' => '20398'
+    'CLUTTER_IM_MODULE' => 'ibus'
+    'GJS_DEBUG_OUTPUT' => 'stderr'
+    'LESSCLOSE' => '/usr/bin/lesspipe %s %s'
+    'XDG_SESSION_CLASS' => 'user'
+    'TERM' => 'xterm-256color'
+    'LC_IDENTIFICATION' => 'ru_RU.UTF-8'
+    'DEFAULTS_PATH' => '/usr/share/gconf/ubuntu.default.path'
+    'LESSOPEN' => '| /usr/bin/lesspipe %s'
+    'USER' => 'neiron'
+    'NO_PROXY' => 'localhost,127.0.0.0/8,::1'
+    'GNOME_TERMINAL_SERVICE' => ':1.104'
+    'DISPLAY' => ':1'
+    'SHLVL' => '1'
+    'LC_TELEPHONE' => 'ru_RU.UTF-8'
+    'QT_IM_MODULE' => 'ibus'
+    'LC_MEASUREMENT' => 'ru_RU.UTF-8'
+    'XDG_RUNTIME_DIR' => '/run/user/1000'
+    'LC_TIME' => 'ru_RU.UTF-8'
+    'JOURNAL_STREAM' => '9:191857'
+    'XDG_DATA_DIRS' => '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop:/var/lib/snapd/desktop'
+    'PATH' => '/home/neiron/bin:/home/neiron/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin'
+    'GDMSESSION' => 'ubuntu'
+    'DBUS_SESSION_BUS_ADDRESS' => 'unix:path=/run/user/1000/bus'
+    'LC_NUMERIC' => 'ru_RU.UTF-8'
+    'OLDPWD' => '/var/www'
+    '_' => '/usr/bin/php'
+    'PHP_SELF' => 'yii'
+    'SCRIPT_NAME' => 'yii'
+    'SCRIPT_FILENAME' => 'yii'
+    'PATH_TRANSLATED' => 'yii'
+    'DOCUMENT_ROOT' => ''
+    'REQUEST_TIME_FLOAT' => 1576878010.4948
+    'REQUEST_TIME' => 1576878010
+    'argv' => [
+        0 => 'yii'
+        1 => 'simplechat'
+    ]
+    'argc' => 2
+]
+2019-12-20 21:46:02 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "messages/default/index". in /var/www/workshop/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('messages/defaul...', Array)
+#1 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Страница не найдена. in /var/www/workshop/vendor/yiisoft/yii2/web/Application.php:115
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#2 {main}
+2019-12-20 21:46:02 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'XDEBUG_SESSION' => 'XDEBUG_ECLIPSE'
+    'PHPSESSID' => 'nmab1pmm6lm9nv7gimpibbh4u7'
+    '_csrf' => '5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'USER' => 'www-data'
+    'HOME' => '/var/www'
+    'HTTP_COOKIE' => 'XDEBUG_SESSION=XDEBUG_ECLIPSE; PHPSESSID=nmab1pmm6lm9nv7gimpibbh4u7; _csrf=5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz%22%3B%7D'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,la;q=0.6'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_DNT' => '1'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_HOST' => 'workshop'
+    'SCRIPT_FILENAME' => '/var/www/workshop/web/index.php'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'workshop'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '127.0.0.1'
+    'REMOTE_PORT' => '51208'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'SERVER_SOFTWARE' => 'nginx/1.16.1'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'REQUEST_SCHEME' => 'http'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/var/www/workshop/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/messages'
+    'SCRIPT_NAME' => '/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => ''
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1576878362.3744
+    'REQUEST_TIME' => 1576878362
+]
+2019-12-20 21:46:05 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "messages/". in /var/www/workshop/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('messages/', Array)
+#1 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Страница не найдена. in /var/www/workshop/vendor/yiisoft/yii2/web/Application.php:115
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#2 {main}
+2019-12-20 21:46:05 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'XDEBUG_SESSION' => 'XDEBUG_ECLIPSE'
+    'PHPSESSID' => 'nmab1pmm6lm9nv7gimpibbh4u7'
+    '_csrf' => '5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'USER' => 'www-data'
+    'HOME' => '/var/www'
+    'HTTP_COOKIE' => 'XDEBUG_SESSION=XDEBUG_ECLIPSE; PHPSESSID=nmab1pmm6lm9nv7gimpibbh4u7; _csrf=5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz%22%3B%7D'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,la;q=0.6'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_DNT' => '1'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_HOST' => 'workshop'
+    'SCRIPT_FILENAME' => '/var/www/workshop/web/index.php'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'workshop'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '127.0.0.1'
+    'REMOTE_PORT' => '51208'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'SERVER_SOFTWARE' => 'nginx/1.16.1'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'REQUEST_SCHEME' => 'http'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/var/www/workshop/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/messages/'
+    'SCRIPT_NAME' => '/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => ''
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1576878365.8675
+    'REQUEST_TIME' => 1576878365
+]
+2019-12-20 21:46:12 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "messages/default/index". in /var/www/workshop/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('messages/defaul...', Array)
+#1 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Страница не найдена. in /var/www/workshop/vendor/yiisoft/yii2/web/Application.php:115
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#2 {main}
+2019-12-20 21:46:12 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'XDEBUG_SESSION' => 'XDEBUG_ECLIPSE'
+    'PHPSESSID' => 'nmab1pmm6lm9nv7gimpibbh4u7'
+    '_csrf' => '5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'USER' => 'www-data'
+    'HOME' => '/var/www'
+    'HTTP_COOKIE' => 'XDEBUG_SESSION=XDEBUG_ECLIPSE; PHPSESSID=nmab1pmm6lm9nv7gimpibbh4u7; _csrf=5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz%22%3B%7D'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,la;q=0.6'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_DNT' => '1'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_HOST' => 'workshop'
+    'SCRIPT_FILENAME' => '/var/www/workshop/web/index.php'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'workshop'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '127.0.0.1'
+    'REMOTE_PORT' => '51208'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'SERVER_SOFTWARE' => 'nginx/1.16.1'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'REQUEST_SCHEME' => 'http'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/var/www/workshop/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/messages/default/index'
+    'SCRIPT_NAME' => '/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => ''
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1576878372.4745
+    'REQUEST_TIME' => 1576878372
+]
+2019-12-20 21:47:11 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "messages/". in /var/www/workshop/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('messages/', Array)
+#1 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Страница не найдена. in /var/www/workshop/vendor/yiisoft/yii2/web/Application.php:115
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#2 {main}
+2019-12-20 21:47:11 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'XDEBUG_SESSION' => 'XDEBUG_ECLIPSE'
+    'PHPSESSID' => 'nmab1pmm6lm9nv7gimpibbh4u7'
+    '_csrf' => '5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'USER' => 'www-data'
+    'HOME' => '/var/www'
+    'HTTP_COOKIE' => 'XDEBUG_SESSION=XDEBUG_ECLIPSE; PHPSESSID=nmab1pmm6lm9nv7gimpibbh4u7; _csrf=5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz%22%3B%7D'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,la;q=0.6'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_DNT' => '1'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_HOST' => 'workshop'
+    'SCRIPT_FILENAME' => '/var/www/workshop/web/index.php'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'workshop'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '127.0.0.1'
+    'REMOTE_PORT' => '51208'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'SERVER_SOFTWARE' => 'nginx/1.16.1'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'REQUEST_SCHEME' => 'http'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/var/www/workshop/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/messages/'
+    'SCRIPT_NAME' => '/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => ''
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1576878431.4328
+    'REQUEST_TIME' => 1576878431
+]
+2019-12-20 21:48:13 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "message/default/index". in /var/www/workshop/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('message/default...', Array)
+#1 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Страница не найдена. in /var/www/workshop/vendor/yiisoft/yii2/web/Application.php:115
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#2 {main}
+2019-12-20 21:48:13 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'XDEBUG_SESSION' => 'XDEBUG_ECLIPSE'
+    'PHPSESSID' => 'nmab1pmm6lm9nv7gimpibbh4u7'
+    '_csrf' => '5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'USER' => 'www-data'
+    'HOME' => '/var/www'
+    'HTTP_COOKIE' => 'XDEBUG_SESSION=XDEBUG_ECLIPSE; PHPSESSID=nmab1pmm6lm9nv7gimpibbh4u7; _csrf=5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz%22%3B%7D'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,la;q=0.6'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_DNT' => '1'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_HOST' => 'workshop'
+    'SCRIPT_FILENAME' => '/var/www/workshop/web/index.php'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'workshop'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '127.0.0.1'
+    'REMOTE_PORT' => '51208'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'SERVER_SOFTWARE' => 'nginx/1.16.1'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'REQUEST_SCHEME' => 'http'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/var/www/workshop/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/message'
+    'SCRIPT_NAME' => '/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => ''
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1576878493.4415
+    'REQUEST_TIME' => 1576878493
+]
+2019-12-20 21:48:20 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "message/default/index". in /var/www/workshop/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('message/default...', Array)
+#1 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Страница не найдена. in /var/www/workshop/vendor/yiisoft/yii2/web/Application.php:115
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#2 {main}
+2019-12-20 21:48:20 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'XDEBUG_SESSION' => 'XDEBUG_ECLIPSE'
+    'PHPSESSID' => 'nmab1pmm6lm9nv7gimpibbh4u7'
+    '_csrf' => '5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'USER' => 'www-data'
+    'HOME' => '/var/www'
+    'HTTP_COOKIE' => 'XDEBUG_SESSION=XDEBUG_ECLIPSE; PHPSESSID=nmab1pmm6lm9nv7gimpibbh4u7; _csrf=5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz%22%3B%7D'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,la;q=0.6'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_DNT' => '1'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_HOST' => 'workshop'
+    'SCRIPT_FILENAME' => '/var/www/workshop/web/index.php'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'workshop'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '127.0.0.1'
+    'REMOTE_PORT' => '51208'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'SERVER_SOFTWARE' => 'nginx/1.16.1'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'REQUEST_SCHEME' => 'http'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/var/www/workshop/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/message'
+    'SCRIPT_NAME' => '/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => ''
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1576878500.8049
+    'REQUEST_TIME' => 1576878500
+]
+2019-12-20 21:50:41 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "country/default/index". in /var/www/workshop/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('country/default...', Array)
+#1 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Страница не найдена. in /var/www/workshop/vendor/yiisoft/yii2/web/Application.php:115
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#2 {main}
+2019-12-20 21:50:41 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'XDEBUG_SESSION' => 'XDEBUG_ECLIPSE'
+    'PHPSESSID' => 'nmab1pmm6lm9nv7gimpibbh4u7'
+    '_csrf' => '5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'USER' => 'www-data'
+    'HOME' => '/var/www'
+    'HTTP_COOKIE' => 'XDEBUG_SESSION=XDEBUG_ECLIPSE; PHPSESSID=nmab1pmm6lm9nv7gimpibbh4u7; _csrf=5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz%22%3B%7D'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,la;q=0.6'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_PURPOSE' => 'prefetch'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_DNT' => '1'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_HOST' => 'workshop'
+    'SCRIPT_FILENAME' => '/var/www/workshop/web/index.php'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'workshop'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '127.0.0.1'
+    'REMOTE_PORT' => '51332'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'SERVER_SOFTWARE' => 'nginx/1.16.1'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'REQUEST_SCHEME' => 'http'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/var/www/workshop/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/country'
+    'SCRIPT_NAME' => '/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => ''
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1576878641.6024
+    'REQUEST_TIME' => 1576878641
+]
+2019-12-20 21:50:42 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "chat/default/index". in /var/www/workshop/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('chat/default/in...', Array)
+#1 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Страница не найдена. in /var/www/workshop/vendor/yiisoft/yii2/web/Application.php:115
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#2 {main}
+2019-12-20 21:50:42 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'XDEBUG_SESSION' => 'XDEBUG_ECLIPSE'
+    'PHPSESSID' => 'nmab1pmm6lm9nv7gimpibbh4u7'
+    '_csrf' => '5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'USER' => 'www-data'
+    'HOME' => '/var/www'
+    'HTTP_COOKIE' => 'XDEBUG_SESSION=XDEBUG_ECLIPSE; PHPSESSID=nmab1pmm6lm9nv7gimpibbh4u7; _csrf=5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz%22%3B%7D'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,la;q=0.6'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_DNT' => '1'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_HOST' => 'workshop'
+    'SCRIPT_FILENAME' => '/var/www/workshop/web/index.php'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'workshop'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '127.0.0.1'
+    'REMOTE_PORT' => '51332'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'SERVER_SOFTWARE' => 'nginx/1.16.1'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'REQUEST_SCHEME' => 'http'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/var/www/workshop/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/chat'
+    'SCRIPT_NAME' => '/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => ''
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1576878642.6601
+    'REQUEST_TIME' => 1576878642
+]
+2019-12-20 21:50:47 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "messages/default/index". in /var/www/workshop/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('messages/defaul...', Array)
+#1 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Страница не найдена. in /var/www/workshop/vendor/yiisoft/yii2/web/Application.php:115
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#2 {main}
+2019-12-20 21:50:47 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'XDEBUG_SESSION' => 'XDEBUG_ECLIPSE'
+    'PHPSESSID' => 'nmab1pmm6lm9nv7gimpibbh4u7'
+    '_csrf' => '5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'USER' => 'www-data'
+    'HOME' => '/var/www'
+    'HTTP_COOKIE' => 'XDEBUG_SESSION=XDEBUG_ECLIPSE; PHPSESSID=nmab1pmm6lm9nv7gimpibbh4u7; _csrf=5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz%22%3B%7D'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,la;q=0.6'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_DNT' => '1'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_HOST' => 'workshop'
+    'SCRIPT_FILENAME' => '/var/www/workshop/web/index.php'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'workshop'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '127.0.0.1'
+    'REMOTE_PORT' => '51332'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'SERVER_SOFTWARE' => 'nginx/1.16.1'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'REQUEST_SCHEME' => 'http'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/var/www/workshop/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/messages'
+    'SCRIPT_NAME' => '/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => ''
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1576878647.292
+    'REQUEST_TIME' => 1576878647
+]
+2019-12-20 21:51:33 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "messages/default/index". in /var/www/workshop/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('messages/defaul...', Array)
+#1 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Страница не найдена. in /var/www/workshop/vendor/yiisoft/yii2/web/Application.php:115
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#2 {main}
+2019-12-20 21:51:33 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'XDEBUG_SESSION' => 'XDEBUG_ECLIPSE'
+    'PHPSESSID' => 'nmab1pmm6lm9nv7gimpibbh4u7'
+    '_csrf' => '5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'USER' => 'www-data'
+    'HOME' => '/var/www'
+    'HTTP_COOKIE' => 'XDEBUG_SESSION=XDEBUG_ECLIPSE; PHPSESSID=nmab1pmm6lm9nv7gimpibbh4u7; _csrf=5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz%22%3B%7D'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,la;q=0.6'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_DNT' => '1'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_HOST' => 'workshop'
+    'SCRIPT_FILENAME' => '/var/www/workshop/web/index.php'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'workshop'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '127.0.0.1'
+    'REMOTE_PORT' => '51332'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'SERVER_SOFTWARE' => 'nginx/1.16.1'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'REQUEST_SCHEME' => 'http'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/var/www/workshop/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/messages'
+    'SCRIPT_NAME' => '/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => ''
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1576878693.3508
+    'REQUEST_TIME' => 1576878693
+]
+2019-12-20 21:54:51 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "messages/default/index". in /var/www/workshop/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('messages/defaul...', Array)
+#1 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Страница не найдена. in /var/www/workshop/vendor/yiisoft/yii2/web/Application.php:115
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#2 {main}
+2019-12-20 21:54:51 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'XDEBUG_SESSION' => 'XDEBUG_ECLIPSE'
+    'PHPSESSID' => 'nmab1pmm6lm9nv7gimpibbh4u7'
+    '_csrf' => '5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'USER' => 'www-data'
+    'HOME' => '/var/www'
+    'HTTP_COOKIE' => 'XDEBUG_SESSION=XDEBUG_ECLIPSE; PHPSESSID=nmab1pmm6lm9nv7gimpibbh4u7; _csrf=5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz%22%3B%7D'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,la;q=0.6'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_DNT' => '1'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_HOST' => 'workshop'
+    'SCRIPT_FILENAME' => '/var/www/workshop/web/index.php'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'workshop'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '127.0.0.1'
+    'REMOTE_PORT' => '51538'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'SERVER_SOFTWARE' => 'nginx/1.16.1'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'REQUEST_SCHEME' => 'http'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/var/www/workshop/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/messages'
+    'SCRIPT_NAME' => '/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => ''
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1576878891.4009
+    'REQUEST_TIME' => 1576878891
+]
+2019-12-20 21:54:55 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "messages/". in /var/www/workshop/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('messages/', Array)
+#1 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Страница не найдена. in /var/www/workshop/vendor/yiisoft/yii2/web/Application.php:115
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#2 {main}
+2019-12-20 21:54:55 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'XDEBUG_SESSION' => 'XDEBUG_ECLIPSE'
+    'PHPSESSID' => 'nmab1pmm6lm9nv7gimpibbh4u7'
+    '_csrf' => '5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'USER' => 'www-data'
+    'HOME' => '/var/www'
+    'HTTP_COOKIE' => 'XDEBUG_SESSION=XDEBUG_ECLIPSE; PHPSESSID=nmab1pmm6lm9nv7gimpibbh4u7; _csrf=5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz%22%3B%7D'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,la;q=0.6'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_DNT' => '1'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_HOST' => 'workshop'
+    'SCRIPT_FILENAME' => '/var/www/workshop/web/index.php'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'workshop'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '127.0.0.1'
+    'REMOTE_PORT' => '51538'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'SERVER_SOFTWARE' => 'nginx/1.16.1'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'REQUEST_SCHEME' => 'http'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/var/www/workshop/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/messages/'
+    'SCRIPT_NAME' => '/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => ''
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1576878895.0952
+    'REQUEST_TIME' => 1576878895
+]
+2019-12-20 21:55:00 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "messages/". in /var/www/workshop/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('messages/', Array)
+#1 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Страница не найдена. in /var/www/workshop/vendor/yiisoft/yii2/web/Application.php:115
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#2 {main}
+2019-12-20 21:55:00 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'XDEBUG_SESSION' => 'XDEBUG_ECLIPSE'
+    'PHPSESSID' => 'nmab1pmm6lm9nv7gimpibbh4u7'
+    '_csrf' => '5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'USER' => 'www-data'
+    'HOME' => '/var/www'
+    'HTTP_COOKIE' => 'XDEBUG_SESSION=XDEBUG_ECLIPSE; PHPSESSID=nmab1pmm6lm9nv7gimpibbh4u7; _csrf=5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz%22%3B%7D'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,la;q=0.6'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_DNT' => '1'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_HOST' => 'workshop'
+    'SCRIPT_FILENAME' => '/var/www/workshop/web/index.php'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'workshop'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '127.0.0.1'
+    'REMOTE_PORT' => '51538'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'SERVER_SOFTWARE' => 'nginx/1.16.1'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'REQUEST_SCHEME' => 'http'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/var/www/workshop/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/messages/'
+    'SCRIPT_NAME' => '/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => ''
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1576878900.6314
+    'REQUEST_TIME' => 1576878900
+]
+2019-12-20 21:55:42 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "messages/". in /var/www/workshop/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('messages/', Array)
+#1 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Страница не найдена. in /var/www/workshop/vendor/yiisoft/yii2/web/Application.php:115
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#2 {main}
+2019-12-20 21:55:42 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'XDEBUG_SESSION' => 'XDEBUG_ECLIPSE'
+    'PHPSESSID' => 'nmab1pmm6lm9nv7gimpibbh4u7'
+    '_csrf' => '5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'USER' => 'www-data'
+    'HOME' => '/var/www'
+    'HTTP_COOKIE' => 'XDEBUG_SESSION=XDEBUG_ECLIPSE; PHPSESSID=nmab1pmm6lm9nv7gimpibbh4u7; _csrf=5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz%22%3B%7D'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,la;q=0.6'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_DNT' => '1'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_HOST' => 'workshop'
+    'SCRIPT_FILENAME' => '/var/www/workshop/web/index.php'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'workshop'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '127.0.0.1'
+    'REMOTE_PORT' => '51538'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'SERVER_SOFTWARE' => 'nginx/1.16.1'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'REQUEST_SCHEME' => 'http'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/var/www/workshop/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/messages/'
+    'SCRIPT_NAME' => '/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => ''
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1576878942.8959
+    'REQUEST_TIME' => 1576878942
+]
+2019-12-20 21:55:44 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "messages/". in /var/www/workshop/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('messages/', Array)
+#1 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Страница не найдена. in /var/www/workshop/vendor/yiisoft/yii2/web/Application.php:115
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#2 {main}
+2019-12-20 21:55:43 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'XDEBUG_SESSION' => 'XDEBUG_ECLIPSE'
+    'PHPSESSID' => 'nmab1pmm6lm9nv7gimpibbh4u7'
+    '_csrf' => '5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'USER' => 'www-data'
+    'HOME' => '/var/www'
+    'HTTP_COOKIE' => 'XDEBUG_SESSION=XDEBUG_ECLIPSE; PHPSESSID=nmab1pmm6lm9nv7gimpibbh4u7; _csrf=5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz%22%3B%7D'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,la;q=0.6'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_DNT' => '1'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_HOST' => 'workshop'
+    'SCRIPT_FILENAME' => '/var/www/workshop/web/index.php'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'workshop'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '127.0.0.1'
+    'REMOTE_PORT' => '51538'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'SERVER_SOFTWARE' => 'nginx/1.16.1'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'REQUEST_SCHEME' => 'http'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/var/www/workshop/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/messages/'
+    'SCRIPT_NAME' => '/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => ''
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1576878943.9958
+    'REQUEST_TIME' => 1576878943
+]
+2019-12-20 21:55:49 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "messages/default/index". in /var/www/workshop/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('messages/defaul...', Array)
+#1 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Страница не найдена. in /var/www/workshop/vendor/yiisoft/yii2/web/Application.php:115
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#2 {main}
+2019-12-20 21:55:49 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'XDEBUG_SESSION' => 'XDEBUG_ECLIPSE'
+    'PHPSESSID' => 'nmab1pmm6lm9nv7gimpibbh4u7'
+    '_csrf' => '5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'USER' => 'www-data'
+    'HOME' => '/var/www'
+    'HTTP_COOKIE' => 'XDEBUG_SESSION=XDEBUG_ECLIPSE; PHPSESSID=nmab1pmm6lm9nv7gimpibbh4u7; _csrf=5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz%22%3B%7D'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,la;q=0.6'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_PURPOSE' => 'prefetch'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_DNT' => '1'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_HOST' => 'workshop'
+    'SCRIPT_FILENAME' => '/var/www/workshop/web/index.php'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'workshop'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '127.0.0.1'
+    'REMOTE_PORT' => '51538'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'SERVER_SOFTWARE' => 'nginx/1.16.1'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'REQUEST_SCHEME' => 'http'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/var/www/workshop/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/messages'
+    'SCRIPT_NAME' => '/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => ''
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1576878949.6222
+    'REQUEST_TIME' => 1576878949
+]
+2019-12-20 21:55:53 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "mesage/default/index". in /var/www/workshop/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('mesage/default/...', Array)
+#1 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Страница не найдена. in /var/www/workshop/vendor/yiisoft/yii2/web/Application.php:115
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#2 {main}
+2019-12-20 21:55:53 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'XDEBUG_SESSION' => 'XDEBUG_ECLIPSE'
+    'PHPSESSID' => 'nmab1pmm6lm9nv7gimpibbh4u7'
+    '_csrf' => '5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'USER' => 'www-data'
+    'HOME' => '/var/www'
+    'HTTP_COOKIE' => 'XDEBUG_SESSION=XDEBUG_ECLIPSE; PHPSESSID=nmab1pmm6lm9nv7gimpibbh4u7; _csrf=5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz%22%3B%7D'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,la;q=0.6'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_DNT' => '1'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_HOST' => 'workshop'
+    'SCRIPT_FILENAME' => '/var/www/workshop/web/index.php'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'workshop'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '127.0.0.1'
+    'REMOTE_PORT' => '51538'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'SERVER_SOFTWARE' => 'nginx/1.16.1'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'REQUEST_SCHEME' => 'http'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/var/www/workshop/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/mesage'
+    'SCRIPT_NAME' => '/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => ''
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1576878953.6187
+    'REQUEST_TIME' => 1576878953
+]
+2019-12-21 07:41:54 [127.0.0.1][-][-][error][yii\i18n\PhpMessageSource::loadFallbackMessages] The message file for category 'app' does not exist: /var/www/workshop/messages/ru-RU/app.php Fallback file does not exist as well: /var/www/workshop/messages/ru/app.php
+    in /var/www/workshop/modules/jk/models/Percent.php:84
+    in /var/www/workshop/modules/jk/views/percent/_form.php:23
+    in /var/www/workshop/modules/jk/views/percent/create.php:31
+2019-12-21 07:41:54 [127.0.0.1][-][-][error][yii\i18n\PhpMessageSource::loadFallbackMessages] The message file for category 'app/jk' does not exist: /var/www/workshop/messages/ru-RU/app_jk.php Fallback file does not exist as well: /var/www/workshop/messages/ru/app_jk.php
+    in /var/www/workshop/modules/jk/models/Percent.php:89
+    in /var/www/workshop/modules/jk/views/percent/_form.php:23
+    in /var/www/workshop/modules/jk/views/percent/create.php:31
+2019-12-21 07:41:53 [127.0.0.1][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'XDEBUG_SESSION' => 'XDEBUG_ECLIPSE'
+    'PHPSESSID' => 'nmab1pmm6lm9nv7gimpibbh4u7'
+    '_csrf' => '5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'USER' => 'www-data'
+    'HOME' => '/var/www'
+    'HTTP_COOKIE' => 'XDEBUG_SESSION=XDEBUG_ECLIPSE; PHPSESSID=nmab1pmm6lm9nv7gimpibbh4u7; _csrf=5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz%22%3B%7D'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,la;q=0.6'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://workshop/jk'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36'
+    'HTTP_DNT' => '1'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_HOST' => 'workshop'
+    'SCRIPT_FILENAME' => '/var/www/workshop/web/index.php'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'workshop'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '127.0.0.1'
+    'REMOTE_PORT' => '51914'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'SERVER_SOFTWARE' => 'nginx/1.16.1'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'REQUEST_SCHEME' => 'http'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/var/www/workshop/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/jk/percent/create'
+    'SCRIPT_NAME' => '/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => ''
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1576914113.9539
+    'REQUEST_TIME' => 1576914113
+]
+2019-12-21 07:42:30 [127.0.0.1][-][-][error][yii\i18n\PhpMessageSource::loadFallbackMessages] The message file for category 'app' does not exist: /var/www/workshop/messages/ru-RU/app.php Fallback file does not exist as well: /var/www/workshop/messages/ru/app.php
+    in /var/www/workshop/modules/jk/models/Percent.php:84
+    in /var/www/workshop/modules/jk/views/percent/_form.php:23
+    in /var/www/workshop/modules/jk/views/percent/create.php:31
+2019-12-21 07:42:30 [127.0.0.1][-][-][error][yii\i18n\PhpMessageSource::loadFallbackMessages] The message file for category 'app/jk' does not exist: /var/www/workshop/messages/ru-RU/app_jk.php Fallback file does not exist as well: /var/www/workshop/messages/ru/app_jk.php
+    in /var/www/workshop/modules/jk/models/Percent.php:89
+    in /var/www/workshop/modules/jk/views/percent/_form.php:23
+    in /var/www/workshop/modules/jk/views/percent/create.php:31
+2019-12-21 07:42:30 [127.0.0.1][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'XDEBUG_SESSION' => 'XDEBUG_ECLIPSE'
+    'PHPSESSID' => 'nmab1pmm6lm9nv7gimpibbh4u7'
+    '_csrf' => '5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'USER' => 'www-data'
+    'HOME' => '/var/www'
+    'HTTP_COOKIE' => 'XDEBUG_SESSION=XDEBUG_ECLIPSE; PHPSESSID=nmab1pmm6lm9nv7gimpibbh4u7; _csrf=5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz%22%3B%7D'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,la;q=0.6'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://workshop/jk'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_DNT' => '1'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_HOST' => 'workshop'
+    'SCRIPT_FILENAME' => '/var/www/workshop/web/index.php'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'workshop'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '127.0.0.1'
+    'REMOTE_PORT' => '51924'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'SERVER_SOFTWARE' => 'nginx/1.16.1'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'REQUEST_SCHEME' => 'http'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/var/www/workshop/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/jk/percent/create'
+    'SCRIPT_NAME' => '/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => ''
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1576914150.5064
+    'REQUEST_TIME' => 1576914150
+]
+2019-12-21 07:42:32 [127.0.0.1][-][-][error][yii\i18n\PhpMessageSource::loadFallbackMessages] The message file for category 'app' does not exist: /var/www/workshop/messages/ru-RU/app.php Fallback file does not exist as well: /var/www/workshop/messages/ru/app.php
+    in /var/www/workshop/modules/jk/models/Percent.php:84
+    in /var/www/workshop/modules/jk/views/percent/_form.php:23
+    in /var/www/workshop/modules/jk/views/percent/create.php:31
+2019-12-21 07:42:32 [127.0.0.1][-][-][error][yii\i18n\PhpMessageSource::loadFallbackMessages] The message file for category 'app/jk' does not exist: /var/www/workshop/messages/ru-RU/app_jk.php Fallback file does not exist as well: /var/www/workshop/messages/ru/app_jk.php
+    in /var/www/workshop/modules/jk/models/Percent.php:89
+    in /var/www/workshop/modules/jk/views/percent/_form.php:23
+    in /var/www/workshop/modules/jk/views/percent/create.php:31
+2019-12-21 07:42:32 [127.0.0.1][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'XDEBUG_SESSION' => 'XDEBUG_ECLIPSE'
+    'PHPSESSID' => 'nmab1pmm6lm9nv7gimpibbh4u7'
+    '_csrf' => '5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'USER' => 'www-data'
+    'HOME' => '/var/www'
+    'HTTP_COOKIE' => 'XDEBUG_SESSION=XDEBUG_ECLIPSE; PHPSESSID=nmab1pmm6lm9nv7gimpibbh4u7; _csrf=5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz%22%3B%7D'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,la;q=0.6'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://workshop/jk'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_DNT' => '1'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_HOST' => 'workshop'
+    'SCRIPT_FILENAME' => '/var/www/workshop/web/index.php'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'workshop'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '127.0.0.1'
+    'REMOTE_PORT' => '51924'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'SERVER_SOFTWARE' => 'nginx/1.16.1'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'REQUEST_SCHEME' => 'http'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/var/www/workshop/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/jk/percent/create'
+    'SCRIPT_NAME' => '/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => ''
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1576914152.5192
+    'REQUEST_TIME' => 1576914152
+]
+2019-12-21 07:42:36 [127.0.0.1][-][-][error][yii\i18n\PhpMessageSource::loadFallbackMessages] The message file for category 'app' does not exist: /var/www/workshop/messages/ru-RU/app.php Fallback file does not exist as well: /var/www/workshop/messages/ru/app.php
+    in /var/www/workshop/modules/jk/models/Percent.php:84
+    in /var/www/workshop/modules/jk/views/percent/_form.php:23
+    in /var/www/workshop/modules/jk/views/percent/create.php:31
+2019-12-21 07:42:36 [127.0.0.1][-][-][error][yii\i18n\PhpMessageSource::loadFallbackMessages] The message file for category 'app/jk' does not exist: /var/www/workshop/messages/ru-RU/app_jk.php Fallback file does not exist as well: /var/www/workshop/messages/ru/app_jk.php
+    in /var/www/workshop/modules/jk/models/Percent.php:89
+    in /var/www/workshop/modules/jk/views/percent/_form.php:23
+    in /var/www/workshop/modules/jk/views/percent/create.php:31
+2019-12-21 07:42:36 [127.0.0.1][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'XDEBUG_SESSION' => 'XDEBUG_ECLIPSE'
+    'PHPSESSID' => 'nmab1pmm6lm9nv7gimpibbh4u7'
+    '_csrf' => '5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'USER' => 'www-data'
+    'HOME' => '/var/www'
+    'HTTP_COOKIE' => 'XDEBUG_SESSION=XDEBUG_ECLIPSE; PHPSESSID=nmab1pmm6lm9nv7gimpibbh4u7; _csrf=5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz%22%3B%7D'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,la;q=0.6'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://workshop/jk'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_DNT' => '1'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_PRAGMA' => 'no-cache'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_HOST' => 'workshop'
+    'SCRIPT_FILENAME' => '/var/www/workshop/web/index.php'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'workshop'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '127.0.0.1'
+    'REMOTE_PORT' => '51924'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'SERVER_SOFTWARE' => 'nginx/1.16.1'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'REQUEST_SCHEME' => 'http'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/var/www/workshop/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/jk/percent/create'
+    'SCRIPT_NAME' => '/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => ''
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1576914156.376
+    'REQUEST_TIME' => 1576914156
+]
+2019-12-21 08:37:47 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][error][Error] Error: Class 'AlertAlias' not found in /var/www/workshop/views/layouts/index.php:61
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/base/View.php(348): require()
+#1 /var/www/workshop/vendor/yiisoft/yii2/base/View.php(257): yii\base\View->renderPhpFile('/var/www/worksh...', Array)
+#2 /var/www/workshop/vendor/yiisoft/yii2/base/Controller.php(401): yii\base\View->renderFile('/var/www/worksh...', Array, Object(app\controllers\SiteController))
+#3 /var/www/workshop/vendor/yiisoft/yii2/base/Controller.php(387): yii\base\Controller->renderContent('<div class="row...')
+#4 /var/www/workshop/controllers/SiteController.php(70): yii\base\Controller->render('index')
+#5 [internal function]: app\controllers\SiteController->actionIndex()
+#6 /var/www/workshop/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#7 /var/www/workshop/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#8 /var/www/workshop/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('', Array)
+#9 /var/www/workshop/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('', Array)
+#10 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#11 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#12 {main}
+2019-12-21 08:37:47 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'XDEBUG_SESSION' => 'XDEBUG_ECLIPSE'
+    'PHPSESSID' => 'nmab1pmm6lm9nv7gimpibbh4u7'
+    '_csrf' => '5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'USER' => 'www-data'
+    'HOME' => '/var/www'
+    'HTTP_COOKIE' => 'XDEBUG_SESSION=XDEBUG_ECLIPSE; PHPSESSID=nmab1pmm6lm9nv7gimpibbh4u7; _csrf=5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz%22%3B%7D'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,la;q=0.6'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_DNT' => '1'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_HOST' => 'workshop'
+    'SCRIPT_FILENAME' => '/var/www/workshop/web/index.php'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'workshop'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '127.0.0.1'
+    'REMOTE_PORT' => '52984'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'SERVER_SOFTWARE' => 'nginx/1.16.1'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'REQUEST_SCHEME' => 'http'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/var/www/workshop/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/'
+    'SCRIPT_NAME' => '/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => ''
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1576917467.4413
+    'REQUEST_TIME' => 1576917467
+]
+2019-12-21 08:38:20 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][error][yii\base\ViewNotFoundException] yii\base\ViewNotFoundException: The view file does not exist: /var/www/workshop/modules/user/views/default/signup.php in /var/www/workshop/vendor/yiisoft/yii2/base/View.php:233
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/base/View.php(156): yii\base\View->renderFile('/var/www/worksh...', Array, Object(app\modules\user\controllers\DefaultController))
+#1 /var/www/workshop/vendor/yiisoft/yii2/base/Controller.php(386): yii\base\View->render('signup', Array, Object(app\modules\user\controllers\DefaultController))
+#2 /var/www/workshop/modules/user/controllers/DefaultController.php(90): yii\base\Controller->render('signup', Array)
+#3 [internal function]: app\modules\user\controllers\DefaultController->actionSignup()
+#4 /var/www/workshop/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#5 /var/www/workshop/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#6 /var/www/workshop/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('signup', Array)
+#7 /var/www/workshop/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('user/default/si...', Array)
+#8 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#9 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#10 {main}
+2019-12-21 08:38:20 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'XDEBUG_SESSION' => 'XDEBUG_ECLIPSE'
+    'PHPSESSID' => 'nmab1pmm6lm9nv7gimpibbh4u7'
+    '_csrf' => '5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'USER' => 'www-data'
+    'HOME' => '/var/www'
+    'HTTP_COOKIE' => 'XDEBUG_SESSION=XDEBUG_ECLIPSE; PHPSESSID=nmab1pmm6lm9nv7gimpibbh4u7; _csrf=5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz%22%3B%7D'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,la;q=0.6'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://workshop/login'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36'
+    'HTTP_DNT' => '1'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_HOST' => 'workshop'
+    'SCRIPT_FILENAME' => '/var/www/workshop/web/index.php'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'workshop'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '127.0.0.1'
+    'REMOTE_PORT' => '52984'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'SERVER_SOFTWARE' => 'nginx/1.16.1'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'REQUEST_SCHEME' => 'http'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/var/www/workshop/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/signup'
+    'SCRIPT_NAME' => '/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => ''
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1576917500.9223
+    'REQUEST_TIME' => 1576917500
+]
+2019-12-21 08:38:37 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "main/default/index". in /var/www/workshop/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('main/default/in...', Array)
+#1 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Страница не найдена. in /var/www/workshop/vendor/yiisoft/yii2/web/Application.php:115
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#2 {main}
+2019-12-21 08:38:37 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'XDEBUG_SESSION' => 'XDEBUG_ECLIPSE'
+    'PHPSESSID' => 'nmab1pmm6lm9nv7gimpibbh4u7'
+    '_csrf' => '5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'USER' => 'www-data'
+    'HOME' => '/var/www'
+    'HTTP_COOKIE' => 'XDEBUG_SESSION=XDEBUG_ECLIPSE; PHPSESSID=nmab1pmm6lm9nv7gimpibbh4u7; _csrf=5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz%22%3B%7D'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,la;q=0.6'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://workshop/login'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36'
+    'HTTP_DNT' => '1'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_HOST' => 'workshop'
+    'SCRIPT_FILENAME' => '/var/www/workshop/web/index.php'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'workshop'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '127.0.0.1'
+    'REMOTE_PORT' => '52984'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'SERVER_SOFTWARE' => 'nginx/1.16.1'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'REQUEST_SCHEME' => 'http'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/var/www/workshop/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/main'
+    'SCRIPT_NAME' => '/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => ''
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1576917517.177
+    'REQUEST_TIME' => 1576917517
+]
+2019-12-21 08:38:40 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "main/contact/index". in /var/www/workshop/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('main/contact/in...', Array)
+#1 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Страница не найдена. in /var/www/workshop/vendor/yiisoft/yii2/web/Application.php:115
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#2 {main}
+2019-12-21 08:38:40 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'XDEBUG_SESSION' => 'XDEBUG_ECLIPSE'
+    'PHPSESSID' => 'nmab1pmm6lm9nv7gimpibbh4u7'
+    '_csrf' => '5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'USER' => 'www-data'
+    'HOME' => '/var/www'
+    'HTTP_COOKIE' => 'XDEBUG_SESSION=XDEBUG_ECLIPSE; PHPSESSID=nmab1pmm6lm9nv7gimpibbh4u7; _csrf=5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz%22%3B%7D'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,la;q=0.6'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://workshop/main'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36'
+    'HTTP_DNT' => '1'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_HOST' => 'workshop'
+    'SCRIPT_FILENAME' => '/var/www/workshop/web/index.php'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'workshop'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '127.0.0.1'
+    'REMOTE_PORT' => '52984'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'SERVER_SOFTWARE' => 'nginx/1.16.1'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'REQUEST_SCHEME' => 'http'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/var/www/workshop/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/main/contact/index'
+    'SCRIPT_NAME' => '/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => ''
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1576917520.3958
+    'REQUEST_TIME' => 1576917520
+]
+2019-12-21 08:38:50 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][error][TypeError] TypeError: Argument 1 passed to yii\web\User::login() must be an instance of yii\web\IdentityInterface, instance of app\modules\user\models\User given, called in /var/www/workshop/modules/user/models/LoginForm.php on line 57 and defined in /var/www/workshop/vendor/yiisoft/yii2/web/User.php:249
+Stack trace:
+#0 /var/www/workshop/modules/user/models/LoginForm.php(57): yii\web\User->login(Object(app\modules\user\models\User), 2592000)
+#1 /var/www/workshop/modules/user/controllers/DefaultController.php(63): app\modules\user\models\LoginForm->login()
+#2 [internal function]: app\modules\user\controllers\DefaultController->actionLogin()
+#3 /var/www/workshop/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#4 /var/www/workshop/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#5 /var/www/workshop/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('login', Array)
+#6 /var/www/workshop/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('user/default/lo...', Array)
+#7 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#8 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#9 {main}
+2019-12-21 08:38:50 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][info][application] $_GET = []
+
+$_POST = [
+    '_csrf' => 'w-d-DX1d1S9iqp9jTKWRMUyd3ObzvxwaE6OW5rMIG5qylTVDBDbmSxjJqjAF8uJ5GPWtoqP1T3FCmszS1GFT4A=='
+    'LoginForm' => [
+        'username' => 'admin'
+        'password' => '123456'
+        'rememberMe' => '1'
+    ]
+    'login-button' => ''
+]
+
+$_FILES = []
+
+$_COOKIE = [
+    'XDEBUG_SESSION' => 'XDEBUG_ECLIPSE'
+    'PHPSESSID' => 'nmab1pmm6lm9nv7gimpibbh4u7'
+    '_csrf' => '5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'USER' => 'www-data'
+    'HOME' => '/var/www'
+    'HTTP_COOKIE' => 'XDEBUG_SESSION=XDEBUG_ECLIPSE; PHPSESSID=nmab1pmm6lm9nv7gimpibbh4u7; _csrf=5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz%22%3B%7D'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,la;q=0.6'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://workshop/login'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36'
+    'HTTP_CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_DNT' => '1'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_ORIGIN' => 'http://workshop'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_CONTENT_LENGTH' => '229'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_HOST' => 'workshop'
+    'SCRIPT_FILENAME' => '/var/www/workshop/web/index.php'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'workshop'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '127.0.0.1'
+    'REMOTE_PORT' => '52984'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'SERVER_SOFTWARE' => 'nginx/1.16.1'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'REQUEST_SCHEME' => 'http'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/var/www/workshop/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/login'
+    'SCRIPT_NAME' => '/index.php'
+    'CONTENT_LENGTH' => '229'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1576917530.3015
+    'REQUEST_TIME' => 1576917530
+]
+2019-12-21 08:40:52 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][error][yii\base\ViewNotFoundException] yii\base\ViewNotFoundException: The view file does not exist: /var/www/workshop/modules/user/views/default/signup.php in /var/www/workshop/vendor/yiisoft/yii2/base/View.php:233
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/base/View.php(156): yii\base\View->renderFile('/var/www/worksh...', Array, Object(app\modules\user\controllers\DefaultController))
+#1 /var/www/workshop/vendor/yiisoft/yii2/base/Controller.php(386): yii\base\View->render('signup', Array, Object(app\modules\user\controllers\DefaultController))
+#2 /var/www/workshop/modules/user/controllers/DefaultController.php(90): yii\base\Controller->render('signup', Array)
+#3 [internal function]: app\modules\user\controllers\DefaultController->actionSignup()
+#4 /var/www/workshop/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#5 /var/www/workshop/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#6 /var/www/workshop/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('signup', Array)
+#7 /var/www/workshop/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('user/default/si...', Array)
+#8 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#9 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#10 {main}
+2019-12-21 08:40:52 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'XDEBUG_SESSION' => 'XDEBUG_ECLIPSE'
+    'PHPSESSID' => 'nmab1pmm6lm9nv7gimpibbh4u7'
+    '_csrf' => '5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'USER' => 'www-data'
+    'HOME' => '/var/www'
+    'HTTP_COOKIE' => 'XDEBUG_SESSION=XDEBUG_ECLIPSE; PHPSESSID=nmab1pmm6lm9nv7gimpibbh4u7; _csrf=5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz%22%3B%7D'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,la;q=0.6'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://workshop/login'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36'
+    'HTTP_DNT' => '1'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_HOST' => 'workshop'
+    'SCRIPT_FILENAME' => '/var/www/workshop/web/index.php'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'workshop'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '127.0.0.1'
+    'REMOTE_PORT' => '53056'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'SERVER_SOFTWARE' => 'nginx/1.16.1'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'REQUEST_SCHEME' => 'http'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/var/www/workshop/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/signup'
+    'SCRIPT_NAME' => '/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => ''
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1576917652.3924
+    'REQUEST_TIME' => 1576917652
+]
+2019-12-21 08:41:18 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][error][yii\base\ViewNotFoundException] yii\base\ViewNotFoundException: The view file does not exist: /var/www/workshop/modules/user/views/default/signup.php in /var/www/workshop/vendor/yiisoft/yii2/base/View.php:233
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/base/View.php(156): yii\base\View->renderFile('/var/www/worksh...', Array, Object(app\modules\user\controllers\DefaultController))
+#1 /var/www/workshop/vendor/yiisoft/yii2/base/Controller.php(386): yii\base\View->render('signup', Array, Object(app\modules\user\controllers\DefaultController))
+#2 /var/www/workshop/modules/user/controllers/DefaultController.php(90): yii\base\Controller->render('signup', Array)
+#3 [internal function]: app\modules\user\controllers\DefaultController->actionSignup()
+#4 /var/www/workshop/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#5 /var/www/workshop/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#6 /var/www/workshop/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('signup', Array)
+#7 /var/www/workshop/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('user/default/si...', Array)
+#8 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#9 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#10 {main}
+2019-12-21 08:41:18 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'XDEBUG_SESSION' => 'XDEBUG_ECLIPSE'
+    'PHPSESSID' => 'nmab1pmm6lm9nv7gimpibbh4u7'
+    '_csrf' => '5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'USER' => 'www-data'
+    'HOME' => '/var/www'
+    'HTTP_COOKIE' => 'XDEBUG_SESSION=XDEBUG_ECLIPSE; PHPSESSID=nmab1pmm6lm9nv7gimpibbh4u7; _csrf=5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz%22%3B%7D'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,la;q=0.6'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://workshop/login'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_DNT' => '1'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_HOST' => 'workshop'
+    'SCRIPT_FILENAME' => '/var/www/workshop/web/index.php'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'workshop'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '127.0.0.1'
+    'REMOTE_PORT' => '53056'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'SERVER_SOFTWARE' => 'nginx/1.16.1'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'REQUEST_SCHEME' => 'http'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/var/www/workshop/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/signup'
+    'SCRIPT_NAME' => '/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => ''
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1576917678.8141
+    'REQUEST_TIME' => 1576917678
+]
+2019-12-21 08:44:21 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][error][yii\base\ViewNotFoundException] yii\base\ViewNotFoundException: The view file does not exist: /var/www/workshop/modules/user/mails/emailConfirm.php in /var/www/workshop/vendor/yiisoft/yii2/base/View.php:233
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/base/View.php(156): yii\base\View->renderFile('/var/www/worksh...', Array, Object(yii\swiftmailer\Mailer))
+#1 /var/www/workshop/vendor/yiisoft/yii2/mail/BaseMailer.php(302): yii\base\View->render('@app/modules/us...', Array, Object(yii\swiftmailer\Mailer))
+#2 /var/www/workshop/vendor/yiisoft/yii2/mail/BaseMailer.php(194): yii\mail\BaseMailer->render('@app/modules/us...', Array, 'layouts/html')
+#3 /var/www/workshop/modules/user/models/SignupForm.php(55): yii\mail\BaseMailer->compose('@app/modules/us...', Array)
+#4 /var/www/workshop/modules/user/controllers/DefaultController.php(83): app\modules\user\models\SignupForm->signup()
+#5 [internal function]: app\modules\user\controllers\DefaultController->actionSignup()
+#6 /var/www/workshop/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#7 /var/www/workshop/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#8 /var/www/workshop/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('signup', Array)
+#9 /var/www/workshop/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('user/default/si...', Array)
+#10 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#11 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#12 {main}
+2019-12-21 08:44:20 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][info][application] $_GET = []
+
+$_POST = [
+    '_csrf' => '0qn_KL_ocbAnVWX8hPM4NDYNtZT73nc-_syKew3Ddqej27RmxoNC1F02UK_NpEt8YmXE0KuUJFWv9dBPaqo-3Q=='
+    'SignupForm' => [
+        'username' => 'test'
+        'email' => 'obedkinav@ya.ru'
+        'password' => '123456'
+        'verifyCode' => 'sudaei'
+    ]
+    'signup-button' => ''
+]
+
+$_FILES = []
+
+$_COOKIE = [
+    'XDEBUG_SESSION' => 'XDEBUG_ECLIPSE'
+    'PHPSESSID' => 'nmab1pmm6lm9nv7gimpibbh4u7'
+    '_csrf' => '5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__captcha/user/default/captcha' => 'qpdnsa'
+    '__captcha/user/default/captchacount' => 1
+]
+
+$_SERVER = [
+    'USER' => 'www-data'
+    'HOME' => '/var/www'
+    'HTTP_COOKIE' => 'XDEBUG_SESSION=XDEBUG_ECLIPSE; PHPSESSID=nmab1pmm6lm9nv7gimpibbh4u7; _csrf=5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz%22%3B%7D'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,la;q=0.6'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://workshop/signup'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36'
+    'HTTP_CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_DNT' => '1'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_ORIGIN' => 'http://workshop'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_CONTENT_LENGTH' => '249'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_HOST' => 'workshop'
+    'SCRIPT_FILENAME' => '/var/www/workshop/web/index.php'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'workshop'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '127.0.0.1'
+    'REMOTE_PORT' => '53088'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'SERVER_SOFTWARE' => 'nginx/1.16.1'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'REQUEST_SCHEME' => 'http'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/var/www/workshop/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/signup'
+    'SCRIPT_NAME' => '/index.php'
+    'CONTENT_LENGTH' => '249'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1576917860.2975
+    'REQUEST_TIME' => 1576917860
+]
+2019-12-21 08:45:17 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][error][Swift_RfcComplianceException] Swift_RfcComplianceException: Address in mailbox given [] does not comply with RFC 2822, 3.6.2. in /var/www/workshop/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Mime/Headers/MailboxHeader.php:355
+Stack trace:
+#0 /var/www/workshop/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Mime/Headers/MailboxHeader.php(272): Swift_Mime_Headers_MailboxHeader->assertValidAddress('')
+#1 /var/www/workshop/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Mime/Headers/MailboxHeader.php(117): Swift_Mime_Headers_MailboxHeader->normalizeMailboxes(Array)
+#2 /var/www/workshop/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Mime/Headers/MailboxHeader.php(74): Swift_Mime_Headers_MailboxHeader->setNameAddresses(Array)
+#3 /var/www/workshop/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Mime/SimpleMimeEntity.php(600): Swift_Mime_Headers_MailboxHeader->setFieldBodyModel(Array)
+#4 /var/www/workshop/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Mime/SimpleMessage.php(213): Swift_Mime_SimpleMimeEntity->setHeaderFieldModel('From', Array)
+#5 /var/www/workshop/vendor/yiisoft/yii2-swiftmailer/src/Message.php(103): Swift_Mime_SimpleMessage->setFrom(Array)
+#6 /var/www/workshop/modules/user/models/SignupForm.php(56): yii\swiftmailer\Message->setFrom(Array)
+#7 /var/www/workshop/modules/user/controllers/DefaultController.php(83): app\modules\user\models\SignupForm->signup()
+#8 [internal function]: app\modules\user\controllers\DefaultController->actionSignup()
+#9 /var/www/workshop/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#10 /var/www/workshop/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#11 /var/www/workshop/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('signup', Array)
+#12 /var/www/workshop/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('user/default/si...', Array)
+#13 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#14 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#15 {main}
+2019-12-21 08:45:16 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][info][application] $_GET = []
+
+$_POST = [
+    '_csrf' => '2cGJ4v47RhJIZCDLTHXhL11eh8T0o_StSqCWqDHWsB2os8Ksh1B1djIHFZgFIpJnCTb2gKTpp8YbmcycVr_4Zw=='
+    'SignupForm' => [
+        'username' => 'test1'
+        'email' => 'obedkinav1@ya.ru'
+        'password' => '123456'
+        'verifyCode' => 'qpdnsa'
+    ]
+    'signup-button' => ''
+]
+
+$_FILES = []
+
+$_COOKIE = [
+    'XDEBUG_SESSION' => 'XDEBUG_ECLIPSE'
+    'PHPSESSID' => 'nmab1pmm6lm9nv7gimpibbh4u7'
+    '_csrf' => '5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__captcha/user/default/captcha' => 'konopiy'
+    '__captcha/user/default/captchacount' => 1
+]
+
+$_SERVER = [
+    'USER' => 'www-data'
+    'HOME' => '/var/www'
+    'HTTP_COOKIE' => 'XDEBUG_SESSION=XDEBUG_ECLIPSE; PHPSESSID=nmab1pmm6lm9nv7gimpibbh4u7; _csrf=5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz%22%3B%7D'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,la;q=0.6'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://workshop/signup'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36'
+    'HTTP_CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_DNT' => '1'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_ORIGIN' => 'http://workshop'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_CONTENT_LENGTH' => '251'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_HOST' => 'workshop'
+    'SCRIPT_FILENAME' => '/var/www/workshop/web/index.php'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'workshop'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '127.0.0.1'
+    'REMOTE_PORT' => '53088'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'SERVER_SOFTWARE' => 'nginx/1.16.1'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'REQUEST_SCHEME' => 'http'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/var/www/workshop/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/signup'
+    'SCRIPT_NAME' => '/index.php'
+    'CONTENT_LENGTH' => '251'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1576917916.3598
+    'REQUEST_TIME' => 1576917916
+]
+2019-12-21 08:47:33 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][error][Swift_RfcComplianceException] Swift_RfcComplianceException: Address in mailbox given [] does not comply with RFC 2822, 3.6.2. in /var/www/workshop/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Mime/Headers/MailboxHeader.php:355
+Stack trace:
+#0 /var/www/workshop/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Mime/Headers/MailboxHeader.php(272): Swift_Mime_Headers_MailboxHeader->assertValidAddress('')
+#1 /var/www/workshop/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Mime/Headers/MailboxHeader.php(117): Swift_Mime_Headers_MailboxHeader->normalizeMailboxes(Array)
+#2 /var/www/workshop/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Mime/Headers/MailboxHeader.php(74): Swift_Mime_Headers_MailboxHeader->setNameAddresses(Array)
+#3 /var/www/workshop/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Mime/SimpleMimeEntity.php(600): Swift_Mime_Headers_MailboxHeader->setFieldBodyModel(Array)
+#4 /var/www/workshop/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Mime/SimpleMessage.php(213): Swift_Mime_SimpleMimeEntity->setHeaderFieldModel('From', Array)
+#5 /var/www/workshop/vendor/yiisoft/yii2-swiftmailer/src/Message.php(103): Swift_Mime_SimpleMessage->setFrom(Array)
+#6 /var/www/workshop/modules/user/models/SignupForm.php(56): yii\swiftmailer\Message->setFrom(Array)
+#7 /var/www/workshop/modules/user/controllers/DefaultController.php(83): app\modules\user\models\SignupForm->signup()
+#8 [internal function]: app\modules\user\controllers\DefaultController->actionSignup()
+#9 /var/www/workshop/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#10 /var/www/workshop/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#11 /var/www/workshop/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('signup', Array)
+#12 /var/www/workshop/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('user/default/si...', Array)
+#13 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#14 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#15 {main}
+2019-12-21 08:47:32 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][info][application] $_GET = []
+
+$_POST = [
+    '_csrf' => '34AtfKAR9RD1cL7lcGXnTKIJdbFY23P-2_t5e1oY_q2u8mYy2XrGdI8Ti7Y5MpQE9mEE9QiRIJWKwiNPPXG21w=='
+    'SignupForm' => [
+        'username' => 'obedkin'
+        'email' => 'obedkin@gmail.com'
+        'password' => '123456'
+        'verifyCode' => 'konopiy'
+    ]
+    'signup-button' => ''
+]
+
+$_FILES = []
+
+$_COOKIE = [
+    'XDEBUG_SESSION' => 'XDEBUG_ECLIPSE'
+    'PHPSESSID' => 'nmab1pmm6lm9nv7gimpibbh4u7'
+    '_csrf' => '5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__captcha/user/default/captcha' => 'vaiugac'
+    '__captcha/user/default/captchacount' => 1
+]
+
+$_SERVER = [
+    'USER' => 'www-data'
+    'HOME' => '/var/www'
+    'HTTP_COOKIE' => 'XDEBUG_SESSION=XDEBUG_ECLIPSE; PHPSESSID=nmab1pmm6lm9nv7gimpibbh4u7; _csrf=5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz%22%3B%7D'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,la;q=0.6'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://workshop/signup'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36'
+    'HTTP_CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_DNT' => '1'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_ORIGIN' => 'http://workshop'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_CONTENT_LENGTH' => '255'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_HOST' => 'workshop'
+    'SCRIPT_FILENAME' => '/var/www/workshop/web/index.php'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'workshop'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '127.0.0.1'
+    'REMOTE_PORT' => '53524'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'SERVER_SOFTWARE' => 'nginx/1.16.1'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'REQUEST_SCHEME' => 'http'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/var/www/workshop/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/signup'
+    'SCRIPT_NAME' => '/index.php'
+    'CONTENT_LENGTH' => '255'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1576918052.6494
+    'REQUEST_TIME' => 1576918052
+]
+2019-12-21 08:59:47 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "site/default/login". in /var/www/workshop/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('site/default/lo...', Array)
+#1 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Страница не найдена. in /var/www/workshop/vendor/yiisoft/yii2/web/Application.php:115
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#2 {main}
+2019-12-21 08:59:47 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'XDEBUG_SESSION' => 'XDEBUG_ECLIPSE'
+    'PHPSESSID' => 'nmab1pmm6lm9nv7gimpibbh4u7'
+    '_csrf' => '5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__captcha/user/default/captcha' => 'vaiugac'
+    '__captcha/user/default/captchacount' => 1
+]
+
+$_SERVER = [
+    'USER' => 'www-data'
+    'HOME' => '/var/www'
+    'HTTP_COOKIE' => 'XDEBUG_SESSION=XDEBUG_ECLIPSE; PHPSESSID=nmab1pmm6lm9nv7gimpibbh4u7; _csrf=5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz%22%3B%7D'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,la;q=0.6'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_PURPOSE' => 'prefetch'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_DNT' => '1'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_HOST' => 'workshop'
+    'SCRIPT_FILENAME' => '/var/www/workshop/web/index.php'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'workshop'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '127.0.0.1'
+    'REMOTE_PORT' => '54576'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'SERVER_SOFTWARE' => 'nginx/1.16.1'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'REQUEST_SCHEME' => 'http'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/var/www/workshop/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/site/login'
+    'SCRIPT_NAME' => '/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => ''
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1576918786.4178
+    'REQUEST_TIME' => 1576918786
+]
+2019-12-21 08:59:49 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "site/default/contact". in /var/www/workshop/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('site/default/co...', Array)
+#1 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Страница не найдена. in /var/www/workshop/vendor/yiisoft/yii2/web/Application.php:115
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#2 {main}
+2019-12-21 08:59:49 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'XDEBUG_SESSION' => 'XDEBUG_ECLIPSE'
+    'PHPSESSID' => 'nmab1pmm6lm9nv7gimpibbh4u7'
+    '_csrf' => '5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__captcha/user/default/captcha' => 'vaiugac'
+    '__captcha/user/default/captchacount' => 1
+]
+
+$_SERVER = [
+    'USER' => 'www-data'
+    'HOME' => '/var/www'
+    'HTTP_COOKIE' => 'XDEBUG_SESSION=XDEBUG_ECLIPSE; PHPSESSID=nmab1pmm6lm9nv7gimpibbh4u7; _csrf=5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz%22%3B%7D'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,la;q=0.6'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_DNT' => '1'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_HOST' => 'workshop'
+    'SCRIPT_FILENAME' => '/var/www/workshop/web/index.php'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'workshop'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '127.0.0.1'
+    'REMOTE_PORT' => '54576'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'SERVER_SOFTWARE' => 'nginx/1.16.1'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'REQUEST_SCHEME' => 'http'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/var/www/workshop/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/site/contact'
+    'SCRIPT_NAME' => '/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => ''
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1576918789.2814
+    'REQUEST_TIME' => 1576918789
+]
+2019-12-21 08:59:56 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "contact/default/index". in /var/www/workshop/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('contact/default...', Array)
+#1 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Страница не найдена. in /var/www/workshop/vendor/yiisoft/yii2/web/Application.php:115
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#2 {main}
+2019-12-21 08:59:56 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'XDEBUG_SESSION' => 'XDEBUG_ECLIPSE'
+    'PHPSESSID' => 'nmab1pmm6lm9nv7gimpibbh4u7'
+    '_csrf' => '5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__captcha/user/default/captcha' => 'vaiugac'
+    '__captcha/user/default/captchacount' => 1
+]
+
+$_SERVER = [
+    'USER' => 'www-data'
+    'HOME' => '/var/www'
+    'HTTP_COOKIE' => 'XDEBUG_SESSION=XDEBUG_ECLIPSE; PHPSESSID=nmab1pmm6lm9nv7gimpibbh4u7; _csrf=5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz%22%3B%7D'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,la;q=0.6'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_DNT' => '1'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_HOST' => 'workshop'
+    'SCRIPT_FILENAME' => '/var/www/workshop/web/index.php'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'workshop'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '127.0.0.1'
+    'REMOTE_PORT' => '54576'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'SERVER_SOFTWARE' => 'nginx/1.16.1'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'REQUEST_SCHEME' => 'http'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/var/www/workshop/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/contact'
+    'SCRIPT_NAME' => '/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => ''
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1576918796.4589
+    'REQUEST_TIME' => 1576918796
+]
+2019-12-21 09:00:31 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][error][Swift_RfcComplianceException] Swift_RfcComplianceException: Address in mailbox given [] does not comply with RFC 2822, 3.6.2. in /var/www/workshop/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Mime/Headers/MailboxHeader.php:355
+Stack trace:
+#0 /var/www/workshop/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Mime/Headers/MailboxHeader.php(272): Swift_Mime_Headers_MailboxHeader->assertValidAddress('')
+#1 /var/www/workshop/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Mime/Headers/MailboxHeader.php(117): Swift_Mime_Headers_MailboxHeader->normalizeMailboxes(Array)
+#2 /var/www/workshop/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Mime/Headers/MailboxHeader.php(74): Swift_Mime_Headers_MailboxHeader->setNameAddresses(Array)
+#3 /var/www/workshop/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Mime/SimpleMimeEntity.php(600): Swift_Mime_Headers_MailboxHeader->setFieldBodyModel(Array)
+#4 /var/www/workshop/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Mime/SimpleMessage.php(213): Swift_Mime_SimpleMimeEntity->setHeaderFieldModel('From', Array)
+#5 /var/www/workshop/vendor/yiisoft/yii2-swiftmailer/src/Message.php(103): Swift_Mime_SimpleMessage->setFrom(Array)
+#6 /var/www/workshop/modules/user/models/SignupForm.php(56): yii\swiftmailer\Message->setFrom(Array)
+#7 /var/www/workshop/modules/user/controllers/DefaultController.php(83): app\modules\user\models\SignupForm->signup()
+#8 [internal function]: app\modules\user\controllers\DefaultController->actionSignup()
+#9 /var/www/workshop/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#10 /var/www/workshop/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#11 /var/www/workshop/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('signup', Array)
+#12 /var/www/workshop/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('user/default/si...', Array)
+#13 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#14 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#15 {main}
+2019-12-21 09:00:29 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][info][application] $_GET = []
+
+$_POST = [
+    '_csrf' => 'gYLHVg1O4EgUJ0-e7QUkfNsAn0JrtmKt_vqXZJhQiy_w8IwYdCXTLG5Ees2kUlc0j2juBjv8Mcavw81Q_znDVQ=='
+    'SignupForm' => [
+        'username' => '123'
+        'email' => 'test@gmail.com'
+        'password' => '123456'
+        'verifyCode' => 'vaiugac'
+    ]
+    'signup-button' => ''
+]
+
+$_FILES = []
+
+$_COOKIE = [
+    'XDEBUG_SESSION' => 'XDEBUG_ECLIPSE'
+    'PHPSESSID' => 'nmab1pmm6lm9nv7gimpibbh4u7'
+    '_csrf' => '5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__captcha/user/default/captcha' => 'hirieac'
+    '__captcha/user/default/captchacount' => 1
+]
+
+$_SERVER = [
+    'USER' => 'www-data'
+    'HOME' => '/var/www'
+    'HTTP_COOKIE' => 'XDEBUG_SESSION=XDEBUG_ECLIPSE; PHPSESSID=nmab1pmm6lm9nv7gimpibbh4u7; _csrf=5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz%22%3B%7D'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,la;q=0.6'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://workshop/signup'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36'
+    'HTTP_CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_DNT' => '1'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_ORIGIN' => 'http://workshop'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_CONTENT_LENGTH' => '248'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_HOST' => 'workshop'
+    'SCRIPT_FILENAME' => '/var/www/workshop/web/index.php'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'workshop'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '127.0.0.1'
+    'REMOTE_PORT' => '54576'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'SERVER_SOFTWARE' => 'nginx/1.16.1'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'REQUEST_SCHEME' => 'http'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/var/www/workshop/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/signup'
+    'SCRIPT_NAME' => '/index.php'
+    'CONTENT_LENGTH' => '248'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1576918829.1679
+    'REQUEST_TIME' => 1576918829
+]
+2019-12-21 09:05:20 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "main/contact/index". in /var/www/workshop/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('main/contact/in...', Array)
+#1 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Страница не найдена. in /var/www/workshop/vendor/yiisoft/yii2/web/Application.php:115
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#2 {main}
+2019-12-21 09:05:20 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'XDEBUG_SESSION' => 'XDEBUG_ECLIPSE'
+    'PHPSESSID' => 'nmab1pmm6lm9nv7gimpibbh4u7'
+    '_csrf' => '5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__captcha/user/default/captcha' => 'suautob'
+    '__captcha/user/default/captchacount' => 1
+]
+
+$_SERVER = [
+    'USER' => 'www-data'
+    'HOME' => '/var/www'
+    'HTTP_COOKIE' => 'XDEBUG_SESSION=XDEBUG_ECLIPSE; PHPSESSID=nmab1pmm6lm9nv7gimpibbh4u7; _csrf=5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz%22%3B%7D'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,la;q=0.6'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://workshop/'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36'
+    'HTTP_DNT' => '1'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_HOST' => 'workshop'
+    'SCRIPT_FILENAME' => '/var/www/workshop/web/index.php'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'workshop'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '127.0.0.1'
+    'REMOTE_PORT' => '54700'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'SERVER_SOFTWARE' => 'nginx/1.16.1'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'REQUEST_SCHEME' => 'http'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/var/www/workshop/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/main/contact/index'
+    'SCRIPT_NAME' => '/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => ''
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1576919120.9253
+    'REQUEST_TIME' => 1576919120
+]
+2019-12-21 09:07:46 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][error][TypeError] TypeError: Argument 1 passed to yii\web\User::login() must be an instance of yii\web\IdentityInterface, instance of app\modules\user\models\User given, called in /var/www/workshop/modules/user/models/LoginForm.php on line 57 and defined in /var/www/workshop/vendor/yiisoft/yii2/web/User.php:249
+Stack trace:
+#0 /var/www/workshop/modules/user/models/LoginForm.php(57): yii\web\User->login(Object(app\modules\user\models\User), 2592000)
+#1 /var/www/workshop/modules/user/controllers/DefaultController.php(63): app\modules\user\models\LoginForm->login()
+#2 [internal function]: app\modules\user\controllers\DefaultController->actionLogin()
+#3 /var/www/workshop/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#4 /var/www/workshop/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#5 /var/www/workshop/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('login', Array)
+#6 /var/www/workshop/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('user/default/lo...', Array)
+#7 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#8 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#9 {main}
+2019-12-21 09:07:45 [127.0.0.1][-][nmab1pmm6lm9nv7gimpibbh4u7][info][application] $_GET = []
+
+$_POST = [
+    '_csrf' => 'Cc9cLF5HzY67Ml3nTctBl9Uty1KCSp9FcdUMl7_VEmZ4vRdiJyz-6sFRaLQEnDLfgUW6FtIAzC4g7Faj2LxaHA=='
+    'LoginForm' => [
+        'username' => 'test'
+        'password' => '123456'
+        'rememberMe' => '1'
+    ]
+    'login-button' => ''
+]
+
+$_FILES = []
+
+$_COOKIE = [
+    'XDEBUG_SESSION' => 'XDEBUG_ECLIPSE'
+    'PHPSESSID' => 'nmab1pmm6lm9nv7gimpibbh4u7'
+    '_csrf' => '5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__captcha/user/default/captcha' => 'lykevz'
+    '__captcha/user/default/captchacount' => 1
+]
+
+$_SERVER = [
+    'USER' => 'www-data'
+    'HOME' => '/var/www'
+    'HTTP_COOKIE' => 'XDEBUG_SESSION=XDEBUG_ECLIPSE; PHPSESSID=nmab1pmm6lm9nv7gimpibbh4u7; _csrf=5b5436046b963526cfccbea2c6a557bddc93e71c862ada6b61dec3284def1b30a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22qrKNyk3dzc5SIWsHThqDPJSkQ9Z4giHz%22%3B%7D'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,la;q=0.6'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://workshop/login'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36'
+    'HTTP_CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_DNT' => '1'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_ORIGIN' => 'http://workshop'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_CONTENT_LENGTH' => '228'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_HOST' => 'workshop'
+    'SCRIPT_FILENAME' => '/var/www/workshop/web/index.php'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'workshop'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '127.0.0.1'
+    'REMOTE_PORT' => '54800'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'SERVER_SOFTWARE' => 'nginx/1.16.1'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'REQUEST_SCHEME' => 'http'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/var/www/workshop/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/login'
+    'SCRIPT_NAME' => '/index.php'
+    'CONTENT_LENGTH' => '228'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1576919265.512
+    'REQUEST_TIME' => 1576919265
+]
+2019-12-21 09:11:57 [127.0.0.1][-][j1osk0dpra0ag5og3ntv18rdrd][error][Error] Error: Class 'app\modules\User\models\User' not found in /var/www/workshop/vendor/yiisoft/yii2/web/User.php:690
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/web/User.php(192): yii\web\User->renewAuthStatus()
+#1 /var/www/workshop/vendor/yiisoft/yii2/web/User.php(360): yii\web\User->getIdentity()
+#2 /var/www/workshop/vendor/yiisoft/yii2/base/Component.php(139): yii\web\User->getIsGuest()
+#3 /var/www/workshop/vendor/yiisoft/yii2-debug/src/panels/UserPanel.php(83): yii\base\Component->__get('isGuest')
+#4 /var/www/workshop/vendor/yiisoft/yii2/base/BaseObject.php(109): yii\debug\panels\UserPanel->init()
+#5 [internal function]: yii\base\BaseObject->__construct(Array)
+#6 /var/www/workshop/vendor/yiisoft/yii2/di/Container.php(400): ReflectionClass->newInstanceArgs(Array)
+#7 /var/www/workshop/vendor/yiisoft/yii2/di/Container.php(159): yii\di\Container->build('yii\\debug\\panel...', Array, Array)
+#8 /var/www/workshop/vendor/yiisoft/yii2/BaseYii.php(365): yii\di\Container->get('yii\\debug\\panel...', Array, Array)
+#9 /var/www/workshop/vendor/yiisoft/yii2-debug/src/Module.php(247): yii\BaseYii::createObject(Array)
+#10 /var/www/workshop/vendor/yiisoft/yii2-debug/src/Module.php(218): yii\debug\Module->initPanels()
+#11 /var/www/workshop/vendor/yiisoft/yii2/base/BaseObject.php(109): yii\debug\Module->init()
+#12 /var/www/workshop/vendor/yiisoft/yii2/base/Module.php(158): yii\base\BaseObject->__construct(Array)
+#13 [internal function]: yii\base\Module->__construct('debug', Object(yii\web\Application), Array)
+#14 /var/www/workshop/vendor/yiisoft/yii2/di/Container.php(392): ReflectionClass->newInstanceArgs(Array)
+#15 /var/www/workshop/vendor/yiisoft/yii2/di/Container.php(159): yii\di\Container->build('yii\\debug\\Modul...', Array, Array)
+#16 /var/www/workshop/vendor/yiisoft/yii2/BaseYii.php(365): yii\di\Container->get('yii\\debug\\Modul...', Array, Array)
+#17 /var/www/workshop/vendor/yiisoft/yii2/base/Module.php(427): yii\BaseYii::createObject(Array, Array)
+#18 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(315): yii\base\Module->getModule('debug')
+#19 /var/www/workshop/vendor/yiisoft/yii2/web/Application.php(69): yii\base\Application->bootstrap()
+#20 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(273): yii\web\Application->bootstrap()
+#21 /var/www/workshop/vendor/yiisoft/yii2/base/BaseObject.php(109): yii\base\Application->init()
+#22 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(206): yii\base\BaseObject->__construct(Array)
+#23 /var/www/workshop/web/index.php(12): yii\base\Application->__construct(Array)
+#24 {main}
+2019-12-21 09:11:57 [127.0.0.1][-][j1osk0dpra0ag5og3ntv18rdrd][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'XDEBUG_SESSION' => 'XDEBUG_ECLIPSE'
+    'PHPSESSID' => 'j1osk0dpra0ag5og3ntv18rdrd'
+    '_identity' => 'bdb68c67386c1d8aed3df68522f1fa517d55dfb32d4a189d04e340d0d782702ea:2:{i:0;s:9:\"_identity\";i:1;s:46:\"[9,\"BbnJjErqQquI7O7EoRTATzhDByAOb5lQ\",2592000]\";}'
+    '_csrf' => 'b9f918674f7293515db56bb7e2e6f67486ed40857830ccf0ac2c9c918792d79ea:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"esZxOUb8Xe_Jym6ChzC6qXcIHdOdzcP7\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__captcha/user/default/captcha' => 'lykevz'
+    '__captcha/user/default/captchacount' => 1
+    '__id' => 9
+]
+
+$_SERVER = [
+    'USER' => 'www-data'
+    'HOME' => '/var/www'
+    'HTTP_COOKIE' => 'XDEBUG_SESSION=XDEBUG_ECLIPSE; PHPSESSID=j1osk0dpra0ag5og3ntv18rdrd; _identity=bdb68c67386c1d8aed3df68522f1fa517d55dfb32d4a189d04e340d0d782702ea%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A46%3A%22%5B9%2C%22BbnJjErqQquI7O7EoRTATzhDByAOb5lQ%22%2C2592000%5D%22%3B%7D; _csrf=b9f918674f7293515db56bb7e2e6f67486ed40857830ccf0ac2c9c918792d79ea%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22esZxOUb8Xe_Jym6ChzC6qXcIHdOdzcP7%22%3B%7D'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,la;q=0.6'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://workshop/login'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_DNT' => '1'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_HOST' => 'workshop'
+    'SCRIPT_FILENAME' => '/var/www/workshop/web/index.php'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'workshop'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '127.0.0.1'
+    'REMOTE_PORT' => '54916'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'SERVER_SOFTWARE' => 'nginx/1.16.1'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'REQUEST_SCHEME' => 'http'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/var/www/workshop/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/'
+    'SCRIPT_NAME' => '/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => ''
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1576919517.604
+    'REQUEST_TIME' => 1576919517
+]
+2019-12-21 09:15:56 [127.0.0.1][9][j1osk0dpra0ag5og3ntv18rdrd][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "main/default/index". in /var/www/workshop/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('main/default/in...', Array)
+#1 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Страница не найдена. in /var/www/workshop/vendor/yiisoft/yii2/web/Application.php:115
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#2 {main}
+2019-12-21 09:15:56 [127.0.0.1][9][j1osk0dpra0ag5og3ntv18rdrd][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'XDEBUG_SESSION' => 'XDEBUG_ECLIPSE'
+    'PHPSESSID' => 'j1osk0dpra0ag5og3ntv18rdrd'
+    '_identity' => 'bdb68c67386c1d8aed3df68522f1fa517d55dfb32d4a189d04e340d0d782702ea:2:{i:0;s:9:\"_identity\";i:1;s:46:\"[9,\"BbnJjErqQquI7O7EoRTATzhDByAOb5lQ\",2592000]\";}'
+    '_csrf' => 'b9f918674f7293515db56bb7e2e6f67486ed40857830ccf0ac2c9c918792d79ea:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"esZxOUb8Xe_Jym6ChzC6qXcIHdOdzcP7\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__captcha/user/default/captcha' => 'lykevz'
+    '__captcha/user/default/captchacount' => 1
+    '__id' => 9
+]
+
+$_SERVER = [
+    'USER' => 'www-data'
+    'HOME' => '/var/www'
+    'HTTP_COOKIE' => 'XDEBUG_SESSION=XDEBUG_ECLIPSE; PHPSESSID=j1osk0dpra0ag5og3ntv18rdrd; _identity=bdb68c67386c1d8aed3df68522f1fa517d55dfb32d4a189d04e340d0d782702ea%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A46%3A%22%5B9%2C%22BbnJjErqQquI7O7EoRTATzhDByAOb5lQ%22%2C2592000%5D%22%3B%7D; _csrf=b9f918674f7293515db56bb7e2e6f67486ed40857830ccf0ac2c9c918792d79ea%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22esZxOUb8Xe_Jym6ChzC6qXcIHdOdzcP7%22%3B%7D'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,la;q=0.6'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://workshop/'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36'
+    'HTTP_DNT' => '1'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_HOST' => 'workshop'
+    'SCRIPT_FILENAME' => '/var/www/workshop/web/index.php'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'workshop'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '127.0.0.1'
+    'REMOTE_PORT' => '54976'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'SERVER_SOFTWARE' => 'nginx/1.16.1'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'REQUEST_SCHEME' => 'http'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/var/www/workshop/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/main'
+    'SCRIPT_NAME' => '/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => ''
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1576919756.261
+    'REQUEST_TIME' => 1576919756
+]
+2019-12-21 09:15:58 [127.0.0.1][9][j1osk0dpra0ag5og3ntv18rdrd][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "main/default/index". in /var/www/workshop/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('main/default/in...', Array)
+#1 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Страница не найдена. in /var/www/workshop/vendor/yiisoft/yii2/web/Application.php:115
+Stack trace:
+#0 /var/www/workshop/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /var/www/workshop/web/index.php(12): yii\base\Application->run()
+#2 {main}
+2019-12-21 09:15:58 [127.0.0.1][9][j1osk0dpra0ag5og3ntv18rdrd][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'XDEBUG_SESSION' => 'XDEBUG_ECLIPSE'
+    'PHPSESSID' => 'j1osk0dpra0ag5og3ntv18rdrd'
+    '_identity' => 'bdb68c67386c1d8aed3df68522f1fa517d55dfb32d4a189d04e340d0d782702ea:2:{i:0;s:9:\"_identity\";i:1;s:46:\"[9,\"BbnJjErqQquI7O7EoRTATzhDByAOb5lQ\",2592000]\";}'
+    '_csrf' => 'b9f918674f7293515db56bb7e2e6f67486ed40857830ccf0ac2c9c918792d79ea:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"esZxOUb8Xe_Jym6ChzC6qXcIHdOdzcP7\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__captcha/user/default/captcha' => 'lykevz'
+    '__captcha/user/default/captchacount' => 1
+    '__id' => 9
+]
+
+$_SERVER = [
+    'USER' => 'www-data'
+    'HOME' => '/var/www'
+    'HTTP_COOKIE' => 'XDEBUG_SESSION=XDEBUG_ECLIPSE; PHPSESSID=j1osk0dpra0ag5og3ntv18rdrd; _identity=bdb68c67386c1d8aed3df68522f1fa517d55dfb32d4a189d04e340d0d782702ea%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A46%3A%22%5B9%2C%22BbnJjErqQquI7O7EoRTATzhDByAOb5lQ%22%2C2592000%5D%22%3B%7D; _csrf=b9f918674f7293515db56bb7e2e6f67486ed40857830ccf0ac2c9c918792d79ea%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22esZxOUb8Xe_Jym6ChzC6qXcIHdOdzcP7%22%3B%7D'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,la;q=0.6'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://workshop/main'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36'
+    'HTTP_DNT' => '1'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_HOST' => 'workshop'
+    'SCRIPT_FILENAME' => '/var/www/workshop/web/index.php'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'workshop'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '127.0.0.1'
+    'REMOTE_PORT' => '54976'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'SERVER_SOFTWARE' => 'nginx/1.16.1'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'REQUEST_SCHEME' => 'http'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/var/www/workshop/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/main'
+    'SCRIPT_NAME' => '/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => ''
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1576919758.2207
+    'REQUEST_TIME' => 1576919758
+]

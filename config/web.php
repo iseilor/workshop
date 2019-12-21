@@ -20,9 +20,8 @@ $config = [
         'jk' => [
             'class' => 'app\modules\jk\Module',
         ],
-
-        'simplechat' => [
-            'class' => 'bubasuma\simplechat\Module',
+        'user' => [
+            'class' => 'app\modules\user\Module',
         ],
     ],
     'components' => [
@@ -37,7 +36,7 @@ $config = [
             'linkAssets' => true
         ],
         'user' => [
-            'identityClass' => 'app\models\User',
+            'identityClass' => 'app\modules\user\models\User',
             'enableAutoLogin' => true,
         ],
         'errorHandler' => [
@@ -48,7 +47,7 @@ $config = [
             // send all mails to a file by default. You have to set
             // 'useFileTransport' to false and configure a transport
             // for the mailer to send real emails.
-            'useFileTransport' => true,
+            //'useFileTransport' => true,
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -70,6 +69,7 @@ $config = [
                     'fileMap' => [
                         'app' => 'app.php',
                         'app/jk' => 'app_jk.php',
+                        'app/user'=>'app_user.php'
                     ],
                 ],
             ],
@@ -80,9 +80,7 @@ $config = [
             'showScriptName' => false,
 
             'rules' => [
-                'login' => 'site/login',
-                'logout' => 'site/logout',
-                'signup' => 'site/signup',
+                '<_a:(login|logout|signup|email-confirm|request-password-reset|password-reset)>' => 'user/default/<_a>',
 
                 '<_m:[\w\-]+>' => '<_m>/default/index',
 
