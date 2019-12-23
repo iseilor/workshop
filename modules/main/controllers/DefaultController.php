@@ -9,6 +9,9 @@ use yii\web\Controller;
  */
 class DefaultController extends Controller
 {
+
+    public $title;
+
     public function actions()
     {
         return [

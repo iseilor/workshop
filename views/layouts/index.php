@@ -34,7 +34,7 @@ AppAssetAdminLTE::register($this);
 <?php $this->beginBody() ?>
 <div class="wrapper">
 
-    <?= $this->render('assets/navbar_old'); ?>
+    <?= $this->render('assets/navbar'); ?>
     <?= $this->render('assets/sidebar'); ?>
 
     <!-- Content Wrapper. Contains page content -->

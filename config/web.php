@@ -4,8 +4,8 @@ $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
 $config = [
-    'id' => 'workshop',
-    'name' => 'Workshop',
+    'id' => 'WORKSHOP',
+    'name' => 'Ростелеком Внутренние Услуги 1.0',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'layout' => 'index',

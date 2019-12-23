@@ -8,12 +8,11 @@ use yii\helpers\Url;
 ?>
 
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
     <a href="<?=Yii::$app->homeUrl?>" class="brand-link">
-        <img src="<?=Yii::$app->homeUrl?>img/rt_logo.jpg" alt="Ростелеком"
+        <img src="<?=Yii::$app->homeUrl?>img/rt_logo.jpg" alt="<?=Yii::$app->id;?>"
              class="brand-image img-circle elevation-3"
              style="opacity: .8">
-        <span class="brand-text font-weight-light">Workshop-2019</span>
+        <span class="brand-text font-weight-light"><?=Yii::$app->id;?></span>
     </a>
 
     <?php /*echo Nav::widget([
@@ -59,11 +58,11 @@ use yii\helpers\Url;
                     if (Yii::$app->user->isGuest) {
                         echo Html::a('Войти','/login');
                         echo ' / ';
-                        echo Html::a('Рег','signup');
+                        echo Html::a('Рег','/signup');
                     } else {
 
 
-                        echo Html::beginForm(['/site/logout'], 'post');
+                        echo Html::beginForm(['/logout'], 'post');
                         echo Html::submitButton(
                             'Выйти (' . Yii::$app->user->identity->username . ')'
                         );

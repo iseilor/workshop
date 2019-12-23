@@ -1,8 +1,9 @@
 <?php
 /* @var $this yii\web\View */
-$this->title = 'РВУ 1.0';
+$this->title = Yii::$app->name;
+use yii\helpers\Url;
+?>
 
-use yii\helpers\Url; ?>
 <div class="row">
     <div class="col-md-3">
         <!-- small box -->
