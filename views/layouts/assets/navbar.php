@@ -1,6 +1,7 @@
 <?php
 
 use app\widgets\Nav2;
+use yii\helpers\Html;
 use yii\helpers\Url;
 
 ?>
@@ -29,12 +30,12 @@ use yii\helpers\Url;
             ],
 
         ],
-    ]); */?>
+    ]); */ ?>
 
     <ul class="navbar-nav">
         <li class="nav-item">
             <a class="nav-link" data-widget="pushmenu" href="#"><i
-                    class="fas fa-bars"></i></a>
+                        class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
             <a href="<?= Url::home() ?>" class="nav-link">Главная</a>
@@ -81,12 +82,12 @@ use yii\helpers\Url;
                             <h3 class="dropdown-item-title">
                                 Алексей Воронин
                                 <span class="float-right text-sm text-danger"><i
-                                        class="fas fa-star"></i></span>
+                                            class="fas fa-star"></i></span>
                             </h3>
                             <p class="text-sm">Перезвони мне
                                 пожалуйста...</p>
                             <p class="text-sm text-muted"><i
-                                    class="far fa-clock mr-1"></i> 4
+                                        class="far fa-clock mr-1"></i> 4
                                 часа назад</p>
                         </div>
                     </div>
@@ -103,11 +104,11 @@ use yii\helpers\Url;
                             <h3 class="dropdown-item-title">
                                 Сергей Гузин
                                 <span class="float-right text-sm text-muted"><i
-                                        class="fas fa-star"></i></span>
+                                            class="fas fa-star"></i></span>
                             </h3>
                             <p class="text-sm">Пошлите на обед</p>
                             <p class="text-sm text-muted"><i
-                                    class="far fa-clock mr-1"></i> 4
+                                        class="far fa-clock mr-1"></i> 4
                                 часа назад</p>
                         </div>
                     </div>
@@ -124,12 +125,12 @@ use yii\helpers\Url;
                             <h3 class="dropdown-item-title">
                                 Лада Горшкова
                                 <span class="float-right text-sm text-warning"><i
-                                        class="fas fa-star"></i></span>
+                                            class="fas fa-star"></i></span>
                             </h3>
                             <p class="text-sm">Встреча перенесена на
                                 13:00</p>
                             <p class="text-sm text-muted"><i
-                                    class="far fa-clock mr-1"></i> 4
+                                        class="far fa-clock mr-1"></i> 4
                                 часа назад</p>
                         </div>
                     </div>
@@ -175,14 +176,38 @@ use yii\helpers\Url;
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <div class="dropdown-divider"></div>
                 <?php
-                if (Yii::$app->user->isGuest){?>
-                    <a href="#" class="dropdown-item">
-                    <i class="fas fa-envelope mr-2"></i> Войти</a>
-                <?php
-                }else{
 
-                }?>
-
+                if (Yii::$app->user->isGuest) {
+                    echo Html::a(
+                        '<i class="fas fa-sign-in-alt"></i> Войти',
+                        Url::home().'login',
+                        ['class' => 'dropdown-item']
+                    );
+                    echo '<div class="dropdown-divider"></div>';
+                    echo Html::a(
+                        '<i class="fas fa-user-plus"></i> Регистрация',
+                        Url::home().'signup',
+                        ['class' => 'dropdown-item']
+                    );
+                } else {
+                    echo Html::a(
+                        '<i class="fas fa-user-circle"></i> Профиль',
+                        Url::home().'user/profile',
+                        ['class' => 'dropdown-item']
+                    );
+                    echo '<div class="dropdown-divider"></div>';
+                    echo Html::a(
+                        '<i class="fas fa-user-shield"></i> Админка',
+                        Url::home().'admin',
+                        [ 'class'  => 'dropdown-item' ]
+                    );
+                    echo '<div class="dropdown-divider"></div>';
+                    echo Html::a(
+                        '<i class="fas fa-sign-out-alt"></i> Выйти',
+                        Url::home().'logout',
+                        ['class' => 'dropdown-item','data-method' => 'post']
+                    );
+                } ?>
 
             </div>
         </li>

@@ -21,7 +21,7 @@ AppAssetAdminLTE::register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <?php $this->registerCsrfMetaTags() ?>
+    <?php //$this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
     <link href="<?=Yii::$app->homeUrl?>css/google_fonts.css" rel="stylesheet">

@@ -69,4 +69,17 @@ use yii\helpers\Url;
             <a href="<?= Url::to(['site/dev']); ?>" class="small-box-footer">Перейти <i class="fas fa-arrow-circle-right"></i></a>
         </div>
     </div>
+    <div class="col-md-3">
+        <div class="small-box bg-warning">
+            <div class="inner">
+                <h3>Админка</h3>
+                <p>Административная панель</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-tools"></i>
+            </div>
+            <a href="<?=Url::to(['/admin/']); ?>" class="small-box-footer">Перейти <i
+                        class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
 </div>

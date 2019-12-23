@@ -2,6 +2,8 @@
 
 namespace app\modules\user\controllers;
 
+use app\modules\jk\models\PercentSearch;
+use app\modules\jk\models\ZaimSearch;
 use app\modules\user\models\PasswordChangeForm;
 use app\modules\user\models\ProfileUpdateForm;
 use app\modules\user\models\User;
@@ -29,8 +31,18 @@ class ProfileController extends Controller
 
     public function actionIndex()
     {
+        $percentSearchModel = new PercentSearch();
+        $percentDataProvider = $percentSearchModel->search(Yii::$app->request->queryParams);
+
+        $zaimSearchModel = new ZaimSearch();
+        $zaimDataProvider = $zaimSearchModel->search(Yii::$app->request->queryParams);
+
         return $this->render('index', [
             'model' => $this->findModel(),
+            'percentSearchModel' => $percentSearchModel,
+            'percentDataProvider' => $percentDataProvider,
+            'zaimSearchModel' => $zaimSearchModel,
+            'zaimDataProvider' => $zaimDataProvider,
         ]);
     }
 
