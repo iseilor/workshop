@@ -1,0 +1,68 @@
+<?php
+
+use yii\db\Expression;
+use yii\db\Migration;
+use yii\db\mysql\Schema;
+
+/**
+ * Handles the creation of table `{{%jk_doc}}`.
+ */
+class m000001_000004_create_jk_doc_table extends Migration
+{
+    /**
+     * {@inheritdoc}
+     */
+    public function safeUp()
+    {
+        $tableOptions = null;
+        if ($this->db->driverName === 'mysql') {
+            $tableOptions
+                = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
+        }
+
+        $this->createTable(
+            '{{%jk_doc}}',
+            [
+                'id' => $this->primaryKey(),
+                'created_at' => Schema::TYPE_DATETIME . ' NOT NULL',
+                'created_by' => Schema::TYPE_INTEGER . ' NOT NULL',
+                'updated_at' => Schema::TYPE_DATETIME,
+                'updated_by' => Schema::TYPE_INTEGER,
+                'deleted_at' => Schema::TYPE_DATETIME,
+                'deleted_by' => Schema::TYPE_INTEGER,
+                'title' => Schema::TYPE_STRING . ' NOT NULL',
+                'description' => Schema::TYPE_TEXT . ' NOT NULL',
+                'src' => Schema::TYPE_STRING . ' NOT NULL'
+            ],
+            $tableOptions
+        );
+        $this->execute($this->addData());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addData()
+    {
+        $now = new Expression('NOW()');
+        return "INSERT INTO {{%jk_doc}} (`created_at`,`created_by`,`title`,`description`,`src`)
+        VALUES 
+        ($now,1,'Согласие на обработку ПД','Согласие на обработку ПД','Согласие на обработку персональных данных.docx'),
+        ($now,1,'Начало заявочной компании 2019 года','Начало заявочной компании 2019','Начало заявочной компании 2019 года.docx'),
+        ($now,1,'Шаблон письменного отчета (стройка дома)','Шаблон письменного отчета (стройка дома)','Шаблон письменного отчета (стройка дома).xlsx'),
+        ($now,1,'Согласие на обработку ПД (дети)','Согласие на обработку ПД (дети)','Согласие на обработку ПД (дети).docx'),
+        ($now,1,'Заявление на оказание помощи (пример по займу)','Заявление на оказание помощи (пример по займу)','Заявление на оказание помощи (пример по займу).docx'),
+        ($now,1,'Важная информация о Заявочной компании','Важная информация о Заявочной компании','Важная информация о Заявочной компании.docx'),
+        ($now,1,'Заявление на оказание помощи (пример по стройке дома)','Заявление на оказание помощи (пример по стройке дома)','Заявление на оказание помощи (пример по стройке дома).docx'),
+        ($now,1,'Заявление на оказание помощи (пример по компенсации %)','Заявление на оказание помощи (пример по компенсации %)','Заявление на оказание помощи (пример по компенсации процентов).docx')
+        ";
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function safeDown()
+    {
+        $this->dropTable('{{%jk_doc}}');
+    }
+}

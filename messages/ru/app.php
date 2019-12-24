@@ -2,6 +2,9 @@
 return [
     'Save'=>'Сохранить',
 
+    'Title'=>'Название',
+    'Description'=>'Описание',
+
     'Login'=>'Авторизация',
     'Signup'=>'Регистрация',
     'Username'=> 'Логин',
@@ -14,6 +17,9 @@ return [
     'Created By' => 'Кем создано',
     'Updated At'=>'Когда изменено',
     'Updated By' => 'Кем изменено',
+    'Deleted At'=>'Когда удалено',
+    'Deleted By' => 'Кем удалено',
+
     'Update'=>'Изменить',
     'Delete'=>'Удалить',
     'Are you sure you want to delete this item?'=>'Вы действительноу уверены, что хотите удалить данный элемент?'

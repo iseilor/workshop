@@ -1,44 +1,30 @@
 <?php
 
-use yii\helpers\Html;
-use yii\grid\GridView;
-use yii\widgets\Pjax;
-/* @var $this yii\web\View */
-/* @var $searchModel app\modules\jk\models\FaqSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
-
-$this->title = Yii::t('app\jk', 'Faqs');
+$this->title = "Частые вопросы";
+$this->params['breadcrumbs'][] = ['label' => 'Жилищная компания', 'url' => ['/jk/']];
 $this->params['breadcrumbs'][] = $this->title;
-?>
-<div class="faq-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a(Yii::t('app\jk', 'Create Faq'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
-    <?php Pjax::begin(); ?>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'created_at',
-            'created_by',
-            'updated_at',
-            'updated_by',
-            //'question',
-            //'answer:ntext',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
-
-    <?php Pjax::end(); ?>
-
+use yii\widgets\ListView; ?>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title"><i class="fas fa-question"></i> <?= $this->title; ?></h3>
+            </div>
+            <div class="card-body">
+                <p>Для получения ответа на часто задаваемые вопросы нажмите на него мышкой</p>
+                <div id="accordion">
+                    <?php
+                    echo ListView::widget(
+                        [
+                            'dataProvider' => $dataProvider,
+                            'itemView' => 'index_item',
+                        ]
+                    );
+                    ?>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
