@@ -8,7 +8,7 @@ use yii\helpers\Html;
         <h4 class="card-title">
             <a data-toggle="collapse" data-parent="#accordion" href="#faq-<?=$model->id?>"
                class="collapsed" aria-expanded="false">
-                <?= Html::encode($model->question) ?>
+                <i class='fas fa-question'></i> <?= Html::encode($model->question) ?>
             </a>
         </h4>
     </div>

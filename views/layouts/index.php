@@ -21,13 +21,13 @@ AppAssetAdminLTE::register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <?php //$this->registerCsrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?></title>
+    <?php $this->registerCsrfMetaTags() ?>
+    <title><?=strip_tags(Html::decode($this->title));?></title>
     <?php $this->head() ?>
-    <link href="<?=Yii::$app->homeUrl?>css/google_fonts.css" rel="stylesheet">
-    <link href="<?=Yii::$app->homeUrl?>css/ionicons.min.css" rel="stylesheet">
-    <link href="<?=Yii::$app->homeUrl?>css/style.css" rel="stylesheet">
-    <link rel="icon" href="<?=Yii::$app->homeUrl?>favicon.ico" type="image/x-icon">
+    <link href="<?= Yii::$app->homeUrl ?>css/google_fonts.css" rel="stylesheet">
+    <link href="<?= Yii::$app->homeUrl ?>css/ionicons.min.css" rel="stylesheet">
+    <link href="<?= Yii::$app->homeUrl ?>css/style.css" rel="stylesheet">
+    <link rel="icon" href="<?= Yii::$app->homeUrl ?>favicon.ico" type="image/x-icon">
 
 </head>
 <body class="hold-transition sidebar-mini">
@@ -44,20 +44,23 @@ AppAssetAdminLTE::register($this);
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0 text-dark"><?= Html::encode($this->title) ?></h1>
+                        <h1 class="m-0 text-dark"><?= $this->title; ?></h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
-                        <?= Breadcrumbs::widget([
-                            'tag' => 'ol',
-                            'options' => [
-                                'class' => 'breadcrumb float-sm-right',
-                            ],
-                            'homeLink' => ['label' => 'Главная', 'url' => '/'],
-                            'itemTemplate' => '<li class="breadcrumb-item">{link}</li>',
-                            'activeItemTemplate' => '<li class="breadcrumb-item active">{link}</li>',
-                            'links' => isset($this->params['breadcrumbs'])
-                                ? $this->params['breadcrumbs'] : [],
-                        ]) ?>
+                        <?= Breadcrumbs::widget(
+                            [
+                                'tag' => 'ol',
+                                'options' => [
+                                    'class' => 'breadcrumb float-sm-right',
+                                ],
+                                'encodeLabels' => false,
+                                'homeLink' => ['label' => '<i class="nav-icon fas fa-tachometer-alt"></i> Главная', 'url' => '/'],
+                                'itemTemplate' => '<li class="breadcrumb-item">{link}</li>',
+                                'activeItemTemplate' => '<li class="breadcrumb-item active">{link}</li>',
+                                'links' => isset($this->params['breadcrumbs'])
+                                    ? $this->params['breadcrumbs'] : [],
+                            ]
+                        ) ?>
                         <?= Alert::widget() ?>
                     </div><!-- /.col -->
                 </div><!-- /.row -->

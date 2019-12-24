@@ -23,7 +23,7 @@ $(document).ready(function () {
         if ($all_full) {
             jk_percent_calc();
         } else {
-            alert('Есть ошибки на форме');
+            alert('Не все поля формы заполнены, либо на ней есть ошибки');
         }
     });
 });

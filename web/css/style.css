@@ -23,3 +23,14 @@ div.required label:after {
     letter-spacing: 0.1em;
     max-width: 7em;
 }
+
+a.workshop-link{
+    font-weight: bold;
+    color: #0056b3;
+    text-decoration: none;
+}
+
+a.btn-a{
+    text-decoration: none;
+    color: #ffffff;
+}

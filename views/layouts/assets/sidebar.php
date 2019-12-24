@@ -56,9 +56,9 @@ use yii\helpers\Url;
                 <a href="<?= Url::home() ?>" class="d-block">
                     <?php
                     if (Yii::$app->user->isGuest) {
-                        echo Html::a('Войти','/login');
+                        echo  Html::a('Войти',Url::home().'login');
                         echo ' / ';
-                        echo Html::a('Рег','/signup');
+                        echo Html::a('Рег',Url::home().'signup');
                     } else {
 
 
