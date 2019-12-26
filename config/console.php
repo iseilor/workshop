@@ -4,9 +4,9 @@ $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
 $config = [
-    'id' => 'basic-console',
+    'id' => 'WORKSHOP',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log','simplechat'],
+    'bootstrap' => ['log'],
     'controllerNamespace' => 'app\commands',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
@@ -14,10 +14,21 @@ $config = [
         '@tests' => '@app/tests',
     ],
     'modules' => [
-        'simplechat' => [
+        /*'simplechat' => [
             'class' => 'bubasuma\simplechat\Module',
+        ],*/
+        'admin' => [
+            'class' => 'app\modules\admin\Module',
+            'controllerNamespace' => 'app\modules\admin\commands',
         ],
-        // ...
+        'main' => [
+            'class' => 'app\modules\main\Module',
+            'controllerNamespace' => 'app\modules\main\commands',
+        ],
+        'user' => [
+            'class' => 'app\modules\user\Module',
+            'controllerNamespace' => 'app\modules\user\commands',
+        ],
     ],
     'components' => [
         'cache' => [

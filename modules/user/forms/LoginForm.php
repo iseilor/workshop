@@ -1,7 +1,9 @@
 <?php
 
-namespace app\modules\user\models;
+namespace app\modules\user\forms;
 
+use app\modules\user\models\User;
+use app\modules\user\Module;
 use Yii;
 use yii\base\Model;
 
@@ -13,8 +15,10 @@ class LoginForm extends Model
     public $username;
     public $password;
     public $rememberMe = true;
+    public $icon = '<i class="fas fa-sign-in-alt"></i>';
 
     private $_user = false;
+
 
     /**
      * @return array the validation rules.
@@ -54,7 +58,7 @@ class LoginForm extends Model
     public function login()
     {
         if ($this->validate()) {
-            return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600*24*30 : 0);
+            return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
         } else {
             return false;
         }
@@ -77,9 +81,9 @@ class LoginForm extends Model
     public function attributeLabels()
     {
         return [
-            'username' => Yii::t('app', 'Username'),
-            'password' => Yii::t('app', 'Password'),
-            'rememberMe' => Yii::t('app', 'Remember Me')
+            'username' => Module::t('module', 'Username'),
+            'password' => Module::t('module', 'Password'),
+            'rememberMe' => Module::t('module', 'Remember Me')
         ];
     }
 }

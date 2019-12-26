@@ -7,7 +7,7 @@ $config = [
     'id' => 'WORKSHOP',
     'name' => 'Ростелеком Внутренние Услуги 1.0',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
+    'bootstrap' => ['log', 'app\modules\user\Bootstrap',],
     'layout' => 'index',
     'language' => 'ru-RU',
     'defaultRoute' => 'main/default/index',
@@ -79,15 +79,15 @@ $config = [
 
         'i18n' => [
             'translations' => [
-                'app*' => [
+                'app' => [
                     'class' => 'yii\i18n\PhpMessageSource',
+                    'forceTranslation' => true,
                     //'basePath' => '@app/messages',
-                    //'sourceLanguage' => 'en-US',
-                    'fileMap' => [
+                    'sourceLanguage' => 'ru-RU',
+                    /*'fileMap' => [
                         'app' => 'app.php',
                         'app/jk' => 'app_jk.php',
-                        'app/user'=>'app_user.php'
-                    ],
+                    ],*/
                 ],
             ],
         ],
@@ -106,7 +106,8 @@ $config = [
                 '' => 'main/default/index',
                 'contact' => 'main/contact/index',
                 '<_a:error>' => 'main/default/<_a>',
-                '<_a:(login|logout|signup|confirm-email|request-password-reset|reset-password)>' => 'user/default/<_a>',
+                '<_a:(login|logout|signup|confirm-email|request-password-reset|password-reset)>' =>
+                    'user/default/<_a>',
 
                 '<_m:[\w\-]+>/<_c:[\w\-]+>/<id:\d+>' => '<_m>/<_c>/view',
                 '<_m:[\w\-]+>/<_c:[\w\-]+>/<id:\d+>/<_a:[\w\-]+>' => '<_m>/<_c>/<_a>',

@@ -1,16 +1,14 @@
 <?php
-use yii\helpers\Html;
-
+use app\modules\user\Module;
 /* @var $this yii\web\View */
 /* @var $user app\modules\user\models\User */
-
 $confirmLink = Yii::$app->urlManager->createAbsoluteUrl(['user/default/email-confirm', 'token' => $user->email_confirm_token]);
 ?>
 
-Здравствуйте, <?= Html::encode($user->username) ?>!
+<?= Module::t('module', 'HELLO {username}', ['username' => $user->username]); ?>
 
-Для подтверждения адреса пройдите по ссылке:
+<?= Module::t('module', 'FOLLOW_TO_CONFIRM_EMAIL') ?>
 
-<?= Html::a(Html::encode($confirmLink), $confirmLink) ?>
+<?= $confirmLink ?>
 
-Если Вы не регистрировались у на нашем сайте, то просто удалите это письмо.
+<?= Module::t('module', 'IGNORE_IF_DO_NOT_REGISTER') ?>
