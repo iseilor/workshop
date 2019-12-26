@@ -7,7 +7,7 @@ $config = [
     'id' => 'WORKSHOP',
     'name' => 'Ростелеком Внутренние Услуги 1.0',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log', 'app\modules\user\Bootstrap',],
+    'bootstrap' => ['log', 'app\modules\user\Bootstrap','app\modules\main\Bootstrap'],
     'layout' => 'index',
     'language' => 'ru-RU',
     'defaultRoute' => 'main/default/index',
@@ -97,14 +97,9 @@ $config = [
             'showScriptName' => false,
 
             'rules' => [
-                /*'<_a:(login|logout|signup|email-confirm|request-password-reset|password-reset)>' => 'user/default/<_a>',
-                '<_m:[\w\-]+>' => '<_m>/default/index',
-                '<module:[\w-]+>/<controller:[\w-]+>/<action:[\w-]+>/<id:\d+>' => '<module>/<controller>/<action>',
-                '<module:\w+>/<action:\w+>' => '<module>/default/<action>',
-                '<controller>/<action>' => '<controller>/<action>'*/
-
                 '' => 'main/default/index',
                 'contact' => 'main/contact/index',
+                'team' => 'main/team/index',
                 '<_a:error>' => 'main/default/<_a>',
                 '<_a:(login|logout|signup|confirm-email|request-password-reset|password-reset)>' =>
                     'user/default/<_a>',

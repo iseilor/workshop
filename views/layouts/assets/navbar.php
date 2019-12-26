@@ -41,7 +41,11 @@ use yii\helpers\Url;
             <a href="<?= Url::home() ?>" class="nav-link">Главная</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="<?= Url::home() ?>" class="nav-link">Команда</a>
+            <?php echo Html::a(
+                'Команда',
+                Url::home() . 'team',
+                ['class' => 'nav-link']
+            ); ?>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
             <a href="<?= Url::home() ?>" class="nav-link">О проекте</a>
@@ -180,32 +184,32 @@ use yii\helpers\Url;
                 if (Yii::$app->user->isGuest) {
                     echo Html::a(
                         '<i class="fas fa-sign-in-alt"></i> Войти',
-                        Url::home().'login',
+                        Url::home() . 'login',
                         ['class' => 'dropdown-item']
                     );
                     echo '<div class="dropdown-divider"></div>';
                     echo Html::a(
                         '<i class="fas fa-user-plus"></i> Регистрация',
-                        Url::home().'signup',
+                        Url::home() . 'signup',
                         ['class' => 'dropdown-item']
                     );
                 } else {
                     echo Html::a(
                         '<i class="fas fa-user-circle"></i> Профиль',
-                        Url::home().'user/profile',
+                        Url::home() . 'user/profile',
                         ['class' => 'dropdown-item']
                     );
                     echo '<div class="dropdown-divider"></div>';
                     echo Html::a(
                         '<i class="fas fa-user-shield"></i> Админка',
-                        Url::home().'admin',
-                        [ 'class'  => 'dropdown-item' ]
+                        Url::home() . 'admin',
+                        ['class' => 'dropdown-item']
                     );
                     echo '<div class="dropdown-divider"></div>';
                     echo Html::a(
                         '<i class="fas fa-sign-out-alt"></i> Выйти',
-                        Url::home().'logout',
-                        ['class' => 'dropdown-item','data-method' => 'post']
+                        Url::home() . 'logout',
+                        ['class' => 'dropdown-item', 'data-method' => 'post']
                     );
                 } ?>
 
