@@ -1,12 +1,13 @@
 <?php
-
+use app\modules\jk\Module;
 /* @var $this yii\web\View */
 /* @var $model app\modules\jk\models\Zaim */
 
-$this->title = Yii::t('app/jk', 'Create Zaim');
+$this->title = Module::t('module', 'Create Zaim');
 $icon = '<i class="fas fa-calculator nav-icon"></i>';
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app/jk', 'Zaims'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'Zaims'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <div id="result" class="alert alert-success alert-dismissible d-none">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>

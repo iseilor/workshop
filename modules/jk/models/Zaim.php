@@ -2,6 +2,7 @@
 
 namespace app\modules\jk\models;
 
+use app\modules\jk\Module;
 use Yii;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
@@ -61,25 +62,25 @@ class Zaim extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app/jk', 'ID'),
+            'id' => Yii::t('app', 'ID'),
             'created_at' => Yii::t('app', 'Created At'),
             'created_by' => Yii::t('app', 'Created By'),
             'updated_at' => Yii::t('app', 'Updated At'),
             'updated_by' => Yii::t('app', 'Updated By'),
-            'date_birth' => Yii::t('app/jk', 'Date Birth'),
-            'gender' => Yii::t('app/jk', 'Gender'),
-            'experience' => Yii::t('app/jk', 'Experience'),
-            'family_count' => Yii::t('app/jk', 'Family Count'),
-            'family_income' => Yii::t('app/jk', 'Family Income'),
-            'area_total' => Yii::t('app/jk', 'Area Total'),
-            'area_buy' => Yii::t('app/jk', 'Area Buy'),
-            'cost_total' => Yii::t('app/jk', 'Cost Total'),
-            'cost_user' => Yii::t('app/jk', 'Cost User'),
-            'bank_credit' => Yii::t('app/jk', 'Bank Credit'),
-            'rf_area' => Yii::t('app/jk', 'RF Area'),
-            'compensation_result' => Yii::t('app/jk', 'Compensation Result'),
-            'compensation_count' => Yii::t('app/jk', 'Compensation Count'),
-            'compensation_years' => Yii::t('app/jk', 'Compensation Years'),
+            'date_birth' => Module::t('module', 'Date Birth'),
+            'gender' => Module::t('module', 'Gender'),
+            'experience' => Module::t('module', 'Experience'),
+            'family_count' => Module::t('module', 'Family Count'),
+            'family_income' => Module::t('module', 'Family Income'),
+            'area_total' => Module::t('module', 'Area Total'),
+            'area_buy' => Module::t('module', 'Area Buy'),
+            'cost_total' => Module::t('module', 'Cost Total'),
+            'cost_user' => Module::t('module', 'Cost User'),
+            'bank_credit' => Module::t('module', 'Bank Credit'),
+            'rf_area' => Module::t('module', 'RF Area'),
+            'compensation_result' => Module::t('module', 'Compensation Result'),
+            'compensation_count' => Module::t('module', 'Compensation Count'),
+            'compensation_years' => Module::t('module', 'Compensation Years'),
         ];
     }
 
