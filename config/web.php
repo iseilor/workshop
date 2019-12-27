@@ -7,7 +7,12 @@ $config = [
     'id' => 'WORKSHOP',
     'name' => 'Ростелеком Внутренние Услуги 1.0',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log', 'app\modules\user\Bootstrap','app\modules\main\Bootstrap'],
+    'bootstrap' => [
+        'log',
+        'app\modules\user\Bootstrap',
+        'app\modules\main\Bootstrap',
+        'app\modules\jk\Bootstrap'
+    ],
     'layout' => 'index',
     'language' => 'ru-RU',
     'defaultRoute' => 'main/default/index',

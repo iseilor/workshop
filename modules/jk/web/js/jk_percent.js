@@ -1,6 +1,13 @@
 $(document).ready(function () {
+
+
+
+    // Маска для процентов
+    $('#percent-percent_rate').inputmask("decimal", { min: 1, max: 100, allowMinus: false,digits: 1 });
+
     // Кнопка рассчитать
     $('#percent-calc').click(function () {
+
 
         // Проверяем заполненность всех полей
         $all_full = true;
@@ -25,6 +32,12 @@ $(document).ready(function () {
         } else {
             alert('Не все поля формы заполнены, либо на ней есть ошибки');
         }
+    });
+
+    // Показываем подсказки
+    $('.show-hint').click(function(){
+        $(this).parent().parent().find('.hint-block p').toggleClass('d-none');
+        return false;
     });
 });
 

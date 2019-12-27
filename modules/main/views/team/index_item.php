@@ -1,5 +1,10 @@
+<?php
 
-    <div class="card bg-light">
+use yii\helpers\Url;
+
+?>
+
+<div class="card bg-light">
         <div class="card-header text-muted border-bottom-0">
             <?=$model->status;?>
         </div>
@@ -15,7 +20,7 @@
                     </ul>
                 </div>
                 <div class="col-5 text-center">
-                    <img src="/img/main/team/<?=$model->photo?>" alt="<?=$model->full_name?>" class="img-circle img-fluid">
+                    <img src="<?= Url::home() ?>img/main/team/<?=$model->photo?>" alt="<?=$model->full_name?>" class="img-circle img-fluid">
                 </div>
             </div>
         </div>

@@ -1,5 +1,6 @@
 <?php
 
+use app\modules\jk\Module;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -7,13 +8,11 @@ use yii\widgets\DetailView;
 /* @var $model app\modules\jk\models\Percent */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app\jk', 'Percents'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'Percents'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="percent-view">
-
-    <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
         <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>

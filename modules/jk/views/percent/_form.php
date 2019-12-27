@@ -6,10 +6,12 @@ use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\jk\models\Percent */
+
 /* @var $form yii\widgets\ActiveForm */
 
 
 use app\modules\jk\assets\PercentAsset;
+
 PercentAsset::register($this);
 ?>
 
@@ -18,16 +20,21 @@ PercentAsset::register($this);
         <div class="row">
             <div class="col-md-4">
                 <?= $form->field($model, 'date_birth')
-                    ->widget(DatePicker::className(),
+                    ->widget(
+                        DatePicker::className(),
                         [
                             'options' => ['class' => 'form-control'],
                             'dateFormat' => 'dd.MM.yyyy'
-                        ]) ?>
-                <?= $form->field($model, 'gender')->dropDownList([
-                    '1' => 'М',
-                    '0' => 'Ж',
-                ]); ?>
-                <?= $form->field($model, 'experience')->textInput() ?>
+                        ]
+                    ) ?>
+                <?= $form->field($model, 'gender')->dropDownList(
+                    [
+                        '1' => 'М',
+                        '0' => 'Ж',
+                    ]
+                ); ?>
+                <?= $form->field($model, 'experience')->label($model->getAttributeLabel('experience') . ' <a href="#" class="show-hint"><i class="fas fa-info"></i></a>')
+                    ->hint('<p class="text-muted d-none">Text muted to emphasize general</p>')->textInput() ?>
                 <?= $form->field($model, 'family_count')->textInput() ?>
                 <?= $form->field($model, 'family_income')->textInput() ?>
             </div>
@@ -51,11 +58,18 @@ PercentAsset::register($this);
         </div>
     </div>
     <div class="card-footer">
-        <?= Html::button('<i class="fas fa-calculator nav-icon"></i> Рассчитать',
-            ['class' => 'btn btn-info', 'id' => 'percent-calc']) ?>
-        <?= Html::submitButton('<i class="fas fa-save nav-icon"></i> Сохранить',
-            ['class' => 'btn btn-success']) ?>
-        <?= Html::a(Yii::t('app', 'Отмена'), ['create'],
-            ['class' => 'btn btn-default float-right']) ?>
+        <?= Html::button(
+            '<i class="fas fa-calculator nav-icon"></i> Рассчитать',
+            ['class' => 'btn btn-info', 'id' => 'percent-calc']
+        ) ?>
+        <?= Html::submitButton(
+            '<i class="fas fa-save nav-icon"></i> Сохранить',
+            ['class' => 'btn btn-success']
+        ) ?>
+        <?= Html::a(
+            Yii::t('app', 'Отмена'),
+            ['create'],
+            ['class' => 'btn btn-default float-right']
+        ) ?>
     </div>
 <?php ActiveForm::end(); ?>

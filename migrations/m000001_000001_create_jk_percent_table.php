@@ -44,7 +44,7 @@ class m000001_000001_create_jk_percent_table extends Migration
             'loan'=> Schema::TYPE_INTEGER,
 
             'percent_count' => Schema::TYPE_INTEGER . ' NOT NULL',
-            'percent_rate' => Schema::TYPE_INTEGER . ' NOT NULL',
+            'percent_rate' => Schema::TYPE_FLOAT . ' NOT NULL',
 
             'compensation_result'=> Schema::TYPE_BOOLEAN,
             'compensation_count'=> Schema::TYPE_INTEGER,

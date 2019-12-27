@@ -2,6 +2,7 @@
 
 namespace app\modules\jk\models;
 
+use app\modules\jk\Module;
 use Yii;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
@@ -28,7 +29,7 @@ use yii\db\Expression;
  * @property int $bank_credit
  * @property int|null $loan
  * @property int|null $percent_count
- * @property int|null $percent_rate
+ * @property float|null $percent_rate
  * @property int|null $compensation_result
  * @property int|null $compensation_count
  * @property int|null $compensation_years
@@ -51,7 +52,8 @@ class Percent extends \yii\db\ActiveRecord
         return [
             [['date_birth', 'gender', 'experience',  'family_count', 'family_income', 'area_total', 'area_buy', 'cost_total', 'cost_user', 'bank_credit', 'percent_count', 'percent_rate'], 'required'],
             [['created_at', 'updated_at', 'date_birth'], 'safe'],
-            [['created_by', 'updated_by', 'gender', 'experience', 'family_count', 'family_income', 'area_total', 'area_buy', 'cost_total', 'cost_user', 'bank_credit', 'loan', 'percent_count', 'percent_rate', 'compensation_result', 'compensation_count', 'compensation_years'], 'integer'],
+            [['created_by', 'updated_by', 'gender', 'experience', 'family_count', 'family_income', 'area_total', 'area_buy', 'cost_total', 'cost_user', 'bank_credit', 'loan', 'percent_count', 'compensation_result', 'compensation_count', 'compensation_years'], 'integer'],
+            [['percent_rate'],'double'],
 
             // Стаж в компании
             ['experience', 'compare', 'compareValue' => 1, 'operator' => '>=', 'type' => 'number'],
@@ -70,8 +72,8 @@ class Percent extends \yii\db\ActiveRecord
             ['percent_count', 'compare', 'compareValue' => 1, 'operator' => '>=', 'type' => 'number'],
 
             // Процентная ставка
-            ['percent_rate', 'compare', 'compareValue' => 1, 'operator' => '>=', 'type' => 'number'],
-            ['percent_rate', 'compare', 'compareValue' => 100, 'operator' => '<=', 'type' => 'number'],
+            ['percent_rate', 'compare', 'compareValue' => 1, 'operator' => '>=', 'type' => 'double'],
+            ['percent_rate', 'compare', 'compareValue' => 100, 'operator' => '<=', 'type' => 'double'],
         ];
     }
 
@@ -86,22 +88,22 @@ class Percent extends \yii\db\ActiveRecord
             'created_by' => Yii::t('app', 'Created By'),
             'updated_at' => Yii::t('app', 'Updated At'),
             'updated_by' => Yii::t('app', 'Updated By'),
-            'date_birth' => Yii::t('app/jk', 'Date Birth'),
-            'gender' => Yii::t('app/jk', 'Gender'),
-            'experience' => Yii::t('app/jk', 'Experience'),
-            'family_count' => Yii::t('app/jk', 'Family Count'),
-            'family_income' => Yii::t('app/jk', 'Family Income'),
-            'area_total' => Yii::t('app/jk', 'Area Total'),
-            'area_buy' => Yii::t('app/jk', 'Area Buy'),
-            'cost_total' => Yii::t('app/jk', 'Cost Total'),
-            'cost_user' => Yii::t('app/jk', 'Cost User'),
-            'bank_credit' => Yii::t('app/jk', 'Bank Credit'),
-            'loan' => Yii::t('app/jk', 'Loan'),
-            'percent_count' => Yii::t('app/jk', 'Percent Count'),
-            'percent_rate' => Yii::t('app/jk', 'Percent Rate'),
-            'compensation_result' => Yii::t('app/jk', 'Compensation Result'),
-            'compensation_count' => Yii::t('app/jk', 'Compensation Count'),
-            'compensation_years' => Yii::t('app/jk', 'Compensation Years'),
+            'date_birth' => Module::t('module', 'Date Birth'),
+            'gender' => Module::t('module', 'Gender'),
+            'experience' => Module::t('module', 'Experience'),
+            'family_count' => Module::t('module', 'Family Count'),
+            'family_income' => Module::t('module', 'Family Income'),
+            'area_total' => Module::t('module', 'Area Total'),
+            'area_buy' => Module::t('module', 'Area Buy'),
+            'cost_total' => Module::t('module', 'Cost Total'),
+            'cost_user' => Module::t('module', 'Cost User'),
+            'bank_credit' => Module::t('module', 'Bank Credit'),
+            'loan' => Module::t('module', 'Loan'),
+            'percent_count' => Module::t('module', 'Percent Count'),
+            'percent_rate' => Module::t('module', 'Percent Rate'),
+            'compensation_result' => Module::t('module', 'Compensation Result'),
+            'compensation_count' => Module::t('module', 'Compensation Count'),
+            'compensation_years' => Module::t('module', 'Compensation Years'),
         ];
     }
 

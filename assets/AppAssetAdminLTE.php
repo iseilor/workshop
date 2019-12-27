@@ -22,6 +22,9 @@ class AppAssetAdminLTE extends AssetBundle
     public $js
         = [
             //'plugins/jquery/jquery.js',
+
+            'plugins/jquery-ui/jquery-ui.js',
+            'plugins/inputmask/min/jquery.inputmask.bundle.min.js',
             'plugins/bootstrap/js/bootstrap.bundle.js',
             'dist/js/adminlte.js',
             'dist/js/demo.js',
