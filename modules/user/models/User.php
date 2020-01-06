@@ -2,6 +2,7 @@
 
 namespace app\modules\user\models;
 
+use app\modules\user\Module;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\helpers\ArrayHelper;
@@ -65,13 +66,13 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             'id' => Yii::t('app', 'ID'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
-            'username' => Yii::t('app/user', 'Username'),
-            'auth_key' => Yii::t('app/user', 'Auth Key'),
-            'email_confirm_token' => Yii::t('app/user', 'Email Confirm Token'),
-            'password_hash' => Yii::t('app/user', 'Password Hash'),
-            'password_reset_token' => Yii::t('app/user', 'Password Reset Token'),
-            'email' => Yii::t('app/user', 'Email'),
-            'status' => Yii::t('app/user', 'Status'),
+            'username' => Module::t('module', 'Username'),
+            'auth_key' => Module::t('module', 'Auth Key'),
+            'email_confirm_token' => Module::t('module', 'Email Confirm Token'),
+            'password_hash' => Module::t('module', 'Password Hash'),
+            'password_reset_token' => Module::t('module', 'Password Reset Token'),
+            'email' => Module::t('module', 'Email'),
+            'status' => Module::t('module', 'Status'),
         ];
     }
 

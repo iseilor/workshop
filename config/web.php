@@ -105,6 +105,10 @@ $config = [
                 '' => 'main/default/index',
                 'contact' => 'main/contact/index',
                 'team' => 'main/team/index',
+                'about' => 'main/default/about',
+
+
+
                 '<_a:error>' => 'main/default/<_a>',
                 '<_a:(login|logout|signup|confirm-email|request-password-reset|password-reset)>' =>
                     'user/default/<_a>',

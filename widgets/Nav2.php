@@ -9,7 +9,7 @@ class Nav2 extends Nav
     {
         parent::init();
 
-        // Удаляем класс NAV, т.к. по шаблону он не нужне
+        // Удаляем класс NAV, т.к. по шаблону он не нужен
         Html::removeCssClass($this->options, 'nav');
     }
 }

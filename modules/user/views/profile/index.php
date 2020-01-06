@@ -1,6 +1,7 @@
 <?php
 
 use app\components\grid\LinkColumn;
+use app\modules\user\Module;
 use yii\grid\ActionColumn;
 
 
@@ -13,7 +14,7 @@ use yii\widgets\Pjax;
 /* @var $this yii\web\View */
 /* @var $model app\modules\user\models\User */
 
-$this->title = Yii::t('app/user', 'Profile');
+$this->title = Module::t('module', 'Profile');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -42,9 +43,9 @@ $this->params['breadcrumbs'][] = $this->title;
                         <b>Дата рождения</b> <a class="float-right">04.03.1988</a>
                     </li>
                 </ul>
-                <?= Html::a('<i class="fas fa-user-edit"></i> '.Yii::t('app/user', 'Profile Update'), ['update'], ['class' => 'btn 
+                <?= Html::a('<i class="fas fa-user-edit"></i> '.Module::t('module', 'Profile Update'), ['update'], ['class' => 'btn 
         btn-primary',]) ?>
-                <?= Html::a('<i class="fas fa-user-lock"></i> '.Yii::t('app/user', 'Password Change'), ['password-change'], ['class' => 'btn 
+                <?= Html::a('<i class="fas fa-user-lock"></i> '.Module::t('module', 'Password Change'), ['password-change'], ['class' => 'btn 
         btn-primary']) ?>
 
             </div>

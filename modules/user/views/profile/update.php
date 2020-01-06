@@ -1,12 +1,14 @@
 <?php
+
+use app\modules\user\Module;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\user\models\User */
 
-$this->title = Yii::t('app/user', 'Profile Update');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app/user', 'Profile Update'), 'url' => ['index']];
+$this->title = Module::t('module', 'Profile Update');
+$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'Profile Update'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-profile-update">

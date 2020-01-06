@@ -1,59 +1,28 @@
 <?php
 
-use app\widgets\Nav2;
+use app\modules\main\Module;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\widgets\Menu;
 
 ?>
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">
 
-    <?php /*echo Nav2::widget([
+    <?php
+    echo Menu::widget([
+        'encodeLabels' => false,
         'options' => ['class' => 'navbar-nav'],
-        'encodeLabels' => true,
+        'itemOptions' => ['class' => 'nav-item d-none d-sm-inline-block'],
+        'linkTemplate' => '<a href="{url}" class="nav-link">{label}</a>',
         'items' => [
-            [
-                'label' => '<i class="fas fa-bars"></i>',
-                'url' => '#',
-                'options' => ['class' => 'nav-item'],
-                'linkOptions' => [
-                    'class' => 'nav-link',
-                    'data-widget' => "pushmenu",
-                ],
-
-            ],
-            [
-                'label' => Yii::t('app', 'Главная'),
-                'url' => ['/main/default/index'],
-                'options' => ['class' => 'nav-item d-none d-sm-inline-block'],
-                'linkOptions' => ['class' => 'nav-link'],
-
-            ],
-
+            ['label' => '<i class="fas fa-bars"></i>', 'url' => '#', 'options' => ['class' => 'nav-item'], 'template' => '<a href="{url}" class="nav-link" data-widget="pushmenu">{label}</a>',],
+            ['label' => Module::t('module', 'Home'), 'url' => ['/main/default/index']],
+            ['label' => Module::t('module', 'Teams'), 'url' => ['/main/team/index']],
+            ['label' => Module::t('module', 'About project'), 'url' => ['/main/default/about']],
+            ['label' => Module::t('module', 'Contacts'), 'url' => ['/main/default/contacts']],
         ],
-    ]); */ ?>
-
-    <ul class="navbar-nav">
-        <li class="nav-item">
-            <a class="nav-link" data-widget="pushmenu" href="#"><i
-                        class="fas fa-bars"></i></a>
-        </li>
-        <li class="nav-item d-none d-sm-inline-block">
-            <a href="<?= Url::home() ?>" class="nav-link">Главная</a>
-        </li>
-        <li class="nav-item d-none d-sm-inline-block">
-            <?php echo Html::a(
-                'Команда',
-                Url::home() . 'team',
-                ['class' => 'nav-link']
-            ); ?>
-        </li>
-        <li class="nav-item d-none d-sm-inline-block">
-            <a href="<?= Url::home() ?>" class="nav-link">О проекте</a>
-        </li>
-        <li class="nav-item d-none d-sm-inline-block">
-            <a href="<?= Url::home() ?>" class="nav-link">Контакты</a>
-        </li>
-    </ul>
+    ]);
+    ?>
 
     <!-- SEARCH FORM -->
     <form class="form-inline ml-3">

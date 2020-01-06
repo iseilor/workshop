@@ -2,7 +2,7 @@
 
 namespace app\modules\user\controllers;
 
-use app\modules\user\models\EmailConfirmForm;
+use app\modules\user\forms\EmailConfirmForm;
 use app\modules\user\forms\LoginForm;
 use app\modules\user\forms\PasswordResetRequestForm;
 use app\modules\user\forms\PasswordResetForm;
