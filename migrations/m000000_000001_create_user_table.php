@@ -29,6 +29,10 @@ class m000000_000001_create_user_table extends Migration
             'password_reset_token' => $this->string(),
             'email' => $this->string()->notNull(),
             'status' => $this->smallInteger()->notNull()->defaultValue(0),
+            'birth_date' => $this->integer(),
+            'work_date'=> $this->integer(),
+            'gender'=>$this->boolean(),
+            'phone'=>$this->string(10)
 
         ], $tableOptions);
 

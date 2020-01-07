@@ -21,6 +21,13 @@ use yii\web\IdentityInterface;
  * @property string|null $password_reset_token
  * @property string $email
  * @property int $status
+ *
+ * @property int $birth_date
+ * @property int $work_date
+ * @property int $gender
+ *
+ *
+ *
  */
 class User extends \yii\db\ActiveRecord implements IdentityInterface
 {
@@ -29,6 +36,9 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     const STATUS_ACTIVE = 1;
     const STATUS_WAIT = 2;
     const SCENARIO_PROFILE = 'profile';
+
+
+
     /**
      * {@inheritdoc}
      */
@@ -54,6 +64,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             ['status', 'integer'],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => array_keys(self::getStatusesArray())],
+
         ];
     }
 
@@ -73,6 +84,12 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             'password_reset_token' => Module::t('module', 'Password Reset Token'),
             'email' => Module::t('module', 'Email'),
             'status' => Module::t('module', 'Status'),
+
+            'birth_date' => Module::t('module', 'Birth Date'),
+            'work_date' => Module::t('module', 'Work Date'),
+            'gender' => Module::t('module', 'Gender'),
+
+
         ];
     }
 

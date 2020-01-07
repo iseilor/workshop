@@ -37,8 +37,24 @@ class ProfileController extends Controller
         $zaimSearchModel = new ZaimSearch();
         $zaimDataProvider = $zaimSearchModel->search(Yii::$app->request->queryParams);
 
+        $model = $this->findModel();
+        switch ($model->gender) {
+            case 0:
+                $model->gender='Женский';
+                break;
+            case 1:
+                $model->gender='Мужской';
+                break;
+            default:
+                $model->gender='Не определён';
+                break;
+        }
+        $experience=intdiv(mktime()-$model->work_date,31556926);
+
+
         return $this->render('index', [
-            'model' => $this->findModel(),
+            'model' => $model,
+            'experience'=>$experience,
             'percentSearchModel' => $percentSearchModel,
             'percentDataProvider' => $percentDataProvider,
             'zaimSearchModel' => $zaimSearchModel,

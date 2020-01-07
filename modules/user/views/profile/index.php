@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="card-body box-profile">
                 <div class="text-center">
                     <img class="profile-user-img img-fluid img-circle"
-                         src="<?=Url::home()?>img/user4-128x128.jpg"
+                         src="<?= Url::home() ?>img/user4-128x128.jpg"
                          alt="User profile picture">
                 </div>
 
@@ -34,19 +34,32 @@ $this->params['breadcrumbs'][] = $this->title;
                 <p class="text-muted text-center">Программист</p>
                 <ul class="list-group list-group-unbordered mb-3">
                     <li class="list-group-item">
-                        <b>Email</b> <a class="float-right">test@gmail.com</a>
+                        <b>Email</b> <a class="float-right"><?= $model->email; ?></a>
                     </li>
                     <li class="list-group-item">
-                        <b>Телефон</b> <a class="float-right">8 (800) 200-00-00</a>
+                        <b>Телефон</b> <a class="float-right"><?= $model->phone; ?></a>
                     </li>
                     <li class="list-group-item">
-                        <b>Дата рождения</b> <a class="float-right">04.03.1988</a>
+                        <b>Дата рождения</b> <a class="float-right"><?= Yii::$app->formatter->format($model->birth_date, 'date'); ?></a>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Пол</b> <a class="float-right"><?= $model->gender; ?></a>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Дата трудоустройства</b> <a class="float-right"><?= Yii::$app->formatter->format($model->work_date, 'date'); ?></a>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Стаж, полных лет</b> <a class="float-right"><?=$experience?></a>
                     </li>
                 </ul>
-                <?= Html::a('<i class="fas fa-user-edit"></i> '.Module::t('module', 'Profile Update'), ['update'], ['class' => 'btn 
-        btn-primary',]) ?>
-                <?= Html::a('<i class="fas fa-user-lock"></i> '.Module::t('module', 'Password Change'), ['password-change'], ['class' => 'btn 
-        btn-primary']) ?>
+                <?= Html::a('<i class="fas fa-user-edit"></i> ' . Module::t('module', 'Profile Update'), ['update'], [
+                    'class' => 'btn 
+        btn-primary',
+                ]) ?>
+                <?= Html::a('<i class="fas fa-user-lock"></i> ' . Module::t('module', 'Password Change'), ['password-change'], [
+                    'class' => 'btn 
+        btn-primary',
+                ]) ?>
 
             </div>
             <!-- /.card-body -->
@@ -117,16 +130,16 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?php Pjax::begin(); ?>
                         <?=
                         GridView::widget([
-                                                 'dataProvider' => $percentDataProvider,
-                                                 'filterModel' => $percentSearchModel,
-                                                 'columns' => [
-                                                     'id',
-                                                     'created_at',
-                                                     'compensation_count',
-                                                     'compensation_years',
-                                                     ['class' => ActionColumn::className()],
-                                                 ],
-                                             ]); ?>
+                            'dataProvider' => $percentDataProvider,
+                            'filterModel' => $percentSearchModel,
+                            'columns' => [
+                                'id',
+                                'created_at',
+                                'compensation_count',
+                                'compensation_years',
+                                ['class' => ActionColumn::className()],
+                            ],
+                        ]); ?>
                         <?php Pjax::end(); ?>
                     </div>
 
@@ -134,16 +147,16 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?php Pjax::begin(); ?>
                         <?=
                         GridView::widget([
-                                             'dataProvider' => $zaimDataProvider,
-                                             'filterModel' => $zaimSearchModel,
-                                             'columns' => [
-                                                 'id',
-                                                 'created_at',
-                                                 'compensation_count',
-                                                 'compensation_years',
-                                                 ['class' => ActionColumn::className()],
-                                             ],
-                                         ]); ?>
+                            'dataProvider' => $zaimDataProvider,
+                            'filterModel' => $zaimSearchModel,
+                            'columns' => [
+                                'id',
+                                'created_at',
+                                'compensation_count',
+                                'compensation_years',
+                                ['class' => ActionColumn::className()],
+                            ],
+                        ]); ?>
                         <?php Pjax::end(); ?>
                     </div>
 
@@ -209,11 +222,11 @@ $this->params['breadcrumbs'][] = $this->title;
 <!--
 <div class="user-profile">
     <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'username',
-            'email',
-        ],
-    ]) ?>
+    'model' => $model,
+    'attributes' => [
+        'username',
+        'email',
+    ],
+]) ?>
 </div>
 -->

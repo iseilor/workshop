@@ -23,5 +23,9 @@ return [
     'USER_CURRENT_PASSWORD'=>'Текущий пароль',
     'USER_NEW_PASSWORD'=>'Новый пароль',
     'USER_REPEAT_PASSWORD'=>'Повторите новый пароль',
-    'BUTTON_SAVE'=>'Сохранить'
+    'BUTTON_SAVE'=>'Сохранить',
+
+    'Birth Date'=>'Дата рождения',
+    'Work Date'=>'Дата трудоустройства в Ростелеком',
+    'Gender'=>'Пол',
 ];
