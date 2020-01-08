@@ -5,11 +5,11 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\modules\jk\models\Zaim */
 
-$this->title = Yii::t('app/jk', 'Update Zaim: {name}', [
+$this->title = Yii::t('app', 'Update Zaim: {name}', [
     'name' => $model->id,
 ]);
 $icon = '<i class="fas fa-calculator nav-icon"></i>';
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app/jk', 'Zaims'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Zaims'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>

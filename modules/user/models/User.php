@@ -37,8 +37,6 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     const STATUS_WAIT = 2;
     const SCENARIO_PROFILE = 'profile';
 
-
-
     /**
      * {@inheritdoc}
      */
@@ -46,7 +44,6 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return 'user';
     }
-
 
     public function rules()
     {
@@ -278,5 +275,32 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             self::SCENARIO_DEFAULT => ['username', 'email', 'status'],
             self::SCENARIO_PROFILE => ['email'],
         ];
+    }
+
+    // Возраст, кол-во полных лет
+    public function getYears(){
+        return intdiv(mktime()-$this->birth_date,31556926);
+    }
+
+    // Стаж, кол-во полных лет
+    public function getExperience(){
+        return intdiv(mktime()-$this->work_date,31556926);
+    }
+
+    // Дата выхода на пенсию
+    public function getPensionDate(){
+        $date='';
+        if ($this->gender==1){
+            $date=date('d.m.Y',$this->birth_date+60*31556926);
+        }
+        if ($this->gender===0){
+            $date=date('d.m.Y',$this->birth_date+55*31556926);
+        }
+        return $date;
+    }
+
+    // Кол-во полных лет до пенсии
+    public function getPensionYears(){
+        return intdiv(strtotime($this->getPensionDate())-mktime(),31556926);
     }
 }

@@ -4,6 +4,6 @@
         От IT для людей с любовью
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2019 <a href="https://workshop.center.rt.ru">Workshop</a>.</strong>
+    <strong>Copyright &copy; 2k20 <a href="https://workshop.center.rt.ru">Workshop</a>.</strong>
     Все права защищены.
 </footer>

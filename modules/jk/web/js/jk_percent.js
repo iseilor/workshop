@@ -1,13 +1,27 @@
 $(document).ready(function () {
 
 
-
     // Маска для процентов
     $('#percent-percent_rate').inputmask("decimal", { min: 1, max: 100, allowMinus: false,digits: 1 });
 
     // Кнопка рассчитать
     $('#percent-calc').click(function () {
 
+        var data = $('#percent-form').serialize();
+        $.ajax({
+            url: '/jk/percent/calc',
+            type: 'POST',
+            data: data,
+            success: function(result){
+                $('#result').html(result);
+            },
+            error: function(){
+                alert('Error!');
+            }
+        });
+        return false;
+
+        /*
 
         // Проверяем заполненность всех полей
         $all_full = true;
@@ -31,13 +45,18 @@ $(document).ready(function () {
             jk_percent_calc();
         } else {
             alert('Не все поля формы заполнены, либо на ней есть ошибки');
-        }
+        }*/
     });
 
     // Показываем подсказки
     $('.show-hint').click(function(){
         $(this).parent().parent().find('.hint-block p').toggleClass('d-none');
         return false;
+    });
+
+    // Кнопка сохранить расчёт в результатах
+    $('body').on('click', '#result-save', function () {
+        $('#btn-save').click();
     });
 });
 
