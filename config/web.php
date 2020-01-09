@@ -5,7 +5,7 @@ $db = require __DIR__ . '/db.php';
 
 $config = [
     'id' => 'WORKSHOP',
-    'name' => 'Ростелеком Внутренние Услуги 1.0',
+    'name' => 'WORKSHOP',
     'basePath' => dirname(__DIR__),
     'bootstrap' => [
         'log',
@@ -111,10 +111,10 @@ $config = [
 
             'rules' => [
                 '' => 'main/default/index',
-                'contact' => 'main/contact/index',
+
                 'team' => 'main/team/index',
                 'about' => 'main/default/about',
-
+                'contacts' => 'main/default/contacts',
 
 
                 '<_a:error>' => 'main/default/<_a>',
