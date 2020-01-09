@@ -1,8 +1,8 @@
 <?php
 
+use app\components\grid\ActionColumn;
 use app\components\grid\LinkColumn;
 use app\modules\user\Module;
-use yii\grid\ActionColumn;
 
 
 use yii\grid\GridView;
@@ -114,10 +114,13 @@ $this->params['breadcrumbs'][] = $this->title;
                                     [
                                         'label' => 'Максимальный размер компенсации, руб',
                                         'attribute' => 'compensation_count',
-                                        'format'=>['decimal',0,' ']
+                                        'format' => ['decimal', 0, ' ']
                                     ],
                                     'compensation_years',
-                                    ['class' => ActionColumn::className()],
+                                    [
+                                        'class' => ActionColumn::className(),
+                                        'controller' => '/jk/percent'
+                                    ],
                                 ],
                             ]
                         ); ?>
@@ -140,7 +143,10 @@ $this->params['breadcrumbs'][] = $this->title;
                                     ],
                                     'compensation_count',
                                     'compensation_years',
-                                    ['class' => ActionColumn::className()],
+                                    [
+                                        'class' => ActionColumn::className(),
+                                        'controller' => '/jk/percent'
+                                    ],
                                 ],
                             ]
                         ); ?>
