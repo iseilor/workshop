@@ -20,9 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="row">
     <div class="col-md-4">
-
-        <!-- Profile Image -->
-        <div class="card card-primary card-outline">
+        <div class="card card-outline">
             <div class="card-body box-profile">
                 <div class="text-center">
                     <img class="profile-user-img img-fluid img-circle"
@@ -49,184 +47,109 @@ $this->params['breadcrumbs'][] = $this->title;
                         <b>Дата трудоустройства</b> <a class="float-right"><?= Yii::$app->formatter->format($model->work_date, 'date'); ?></a>
                     </li>
                     <li class="list-group-item">
-                        <b>Стаж, полных лет</b> <a class="float-right"><?=$experience?></a>
+                        <b>Стаж, полных лет</b> <a class="float-right"><?= $experience ?></a>
                     </li>
                 </ul>
-                <?= Html::a('<i class="fas fa-user-edit"></i> ' . Module::t('module', 'Profile Update'), ['update'], [
-                    'class' => 'btn 
+                <?= Html::a(
+                    '<i class="fas fa-user-edit"></i> ' . Module::t('module', 'Profile Update'),
+                    ['update'],
+                    [
+                        'class' => 'btn 
         btn-primary',
-                ]) ?>
-                <?= Html::a('<i class="fas fa-user-lock"></i> ' . Module::t('module', 'Password Change'), ['password-change'], [
-                    'class' => 'btn 
+                    ]
+                ) ?>
+                <?= Html::a(
+                    '<i class="fas fa-user-lock"></i> ' . Module::t('module', 'Password Change'),
+                    ['password-change'],
+                    [
+                        'class' => 'btn 
         btn-primary',
-                ]) ?>
+                    ]
+                ) ?>
 
             </div>
             <!-- /.card-body -->
         </div>
-        <!-- /.card -->
-
-
-        <!--<div class="card card-primary">
-            <div class="card-header">
-                <h3 class="card-title">Обо мне</h3>
-            </div>
-
-            <div class="card-body">
-                <strong><i class="fas fa-book mr-1"></i> Образование</strong>
-
-                <p class="text-muted">
-                    МГУ, Мордовский Государственный Университет, г.Саранск
-                </p>
-
-                <hr>
-
-                <strong><i class="fas fa-map-marker-alt mr-1"></i> Офис</strong>
-
-                <p class="text-muted">г.Москва, ул.Киевское шоссе, д.6, БЦ Comcity</p>
-
-                <hr>
-
-                <strong><i class="fas fa-pencil-alt mr-1"></i> Навыки</strong>
-
-                <p class="text-muted">
-                    <span class="tag tag-danger">Дизайн</span>
-                    <span class="tag tag-success">Программирование</span>
-                    <span class="tag tag-info">Продажи</span>
-                    <span class="tag tag-warning">Спорт</span>
-                    <span class="tag tag-primary">Node.js</span>
-                </p>
-
-                <hr>
-                <strong><i class="far fa-file-alt mr-1"></i> Заметки</strong>
-
-                <p class="text-muted">Очень люблю общаться с коллеками, но пожалуйста не звоните
-                    мне после 23:00. Спасибо
-                </p>
-            </div>
-
-        </div>-->
-
     </div>
+
 
     <div class="col-md-8">
-        <div class="card">
-            <div class="card-header p-2">
-                <ul class="nav nav-pills">
-                    <li class="nav-item"><a class="nav-link active" href="#activity"
-                                            data-toggle="tab"><i class="fas fa-calculator
-                                            nav-icon"></i> Калькуляции процентов</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#timeline"
-                                            data-toggle="tab"><i class="fas fa-calculator
-                                            nav-icon"></i> Калькуляции займов</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#settings"
-                                            data-toggle="tab"><i class="fas fa-cog"></i>
-                            Настройки</a></li>
+        <div class="card card-primary card-outline card-outline-tabs" style="border-top: none;">
+            <div class="card-header p-0 border-bottom-0">
+                <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="custom-tabs-three-home-tab" data-toggle="pill" href="#custom-tabs-three-home" role="tab" aria-controls="custom-tabs-three-home">
+                            <i class="fas fa-calculator nav-icon"></i> Калькуляции процентов</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="custom-tabs-three-profile-tab" data-toggle="pill" href="#custom-tabs-three-profile" role="tab" aria-controls="custom-tabs-three-profile"
+                           aria-selected="true">
+                            <i class="fas fa-calculator nav-icon"></i> Калькуляции займов
+                        </a>
+                    </li>
                 </ul>
-            </div><!-- /.card-header -->
+            </div>
             <div class="card-body">
-                <div class="tab-content">
-                    <div class="tab-pane active" id="activity">
+                <div class="tab-content" id="custom-tabs-three-tabContent">
+                    <div class="tab-pane fade active show" id="custom-tabs-three-home" role="tabpanel" aria-labelledby="custom-tabs-three-home-tab">
                         <?php Pjax::begin(); ?>
                         <?=
-                        GridView::widget([
-                            'dataProvider' => $percentDataProvider,
-                            /*'filterModel' => $percentSearchModel,*/
-                            'columns' => [
-                                'id',
-                                'created_at',
-                                'compensation_count',
-                                'compensation_years',
-                                ['class' => ActionColumn::className()],
-                            ],
-                        ]); ?>
+                        GridView::widget(
+                            [
+                                'dataProvider' => $percentDataProvider,
+                                /*'filterModel' => $percentSearchModel,*/
+                                'columns' => [
+                                    [
+                                        'attribute' => 'id',
+                                        'value' => function ($data) {
+                                            return Html::a($data->id, ['/jk/percent/view', 'id' => $data->id]);
+                                        },
+                                        'format' => 'raw',
+                                    ],
+                                    [
+                                        'label' => 'Дата',
+                                        'attribute' => 'created_at',
+                                        'format' => ['date', 'dd.MM.Y hh:i:s'],
+                                    ],
+                                    [
+                                        'label' => 'Максимальный размер компенсации, руб',
+                                        'attribute' => 'compensation_count',
+                                        'format'=>['decimal',0,' ']
+                                    ],
+                                    'compensation_years',
+                                    ['class' => ActionColumn::className()],
+                                ],
+                            ]
+                        ); ?>
                         <?php Pjax::end(); ?>
                     </div>
-
-                    <div class="tab-pane" id="timeline">
+                    <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel" aria-labelledby="custom-tabs-three-profile-tab">
                         <?php Pjax::begin(); ?>
                         <?=
-                        GridView::widget([
-                            'dataProvider' => $zaimDataProvider,
-                            /*'filterModel' => $zaimSearchModel,*/
-                            'columns' => [
-                                'id',
-                                'created_at',
-                                'compensation_count',
-                                'compensation_years',
-                                ['class' => ActionColumn::className()],
-                            ],
-                        ]); ?>
+                        GridView::widget(
+                            [
+                                'dataProvider' => $zaimDataProvider,
+                                /*'filterModel' => $zaimSearchModel,*/
+                                'columns' => [
+                                    'id',
+                                    [
+                                        'label' => 'Дата',
+                                        'attribute' => 'created_at',
+                                        'format' => ['date', 'dd.mm.Y hh:i:s'],
+
+                                    ],
+                                    'compensation_count',
+                                    'compensation_years',
+                                    ['class' => ActionColumn::className()],
+                                ],
+                            ]
+                        ); ?>
                         <?php Pjax::end(); ?>
                     </div>
-
-                    <div class="tab-pane" id="settings">
-                        <form class="form-horizontal">
-                            <div class="form-group row">
-                                <label for="inputName" class="col-sm-2 col-form-label">Name</label>
-                                <div class="col-sm-10">
-                                    <input type="email" class="form-control" id="inputName" placeholder="Name">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
-                                <div class="col-sm-10">
-                                    <input type="email" class="form-control" id="inputEmail" placeholder="Email">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="inputName2" class="col-sm-2 col-form-label">Name</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="inputName2" placeholder="Name">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="inputExperience" class="col-sm-2 col-form-label">Experience</label>
-                                <div class="col-sm-10">
-                                    <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="inputSkills" class="col-sm-2 col-form-label">Skills</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="inputSkills" placeholder="Skills">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="offset-sm-2 col-sm-10">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="offset-sm-2 col-sm-10">
-                                    <button type="submit" class="btn btn-danger">Submit</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <!-- /.tab-pane -->
                 </div>
-                <!-- /.tab-content -->
-            </div><!-- /.card-body -->
+            </div>
         </div>
-        <!-- /.nav-tabs-custom -->
     </div>
-
 </div>
 
 
-<!--
-<div class="user-profile">
-    <?= DetailView::widget([
-    'model' => $model,
-    'attributes' => [
-        'username',
-        'email',
-    ],
-]) ?>
-</div>
--->
