@@ -9,14 +9,17 @@ $(document).ready(function () {
 
         var data = $('#percent-form').serialize();
         $.ajax({
-            url: '/jk/percent/calc',
+            url: $(this).data('url'),
             type: 'POST',
             data: data,
             success: function(result){
                 $('#result').html(result);
+                $('#percent-compensation_result').val(1);
+                $('#percent-compensation_count').val($('#result_money').html().replace(/\s+/g,''));
+                $('#percent-compensation_years').val($('#result_years').html().replace(/\s+/g,''));
             },
             error: function(){
-                alert('Error!');
+                alert('Ошибка');
             }
         });
         return false;
@@ -54,9 +57,26 @@ $(document).ready(function () {
         return false;
     });
 
-    // Кнопка сохранить расчёт в результатах
+    // Кнопка "Сохранить расчёт" в результатах расчёта
     $('body').on('click', '#result-save', function () {
         $('#btn-save').click();
+    });
+
+    // Кнопка "Отправить расчёт на почту"
+    $('body').on('click', '#result-send-email', function () {
+        var data = $('#percent-form').serialize();
+        $.ajax({
+            url: $(this).data('url'),
+            type: 'POST',
+            data: data,
+            success: function(result){
+                alert(result);
+            },
+            error: function(){
+                alert('Ошибка');
+            }
+        });
+        return false;
     });
 });
 

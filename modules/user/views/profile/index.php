@@ -66,12 +66,12 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <!-- /.card -->
 
-        <!-- About Me Box -->
-        <div class="card card-primary">
+
+        <!--<div class="card card-primary">
             <div class="card-header">
                 <h3 class="card-title">Обо мне</h3>
             </div>
-            <!-- /.card-header -->
+
             <div class="card-body">
                 <strong><i class="fas fa-book mr-1"></i> Образование</strong>
 
@@ -104,21 +104,21 @@ $this->params['breadcrumbs'][] = $this->title;
                     мне после 23:00. Спасибо
                 </p>
             </div>
-            <!-- /.card-body -->
-        </div>
-        <!-- /.card -->
+
+        </div>-->
+
     </div>
-    <!-- /.col -->
+
     <div class="col-md-8">
         <div class="card">
             <div class="card-header p-2">
                 <ul class="nav nav-pills">
                     <li class="nav-item"><a class="nav-link active" href="#activity"
                                             data-toggle="tab"><i class="fas fa-calculator
-                                            nav-icon"></i> Калькулятор процентов</a></li>
+                                            nav-icon"></i> Калькуляции процентов</a></li>
                     <li class="nav-item"><a class="nav-link" href="#timeline"
                                             data-toggle="tab"><i class="fas fa-calculator
-                                            nav-icon"></i> Калькулятор займа</a></li>
+                                            nav-icon"></i> Калькуляции займов</a></li>
                     <li class="nav-item"><a class="nav-link" href="#settings"
                                             data-toggle="tab"><i class="fas fa-cog"></i>
                             Настройки</a></li>
@@ -131,7 +131,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?=
                         GridView::widget([
                             'dataProvider' => $percentDataProvider,
-                            'filterModel' => $percentSearchModel,
+                            /*'filterModel' => $percentSearchModel,*/
                             'columns' => [
                                 'id',
                                 'created_at',
@@ -148,7 +148,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?=
                         GridView::widget([
                             'dataProvider' => $zaimDataProvider,
-                            'filterModel' => $zaimSearchModel,
+                            /*'filterModel' => $zaimSearchModel,*/
                             'columns' => [
                                 'id',
                                 'created_at',
@@ -215,7 +215,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <!-- /.nav-tabs-custom -->
     </div>
-    <!-- /.col -->
+
 </div>
 
 

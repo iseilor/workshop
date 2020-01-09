@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\jui\DatePicker;
+use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
@@ -54,13 +54,16 @@ PercentAsset::register($this);
             <div class="card-footer">
                 <?= Html::button(
                     '<i class="fas fa-calculator nav-icon"></i> Рассчитать',
-                    ['class' => 'btn btn-info', 'id' => 'percent-calc']
+                    [   'class' => 'btn btn-info',
+                        'id' => 'percent-calc',
+                        'data'=>['url'=>Url::home().'jk/percent/calc']
+                    ]
                 ) ?>
                 <?= Html::submitButton(
                     '<i class="fas fa-save nav-icon"></i> Сохранить',
                     [
                         'class' => 'btn btn-success',
-                        'id' => 'btn-save'
+                        'id' => 'btn-save',
                     ]
                 ) ?>
                 <?= Html::a(

@@ -8,70 +8,40 @@ use yii\helpers\Url;
 ?>
 
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <a href="<?=Yii::$app->homeUrl?>" class="brand-link">
-        <img src="<?=Yii::$app->homeUrl?>img/rt_logo.jpg" alt="<?=Yii::$app->id;?>"
+    <a href="<?= Yii::$app->homeUrl ?>" class="brand-link">
+        <img src="<?= Yii::$app->homeUrl ?>img/rt_logo.jpg" alt="<?= Yii::$app->id; ?>"
              class="brand-image img-circle elevation-3"
              style="opacity: .8">
-        <span class="brand-text font-weight-light"><?=Yii::$app->id;?></span>
+        <span class="brand-text font-weight-light"><?= Yii::$app->id; ?></span>
     </a>
 
-    <?php /*echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'activateParents' => true,
-        'items' => array_filter([
-            ['label' => Yii::t('app', 'NAV_HOME'), 'url' => ['/main/default/index']],
-            ['label' => Yii::t('app', 'NAW_CONTACT'), 'url' => ['/main/contact/index']],
-            Yii::$app->user->isGuest ?
-                ['label' => Yii::t('app', 'NAV_SIGNUP'), 'url' => ['/user/default/signup']] :
-                false,
-            Yii::$app->user->isGuest ?
-                ['label' => Yii::t('app', 'NAV_LOGIN'), 'url' => ['/user/default/login']] :
-                false,
-            !Yii::$app->user->isGuest ?
-                ['label' => Yii::t('app', 'NAV_ADMIN'), 'items' => [
-                    ['label' => Yii::t('app', 'NAV_ADMIN'), 'url' => ['/admin/default/index']],
-                    ['label' => Yii::t('app', 'ADMIN_USERS'), 'url' => ['/admin/users/index']],
-                ]] :
-                false,
-            !Yii::$app->user->isGuest ?
-                ['label' => Yii::t('app', 'NAV_PROFILE'), 'items' => [
-                    ['label' => Yii::t('app', 'NAV_PROFILE'), 'url' => ['/user/profile/index']],
-                    ['label' => Yii::t('app', 'NAV_LOGOUT'),
-                        'url' => ['/user/default/logout'],
-                        'linkOptions' => ['data-method' => 'post']]
-                ]] :
-                false,
-        ]),
-    ]);*/?>
 
     <!-- Sidebar -->
     <div class="sidebar">
-        <!-- Sidebar user panel (optional) -->
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-            <div class="image">
-                <img src="<?=Yii::$app->homeUrl?>img/user2-160x160.jpg"
-                     class="img-circle elevation-2" alt="User Image">
-            </div>
-            <div class="info">
-                <a href="<?= Url::home() ?>" class="d-block">
-                    <?php
-                    if (Yii::$app->user->isGuest) {
-                        echo  Html::a('Войти',Url::home().'login');
-                        echo ' / ';
-                        echo Html::a('Рег',Url::home().'signup');
-                    } else {
 
-
-                        echo Html::beginForm(['/logout'], 'post');
-                        echo Html::submitButton(
-                            'Выйти (' . Yii::$app->user->identity->username . ')'
-                        );
-                        echo Html::endForm();
-                    }
-                    ?>
-                </a>
+        <!-- Если пользователь авторизован, то показываем его фото и ссылку на профиль-->
+        <?php if (!Yii::$app->user->isGuest): ?>
+            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                <div class="image">
+                    <img src="<?= Yii::$app->homeUrl ?>img/user2-160x160.jpg"
+                         class="img-circle elevation-2" alt="User Image">
+                </div>
+                <div class="info">
+                    <a href="<?= Url::home() ?>" class="d-block">
+                        <?php
+                        if (!Yii::$app->user->isGuest) {
+                            {
+                                echo Html::a(
+                                    Yii::$app->user->identity->username,
+                                    Url::home() . 'user/profile'
+                                );
+                            }
+                        }
+                        ?>
+                    </a>
+                </div>
             </div>
-        </div>
+        <?php endif ?>
 
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column"
@@ -94,13 +64,13 @@ use yii\helpers\Url;
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="<?=Url::to(['/jk/percent/create']);?>" class="nav-link">
+                            <a href="<?= Url::to(['/jk/percent/create']); ?>" class="nav-link">
                                 <i class="fas fa-calculator nav-icon"></i>
                                 <p>Калькулятор процентов</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?=Url::to(['/jk/percent/create']);?>" class="nav-link">
+                            <a href="<?= Url::to(['/jk/percent/create']); ?>" class="nav-link">
                                 <i class="fas fa-calculator nav-icon"></i>
                                 <p>Калькулятор займа</p>
                             </a>
