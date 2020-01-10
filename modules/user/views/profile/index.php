@@ -1,14 +1,13 @@
 <?php
 
 use app\components\grid\ActionColumn;
-use app\components\grid\LinkColumn;
 use app\modules\user\Module;
 
 
 use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\widgets\DetailView;
+
 use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
@@ -19,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-3">
         <div class="card card-outline">
             <div class="card-body box-profile">
                 <div class="text-center">
@@ -58,22 +57,21 @@ $this->params['breadcrumbs'][] = $this->title;
         btn-primary',
                     ]
                 ) ?>
-                <?= Html::a(
+                <!--<?= Html::a(
                     '<i class="fas fa-user-lock"></i> ' . Module::t('module', 'Password Change'),
                     ['password-change'],
                     [
                         'class' => 'btn 
         btn-primary',
                     ]
-                ) ?>
+                ) ?>-->
 
             </div>
-            <!-- /.card-body -->
         </div>
     </div>
 
 
-    <div class="col-md-8">
+    <div class="col-md-9">
         <div class="card card-primary card-outline card-outline-tabs" style="border-top: none;">
             <div class="card-header p-0 border-bottom-0">
                 <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">

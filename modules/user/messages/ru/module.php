@@ -9,7 +9,7 @@ return [
     'Verify Code'=>'Код',
 
     'Profile' => 'Профиль',
-    'Profile Update' => 'Изменить профиль',
+    'Profile Update' => 'Редактировать профиль',
     'Password Change' => 'Изменить пароль',
 
     'I forgot password' => 'Я забыл пароль',

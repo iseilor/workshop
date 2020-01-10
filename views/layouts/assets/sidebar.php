@@ -1,9 +1,10 @@
 <?php
 
+
+use app\components\menu\MenuActive;
 use yii\helpers\Html;
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
 use yii\helpers\Url;
+
 
 ?>
 
@@ -15,8 +16,6 @@ use yii\helpers\Url;
         <span class="brand-text font-weight-light"><?= Yii::$app->id; ?></span>
     </a>
 
-
-    <!-- Sidebar -->
     <div class="sidebar">
 
         <!-- Если пользователь авторизован, то показываем его фото и ссылку на профиль-->
@@ -44,66 +43,30 @@ use yii\helpers\Url;
         <?php endif ?>
 
         <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column"
-                data-widget="treeview" role="menu" data-accordion="false">
-                <li class="nav-item">
-                    <a href="<?= Url::home() ?>" class="nav-link">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>
-                            Главная
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item has-treeview menu-open">
-                    <a href="/zhp" class="nav-link">
-                        <i class="nav-icon fas fa-home"></i>
-                        <p>
-                            Жилищная политика
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="<?= Url::to(['/jk/percent/create']); ?>" class="nav-link">
-                                <i class="fas fa-calculator nav-icon"></i>
-                                <p>Калькулятор процентов</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?= Url::to(['/jk/percent/create']); ?>" class="nav-link">
-                                <i class="fas fa-calculator nav-icon"></i>
-                                <p>Калькулятор займа</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a href="/" class="nav-link">
-                        <i class="nav-icon fas fa-heartbeat"></i>
-                        <p>
-                            ДМС
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="/" class="nav-link">
-                        <i class="nav-icon fas fa-plane"></i>
-                        <p>
-                            Путёвки
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="/" class="nav-link">
-                        <i class="nav-icon fas fa-file-alt"></i>
-                        <p>
-                            Отчёты
-                        </p>
-                    </a>
-                </li>
-            </ul>
+            <?php echo MenuActive::widget(
+                [
+                    'options' => ['class' => 'nav nav-pills nav-sidebar flex-column', 'role' => 'menu', 'data' => ['widget' => 'treeview', 'accordion' => 'false']],
+                    'itemOptions' => ['class' => 'nav-item has-treeview'],
+                    'linkTemplate' => '<a href="{url}" class="nav-link {activeClass}">{label}</a>',
+                    'encodeLabels' => false,
+                    'submenuTemplate' => "<ul class='nav nav-treeview'>{items}</ul>",
+                    'activateParents' => true,
+                    'activateItems' => true,
+                    'activeCssClass'=>'active menu-open',
+                    'items' => [
+                        ['label' => '<i class="nav-icon fas fa-tachometer-alt"></i> Главная', 'url' => ['/main/default/index']],
+                        [
+                            'label' => '<i class="nav-icon fas fa-home"></i> <p>Жилищная компания  <i class="right fas fa-angle-left"></i></p>',
+                            'url' => ['#'],
+                            'items' => [
+                                ['label' => '<i class="fas fa-calculator nav-icon"></i> Калькулятор процентов', 'url' => [ Url::to(['/jk/percent/create'])]],
+                                ['label' => '<i class="fas fa-calculator nav-icon"></i> Калькулятор займа', 'url' => [ Url::to(['/jk/zaim/create'])]],
+                                ['label' => '<i class="fas fa-ruble-sign nav-icon"></i> Заявка', 'url' => [ Url::to(['/jk/order/create'])]],
+                            ]
+                        ],
+                    ],
+                ]
+            ); ?>
         </nav>
-        <!-- /.sidebar-menu -->
     </div>
-    <!-- /.sidebar -->
 </aside>
