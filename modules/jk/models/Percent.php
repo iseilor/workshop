@@ -50,26 +50,66 @@ class Percent extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['date_birth', 'gender', 'experience',  'family_count', 'family_income', 'area_total', 'area_buy', 'cost_total', 'cost_user', 'bank_credit', 'percent_count', 'percent_rate'], 'required'],
+            [['date_birth', 'gender', 'experience', 'family_count', 'family_income', 'area_total', 'area_buy', 'cost_total', 'cost_user', 'bank_credit', 'percent_count', 'percent_rate'], 'required'],
             [['created_at', 'updated_at', 'date_birth'], 'safe'],
-            [['created_by', 'updated_by', 'gender', 'experience', 'family_count', 'family_income', 'area_total', 'area_buy', 'cost_total', 'cost_user', 'bank_credit', 'loan', 'percent_count', 'compensation_result', 'compensation_count', 'compensation_years'], 'integer'],
-            [['percent_rate'],'double'],
-
-            // Стаж в компании
-            ['experience', 'compare', 'compareValue' => 1, 'operator' => '>=', 'type' => 'number'],
-            ['experience', 'compare', 'compareValue' => 50, 'operator' => '<=', 'type' => 'number'],
+            [
+                [
+                    'created_by',
+                    'updated_by',
+                    'gender',
+                    'experience',
+                    'family_count',
+                    'family_income',
+                    'area_total',
+                    'area_buy',
+                    'cost_total',
+                    'cost_user',
+                    'bank_credit',
+                    'loan',
+                    'percent_count',
+                    'compensation_result',
+                    'compensation_count',
+                    'compensation_years'
+                ],
+                'integer'
+            ],
+            [['percent_rate'], 'double'],
 
             // Кол-во членов в семье
             ['family_count', 'compare', 'compareValue' => 1, 'operator' => '>=', 'type' => 'number'],
             ['family_count', 'compare', 'compareValue' => 10, 'operator' => '<=', 'type' => 'number'],
 
-            // Прожиточный минимум в сеьме
-            ['family_income', 'compare', 'compareValue' => 5000, 'operator' => '>=', 'type' => 'number'],
-            ['family_income', 'compare', 'compareValue' => 50000, 'operator' => '<=', 'type' => 'number'],
+            // Доход на одного члена семьи
+            ['family_income', 'compare', 'compareValue' => 1000, 'operator' => '>=', 'type' => 'number'],
+            ['family_income', 'compare', 'compareValue' => 100000, 'operator' => '<=', 'type' => 'number'],
 
+            // Кол-во имеющегося жилья
+            ['area_total', 'compare', 'compareValue' => 1, 'operator' => '>=', 'type' => 'number'],
+            ['area_total', 'compare', 'compareValue' => 500, 'operator' => '<=', 'type' => 'number'],
+
+            // Кол-во приобритаемого жилья
+            ['area_buy', 'compare', 'compareValue' => 1, 'operator' => '>=', 'type' => 'number'],
+            ['area_buy', 'compare', 'compareValue' => 500, 'operator' => '<=', 'type' => 'number'],
+
+            // Полная стоимость жилья
+            ['cost_total', 'compare', 'compareValue' => 1, 'operator' => '>=', 'type' => 'number'],
+            ['cost_total', 'compare', 'compareValue' => 10000000, 'operator' => '<=', 'type' => 'number'],
+
+            // Собственные средства работника
+            ['cost_user', 'compare', 'compareValue' => 1, 'operator' => '>=', 'type' => 'number'],
+            ['cost_user', 'compare', 'compareValue' => 10000000, 'operator' => '<=', 'type' => 'number'],
+
+            // Размер кредита в банке
+            ['bank_credit', 'compare', 'compareValue' => 1, 'operator' => '>=', 'type' => 'number'],
+            ['bank_credit', 'compare', 'compareValue' => 10000000, 'operator' => '<=', 'type' => 'number'],
+
+            // Займ
+            ['loan', 'compare', 'compareValue' => 1, 'operator' => '>=', 'type' => 'number'],
+            ['loan', 'compare', 'compareValue' => 1000000, 'operator' => '<=', 'type' => 'number'],
 
             // Сумма процентов
             ['percent_count', 'compare', 'compareValue' => 1, 'operator' => '>=', 'type' => 'number'],
+            ['loan', 'compare', 'compareValue' => 10000000, 'operator' => '<=', 'type' => 'number'],
 
             // Процентная ставка
             ['percent_rate', 'compare', 'compareValue' => 1, 'operator' => '>=', 'type' => 'double'],
@@ -104,6 +144,42 @@ class Percent extends \yii\db\ActiveRecord
             'compensation_result' => Module::t('module', 'Compensation Result'),
             'compensation_count' => Module::t('module', 'Compensation Count'),
             'compensation_years' => Module::t('module', 'Compensation Years'),
+        ];
+    }
+
+    // Вторая версия подписи
+    public function getAttributeLabels2($attr)
+    {
+        return $this->attributeLabels()[$attr] . ' <a href="#" data-toggle="tooltip" data-html="true" title="' . $this->attributeTooltips()[$attr] . '"><i class="fas fa-info"></i></a>';
+    }
+
+    public function attributeTooltips($img='')
+    {
+        return [
+            'family_count' => '- Поле должно быть не меньше 1, поле заполняется целыми значениями: 1, 2, 3 и т.д.<br>
+                               - К членам семьи работника относятся следующие лица:<br>
+                               &nbsp;&nbsp;&nbsp; - супруг (супруга);<br>
+                               &nbsp;&nbsp;&nbsp; - несовершеннолетние дети;<br>
+                               &nbsp;&nbsp;&nbsp; - дети старше 18 лет, ставшие инвалидами до достижения ими возраста 18 лет;<br>
+                               &nbsp;&nbsp;&nbsp; - дети в возрасте до 23 лет, обучающиеся в образовательных учреждениях по очной форме обучения',
+            'family_income' => 'Порядок расчета среднемесячного дохода на одного члена семьи за последние 12 месяцев рассчитывается следующим образом:<br>
+                                где:<br>
+                                &nbsp;&nbsp;&nbsp; - СД - среднемесячный доход на одного члена семьи за последние 12 месяцев;<br>
+                                &nbsp;&nbsp;&nbsp; - СДС - суммарный доход семьи за вычетом налоговых удержаний за последние 12 месяцев без учета районного коэффициента и северной надбавки;<br>
+                                &nbsp;&nbsp;&nbsp; - КЧС - количество членов семьи работника на дату подачи заявления об оказании помощи, включая работника.</br>',
+            'area_total' => 'Рассчитывается без учета приобретаемого жилья (с помощью Жилищной программы),<br>
+                            и с учетом жилых / не жилых помещений, по которым в течение 5 лет до подачи<br>
+                            заявления осуществлялись сделки ',
+            'area_buy' => 'Поле должно быть не меньше 1',
+            'cost_total' => 1,
+            'cost_user' => 1,
+            'bank_credit' => 3,
+            'loan' => 2,
+            'percent_count' => 3,
+            'percent_rate' => 4,
+            'compensation_result' => 5,
+            'compensation_count' => 6,
+            'compensation_years' => 7,
         ];
     }
 

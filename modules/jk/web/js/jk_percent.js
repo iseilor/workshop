@@ -1,5 +1,9 @@
 $(document).ready(function () {
 
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    })
+
 
     // Маска для процентов
     $('#percent-percent_rate').inputmask("decimal", { min: 1, max: 100, allowMinus: false,digits: 1 });

@@ -72,12 +72,12 @@ AppAssetAdminLTE::register($this);
             <div class="container-fluid">
                 <?= $content ?>
             </div>
+            <a id="back-to-top" href="#" class="btn btn-primary back-to-top" role="button" aria-label="Scroll to top">
+                <i class="fas fa-chevron-up"></i>
+            </a>
         </div>
 
     </div>
-    <!-- /.content-wrapper -->
-
-    <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
         <!-- Control sidebar content goes here -->
         <div class="p-3">
@@ -85,13 +85,10 @@ AppAssetAdminLTE::register($this);
             <p>Sidebar content</p>
         </div>
     </aside>
-    <!-- /.control-sidebar -->
     <?= $this->render('assets/footer'); ?>
 </div>
 <?php $this->endBody() ?>
+<script src="<?= Yii::$app->homeUrl ?>js/script.js"></script>
 </body>
 </html>
 <?php $this->endPage() ?>
-
-
-
