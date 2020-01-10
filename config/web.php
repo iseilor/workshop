@@ -116,10 +116,8 @@ $config = [
                 'about' => 'main/default/about',
                 'contacts' => 'main/default/contacts',
 
-
                 '<_a:error>' => 'main/default/<_a>',
-                '<_a:(login|logout|signup|confirm-email|request-password-reset|password-reset)>' =>
-                    'user/default/<_a>',
+                '<_a:(login|logout|signup|confirm-email|request-password-reset|password-reset)>' => 'user/default/<_a>',
 
                 '<_m:[\w\-]+>/<_c:[\w\-]+>/<id:\d+>' => '<_m>/<_c>/view',
                 '<_m:[\w\-]+>/<_c:[\w\-]+>/<id:\d+>/<_a:[\w\-]+>' => '<_m>/<_c>/<_a>',

@@ -59,9 +59,13 @@ use yii\helpers\Url;
                             'label' => '<i class="nav-icon fas fa-home"></i> <p>Жилищная компания  <i class="right fas fa-angle-left"></i></p>',
                             'url' => ['#'],
                             'items' => [
-                                ['label' => '<i class="fas fa-calculator nav-icon"></i> Калькулятор процентов', 'url' => [ Url::to(['/jk/percent/create'])]],
-                                ['label' => '<i class="fas fa-calculator nav-icon"></i> Калькулятор займа', 'url' => [ Url::to(['/jk/zaim/create'])]],
-                                ['label' => '<i class="fas fa-ruble-sign nav-icon"></i> Заявка', 'url' => [ Url::to(['/jk/order/create'])]],
+                                ['label' => '<i class="fas fa-calculator nav-icon"></i> Калькулятор процентов', 'url' => [ '/jk/percent/create']],
+                                ['label' => '<i class="fas fa-calculator nav-icon"></i> Калькулятор займа', 'url' => ['/jk/zaim/create']],
+                                ['label' => '<i class="fas fa-ruble-sign nav-icon"></i> Заявка', 'url' => ['/jk']],
+                                ['label' => '<i class="fas fa-file-word nav-icon"></i> Документы', 'url' => ['/jk/doc/index']],
+                                ['label' => '<i class="fas fa-question nav-icon"></i> Вопросы', 'url' => ['/jk/faq/index']],
+                                ['label' => '<i class="fas fa-user nav-icon"></i> Куратор', 'url' => ['/jk/']],
+
                             ]
                         ],
                     ],

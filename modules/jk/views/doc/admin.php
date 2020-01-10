@@ -9,7 +9,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel app\modules\jk\models\DocSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app/jk', 'Docs');
+$this->title = Yii::t('app', 'Docs');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="row">
@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     <p>
                         <?= Html::a(
-                            '<i class="fas fa-plus"></i> '.Yii::t('app/jk', 'Create Doc'),
+                            '<i class="fas fa-plus"></i> '.Yii::t('app', 'Create Doc'),
                             ['create'],
                             ['class' => 'btn btn-success']
                         ) ?>
