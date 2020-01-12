@@ -2,10 +2,13 @@
 
 namespace app\modules\admin;
 
+use Yii;
+use yii\base\BootstrapInterface;
+
 /**
  * admin module definition class
  */
-class Module extends \yii\base\Module
+class Module extends \yii\base\Module implements BootstrapInterface
 {
     /**
      * {@inheritdoc}
@@ -35,7 +38,7 @@ class Module extends \yii\base\Module
             'forceTranslation' => true,
             'basePath' => '@app/modules/admin/messages',
             'fileMap' => [
-                'modules/user/module' => 'module.php',
+                'modules/admin/module' => 'module.php',
             ],
         ];
     }

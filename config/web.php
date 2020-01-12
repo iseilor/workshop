@@ -10,6 +10,7 @@ $config = [
     'bootstrap' => [
         'log',
         'app\modules\user\Bootstrap',
+        'app\modules\admin\Bootstrap',
         'app\modules\main\Bootstrap',
         'app\modules\jk\Bootstrap'
     ],
@@ -110,13 +111,14 @@ $config = [
             'showScriptName' => false,
 
             'rules' => [
-                '' => 'main/default/index',
 
+                '' => 'main/default/index',
                 'team' => 'main/team/index',
                 'about' => 'main/default/about',
                 'contacts' => 'main/default/contacts',
-
                 '<_a:error>' => 'main/default/<_a>',
+
+                '<_m:(user)>/<id:\d+>' => 'user/default/view',
                 '<_a:(login|logout|signup|confirm-email|request-password-reset|password-reset)>' => 'user/default/<_a>',
 
                 '<_m:[\w\-]+>/<_c:[\w\-]+>/<id:\d+>' => '<_m>/<_c>/view',

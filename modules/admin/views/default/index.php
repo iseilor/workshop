@@ -1,12 +1,27 @@
-<div class="admin-default-index">
-    <h1><?= $this->context->action->uniqueId ?></h1>
-    <p>
-        This is the view content for action "<?= $this->context->action->id ?>".
-        The action belongs to the controller "<?= get_class($this->context) ?>"
-        in the "<?= $this->context->module->id ?>" module.
-    </p>
-    <p>
-        You may customize this page by editing the following file:<br>
-        <code><?= __FILE__ ?></code>
-    </p>
+<?php
+
+use app\modules\admin\Module;
+use yii\helpers\Url;
+
+/* @var $this yii\web\View */
+
+
+$this->title = '<i class="fas fa-info"></i>'.' '.Module::t('module', 'Admin');
+$this->params['breadcrumbs'][] = $this->title;
+?>
+
+<div class="row">
+    <div class="col-md-3">
+        <div class="small-box bg-info">
+            <div class="inner">
+                <h3>ЖК</h3>
+                <p>Жилищная компания</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-home"></i>
+            </div>
+            <a href="<?= Url::to(['/jk/admin']); ?>" class="small-box-footer">Перейти <i
+                        class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
 </div>

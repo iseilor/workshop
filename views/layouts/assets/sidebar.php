@@ -54,17 +54,17 @@ use yii\helpers\Url;
                     'activateItems' => true,
                     'activeCssClass'=>'active menu-open',
                     'items' => [
-                        ['label' => '<i class="nav-icon fas fa-tachometer-alt"></i> Главная', 'url' => ['/main/default/index']],
+                        ['label' => '<i class="nav-icon fas fa-tachometer-alt"></i> <p>Главная</p>', 'url' => ['/main/default/index']],
                         [
                             'label' => '<i class="nav-icon fas fa-home"></i> <p>Жилищная компания  <i class="right fas fa-angle-left"></i></p>',
                             'url' => ['#'],
                             'items' => [
-                                ['label' => '<i class="fas fa-calculator nav-icon"></i> Калькулятор процентов', 'url' => [ '/jk/percent/create']],
-                                ['label' => '<i class="fas fa-calculator nav-icon"></i> Калькулятор займа', 'url' => ['/jk/zaim/create']],
-                                ['label' => '<i class="fas fa-ruble-sign nav-icon"></i> Заявка', 'url' => ['/jk']],
-                                ['label' => '<i class="fas fa-file-word nav-icon"></i> Документы', 'url' => ['/jk/doc/index']],
-                                ['label' => '<i class="fas fa-question nav-icon"></i> Вопросы', 'url' => ['/jk/faq/index']],
-                                ['label' => '<i class="fas fa-user nav-icon"></i> Куратор', 'url' => ['/jk/']],
+                                ['label' => '<i class="fas fa-calculator nav-icon"></i> <p>Калькулятор процентов</p>', 'url' => [ '/jk/percent/create']],
+                                ['label' => '<i class="fas fa-calculator nav-icon"></i> <p>Калькулятор займа</p>', 'url' => ['/jk/zaim/create']],
+                                ['label' => '<i class="fas fa-ruble-sign nav-icon"></i> <p>Заявка</p>', 'url' => ['/jk']],
+                                ['label' => '<i class="fas fa-file-word nav-icon"></i> <p>Документы</p>', 'url' => ['/jk/doc/index']],
+                                ['label' => '<i class="fas fa-question nav-icon"></i> <p>Вопросы</p>', 'url' => ['/jk/faq/index']],
+                                ['label' => '<i class="fas fa-user nav-icon"></i> <p>Куратор</p>', 'url' => ['/jk/']],
 
                             ]
                         ],

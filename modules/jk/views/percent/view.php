@@ -1,14 +1,16 @@
 <?php
 
 use app\modules\jk\Module;
+use app\modules\user\models\User;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\jk\models\Percent */
 
+$this->params['breadcrumbs'][] = ['label' => '<i class="nav-icon fas fa-home"></i> Жилищная компания', 'url' => ['/jk']];
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'Percents'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => "<i class='fas fa-calculator nav-icon'></i> " . Module::t('module', 'Percents'), 'url' => ['update', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
@@ -29,12 +31,15 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'created_at',
-            'created_by',
-            'updated_at',
-            'updated_by',
-            'date_birth',
-            'gender',
+            //'created_at',
+            //'created_by',
+            //'updated_at',
+            //'updated_by',
+            'date_birth:date',
+            [
+                'attribute' => 'gender',
+                'value' => ($model->gender == 1 ? 'Мужской' : 'Женский'),
+            ],
             'experience',
             'family_count',
             'family_income',
@@ -43,10 +48,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'cost_total',
             'cost_user',
             'bank_credit',
-            'loan',
+            [
+                'attribute' => 'loan',
+                'visible' => false,
+            ],
             'percent_count',
             'percent_rate',
-            'compensation_result',
+            //'compensation_result',
             'compensation_count',
             'compensation_years',
         ],

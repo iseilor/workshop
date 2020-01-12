@@ -228,10 +228,19 @@ class PercentController extends Controller
 
     // Отправить письмо
     public function actionSendEmail(){
-        $percent = new Percent();
-        $percent->load(Yii::$app->request->post());
+        $model = new Percent();
+        $model->load(Yii::$app->request->post());
         $user = User::findOne(Yii::$app->user->identity->getId());
-        return Yii::$app->mailer->compose('@app/modules/jk/mails/percent', ['percent' => $percent,'user'=>$user])
+
+        $model->gender=$user->gender;
+        $model->date_birth=$user->birth_date;
+        $model->experience=$user->getExperience();
+
+        return Yii::$app->mailer->compose('@app/modules/jk/mails/percent',
+            [
+                'model' => $model,
+                'user'=>$user
+            ])
             ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->id])
             ->setTo($user->email)
             ->setSubject('WORKSHOP / ЖК / Калькулятор процентов')

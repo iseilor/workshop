@@ -171,15 +171,12 @@ class Percent extends \yii\db\ActiveRecord
                             и с учетом жилых / не жилых помещений, по которым в течение 5 лет до подачи<br>
                             заявления осуществлялись сделки ',
             'area_buy' => 'Поле должно быть не меньше 1',
-            'cost_total' => 1,
-            'cost_user' => 1,
-            'bank_credit' => 3,
-            'loan' => 2,
-            'percent_count' => 3,
-            'percent_rate' => 4,
-            'compensation_result' => 5,
-            'compensation_count' => 6,
-            'compensation_years' => 7,
+            'cost_total' => $this->attributeLabels()['cost_total'],
+            'cost_user' => $this->attributeLabels()['cost_user'],
+            'bank_credit' => $this->attributeLabels()['bank_credit'],
+            'loan' => $this->attributeLabels()['loan'],
+            'percent_count' => $this->attributeLabels()['percent_count'],
+            'percent_rate' => $this->attributeLabels()['percent_rate']
         ];
     }
 

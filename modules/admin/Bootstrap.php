@@ -14,7 +14,7 @@ class Bootstrap implements BootstrapInterface
             'forceTranslation' => true,
             'basePath' => '@app/modules/admin/messages',
             'fileMap' => [
-                'modules/user/module' => 'module.php',
+                'modules/admin/module' => 'module.php',
             ],
         ];
     }

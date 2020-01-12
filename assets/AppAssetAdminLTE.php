@@ -15,8 +15,10 @@ class AppAssetAdminLTE extends AssetBundle
 
     public $css
         = [
+            'plugins/toastr/toastr.css',
             'plugins/fontawesome-free/css/all.css',
             'dist/css/adminlte.css',
+
         ];
 
     public $js
@@ -24,6 +26,7 @@ class AppAssetAdminLTE extends AssetBundle
             //'plugins/jquery/jquery.js',
 
             //'plugins/jquery-ui/jquery-ui.js',
+            'plugins/toastr/toastr.min.js',
             'plugins/inputmask/min/jquery.inputmask.bundle.min.js',
             'plugins/bootstrap/js/bootstrap.bundle.js',
             'dist/js/adminlte.js',

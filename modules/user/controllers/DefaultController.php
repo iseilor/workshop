@@ -2,17 +2,20 @@
 
 namespace app\modules\user\controllers;
 
+use app\modules\jk\models\Percent;
 use app\modules\user\forms\EmailConfirmForm;
 use app\modules\user\forms\LoginForm;
 use app\modules\user\forms\PasswordResetRequestForm;
 use app\modules\user\forms\PasswordResetForm;
 use app\modules\user\forms\SignupForm;
+use app\modules\user\models\User;
 use yii\base\InvalidParamException;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use Yii;
+use yii\web\NotFoundHttpException;
 
 class DefaultController extends Controller
 {
@@ -58,6 +61,29 @@ class DefaultController extends Controller
     public function actionIndex()
     {
         return $this->redirect(['profile/index'], 301);
+    }
+
+    public function actionView($id)
+    {
+
+        return $this->render(
+            'view',
+            [
+                'model' => $this->findModel($id),
+            ]
+        );
+    }
+
+    public function getName($id){
+        return $this->findModel($id)->username;
+    }
+
+    protected function findModel($id)
+    {
+        if (($model = User::findOne($id)) !== null) {
+            return $model;
+        }
+        throw new NotFoundHttpException(Yii::t('app', 'Пользователь не найден'));
     }
 
     public function actionLogin()
