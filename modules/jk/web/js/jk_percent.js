@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
     // Маска для процентов
-    $('#percent-percent_rate').inputmask("decimal", {min: 1, max: 100, allowMinus: false, digits: 1});
+    //$('#percent-percent_rate').inputmask("decimal", {min: 1, max: 100, allowMinus: false, digits: 1});
 
     // Кнопка рассчитать
     $('#percent-calc').click(function () {

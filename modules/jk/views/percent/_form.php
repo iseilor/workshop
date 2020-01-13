@@ -39,7 +39,7 @@ $bundle = $this->getAssetManager()->getBundle('\app\modules\jk\assets\PercentAss
                 <h3 class="card-title"><i class="fas fa-calculator nav-icon"></i> Калькулятор</h3>
             </div>
 
-            <?php $form = ActiveForm::begin(['id' => 'percent-form',]); ?>
+            <?php $form = ActiveForm::begin(['id' => 'percent-form']); ?>
             <div class="card-body">
                 <div class="row">
                     <ul>

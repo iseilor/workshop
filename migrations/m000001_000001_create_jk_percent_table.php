@@ -35,8 +35,8 @@ class m000001_000001_create_jk_percent_table extends Migration
             'family_count'=> Schema::TYPE_INTEGER . ' NOT NULL',
             'family_income'=> Schema::TYPE_INTEGER . ' NOT NULL',
 
-            'area_total'=> Schema::TYPE_INTEGER . ' NOT NULL',
-            'area_buy'=> Schema::TYPE_INTEGER . ' NOT NULL',
+            'area_total'=> Schema::TYPE_FLOAT . ' NOT NULL',
+            'area_buy'=> Schema::TYPE_FLOAT . ' NOT NULL',
 
             'cost_total'=> Schema::TYPE_INTEGER . ' NOT NULL',
             'cost_user' => Schema::TYPE_INTEGER . ' NOT NULL',

@@ -25,7 +25,7 @@ class ContactForm extends Model
     {
         return [
             [['subject', 'body','verifyCode'], 'required'],
-            ['verifyCode', 'captcha', 'captchaAction' => '/main/contact/captcha/'],
+            ['verifyCode', 'captcha', 'captchaAction' => '/main/default/captcha/'],
         ];
     }
 

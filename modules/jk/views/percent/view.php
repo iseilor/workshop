@@ -18,46 +18,60 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
-                'method' => 'post',
-            ],
-        ]) ?>
+        <?= Html::a(
+            Yii::t('app', 'Delete'),
+            ['delete', 'id' => $model->id],
+            [
+                'class' => 'btn btn-danger',
+                'data' => [
+                    'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
+                    'method' => 'post',
+                ],
+            ]
+        ) ?>
     </p>
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            //'created_at',
-            //'created_by',
-            //'updated_at',
-            //'updated_by',
-            'date_birth:date',
-            [
-                'attribute' => 'gender',
-                'value' => ($model->gender == 1 ? 'Мужской' : 'Женский'),
+    <?= DetailView::widget(
+        [
+            'model' => $model,
+
+            'attributes' => [
+                'id',
+                //'created_at',
+                //'created_by',
+                //'updated_at',
+                //'updated_by',
+                'date_birth:date',
+                [
+                    'attribute' => 'gender',
+                    'value' => ($model->gender == 1 ? 'Мужской' : 'Женский'),
+                ],
+                'experience',
+                'family_count',
+                'family_income:integer',
+                'area_total:decimal',
+                'area_buy:decimal',
+                'cost_total:integer',
+                'cost_user:integer',
+                'bank_credit:integer',
+                [
+                    'attribute' => 'loan',
+                    'visible' => false,
+                ],
+                'percent_count:integer',
+                'percent_rate:decimal',
+                //'compensation_result',
+                [
+                    'attribute' => 'compensation_count',
+                    'format'=>'integer',
+                    'contentOptions' => ['class' => 'table-success']
+                ],
+                [
+                    'attribute' => 'compensation_years',
+                    'contentOptions' => ['class' => 'table-success']
+                ]
             ],
-            'experience',
-            'family_count',
-            'family_income',
-            'area_total',
-            'area_buy',
-            'cost_total',
-            'cost_user',
-            'bank_credit',
-            [
-                'attribute' => 'loan',
-                'visible' => false,
-            ],
-            'percent_count',
-            'percent_rate',
-            //'compensation_result',
-            'compensation_count',
-            'compensation_years',
-        ],
-    ]) ?>
+        ]
+    ) ?>
 
 </div>

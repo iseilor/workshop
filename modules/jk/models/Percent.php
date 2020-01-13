@@ -60,8 +60,6 @@ class Percent extends \yii\db\ActiveRecord
                     'experience',
                     'family_count',
                     'family_income',
-                    'area_total',
-                    'area_buy',
                     'cost_total',
                     'cost_user',
                     'bank_credit',
@@ -73,7 +71,7 @@ class Percent extends \yii\db\ActiveRecord
                 ],
                 'integer'
             ],
-            [['percent_rate'], 'double'],
+
 
             // Кол-во членов в семье
             ['family_count', 'compare', 'compareValue' => 1, 'operator' => '>=', 'type' => 'number'],
@@ -84,16 +82,32 @@ class Percent extends \yii\db\ActiveRecord
             ['family_income', 'compare', 'compareValue' => 100000, 'operator' => '<=', 'type' => 'number'],
 
             // Кол-во имеющегося жилья
+            [['area_total'], 'match', 'pattern' => '/^\s*[-+]?[0-9]*[.,]?[0-9]+([eE][-+]?[0-9]+)?\s*$/'],
             ['area_total', 'compare', 'compareValue' => 1, 'operator' => '>=', 'type' => 'number'],
             ['area_total', 'compare', 'compareValue' => 500, 'operator' => '<=', 'type' => 'number'],
 
             // Кол-во приобритаемого жилья
+            [['area_buy'], 'match', 'pattern' => '/^\s*[-+]?[0-9]*[.,]?[0-9]+([eE][-+]?[0-9]+)?\s*$/'],
             ['area_buy', 'compare', 'compareValue' => 1, 'operator' => '>=', 'type' => 'number'],
             ['area_buy', 'compare', 'compareValue' => 500, 'operator' => '<=', 'type' => 'number'],
 
             // Полная стоимость жилья
             ['cost_total', 'compare', 'compareValue' => 1, 'operator' => '>=', 'type' => 'number'],
             ['cost_total', 'compare', 'compareValue' => 10000000, 'operator' => '<=', 'type' => 'number'],
+            [
+                ['cost_total', 'cost_user', 'bank_credit'],
+                function () {
+                    if ($this->loan > 0) {
+                        if ($this->cost_total != ($this->cost_user + $this->bank_credit + $this->loan)) {
+                            $this->addError('cost_total', 'Полная стоимость жилья = Собственные средства работника + Размер кредита Банка + Размер займа (если предоставлялся)');
+                        }
+                    } else {
+                        if ($this->cost_total != ($this->cost_user + $this->bank_credit)) {
+                            $this->addError('cost_total', 'Полная стоимость жилья = Собственные средства работника + Размер кредита Банка + Размер займа (если предоставлялся)');
+                        }
+                    }
+                }
+            ],
 
             // Собственные средства работника
             ['cost_user', 'compare', 'compareValue' => 1, 'operator' => '>=', 'type' => 'number'],
@@ -112,8 +126,9 @@ class Percent extends \yii\db\ActiveRecord
             ['loan', 'compare', 'compareValue' => 10000000, 'operator' => '<=', 'type' => 'number'],
 
             // Процентная ставка
-            ['percent_rate', 'compare', 'compareValue' => 1, 'operator' => '>=', 'type' => 'double'],
-            ['percent_rate', 'compare', 'compareValue' => 100, 'operator' => '<=', 'type' => 'double'],
+            [['percent_rate'], 'match', 'pattern' => '/^\s*[-+]?[0-9]*[.,]?[0-9]+([eE][-+]?[0-9]+)?\s*$/'],
+            ['percent_rate', 'compare', 'compareValue' => 1, 'operator' => '>=', 'type' => 'number'],
+            ['percent_rate', 'compare', 'compareValue' => 100, 'operator' => '<=', 'type' => 'number'],
         ];
     }
 
@@ -153,7 +168,7 @@ class Percent extends \yii\db\ActiveRecord
         return $this->attributeLabels()[$attr] . ' <a href="#" data-toggle="tooltip" data-html="true" title="' . $this->attributeTooltips()[$attr] . '"><i class="fas fa-info"></i></a>';
     }
 
-    public function attributeTooltips($img='')
+    public function attributeTooltips($img = '')
     {
         return [
             'family_count' => '- Поле должно быть не меньше 1, поле заполняется целыми значениями: 1, 2, 3 и т.д.<br>
@@ -171,12 +186,12 @@ class Percent extends \yii\db\ActiveRecord
                             и с учетом жилых / не жилых помещений, по которым в течение 5 лет до подачи<br>
                             заявления осуществлялись сделки ',
             'area_buy' => 'Поле должно быть не меньше 1',
-            'cost_total' => $this->attributeLabels()['cost_total'],
-            'cost_user' => $this->attributeLabels()['cost_user'],
-            'bank_credit' => $this->attributeLabels()['bank_credit'],
-            'loan' => $this->attributeLabels()['loan'],
-            'percent_count' => $this->attributeLabels()['percent_count'],
-            'percent_rate' => $this->attributeLabels()['percent_rate']
+            'cost_total' => 'Полная стоимость жилья = Собственные средства работника + Размер кредита Банка + Размер займа (если предоставлялся)',
+            'cost_user' => 'Собственные средства работника',
+            'bank_credit' => 'Данные вводятся без учёта требуемого займа',
+            'loan' => 'Размер займа от компании, если он ранее предоставлялся',
+            'percent_count' => 'Полная сумма по переплаченным процентам за кредит',
+            'percent_rate' => 'Процентная ставка в банке'
         ];
     }
 
@@ -208,5 +223,15 @@ class Percent extends \yii\db\ActiveRecord
                 'updatedByAttribute' => 'updated_by',
             ],
         ];
+    }
+
+
+    public function beforeValidate()
+    {
+        // Заменяем запятые на точки
+        $this->percent_rate = str_replace(",", ".", $this->percent_rate);
+        $this->area_total = str_replace(",", ".", $this->area_total);
+        $this->area_buy = str_replace(",", ".", $this->area_buy);
+        return parent::beforeValidate();
     }
 }

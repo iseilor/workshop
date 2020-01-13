@@ -48,6 +48,7 @@ $config = [
             'datetimeFormat' => 'php:d.m.Y H:i:s',
             'timeFormat'     => 'php:H:i:s',
             'thousandSeparator' => ' ',
+            'decimalSeparator' => ',',
 
         ],
         'cache' => [

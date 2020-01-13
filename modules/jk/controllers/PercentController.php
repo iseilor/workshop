@@ -3,6 +3,7 @@
 namespace app\modules\jk\controllers;
 
 use app\modules\user\models\User;
+use http\Client\Response;
 use Yii;
 use app\modules\jk\models\Percent;
 use app\modules\jk\models\PercentSearch;
@@ -10,6 +11,7 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\widgets\ActiveForm;
 
 /**
  * PercentController implements the CRUD actions for Percent model.
@@ -160,6 +162,11 @@ class PercentController extends Controller
         $percent = new Percent();
         $percent->load(Yii::$app->request->post());
 
+        // TODO: научиться менять запятые на точки на уровен модели
+        $percent->area_buy=str_replace(",",".",$percent->area_buy);
+        $percent->area_total=str_replace(",",".",$percent->area_total);
+        $percent->percent_rate=str_replace(",",".",$percent->percent_rate);
+
         // Максимальный срок компенсации процентов (кол-во лет до пенсии, но не более 10 лет)
         $user = User::findOne(Yii::$app->user->identity->getId());
         $maxPercentYears = $user->getPensionYears();
@@ -208,7 +215,6 @@ class PercentController extends Controller
 
         // Коэффициент учёта корпоративной нормы KUKN
         $KUKN = $KNP / ($percent->area_buy - ($percent->cost_user / $percent->cost_total * $percent->area_buy));
-
 
 
         if ($KUKN > 1) {
