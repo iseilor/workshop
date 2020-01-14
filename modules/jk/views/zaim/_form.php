@@ -22,33 +22,20 @@ ZaimAsset::register($this);
                 </p>
             </div>
             <div class="col-md-4">
-                <?= $form->field($model, 'date_birth')
-                    ->widget(
-                        DatePicker::className(),
-                        [
-                            'options' => ['class' => 'form-control'],
-                            'dateFormat' => 'dd.MM.yyyy'
-                        ]
-                    ) ?>
-                <?= $form->field($model, 'gender')->dropDownList(
-                    [
-                        '1' => 'М',
-                        '0' => 'Ж',
-                    ]
-                ); ?>
-                <?= $form->field($model, 'experience')->textInput() ?>
                 <?= $form->field($model, 'family_count')->textInput() ?>
                 <?= $form->field($model, 'family_income')->textInput() ?>
+                <?= $form->field($model, 'area_total')->textInput() ?>
             </div>
             <div class="col-md-4">
-                <?= $form->field($model, 'area_total')->textInput() ?>
+
                 <?= $form->field($model, 'area_buy')->textInput() ?>
                 <?= $form->field($model, 'cost_total')->textInput() ?>
                 <?= $form->field($model, 'cost_user')->textInput() ?>
-                <?= $form->field($model, 'bank_credit')->textInput() ?>
+
             </div>
 
             <div class="col-md-4">
+                <?= $form->field($model, 'bank_credit')->textInput() ?>
                 <?= $form->field($model, 'rf_area')->dropDownList(
                     [
                         "0" => "Не выбрано",

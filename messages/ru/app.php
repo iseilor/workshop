@@ -20,6 +20,7 @@ return [
     'Deleted At'=>'Когда удалено',
     'Deleted By' => 'Кем удалено',
 
+    'Create'=>'Добавить',
     'Update'=>'Изменить',
     'Delete'=>'Удалить',
     'Are you sure you want to delete this item?'=>'Вы действительноу уверены, что хотите удалить данный элемент?'
