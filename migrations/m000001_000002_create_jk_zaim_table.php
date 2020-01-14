@@ -28,6 +28,7 @@ class m000001_000002_create_jk_zaim_table extends Migration
             'updated_at' => Schema::TYPE_DATETIME,
             'updated_by' => Schema::TYPE_INTEGER,
 
+
             'family_count'=> Schema::TYPE_INTEGER . ' NOT NULL',
             'family_income'=> Schema::TYPE_INTEGER . ' NOT NULL',
 

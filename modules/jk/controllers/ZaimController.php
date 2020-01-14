@@ -2,6 +2,7 @@
 
 namespace app\modules\jk\controllers;
 
+use app\modules\jk\models\Min;
 use Yii;
 use app\modules\jk\models\Zaim;
 use app\modules\jk\models\ZaimSearch;
@@ -38,10 +39,13 @@ class ZaimController extends Controller
         $searchModel = new ZaimSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+        return $this->render(
+            'index',
+            [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]
+        );
     }
 
     /**
@@ -52,9 +56,12 @@ class ZaimController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        return $this->render(
+            'view',
+            [
+                'model' => $this->findModel($id),
+            ]
+        );
     }
 
     /**
@@ -66,13 +73,19 @@ class ZaimController extends Controller
     {
         $model = new Zaim();
 
+        $mins = Min::find()->orderBy('title')->all();
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+        return $this->render(
+            'create',
+            [
+                'model' => $model,
+                'mins' => $mins
+            ]
+        );
     }
 
     /**
@@ -90,9 +103,12 @@ class ZaimController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        return $this->render('update', [
-            'model' => $model,
-        ]);
+        return $this->render(
+            'update',
+            [
+                'model' => $model,
+            ]
+        );
     }
 
     /**

@@ -2,6 +2,7 @@
 use app\modules\jk\Module;
 /* @var $this yii\web\View */
 /* @var $model app\modules\jk\models\Zaim */
+/* @var $model app\modules\jk\models\Min */
 
 $this->title = Module::t('module', 'Create Zaim');
 $icon = '<i class="fas fa-calculator nav-icon"></i>';
@@ -26,6 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
             <?= $this->render('_form', [
                 'model' => $model,
+                'mins' => $mins
             ]) ?>
         </div>
     </div>

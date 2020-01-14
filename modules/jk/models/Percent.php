@@ -168,7 +168,7 @@ class Percent extends \yii\db\ActiveRecord
         return $this->attributeLabels()[$attr] . ' <a href="#" data-toggle="tooltip" data-html="true" title="' . $this->attributeTooltips()[$attr] . '"><i class="fas fa-info"></i></a>';
     }
 
-    public function attributeTooltips($img = '')
+    public function attributeTooltips()
     {
         return [
             'family_count' => '- Поле должно быть не меньше 1, поле заполняется целыми значениями: 1, 2, 3 и т.д.<br>
