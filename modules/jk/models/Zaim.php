@@ -2,6 +2,7 @@
 
 namespace app\modules\jk\models;
 
+use app\models\Model;
 use app\modules\jk\Module;
 use Yii;
 use yii\behaviors\BlameableBehavior;
@@ -32,7 +33,7 @@ use yii\db\Expression;
  * @property int|null $compensation_count
  * @property int|null $compensation_years
  */
-class Zaim extends \yii\db\ActiveRecord
+class Zaim extends Model
 {
     /**
      * {@inheritdoc}
@@ -49,10 +50,10 @@ class Zaim extends \yii\db\ActiveRecord
     {
         return [
             [['date_birth', 'gender', 'experience', 'family_count', 'family_income',
-                'area_total', 'area_buy', 'cost_total', 'cost_user', 'bank_credit','rf_area'], 'required'],
+                'area_total', 'area_buy', 'cost_total', 'cost_user', 'bank_credit','min_id'], 'required'],
             [['created_at', 'updated_at', 'date_birth'], 'safe'],
             [['created_by', 'updated_by', 'gender', 'experience', 'family_count',
-                'family_income', 'area_total', 'area_buy', 'cost_total', 'cost_user', 'bank_credit', 'compensation_result', 'compensation_count', 'compensation_years','rf_area'], 'integer'],
+                'family_income', 'area_total', 'area_buy', 'cost_total', 'cost_user', 'bank_credit', 'compensation_result', 'compensation_count', 'compensation_years','min_id'], 'integer'],
         ];
     }
 
@@ -67,6 +68,8 @@ class Zaim extends \yii\db\ActiveRecord
             'created_by' => Yii::t('app', 'Created By'),
             'updated_at' => Yii::t('app', 'Updated At'),
             'updated_by' => Yii::t('app', 'Updated By'),
+            'deleted_at' => Yii::t('app', 'Updated At'),
+            'deleteed_by' => Yii::t('app', 'Updated By'),
             'date_birth' => Module::t('module', 'Date Birth'),
             'gender' => Module::t('module', 'Gender'),
             'experience' => Module::t('module', 'Experience'),
@@ -77,7 +80,7 @@ class Zaim extends \yii\db\ActiveRecord
             'cost_total' => Module::t('module', 'Cost Total'),
             'cost_user' => Module::t('module', 'Cost User'),
             'bank_credit' => Module::t('module', 'Bank Credit'),
-            'rf_area' => Module::t('module', 'RF Area'),
+            'min_id' => Module::t('module', 'RF Area'),
             'compensation_result' => Module::t('module', 'Compensation Result'),
             'compensation_count' => Module::t('module', 'Compensation Count'),
             'compensation_years' => Module::t('module', 'Compensation Years'),
@@ -111,7 +114,7 @@ class Zaim extends \yii\db\ActiveRecord
             'cost_total' => 'Полная стоимость жилья = Собственные средства работника + Размер кредита Банка + Размер займа (если предоставлялся)',
             'cost_user' => 'Собственные средства работника',
             'bank_credit' => 'Данные вводятся без учёта требуемого займа',
-            'rf_area' => Module::t('module', 'RF Area'),
+            'min_id' => Module::t('module', 'RF Area'),
         ];
     }
 
@@ -140,9 +143,16 @@ class Zaim extends \yii\db\ActiveRecord
             [
                 'class' => BlameableBehavior::className(),
                 'createdByAttribute' => 'created_by',
-                'updatedByAttribute' => 'updated_by',
+                //'updatedByAttribute' => 'updated_by',
             ],
         ];
     }
+
+    public function getMin(){
+        return $this->hasOne(Min::className(), ['id' => 'min_id']);
+    }
+
+
+
 
 }

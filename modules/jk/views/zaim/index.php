@@ -7,13 +7,13 @@ use yii\widgets\Pjax;
 /* @var $searchModel app\modules\jk\models\ZaimSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app/jk', 'Zaims');
+$this->title = Yii::t('app', 'Zaims');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="zaim-index">
 
     <p>
-        <?= Html::a(Yii::t('app/jk', 'Create Zaim'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Create Zaim'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php Pjax::begin(); ?>

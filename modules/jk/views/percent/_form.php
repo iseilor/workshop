@@ -22,12 +22,6 @@ $bundle = $this->getAssetManager()->getBundle('\app\modules\jk\assets\PercentAss
 */
 ?>
 
-
-
-
-
-
-
 <div id="result">
 </div>
 
@@ -53,26 +47,26 @@ $bundle = $this->getAssetManager()->getBundle('\app\modules\jk\assets\PercentAss
                         <li>Главный <?= Html::a('куратор', ['/jk/doc']) ?> жилищной компании</li>
                     </ul>
                     <div class="col-md-4">
-                        <?php $tabindex=1;?>
-                        <?= $form->field($model, 'family_count')->textInput(['tabindex'=>$tabindex++])->label($model->getAttributeLabels2('family_count')) ?>
-                        <?= $form->field($model, 'family_income')->textInput(['tabindex'=>$tabindex++])->label($model->getAttributeLabels2('family_income')) ?>
-                        <?= $form->field($model, 'area_total')->textInput(['tabindex'=>$tabindex++])->label($model->getAttributeLabels2('area_total'))  ?>
-                        <?= $form->field($model, 'area_buy')->textInput(['tabindex'=>$tabindex++])->label($model->getAttributeLabels2('area_buy')) ?>
+                        <?php $tabindex = 1; ?>
+                        <?= $form->field($model, 'family_count')->textInput(['tabindex' => $tabindex++])->label($model->getAttributeLabels2('family_count')) ?>
+                        <?= $form->field($model, 'family_income')->textInput(['tabindex' => $tabindex++])->label($model->getAttributeLabels2('family_income')) ?>
+                        <?= $form->field($model, 'area_total')->textInput(['tabindex' => $tabindex++])->label($model->getAttributeLabels2('area_total')) ?>
+                        <?= $form->field($model, 'area_buy')->textInput(['tabindex' => $tabindex++])->label($model->getAttributeLabels2('area_buy')) ?>
                     </div>
                     <div class="col-md-4">
-                        <?= $form->field($model, 'cost_total')->textInput(['tabindex'=>$tabindex++])->label($model->getAttributeLabels2('cost_total')) ?>
-                        <?= $form->field($model, 'cost_user')->textInput(['tabindex'=>$tabindex++])->label($model->getAttributeLabels2('cost_user')) ?>
-                        <?= $form->field($model, 'bank_credit')->textInput(['tabindex'=>$tabindex++])->label($model->getAttributeLabels2('bank_credit')) ?>
+                        <?= $form->field($model, 'cost_total')->textInput(['tabindex' => $tabindex++])->label($model->getAttributeLabels2('cost_total')) ?>
+                        <?= $form->field($model, 'cost_user')->textInput(['tabindex' => $tabindex++])->label($model->getAttributeLabels2('cost_user')) ?>
+                        <?= $form->field($model, 'bank_credit')->textInput(['tabindex' => $tabindex++])->label($model->getAttributeLabels2('bank_credit')) ?>
                     </div>
                     <div class="col-md-4">
-                        <?= $form->field($model, 'loan')->textInput(['tabindex'=>$tabindex++])->label($model->getAttributeLabels2('loan')) ?>
-                        <?= $form->field($model, 'percent_count')->textInput(['tabindex'=>$tabindex++])->label($model->getAttributeLabels2('percent_count')) ?>
-                        <?= $form->field($model, 'percent_rate')->textInput(['tabindex'=>$tabindex++])->label($model->getAttributeLabels2('percent_rate')) ?>
+                        <?= $form->field($model, 'loan')->textInput(['tabindex' => $tabindex++])->label($model->getAttributeLabels2('loan')) ?>
+                        <?= $form->field($model, 'percent_count')->textInput(['tabindex' => $tabindex++])->label($model->getAttributeLabels2('percent_count')) ?>
+                        <?= $form->field($model, 'percent_rate')->textInput(['tabindex' => $tabindex++])->label($model->getAttributeLabels2('percent_rate')) ?>
                     </div>
                     <div class="col-md-4 d-none">
-                        <?= $form->field($model, 'compensation_result')->textInput()?>
-                        <?= $form->field($model, 'compensation_count')->textInput()?>
-                        <?= $form->field($model, 'compensation_years')->textInput()?>
+                        <?= $form->field($model, 'compensation_result')->textInput() ?>
+                        <?= $form->field($model, 'compensation_count')->textInput() ?>
+                        <?= $form->field($model, 'compensation_years')->textInput() ?>
                     </div>
                 </div>
             </div>

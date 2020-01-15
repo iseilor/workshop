@@ -1,6 +1,8 @@
 $(document).ready(function () {
-    // Кнопка рассчитать Займ
+
+    // Кнопка рассчитать
     $('#zaim-calc').click(function () {
+        $('#result').html(''); // Очищаем предыдущее значение
 
         // Проверяем заполненность всех полей
         $all_full = true;
@@ -19,115 +21,49 @@ $(document).ready(function () {
             }
         });
 
-        // Нет ошибок на форме bk
+        // Нет ошибок на форме
         if ($all_full) {
-            zaim_calc();
+            var data = $('#zaim-form').serialize();
+            $.ajax({
+                url: $(this).data('url'),
+                type: 'POST',
+                data: data,
+                success: function (result) {
+                    toastr["success"]("Расчёт суммы материальной помощи успешно завершён", "Расчёт окончен");
+                    $('#result').html(result);
+                    $('#zaim-compensation_result').val(1);
+                    $('#zaim-compensation_count').val($('#result_money').html().replace(/\s+/g, ''));
+                    $('#zaim-compensation_years').val($('#result_years').html().replace(/\s+/g, ''));
+                },
+                error: function () {
+                    toastr["error"]("В процессе расчёта произошла ошибка. Попробуйте изменить данные вашей формы и повторить расчёт. Если ошибка сохранится, то свяжитесь с администраторами системы", "Ошибка");
+                }
+            });
         } else {
-            alert('Есть ошибки на форме');
+            toastr["error"]("Заполните все поля формы корректными данными и повторите расчёт", "Ошибка");
+            return false;
         }
     });
+
+    // Кнопка "Отправить расчёт на почту"
+    $('body').on('click', '#result-send-email', function () {
+        var data = $('#zaim-form').serialize();
+        $.ajax({
+            url: $(this).data('url'),
+            type: 'POST',
+            data: data,
+            success: function (result) {
+                toastr["success"]("Рассчёт суммы займа отправлен на ваш email", "Письмо отправлено");
+            },
+            error: function () {
+                toastr["error"]("Письмо по техническим причинам не отправлено, свяжитесь с администраторами системы", "Письмо не отправлено");
+            }
+        });
+        return false;
+    });
+
+    // Кнопка "Сохранить расчёт" в результатах расчёта
+    $('body').on('click', '#result-save', function () {
+        $('#btn-save').click();
+    });
 });
-
-// Функция рассчёта займа
-function zaim_calc() {
-
-    // Прожиточный минимум в зависимости от региона
-    rf_area = $('#zaim-rf_area').val();
-    PM = 15382;
-    switch (rf_area) {
-        case '1':
-            PM = 15382;
-            break;
-        case '2':
-            PM = 10916;
-            break;
-        case '20':
-        case '19':
-            PM = 9068;
-            break;
-        case '3':
-            PM = 8221;
-            break;
-        case '4':
-            PM = 9223;
-            break;
-        case '5':
-            PM = 9398;
-            break;
-        case '6':
-            PM = 9650;
-            break;
-        case '7':
-            PM = 8317;
-            break;
-        case '8':
-            PM = 9429;
-            break;
-        case '9':
-            PM = 9345;
-            break;
-        case '10':
-            PM = 8456;
-            break;
-        case '11':
-            PM = 8523;
-            break;
-        case '12':
-            PM = 8967;
-            break;
-        case '13':
-            PM = 8930;
-            break;
-        case '14':
-            PM = 10599;
-            break;
-        case '15':
-            PM = 8403;
-            break;
-        case '16':
-            PM = 9747;
-            break;
-        case '17':
-            PM = 9212;
-            break;
-        case '18':
-            PM = 9095;
-            break;
-        default:
-            PM = 15382;
-            break;
-    }
-    console.log('Прожиточный минимум в этом регионе: ' + PM);
-
-    // Максимальный срок займа
-    MSZ = 10;
-    family_income = $('#zaim-family_income').val(); // Среднемесячный доход на одного члена семьи
-    if (family_income > 35000) {
-        MSZ = 7;
-    } else if (family_income > 25000) {
-        MSZ = 8;
-    } else if (family_income > 15000) {
-        MSZ = 10;
-    } else {
-        MSZ = 10;
-    }
-    console.log('Максимальный срок займа: ' + MSZ);
-
-    // Максимальный размер займа
-    family_count = $('#zaim-family_count').val();
-    MRZ = (family_income - PM) * family_count * MSZ * 12;
-    console.info('Максимальный размер займа: '+MRZ);
-
-    result_money = MRZ;
-    result_year = MSZ;
-
-    // Показываем плашку с результатом
-    $('#result_money').html(result_money);
-    $('#result_year').html(result_year);
-    $('#result').removeClass('d-none');
-
-    // Скрыте поля формы
-    $('#percent-compensation_result').val('1');
-    $('#percent-compensation_count').val(result_money);
-    $('#percent-compensation_years').val(result_year);
-}

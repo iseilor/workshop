@@ -6,6 +6,8 @@ $(document).ready(function () {
     // Кнопка рассчитать
     $('#percent-calc').click(function () {
 
+        $('#result').html(''); // Очищаем предыдущее значение
+
         // Проверяем заполненность всех полей
         $all_full = true;
         var inputs = $('#percent-form .required :input');

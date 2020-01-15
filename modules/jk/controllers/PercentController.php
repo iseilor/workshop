@@ -84,8 +84,8 @@ class PercentController extends Controller
     public function actionCreate()
     {
         $model = new Percent();
-        $user = User::findOne(Yii::$app->user->identity->getId());
 
+        $user = User::findOne(Yii::$app->user->identity->getId());
         $model->date_birth = $user->birth_date;
         $model->gender = $user->gender;
         $model->experience = $user->getExperience();
@@ -249,7 +249,7 @@ class PercentController extends Controller
             ])
             ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->id])
             ->setTo($user->email)
-            ->setSubject('WORKSHOP / ЖК / Калькулятор процентов')
+            ->setSubject('WORKSHOP / Жилищная компания / Калькулятор процентов')
             ->send();
     }
 }

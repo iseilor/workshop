@@ -27,6 +27,12 @@ class m000001_000002_create_jk_zaim_table extends Migration
             'created_by' => Schema::TYPE_INTEGER . ' NOT NULL',
             'updated_at' => Schema::TYPE_DATETIME,
             'updated_by' => Schema::TYPE_INTEGER,
+            'deleted_at' => Schema::TYPE_DATETIME,
+            'deleted_by' => Schema::TYPE_INTEGER,
+
+            'date_birth' => Schema::TYPE_INTEGER . ' NOT NULL',
+            'gender' => Schema::TYPE_BOOLEAN . ' NOT NULL',
+            'experience' => Schema::TYPE_INTEGER . ' NOT NULL',
 
 
             'family_count'=> Schema::TYPE_INTEGER . ' NOT NULL',
@@ -39,7 +45,7 @@ class m000001_000002_create_jk_zaim_table extends Migration
             'cost_user' => Schema::TYPE_INTEGER . ' NOT NULL',
             'bank_credit' => Schema::TYPE_INTEGER . ' NOT NULL',
 
-            'rf_area'=> Schema::TYPE_INTEGER . ' NOT NULL',
+            'min_id'=> Schema::TYPE_INTEGER . ' NOT NULL',
 
             'compensation_result'=> Schema::TYPE_BOOLEAN,
             'compensation_count'=> Schema::TYPE_INTEGER,
