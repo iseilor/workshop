@@ -38,15 +38,31 @@ $config = [
 
     ],
     'components' => [
+        'ad' => [
+            'class' => 'Edvlerblog\Adldap2\Adldap2Wrapper',
+            'providers' => [
+                'default' => [
+                    'autoconnect' => true,
+                    'config' => [
+                        'account_suffix' => '@rt.ru',
+                        'hosts' => [''],
+                        'base_dn' => 'DC=RT,DC=RU',
+                        'username' => '',
+                        'password' => '',
+                        'port' => 3268,
+                    ]
+                ],
+            ],
+        ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'm71YjtB7X51bk2lS2s7sHiedVrgUg2SN',
         ],
 
         'formatter' => [
-            'dateFormat'     => 'php:d.m.Y',
+            'dateFormat' => 'php:d.m.Y',
             'datetimeFormat' => 'php:d.m.Y H:i:s',
-            'timeFormat'     => 'php:H:i:s',
+            'timeFormat' => 'php:H:i:s',
             'thousandSeparator' => ' ',
             'decimalSeparator' => ',',
 

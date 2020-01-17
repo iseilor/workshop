@@ -173,6 +173,26 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public function validatePassword($password)
     {
+        /*$username = '';
+        $password = '';
+
+        $ldapObject = Yii::$app->ad->search()->findBy('mail', 'aleksey.obedkin@rt.ru');
+        //$ldapObject = Yii::$app->ad->co
+
+        $ad = Yii::$app->ad;
+        try {
+            if ($ad->auth()->attempt($username, $password)) {
+                echo '1';
+                // Passed.
+            } else {
+                echo '2';
+                // Failed.
+            }
+        } catch (Adldap\Auth\UsernameRequiredException $e) {
+            // The user didn't supply a username.
+        } catch (Adldap\Auth\PasswordRequiredException $e) {
+            // The user didn't supply a password.
+        }*/
         return Yii::$app->security->validatePassword($password, $this->password_hash);
     }
 
