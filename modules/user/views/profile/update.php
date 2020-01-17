@@ -10,8 +10,8 @@ use yii\jui\DatePicker;
 /* @var $this yii\web\View */
 /* @var $model app\modules\user\models\User */
 
-$this->title = '<i class="fas fa-user-edit"></i> '.Module::t('module', 'Profile Update');
-$this->params['breadcrumbs'][] = ['label' => '<i class="fas fa-user"></i> '.Module::t('module', 'Profile'), 'url' => ['index']];
+$this->title = '<i class="fas fa-user-edit"></i> ' . Module::t('module', 'Profile Update');
+$this->params['breadcrumbs'][] = ['label' => '<i class="fas fa-user"></i> ' . Module::t('module', 'Profile'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="card card-primary card-outline card-outline-tabs" style="border-top: none;">
@@ -22,6 +22,12 @@ $this->params['breadcrumbs'][] = $this->title;
                     <i class="fas fa-user"></i> Общие данные</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" id="custom-tabs-three-work-tab" data-toggle="pill" href="#custom-tabs-three-work" role="tab" aria-controls="custom-tabs-three-work"
+                   aria-selected="true">
+                    <i class="fas fa-user-tie"></i> Сотрудник
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" id="custom-tabs-three-profile-tab" data-toggle="pill" href="#custom-tabs-three-profile" role="tab" aria-controls="custom-tabs-three-profile"
                    aria-selected="true">
                     <i class="far fa-address-card"></i> Паспорт
@@ -29,36 +35,56 @@ $this->params['breadcrumbs'][] = $this->title;
             </li>
         </ul>
     </div>
+
     <?php $form = ActiveForm::begin(); ?>
+
     <div class="card-body">
         <div class="tab-content" id="custom-tabs-three-tabContent">
             <div class="tab-pane fade active show" id="custom-tabs-three-home" role="tabpanel" aria-labelledby="custom-tabs-three-home-tab">
-                <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 
-                <?= $form->field($model, 'birth_date')->widget(DatePicker::classname(), [
-                    'language' => 'ru',
-                    'dateFormat' => 'dd.MM.yyyy',
-                    'options' => ['class' => 'form-control'],
-                ]) ?>
+                <?= $form->field($model, 'fio')->textInput(['maxlength' => true]) ?>
                 <?= $form->field($model, 'gender')->dropDownList(
                     [
                         '1' => 'М',
                         '0' => 'Ж',
                     ]
                 ); ?>
-                <?= $form->field($model, 'work_date')->widget(DatePicker::classname(), [
-                    'language' => 'ru',
-                    'dateFormat' => 'dd.MM.yyyy',
-                    'options' => ['class' => 'form-control'],
-                ]) ?>
+                <?= $form->field($model, 'birth_date')->widget(
+                    DatePicker::classname(),
+                    [
+                        'language' => 'ru',
+                        'dateFormat' => 'dd.MM.yyyy',
+                        'options' => ['class' => 'form-control'],
+                    ]
+                ) ?>
+
+            </div>
+            <div class="tab-pane fade" id="custom-tabs-three-work" role="tabpanel" aria-labelledby="custom-tabs-three-work-tab">
+                <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'position')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'department')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'phone_work')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'work_date')->widget(
+                    DatePicker::classname(),
+                    [
+                        'language' => 'ru',
+                        'dateFormat' => 'dd.MM.yyyy',
+                        'options' => ['class' => 'form-control'],
+                    ]
+                ) ?>
             </div>
             <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel" aria-labelledby="custom-tabs-three-profile-tab">
-
+                <?= $form->field($model, 'passport_seria')->textInput() ?>
+                <?= $form->field($model, 'passport_number')->textInput() ?>
+                <?= $form->field($model, 'passport_date')->textInput() ?>
+                <?= $form->field($model, 'passport_scan1')->textInput() ?>
+                <?= $form->field($model, 'passport_scan2')->textInput() ?>
             </div>
         </div>
     </div>
     <div class="card-footer">
-        <?= Html::submitButton('<i class="fas fa-save"></i> '.Yii::t('app', 'Save'), ['class' => 'btn btn-primary']) ?>
+        <?= Html::submitButton('<i class="fas fa-save"></i> ' . Yii::t('app', 'Save'), ['class' => 'btn btn-primary']) ?>
     </div>
+
     <?php ActiveForm::end(); ?>
 </div>

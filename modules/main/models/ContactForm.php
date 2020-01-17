@@ -53,7 +53,7 @@ class ContactForm extends Model
                 ->setTo($email)
                 ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
                 ->setReplyTo([$this->email => $this->name])
-                ->setSubject('Сообщение с портала')
+                ->setSubject('Сообщение с портала WORKSHOP')
                 ->send();
             return true;
         }

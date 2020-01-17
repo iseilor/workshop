@@ -2,6 +2,8 @@
 
 namespace app\modules\jk\models;
 
+use app\models\Model;
+use app\modules\jk\Module;
 use Yii;
 
 /**
@@ -15,7 +17,7 @@ use Yii;
  * @property string $question
  * @property string $answer
  */
-class Faq extends \yii\db\ActiveRecord
+class Faq extends Model
 {
     /**
      * {@inheritdoc}
@@ -31,7 +33,7 @@ class Faq extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['created_at', 'created_by', 'question', 'answer'], 'required'],
+            [['question', 'answer'], 'required'],
             [['created_at', 'updated_at'], 'safe'],
             [['created_by', 'updated_by'], 'integer'],
             [['answer'], 'string'],
@@ -50,8 +52,8 @@ class Faq extends \yii\db\ActiveRecord
             'created_by' => Yii::t('app', 'Created By'),
             'updated_at' => Yii::t('app', 'Updated At'),
             'updated_by' => Yii::t('app', 'Updated By'),
-            'question' => Yii::t('app', 'Question'),
-            'answer' => Yii::t('app', 'Answer'),
+            'question' => Module::t('module', 'Question'),
+            'answer' => Module::t('module', 'Answer'),
         ];
     }
 

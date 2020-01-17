@@ -82,11 +82,20 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             'email' => Module::t('module', 'Email'),
             'status' => Module::t('module', 'Status'),
 
+            'fio'=>Module::t('module', 'FIO'),
+            'position'=>Module::t('module', 'Position'),
+            'department'=>Module::t('module', 'Department'),
+            'phone_work'=>Module::t('module', 'Phone Work'),
+
             'birth_date' => Module::t('module', 'Birth Date'),
             'work_date' => Module::t('module', 'Work Date'),
             'gender' => Module::t('module', 'Gender'),
 
-
+            'passport_seria' => Module::t('module', 'Passport Seria'),
+            'passport_number' => Module::t('module', 'Passport Number'),
+            'passport_date' => Module::t('module', 'Passport Date'),
+            'passport_scan1' => Module::t('module', 'Passport Scan1'),
+            'passport_scan2' => Module::t('module', 'Passport Scan2')
         ];
     }
 

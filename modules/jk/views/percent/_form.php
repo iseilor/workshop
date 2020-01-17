@@ -98,4 +98,3 @@ $bundle = $this->getAssetManager()->getBundle('\app\modules\jk\assets\PercentAss
         </div>
     </div>
 </div>
-

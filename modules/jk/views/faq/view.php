@@ -1,5 +1,6 @@
 <?php
 
+use app\modules\jk\Module;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -7,8 +8,10 @@ use yii\widgets\DetailView;
 /* @var $model app\modules\jk\models\Faq */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app/jk', 'Faqs'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => '<i class="nav-icon fas fa-home"></i> Жилищная компания', 'url' => ['/jk/']];
+$this->params['breadcrumbs'][] = ['label' => '<i class="fas fa-question"></i> '.Module::t('module', 'Faqs'), 'url' => ['admin']];
 $this->params['breadcrumbs'][] = $this->title;
+
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="faq-view">
@@ -28,9 +31,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'created_at',
-            'created_by',
-            'updated_at',
+            'created_at:datetime',
+            [
+                'label' => Yii::t('app','Created By'),
+                'value' => $model->createdUser->username,
+            ],
+            'updated_at:datetime',
             'updated_by',
             'question',
             'answer:ntext',

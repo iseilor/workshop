@@ -28,4 +28,15 @@ return [
     'Birth Date'=>'Дата рождения',
     'Work Date'=>'Дата трудоустройства в Ростелеком',
     'Gender'=>'Пол',
+    'FIO'=>'ФИО',
+    'Phone Work'=>'Рабочий телефон',
+
+    'Position'=>'Должность',
+    'Department'=>'Подразделение',
+
+     'Passport Seria'=> 'Серия',
+     'Passport Number'=> 'Номер',
+     'Passport Date'=> 'Дата выдачи',
+     'Passport Scan1'=> 'Скан разворота с фотографией',
+     'Passport Scan2'=> 'Скан разворота с текущей пропиской',
 ];

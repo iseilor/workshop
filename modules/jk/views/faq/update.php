@@ -1,23 +1,27 @@
 <?php
 
+use app\modules\jk\Module;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\jk\models\Faq */
 
-$this->title = Yii::t('app\jk', 'Update Faq: {name}', [
-    'name' => $model->id,
-]);
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app\jk', 'Faqs'), 'url' => ['index']];
+$this->title = Module::t(
+    'module',
+    'Update Faq: {name}',
+    [
+        'name' => $model->id,
+    ]
+);
+$this->params['breadcrumbs'][] = ['label' => '<i class="fas fa-home"></i> Жилищная компания', 'url' => ['/jk/']];
+$this->params['breadcrumbs'][] = ['label' => '<i class="fas fa-question"></i> '.Module::t('module', 'Faqs'), 'url' => ['admin']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = Yii::t('app\jk', 'Update');
+$this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>
-<div class="faq-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <?= $this->render('_form', [
+<?= $this->render(
+    '_form',
+    [
         'model' => $model,
-    ]) ?>
-
-</div>
+    ]
+) ?>

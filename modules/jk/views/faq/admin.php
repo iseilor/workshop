@@ -1,5 +1,6 @@
 <?php
 
+use app\modules\jk\Module;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
@@ -7,20 +8,18 @@ use yii\widgets\Pjax;
 /* @var $searchModel app\modules\jk\models\FaqSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = '<i class="fas fa-question"></i> '.Yii::t('app/jk', 'Faqs');
+$this->title = '<i class="fas fa-question"></i> '.Module::t('module', 'Faqs');
 $this->params['breadcrumbs'][] = ['label' => '<i class="nav-icon fas fa-home"></i> Жилищная компания', 'url' => ['/jk/']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="row">
     <div class="col-md-12">
         <div class="card card-primary">
-            <div class="card-header">
-                <h3 class="card-title"><?=$this->title?></h3>
-            </div>
+
             <div class="card-body">
 
                 <p>
-                    <?= Html::a('<i class="fas fa-plus"></i> '.Yii::t('app/jk', 'Create Faq'), ['create'], ['class' => 'btn btn-success']) ?>
+                    <?= Html::a('<i class="fas fa-plus"></i> '.Module::t('module', 'Create Faq'), ['create'], ['class' => 'btn btn-success']) ?>
                 </p>
 
                 <?php Pjax::begin(); ?>
@@ -33,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                              ['class' => 'yii\grid\SerialColumn'],
 
                                              'id',
-                                             'created_at',
+                                             'created_at:datetime',
                                              'created_by',
                                              //'updated_at',
                                              //'updated_by',

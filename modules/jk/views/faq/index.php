@@ -8,9 +8,6 @@ use yii\widgets\ListView; ?>
 <div class="row">
     <div class="col-md-12">
         <div class="card card-primary">
-            <div class="card-header">
-                <h3 class="card-title"><?= $this->title; ?></h3>
-            </div>
             <div class="card-body">
                 <p>Для получения ответа на часто задаваемые вопросы нажмите на него мышкой</p>
                 <div id="accordion">

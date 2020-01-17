@@ -51,7 +51,7 @@ class DefaultController extends Controller
             $post = true;
         }
 
-        if ($post && $model->contact(Yii::$app->params['adminEmail'])) {
+        if ($post && $model->contact(Yii::$app->params['supportEmail'])) {
             Yii::$app->session->setFlash('contactFormSubmitted');
             return $this->refresh();
         } else {

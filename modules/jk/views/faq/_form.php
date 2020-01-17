@@ -8,26 +8,48 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="faq-form">
 
-    <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'created_at')->textInput() ?>
+<div class="row">
+    <div class="col-md-12">
 
-    <?= $form->field($model, 'created_by')->textInput() ?>
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title"><i class="fas fa-question"></i> Вопрос</h3>
+            </div>
 
-    <?= $form->field($model, 'updated_at')->textInput() ?>
+            <?php $form = ActiveForm::begin(); ?>
+            <div class="card-body">
 
-    <?= $form->field($model, 'updated_by')->textInput() ?>
 
-    <?= $form->field($model, 'question')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'question')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'answer')->textarea(['rows' => 6]) ?>
+                <?= $form->field($model, 'answer')->textarea(['rows' => 6]) ?>
 
-    <div class="form-group">
-        <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
+
+
+
+            </div>
+            <div class="card-footer">
+
+                <?= Html::submitButton(
+                    '<i class="fas fa-save nav-icon"></i> Сохранить',
+                    [
+                        'class' => 'btn btn-success',
+                        'id' => 'btn-save',
+                    ]
+                ) ?>
+
+
+                <?= Html::a(
+                    Yii::t('app', 'Отмена'),
+                    ['create'],
+                    ['class' => 'btn btn-default float-right']
+                ) ?>
+
+
+            </div>
+            <?php ActiveForm::end(); ?>
+        </div>
     </div>
-
-    <?php ActiveForm::end(); ?>
-
 </div>

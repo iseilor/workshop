@@ -32,7 +32,19 @@ class m000000_000001_create_user_table extends Migration
             'birth_date' => $this->integer(),
             'work_date'=> $this->integer(),
             'gender'=>$this->boolean(),
-            'phone'=>$this->string(10)
+            'phone_mobile'=>$this->string(10),
+            'phone_work'=>$this->string(10),
+
+            'fio'=> $this->string(),
+            'position'=> $this->string(),
+            'department'=> $this->string(),
+
+            'passport_seria'=> $this->integer(),
+            'passport_number'=> $this->integer(),
+            'passport_date'=> $this->integer(),
+            'passport_scan1'=> $this->string(),
+            'passport_scan2'=> $this->string(),
+
 
         ], $tableOptions);
 
@@ -40,7 +52,7 @@ class m000000_000001_create_user_table extends Migration
         $this->createIndex('idx-user-email', '{{%user}}', 'email');
         $this->createIndex('idx-user-status', '{{%user}}', 'status');
 
-        //$this->execute($this->addData());
+        $this->execute($this->addData());
     }
 
     /**
@@ -54,7 +66,6 @@ class m000000_000001_create_user_table extends Migration
     public function addData()
     {
         return "INSERT INTO {{%user}} (`id`,`username`,`auth_key`,`password_hash`,`email`,`status`,`created_at`,`updated_at`)
-        VALUES (1,'admin', 'KhzwCjkdPWSW020jZfNU2FsQdJ03Ayai', '$2y$13$0m8vVgx3tqSJR1dmAZctU.feEXOerAG73vZA9BubTYQlo3BoUvEZi', 'admin@gmail.com',	10,	1576662481,	1576662481)";
-
+        VALUES (1,'admin', 'a7wRnPzutnPTQUd80EnGuJH3L4PFdfUc', '$2y$13\$j7aNZGyUxzCzp7pep5UwcuQ.J682wrjD5xwd6NjOGM8uYn/Oo23.S', 'obedkinav@ya.ru',	1,	1579187759,	1579187759)";
     }
 }
