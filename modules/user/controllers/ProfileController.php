@@ -10,6 +10,7 @@ use app\modules\user\models\User;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use Yii;
+use yii\web\UploadedFile;
 
 class ProfileController extends Controller
 {
@@ -76,6 +77,9 @@ class ProfileController extends Controller
         $model = new ProfileUpdateForm($user);
 
         if ($model->load(Yii::$app->request->post()) && $model->update()) {
+
+            //$model->img = UploadedFile::getInstance($model, 'img');
+            //$model->upload();
             return $this->redirect(['index']);
         } else {
             return $this->render('update', [

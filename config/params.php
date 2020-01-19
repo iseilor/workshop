@@ -6,4 +6,5 @@ return [
     'senderEmail' => 'workshop@rt.ru',
     'senderName' => 'WORKSHOP',
     'user.passwordResetTokenExpire' => 3600,
+
 ];

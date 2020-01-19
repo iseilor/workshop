@@ -6,6 +6,8 @@ use app\modules\user\models\User;
 use yii\base\Model;
 use yii\db\ActiveQuery;
 use Yii;
+use yii\imagine\Image;
+use yii\web\UploadedFile;
 
 class ProfileUpdateForm extends Model
 {
@@ -15,6 +17,7 @@ class ProfileUpdateForm extends Model
     public $gender;
     public $experience;
     public $fio;
+    public $img;
 
     public $position;
     public $department;
@@ -71,7 +74,12 @@ class ProfileUpdateForm extends Model
             [['work_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'work_date'],
             ['birth_date', 'required'],
             ['work_date', 'required'],
-            ['gender', 'required']
+            ['gender', 'required'],
+
+            [['img'], 'safe'],
+            [['img'], 'file', 'extensions'=>'jpg, png'],
+            [['img'], 'file', 'maxSize'=>'2048000'],
+            //[['image_src_filename', 'image_web_filename'], 'string', 'max' => 255],
         ];
     }
 
@@ -96,7 +104,32 @@ class ProfileUpdateForm extends Model
             $user->passport_scan1 = $this->passport_scan1;
             $user->passport_scan2 = $this->passport_scan2;
 
+            $this->img = UploadedFile::getInstance($this, 'img');
+            $this->upload();
+            $user->img =   $this->_user->id . '.' . $this->img->extension;
+
             return $user->save();
+        } else {
+            return false;
+        }
+    }
+
+    public function upload()
+    {
+        if ($this->validate()) {
+            $fileName =  $this->_user->id . '.' . $this->img->extension;
+            $fileName100 = $this->_user->id . '_100.' . $this->img->extension;
+            $filePath = '@files/user/profile/' ;
+
+            $this->img->saveAs($filePath.$fileName);
+
+
+            //$image = Yii::getAlias('@webroot/images/img.jpg');
+
+            // Обрежет по высоте на 120px, по ширине на 120px
+            /*Image::thumbnail($filePath.$fileName, 100, 100)
+                ->save($filePath.$fileName100, ['quality' => 100]);*/
+            return true;
         } else {
             return false;
         }

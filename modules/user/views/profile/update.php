@@ -2,6 +2,7 @@
 
 use app\modules\user\Module;
 
+use kartik\file\FileInput;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 use yii\jui\DatePicker;
@@ -36,11 +37,13 @@ $this->params['breadcrumbs'][] = $this->title;
         </ul>
     </div>
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options'=>['enctype'=>'multipart/form-data']]); ?>
 
     <div class="card-body">
         <div class="tab-content" id="custom-tabs-three-tabContent">
             <div class="tab-pane fade active show" id="custom-tabs-three-home" role="tabpanel" aria-labelledby="custom-tabs-three-home-tab">
+
+                <?= $form->field($model, 'img')->fileInput() ?>
 
                 <?= $form->field($model, 'fio')->textInput(['maxlength' => true]) ?>
                 <?= $form->field($model, 'gender')->dropDownList(

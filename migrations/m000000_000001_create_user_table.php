@@ -35,6 +35,8 @@ class m000000_000001_create_user_table extends Migration
             'phone_mobile'=>$this->string(10),
             'phone_work'=>$this->string(10),
 
+            'img'=>$this->string(),
+
             'fio'=> $this->string(),
             'position'=> $this->string(),
             'department'=> $this->string(),

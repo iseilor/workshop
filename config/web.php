@@ -21,6 +21,7 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm' => '@vendor/npm-asset',
         '@adminlte' => '@vendor/almasaeed2010/adminlte',
+        '@files'=>'files'
     ],
     'modules' => [
         'main' => [

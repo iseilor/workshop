@@ -30,6 +30,7 @@ class ComposerStaticInitecbe9ee047cdfe8ad4a5b4da8c33329a
         array (
             'yii\\swiftmailer\\' => 16,
             'yii\\jui\\' => 8,
+            'yii\\imagine\\' => 12,
             'yii\\gii\\' => 8,
             'yii\\faker\\' => 10,
             'yii\\debug\\' => 10,
@@ -43,8 +44,10 @@ class ComposerStaticInitecbe9ee047cdfe8ad4a5b4da8c33329a
         ),
         'k' => 
         array (
+            'kartik\\plugins\\fileinput\\' => 25,
             'kartik\\helpers\\' => 15,
             'kartik\\form\\' => 12,
+            'kartik\\file\\' => 12,
             'kartik\\field\\' => 13,
             'kartik\\datetime\\' => 16,
             'kartik\\date\\' => 12,
@@ -99,6 +102,7 @@ class ComposerStaticInitecbe9ee047cdfe8ad4a5b4da8c33329a
         ),
         'I' => 
         array (
+            'Imagine\\' => 8,
             'Illuminate\\Contracts\\' => 21,
         ),
         'G' => 
@@ -140,6 +144,10 @@ class ComposerStaticInitecbe9ee047cdfe8ad4a5b4da8c33329a
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2-jui',
         ),
+        'yii\\imagine\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/yiisoft/yii2-imagine/src',
+        ),
         'yii\\gii\\' => 
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2-gii/src',
@@ -170,6 +178,10 @@ class ComposerStaticInitecbe9ee047cdfe8ad4a5b4da8c33329a
             1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
             2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
         ),
+        'kartik\\plugins\\fileinput\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/bootstrap-fileinput',
+        ),
         'kartik\\helpers\\' => 
         array (
             0 => __DIR__ . '/..' . '/kartik-v/yii2-helpers/src',
@@ -177,6 +189,10 @@ class ComposerStaticInitecbe9ee047cdfe8ad4a5b4da8c33329a
         'kartik\\form\\' => 
         array (
             0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-activeform/src',
+        ),
+        'kartik\\file\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-fileinput/src',
         ),
         'kartik\\field\\' => 
         array (
@@ -297,6 +313,10 @@ class ComposerStaticInitecbe9ee047cdfe8ad4a5b4da8c33329a
         'Opis\\Closure\\' => 
         array (
             0 => __DIR__ . '/..' . '/opis/closure/src',
+        ),
+        'Imagine\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/imagine/imagine/src',
         ),
         'Illuminate\\Contracts\\' => 
         array (

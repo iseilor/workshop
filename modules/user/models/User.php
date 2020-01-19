@@ -62,6 +62,11 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => array_keys(self::getStatusesArray())],
 
+            [['img'], 'safe'],
+            [['img'], 'file', 'extensions'=>'jpg, png'],
+            [['img'], 'file', 'maxSize'=>'100000'],
+            //[['image_src_filename', 'image_web_filename'], 'string', 'max' => 255],
+
         ];
     }
 
@@ -81,6 +86,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             'password_reset_token' => Module::t('module', 'Password Reset Token'),
             'email' => Module::t('module', 'Email'),
             'status' => Module::t('module', 'Status'),
+            'img'=>Module::t('module','Photo'),
 
             'fio'=>Module::t('module', 'FIO'),
             'position'=>Module::t('module', 'Position'),
@@ -173,26 +179,6 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public function validatePassword($password)
     {
-        /*$username = '';
-        $password = '';
-
-        $ldapObject = Yii::$app->ad->search()->findBy('mail', 'aleksey.obedkin@rt.ru');
-        //$ldapObject = Yii::$app->ad->co
-
-        $ad = Yii::$app->ad;
-        try {
-            if ($ad->auth()->attempt($username, $password)) {
-                echo '1';
-                // Passed.
-            } else {
-                echo '2';
-                // Failed.
-            }
-        } catch (Adldap\Auth\UsernameRequiredException $e) {
-            // The user didn't supply a username.
-        } catch (Adldap\Auth\PasswordRequiredException $e) {
-            // The user didn't supply a password.
-        }*/
         return Yii::$app->security->validatePassword($password, $this->password_hash);
     }
 

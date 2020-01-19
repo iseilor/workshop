@@ -7,6 +7,7 @@ return [
     'Password' => 'Пароль',
     'Remember Me' => 'Запомнить меня',
     'Verify Code'=>'Код',
+    'Photo'=>'Фотография',
 
     'Profile' => 'Профиль',
     'Profile Update' => 'Редактировать профиль',
