@@ -83,7 +83,7 @@ class Percent extends \yii\db\ActiveRecord
 
             // Кол-во имеющегося жилья
             [['area_total'], 'match', 'pattern' => '/^\s*[-+]?[0-9]*[.,]?[0-9]+([eE][-+]?[0-9]+)?\s*$/'],
-            ['area_total', 'compare', 'compareValue' => 1, 'operator' => '>=', 'type' => 'number'],
+            ['area_total', 'compare', 'compareValue' => 0, 'operator' => '>=', 'type' => 'number'],
             ['area_total', 'compare', 'compareValue' => 500, 'operator' => '<=', 'type' => 'number'],
 
             // Кол-во приобритаемого жилья

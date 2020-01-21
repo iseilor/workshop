@@ -19,7 +19,7 @@ use yii\widgets\Menu;
             ['label' => Module::t('module', 'Home'), 'url' => ['/main/default/index']],
             ['label' => Module::t('module', 'Teams'), 'url' => ['/main/team/index']],
             ['label' => Module::t('module', 'About project'), 'url' => ['/main/default/about']],
-            ['label' => Module::t('module', 'Contacts'), 'url' => ['/main/default/contacts']],
+            ['label' => Module::t('module', 'Feedback'), 'url' => ['/main/default/feedback']],
         ],
     ]);
     ?>

@@ -12,7 +12,7 @@ use yii\captcha\Captcha;
 use app\modules\main\Module;
 use yii\helpers\Url;
 
-$this->title = '<i class="fas fa-envelope"></i> ' . Module::t('module', 'Contacts');
+$this->title = '<i class="fas fa-envelope"></i> ' . Module::t('module', 'Feedback');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 

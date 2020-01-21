@@ -4,6 +4,8 @@ namespace app\modules\main\controllers;
 use app\modules\main\models\ContactForm;
 use app\modules\user\models\User;
 use Yii;
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 
 /**
@@ -14,6 +16,23 @@ class DefaultController extends Controller
 
     public $title;
 
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'only' => ['feedback'],
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => ['feedback'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+        ];
+    }
+
     public function actions()
     {
         return [
@@ -23,7 +42,7 @@ class DefaultController extends Controller
             'captcha' => [
                 'class' => 'yii\captcha\CaptchaAction',
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
-            ],
+            ]
         ];
     }
 
@@ -42,7 +61,7 @@ class DefaultController extends Controller
         return $this->render('about');
     }
 
-    public function actionContacts()
+    public function actionFeedback()
     {
         $model = new ContactForm();
         $post = false;
@@ -59,7 +78,7 @@ class DefaultController extends Controller
             Yii::$app->session->setFlash('contactFormSubmitted');
             return $this->refresh();
         } else {
-            return $this->render('contacts', [
+            return $this->render('feedback', [
                 'model' => $model,
             ]);
         }

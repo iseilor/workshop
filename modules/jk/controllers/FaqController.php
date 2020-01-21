@@ -5,6 +5,7 @@ namespace app\modules\jk\controllers;
 use Yii;
 use app\modules\jk\models\Faq;
 use app\modules\jk\models\FaqSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -24,6 +25,17 @@ class FaqController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                ],
+            ],
+            'access' => [
+                'only' => ['admin','create','update','delete'],
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => ['admin','create','update','delete'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
                 ],
             ],
         ];
