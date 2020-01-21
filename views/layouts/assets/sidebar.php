@@ -45,7 +45,7 @@ use yii\helpers\Url;
         <nav class="mt-2">
             <?php echo MenuActive::widget(
                 [
-                    'options' => ['class' => 'nav nav-pills nav-sidebar flex-column', 'role' => 'menu', 'data' => ['widget' => 'treeview', 'accordion' => 'false']],
+                    'options' => ['class' => 'nav nav-pills nav-sidebar flex-column nav-child-indent', 'role' => 'menu', 'data' => ['widget' => 'treeview', 'accordion' => 'false']],
                     'itemOptions' => ['class' => 'nav-item has-treeview'],
                     'linkTemplate' => '<a href="{url}" class="nav-link {activeClass}">{label}</a>',
                     'encodeLabels' => false,
@@ -61,13 +61,14 @@ use yii\helpers\Url;
                             'items' => [
                                 ['label' => '<i class="fas fa-calculator nav-icon"></i> <p>Калькулятор процентов</p>', 'url' => [ '/jk/percent/create']],
                                 ['label' => '<i class="fas fa-calculator nav-icon"></i> <p>Калькулятор займа</p>', 'url' => ['/jk/zaim/create']],
-                                ['label' => '<i class="fas fa-ruble-sign nav-icon"></i> <p>Заявка</p>', 'url' => ['/jk']],
+                                ['label' => '<i class="fas fa-ruble-sign nav-icon"></i> <p>Заявка</p>', 'url' => ['/jk/order/create']],
                                 ['label' => '<i class="fas fa-file-word nav-icon"></i> <p>Документы</p>', 'url' => ['/jk/doc/index']],
                                 ['label' => '<i class="fas fa-question nav-icon"></i> <p>Вопросы</p>', 'url' => ['/jk/faq/index']],
                                 ['label' => '<i class="fas fa-user nav-icon"></i> <p>Куратор</p>', 'url' => ['/jk/']],
 
                             ]
                         ],
+                        ['label' => '<i class="nav-icon fas fa-tachometer-alt"></i> <p>Админка</p>', 'url' => ['/admin/default/index']],
                     ],
                 ]
             ); ?>

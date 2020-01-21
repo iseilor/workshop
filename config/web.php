@@ -61,12 +61,12 @@ $config = [
         ],
 
         'formatter' => [
+            'timeZone' => 'Europe/Moscow',
             'dateFormat' => 'php:d.m.Y',
             'datetimeFormat' => 'php:d.m.Y H:i:s',
             'timeFormat' => 'php:H:i:s',
             'thousandSeparator' => ' ',
             'decimalSeparator' => ',',
-
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
