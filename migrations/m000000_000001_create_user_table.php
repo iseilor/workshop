@@ -40,6 +40,8 @@ class m000000_000001_create_user_table extends Migration
             'fio'=> $this->string(),
             'position'=> $this->string(),
             'department'=> $this->string(),
+            'tab_number'=> $this->string(),
+            'telephone_number'=> $this->string(),
 
             'passport_seria'=> $this->integer(),
             'passport_number'=> $this->integer(),

@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="col-md-6">
         <div class="card card-primary">
             <div class="card-header">
-                <h3 class="card-title"><?= $this->title; ?></h3>
+                <h3 class="card-title"><i class="fas fa-user"></i> Корпоративная учётная запись</h3>
             </div>
             <?php $form = ActiveForm::begin(
                 [
@@ -28,20 +28,6 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="card-body">
                 <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
                 <?= $form->field($model, 'password')->passwordInput() ?>
-                <?= $form->field($model, 'rememberMe')->checkbox(
-                    [
-                        'template' => "<div class='col-lg-offset-1 col-lg-3'>{input} {label}</div>\n<div class='col-lg-8'>{error}</div>",
-                    ]
-                ) ?>
-                <p>
-                    <?= Html::a(
-                        Module::t('module', 'I forgot password'),
-                        ['password-reset']
-                    ) ?><br/>
-                    <?= Html::a(
-                        Module::t('module', 'Signup'),
-                        ['signup'])?>
-                </p>
             </div>
             <div class="card-footer">
                 <?= Html::submitButton(

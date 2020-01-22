@@ -1,18 +1,32 @@
 <?php
 
 return [
-    'adminEmail' => 'aleksey.obedkin@rt.ru',
-    'supportEmail' => [
-        'aleksey.obedkin@rt.ru',
-        'roman.ignatovich@rt.ru',
-        'ekaterina.zinchuk@rt.ru',
-        'pavel.shilyaev@rt.ru',
-        'roman.ignatovich@rt.ru',
-        'nikita.tsygankov@rt.ru',
-        'yuliya_shilkina@center.rt.ru',
-        'Aleksandra.Shilyaeva@rt.ru'
-    ],
-    'senderEmail' => 'workshop@rt.ru',
-    'senderName' => 'WORKSHOP',
+    'adminEmail' => '',
+    'supportEmail' => [],
+    'senderEmail' => '',
+    'senderName' => '',
     'user.passwordResetTokenExpire' => 3600,
+    'ad' => [
+        'account_suffix' => '',
+        'hosts' => [],
+        'base_dn' => '',
+        'username' => '',
+        'password' => '',
+        'port' => 0,
+    ],
+    'module' => [
+        'jk' => [
+            'icon' => '<i class="fas fa-home"></i>'
+        ],
+        'user' => [
+            'icon' => '<i class="fas fa-home"></i>'
+        ]
+        ,
+        'admin' => [
+            'icon' => '<i class="fas fa-home"></i>'
+        ],
+        'main' => [
+            'icon' => '<i class="fas fa-home"></i>'
+        ]
+    ]
 ];

@@ -27,8 +27,8 @@ $this->params['breadcrumbs'][] = $this->title;
                          alt="User profile picture">
                 </div>
 
-                <h3 class="profile-username text-center">Иванов Иван</h3>
-                <p class="text-muted text-center">Программист</p>
+                <h3 class="profile-username text-center"><?=$model->fio;?></h3>
+                <p class="text-muted text-center"><?=$model->position;?></p>
                 <ul class="list-group list-group-unbordered mb-3">
                     <li class="list-group-item">
                         <b>Email</b> <a class="float-right"><?= $model->email; ?></a>

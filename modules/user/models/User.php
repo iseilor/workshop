@@ -49,7 +49,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return [
             ['username', 'required'],
-            ['username', 'match', 'pattern' => '#^[\w_-]+$#is'],
+            //['username', 'match', 'pattern' => '#^[\w_-]+$#is'],
             ['username', 'unique', 'targetClass' => self::className(), 'message' => 'This username has already been taken.'],
             ['username', 'string', 'min' => 2, 'max' => 255],
 

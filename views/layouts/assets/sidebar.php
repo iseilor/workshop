@@ -30,8 +30,7 @@ use yii\helpers\Url;
                         <?php
                         if (!Yii::$app->user->isGuest) {
                             {
-                                echo Html::a(
-                                    Yii::$app->user->identity->username,
+                                echo Html::a('Мой профиль',
                                     Url::home() . 'user/profile'
                                 );
                             }

@@ -1,6 +1,12 @@
 <?php
 
-$params = require __DIR__ . '/params.php';
+
+use yii\helpers\ArrayHelper;
+
+$params = ArrayHelper::merge(
+    require(__DIR__ . '/params.php'),
+    require(__DIR__ . '/params-local.php')
+);
 $db = require __DIR__ . '/db.php';
 
 $config = [
@@ -21,7 +27,7 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm' => '@vendor/npm-asset',
         '@adminlte' => '@vendor/almasaeed2010/adminlte',
-        '@files'=>'files'
+        '@files' => 'files'
     ],
     'modules' => [
         'main' => [
@@ -45,12 +51,12 @@ $config = [
                 'default' => [
                     'autoconnect' => true,
                     'config' => [
-                        'account_suffix' => '@rt.ru',
-                        'hosts' => [''],
-                        'base_dn' => 'DC=RT,DC=RU',
-                        'username' => '',
-                        'password' => '',
-                        'port' => 3268,
+                        'account_suffix' => $params['ad']['account_suffix'],
+                        'hosts' => $params['ad']['hosts'],
+                        'base_dn' => $params['ad']['base_dn'],
+                        'username' => $params['ad']['username'],
+                        'password' => $params['ad']['password'],
+                        'port' => $params['ad']['port'],
                     ]
                 ],
             ],
