@@ -38,6 +38,7 @@ class m000000_000001_create_user_table extends Migration
             'img'=>$this->string(),
 
             'fio'=> $this->string(),
+
             'position'=> $this->string(),
             'department'=> $this->string(),
             'tab_number'=> $this->string(),

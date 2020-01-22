@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <?= $form->field($model, 'img')->fileInput() ?>
 
-                <?= $form->field($model, 'fio')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'fio')->textInput(['maxlength' => true,'disabled' => 'disabled']) ?>
                 <?= $form->field($model, 'gender')->dropDownList(
                     [
                         '1' => 'М',

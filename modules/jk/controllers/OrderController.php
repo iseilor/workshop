@@ -2,6 +2,7 @@
 
 namespace app\modules\jk\controllers;
 
+use app\modules\jk\Module;
 use Yii;
 use app\modules\jk\models\Order;
 use app\modules\jk\models\OrderSearch;
@@ -14,6 +15,20 @@ use yii\filters\VerbFilter;
  */
 class OrderController extends Controller
 {
+
+    public $icon = '';
+    public $parent = '';
+
+    public function __construct($id, $module, $config = [])
+    {
+        parent::__construct($id, $module, $config);
+        $this->icon = Yii::$app->params['module']['jk']['order']['icon'];
+        $this->parent = [
+            'label' => Yii::$app->params['module']['jk']['icon'].' '.Module::t('module','JK'),
+            'url' => ['/jk']
+        ];
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -38,10 +53,31 @@ class OrderController extends Controller
         $searchModel = new OrderSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+        return $this->render(
+            'index',
+            [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]
+        );
+    }
+
+    /**
+     * Lists all Order models.
+     * @return mixed
+     */
+    public function actionAdmin()
+    {
+        $searchModel = new OrderSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render(
+            'admin',
+            [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]
+        );
     }
 
     /**
@@ -52,9 +88,12 @@ class OrderController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        return $this->render(
+            'view',
+            [
+                'model' => $this->findModel($id),
+            ]
+        );
     }
 
     /**
@@ -70,9 +109,12 @@ class OrderController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+        return $this->render(
+            'create',
+            [
+                'model' => $model,
+            ]
+        );
     }
 
     /**
@@ -90,9 +132,12 @@ class OrderController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        return $this->render('update', [
-            'model' => $model,
-        ]);
+        return $this->render(
+            'update',
+            [
+                'model' => $model,
+            ]
+        );
     }
 
     /**

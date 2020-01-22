@@ -14,9 +14,7 @@ use yii\helpers\Html;
     </div>
     <div id="faq-<?=$model->id?>" class="panel-collapse collapse">
         <div class="card-body">
-            <p>
-                <?= Html::encode($model->answer) ?>
-            </p>
+            <?= $model->answer ?>
         </div>
     </div>
 </div>

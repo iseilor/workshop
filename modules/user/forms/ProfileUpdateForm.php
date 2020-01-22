@@ -104,9 +104,9 @@ class ProfileUpdateForm extends Model
             $user->passport_scan1 = $this->passport_scan1;
             $user->passport_scan2 = $this->passport_scan2;
 
-            $this->img = UploadedFile::getInstance($this, 'img');
-            $this->upload();
-            $user->img =   $this->_user->id . '.' . $this->img->extension;
+            //$this->img = UploadedFile::getInstance($this, 'img');
+            //$this->upload();
+            //$user->img =   $this->_user->id . '.' . $this->img->extension;
 
             return $user->save();
         } else {

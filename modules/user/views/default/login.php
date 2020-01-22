@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]
             ); ?>
             <div class="card-body">
-                <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
+                <?= $form->field($model, 'username')->textInput(['autofocus' => true])->label('Email') ?>
                 <?= $form->field($model, 'password')->passwordInput() ?>
             </div>
             <div class="card-footer">

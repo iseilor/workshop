@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="card-body box-profile">
                 <div class="text-center">
                     <img class="profile-user-img img-fluid img-circle"
-                         src="<?= Url::home() ?>img/user4-128x128.jpg"
+                         src="<?= Url::home() ?>img/user_247.jpg"
                          alt="User profile picture">
                 </div>
 

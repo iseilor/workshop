@@ -22,7 +22,7 @@ use yii\helpers\Url;
         <?php if (!Yii::$app->user->isGuest): ?>
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <img src="<?= Yii::$app->homeUrl ?>img/user2-160x160.jpg"
+                    <img src="<?= Yii::$app->homeUrl ?>img/user_247.jpg"
                          class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
@@ -30,7 +30,8 @@ use yii\helpers\Url;
                         <?php
                         if (!Yii::$app->user->isGuest) {
                             {
-                                echo Html::a('Мой профиль',
+                                echo Html::a(
+                                    'Мой профиль',
                                     Url::home() . 'user/profile'
                                 );
                             }
@@ -51,23 +52,31 @@ use yii\helpers\Url;
                     'submenuTemplate' => "<ul class='nav nav-treeview'>{items}</ul>",
                     'activateParents' => true,
                     'activateItems' => true,
-                    'activeCssClass'=>'active menu-open',
+                    'activeCssClass' => 'active menu-open',
                     'items' => [
                         ['label' => '<i class="nav-icon fas fa-tachometer-alt"></i> <p>Главная</p>', 'url' => ['/main/default/index']],
                         [
                             'label' => '<i class="nav-icon fas fa-home"></i> <p>Жилищная компания  <i class="right fas fa-angle-left"></i></p>',
                             'url' => ['#'],
                             'items' => [
-                                ['label' => '<i class="fas fa-calculator nav-icon"></i> <p>Калькулятор процентов</p>', 'url' => [ '/jk/percent/create']],
+                                ['label' => '<i class="fas fa-calculator nav-icon"></i> <p>Калькулятор процентов</p>', 'url' => ['/jk/percent/create']],
                                 ['label' => '<i class="fas fa-calculator nav-icon"></i> <p>Калькулятор займа</p>', 'url' => ['/jk/zaim/create']],
                                 ['label' => '<i class="fas fa-ruble-sign nav-icon"></i> <p>Заявка</p>', 'url' => ['/jk/order/create']],
                                 ['label' => '<i class="fas fa-file-word nav-icon"></i> <p>Документы</p>', 'url' => ['/jk/doc/index']],
                                 ['label' => '<i class="fas fa-question nav-icon"></i> <p>Вопросы</p>', 'url' => ['/jk/faq/index']],
                                 ['label' => '<i class="fas fa-user nav-icon"></i> <p>Куратор</p>', 'url' => ['/jk/']],
-
                             ]
                         ],
-                        ['label' => '<i class="nav-icon fas fa-tachometer-alt"></i> <p>Админка</p>', 'url' => ['/admin/default/index']],
+                        [
+                            'label' => '<i class="nav-icon fas fa-tachometer-alt"></i> <p>Админка <i class="right fas fa-angle-left"></i></p>',
+                            'url' => ['/admin/default/index'],
+                            'items'=>[
+                                ['label' => Yii::$app->params['module']['jk']['min']['icon'].' <p>Минимумы</p>', 'url' => ['/jk/min/admin']],
+                                ['label' => Yii::$app->params['module']['jk']['percent']['icon']. ' <p>Проценты</p>', 'url' => ['/jk/percent/admin']],
+                                ['label' => Yii::$app->params['module']['jk']['zaim']['icon']. ' <p>Займы</p>', 'url' => ['/jk/zaim/admin']],
+                                ['label' =>Yii::$app->params['module']['jk']['order']['icon']. ' <p>Заявки</p>', 'url' => ['/jk/order/admin']],
+                            ]
+                        ],
                     ],
                 ]
             ); ?>

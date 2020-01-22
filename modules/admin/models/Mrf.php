@@ -1,12 +1,11 @@
 <?php
 
-namespace app\modules\jk\models;
+namespace app\modules\admin\models;
 
-use app\models\Model;
 use Yii;
 
 /**
- * This is the model class for table "jk_order".
+ * This is the model class for table "mrf".
  *
  * @property int $id
  * @property int $created_at
@@ -15,15 +14,17 @@ use Yii;
  * @property int|null $updated_by
  * @property int|null $deleted_at
  * @property int|null $deleted_by
+ * @property string $title
+ * @property string $description
  */
-class Order extends Model
+class Mrf extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'jk_order';
+        return 'mrf';
     }
 
     /**
@@ -32,7 +33,9 @@ class Order extends Model
     public function rules()
     {
         return [
+            [['created_at', 'created_by', 'title', 'description'], 'required'],
             [['created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by'], 'integer'],
+            [['title', 'description'], 'string', 'max' => 255],
         ];
     }
 
@@ -49,17 +52,17 @@ class Order extends Model
             'updated_by' => Yii::t('app', 'Updated By'),
             'deleted_at' => Yii::t('app', 'Deleted At'),
             'deleted_by' => Yii::t('app', 'Deleted By'),
+            'title' => Yii::t('app', 'Title'),
+            'description' => Yii::t('app', 'Description'),
         ];
     }
 
     /**
      * {@inheritdoc}
-     * @return OrderQuery the active query used by this AR class.
+     * @return MrfQuery the active query used by this AR class.
      */
     public static function find()
     {
-        return new OrderQuery(get_called_class());
+        return new MrfQuery(get_called_class());
     }
-
-
 }
