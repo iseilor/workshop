@@ -86,9 +86,10 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             'password_reset_token' => Module::t('module', 'Password Reset Token'),
             'email' => Module::t('module', 'Email'),
             'status' => Module::t('module', 'Status'),
-            'img'=>Module::t('module','Photo'),
 
             'fio'=>Module::t('module', 'FIO'),
+            'photo'=>Module::t('module','Photo'),
+
             'position'=>Module::t('module', 'Position'),
             'department'=>Module::t('module', 'Department'),
             'phone_work'=>Module::t('module', 'Phone Work'),
@@ -101,7 +102,10 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             'passport_number' => Module::t('module', 'Passport Number'),
             'passport_date' => Module::t('module', 'Passport Date'),
             'passport_scan1' => Module::t('module', 'Passport Scan1'),
-            'passport_scan2' => Module::t('module', 'Passport Scan2')
+            'passport_scan2' => Module::t('module', 'Passport Scan2'),
+
+            'snils_number' => Module::t('module', 'Snils Number'),
+            'snils_scan' => Module::t('module', 'Snils Scan'),
         ];
     }
 

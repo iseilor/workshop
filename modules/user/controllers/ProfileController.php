@@ -39,28 +39,41 @@ class ProfileController extends Controller
         $zaimDataProvider = $zaimSearchModel->search(Yii::$app->request->queryParams);
 
         $model = $this->findModel();
-        switch ($model->gender) {
-            case 0:
-                $model->gender='Женский';
-                break;
-            case 1:
-                $model->gender='Мужской';
-                break;
-            default:
-                $model->gender='Не определён';
-                break;
+
+        // Фотография
+        if (isset($model->photo)) {
+            $model->photo = Yii::$app->params['module']['user']['photoPath'] . $model->photo;
+        } else {
+            $model->photo = Yii::$app->params['module']['user']['photoDefault'];
         }
-        $experience=intdiv(mktime()-$model->work_date,31556926);
 
+        if (isset($model->gender)) {
+            switch ($model->gender) {
+                case 0:
+                    $model->gender = 'Женский';
+                    break;
+                case 1:
+                    $model->gender = 'Мужской';
+                    break;
+            }
+        }
 
-        return $this->render('index', [
-            'model' => $model,
-            'experience'=>$experience,
-            'percentSearchModel' => $percentSearchModel,
-            'percentDataProvider' => $percentDataProvider,
-            'zaimSearchModel' => $zaimSearchModel,
-            'zaimDataProvider' => $zaimDataProvider,
-        ]);
+        $experience='';
+        if (isset($model->work_date)){
+            $experience = intdiv(mktime() - $model->work_date, 31556926);
+        }
+
+        return $this->render(
+            'index',
+            [
+                'model' => $model,
+                'experience' => $experience,
+                'percentSearchModel' => $percentSearchModel,
+                'percentDataProvider' => $percentDataProvider,
+                'zaimSearchModel' => $zaimSearchModel,
+                'zaimDataProvider' => $zaimDataProvider,
+            ]
+        );
     }
 
     /**
@@ -77,14 +90,16 @@ class ProfileController extends Controller
         $model = new ProfileUpdateForm($user);
 
         if ($model->load(Yii::$app->request->post()) && $model->update()) {
-
             //$model->img = UploadedFile::getInstance($model, 'img');
             //$model->upload();
             return $this->redirect(['index']);
         } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+            return $this->render(
+                'update',
+                [
+                    'model' => $model,
+                ]
+            );
         }
     }
 
@@ -96,9 +111,12 @@ class ProfileController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->changePassword()) {
             return $this->redirect(['index']);
         } else {
-            return $this->render('passwordChange', [
-                'model' => $model,
-            ]);
+            return $this->render(
+                'passwordChange',
+                [
+                    'model' => $model,
+                ]
+            );
         }
     }
 }

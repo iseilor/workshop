@@ -34,7 +34,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'created_at:datetime',
             [
                 'label' => Yii::t('app','Created By'),
-                'value' => $model->createdUser->username,
+                'attribute' => 'created_by',
+                'value' => 'user.username',
             ],
             'updated_at:datetime',
             'updated_by',

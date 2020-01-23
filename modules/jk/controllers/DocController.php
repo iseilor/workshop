@@ -2,18 +2,35 @@
 
 namespace app\modules\jk\controllers;
 
+use app\modules\jk\Module;
 use Yii;
 use app\modules\jk\models\Doc;
 use app\modules\jk\models\DocSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * DocController implements the CRUD actions for Doc model.
  */
 class DocController extends Controller
 {
+
+    public $icon = '';
+    public $parent = '';
+
+    public function __construct($id, $module, $config = [])
+    {
+        parent::__construct($id, $module, $config);
+        $this->icon = Yii::$app->params['module']['jk']['doc']['icon'];
+        $this->parent = [
+            'label' => Yii::$app->params['module']['jk']['icon'] . ' ' . Module::t('module', 'JK'),
+            'url' => ['/jk']
+        ];
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -24,6 +41,15 @@ class DocController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
                 ],
             ],
         ];
@@ -38,10 +64,13 @@ class DocController extends Controller
         $searchModel = new DocSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+        return $this->render(
+            'index',
+            [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]
+        );
     }
 
     /**
@@ -53,10 +82,13 @@ class DocController extends Controller
         $searchModel = new DocSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('admin', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+        return $this->render(
+            'admin',
+            [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]
+        );
     }
 
     /**
@@ -67,9 +99,12 @@ class DocController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        return $this->render(
+            'view',
+            [
+                'model' => $this->findModel($id),
+            ]
+        );
     }
 
     /**
@@ -82,12 +117,19 @@ class DocController extends Controller
         $model = new Doc();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            $model->file = UploadedFile::getInstance($model, 'file');
+            if ($model->upload()) {
+                $model->src=$model->id.'.'.$model->file->extension;
+                $model->save();
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+        return $this->render(
+            'create',
+            [
+                'model' => $model,
+            ]
+        );
     }
 
     /**
@@ -105,9 +147,12 @@ class DocController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        return $this->render('update', [
-            'model' => $model,
-        ]);
+        return $this->render(
+            'update',
+            [
+                'model' => $model,
+            ]
+        );
     }
 
     /**

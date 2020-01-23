@@ -22,25 +22,22 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="card card-outline">
             <div class="card-body box-profile">
                 <div class="text-center">
-                    <img class="profile-user-img img-fluid img-circle"
-                         src="<?= Url::home() ?>img/user_247.jpg"
-                         alt="User profile picture">
+                    <?= Html::img('/'.$model->photo, ['alt' => 'Наш логотип','class'=>'profile-user-img img-fluid img-circle']) ?>
                 </div>
-
                 <h3 class="profile-username text-center"><?=$model->fio;?></h3>
                 <p class="text-muted text-center"><?=$model->position;?></p>
                 <ul class="list-group list-group-unbordered mb-3">
-                    <li class="list-group-item">
-                        <b>Email</b> <a class="float-right"><?= $model->email; ?></a>
-                    </li>
-                    <li class="list-group-item">
-                        <b>Телефон</b> <a class="float-right"><?= $model->phone_mobile; ?></a>
-                    </li>
                     <li class="list-group-item">
                         <b>Дата рождения</b> <a class="float-right"><?= Yii::$app->formatter->format($model->birth_date, 'date'); ?></a>
                     </li>
                     <li class="list-group-item">
                         <b>Пол</b> <a class="float-right"><?= $model->gender; ?></a>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Email</b> <a class="float-right"><?= $model->email; ?></a>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Телефон</b> <a class="float-right"><?= $model->phone_mobile; ?></a>
                     </li>
                     <li class="list-group-item">
                         <b>Дата трудоустройства</b> <a class="float-right"><?= Yii::$app->formatter->format($model->work_date, 'date'); ?></a>
@@ -54,18 +51,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     ['update'],
                     [
                         'class' => 'btn 
-        btn-primary',
+        btn-info',
                     ]
                 ) ?>
-                <!--<?= Html::a(
-                    '<i class="fas fa-user-lock"></i> ' . Module::t('module', 'Password Change'),
-                    ['password-change'],
-                    [
-                        'class' => 'btn 
-        btn-primary',
-                    ]
-                ) ?>-->
-
             </div>
         </div>
     </div>
@@ -77,12 +65,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active" id="custom-tabs-three-home-tab" data-toggle="pill" href="#custom-tabs-three-home" role="tab" aria-controls="custom-tabs-three-home">
-                            <i class="fas fa-calculator nav-icon"></i> Калькуляции процентов</a>
+                            <i class="fas fa-calculator nav-icon"></i></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="custom-tabs-three-profile-tab" data-toggle="pill" href="#custom-tabs-three-profile" role="tab" aria-controls="custom-tabs-three-profile"
                            aria-selected="true">
-                            <i class="fas fa-calculator nav-icon"></i> Калькуляции займов
+                            <i class="fas fa-calculator nav-icon"></i>
                         </a>
                     </li>
                 </ul>

@@ -52,7 +52,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         'label'=>'Сотрудник',
                         'format' => 'raw',
                         'value' => function () {
-                            return 'Объедкин Алексей Валерьевич<br><small>Инженер-программист</small>';
+                            return '<span style="float: left; margin-right: 0.5rem;"><img alt="Avatar" class="table-avatar" src="/img/avatar.png"></span>
+                                    Объедкин Алексей Валерьевич<br><small>Инженер-программист, 27 лет</small>';
                         }
                     ],
                     [

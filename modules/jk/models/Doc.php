@@ -2,6 +2,7 @@
 
 namespace app\modules\jk\models;
 
+use app\models\Model;
 use Yii;
 
 /**
@@ -18,8 +19,9 @@ use Yii;
  * @property string $description
  * @property string $src
  */
-class Doc extends \yii\db\ActiveRecord
+class Doc extends Model
 {
+    public $file;
     /**
      * {@inheritdoc}
      */
@@ -34,11 +36,15 @@ class Doc extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['created_at', 'created_by', 'title', 'description', 'src'], 'required'],
+            [['title', 'description'], 'required'],
             [['created_at', 'updated_at', 'deleted_at'], 'safe'],
             [['created_by', 'updated_by', 'deleted_by'], 'integer'],
             [['description'], 'string'],
-            [['title', 'src'], 'string', 'max' => 255],
+            [['title'], 'string', 'max' => 255],
+
+
+            [['file'], 'file', 'extensions'=>'doc,docx,pdf,xls,xlsx,txt','checkExtensionByMimeType'=>false],
+            [['file'], 'file', 'maxSize'=>'2048000'],
         ];
     }
 
@@ -58,6 +64,7 @@ class Doc extends \yii\db\ActiveRecord
             'title' => Yii::t('app', 'Title'),
             'description' => Yii::t('app', 'Description'),
             'src' => Yii::t('app', 'Src'),
+            'file' => Yii::t('app', 'File'),
         ];
     }
 
@@ -68,5 +75,15 @@ class Doc extends \yii\db\ActiveRecord
     public static function find()
     {
         return new DocQuery(get_called_class());
+    }
+
+    public function upload()
+    {
+        if ($this->validate()) {
+            $this->file->saveAs(Yii::$app->params['module']['jk']['doc']['filePath'].$this->id . '.' . $this->file->extension);
+            return true;
+        } else {
+            return false;
+        }
     }
 }

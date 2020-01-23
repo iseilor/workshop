@@ -16,8 +16,9 @@ class ProfileUpdateForm extends Model
     public $work_date;
     public $gender;
     public $experience;
+
     public $fio;
-    public $img;
+    public $photo;
 
     public $position;
     public $department;
@@ -28,6 +29,9 @@ class ProfileUpdateForm extends Model
     public $passport_date;
     public $passport_scan1;
     public $passport_scan2;
+
+    public $snils_number;
+    public $snils_scan;
 
     /**
      * @var User
@@ -60,8 +64,7 @@ class ProfileUpdateForm extends Model
     public function rules()
     {
         return [
-            [['email', 'fio','position','department','phone_work','passport_seria','passport_number','passport_date','passport_scan1','passport_scan2'], 'required'],
-            ['email', 'email'],
+            [['gender','birth_date'], 'required'],
             [
                 'email',
                 'unique',
@@ -70,16 +73,13 @@ class ProfileUpdateForm extends Model
                 'filter' => ['<>', 'id', $this->_user->id],
             ],
             ['email', 'string', 'max' => 255],
+
             [['birth_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'birth_date'],
             [['work_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'work_date'],
-            ['birth_date', 'required'],
-            ['work_date', 'required'],
-            ['gender', 'required'],
 
-            [['img'], 'safe'],
-            [['img'], 'file', 'extensions'=>'jpg, png'],
-            [['img'], 'file', 'maxSize'=>'2048000'],
-            //[['image_src_filename', 'image_web_filename'], 'string', 'max' => 255],
+            [['photo'], 'safe'],
+            [['photo'], 'file', 'extensions'=>'jpg, png'],
+            [['photo'], 'file', 'maxSize'=>'2048000'],
         ];
     }
 
@@ -104,9 +104,11 @@ class ProfileUpdateForm extends Model
             $user->passport_scan1 = $this->passport_scan1;
             $user->passport_scan2 = $this->passport_scan2;
 
-            //$this->img = UploadedFile::getInstance($this, 'img');
-            //$this->upload();
-            //$user->img =   $this->_user->id . '.' . $this->img->extension;
+            if ($this->photo){
+                $this->photo = UploadedFile::getInstance($this, 'photo');
+                $this->upload();
+                $user->photo =   $this->_user->id . '.' . $this->photo->extension;
+            }
 
             return $user->save();
         } else {
@@ -114,26 +116,17 @@ class ProfileUpdateForm extends Model
         }
     }
 
+    // Загрузка файлов
     public function upload()
     {
         if ($this->validate()) {
-            $fileName =  $this->_user->id . '.' . $this->img->extension;
-            $fileName100 = $this->_user->id . '_100.' . $this->img->extension;
-            $filePath = '@files/user/profile/' ;
-
-            $this->img->saveAs($filePath.$fileName);
-
-
-            //$image = Yii::getAlias('@webroot/images/img.jpg');
-
-            // Обрежет по высоте на 120px, по ширине на 120px
-            /*Image::thumbnail($filePath.$fileName, 100, 100)
-                ->save($filePath.$fileName100, ['quality' => 100]);*/
+            $this->photo->saveAs(Yii::$app->params['module']['user']['photoPath'].$this->_user->id . '.' . $this->photo->extension);
             return true;
         } else {
             return false;
         }
     }
+
 
     public function attributeLabels()
     {

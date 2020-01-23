@@ -22,22 +22,19 @@ use yii\helpers\Url;
         <?php if (!Yii::$app->user->isGuest): ?>
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <img src="<?= Yii::$app->homeUrl ?>img/user_247.jpg"
-                         class="img-circle elevation-2" alt="User Image">
+
+                    <?php
+                    $userPhoto = Yii::$app->user->identity->photo;
+                    if (isset($userPhoto) && $userPhoto){
+                        $userPhotoPath = Yii::$app->params['module']['user']['photoPath'].$userPhoto;
+                    }else{
+                        $userPhotoPath = Yii::$app->params['module']['user']['photoDefault'];
+                    }
+                    ?>
+                    <?= Html::img('/'.$userPhotoPath, ['title' => Yii::$app->user->identity->username,'class'=>'img-circle elevation-2']) ?>
                 </div>
                 <div class="info">
-                    <a href="<?= Url::home() ?>" class="d-block">
-                        <?php
-                        if (!Yii::$app->user->isGuest) {
-                            {
-                                echo Html::a(
-                                    'Мой профиль',
-                                    Url::home() . 'user/profile'
-                                );
-                            }
-                        }
-                        ?>
-                    </a>
+                        <?=Html::a( 'Мой профиль','/user/profile',['title'=>Yii::$app->user->identity->username]);?>
                 </div>
             </div>
         <?php endif ?>
@@ -56,7 +53,7 @@ use yii\helpers\Url;
                     'items' => [
                         ['label' => '<i class="nav-icon fas fa-tachometer-alt"></i> <p>Главная</p>', 'url' => ['/main/default/index']],
                         [
-                            'label' => '<i class="nav-icon fas fa-home"></i> <p>Жилищная компания  <i class="right fas fa-angle-left"></i></p>',
+                            'label' => '<i class="nav-icon fas fa-home"></i> <p>' . \app\modules\jk\Module::t('module', 'jk') . '  <i class="right fas fa-angle-left"></i></p>',
                             'url' => ['#'],
                             'items' => [
                                 ['label' => '<i class="fas fa-calculator nav-icon"></i> <p>Калькулятор процентов</p>', 'url' => ['/jk/percent/create']],
@@ -70,11 +67,13 @@ use yii\helpers\Url;
                         [
                             'label' => '<i class="nav-icon fas fa-tachometer-alt"></i> <p>Админка <i class="right fas fa-angle-left"></i></p>',
                             'url' => ['/admin/default/index'],
-                            'items'=>[
-                                ['label' => Yii::$app->params['module']['jk']['min']['icon'].' <p>Минимумы</p>', 'url' => ['/jk/min/admin']],
-                                ['label' => Yii::$app->params['module']['jk']['percent']['icon']. ' <p>Проценты</p>', 'url' => ['/jk/percent/admin']],
-                                ['label' => Yii::$app->params['module']['jk']['zaim']['icon']. ' <p>Займы</p>', 'url' => ['/jk/zaim/admin']],
-                                ['label' =>Yii::$app->params['module']['jk']['order']['icon']. ' <p>Заявки</p>', 'url' => ['/jk/order/admin']],
+                            'items' => [
+                                ['label' => Yii::$app->params['module']['user']['icon2'] . ' <p>Пользователи</p>', 'url' => ['/admin/user']],
+                                ['label' => Yii::$app->params['module']['jk']['min']['icon'] . ' <p>Минимумы</p>', 'url' => ['/jk/min/admin']],
+                                ['label' => Yii::$app->params['module']['jk']['doc']['icon'] . ' <p>Документы</p>', 'url' => ['/jk/doc/admin']],
+                                ['label' => Yii::$app->params['module']['jk']['percent']['icon'] . ' <p>Проценты</p>', 'url' => ['/jk/percent/admin']],
+                                ['label' => Yii::$app->params['module']['jk']['zaim']['icon'] . ' <p>Займы</p>', 'url' => ['/jk/zaim/admin']],
+                                ['label' => Yii::$app->params['module']['jk']['order']['icon'] . ' <p>Заявки</p>', 'url' => ['/jk/order/admin']],
                             ]
                         ],
                     ],

@@ -35,8 +35,7 @@ class m000000_000001_create_user_table extends Migration
             'phone_mobile'=>$this->string(10),
             'phone_work'=>$this->string(10),
 
-            'img'=>$this->string(),
-
+            'photo'=>$this->string(),
             'fio'=> $this->string(),
 
             'position'=> $this->string(),
@@ -49,6 +48,9 @@ class m000000_000001_create_user_table extends Migration
             'passport_date'=> $this->integer(),
             'passport_scan1'=> $this->string(),
             'passport_scan2'=> $this->string(),
+
+            'snils_number'=>$this->string(),
+            'snils_scan'=>$this->string()
 
 
         ], $tableOptions);
@@ -70,7 +72,7 @@ class m000000_000001_create_user_table extends Migration
 
     public function addData()
     {
-        return "INSERT INTO {{%user}} (`id`,`username`,`auth_key`,`password_hash`,`email`,`status`,`created_at`,`updated_at`)
-        VALUES (1,'admin', 'a7wRnPzutnPTQUd80EnGuJH3L4PFdfUc', '$2y$13\$j7aNZGyUxzCzp7pep5UwcuQ.J682wrjD5xwd6NjOGM8uYn/Oo23.S', 'obedkinav@ya.ru',	1,	1579187759,	1579187759)";
+        return "INSERT INTO {{%user}} (`id`,`username`,`auth_key`,`password_hash`,`email`,`status`,`created_at`,`updated_at`,`fio`)
+        VALUES (1,'admin', 'a7wRnPzutnPTQUd80EnGuJH3L4PFdfUc', '$2y$13\$j7aNZGyUxzCzp7pep5UwcuQ.J682wrjD5xwd6NjOGM8uYn/Oo23.S', 'obedkinav@ya.ru',	1,	1579187759,	1579187759,'Объедкин Алексей Валерьевич')";
     }
 }
