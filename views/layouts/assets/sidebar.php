@@ -56,8 +56,8 @@ use yii\helpers\Url;
                             'label' => '<i class="nav-icon fas fa-home"></i> <p>' . \app\modules\jk\Module::t('module', 'jk') . '  <i class="right fas fa-angle-left"></i></p>',
                             'url' => ['#'],
                             'items' => [
-                                ['label' => '<i class="fas fa-calculator nav-icon"></i> <p>Калькулятор процентов</p>', 'url' => ['/jk/percent/create']],
-                                ['label' => '<i class="fas fa-calculator nav-icon"></i> <p>Калькулятор займа</p>', 'url' => ['/jk/zaim/create']],
+                                ['label' => '<i class="fas fa-calculator nav-icon"></i> <p>Проценты</p>', 'url' => ['/jk/percent/create']],
+                                ['label' => '<i class="fas fa-calculator nav-icon"></i> <p>Займ</p>', 'url' => ['/jk/zaim/create']],
                                 ['label' => '<i class="fas fa-ruble-sign nav-icon"></i> <p>Заявка</p>', 'url' => ['/jk/order/create']],
                                 ['label' => '<i class="fas fa-file-word nav-icon"></i> <p>Документы</p>', 'url' => ['/jk/doc/index']],
                                 ['label' => '<i class="fas fa-question nav-icon"></i> <p>Вопросы</p>', 'url' => ['/jk/faq/index']],

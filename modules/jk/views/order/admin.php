@@ -51,9 +51,14 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'label'=>'Сотрудник',
                         'format' => 'raw',
-                        'value' => function () {
-                            return '<span style="float: left; margin-right: 0.5rem;"><img alt="Avatar" class="table-avatar" src="/img/avatar.png"></span>
-                                    Объедкин Алексей Валерьевич<br><small>Инженер-программист, 27 лет</small>';
+                        'value' => function ($data) {
+
+
+                            return '<span style="float: left; margin-right: 0.5rem;">
+                                        <img alt="Avatar" class="table-avatar" src="/img/avatar.png">
+                                    </span>
+                                    Объедкин Алексей Валерьевич<br>
+                                    <small>Инженер-программист</small>';
                         }
                     ],
                     [
@@ -73,21 +78,37 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'label' => 'Прогресс',
                         'format' => 'raw',
-                        'value' => function () {
+                        'value' => function ($data) {
                             return '<div class="progress progress-sm">
-                            <div class="progress-bar bg-green" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100" style="width: 57%">
+                                    <div class="progress-bar bg-green" 
+                                    role="progressbar" 
+                                    aria-volumenow="'.$data['progress'].'" 
+                                    aria-volumemin="0" 
+                                    aria-volumemax="100" 
+                                    style="width: '.$data['progress'].'%">
                             </div>
                         </div>
                         <small>
-                            57% Complete
+                            '.$data['progress'].'% выполнено
                         </small>';
                         }
                     ],
                     [
                         'label' => 'Статус',
                         'format' => 'raw',
-                        'value' => function () {
-                            return '<span class="badge badge-success">Выплачено</span>';
+                        'value' => function ($data) {
+                            switch ($data['status']) {
+                                case 1:
+                                    $status = '<span class="badge badge-success">Проверка завершена</span>';
+                                    break;
+                                case 2:
+                                    $status = '<span class="badge badge-warning">Досыл документов</span>';
+                                    break;
+                                case 3:
+                                    $status = '<span class="badge badge-danger">Неверные данные</span>';
+                                    break;
+                            }
+                            return $status;
                         }
                     ],
                     ['class' => ActionColumn::className()],

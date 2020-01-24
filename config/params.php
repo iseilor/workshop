@@ -2,9 +2,9 @@
 
 return [
     'adminEmail' => '',
-    'supportEmail' => [],
-    'senderEmail' => '',
-    'senderName' => '',
+    'supportEmail' => ['obedkinav@ya.ru'],
+    'senderEmail' => 'workshop@rt.ru',
+    'senderName' => 'WORKSHOP',
     'user.passwordResetTokenExpire' => 3600,
     'ad' => [
         'account_suffix' => '',

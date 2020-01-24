@@ -32,7 +32,7 @@ $(document).ready(function () {
                     toastr["success"]("Расчёт суммы материальной помощи успешно завершён", "Расчёт окончен");
                     $('#result').html(result);
                     $('#zaim-compensation_result').val(1);
-                    if ($('#result_money').length()){
+                    if ($('#result_money').length){
                         $('#zaim-compensation_count').val($('#result_money').html().replace(/\s+/g, ''));
                         $('#zaim-compensation_years').val($('#result_years').html().replace(/\s+/g, ''));
                     }

@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 
 ?>
     <p>
-        Уважаемый, <?= $user->username ?>!<br>
+        <strong>Уважаемый, <?= $user->fio ?>!</strong><br>
         На портале <a href="<?= 'http://' . $_SERVER['SERVER_NAME'] . Url::home(); ?>">WORKSHOP</a> вы произвели расчёт суммы займа и получили следующие результаты:
     </p>
     <ul>
