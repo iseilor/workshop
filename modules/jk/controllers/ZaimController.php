@@ -261,9 +261,9 @@ class ZaimController extends Controller
                                               'model' => $model,
                                               'user'=>$user
                                           ])
-            ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->id])
+            ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->id])
             ->setTo($user->email)
-            ->setSubject('WORKSHOP / Жилищная компания / Калькулятор займа')
+            ->setSubject('WORKSHOP / Жилищная кампания / Калькулятор займа')
             ->send();
     }
 }

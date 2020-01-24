@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="card card-outline">
             <div class="card-body box-profile">
                 <div class="text-center">
-                    <?= Html::img('/'.$model->photo, ['alt' => 'Наш логотип','class'=>'profile-user-img img-fluid img-circle']) ?>
+                    <?= Html::img($model->photo, ['alt' => $model->fio,'class'=>'profile-user-img img-fluid img-circle']) ?>
                 </div>
                 <h3 class="profile-username text-center"><?=$model->fio;?></h3>
                 <p class="text-muted text-center"><?=$model->position;?></p>
@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <b>Email</b> <a class="float-right"><?= $model->email; ?></a>
                     </li>
                     <li class="list-group-item">
-                        <b>Телефон</b> <a class="float-right"><?= $model->phone_mobile; ?></a>
+                        <b>Телефон</b> <a class="float-right"><?= $model->phone_work; ?></a>
                     </li>
                     <li class="list-group-item">
                         <b>Дата трудоустройства</b> <a class="float-right"><?= Yii::$app->formatter->format($model->work_date, 'date'); ?></a>

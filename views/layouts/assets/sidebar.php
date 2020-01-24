@@ -26,15 +26,15 @@ use yii\helpers\Url;
                     <?php
                     $userPhoto = Yii::$app->user->identity->photo;
                     if (isset($userPhoto) && $userPhoto){
-                        $userPhotoPath = Yii::$app->params['module']['user']['photoPath'].$userPhoto;
+                        $userPhotoPath = Yii::$app->homeUrl.Yii::$app->params['module']['user']['photoPath'].$userPhoto;
                     }else{
-                        $userPhotoPath = Yii::$app->params['module']['user']['photoDefault'];
+                        $userPhotoPath = Yii::$app->homeUrl.Yii::$app->params['module']['user']['photoDefault'];
                     }
                     ?>
-                    <?= Html::img('/'.$userPhotoPath, ['title' => Yii::$app->user->identity->username,'class'=>'img-circle elevation-2']) ?>
+                    <?= Html::img($userPhotoPath, ['title' => Yii::$app->user->identity->username,'class'=>'img-circle elevation-2']) ?>
                 </div>
                 <div class="info">
-                        <?=Html::a( 'Мой профиль','/user/profile',['title'=>Yii::$app->user->identity->username]);?>
+                        <?=Html::a( 'Мой профиль',Yii::$app->homeUrl.'user/profile',['title'=>Yii::$app->user->identity->username]);?>
                 </div>
             </div>
         <?php endif ?>

@@ -41,10 +41,10 @@ class ProfileController extends Controller
         $model = $this->findModel();
 
         // Фотография
-        if (isset($model->photo)) {
-            $model->photo = Yii::$app->params['module']['user']['photoPath'] . $model->photo;
+        if (isset($model->photo) && $model->photo) {
+            $model->photo = Yii::$app->homeUrl.Yii::$app->params['module']['user']['photoPath'] . $model->photo;
         } else {
-            $model->photo = Yii::$app->params['module']['user']['photoDefault'];
+            $model->photo = Yii::$app->homeUrl.Yii::$app->params['module']['user']['photoDefault'];
         }
 
         if (isset($model->gender)) {

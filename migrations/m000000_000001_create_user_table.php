@@ -32,8 +32,8 @@ class m000000_000001_create_user_table extends Migration
             'birth_date' => $this->integer(),
             'work_date'=> $this->integer(),
             'gender'=>$this->boolean(),
-            'phone_mobile'=>$this->string(10),
-            'phone_work'=>$this->string(10),
+            'phone_mobile'=>$this->string(20),
+            'phone_work'=>$this->string(20),
 
             'photo'=>$this->string(),
             'fio'=> $this->string(),
@@ -72,7 +72,7 @@ class m000000_000001_create_user_table extends Migration
 
     public function addData()
     {
-        return "INSERT INTO {{%user}} (`id`,`username`,`auth_key`,`password_hash`,`email`,`status`,`created_at`,`updated_at`,`fio`)
-        VALUES (1,'admin', 'a7wRnPzutnPTQUd80EnGuJH3L4PFdfUc', '$2y$13\$j7aNZGyUxzCzp7pep5UwcuQ.J682wrjD5xwd6NjOGM8uYn/Oo23.S', 'obedkinav@ya.ru',	1,	1579187759,	1579187759,'Объедкин Алексей Валерьевич')";
+        return "INSERT INTO {{%user}} (`id`,`username`,`auth_key`,`password_hash`,`email`,`status`,`created_at`,`updated_at`,`fio`,`photo`,`position`,`department`, `gender`,`birth_date`,`work_date`,`phone_work`)
+        VALUES (1,'obedkinav@ya.ru', 'a7wRnPzutnPTQUd80EnGuJH3L4PFdfUc', '$2y$13\$j7aNZGyUxzCzp7pep5UwcuQ.J682wrjD5xwd6NjOGM8uYn/Oo23.S', 'obedkinav@ya.ru',	1,	1579187759,	1579187759,'Объедкин Алексей Валерьевич','1.jpg','Главный специалист','Отдел эксплутации',1,573436800,1525132800, '8 (495) 855-44-18 ')";
     }
 }

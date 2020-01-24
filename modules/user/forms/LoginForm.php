@@ -58,24 +58,26 @@ class LoginForm extends Model
      */
     public function login()
     {
+        // Заглушка для тестирования вне AD
+        if ($this->username != 'obedkinav@ya.ru') {
+            // Ищем пользователя в AD
+            if (!$this->userAD = $this->findUserAd()) {
+                $this->addError('username', 'Не найдена ваша корпоративная учётная запись');
+                return false;
+            }
 
-        // Ищем пользователя в AD
-        if (!$this->userAD = $this->findUserAd()){
-            $this->addError('username', 'Не найдена ваша корпоративная учётная запись');
-            return false;
+            // Проверяем пароль через AD
+            if (!$this->validatePasswordAd()) {
+                $this->addError('password', 'Вы указали неверный пароль');
+                return false;
+            }
+
+            // Ищем пользователя в DB
+            if (!$this->getUser()) {
+                $this->createUserDB();
+                $this->_user = false;
+            };
         }
-
-        // Проверяем пароль через AD
-        if (!$this->validatePasswordAd()){
-            $this->addError('password', 'Вы указали неверный пароль');
-            return false;
-        }
-
-        // Ищем пользователя в DB
-        if (!$this->getUser()){
-            $this->createUserDB();
-            $this->_user = false;
-        };
 
         return Yii::$app->user->login($this->getUser(), 3600 * 24 * 30);
 
@@ -94,7 +96,8 @@ class LoginForm extends Model
     }
 
     // Проверяем пароль через AD
-    public function validatePasswordAd(){
+    public function validatePasswordAd()
+    {
         return Yii::$app->ad->auth()->attempt($this->userAD->mailnickname[0], $this->password);
     }
 
@@ -110,7 +113,7 @@ class LoginForm extends Model
 
         $user->fio = $this->userAD->cn[0];
         $user->position = $this->userAD->title[0];
-        $user->department =$this->userAD->department[0];
+        $user->department = $this->userAD->department[0];
 
         if ($user->save()) {
             return $user;

@@ -104,8 +104,8 @@ class ProfileUpdateForm extends Model
             $user->passport_scan1 = $this->passport_scan1;
             $user->passport_scan2 = $this->passport_scan2;
 
+            $this->photo = UploadedFile::getInstance($this, 'photo');
             if ($this->photo){
-                $this->photo = UploadedFile::getInstance($this, 'photo');
                 $this->upload();
                 $user->photo =   $this->_user->id . '.' . $this->photo->extension;
             }
@@ -119,8 +119,10 @@ class ProfileUpdateForm extends Model
     // Загрузка файлов
     public function upload()
     {
+
         if ($this->validate()) {
             $this->photo->saveAs(Yii::$app->params['module']['user']['photoPath'].$this->_user->id . '.' . $this->photo->extension);
+            //$this->photo->saveAs(Yii::$app->params['module']['jk']['doc']['filePath'].$this->id . '.' . $this->file->extension);
             return true;
         } else {
             return false;
