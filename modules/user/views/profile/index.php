@@ -78,65 +78,10 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="card-body">
                 <div class="tab-content" id="custom-tabs-three-tabContent">
                     <div class="tab-pane fade active show" id="custom-tabs-three-home" role="tabpanel" aria-labelledby="custom-tabs-three-home-tab">
-                        <?php Pjax::begin(); ?>
-                        <?=
-                        GridView::widget(
-                            [
-                                'dataProvider' => $percentDataProvider,
-                                /*'filterModel' => $percentSearchModel,*/
-                                'columns' => [
-                                    [
-                                        'attribute' => 'id',
-                                        'value' => function ($data) {
-                                            return Html::a($data->id, ['/jk/percent/view', 'id' => $data->id]);
-                                        },
-                                        'format' => 'raw',
-                                    ],
-                                    [
-                                        'label' => 'Дата',
-                                        'attribute' => 'created_at',
-                                        'format' => ['date', 'dd.MM.Y hh:i:s'],
-                                    ],
-                                    [
-                                        'label' => 'Максимальный размер компенсации, руб',
-                                        'attribute' => 'compensation_count',
-                                        'format' => ['decimal', 0, ' ']
-                                    ],
-                                    'compensation_years',
-                                    [
-                                        'class' => ActionColumn::className(),
-                                        'controller' => '/jk/percent'
-                                    ],
-                                ],
-                            ]
-                        ); ?>
-                        <?php Pjax::end(); ?>
+
                     </div>
                     <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel" aria-labelledby="custom-tabs-three-profile-tab">
-                        <?php Pjax::begin(); ?>
-                        <?=
-                        GridView::widget(
-                            [
-                                'dataProvider' => $zaimDataProvider,
-                                /*'filterModel' => $zaimSearchModel,*/
-                                'columns' => [
-                                    'id',
-                                    [
-                                        'label' => 'Дата',
-                                        'attribute' => 'created_at',
-                                        'format' => ['date', 'dd.mm.Y hh:i:s'],
 
-                                    ],
-                                    'compensation_count',
-                                    'compensation_years',
-                                    [
-                                        'class' => ActionColumn::className(),
-                                        'controller' => '/jk/percent'
-                                    ],
-                                ],
-                            ]
-                        ); ?>
-                        <?php Pjax::end(); ?>
                     </div>
                 </div>
             </div>

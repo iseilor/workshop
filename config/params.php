@@ -15,6 +15,9 @@ return [
         'port' => 0,
     ],
     'btn' => [
+        'send' => [
+            'icon' => '<i class="fas fa-paper-plane"></i>'
+        ],
         'save' => [
             'icon' => '<i class="fas fa-save nav-icon"></i>'
         ]
@@ -44,7 +47,7 @@ return [
         ],
         'user' => [
             'icon' => '<i class="fas fa-home"></i>',
-            'icon2'=> '<i class="fas fa-users"></i>',
+            'icon2' => '<i class="fas fa-users"></i>',
             'photoPath' => 'files/user/photo/',
             'photoDefault' => 'files/user/photo/0.jpg'
         ],
@@ -53,6 +56,9 @@ return [
         ],
         'main' => [
             'icon' => '<i class="fas fa-home"></i>'
+        ],
+        'chat' => [
+            'icon' => '<i class="fas fa-comments"></i>'
         ]
     ]
 ];
