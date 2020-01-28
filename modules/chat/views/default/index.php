@@ -1,12 +1,21 @@
 <?php
+
+use app\modules\chat\assets\ChatAsset;
+
+use yii\helpers\Html;
+use yii\helpers\Url;
+use yii\widgets\ActiveForm;
+
 $this->title = Yii::t('app', 'Create Chat');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Chats'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
-use app\modules\chat\Module;
-use yii\widgets\ActiveForm; ?>
+ChatAsset::register($this);
+?>
+
+
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-3">
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title"><i class="far fa-comments"></i> Чаты</h3>
@@ -78,7 +87,7 @@ use yii\widgets\ActiveForm; ?>
             <!-- /.card-body -->
         </div>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-9">
         <div class="card card-outline">
             <div class="card-header">
                 <h3 class="card-title">Сообщения</h3>
@@ -89,7 +98,7 @@ use yii\widgets\ActiveForm; ?>
                         <i class="fas fa-times"></i></button>
                 </div>
             </div>
-            <div class="card card-prirary cardutline direct-chat direct-chat-primary">
+            <div class="card-body card-prirary cardutline direct-chat direct-chat-primary">
                 <div class="direct-chat-messages">
                     <!-- Message. Default to the left -->
                     <div class="direct-chat-msg">
@@ -125,21 +134,20 @@ use yii\widgets\ActiveForm; ?>
                 </div>
             </div>
             <div class="card-footer" style="display: block;">
-                <?php $form = ActiveForm::begin(); ?>
-                    <?= $form->field($model, 'message')->textInput() ?>
-                    <?= Html::submitButton(Yii::$app->params['btn']['send']['icon'].' '.Yii::t('app','Send'), ['class' => 'btn btn-primary']) ?>
-                <?php ActiveForm::end(); ?>
-
-                <form action="#" method="post">
-                    <div class="input-group">
-                        <input type="text" name="message" placeholder="<?=Module::t('module','Text Message')?>..." class="form-control">
-                        <span class="input-group-append">
-                      <button type="submit" class="btn btn-primary"></button>
+                <?php $form = ActiveForm::begin(
+                    [
+                        'id' => 'chat-form',
+                        'action' => Url::toRoute(['/chat/chat/send']),
+                        'fieldConfig' => ['options' => ['tag' => false]]
+                    ]
+                ); ?>
+                <div class="input-group">
+                    <?= $form->field($model, 'message', ['template' => '{input}']); ?>
+                    <span class="input-group-append">
+                        <?= Html::submitButton(Yii::$app->params['btn']['send']['icon'] . ' ' . Yii::t('app', 'Send'), ['class' => 'btn btn-primary', 'id' => 'btn-message-send']) ?>
                     </span>
-                    </div>
-                </form>
-
-
+                </div>
+                <?php ActiveForm::end(); ?>
             </div>
         </div>
     </div>

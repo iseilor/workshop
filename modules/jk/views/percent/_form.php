@@ -16,10 +16,10 @@ PercentAsset::register($this);
 
 // TODO: Разобраться с работой Assets
 
-/*
+
 $bundle = $this->getAssetManager()->getBundle('\app\modules\jk\assets\PercentAsset');
-<img src="<?php echo $bundle->baseUrl ?><!--/img/percent_form_family_income.png" />
-*/
+$img = $bundle->baseUrl.'/img/percent_form_family_income.png';
+
 ?>
 
 <div id="result">
@@ -33,27 +33,34 @@ $bundle = $this->getAssetManager()->getBundle('\app\modules\jk\assets\PercentAss
                 <h3 class="card-title"><i class="fas fa-calculator nav-icon"></i> Калькулятор суммы компенсации процентов</h3>
             </div>
 
-            <?php $form = ActiveForm::begin(['id' => 'percent-form']); ?>
+            <?php $form = ActiveForm::begin(
+                [
+                    'id' => 'percent-form',
+                ]
+            ); ?>
             <div class="card-body">
                 <div class="row">
+                    <h3>Инструкция по работе с калькулятором суммы компенсации процентов</h3>
                     <ul>
-                        <li>Обращаем Ваше внимание, что калькулятор считает максимально возможный размер материальной помощи, без учета решения жилищной комиссии и утвержденного Бюджета на
+                        <li>Обращаем Ваше внимание, что калькулятор считает максимально возможный размер материальной помощи, без учета решения жилищной комиссии и утвержденного бюджета на
                             соответствующий год
                         </li>
                         <li>Максимальный размер компенсации процентов не может быть больше 1 млн.руб. за весь период действия дополнительного соглашения
                         </li>
-                        <li>Нормативные <?= Html::a('документы', ['/jk/doc']) ?> по жилищной компании</li>
-                        <li>Часто задаваемые <?= Html::a('вопросы', ['/jk/faq']) ?> по жилищной компании</li>
-                        <li>Главный <?= Html::a('куратор', ['/jk/doc']) ?> жилищной компании</li>
+                        <li>Вы можете ознакомиться с <?= Html::a('нормативными документами', ['/jk/doc']) ?> по жилищной кампании</li>
+                        <li>Вы можете поискать ответ на ваш вопрос среди <?= Html::a('часто задаваемых вопросов', ['/jk/faq']) ?> по жилищной кампании</li>
+                        <li>Если вы не нашли нужную вам информацию, то вы всегда можете связаться с <?= Html::a('куратором', ['/jk/doc']) ?> по жилищной кампании и получить ответы на все
+                            интересующие вас вопросы
+                        </li>
                     </ul>
                     <div class="col-md-4">
                         <?php $tabindex = 1; ?>
-                        <?= $form->field($model, 'family_count')->textInput(['tabindex' => $tabindex++])->label($model->getAttributeLabels2('family_count')) ?>
-                        <?= $form->field($model, 'family_income')->textInput(['tabindex' => $tabindex++])->label($model->getAttributeLabels2('family_income')) ?>
-                        <?= $form->field($model, 'area_total')->textInput(['tabindex' => $tabindex++])->label($model->getAttributeLabels2('area_total')) ?>
-                        <?= $form->field($model, 'area_buy')->textInput(['tabindex' => $tabindex++])->label($model->getAttributeLabels2('area_buy')) ?>
+                        <?= $form->field($model, 'family_count')->textInput(['tabindex' => $tabindex++])->hint($model->attributeDescription()['family_count']) ?>
+                        <?= $form->field($model, 'family_income')->textInput(['tabindex' => $tabindex++])->hint($model->attributeDescription($img)['family_income']) ?>
+                        <?= $form->field($model, 'area_total')->textInput(['tabindex' => $tabindex++])->hint($model->attributeDescription()['area_total']) ?>
                     </div>
                     <div class="col-md-4">
+                        <?= $form->field($model, 'area_buy')->textInput(['tabindex' => $tabindex++])->label($model->getAttributeLabels2('area_buy')) ?>
                         <?= $form->field($model, 'cost_total')->textInput(['tabindex' => $tabindex++])->label($model->getAttributeLabels2('cost_total')) ?>
                         <?= $form->field($model, 'cost_user')->textInput(['tabindex' => $tabindex++])->label($model->getAttributeLabels2('cost_user')) ?>
                         <?= $form->field($model, 'bank_credit')->textInput(['tabindex' => $tabindex++])->label($model->getAttributeLabels2('bank_credit')) ?>

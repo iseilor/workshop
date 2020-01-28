@@ -2,6 +2,7 @@
 
 namespace app\modules\chat\models;
 
+use app\models\Model;
 use Yii;
 
 /**
@@ -19,7 +20,7 @@ use Yii;
  * @property int|null $status_id
  * @property string $message
  */
-class Chat extends \yii\db\ActiveRecord
+class Chat extends Model
 {
     /**
      * {@inheritdoc}

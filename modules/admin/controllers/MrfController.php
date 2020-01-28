@@ -1,18 +1,18 @@
 <?php
 
-namespace app\modules\chat\controllers;
+namespace app\modules\admin\controllers;
 
 use Yii;
-use app\modules\chat\models\Chat;
-use app\modules\chat\models\ChatSearch;
+use app\modules\admin\models\Mrf;
+use app\modules\admin\models\MrfSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * ChatController implements the CRUD actions for Chat model.
+ * MrfController implements the CRUD actions for Mrf model.
  */
-class ChatController extends Controller
+class MrfController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -30,12 +30,12 @@ class ChatController extends Controller
     }
 
     /**
-     * Lists all Chat models.
+     * Lists all Mrf models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ChatSearch();
+        $searchModel = new MrfSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class ChatController extends Controller
     }
 
     /**
-     * Displays a single Chat model.
+     * Displays a single Mrf model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -58,13 +58,13 @@ class ChatController extends Controller
     }
 
     /**
-     * Creates a new Chat model.
+     * Creates a new Mrf model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Chat();
+        $model = new Mrf();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -75,9 +75,8 @@ class ChatController extends Controller
         ]);
     }
 
-
     /**
-     * Updates an existing Chat model.
+     * Updates an existing Mrf model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -97,7 +96,7 @@ class ChatController extends Controller
     }
 
     /**
-     * Deletes an existing Chat model.
+     * Deletes an existing Mrf model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -111,28 +110,18 @@ class ChatController extends Controller
     }
 
     /**
-     * Finds the Chat model based on its primary key value.
+     * Finds the Mrf model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Chat the loaded model
+     * @return Mrf the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Chat::findOne($id)) !== null) {
+        if (($model = Mrf::findOne($id)) !== null) {
             return $model;
         }
 
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
-    }
-
-
-    // Отправить сообщение
-    public function actionSend(){
-        $model = new Chat();
-        $model->load(Yii::$app->request->post());
-        $model->save();
-
-        return 1;
     }
 }

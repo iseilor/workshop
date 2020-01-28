@@ -13,6 +13,9 @@ class PercentAsset extends AssetBundle
         = [
             'js/jk_percent.js',
         ];
+    public $css= [
+        'css/jk.css',
+    ];
     public $depends
         = [
             'yii\web\YiiAsset',

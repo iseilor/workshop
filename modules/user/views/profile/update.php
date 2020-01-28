@@ -56,7 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         '1' => 'Мужской',
                         '0' => 'Женский',
                     ],
-                    ['prompt' => 'Выбирите из списка']
+                    ['prompt' => 'Выберите из списка']
                 ); ?>
                 <?= $form->field($model, 'birth_date')->widget(
                     DatePicker::classname(),
