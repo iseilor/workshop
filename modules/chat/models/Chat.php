@@ -36,7 +36,7 @@ class Chat extends Model
     public function rules()
     {
         return [
-            [['created_at', 'created_by', 'message'], 'required'],
+            [['message'], 'required'],
             [['created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by', 'user_id', 'group_id', 'status_id'], 'integer'],
             [['message'], 'string'],
         ];
