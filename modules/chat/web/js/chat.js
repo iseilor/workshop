@@ -1,19 +1,32 @@
 $(document).ready(function () {
 
     // Отправить сообщение в чат
-    $('body').on('click', '#btn-message-send', function () {
-        var $yiiform = $('#chat-form');
+    $('#chat-form').on('beforeSubmit', function(){
         $.ajax({
-            url: $yiiform.attr('action'),
+            url: $(this).attr('action'),
             type: 'POST',
-            data: yiiform.serializeArray(),
+            data: $(this).serialize(),
             success: function (result) {
-                alert('123');
+                $('#chat-form').find('input').val('');
+                chatListUpdate();
+
             },
             error: function () {
-
+                alert('Ошибка')
             }
         });
         return false;
     });
 });
+
+function chatListUpdate(){
+    $.ajax({
+        url: '/chat/chat/list',
+        success: function (result) {
+            $('#chat-list').html(result);
+        },
+        error: function () {
+            alert('Ошибка')
+        }
+    });
+}

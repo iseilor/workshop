@@ -131,8 +131,19 @@ class ChatController extends Controller
     public function actionSend(){
         $model = new Chat();
         $model->load(Yii::$app->request->post());
+        $model->group_id = 1;
         $model->save();
 
         return 1;
+    }
+
+    // Получить список сообщений
+    public function actionList(){
+        $searchModel = new ChatSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        return $this->renderPartial('list', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
     }
 }

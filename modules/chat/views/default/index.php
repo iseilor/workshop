@@ -99,8 +99,9 @@ ChatAsset::register($this);
                 </div>
             </div>
             <div class="card-body card-prirary cardutline direct-chat direct-chat-primary">
-                <div class="direct-chat-messages">
-                    <!-- Message. Default to the left -->
+                <div class="direct-chat-messages" id="chat-list">
+
+
                     <div class="direct-chat-msg">
                         <div class="direct-chat-infos clearfix">
                             <span class="direct-chat-name float-left">Alexander Pierce</span>
@@ -114,9 +115,6 @@ ChatAsset::register($this);
                         </div>
                         <!-- /.direct-chat-text -->
                     </div>
-                    <!-- /.direct-chat-msg -->
-
-                    <!-- Message to the right -->
                     <div class="direct-chat-msg right">
                         <div class="direct-chat-infos clearfix">
                             <span class="direct-chat-name float-right">Вы</span>
@@ -130,7 +128,7 @@ ChatAsset::register($this);
                         </div>
                         <!-- /.direct-chat-text -->
                     </div>
-                    <!-- /.direct-chat-msg -->
+
                 </div>
             </div>
             <div class="card-footer" style="display: block;">
