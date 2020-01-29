@@ -98,7 +98,7 @@ class LoginForm extends Model
     // Проверяем пароль через AD
     public function validatePasswordAd()
     {
-        return Yii::$app->ad->auth()->attempt($this->userAD->mailnickname[0], $this->password);
+        return Yii::$app->ad->auth()->attempt($this->userAD->userprincipalname[0], $this->password);
     }
 
 

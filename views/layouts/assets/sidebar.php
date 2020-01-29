@@ -34,7 +34,7 @@ use yii\helpers\Url;
                     <?= Html::img($userPhotoPath, ['title' => Yii::$app->user->identity->username,'class'=>'img-circle elevation-2']) ?>
                 </div>
                 <div class="info">
-                        <?=Html::a( 'Мой профиль',Yii::$app->homeUrl.'user/profile',['title'=>Yii::$app->user->identity->username]);?>
+                        <?=Html::a( 'Мой кабинет',Yii::$app->homeUrl.'user/profile',['title'=>Yii::$app->user->identity->username]);?>
                 </div>
             </div>
         <?php endif ?>

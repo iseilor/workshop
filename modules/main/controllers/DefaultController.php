@@ -49,10 +49,6 @@ class DefaultController extends Controller
 
     public function actionIndex()
     {
-
-        //$un = 'aleksey.obedkin@rt.ru';
-        //$ldapObject = \Yii::$app->ad->search()->findBy('mail', $un);
-
         return $this->render('index');
     }
 

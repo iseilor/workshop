@@ -29,10 +29,10 @@ return [
                 'icon' => '<i class="fas fa-ruble-sign nav-icon"></i>'
             ],
             'percent' => [
-                'icon' => '<i class="fas fa-ruble-sign nav-icon"></i>'
+                'icon' => '<i class="fas fa-percent nav-icon"></i>'
             ],
             'zaim' => [
-                'icon' => '<i class="fas fa-ruble-sign nav-icon"></i>'
+                'icon' => '<i class="fas fa-wallet nav-icon"></i>'
             ],
             'doc' => [
                 'filePath' => 'files/jk/doc/',

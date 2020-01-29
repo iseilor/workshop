@@ -2,6 +2,7 @@
 
 namespace app\modules\user\controllers;
 
+use app\modules\jk\models\OrderSearch;
 use app\modules\jk\models\PercentSearch;
 use app\modules\jk\models\ZaimSearch;
 use app\modules\user\forms\PasswordChangeForm;
@@ -32,11 +33,21 @@ class ProfileController extends Controller
 
     public function actionIndex()
     {
-        $percentSearchModel = new PercentSearch();
-        $percentDataProvider = $percentSearchModel->search(Yii::$app->request->queryParams);
 
+        $userId = Yii::$app->user->identity->id;
+
+        // Проценты текущего пользователя
+        $percentSearchModel = new PercentSearch();
+        $percentDataProvider = $percentSearchModel->search(['PercentSearch'=>['created_by' => $userId]]);
+
+        // Займы текущего пользователя
         $zaimSearchModel = new ZaimSearch();
-        $zaimDataProvider = $zaimSearchModel->search(Yii::$app->request->queryParams);
+        $zaimDataProvider = $zaimSearchModel->search(['ZaimSearch'=>['created_by' => $userId]]);
+
+        // Заявки текущего пользователя
+        $orderSearchModel = new OrderSearch();
+        $orderDataProvider = $orderSearchModel->search(['OrderSearch'=>['created_by' => $userId]]);
+
 
         $model = $this->findModel();
 
@@ -68,10 +79,9 @@ class ProfileController extends Controller
             [
                 'model' => $model,
                 'experience' => $experience,
-                'percentSearchModel' => $percentSearchModel,
                 'percentDataProvider' => $percentDataProvider,
-                'zaimSearchModel' => $zaimSearchModel,
                 'zaimDataProvider' => $zaimDataProvider,
+                'orderDataProvider' => $orderDataProvider,
             ]
         );
     }
@@ -93,6 +103,7 @@ class ProfileController extends Controller
             //$model->img = UploadedFile::getInstance($model, 'img');
             //$model->upload();
             return $this->redirect(['index']);
+            //return $this->goBack();
         } else {
             return $this->render(
                 'update',

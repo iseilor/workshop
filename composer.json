@@ -26,7 +26,8 @@
         "kartik-v/yii2-field-range": "dev-master",
         "edvlerblog/yii2-adldap-module": "^6.0.0",
         "kartik-v/yii2-widget-fileinput": "dev-master",
-        "yiisoft/yii2-imagine": "^2.2"
+        "yiisoft/yii2-imagine": "^2.2",
+        "yiisoft/yii2-bootstrap4": "^2.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

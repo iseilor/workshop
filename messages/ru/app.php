@@ -17,7 +17,7 @@ return [
     'Please fill out the following fields to signup' => 'Для регистрации заполните пожалуйста следующе поля',
     'Remember Me' => 'Запомнить меня',
 
-    'Created At' => 'Когда создано',
+    'Created At' => 'Дата',
     'Created By' => 'Кем создано',
     'Updated At' => 'Когда изменено',
     'Updated By' => 'Кем изменено',

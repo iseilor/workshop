@@ -2,6 +2,7 @@
 namespace app\widgets;
 
 use Yii;
+use yii\bootstrap4\Widget;
 
 /**
  * Alert widget renders a message from session flash. All flash messages are displayed
@@ -22,7 +23,7 @@ use Yii;
  * @author Kartik Visweswaran <kartikv2@gmail.com>
  * @author Alexander Makarov <sam@rmcreative.ru>
  */
-class Alert extends \yii\bootstrap\Widget
+class Alert extends Widget
 {
     /**
      * @var array the alert types configuration for the flash messages.
@@ -59,16 +60,37 @@ class Alert extends \yii\bootstrap\Widget
             }
 
             foreach ((array) $flash as $i => $message) {
-                echo \yii\bootstrap\Alert::widget([
+                //TODO: Закоментировали этот Widget т.к. он переопределяет стили
+                /*echo \yii\bootstrap4\Alert::widget([
                     'body' => $message,
                     'closeButton' => $this->closeButton,
                     'options' => array_merge($this->options, [
                         'id' => $this->getId() . '-' . $type . '-' . $i,
                         'class' => $this->alertTypes[$type] . $appendClass,
                     ]),
-                ]);
-            }
+                ]);*/
 
+                $title = '';
+                switch ($type) {
+                    case 'success':
+                        $title = '<h5><i class="icon fas fa-check"></i> Успех!</h5>';
+                        break;
+                    case 'danger':
+                        $title = '<h5><i class="icon fas fa-ban"></i> Ошибка!</h5>';
+                        break;
+                    case 'warning':
+                        $title = '<h5><i class="icon fas fa-exclamation-triangle"></i> Предупреждение!</h5>';
+                        break;
+                    case 'info':
+                        $title = '<h5><i class="icon fas fa-info"></i> Информация!</h5>';
+                        break;
+                }
+
+                echo '<div class="alert alert-'.$type.' alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    '.$title.$message.'
+                </div>';
+            }
             $session->removeFlash($type);
         }
     }

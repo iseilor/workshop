@@ -94,12 +94,17 @@ class PercentController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        return $this->render(
-            'create',
-            [
-                'model' => $model,
-            ]
-        );
+        if ($user->getIsJKAccess()){
+            return $this->render(
+                'create',
+                [
+                    'model' => $model,
+                ]
+            );
+        }else{
+            Yii::$app->session->setFlash('warning', "Чтобы воспользоваться калькулятором компенсации процентов вам необходимо дозаполнить ваш профиль: возраст, пол и дата трудоустройства");
+            return $this->redirect(['/user/profile/update']);
+        }
     }
 
 

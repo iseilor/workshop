@@ -37,15 +37,14 @@ AppAssetAdminLTE::register($this);
     <?= $this->render('assets/navbar'); ?>
     <?= $this->render('assets/sidebar'); ?>
 
-    <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
+
         <div class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
                         <h1 class="m-0 text-dark"><?= $this->title; ?></h1>
-                    </div><!-- /.col -->
+                    </div>
                     <div class="col-sm-6">
                         <?= Breadcrumbs::widget(
                             [
@@ -61,15 +60,14 @@ AppAssetAdminLTE::register($this);
                                     ? $this->params['breadcrumbs'] : [],
                             ]
                         ) ?>
-                        <?= Alert::widget() ?>
-                    </div><!-- /.col -->
-                </div><!-- /.row -->
-            </div><!-- /.container-fluid -->
+                    </div>
+                </div>
+            </div>
         </div>
-        <!-- /.content-header -->
 
         <div class="content">
             <div class="container-fluid">
+                <?= Alert::widget() ?>
                 <?= $content ?>
             </div>
             <a id="back-to-top" href="#" class="btn btn-primary back-to-top" role="button" aria-label="Scroll to top">

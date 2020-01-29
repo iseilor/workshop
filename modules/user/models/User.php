@@ -322,4 +322,16 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     public function getPensionYears(){
         return intdiv(strtotime($this->getPensionDate())-mktime(),31556926);
     }
+
+    // Проверяем заполненность профиля, если нет, то просим дозаполнить
+    public function getIsJKAccess(){
+        if (isset($this->gender)
+            && isset($this->birth_date)
+            && isset($this->work_date)
+        ){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

@@ -31,6 +31,19 @@ class m000001_000006_create_jk_order_table extends Migration
                 'deleted_at' => Schema::TYPE_INTEGER,
                 'deleted_by' => Schema::TYPE_INTEGER,
 
+                'family_count' => Schema::TYPE_INTEGER,
+                'family_spouse' => Schema::TYPE_BOOLEAN,
+                'family_do'=> Schema::TYPE_BOOLEAN,
+                'family_work'=> Schema::TYPE_BOOLEAN,
+                'family_child_18'=> Schema::TYPE_INTEGER,
+                'family_child_23'=> Schema::TYPE_INTEGER,
+                'family_child'=> Schema::TYPE_INTEGER,
+
+                'percent_count'=> Schema::TYPE_INTEGER,
+                'percent_years'=> Schema::TYPE_INTEGER,
+                'zaim_count'=> Schema::TYPE_INTEGER,
+                'zaim_years'=> Schema::TYPE_INTEGER,
+
                 'progress'=> Schema::TYPE_INTEGER,
                 'status'=> Schema::TYPE_INTEGER,
                 'sum'=> Schema::TYPE_INTEGER
