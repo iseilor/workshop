@@ -48,7 +48,6 @@ class ProfileController extends Controller
         $orderSearchModel = new OrderSearch();
         $orderDataProvider = $orderSearchModel->search(['OrderSearch'=>['created_by' => $userId]]);
 
-
         $model = $this->findModel();
 
         // Фотография

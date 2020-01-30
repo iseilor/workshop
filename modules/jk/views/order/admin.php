@@ -43,36 +43,38 @@ $this->params['breadcrumbs'][] = $this->title;
                         'attribute' => 'id',
                     ],
                     [
-                        'label'=>'Дата',
+                        'label' => 'Дата',
                         'attribute' => 'created_at',
                         'format' => 'datetime'
                     ],
 
                     [
-                        'label'=>'Сотрудник',
+                        'label' => 'Сотрудник',
                         'format' => 'raw',
                         'value' => function ($data) {
-
-
+                            $img = Html::img($data->createdUser->photoPath, ['alt' => $data->createdUser->fio, 'class' => 'table-avatar']);
+                            $tooltip = $data->createdUser->tooltip;
                             return '<span style="float: left; margin-right: 0.5rem;">
-                                        <img alt="Avatar" class="table-avatar" src="/img/avatar.png">
+                                        ' . Html::a(
+                                    $img,
+                                    ['/user/' . $data->createdUser->id],
+                                    ['data-toggle' => 'tooltip', 'data-html' => 'true', 'data-original-title' => $tooltip]
+                                ) . '
                                     </span>
-                                    Объедкин Алексей Валерьевич<br>
-                                    <small>Инженер-программист</small>';
+                                    ' . Html::a($data->createdUser->fio,
+                                                ['/user/' . $data->createdUser->id],
+                                                ['data-toggle' => 'tooltip', 'data-html' => 'true', 'data-original-title' => $tooltip]) . '
+                                    <br><small>' . $data->createdUser->position . '</small>';
                         }
                     ],
                     [
                         'label' => 'Документы',
                         'format' => 'raw',
                         'value' => function () {
-                            return '<ul class="list-inline">
-                        <li class="list-inline-item">
-                            <img alt="Avatar" class="table-avatar" src="/img/avatar.png">
-                        </li>
-                        <li class="list-inline-item">
-                            <img alt="Avatar" class="table-avatar" src="/img/avatar.png">
-                        </li>
-                    </ul>';
+                            return '
+                            <a class="btn btn-danger" href="/jk/order/1" title="Паспорт" aria-label="Просмотр" data-pjax="0"><i class="fas fa-file-powerpoint"></i></a>
+                            <a class="btn btn-warning" href="/jk/order/1" title="Кредитный договор" aria-label="Просмотр" data-pjax="0"><i class="fas fa-file-invoice-dollar"></i></a>
+                            <a class="btn btn-success" href="/jk/order/1" title="График платежей" aria-label="Просмотр" data-pjax="0"><i class="fas fa-file-alt"></i></a>';
                         }
                     ],
                     [
@@ -82,14 +84,14 @@ $this->params['breadcrumbs'][] = $this->title;
                             return '<div class="progress progress-sm">
                                     <div class="progress-bar bg-green" 
                                     role="progressbar" 
-                                    aria-volumenow="'.$data['progress'].'" 
+                                    aria-volumenow="' . $data['progress'] . '" 
                                     aria-volumemin="0" 
                                     aria-volumemax="100" 
-                                    style="width: '.$data['progress'].'%">
+                                    style="width: ' . $data['progress'] . '%">
                             </div>
                         </div>
                         <small>
-                            '.$data['progress'].'% выполнено
+                            ' . $data['progress'] . '% выполнено
                         </small>';
                         }
                     ],
@@ -97,6 +99,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'label' => 'Статус',
                         'format' => 'raw',
                         'value' => function ($data) {
+                            $status = '<span class="badge badge-success">Проверка завершена</span>';
                             switch ($data['status']) {
                                 case 1:
                                     $status = '<span class="badge badge-success">Проверка завершена</span>';

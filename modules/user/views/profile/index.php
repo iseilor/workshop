@@ -30,10 +30,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 <p class="text-muted text-center"><?= $model->position; ?></p>
                 <ul class="list-group list-group-unbordered mb-3">
                     <li class="list-group-item">
-                        <b>ID</b> <a class="float-right"><?=Yii::$app->user->identity->id?></a>
+                        <b>ID</b> <a class="float-right"><?= Yii::$app->user->identity->id ?></a>
                     </li>
                     <li class="list-group-item">
-                        <b>Табельный номер</b> <a class="float-right"><?=Yii::$app->user->identity->id?></a>
+                        <b>Табельный номер</b> <a class="float-right"><?= Yii::$app->user->identity->id ?></a>
                     </li>
                     <li class="list-group-item">
                         <b>Дата рождения</b> <a class="float-right"><?= Yii::$app->formatter->format($model->birth_date, 'date'); ?></a>
@@ -73,18 +73,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active" id="tab-1-tab" data-toggle="pill" href="#tab-1" role="tab" aria-controls="tab-1">
-                            <?=Yii::$app->params['module']['jk']['percent']['icon']?> Проценты</a>
+                            <?= Yii::$app->params['module']['jk']['percent']['icon'] ?> Проценты</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="tab-2-tab" data-toggle="pill" href="#tab-2" role="tab" aria-controls="tab-2"
                            aria-selected="true">
-                            <?=Yii::$app->params['module']['jk']['zaim']['icon']?> Займы
+                            <?= Yii::$app->params['module']['jk']['zaim']['icon'] ?> Займы
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="tab-3-tab" data-toggle="pill" href="#tab-3" role="tab" aria-controls="tab-3"
                            aria-selected="true">
-                            <?=Yii::$app->params['module']['jk']['order']['icon']?> Заявки
+                            <?= Yii::$app->params['module']['jk']['order']['icon'] ?> Заявки
                         </a>
                     </li>
                 </ul>
@@ -102,7 +102,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                         'class' => LinkColumn::className(),
                                         'attribute' => 'id',
                                         'url' => function ($data) {
-                                            return Url::to(['/jk/percent/'.$data->id]);
+                                            return Url::to(['/jk/percent/' . $data->id]);
                                         },
                                     ],
                                     'created_at:datetime',
@@ -126,7 +126,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                         'class' => LinkColumn::className(),
                                         'attribute' => 'id',
                                         'url' => function ($data) {
-                                            return Url::to(['/jk/zaim/'.$data->id]);
+                                            return Url::to(['/jk/zaim/' . $data->id]);
                                         },
                                     ],
                                     'created_at:datetime',
@@ -141,6 +141,62 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
                     <div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby="tab-3-tab">
                         <h3>Ваши заявки по жилищной кампании</h3>
+                        <?= GridView::widget(
+                            [
+                                'dataProvider' => $orderDataProvider,
+                                'columns' => [
+                                    ['class' => 'yii\grid\SerialColumn'],
+                                    [
+                                        'class' => LinkColumn::className(),
+                                        'attribute' => 'id',
+                                        'url' => function ($data) {
+                                            return Url::to(['/jk/order/' . $data->id]);
+                                        },
+                                    ],
+                                    'created_at:datetime',
+                                    [
+                                        'label' => 'Прогресс',
+                                        'format' => 'raw',
+                                        'value' => function ($data) {
+                                            return '<div class="progress progress-sm">
+                                                            <div class="progress-bar bg-green" 
+                                                            role="progressbar" 
+                                                            aria-volumenow="' . $data['progress'] . '" 
+                                                            aria-volumemin="0" 
+                                                            aria-volumemax="100" 
+                                                            style="width: ' . $data['progress'] . '%">
+                                                    </div>
+                                                </div>
+                                                <small>
+                                                    ' . $data['progress'] . '% выполнено
+                                                </small>';
+                                                                }
+                                    ],
+                                    [
+                                        'label' => 'Статус',
+                                        'format' => 'raw',
+                                        'value' => function ($data) {
+                                            $status = '<span class="badge badge-success">Проверка завершена</span>';
+                                            switch ($data['status']) {
+                                                case 1:
+                                                    $status = '<span class="badge badge-success">Проверка завершена</span>';
+                                                    break;
+                                                case 2:
+                                                    $status = '<span class="badge badge-warning">Досыл документов</span>';
+                                                    break;
+                                                case 3:
+                                                    $status = '<span class="badge badge-danger">Неверные данные</span>';
+                                                    break;
+                                            }
+                                            return $status;
+                                        }
+                                    ],
+                                    [
+                                        'class' => ActionColumn::className(),
+                                    ]
+                                ],
+                            ]
+                        ) ?>
                     </div>
                 </div>
             </div>

@@ -2,6 +2,7 @@
 
 namespace app\modules\user\models;
 
+use app\modules\user\controllers\DefaultController;
 use app\modules\user\Module;
 use Yii;
 use yii\behaviors\TimestampBehavior;
@@ -63,8 +64,8 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             ['status', 'in', 'range' => array_keys(self::getStatusesArray())],
 
             [['img'], 'safe'],
-            [['img'], 'file', 'extensions'=>'jpg, png'],
-            [['img'], 'file', 'maxSize'=>'100000'],
+            [['img'], 'file', 'extensions' => 'jpg, png'],
+            [['img'], 'file', 'maxSize' => '100000'],
             //[['image_src_filename', 'image_web_filename'], 'string', 'max' => 255],
 
         ];
@@ -87,12 +88,12 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             'email' => Module::t('module', 'Email'),
             'status' => Module::t('module', 'Status'),
 
-            'fio'=>Module::t('module', 'FIO'),
-            'photo'=>Module::t('module','Photo'),
+            'fio' => Module::t('module', 'FIO'),
+            'photo' => Module::t('module', 'Photo'),
 
-            'position'=>Module::t('module', 'Position'),
-            'department'=>Module::t('module', 'Department'),
-            'phone_work'=>Module::t('module', 'Phone Work'),
+            'position' => Module::t('module', 'Position'),
+            'department' => Module::t('module', 'Department'),
+            'phone_work' => Module::t('module', 'Phone Work'),
 
             'birth_date' => Module::t('module', 'Birth Date'),
             'work_date' => Module::t('module', 'Work Date'),
@@ -224,10 +225,12 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
         if (!static::isPasswordResetTokenValid($token)) {
             return null;
         }
-        return static::findOne([
-            'password_reset_token' => $token,
-            'status' => self::STATUS_ACTIVE,
-        ]);
+        return static::findOne(
+            [
+                'password_reset_token' => $token,
+                'status' => self::STATUS_ACTIVE,
+            ]
+        );
     }
 
     /**
@@ -243,7 +246,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
         }
         $expire = Yii::$app->params['user.passwordResetTokenExpire'];
         $parts = explode('_', $token);
-        $timestamp = (int) end($parts);
+        $timestamp = (int)end($parts);
         return $timestamp + $expire >= time();
     }
 
@@ -297,41 +300,61 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     }
 
     // Возраст, кол-во полных лет
-    public function getYears(){
-        return intdiv(mktime()-$this->birth_date,31556926);
+    public function getYears()
+    {
+        return intdiv(mktime() - $this->birth_date, 31556926);
     }
 
     // Стаж, кол-во полных лет
-    public function getExperience(){
-        return intdiv(mktime()-$this->work_date,31556926);
+    public function getExperience()
+    {
+        return intdiv(mktime() - $this->work_date, 31556926);
     }
 
     // Дата выхода на пенсию
-    public function getPensionDate(){
-        $date='';
-        if ($this->gender==1){
-            $date=date('d.m.Y',$this->birth_date+60*31556926);
+    public function getPensionDate()
+    {
+        $date = '';
+        if ($this->gender == 1) {
+            $date = date('d.m.Y', $this->birth_date + 60 * 31556926);
         }
-        if ($this->gender===0){
-            $date=date('d.m.Y',$this->birth_date+55*31556926);
+        if ($this->gender === 0) {
+            $date = date('d.m.Y', $this->birth_date + 55 * 31556926);
         }
         return $date;
     }
 
     // Кол-во полных лет до пенсии
-    public function getPensionYears(){
-        return intdiv(strtotime($this->getPensionDate())-mktime(),31556926);
+    public function getPensionYears()
+    {
+        return intdiv(strtotime($this->getPensionDate()) - mktime(), 31556926);
     }
 
     // Проверяем заполненность профиля, если нет, то просим дозаполнить
-    public function getIsJKAccess(){
+    public function getIsJKAccess()
+    {
         if (isset($this->gender)
             && isset($this->birth_date)
             && isset($this->work_date)
-        ){
+        ) {
             return true;
-        }else{
+        } else {
             return false;
         }
+    }
+
+    // Получаем путь до фотографии пользователя
+    public function getPhotoPath()
+    {
+        $photoPath = Yii::$app->homeUrl . Yii::$app->params['module']['user']['photoDefault'];
+        if (isset($this->photo) && $this->photo) {
+            $photoPath = Yii::$app->homeUrl . Yii::$app->params['module']['user']['photoPath'] . $this->photo;
+        }
+        return $photoPath;
+    }
+
+    // Описание про пользователя
+    public function getTooltip(){
+       return Yii::$app->view->renderFile('@app/modules/user/views/default/tooltip.php',['model'=>$this]);
     }
 }
