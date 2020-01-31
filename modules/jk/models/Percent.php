@@ -74,12 +74,12 @@ class Percent extends \yii\db\ActiveRecord
 
 
             // Кол-во членов в семье
-            ['family_count', 'compare', 'compareValue' => 1, 'operator' => '>=', 'type' => 'number'],
-            ['family_count', 'compare', 'compareValue' => 10, 'operator' => '<=', 'type' => 'number'],
+            ['family_count', 'compare', 'compareValue' => 0, 'operator' => '>', 'type' => 'number'],
+            ['family_count', 'compare', 'compareValue' => 10, 'operator' => '<', 'type' => 'number'],
 
             // Доход на одного члена семьи
-            ['family_income', 'compare', 'compareValue' => 1000, 'operator' => '>=', 'type' => 'number'],
-            ['family_income', 'compare', 'compareValue' => 100000, 'operator' => '<=', 'type' => 'number'],
+            ['family_income', 'compare', 'compareValue' => 0, 'operator' => '>', 'type' => 'number'],
+            ['family_income', 'compare', 'compareValue' => 100000, 'operator' => '<', 'type' => 'number'],
 
             // Кол-во имеющегося жилья
             [['area_total'], 'match', 'pattern' => '/^\s*[-+]?[0-9]*[.,]?[0-9]+([eE][-+]?[0-9]+)?\s*$/'],
@@ -127,8 +127,8 @@ class Percent extends \yii\db\ActiveRecord
 
             // Процентная ставка
             [['percent_rate'], 'match', 'pattern' => '/^\s*[-+]?[0-9]*[.,]?[0-9]+([eE][-+]?[0-9]+)?\s*$/'],
-            ['percent_rate', 'compare', 'compareValue' => 1, 'operator' => '>=', 'type' => 'number'],
-            ['percent_rate', 'compare', 'compareValue' => 100, 'operator' => '<=', 'type' => 'number'],
+            ['percent_rate', 'compare', 'compareValue' => 0, 'operator' => '>', 'type' => 'number'],
+            ['percent_rate', 'compare', 'compareValue' => 100, 'operator' => '<', 'type' => 'number'],
         ];
     }
 
@@ -183,7 +183,7 @@ class Percent extends \yii\db\ActiveRecord
                                 - <strong>СД</strong> - среднемесячный доход на одного члена семьи за последние 12 месяцев;<br>
                                 - <strong>СДС</strong> - суммарный доход семьи за вычетом налоговых удержаний за последние 12 месяцев без учета районного коэффициента и северной надбавки;<br>
                                 - <strong>КЧС</strong> - количество членов семьи работника на дату подачи заявления об оказании помощи, включая работника.</br>',
-            'area_total' => 'Рассчитывается без учета приобретаемого жилья (с помощью Жилищной программы), и с учетом жилых помещений, по которым в течение 5 лет до подачи заявления осуществлялись сделки ',
+            'area_total' => 'Рассчитывается без учета приобретаемого жилья (с помощью Жилищной программы),<br>и с учетом жилых помещений, по которым в течение 5 лет до подачи заявления осуществлялись сделки ',
             'area_buy' => 'Поле должно быть не меньше 1',
             'cost_total' => 'Полная стоимость жилья = Собственные средства работника + Размер кредита Банка + Размер займа (если предоставлялся)',
             'cost_user' => 'Собственные средства работника',

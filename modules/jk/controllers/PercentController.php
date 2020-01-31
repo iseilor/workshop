@@ -3,11 +3,11 @@
 namespace app\modules\jk\controllers;
 
 use app\modules\user\models\User;
-use http\Client\Response;
 use Yii;
 use app\modules\jk\models\Percent;
 use app\modules\jk\models\PercentSearch;
 use yii\filters\AccessControl;
+use yii\httpclient\Response;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -90,6 +90,11 @@ class PercentController extends Controller
         $model->gender = $user->gender;
         $model->experience = $user->getExperience();
 
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return ActiveForm::validate($model);
+        }
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
@@ -118,6 +123,11 @@ class PercentController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return ActiveForm::validate($model);
+        }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

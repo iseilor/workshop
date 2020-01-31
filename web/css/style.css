@@ -41,3 +41,12 @@ a.btn-a{
     min-width: 100px;
     max-width: 100%;
 }
+
+.callout a{
+    color: #007bff;
+    text-decoration: none;
+}
+.callout a:hover{
+    color: #0056b3;
+    text-decoration: none;
+}
