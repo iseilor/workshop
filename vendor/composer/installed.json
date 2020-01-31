@@ -191,7 +191,7 @@
         "version_normalized": "3.3.11.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/RobinHerbots/Inputmask.git",
+            "url": "git@github.com:RobinHerbots/Inputmask.git",
             "reference": "5e670ad62f50c738388d4dcec78d2888505ad77b"
         },
         "dist": {
@@ -1025,8 +1025,8 @@
     },
     {
         "name": "illuminate/contracts",
-        "version": "v6.12.0",
-        "version_normalized": "6.12.0.0",
+        "version": "v6.13.1",
+        "version_normalized": "6.13.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/illuminate/contracts.git",
@@ -3426,17 +3426,17 @@
     },
     {
         "name": "symfony/console",
-        "version": "v4.4.3",
-        "version_normalized": "4.4.3.0",
+        "version": "v4.4.4",
+        "version_normalized": "4.4.4.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/console.git",
-            "reference": "e9ee09d087e2c88eaf6e5fc0f5c574f64d100e4f"
+            "reference": "f512001679f37e6a042b51897ed24a2f05eba656"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/console/zipball/e9ee09d087e2c88eaf6e5fc0f5c574f64d100e4f",
-            "reference": "e9ee09d087e2c88eaf6e5fc0f5c574f64d100e4f",
+            "url": "https://api.github.com/repos/symfony/console/zipball/f512001679f37e6a042b51897ed24a2f05eba656",
+            "reference": "f512001679f37e6a042b51897ed24a2f05eba656",
             "shasum": ""
         },
         "require": {
@@ -3469,7 +3469,7 @@
             "symfony/lock": "",
             "symfony/process": ""
         },
-        "time": "2020-01-10T21:54:01+00:00",
+        "time": "2020-01-25T12:44:29+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -3504,8 +3504,8 @@
     },
     {
         "name": "symfony/css-selector",
-        "version": "v4.4.3",
-        "version_normalized": "4.4.3.0",
+        "version": "v4.4.4",
+        "version_normalized": "4.4.4.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/css-selector.git",
@@ -3559,8 +3559,8 @@
     },
     {
         "name": "symfony/dom-crawler",
-        "version": "v4.4.3",
-        "version_normalized": "4.4.3.0",
+        "version": "v4.4.4",
+        "version_normalized": "4.4.4.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/dom-crawler.git",
@@ -3622,8 +3622,8 @@
     },
     {
         "name": "symfony/event-dispatcher",
-        "version": "v4.4.3",
-        "version_normalized": "4.4.3.0",
+        "version": "v4.4.4",
+        "version_normalized": "4.4.4.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/event-dispatcher.git",
@@ -3754,8 +3754,8 @@
     },
     {
         "name": "symfony/finder",
-        "version": "v4.4.3",
-        "version_normalized": "4.4.3.0",
+        "version": "v4.4.4",
+        "version_normalized": "4.4.4.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/finder.git",
@@ -4228,17 +4228,17 @@
     },
     {
         "name": "symfony/var-dumper",
-        "version": "v5.0.3",
-        "version_normalized": "5.0.3.0",
+        "version": "v5.0.4",
+        "version_normalized": "5.0.4.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/var-dumper.git",
-            "reference": "ccb1be566ae15f790020f917f06d1da0b04fe47b"
+            "reference": "923591cfb78a935f0c98968fedfad05bfda9d01f"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/var-dumper/zipball/ccb1be566ae15f790020f917f06d1da0b04fe47b",
-            "reference": "ccb1be566ae15f790020f917f06d1da0b04fe47b",
+            "url": "https://api.github.com/repos/symfony/var-dumper/zipball/923591cfb78a935f0c98968fedfad05bfda9d01f",
+            "reference": "923591cfb78a935f0c98968fedfad05bfda9d01f",
             "shasum": ""
         },
         "require": {
@@ -4260,7 +4260,7 @@
             "ext-intl": "To show region name in time zone dump",
             "symfony/console": "To use the ServerDumpCommand and/or the bin/var-dump-server script"
         },
-        "time": "2020-01-04T14:08:26+00:00",
+        "time": "2020-01-25T15:56:29+00:00",
         "bin": [
             "Resources/bin/var-dump-server"
         ],
@@ -4305,8 +4305,8 @@
     },
     {
         "name": "symfony/yaml",
-        "version": "v4.4.3",
-        "version_normalized": "4.4.3.0",
+        "version": "v4.4.4",
+        "version_normalized": "4.4.4.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/yaml.git",
@@ -4408,17 +4408,17 @@
     },
     {
         "name": "tightenco/collect",
-        "version": "v6.12.0",
-        "version_normalized": "6.12.0.0",
+        "version": "v6.13.0",
+        "version_normalized": "6.13.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/tightenco/collect.git",
-            "reference": "b0263d1e2931a272dcf091f1481291ea8ec3ec14"
+            "reference": "17046ff310e1c6a70c8c1cd3743b3631b7e76aee"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/tightenco/collect/zipball/b0263d1e2931a272dcf091f1481291ea8ec3ec14",
-            "reference": "b0263d1e2931a272dcf091f1481291ea8ec3ec14",
+            "url": "https://api.github.com/repos/tightenco/collect/zipball/17046ff310e1c6a70c8c1cd3743b3631b7e76aee",
+            "reference": "17046ff310e1c6a70c8c1cd3743b3631b7e76aee",
             "shasum": ""
         },
         "require": {
@@ -4430,7 +4430,7 @@
             "nesbot/carbon": "^2.23.0",
             "phpunit/phpunit": "^7.0"
         },
-        "time": "2020-01-14T17:16:45+00:00",
+        "time": "2020-01-28T19:25:21+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
