@@ -191,7 +191,7 @@
         "version_normalized": "3.3.11.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/RobinHerbots/Inputmask.git",
+            "url": "git@github.com:RobinHerbots/Inputmask.git",
             "reference": "5e670ad62f50c738388d4dcec78d2888505ad77b"
         },
         "dist": {
@@ -1025,8 +1025,8 @@
     },
     {
         "name": "illuminate/contracts",
-        "version": "v6.12.0",
-        "version_normalized": "6.12.0.0",
+        "version": "v6.13.1",
+        "version_normalized": "6.13.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/illuminate/contracts.git",
@@ -4408,17 +4408,17 @@
     },
     {
         "name": "tightenco/collect",
-        "version": "v6.12.0",
-        "version_normalized": "6.12.0.0",
+        "version": "v6.13.0",
+        "version_normalized": "6.13.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/tightenco/collect.git",
-            "reference": "b0263d1e2931a272dcf091f1481291ea8ec3ec14"
+            "reference": "17046ff310e1c6a70c8c1cd3743b3631b7e76aee"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/tightenco/collect/zipball/b0263d1e2931a272dcf091f1481291ea8ec3ec14",
-            "reference": "b0263d1e2931a272dcf091f1481291ea8ec3ec14",
+            "url": "https://api.github.com/repos/tightenco/collect/zipball/17046ff310e1c6a70c8c1cd3743b3631b7e76aee",
+            "reference": "17046ff310e1c6a70c8c1cd3743b3631b7e76aee",
             "shasum": ""
         },
         "require": {
@@ -4430,7 +4430,7 @@
             "nesbot/carbon": "^2.23.0",
             "phpunit/phpunit": "^7.0"
         },
-        "time": "2020-01-14T17:16:45+00:00",
+        "time": "2020-01-28T19:25:21+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -4962,6 +4962,58 @@
         "keywords": [
             "code generator",
             "gii",
+            "yii2"
+        ]
+    },
+    {
+        "name": "yiisoft/yii2-httpclient",
+        "version": "2.0.12",
+        "version_normalized": "2.0.12.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/yiisoft/yii2-httpclient.git",
+            "reference": "a66a2de6d7dd6d068da3f85a12589fedd0d76855"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/yiisoft/yii2-httpclient/zipball/a66a2de6d7dd6d068da3f85a12589fedd0d76855",
+            "reference": "a66a2de6d7dd6d068da3f85a12589fedd0d76855",
+            "shasum": ""
+        },
+        "require": {
+            "yiisoft/yii2": "~2.0.13"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "4.8.27|~5.7.21|^6.2"
+        },
+        "time": "2019-10-08T09:48:39+00:00",
+        "type": "yii2-extension",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "yii\\httpclient\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Paul Klimov",
+                "email": "klimov.paul@gmail.com"
+            }
+        ],
+        "description": "HTTP client extension for the Yii framework",
+        "keywords": [
+            "curl",
+            "http",
+            "httpclient",
             "yii2"
         ]
     },

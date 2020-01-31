@@ -70,6 +70,11 @@ $config = [
             'cookieValidationKey' => 'm71YjtB7X51bk2lS2s7sHiedVrgUg2SN',
         ],
 
+        /*'response' => [
+            'format' => yii\web\Response::FORMAT_JSON,
+            'charset' => 'UTF-8',
+        ],*/
+
         'formatter' => [
             'dateFormat' => 'php:d.m.Y',
             'datetimeFormat' => 'php:d.m.Y H:i:s',

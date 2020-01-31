@@ -31,6 +31,7 @@ class ComposerStaticInitecbe9ee047cdfe8ad4a5b4da8c33329a
             'yii\\swiftmailer\\' => 16,
             'yii\\jui\\' => 8,
             'yii\\imagine\\' => 12,
+            'yii\\httpclient\\' => 15,
             'yii\\gii\\' => 8,
             'yii\\faker\\' => 10,
             'yii\\debug\\' => 10,
@@ -148,6 +149,10 @@ class ComposerStaticInitecbe9ee047cdfe8ad4a5b4da8c33329a
         'yii\\imagine\\' => 
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2-imagine/src',
+        ),
+        'yii\\httpclient\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/yiisoft/yii2-httpclient/src',
         ),
         'yii\\gii\\' => 
         array (
