@@ -112,6 +112,19 @@ class PercentController extends Controller
         }
     }
 
+    public function actionValidateForm()
+    {
+        $i=10;
+        if (Yii::$app->request->isAjax) {
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+            $model = new Percent();
+            if($model->load(Yii::$app->request->post()))
+                return \yii\widgets\ActiveForm::validate($model);
+        }
+        throw new \yii\web\BadRequestHttpException('Bad request!');
+    }
+
 
     /**
      * Updates an existing Percent model.

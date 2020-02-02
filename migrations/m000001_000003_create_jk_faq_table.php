@@ -18,11 +18,11 @@ class m000001_000003_create_jk_faq_table extends Migration
             '{{%jk_faq}}',
             [
                 'id' => $this->primaryKey(),
-                'created_at' => Schema::TYPE_DATETIME . ' NOT NULL',
+                'created_at' => Schema::TYPE_INTEGER . ' NOT NULL',
                 'created_by' => Schema::TYPE_INTEGER . ' NOT NULL',
-                'updated_at' => Schema::TYPE_DATETIME,
+                'updated_at' => Schema::TYPE_INTEGER,
                 'updated_by' => Schema::TYPE_INTEGER,
-                'deleted_at' => Schema::TYPE_DATETIME,
+                'deleted_at' => Schema::TYPE_INTEGER,
                 'deleted_by' => Schema::TYPE_INTEGER,
                 'question' => Schema::TYPE_STRING . ' NOT NULL',
                 'answer' => Schema::TYPE_TEXT . ' NOT NULL',
@@ -41,7 +41,7 @@ class m000001_000003_create_jk_faq_table extends Migration
 
     public function addData()
     {
-        $now = new Expression('NOW()');
+        $now = strtotime(date('d.m.Y H:i:s'));
         return "INSERT INTO {{%jk_faq}} (`created_at`,`created_by`,`question`,`answer`)
         VALUES 
             ($now,1,

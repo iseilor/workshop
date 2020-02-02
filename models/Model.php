@@ -30,19 +30,26 @@ class Model extends ActiveRecord
     public function behaviors()
     {
         return [
-            'timestamp' => [
+            'TimestampBehavior' => [
                 'class' => TimestampBehavior::className(),
-                'createdAtAttribute' => 'created_at',
-                'updatedAtAttribute' => 'updated_at',
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
+                ],
                 'value' => function () {
                     return date('U');
                 },
             ],
-            [
+            'BlameableBehavior' => [
                 'class' => BlameableBehavior::className(),
-                'createdByAttribute' => 'created_by',
-                'updatedByAttribute' => 'updated_by',
-            ],
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_by'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_by'],
+                ],
+                'value' => function () {
+                    return \Yii::$app->user->identity->getId();
+                },
+            ]
         ];
     }
 }

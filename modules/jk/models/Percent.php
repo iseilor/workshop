@@ -84,7 +84,19 @@ class Percent extends \yii\db\ActiveRecord
             // Кол-во имеющегося жилья
             [['area_total'], 'match', 'pattern' => '/^\s*[-+]?[0-9]*[.,]?[0-9]+([eE][-+]?[0-9]+)?\s*$/'],
             ['area_total', 'compare', 'compareValue' => 0, 'operator' => '>=', 'type' => 'number'],
-            ['area_total', 'compare', 'compareValue' => 500, 'operator' => '<=', 'type' => 'number'],
+            ['area_total', 'compare', 'compareValue' => 1000, 'operator' => '<=', 'type' => 'number'],
+            [
+                ['area_total','family_count'],
+                function () {
+                    if ($this->area_total && $this->family_count){
+                        $KNP = Module::getKNP($this->family_count);
+                        if ($this->area_total>$KNP){
+                            $this->addError('area_total', "Площадь уже имеющегося у вас жилья превышает корпоративную норму, в вашем случае она состоявляет не более $KNP м2");
+                        }
+                    }
+
+                }
+            ],
 
             // Кол-во приобритаемого жилья
             [['area_buy'], 'match', 'pattern' => '/^\s*[-+]?[0-9]*[.,]?[0-9]+([eE][-+]?[0-9]+)?\s*$/'],

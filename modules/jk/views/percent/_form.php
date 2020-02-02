@@ -34,6 +34,8 @@ $img = $bundle->baseUrl.'/img/percent_form_family_income_black.png';
                 [
                     'id' => 'percent-form',
                     'enableAjaxValidation' => true,
+                    'validationUrl' => \yii\helpers\Url::to(['validate-form']),
+                    'validateOnBlur' => true
                 ]
             ); ?>
             <div class="card-body">
@@ -56,7 +58,11 @@ $img = $bundle->baseUrl.'/img/percent_form_family_income_black.png';
                         </ul>
                     </div>
                     <div class="col-md-4">
-                        <?= $form->field($model, 'family_count')->textInput(['data-toggle'=>"tooltip", 'title'=>$model->attributeDescription()['family_count']])?>
+                        <?= $form->field($model, 'family_count')->textInput([
+                            'data-toggle'=>"tooltip",
+                            'title'=>$model->attributeDescription()['family_count'],
+                            'onblur'=>"$(this).closest('form').yiiActiveForm('validateAttribute', 'percent-area_total');"
+                        ])?>
                         <?= $form->field($model, 'family_income')->textInput(['data-toggle'=>"tooltip", 'title'=>$model->attributeDescription($img)['family_income']]) ?>
                         <?= $form->field($model, 'area_total')->textInput(['data-toggle'=>"tooltip", 'title'=>$model->attributeDescription()['area_total']]) ?>
                         <?= $form->field($model, 'area_buy')->textInput(['data-toggle'=>"tooltip", 'title'=>$model->attributeDescription()['area_buy']]) ?>

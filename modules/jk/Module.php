@@ -28,4 +28,22 @@ class Module extends \yii\base\Module
         return Yii::t('modules/jk/' . $category, $message, $params, $language);
     }
 
+    /**
+     * КНП - Корпоративная норма площади, м2 в метрах
+     * @param $n - Кол-во членов семьи, шт
+     * @return float|int - Кол-во площади, м2
+     */
+    public static function getKNP($n){
+        switch ($n) {
+            case 1:
+                return 35;
+                break;
+            case 2:
+                return 50;
+                break;
+            default:
+                return $n*20;
+                break;
+        }
+    }
 }
