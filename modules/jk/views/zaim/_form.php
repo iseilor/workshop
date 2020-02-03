@@ -1,6 +1,7 @@
 <?php
 
 
+use app\modules\jk\Module;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -14,9 +15,11 @@ use yii\widgets\ActiveForm;
 /* @var $mins app\modules\jk\models\Min */
 
 use app\modules\jk\assets\ZaimAsset;
-
 ZaimAsset::register($this);
-$tabindex = 1;
+
+// TODO: Разобраться с работой Assets
+$bundle = $this->getAssetManager()->getBundle('\app\modules\jk\assets\PercentAsset');
+$img = $bundle->baseUrl . '/img/percent_form_family_income_black.png';
 ?>
 
 <div id="result"></div>
@@ -27,54 +30,74 @@ $tabindex = 1;
             <div class="card-header">
                 <h3 class="card-title"><i class="fas fa-calculator nav-icon"></i> Калькулятор займа</h3>
             </div>
-            <?php $form = ActiveForm::begin(['id' => 'zaim-form',]); ?>
+            <?php $form = ActiveForm::begin(
+                [
+                    'id' => 'zaim-form',
+                    'enableAjaxValidation' => true
+                ]
+            ); ?>
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <ul>
-                            <li>Обращаем ваше внимание, что калькулятор считает
-                                максимально возможный размер материальной помощи, без учёта решения жилищной
-                                комиссии и утверждённого бюджета на соответствующий год
-                            </li>
-                            <li>Максимальный размер займа не может быть больше 1 млн. руб.</li>
-                            <li>Нормативные <?= Html::a('документы', ['/jk/doc']) ?> по жилищной компании</li>
-                            <li>Часто задаваемые <?= Html::a('вопросы', ['/jk/faq']) ?> по жилищной компании</li>
-                            <li>Главный <?= Html::a('куратор', ['/jk/doc']) ?> жилищной компании</li>
-                        </ul>
+                        <div class="callout callout-info">
+                            <h5>Инструкция по работе с калькулятором суммы компенсации процентов</h5>
+                            <ul>
+                                <li>Начните заполнять форму и вы увидите <strong>подсказки</strong> и примеры заполнения по каждому полю</li>
+                                <li>Обращаем Ваше внимание, что калькулятор считает <strong>максимально возможный размер материальной помощи</strong>, без учета решения жилищной комиссии и
+                                    утвержденного
+                                    бюджета на
+                                    соответствующий год
+                                </li>
+                                <li>Максимальный размер займа не может быть больше <strong>1 млн.руб.</strong> за весь период действия дополнительного соглашения
+                                </li>
+                                <li>Вы можете ознакомиться с <?= Html::a('нормативными документами', ['/jk/doc']) ?> по жилищной кампании</li>
+                                <li>Вы можете поискать ответ на ваш вопрос среди <?= Html::a('часто задаваемых вопросов', ['/jk/faq']) ?> по жилищной кампании</li>
+                                <li>Если вы не нашли нужную вам информацию, то вы всегда можете связаться с <?= Html::a('куратором', ['/jk/doc']) ?> по жилищной кампании и получить ответы на все
+                                    интересующие вас вопросы
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="col-md-4">
-                        <?= $form->field($model, 'family_count')->textInput(['tabindex' => $tabindex++])->label($model->getAttributeLabels2('family_count')) ?>
-                        <?= $form->field($model, 'family_income')->textInput(['tabindex' => $tabindex++])->label($model->getAttributeLabels2('family_income')) ?>
-                        <?= $form->field($model, 'area_total')->textInput(['tabindex' => $tabindex++])->label($model->getAttributeLabels2('area_total')) ?>
+                        <?= $form->field($model, 'family_count')->textInput(['data-toggle' => "tooltip",'title' => $model->attributeDescription()['family_count']]) ?>
+                        <?= $form->field($model, 'family_income')->textInput(['data-toggle' => "tooltip",'title' => $model->attributeDescription($img)['family_income']]) ?>
+                        <?= $form->field($model, 'area_total')->textInput(['data-toggle' => "tooltip",'title' => $model->attributeDescription()['area_total']]) ?>
+                        <?= $form->field($model, 'area_buy')->textInput(['data-toggle' => "tooltip",'title' => $model->attributeDescription()['area_buy']]) ?>
                     </div>
                     <div class="col-md-4">
-                        <?= $form->field($model, 'area_buy')->textInput(['tabindex' => $tabindex++])->label($model->getAttributeLabels2('area_buy')) ?>
-                        <?= $form->field($model, 'cost_total')->textInput(['tabindex' => $tabindex++])->label($model->getAttributeLabels2('cost_total')) ?>
-                        <?= $form->field($model, 'cost_user')->textInput(['tabindex' => $tabindex++])->label($model->getAttributeLabels2('cost_user')) ?>
+                        <?= $form->field($model, 'cost_total')->textInput(['data-toggle' => "tooltip",'title' => $model->attributeDescription()['cost_total']]) ?>
+                        <?= $form->field($model, 'cost_user')->textInput(['data-toggle' => "tooltip",'title' => $model->attributeDescription()['cost_user']]) ?>
+                        <?= $form->field($model, 'bank_credit')->textInput(['data-toggle' => "tooltip",'title' => $model->attributeDescription()['bank_credit']]) ?>
+                        <?= $form->field($model, 'min_id')->dropDownList(ArrayHelper::map($mins, 'id', 'title'), ['prompt' => 'Выберите...'])->label($model->attributeDescription()['min_id']); ?>
                     </div>
 
                     <div class="col-md-4">
-                        <?= $form->field($model, 'bank_credit')->textInput(['tabindex' => $tabindex++])->label($model->getAttributeLabels2('bank_credit')) ?>
-                        <?= $form->field($model, 'min_id')->dropDownList(ArrayHelper::map($mins, 'id', 'title'), ['prompt' => 'Выберите...'])->label($model->getAttributeLabels2('min_id')); ?>
+                        <div class="callout callout-success bg-success color-palette">
+                            <h3>Результат расчёта</h3>
+                            <?php if ($model->id): ?>
+                                <ul>
+                                    <li><?= Module::t('module', 'Compensation Count') ?>: <strong><?= Yii::$app->formatter->asInteger($model->compensation_count); ?></strong></li>
+                                    <li><?= Module::t('module', 'Compensation Years') ?>: <strong><?= $model->compensation_years ?></strong></li>
+                                </ul>
+                            <?php else: ?>
+                                <p>Нажмите кнопку <strong>Рассчитать</strong></p>
+                            <?php endif; ?>
+                        </div>
                     </div>
-                    <div class="col-md-4 d-none">
-                        <?= $form->field($model, 'compensation_result')->textInput() ?>
-                        <?= $form->field($model, 'compensation_count')->textInput() ?>
-                        <?= $form->field($model, 'compensation_years')->textInput() ?>
-                    </div>
+
                 </div>
             </div>
             <div class="card-footer">
-                <?= Html::button(
+                <!--<?= Html::button(
                     '<i class="fas fa-calculator nav-icon"></i> Рассчитать',
                     [
                         'class' => 'btn btn-info',
                         'id' => 'zaim-calc',
                         'data' => ['url' => Url::home() . 'jk/zaim/calc']
                     ]
-                ) ?>
+                ) ?>-->
                 <?= Html::submitButton(
-                    '<i class="fas fa-save nav-icon"></i> Сохранить',
+                    '<i class="fas fa-calculator nav-icon"></i> Рассчитать',
                     ['class' => 'btn btn-success']
                 ) ?>
                 <?= Html::a(

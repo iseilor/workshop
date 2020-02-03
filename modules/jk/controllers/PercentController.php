@@ -2,6 +2,7 @@
 
 namespace app\modules\jk\controllers;
 
+use app\modules\jk\Module;
 use app\modules\user\models\User;
 use Yii;
 use app\modules\jk\models\Percent;
@@ -90,13 +91,15 @@ class PercentController extends Controller
         $model->gender = $user->gender;
         $model->experience = $user->getExperience();
 
+        // Ajax-валидация сложных полей
         if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
             return ActiveForm::validate($model);
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            Yii::$app->session->setFlash('success', "Расчёт успешно завершён");
+            return $this->redirect(['update', 'id' => $model->id]);
         }
 
         if ($user->getIsJKAccess()){
@@ -112,9 +115,8 @@ class PercentController extends Controller
         }
     }
 
-    public function actionValidateForm()
+    /*public function actionValidateForm()
     {
-        $i=10;
         if (Yii::$app->request->isAjax) {
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
@@ -123,7 +125,7 @@ class PercentController extends Controller
                 return \yii\widgets\ActiveForm::validate($model);
         }
         throw new \yii\web\BadRequestHttpException('Bad request!');
-    }
+    }*/
 
 
     /**
@@ -143,7 +145,8 @@ class PercentController extends Controller
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            Yii::$app->session->setFlash('success', "Расчёт успешно завершён");
+            return $this->redirect(['update', 'id' => $model->id]);
         }
 
         return $this->render(
@@ -206,40 +209,10 @@ class PercentController extends Controller
         }
 
         // Ставка компенсации процентов SKP
-        $SKP = 12;
-        if ($user->getYears() <= 35) {
-            if ($percent->family_income > 35000) {
-                $SKP = 6;
-            } elseif ($percent->family_income > 25000) {
-                $SKP = 8;
-            } elseif ($percent->family_income > 15000) {
-                $SKP = 10;
-            } else {
-                $SKP = 12;
-            }
-        } else {
-            if ($percent->family_income > 35000) {
-                $SKP = 4;
-            } elseif ($percent->family_income > 25000) {
-                $SKP = 6;
-            } elseif ($percent->family_income > 15000) {
-                $SKP = 8;
-            } else {
-                $SKP = 10;
-            }
-        }
+        $SKP = Module::getSKP($percent->family_income);
 
         // Корпоративная норма площади жилья KNP
-        $KNP = 35; // Корпоративная норма в метрах
-        if ($percent->family_count == 1) {
-            $KNP = 35;
-        } else {
-            if ($percent->family_count == 2) {
-                $KNP = 50;
-            } else {
-                $KNP = 20 * $percent->family_count;
-            }
-        }
+        $KNP = Module::getKNP($percent->family_count);
 
         // Коэффициент учёта корпоративной нормы KUKN
         $KUKN = $KNP / ($percent->area_buy - ($percent->cost_user / $percent->cost_total * $percent->area_buy));

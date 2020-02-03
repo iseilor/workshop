@@ -4,6 +4,7 @@ namespace app\modules\jk\models;
 
 use app\models\Model;
 use app\modules\jk\Module;
+use app\modules\user\models\User;
 use Yii;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
@@ -28,8 +29,7 @@ use yii\db\Expression;
  * @property int $cost_total
  * @property int $cost_user
  * @property int $bank_credit
- * @property int $rf_area
- * @property int|null $compensation_result
+ * @property int $min_id
  * @property int|null $compensation_count
  * @property int|null $compensation_years
  */
@@ -49,11 +49,93 @@ class Zaim extends Model
     public function rules()
     {
         return [
-            [['date_birth', 'gender', 'experience', 'family_count', 'family_income',
-                'area_total', 'area_buy', 'cost_total', 'cost_user', 'bank_credit','min_id'], 'required'],
+            [
+                ['date_birth', 'gender', 'experience', 'family_count', 'family_income', 'area_total', 'area_buy', 'cost_total', 'cost_user', 'bank_credit', 'min_id'],
+                'required'
+            ],
             [['created_at', 'updated_at', 'date_birth'], 'safe'],
-            [['created_by', 'updated_by', 'gender', 'experience', 'family_count',
-                'family_income', 'area_total', 'area_buy', 'cost_total', 'cost_user', 'bank_credit', 'compensation_result', 'compensation_count', 'compensation_years','min_id'], 'integer'],
+            [
+                [
+                    'created_by',
+                    'updated_by',
+                    'gender',
+                    'experience',
+                    'family_count',
+                    'family_income',
+                    'cost_total',
+                    'cost_user',
+                    'compensation_count',
+                    'compensation_years'
+                ],
+                'integer'
+            ],
+
+
+            // Кол-во членов в семье
+            ['family_count', 'compare', 'compareValue' => 0, 'operator' => '>', 'type' => 'number'],
+            ['family_count', 'compare', 'compareValue' => 10, 'operator' => '<=', 'type' => 'number'],
+
+            // Доход на одного члена семьи
+            ['family_income', 'compare', 'compareValue' => 0, 'operator' => '>', 'type' => 'number'],
+            ['family_income', 'compare', 'compareValue' => 100000, 'operator' => '<=', 'type' => 'number'],
+
+            // Прожиточный минимум в регионе покупки жилья
+            [
+                ['family_income', 'min_id'],
+                function () {
+                    if ($this->min_id && $this->family_income) {
+                        $min = Min::findOne($this->min_id);
+                        if ($this->family_income <= $min->min) {
+                            $this->addError('family_income', "Вы не можете указать среднемесячный доход ниже прожиточного минимума области, в которой приобритается квартира (".$min->title.": "
+                                                           .$min->min." руб.)");
+                        }
+                    }
+                }
+            ],
+
+
+            // Кол-во имеющегося жилья
+            [['area_total'], 'match', 'pattern' => '/^\s*[-+]?[0-9]*[.,]?[0-9]+([eE][-+]?[0-9]+)?\s*$/'],
+            ['area_total', 'compare', 'compareValue' => 0, 'operator' => '>=', 'type' => 'number'],
+            ['area_total', 'compare', 'compareValue' => 1000, 'operator' => '<=', 'type' => 'number'],
+            [
+                ['area_total', 'family_count'],
+                function () {
+                    if ($this->area_total && $this->family_count) {
+                        $KNP = Module::getKNP($this->family_count);
+                        if ($this->area_total > $KNP) {
+                            $this->addError('area_total', "Площадь уже имеющегося у вас жилья превышает корпоративную норму, в вашем случае она состоявляет не более $KNP м2");
+                        }
+                    }
+                }
+            ],
+
+            // Кол-во приобритаемого жилья
+            [['area_buy'], 'match', 'pattern' => '/^\s*[-+]?[0-9]*[.,]?[0-9]+([eE][-+]?[0-9]+)?\s*$/'],
+            ['area_buy', 'compare', 'compareValue' => 1, 'operator' => '>=', 'type' => 'number'],
+            ['area_buy', 'compare', 'compareValue' => 500, 'operator' => '<=', 'type' => 'number'],
+
+            // Полная стоимость жилья
+            ['cost_total', 'compare', 'compareValue' => 1, 'operator' => '>=', 'type' => 'number'],
+            ['cost_total', 'compare', 'compareValue' => 10000000, 'operator' => '<=', 'type' => 'number'],
+            [
+                ['cost_total', 'cost_user', 'bank_credit'],
+                function () {
+                    if ($this->cost_total <= ($this->cost_user + $this->bank_credit)) {
+                        $this->addError('cost_total', 'Полная стоимость жилья должна = собственные средства + ипотека + займ (который вам может выдать компания)');
+                    }
+                }
+            ],
+
+            // Собственные средства работника
+            ['cost_user', 'compare', 'compareValue' => 1, 'operator' => '>=', 'type' => 'number'],
+            ['cost_user', 'compare', 'compareValue' => 10000000, 'operator' => '<=', 'type' => 'number'],
+
+            // Размер кредита в банке
+            ['bank_credit', 'compare', 'compareValue' => 1, 'operator' => '>=', 'type' => 'number'],
+            ['bank_credit', 'compare', 'compareValue' => 10000000, 'operator' => '<=', 'type' => 'number'],
+
+
         ];
     }
 
@@ -81,9 +163,32 @@ class Zaim extends Model
             'cost_user' => Module::t('module', 'Cost User'),
             'bank_credit' => Module::t('module', 'Bank Credit'),
             'min_id' => Module::t('module', 'RF Area'),
-            'compensation_result' => Module::t('module', 'Compensation Result'),
             'compensation_count' => Module::t('module', 'Compensation Count'),
             'compensation_years' => Module::t('module', 'Compensation Years'),
+        ];
+    }
+
+    // Описание поля + картинка
+    public function attributeDescription($img = '')
+    {
+        return [
+            'family_count' => 'К членам семьи Работника для целей настоящего Положения относятся следующие лица:<br>
+                               - супруг (супруга);<br/>
+                               - несовершеннолетние дети Работника, проживающие с Работником;<br/>
+                               - несовершеннолетние дети супруга/и Работника, проживающие с Работником;<br/>
+                               - дети Работника старше 18 лет, ставшие инвалидами до достижения ими возраста 18 лет;<br/>
+                               - дети Работника в возрасте до 23 лет, обучающиеся в образовательных учреждениях по очной форме обучения.',
+            'family_income' => 'Порядок расчета среднемесячного дохода на одного члена семьи за последние 12 месяцев рассчитывается следующим образом:<br>
+                                <img src="' . $img . '" style="opacity: 0.5;"><br/>где:<br/>
+                                - <strong>СД</strong> - среднемесячный доход на одного члена семьи за последние 12 месяцев;<br>
+                                - <strong>СДС</strong> - суммарный доход семьи за вычетом налоговых удержаний за последние 12 месяцев без учета районного коэффициента и северной надбавки;<br>
+                                - <strong>КЧС</strong> - количество членов семьи работника на дату подачи заявления об оказании помощи, включая работника.</br>',
+            'area_total' => 'Рассчитывается без учета приобретаемого жилья (с помощью Жилищной программы),<br>и с учетом жилых помещений, по которым в течение 5 лет до подачи заявления осуществлялись сделки ',
+            'area_buy' => 'Поле должно быть не меньше 1',
+            'cost_total' => 'Полная стоимость жилья = Собственные средства работника + Размер кредита Банка + Размер займа (если предоставлялся)',
+            'cost_user' => 'Собственные средства работника',
+            'bank_credit' => 'Данные вводятся без учёта требуемого займа',
+            'min_id' => Module::t('module', 'RF Area'),
         ];
     }
 
@@ -114,7 +219,7 @@ class Zaim extends Model
             'cost_total' => 'Полная стоимость жилья = Собственные средства работника + Размер кредита Банка + Размер займа (если предоставлялся)',
             'cost_user' => 'Собственные средства работника',
             'bank_credit' => 'Данные вводятся без учёта требуемого займа',
-            'min_id' => Module::t('module', 'RF Area'),
+
         ];
     }
 
@@ -148,11 +253,78 @@ class Zaim extends Model
         ];
     }
 
-    public function getMin(){
+    public function getMin()
+    {
         return $this->hasOne(Min::className(), ['id' => 'min_id']);
     }
 
+    // Правим запятые на точки
+    public function beforeValidate()
+    {
+        // Заменяем запятые на точки
+        $this->area_total = str_replace(",", ".", $this->area_total);
+        $this->area_buy = str_replace(",", ".", $this->area_buy);
+        return parent::beforeValidate();
+    }
 
+    // Рассчитываем все ставки перед сохранением
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            $this->calc();
+            return true;
+        } else {
+            return false;
+        }
+    }
 
+    /**
+     * Основаня функация расчёта суммы и срока компенсации процентов
+     */
+    public function calc()
+    {
+        // Текущий пользователь
+        $user = User::findOne(Yii::$app->user->identity->getId());
+
+        // Прожиточный минимум в регионе покупки жилья
+        $min = Min::findOne($this->min_id);
+
+        // Максимальный срок займа
+        $this->compensation_years = 10;
+        if ($this->family_income > 35000) {
+            $this->compensation_years = 7;
+        } else {
+            if ($this->family_income > 25000) {
+                $this->compensation_years = 8;
+            } else {
+                if ($this->family_income > 15000) {
+                    $this->compensation_years = 10;
+                } else {
+                    $this->compensation_years = 10;
+                }
+            }
+        }
+
+        // Если лет до пенсии меньше, чем максимальный срок займа, то срок займа сокращаем до срока пенсии
+        $pensionYears = $user->getPensionYears();
+        if ($pensionYears < $this->compensation_years) {
+            $this->compensation_years = $pensionYears;
+        }
+
+        // Максимальный размер займа (Вариант 1)
+        $maxMoney1 = ($this->family_income - $min->min) * $this->family_count * $this->compensation_years * 12;
+
+        $KNP = Module::getKNP($this->family_count); // Корпоративная норма площади жилья KNP
+
+        // Коэффициент
+        $koef = $KNP / ($this->area_buy - $this->cost_user * $this->area_buy / $this->cost_total);
+        $koef = min($koef, 1);
+
+        // Максимальный размер займа (Вариант 2)
+        $maxMoney2 = $koef * ($this->cost_total - $this->cost_user - $this->bank_credit);
+
+        // Выбираем минимальное значение или 1 млн рублей
+        $this->compensation_count = min($maxMoney1, $maxMoney2, 1000000);
+    }
 
 }

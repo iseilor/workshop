@@ -47,9 +47,8 @@ class m000001_000002_create_jk_zaim_table extends Migration
 
             'min_id'=> Schema::TYPE_INTEGER . ' NOT NULL',
 
-            'compensation_result'=> Schema::TYPE_BOOLEAN,
-            'compensation_count'=> Schema::TYPE_INTEGER,
-            'compensation_years'=> Schema::TYPE_INTEGER
+            'compensation_count'=> Schema::TYPE_INTEGER . ' NOT NULL',
+            'compensation_years'=> Schema::TYPE_INTEGER. ' NOT NULL'
 
         ], $tableOptions);
     }

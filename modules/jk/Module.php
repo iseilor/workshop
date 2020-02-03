@@ -2,6 +2,7 @@
 
 namespace app\modules\jk;
 
+use app\modules\user\models\User;
 use Yii;
 
 /**
@@ -46,4 +47,35 @@ class Module extends \yii\base\Module
                 break;
         }
     }
+
+    // Ставка компенсации процентов SKP
+    public static function getSKP($moneyMonth){
+        $SKP = 12;
+        $user = User::findOne(Yii::$app->user->identity->getId());
+
+        // До 35 лет и после 35
+        if ($user->getYears() <= 35) {
+            if ($moneyMonth > 35000) {
+                $SKP = 6;
+            } elseif ($moneyMonth > 25000) {
+                $SKP = 8;
+            } elseif ($moneyMonth > 15000) {
+                $SKP = 10;
+            } else {
+                $SKP = 12;
+            }
+        } else {
+            if ($moneyMonth > 35000) {
+                $SKP = 4;
+            } elseif ($moneyMonth > 25000) {
+                $SKP = 6;
+            } elseif ($moneyMonth > 15000) {
+                $SKP = 8;
+            } else {
+                $SKP = 10;
+            }
+        }
+        return $SKP;
+    }
+
 }

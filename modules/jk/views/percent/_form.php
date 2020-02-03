@@ -1,6 +1,7 @@
 <?php
 
 use app\modules\jk\models\Percent;
+use app\modules\jk\Module;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
@@ -11,12 +12,11 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 
 use app\modules\jk\assets\PercentAsset;
-
 PercentAsset::register($this);
 
 // TODO: Разобраться с работой Assets
 $bundle = $this->getAssetManager()->getBundle('\app\modules\jk\assets\PercentAsset');
-$img = $bundle->baseUrl.'/img/percent_form_family_income_black.png';
+$img = $bundle->baseUrl . '/img/percent_form_family_income_black.png';
 
 ?>
 
@@ -34,8 +34,8 @@ $img = $bundle->baseUrl.'/img/percent_form_family_income_black.png';
                 [
                     'id' => 'percent-form',
                     'enableAjaxValidation' => true,
-                    'validationUrl' => \yii\helpers\Url::to(['validate-form']),
-                    'validateOnBlur' => true
+                    //'validationUrl' => \yii\helpers\Url::to(['validate-form']),
+                    //'validateOnBlur' => true
                 ]
             ); ?>
             <div class="card-body">
@@ -44,8 +44,9 @@ $img = $bundle->baseUrl.'/img/percent_form_family_income_black.png';
                         <h5>Инструкция по работе с калькулятором суммы компенсации процентов</h5>
                         <ul>
                             <li>Начните заполнять форму и вы увидите <strong>подсказки</strong> и примеры заполнения по каждому полю</li>
-                            <li>Обращаем Ваше внимание, что калькулятор считает <strong>максимально возможный размер материальной помощи</strong>, без учета решения жилищной комиссии и утвержденного
-                                    бюджета на
+                            <li>Обращаем Ваше внимание, что калькулятор считает <strong>максимально возможный размер материальной помощи</strong>, без учета решения жилищной комиссии и
+                                утвержденного
+                                бюджета на
                                 соответствующий год
                             </li>
                             <li>Максимальный размер компенсации процентов не может быть больше <strong>1 млн.руб.</strong> за весь период действия дополнительного соглашения
@@ -58,70 +59,73 @@ $img = $bundle->baseUrl.'/img/percent_form_family_income_black.png';
                         </ul>
                     </div>
                     <div class="col-md-4">
-                        <?= $form->field($model, 'family_count')->textInput([
-                            'data-toggle'=>"tooltip",
-                            'title'=>$model->attributeDescription()['family_count'],
-                            'onblur'=>"$(this).closest('form').yiiActiveForm('validateAttribute', 'percent-area_total');"
-                        ])?>
-                        <?= $form->field($model, 'family_income')->textInput(['data-toggle'=>"tooltip", 'title'=>$model->attributeDescription($img)['family_income']]) ?>
-                        <?= $form->field($model, 'area_total')->textInput(['data-toggle'=>"tooltip", 'title'=>$model->attributeDescription()['area_total']]) ?>
-                        <?= $form->field($model, 'area_buy')->textInput(['data-toggle'=>"tooltip", 'title'=>$model->attributeDescription()['area_buy']]) ?>
+                        <?= $form->field($model, 'family_count')->textInput(['data-toggle' => "tooltip",'title' => $model->attributeDescription()['family_count']]) ?>
+                        <?= $form->field($model, 'family_income')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription($img)['family_income']]) ?>
+                        <?= $form->field($model, 'area_total')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['area_total']]) ?>
+                        <?= $form->field($model, 'area_buy')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['area_buy']]) ?>
                     </div>
                     <div class="col-md-4">
 
-                        <?= $form->field($model, 'cost_total')->textInput(['data-toggle'=>"tooltip", 'title'=>$model->attributeDescription()['area_buy']])?>
-                        <?= $form->field($model, 'cost_user')->textInput(['data-toggle'=>"tooltip", 'title'=>$model->attributeDescription()['cost_user']])?>
-                        <?= $form->field($model, 'bank_credit')->textInput(['data-toggle'=>"tooltip", 'title'=>$model->attributeDescription()['bank_credit']])?>
+                        <?= $form->field($model, 'cost_total')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['cost_total']]) ?>
+                        <?= $form->field($model, 'cost_user')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['cost_user']]) ?>
+                        <?= $form->field($model, 'bank_credit')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['bank_credit']]) ?>
+                        <?= $form->field($model, 'loan')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['loan']]) ?>
                     </div>
                     <div class="col-md-4">
-                        <?= $form->field($model, 'loan')->textInput(['data-toggle'=>"tooltip", 'title'=>$model->attributeDescription()['loan']])?>
-                        <?= $form->field($model, 'percent_count')->textInput(['data-toggle'=>"tooltip", 'title'=>$model->attributeDescription()['percent_count']])?>
-                        <?= $form->field($model, 'percent_rate')->textInput(['data-toggle'=>"tooltip", 'title'=>$model->attributeDescription()['percent_rate']])?>
-                    </div>
-                    <div class="col-md-4 d-none">
-                        <?= $form->field($model, 'compensation_result')->textInput() ?>
-                        <?= $form->field($model, 'compensation_count')->textInput() ?>
-                        <?= $form->field($model, 'compensation_years')->textInput() ?>
+                        <?= $form->field($model, 'percent_count')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['percent_count']]) ?>
+                        <?= $form->field($model, 'percent_rate')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['percent_rate']]) ?>
+
+                        <div class="callout callout-success bg-success color-palette">
+                            <h3>Результат расчёта</h3>
+                            <?php if ($model->id): ?>
+                                <ul>
+                                    <li><?= Module::t('module', 'Compensation Count') ?>: <strong><?= Yii::$app->formatter->asInteger($model->compensation_count); ?></strong></li>
+                                    <li><?= Module::t('module', 'Compensation Years') ?>: <strong><?= $model->compensation_years ?></strong></li>
+                                </ul>
+                            <?php else: ?>
+                                <p>Нажмите кнопку <strong>Рассчитать</strong></p>
+                            <?php endif; ?>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="card-footer">
-                <?= Html::button(
+                <!--<?= Html::button(
                     '<i class="fas fa-calculator nav-icon"></i> Рассчитать',
                     [
                         'class' => 'btn btn-info',
                         'id' => 'percent-calc',
                         'data' => ['url' => Url::home() . 'jk/percent/calc']
                     ]
-                ) ?>
+                ) ?>-->
                 <?= Html::submitButton(
-                    '<i class="fas fa-save nav-icon"></i> Сохранить результат',
+                    '<i class="fas fa-calculator nav-icon"></i> Рассчитать',
                     [
                         'class' => 'btn btn-success',
                         'id' => 'btn-save',
                     ]
                 ) ?>
-                <?= Html::a(
+                <!--<?= Html::submitButton(
+                    '<i class="fas fa-calculator nav-icon"></i> Отправить расчёт на email',
+                    [
+                        'class' => 'btn btn-info',
+                        'id' => 'btn-save',
+                    ]
+                ) ?>
+                    <?= Html::submitButton(
+                    '<i class="fas fa-calculator nav-icon"></i> Оформить заявку на помощь',
+                    [
+                        'class' => 'btn btn-info',
+                        'id' => 'btn-save',
+                    ]
+                ) ?>
+                    <?= Html::a(
                     Yii::t('app', '<i class="fas fa-ban"></i> Отмена'),
                     ['create'],
                     ['class' => 'btn btn-default float-right']
-                ) ?>
+                ) ?>-->
             </div>
             <?php ActiveForm::end(); ?>
         </div>
     </div>
 </div>
-
-
-<?php
-/*
-$js = <<<JS
-    $('form').on('beforeSubmit', function(){
-        alert('Работает!');
-        return false;
-    });
-JS;
-
-$this->registerJs($js);
-*/
-?>

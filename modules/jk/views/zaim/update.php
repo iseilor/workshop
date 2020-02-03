@@ -8,11 +8,9 @@ use yii\helpers\Html;
 
 $this->title = Yii::t(
     'app',
-    'Update Zaim: {name}',
-    [
-        'name' => $model->id,
-    ]
+    'Калькулятор займа'
 );
+
 $icon = '<i class="fas fa-calculator nav-icon"></i>';
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Zaims'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];

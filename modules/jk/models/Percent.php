@@ -3,6 +3,7 @@
 namespace app\modules\jk\models;
 
 use app\modules\jk\Module;
+use app\modules\user\models\User;
 use Yii;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
@@ -30,7 +31,6 @@ use yii\db\Expression;
  * @property int|null $loan
  * @property int|null $percent_count
  * @property float|null $percent_rate
- * @property int|null $compensation_result
  * @property int|null $compensation_count
  * @property int|null $compensation_years
  */
@@ -65,7 +65,6 @@ class Percent extends \yii\db\ActiveRecord
                     'bank_credit',
                     'loan',
                     'percent_count',
-                    'compensation_result',
                     'compensation_count',
                     'compensation_years'
                 ],
@@ -75,11 +74,11 @@ class Percent extends \yii\db\ActiveRecord
 
             // Кол-во членов в семье
             ['family_count', 'compare', 'compareValue' => 0, 'operator' => '>', 'type' => 'number'],
-            ['family_count', 'compare', 'compareValue' => 10, 'operator' => '<', 'type' => 'number'],
+            ['family_count', 'compare', 'compareValue' => 10, 'operator' => '<=', 'type' => 'number'],
 
             // Доход на одного члена семьи
             ['family_income', 'compare', 'compareValue' => 0, 'operator' => '>', 'type' => 'number'],
-            ['family_income', 'compare', 'compareValue' => 100000, 'operator' => '<', 'type' => 'number'],
+            ['family_income', 'compare', 'compareValue' => 100000, 'operator' => '<=', 'type' => 'number'],
 
             // Кол-во имеющегося жилья
             [['area_total'], 'match', 'pattern' => '/^\s*[-+]?[0-9]*[.,]?[0-9]+([eE][-+]?[0-9]+)?\s*$/'],
@@ -135,7 +134,7 @@ class Percent extends \yii\db\ActiveRecord
 
             // Сумма процентов
             ['percent_count', 'compare', 'compareValue' => 1, 'operator' => '>=', 'type' => 'number'],
-            ['loan', 'compare', 'compareValue' => 10000000, 'operator' => '<=', 'type' => 'number'],
+            ['percent_count', 'compare', 'compareValue' => 10000000, 'operator' => '<=', 'type' => 'number'],
 
             // Процентная ставка
             [['percent_rate'], 'match', 'pattern' => '/^\s*[-+]?[0-9]*[.,]?[0-9]+([eE][-+]?[0-9]+)?\s*$/'],
@@ -264,6 +263,7 @@ class Percent extends \yii\db\ActiveRecord
     }
 
 
+    // Правим запятые на точки
     public function beforeValidate()
     {
         // Заменяем запятые на точки
@@ -271,5 +271,55 @@ class Percent extends \yii\db\ActiveRecord
         $this->area_total = str_replace(",", ".", $this->area_total);
         $this->area_buy = str_replace(",", ".", $this->area_buy);
         return parent::beforeValidate();
+    }
+
+    // Рассчитываем все ставки перед сохранением
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+
+            $this->calc();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Основаня функация расчёта суммы и срока компенсации процентов
+     */
+    public function calc(){
+
+        // Максимальный срок компенсации процентов (кол-во лет до пенсии, но не более 10 лет)
+        $user = User::findOne(Yii::$app->user->identity->getId());
+        $this->compensation_years = $user->getPensionYears();
+
+        if ($this->compensation_years > 10) {
+            $this->compensation_years = 10;
+        }
+        if ($this->compensation_years < 0) {
+            $this->compensation_years = 0;
+        }
+
+        $SKP = Module::getSKP($this->family_income); // Ставка компенсации процентов SKP
+        $KNP = Module::getKNP($this->family_count); // Корпоративная норма площади жилья KNP
+
+        // Если покупается больше нормы, то сотруднику возмещается только норма
+        $areaBuy = $this->area_buy;
+        if ($areaBuy>$KNP){
+            $areaBuy = $KNP;
+        }
+
+        $KUKN = $KNP / ($areaBuy - ($this->cost_user / $this->cost_total * $areaBuy)); // Коэффициент учёта корпоративной нормы KUKN
+
+        if ($KUKN > 1) {
+            $KUKN = 1;
+        }
+        $this->compensation_count = round($this->percent_count * ($SKP / $this->percent_rate) * $KUKN, -3);
+
+        // Не больше 1 млн.руб
+        if ($this->compensation_count>1000000){
+            $this->compensation_count = 1000000;
+        }
     }
 }

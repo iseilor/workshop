@@ -17,7 +17,7 @@ class PercentSearch extends Percent
     public function rules()
     {
         return [
-            [['id', 'created_by', 'updated_by', 'gender', 'experience', 'family_count', 'family_income', 'area_total', 'area_buy', 'cost_total', 'cost_user', 'bank_credit', 'loan', 'percent_count', 'percent_rate', 'compensation_result', 'compensation_count', 'compensation_years'], 'integer'],
+            [['id', 'created_by', 'updated_by', 'gender', 'experience', 'family_count', 'family_income', 'area_total', 'area_buy', 'cost_total', 'cost_user', 'bank_credit', 'loan', 'percent_count', 'percent_rate', 'compensation_count', 'compensation_years'], 'integer'],
             [['created_at', 'updated_at', 'date_birth', 'date_pension'], 'safe'],
         ];
     }
@@ -76,7 +76,6 @@ class PercentSearch extends Percent
             'loan' => $this->loan,
             'percent_count' => $this->percent_count,
             'percent_rate' => $this->percent_rate,
-            'compensation_result' => $this->compensation_result,
             'compensation_count' => $this->compensation_count,
             'compensation_years' => $this->compensation_years,
         ]);
