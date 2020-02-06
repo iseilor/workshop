@@ -64,6 +64,11 @@ $this->params['breadcrumbs'][] = $this->title;
                         'language' => 'ru',
                         'dateFormat' => 'dd.MM.yyyy',
                         'options' => ['class' => 'form-control'],
+                        'clientOptions' => [
+                            'changeMonth' => true,
+                            'yearRange' => '1950:2002',
+                            'changeYear' => true
+                        ],
                     ]
                 ) ?>
 
@@ -79,6 +84,11 @@ $this->params['breadcrumbs'][] = $this->title;
                         'language' => 'ru',
                         'dateFormat' => 'dd.MM.yyyy',
                         'options' => ['class' => 'form-control'],
+                        'clientOptions' => [
+                            'changeMonth' => true,
+                            'yearRange' => '2000:2020',
+                            'changeYear' => true
+                        ],
                     ]
                 ) ?>
             </div>

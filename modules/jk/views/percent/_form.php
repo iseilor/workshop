@@ -12,6 +12,7 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 
 use app\modules\jk\assets\PercentAsset;
+
 PercentAsset::register($this);
 
 // TODO: Разобраться с работой Assets
@@ -35,7 +36,7 @@ $img = $bundle->baseUrl . '/img/percent_form_family_income_black.png';
                     'id' => 'percent-form',
                     'enableAjaxValidation' => true,
                     //'validationUrl' => \yii\helpers\Url::to(['validate-form']),
-                    //'validateOnBlur' => true
+                    'validateOnBlur' => true
                 ]
             ); ?>
             <div class="card-body">
@@ -59,7 +60,7 @@ $img = $bundle->baseUrl . '/img/percent_form_family_income_black.png';
                         </ul>
                     </div>
                     <div class="col-md-4">
-                        <?= $form->field($model, 'family_count')->textInput(['data-toggle' => "tooltip",'title' => $model->attributeDescription()['family_count']]) ?>
+                        <?= $form->field($model, 'family_count')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['family_count']]) ?>
                         <?= $form->field($model, 'family_income')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription($img)['family_income']]) ?>
                         <?= $form->field($model, 'area_total')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['area_total']]) ?>
                         <?= $form->field($model, 'area_buy')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['area_buy']]) ?>
@@ -67,9 +68,27 @@ $img = $bundle->baseUrl . '/img/percent_form_family_income_black.png';
                     <div class="col-md-4">
 
                         <?= $form->field($model, 'cost_total')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['cost_total']]) ?>
-                        <?= $form->field($model, 'cost_user')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['cost_user']]) ?>
-                        <?= $form->field($model, 'bank_credit')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['bank_credit']]) ?>
-                        <?= $form->field($model, 'loan')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['loan']]) ?>
+                        <?= $form->field($model, 'cost_user')->textInput(
+                            [
+                                'data-toggle' => "tooltip",
+                                'title' => $model->attributeDescription()['cost_user'],
+                                'onblur' => "$(this).closest('form').yiiActiveForm('validateAttribute', 'percent-cost_total');"
+                            ]
+                        ) ?>
+                        <?= $form->field($model, 'bank_credit')->textInput(
+                            [
+                                'data-toggle' => "tooltip",
+                                'title' => $model->attributeDescription()['bank_credit'],
+                                'onblur' => "$(this).closest('form').yiiActiveForm('validateAttribute', 'percent-cost_total');"
+                            ]
+                        ) ?>
+                        <?= $form->field($model, 'loan')->textInput(
+                            [
+                                'data-toggle' => "tooltip",
+                                'title' => $model->attributeDescription()['loan'],
+                                'onblur' => "$(this).closest('form').yiiActiveForm('validateAttribute', 'percent-cost_total');"
+                            ]
+                        ) ?>
                     </div>
                     <div class="col-md-4">
                         <?= $form->field($model, 'percent_count')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['percent_count']]) ?>
