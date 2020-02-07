@@ -78,7 +78,7 @@ class Percent extends \yii\db\ActiveRecord
 
             // Доход на одного члена семьи
             ['family_income', 'compare', 'compareValue' => 0, 'operator' => '>', 'type' => 'number'],
-            ['family_income', 'compare', 'compareValue' => 100000, 'operator' => '<=', 'type' => 'number'],
+            ['family_income', 'compare', 'compareValue' => 1000000, 'operator' => '<=', 'type' => 'number'],
 
             // Кол-во имеющегося жилья
             [['area_total'], 'match', 'pattern' => '/^\s*[-+]?[0-9]*[.,]?[0-9]+([eE][-+]?[0-9]+)?\s*$/'],
@@ -204,7 +204,7 @@ class Percent extends \yii\db\ActiveRecord
             'cost_user' => 'Собственные средства работника',
             'bank_credit' => 'Данные вводятся без учёта требуемого займа',
             'loan' => 'Размер займа от компании, если он ранее предоставлялся',
-            'percent_count' => 'Полная сумма по переплаченным процентам за кредит',
+            'percent_count' => 'По полю указывается сумма процентов (без учета основного долга)<br/>за текущий год согласно Графику платежей Ипотечного договора',
             'percent_rate' => 'Процентная ставка в банке'
         ];
     }

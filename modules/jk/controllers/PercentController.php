@@ -98,7 +98,6 @@ class PercentController extends Controller
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->session->setFlash('success', "Расчёт успешно завершён");
             return $this->redirect(['update', 'id' => $model->id]);
         }
 
@@ -115,17 +114,7 @@ class PercentController extends Controller
         }
     }
 
-    /*public function actionValidateForm()
-    {
-        if (Yii::$app->request->isAjax) {
-            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
-            $model = new Percent();
-            if($model->load(Yii::$app->request->post()))
-                return \yii\widgets\ActiveForm::validate($model);
-        }
-        throw new \yii\web\BadRequestHttpException('Bad request!');
-    }*/
 
 
     /**
@@ -145,7 +134,6 @@ class PercentController extends Controller
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->session->setFlash('success', "Расчёт успешно завершён");
             return $this->redirect(['update', 'id' => $model->id]);
         }
 

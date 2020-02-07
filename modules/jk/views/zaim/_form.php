@@ -40,7 +40,7 @@ $img = $bundle->baseUrl . '/img/percent_form_family_income_black.png';
                 <div class="row">
                     <div class="col-md-12">
                         <div class="callout callout-info">
-                            <h5>Инструкция по работе с калькулятором суммы компенсации процентов</h5>
+                            <h5>Инструкция по работе с калькулятором займа</h5>
                             <ul>
                                 <li>Начните заполнять форму и вы увидите <strong>подсказки</strong> и примеры заполнения по каждому полю</li>
                                 <li>Обращаем Ваше внимание, что калькулятор считает <strong>максимально возможный размер материальной помощи</strong>, без учета решения жилищной комиссии и
@@ -62,29 +62,29 @@ $img = $bundle->baseUrl . '/img/percent_form_family_income_black.png';
                         <?= $form->field($model, 'family_count')->textInput(['data-toggle' => "tooltip",'title' => $model->attributeDescription()['family_count']]) ?>
                         <?= $form->field($model, 'family_income')->textInput(['data-toggle' => "tooltip",'title' => $model->attributeDescription($img)['family_income']]) ?>
                         <?= $form->field($model, 'area_total')->textInput(['data-toggle' => "tooltip",'title' => $model->attributeDescription()['area_total']]) ?>
-                        <?= $form->field($model, 'area_buy')->textInput(['data-toggle' => "tooltip",'title' => $model->attributeDescription()['area_buy']]) ?>
                     </div>
                     <div class="col-md-4">
+                        <?= $form->field($model, 'area_buy')->textInput(['data-toggle' => "tooltip",'title' => $model->attributeDescription()['area_buy']]) ?>
                         <?= $form->field($model, 'cost_total')->textInput(['data-toggle' => "tooltip",'title' => $model->attributeDescription()['cost_total']]) ?>
                         <?= $form->field($model, 'cost_user')->textInput(['data-toggle' => "tooltip",'title' => $model->attributeDescription()['cost_user']]) ?>
+                    </div>
+                    <div class="col-md-4">
                         <?= $form->field($model, 'bank_credit')->textInput(['data-toggle' => "tooltip",'title' => $model->attributeDescription()['bank_credit']]) ?>
                         <?= $form->field($model, 'min_id')->dropDownList(ArrayHelper::map($mins, 'id', 'title'), ['prompt' => 'Выберите...'])->label($model->attributeDescription()['min_id']); ?>
                     </div>
 
-                    <div class="col-md-4">
+                    <?php if ($model->id): ?>
+                    <div class="col-md-12">
                         <div class="callout callout-success bg-success color-palette">
                             <h3>Результат расчёта</h3>
-                            <?php if ($model->id): ?>
                                 <ul>
-                                    <li><?= Module::t('module', 'Compensation Count') ?>: <strong><?= Yii::$app->formatter->asInteger($model->compensation_count); ?></strong></li>
-                                    <li><?= Module::t('module', 'Compensation Years') ?>: <strong><?= $model->compensation_years ?></strong></li>
+                                    <li>Максимальный размер займа, руб: <strong><?= Yii::$app->formatter->asInteger($model->compensation_count); ?></strong></li>
+                                    <li>Максимльный срок займа, лет: <strong><?= $model->compensation_years ?></strong></li>
                                 </ul>
-                            <?php else: ?>
-                                <p>Нажмите кнопку <strong>Рассчитать</strong></p>
-                            <?php endif; ?>
+                            <small>* Полученная сумма и срок возврата материальной помощи являются предварительными, и могут быть скорректированы по решению жилищной комиссии</small>
                         </div>
                     </div>
-
+                    <?php endif; ?>
                 </div>
             </div>
             <div class="card-footer">

@@ -93,19 +93,21 @@ $img = $bundle->baseUrl . '/img/percent_form_family_income_black.png';
                     <div class="col-md-4">
                         <?= $form->field($model, 'percent_count')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['percent_count']]) ?>
                         <?= $form->field($model, 'percent_rate')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['percent_rate']]) ?>
-
-                        <div class="callout callout-success bg-success color-palette">
-                            <h3>Результат расчёта</h3>
-                            <?php if ($model->id): ?>
-                                <ul>
-                                    <li><?= Module::t('module', 'Compensation Count') ?>: <strong><?= Yii::$app->formatter->asInteger($model->compensation_count); ?></strong></li>
-                                    <li><?= Module::t('module', 'Compensation Years') ?>: <strong><?= $model->compensation_years ?></strong></li>
-                                </ul>
-                            <?php else: ?>
-                                <p>Нажмите кнопку <strong>Рассчитать</strong></p>
-                            <?php endif; ?>
-                        </div>
                     </div>
+
+                    <?php if ($model->id): ?>
+                        <div class="col-md-12">
+                            <div class="callout callout-success bg-success color-palette">
+                                <h3>Результат расчёта</h3>
+                                <ul>
+                                    <li>Максимальный размер компенсации процентов, руб: <strong><?= Yii::$app->formatter->asInteger($model->compensation_count); ?></strong></li>
+                                    <li>Максимальный срок компенсации процентов, лет: <strong><?= $model->compensation_years ?></strong></li>
+                                </ul>
+                                <small>* Полученная сумма и срок возврата материальной помощи являются предварительными, и могут быть скорректированы по решению жилищной комиссии</small>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+
                 </div>
             </div>
             <div class="card-footer">
@@ -137,12 +139,12 @@ $img = $bundle->baseUrl . '/img/percent_form_family_income_black.png';
                         'class' => 'btn btn-info',
                         'id' => 'btn-save',
                     ]
-                ) ?>
+                ) ?>-->
                     <?= Html::a(
                     Yii::t('app', '<i class="fas fa-ban"></i> Отмена'),
                     ['create'],
                     ['class' => 'btn btn-default float-right']
-                ) ?>-->
+                ) ?>
             </div>
             <?php ActiveForm::end(); ?>
         </div>

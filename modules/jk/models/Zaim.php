@@ -77,10 +77,10 @@ class Zaim extends Model
 
             // Доход на одного члена семьи
             ['family_income', 'compare', 'compareValue' => 0, 'operator' => '>', 'type' => 'number'],
-            ['family_income', 'compare', 'compareValue' => 100000, 'operator' => '<=', 'type' => 'number'],
+            ['family_income', 'compare', 'compareValue' => 1000000, 'operator' => '<=', 'type' => 'number'],
 
             // Прожиточный минимум в регионе покупки жилья
-            [
+            /*[
                 ['family_income', 'min_id'],
                 function () {
                     if ($this->min_id && $this->family_income) {
@@ -91,7 +91,7 @@ class Zaim extends Model
                         }
                     }
                 }
-            ],
+            ],*/
 
             // Кол-во имеющегося жилья
             [['area_total'], 'match', 'pattern' => '/^\s*[-+]?[0-9]*[.,]?[0-9]+([eE][-+]?[0-9]+)?\s*$/'],
@@ -133,8 +133,6 @@ class Zaim extends Model
             // Размер кредита в банке
             ['bank_credit', 'compare', 'compareValue' => 1, 'operator' => '>=', 'type' => 'number'],
             ['bank_credit', 'compare', 'compareValue' => 10000000, 'operator' => '<=', 'type' => 'number'],
-
-
         ];
     }
 
@@ -316,6 +314,10 @@ class Zaim extends Model
 
         // Максимальный размер займа (Вариант 1)
         $maxMoney1 = ($this->family_income - $min->min) * $this->family_count * $this->compensation_years * 12;
+        if ($maxMoney1<0){
+            $maxMoney1 = 0; // Значит он указал доход на семью ниже прожиточного минимума, займ ему не положен
+            $this->compensation_years = 0;
+        }
 
         $KNP = Module::getKNP($this->family_count); // Корпоративная норма площади жилья KNP
 
