@@ -120,8 +120,8 @@ class Zaim extends Model
             [
                 ['cost_total', 'cost_user', 'bank_credit'],
                 function () {
-                    if ($this->cost_total <= ($this->cost_user + $this->bank_credit)) {
-                        $this->addError('cost_total', 'Полная стоимость жилья должна = собственные средства + ипотека + займ (который вам может выдать компания)');
+                    if ($this->cost_total - $this->cost_user - $this->bank_credit>1000000) {
+                        $this->addError('cost_total', 'Полная стоимость жилья должна = собственные средства + ипотека + займ (который вам может выдать компания, но не более 1 млн.руб)');
                     }
                 }
             ],
@@ -312,13 +312,14 @@ class Zaim extends Model
             $this->compensation_years = $pensionYears;
         }
 
-        // Максимальный размер займа (Вариант 1)
+        // Максимальный размер займа (Вариант 1, ск-ко они могут откладывать ежемесячно)
         $maxMoney1 = ($this->family_income - $min->min) * $this->family_count * $this->compensation_years * 12;
         if ($maxMoney1<0){
             $maxMoney1 = 0; // Значит он указал доход на семью ниже прожиточного минимума, займ ему не положен
             $this->compensation_years = 0;
         }
 
+        // Вариант 2 -------------------------------------------------------------------------------------------------
         $KNP = Module::getKNP($this->family_count); // Корпоративная норма площади жилья KNP
 
         // Коэффициент
@@ -327,6 +328,9 @@ class Zaim extends Model
 
         // Максимальный размер займа (Вариант 2)
         $maxMoney2 = $koef * ($this->cost_total - $this->cost_user - $this->bank_credit);
+
+        // Вариант 3 -------------------------------------------------------------------------------------------------
+        $p =
 
         // Выбираем минимальное значение или 1 млн рублей
         $this->compensation_count = min($maxMoney1, $maxMoney2, 1000000);

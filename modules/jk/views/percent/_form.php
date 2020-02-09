@@ -35,7 +35,6 @@ $img = $bundle->baseUrl . '/img/percent_form_family_income_black.png';
                 [
                     'id' => 'percent-form',
                     'enableAjaxValidation' => true,
-                    //'validationUrl' => \yii\helpers\Url::to(['validate-form']),
                     'validateOnBlur' => true
                 ]
             ); ?>
@@ -82,6 +81,9 @@ $img = $bundle->baseUrl . '/img/percent_form_family_income_black.png';
                                 'onblur' => "$(this).closest('form').yiiActiveForm('validateAttribute', 'percent-cost_total');"
                             ]
                         ) ?>
+
+                    </div>
+                    <div class="col-md-4">
                         <?= $form->field($model, 'loan')->textInput(
                             [
                                 'data-toggle' => "tooltip",
@@ -89,8 +91,6 @@ $img = $bundle->baseUrl . '/img/percent_form_family_income_black.png';
                                 'onblur' => "$(this).closest('form').yiiActiveForm('validateAttribute', 'percent-cost_total');"
                             ]
                         ) ?>
-                    </div>
-                    <div class="col-md-4">
                         <?= $form->field($model, 'percent_count')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['percent_count']]) ?>
                         <?= $form->field($model, 'percent_rate')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['percent_rate']]) ?>
                     </div>

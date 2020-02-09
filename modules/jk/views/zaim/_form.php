@@ -15,6 +15,7 @@ use yii\widgets\ActiveForm;
 /* @var $mins app\modules\jk\models\Min */
 
 use app\modules\jk\assets\ZaimAsset;
+
 ZaimAsset::register($this);
 
 // TODO: Разобраться с работой Assets
@@ -33,7 +34,8 @@ $img = $bundle->baseUrl . '/img/percent_form_family_income_black.png';
             <?php $form = ActiveForm::begin(
                 [
                     'id' => 'zaim-form',
-                    'enableAjaxValidation' => true
+                    'enableAjaxValidation' => true,
+                    'validateOnBlur' => true,
                 ]
             ); ?>
             <div class="card-body">
@@ -59,31 +61,39 @@ $img = $bundle->baseUrl . '/img/percent_form_family_income_black.png';
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <?= $form->field($model, 'family_count')->textInput(['data-toggle' => "tooltip",'title' => $model->attributeDescription()['family_count']]) ?>
-                        <?= $form->field($model, 'family_income')->textInput(['data-toggle' => "tooltip",'title' => $model->attributeDescription($img)['family_income']]) ?>
-                        <?= $form->field($model, 'area_total')->textInput(['data-toggle' => "tooltip",'title' => $model->attributeDescription()['area_total']]) ?>
+                        <?= $form->field($model, 'family_count')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['family_count']]) ?>
+                        <?= $form->field($model, 'family_income')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription($img)['family_income']]) ?>
+                        <?= $form->field($model, 'area_total')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['area_total']]) ?>
                     </div>
                     <div class="col-md-4">
-                        <?= $form->field($model, 'area_buy')->textInput(['data-toggle' => "tooltip",'title' => $model->attributeDescription()['area_buy']]) ?>
-                        <?= $form->field($model, 'cost_total')->textInput(['data-toggle' => "tooltip",'title' => $model->attributeDescription()['cost_total']]) ?>
-                        <?= $form->field($model, 'cost_user')->textInput(['data-toggle' => "tooltip",'title' => $model->attributeDescription()['cost_user']]) ?>
+                        <?= $form->field($model, 'area_buy')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['area_buy']]) ?>
+                        <?= $form->field($model, 'cost_total')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['cost_total']]) ?>
+                        <?= $form->field($model, 'cost_user')->textInput([
+                            'data-toggle' => "tooltip",
+                            'title' => $model->attributeDescription()['cost_user'],
+                            'onblur' => "$(this).closest('form').yiiActiveForm('validateAttribute', 'zaim-cost_total');",
+                        ]) ?>
                     </div>
                     <div class="col-md-4">
-                        <?= $form->field($model, 'bank_credit')->textInput(['data-toggle' => "tooltip",'title' => $model->attributeDescription()['bank_credit']]) ?>
+                        <?= $form->field($model, 'bank_credit')->textInput([
+                            'data-toggle' => "tooltip",
+                            'title' => $model->attributeDescription()['bank_credit'],
+                            'onblur' => "$(this).closest('form').yiiActiveForm('validateAttribute', 'zaim-cost_total');",
+                        ]) ?>
                         <?= $form->field($model, 'min_id')->dropDownList(ArrayHelper::map($mins, 'id', 'title'), ['prompt' => 'Выберите...'])->label($model->attributeDescription()['min_id']); ?>
                     </div>
 
                     <?php if ($model->id): ?>
-                    <div class="col-md-12">
-                        <div class="callout callout-success bg-success color-palette">
-                            <h3>Результат расчёта</h3>
+                        <div class="col-md-12">
+                            <div class="callout callout-success bg-success color-palette">
+                                <h3>Результат расчёта</h3>
                                 <ul>
                                     <li>Максимальный размер займа, руб: <strong><?= Yii::$app->formatter->asInteger($model->compensation_count); ?></strong></li>
                                     <li>Максимльный срок займа, лет: <strong><?= $model->compensation_years ?></strong></li>
                                 </ul>
-                            <small>* Полученная сумма и срок возврата материальной помощи являются предварительными, и могут быть скорректированы по решению жилищной комиссии</small>
+                                <small>* Полученная сумма и срок возврата материальной помощи являются предварительными, и могут быть скорректированы по решению жилищной комиссии</small>
+                            </div>
                         </div>
-                    </div>
                     <?php endif; ?>
                 </div>
             </div>
@@ -93,7 +103,7 @@ $img = $bundle->baseUrl . '/img/percent_form_family_income_black.png';
                     [
                         'class' => 'btn btn-info',
                         'id' => 'zaim-calc',
-                        'data' => ['url' => Url::home() . 'jk/zaim/calc']
+                        'data' => ['url' => Url::home() . 'jk/zaim/calc'],
                     ]
                 ) ?>-->
                 <?= Html::submitButton(
