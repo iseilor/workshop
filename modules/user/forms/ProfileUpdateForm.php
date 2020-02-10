@@ -13,9 +13,7 @@ class ProfileUpdateForm extends Model
 {
     public $email;
     public $birth_date;
-    public $work_date;
     public $gender;
-    public $experience;
 
     public $fio;
     public $photo;
@@ -23,6 +21,8 @@ class ProfileUpdateForm extends Model
     public $position;
     public $department;
     public $phone_work;
+    //public $work_date;
+    public $experience;
 
     public $passport_seria;
     public $passport_number;
@@ -44,7 +44,11 @@ class ProfileUpdateForm extends Model
 
         $this->email = $user->email;
         $this->birth_date = $user->birth_date;
-        $this->work_date = $user->work_date;
+
+        // Стаж
+        //$this->work_date = $user->work_date;
+        $this->experience = $user->getExperience();
+
         $this->gender = $user->gender;
         $this->fio = $user->fio;
 
@@ -64,7 +68,7 @@ class ProfileUpdateForm extends Model
     public function rules()
     {
         return [
-            [['gender','birth_date'], 'required'],
+            [['gender','birth_date','experience'], 'required'],
             [
                 'email',
                 'unique',
@@ -75,7 +79,9 @@ class ProfileUpdateForm extends Model
             ['email', 'string', 'max' => 255],
 
             [['birth_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'birth_date'],
-            [['work_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'work_date'],
+            /*[['work_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'work_date'],*/
+            ['experience', 'compare', 'compareValue' => 0, 'operator' => '>=', 'type' => 'integer'],
+            ['experience', 'compare', 'compareValue' => 50, 'operator' => '<=', 'type' => 'integer'],
 
             [['photo'], 'safe'],
             [['photo'], 'file', 'extensions'=>'jpg, png'],
@@ -90,7 +96,11 @@ class ProfileUpdateForm extends Model
 
             $user->email = $this->email;
             $user->birth_date = $this->birth_date;
-            $user->work_date = $this->work_date;
+
+            // Стаж
+            //$user->work_date = $this->work_date;
+            $user->work_date =  mktime() - $this->experience* 31556926;
+
             $user->gender = $this->gender;
             $user->fio = $this->fio;
 
@@ -133,5 +143,15 @@ class ProfileUpdateForm extends Model
     public function attributeLabels()
     {
         return User::attributeLabels();
+    }
+
+    // Описание поля + картинка
+    public function attributeDescription()
+    {
+        return [
+            'experience' => 'Необходимо указать кол-во полных лет вашего общего стажа<br/>
+                            с учётом переводов из других подразделение и филиалов<br/>
+                            Если ваш стаж менее 1 года, то необходимо указать 0'
+        ];
     }
 }

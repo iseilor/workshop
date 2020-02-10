@@ -94,18 +94,25 @@ class ZaimController extends Controller
         // Прожиточный минимум
         $mins = Min::find()->orderBy('title')->all();
 
-        if ($user->getIsJKAccess()){
-            return $this->render(
-                'create',
-                [
-                    'model' => $model,
-                    'mins' => $mins
-                ]
-            );
+        if ($model->experience<1){
+            Yii::$app->session->setFlash('warning', "К сожалению, вы не можете воспользоваться Жилищной Программой, т.к. ваш общий стаж работы в компании менее 1 года");
+            return $this->redirect(['/main/default/index']);
         }else{
-            Yii::$app->session->setFlash('warning', "Чтобы воспользоваться калькулятором займа вам необходимо дозаполнить ваш профиль: возраст, пол и дата трудоустройства");
-            return $this->redirect(['/user/profile/update']);
+            if ($user->getIsJKAccess()){
+                return $this->render(
+                    'create',
+                    [
+                        'model' => $model,
+                        'mins' => $mins
+                    ]
+                );
+            }else{
+                Yii::$app->session->setFlash('warning', "Чтобы воспользоваться калькулятором займа вам необходимо дозаполнить ваш профиль: возраст, пол и дата трудоустройства");
+                return $this->redirect(['/user/profile/update']);
+            }
         }
+
+
 
 
     }

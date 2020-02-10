@@ -78,19 +78,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= $form->field($model, 'position')->textInput(['disabled' => 'disabled']) ?>
                 <?= $form->field($model, 'department')->textInput(['disabled' => 'disabled']) ?>
                 <?= $form->field($model, 'phone_work')->textInput(['disabled' => 'disabled']) ?>
-                <?= $form->field($model, 'work_date')->widget(
-                    DatePicker::classname(),
-                    [
-                        'language' => 'ru',
-                        'dateFormat' => 'dd.MM.yyyy',
-                        'options' => ['class' => 'form-control'],
-                        'clientOptions' => [
-                            'changeMonth' => true,
-                            'yearRange' => '2000:2020',
-                            'changeYear' => true
-                        ],
-                    ]
-                ) ?>
+                <?= $form->field($model, 'experience')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['experience']]) ?>
             </div>
             <div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby="tab-3-tab">
                 <?= $form->field($model, 'passport_seria')->textInput() ?>

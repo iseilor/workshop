@@ -97,6 +97,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
 
             'birth_date' => Module::t('module', 'Birth Date'),
             'work_date' => Module::t('module', 'Work Date'),
+            'experience' => Module::t('module', 'Experience'),
             'gender' => Module::t('module', 'Gender'),
 
             'passport_seria' => Module::t('module', 'Passport Seria'),
@@ -305,11 +306,12 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
         return intdiv(mktime() - $this->birth_date, 31556926);
     }
 
-    // Стаж, кол-во полных лет
+    // Получить стаж, кол-во полных лет
     public function getExperience()
     {
         return intdiv(mktime() - $this->work_date, 31556926);
     }
+
 
     // Дата выхода на пенсию
     public function getPensionDate()

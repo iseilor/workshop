@@ -47,9 +47,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     <li class="list-group-item">
                         <b>Телефон</b> <a class="float-right"><?= $model->phone_work; ?></a>
                     </li>
-                    <li class="list-group-item">
+                    <!--<li class="list-group-item">
                         <b>Дата трудоустройства</b> <a class="float-right"><?= Yii::$app->formatter->format($model->work_date, 'date'); ?></a>
-                    </li>
+                    </li>-->
                     <li class="list-group-item">
                         <b>Стаж, полных лет</b> <a class="float-right"><?= $experience ?></a>
                     </li>

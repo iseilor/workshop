@@ -50,7 +50,7 @@ class Zaim extends Model
     {
         return [
             [
-                ['date_birth', 'gender', 'experience', 'family_count', 'family_income', 'area_total', 'area_buy', 'cost_total', 'cost_user', 'bank_credit', 'min_id'],
+                ['date_birth', 'gender', 'experience', 'family_count', 'family_income', 'area_total', 'area_buy', 'cost_total', 'cost_user', 'min_id'],
                 'required'
             ],
             [['created_at', 'updated_at', 'date_birth'], 'safe'],
@@ -120,6 +120,9 @@ class Zaim extends Model
             [
                 ['cost_total', 'cost_user', 'bank_credit'],
                 function () {
+                    if (!isset($this->bank_credit) || $this->bank_credit==''){
+                        $this->bank_credit= 0;
+                    }
                     if ($this->cost_total - $this->cost_user - $this->bank_credit>1000000) {
                         $this->addError('cost_total', 'Полная стоимость жилья должна = собственные средства + ипотека + займ (который вам может выдать компания, но не более 1 млн.руб)');
                     }
@@ -134,7 +137,7 @@ class Zaim extends Model
             ['cost_user', 'compare', 'compareValue' => 10000000, 'operator' => '<=', 'type' => 'number'],
 
             // Размер кредита в банке
-            ['bank_credit', 'compare', 'compareValue' => 1, 'operator' => '>=', 'type' => 'number'],
+            ['bank_credit', 'compare', 'compareValue' => 0, 'operator' => '>=', 'type' => 'number'],
             ['bank_credit', 'compare', 'compareValue' => 10000000, 'operator' => '<=', 'type' => 'number'],
         ];
     }

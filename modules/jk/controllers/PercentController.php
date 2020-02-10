@@ -101,20 +101,24 @@ class PercentController extends Controller
             return $this->redirect(['update', 'id' => $model->id]);
         }
 
-        if ($user->getIsJKAccess()){
-            return $this->render(
-                'create',
-                [
-                    'model' => $model,
-                ]
-            );
-        }else{
-            Yii::$app->session->setFlash('warning', "Чтобы воспользоваться калькулятором компенсации процентов вам необходимо дозаполнить ваш профиль: возраст, пол и дата трудоустройства");
-            return $this->redirect(['/user/profile/update']);
+        // Не проходит по стажу
+        if ($model->experience < 1) {
+            Yii::$app->session->setFlash('warning', "К сожалению, вы не можете воспользоваться Жилищной Программой, т.к. ваш общий стаж работы в компании менее 1 года");
+            return $this->redirect(['/main/default/index']);
+        } else {
+            if ($user->getIsJKAccess()) {
+                return $this->render(
+                    'create',
+                    [
+                        'model' => $model,
+                    ]
+                );
+            } else {
+                Yii::$app->session->setFlash('warning', "Чтобы воспользоваться калькулятором компенсации процентов вам необходимо дозаполнить ваш профиль: возраст, пол и дата трудоустройства");
+                return $this->redirect(['/user/profile/update']);
+            }
         }
     }
-
-
 
 
     /**
@@ -182,9 +186,9 @@ class PercentController extends Controller
         $percent->load(Yii::$app->request->post());
 
         // TODO: научиться менять запятые на точки на уровен модели
-        $percent->area_buy=str_replace(",",".",$percent->area_buy);
-        $percent->area_total=str_replace(",",".",$percent->area_total);
-        $percent->percent_rate=str_replace(",",".",$percent->percent_rate);
+        $percent->area_buy = str_replace(",", ".", $percent->area_buy);
+        $percent->area_total = str_replace(",", ".", $percent->area_total);
+        $percent->percent_rate = str_replace(",", ".", $percent->percent_rate);
 
         // Максимальный срок компенсации процентов (кол-во лет до пенсии, но не более 10 лет)
         $user = User::findOne(Yii::$app->user->identity->getId());
@@ -222,20 +226,23 @@ class PercentController extends Controller
     }
 
     // Отправить письмо
-    public function actionSendEmail(){
+    public function actionSendEmail()
+    {
         $model = new Percent();
         $model->load(Yii::$app->request->post());
         $user = User::findOne(Yii::$app->user->identity->getId());
 
-        $model->gender=$user->gender;
-        $model->date_birth=$user->birth_date;
-        $model->experience=$user->getExperience();
+        $model->gender = $user->gender;
+        $model->date_birth = $user->birth_date;
+        $model->experience = $user->getExperience();
 
-        return Yii::$app->mailer->compose('@app/modules/jk/mails/percent',
+        return Yii::$app->mailer->compose(
+            '@app/modules/jk/mails/percent',
             [
                 'model' => $model,
-                'user'=>$user
-            ])
+                'user' => $user
+            ]
+        )
             ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->id])
             ->setTo($user->email)
             ->setSubject('WORKSHOP / Жилищная компания / Калькулятор процентов')
