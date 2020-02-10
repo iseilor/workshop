@@ -89,7 +89,7 @@ $img = $bundle->baseUrl . '/img/percent_form_family_income_black.png';
                                 <h3>Результат расчёта</h3>
                                 <ul>
                                     <li>Максимальный размер займа, руб: <strong><?= Yii::$app->formatter->asInteger($model->compensation_count); ?></strong></li>
-                                    <li>Максимльный срок займа, лет: <strong><?= $model->compensation_years ?></strong></li>
+                                    <li>Максимальный срок займа, лет: <strong><?= $model->compensation_years ?></strong></li>
                                 </ul>
                                 <small>* Полученная сумма и срок возврата материальной помощи являются предварительными, и могут быть скорректированы по решению жилищной комиссии</small>
                             </div>

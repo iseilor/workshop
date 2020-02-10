@@ -289,6 +289,7 @@ class Percent extends \yii\db\ActiveRecord
         }
     }
 
+
     /**
      * Основаня функация расчёта суммы и срока компенсации процентов
      */
@@ -319,11 +320,10 @@ class Percent extends \yii\db\ActiveRecord
         if ($KUKN > 1) {
             $KUKN = 1;
         }
-        $this->compensation_count = round($this->percent_count * ($SKP / $this->percent_rate) * $KUKN, -3);
+        $maxMoney = round($this->percent_count * ($SKP / $this->percent_rate) * $KUKN, -3);
 
         // Не больше 1 млн.руб
-        if ($this->compensation_count>1000000){
-            $this->compensation_count = 1000000;
-        }
+        $this->compensation_count = min($maxMoney, $this->percent_count, 1000000);
+
     }
 }

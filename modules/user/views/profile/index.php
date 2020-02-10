@@ -110,6 +110,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'compensation_years',
                                     [
                                         'class' => ActionColumn::className(),
+                                        'controller' => '/jk/percent',
                                     ]
                                 ],
                             ]
@@ -134,6 +135,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'compensation_years',
                                     [
                                         'class' => ActionColumn::className(),
+                                        'controller' => '/jk/zaim',
                                     ]
                                 ],
                             ]
@@ -193,6 +195,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     ],
                                     [
                                         'class' => ActionColumn::className(),
+                                        'controller' => '/jk/order',
                                     ]
                                 ],
                             ]

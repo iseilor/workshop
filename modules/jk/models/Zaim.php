@@ -123,6 +123,9 @@ class Zaim extends Model
                     if ($this->cost_total - $this->cost_user - $this->bank_credit>1000000) {
                         $this->addError('cost_total', 'Полная стоимость жилья должна = собственные средства + ипотека + займ (который вам может выдать компания, но не более 1 млн.руб)');
                     }
+                    if ($this->cost_total < $this->cost_user + $this->bank_credit) {
+                        $this->addError('cost_total', 'Полная стоимость жилья не может быть меньше суммы собственных средств и ипотеки в банке');
+                    }
                 }
             ],
 
@@ -321,19 +324,33 @@ class Zaim extends Model
 
         // Вариант 2 -------------------------------------------------------------------------------------------------
         $KNP = Module::getKNP($this->family_count); // Корпоративная норма площади жилья KNP
-
         // Коэффициент
         $koef = $KNP / ($this->area_buy - $this->cost_user * $this->area_buy / $this->cost_total);
         $koef = min($koef, 1);
-
         // Максимальный размер займа (Вариант 2)
         $maxMoney2 = $koef * ($this->cost_total - $this->cost_user - $this->bank_credit);
 
         // Вариант 3 -------------------------------------------------------------------------------------------------
-        $p =
+        // Потребность
+        $need = $this->cost_total-$this->cost_user-$this->bank_credit;
+        // Превышение корпоративной нормы
+        $pkn = $this->area_buy-$KNP;
+        // Площадь оплачиваемая работником за счёт собственных средств
+        $porsss = ($this->cost_user+$this->bank_credit)/$this->cost_total*$this->area_buy;
+        // Коэффициент учёта корпоративной нормы
+        $kukn = $KNP/($this->area_buy-$porsss);
+        if ($kukn>1){
+            $kukn = 1;
+        }
+
+        // Максимальный размер займа
+        $mrz = $kukn*$this->cost_total;
+        $maxMoney3 = min($mrz, $need, 1000000);
+        $maxMoney3 = round($maxMoney3,-3);
+
 
         // Выбираем минимальное значение или 1 млн рублей
-        $this->compensation_count = min($maxMoney1, $maxMoney2, 1000000);
+        $this->compensation_count = min($maxMoney1, $maxMoney3, 1000000);
     }
 
 }

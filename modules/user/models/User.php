@@ -316,10 +316,10 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     {
         $date = '';
         if ($this->gender == 1) {
-            $date = date('d.m.Y', $this->birth_date + 60 * 31556926);
+            $date = date('d.m.Y', $this->birth_date + 65 * 31556926);
         }
         if ($this->gender === 0) {
-            $date = date('d.m.Y', $this->birth_date + 55 * 31556926);
+            $date = date('d.m.Y', $this->birth_date + 60 * 31556926);
         }
         return $date;
     }
