@@ -35,6 +35,7 @@ return [
 
     'Position'=>'Должность',
     'Department'=>'Подразделение',
+    'Address' => 'Адрес',
 
      'Passport Seria'=> 'Серия',
      'Passport Number'=> 'Номер',

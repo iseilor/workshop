@@ -77,6 +77,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= $form->field($model, 'email')->textInput(['disabled' => 'disabled']) ?>
                 <?= $form->field($model, 'position')->textInput(['disabled' => 'disabled']) ?>
                 <?= $form->field($model, 'department')->textInput(['disabled' => 'disabled']) ?>
+                <?= $form->field($model, 'address')->textInput(['disabled' => 'disabled']) ?>
                 <?= $form->field($model, 'phone_work')->textInput(['disabled' => 'disabled']) ?>
                 <?= $form->field($model, 'experience')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['experience']]) ?>
             </div>

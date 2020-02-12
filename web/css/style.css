@@ -42,11 +42,11 @@ a.btn-a{
     max-width: 100%;
 }
 
-.callout a{
+a.a-color-blue{
     color: #007bff;
     text-decoration: none;
 }
-.callout a:hover{
+a.a-color-blue:hover{
     color: #0056b3;
     text-decoration: none;
 }

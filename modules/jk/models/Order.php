@@ -3,6 +3,7 @@
 namespace app\modules\jk\models;
 
 use app\models\Model;
+use app\modules\jk\Module;
 use Yii;
 
 /**
@@ -32,6 +33,7 @@ class Order extends Model
     public function rules()
     {
         return [
+            [['is_mortgage'], 'required'],
             [['created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by'], 'integer'],
         ];
     }
@@ -49,6 +51,15 @@ class Order extends Model
             'updated_by' => Yii::t('app', 'Updated By'),
             'deleted_at' => Yii::t('app', 'Deleted At'),
             'deleted_by' => Yii::t('app', 'Deleted By'),
+
+            'is_mortgage'=> Module::t('module', 'Is Mortgage'),
+            'mortgage_file'=> Module::t('module', 'Mortgage File'),
+
+            'is_spouse' => Module::t('module', 'Is Spouse'),
+            'spouse_fio' => Module::t('module', 'Spouse Fio'),
+            'is_spouse_dzo' => Module::t('module', 'Is Spouse Dzo'),
+            'child_count' => Module::t('module', 'Child Count'),
+
         ];
     }
 

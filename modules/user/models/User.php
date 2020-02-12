@@ -94,6 +94,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             'position' => Module::t('module', 'Position'),
             'department' => Module::t('module', 'Department'),
             'phone_work' => Module::t('module', 'Phone Work'),
+            'address'=> Module::t('module', 'Address'),
 
             'birth_date' => Module::t('module', 'Birth Date'),
             'work_date' => Module::t('module', 'Work Date'),

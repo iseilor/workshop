@@ -4,25 +4,64 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\jk\models\Order */
+/* @var $model app\modules\jk\models\Faq */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="order-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title"><i class="fas fa-ruble-sign"></i> Оформление заявки на участие в Жилищной Кампании</h3>
+            </div>
+
+            <?php $form = ActiveForm::begin(); ?>
+            <div class="card-body">
 
 
-    <?= $form->field($model, 'updated_at')->textInput() ?>
-    <?= $form->field($model, 'status')->textInput() ?>
-    <?= $form->field($model, 'progress')->textInput() ?>
+                <div class="row">
+                    <div class="col-md-4">
+                        <?= $form->field($model, 'is_mortgage')->dropDownList(['1' => 'Да','0' => 'Нет'],['prompt' => 'Выберите из списка']); ?>
+                        <?= $form->field($model, 'mortgage_file')->fileInput()->hint('* Прикрепите кредитный договор с актуальным графиком платежей в формате PDF'); ?>
+
+                        <h1>Семья</h1>
+                        <?= $form->field($model, 'is_spouse')->dropDownList(['1' => 'Да','0' => 'Нет'],['prompt' => 'Выберите из списка']); ?>
+                        <?= $form->field($model, 'spouse_fio')->textInput(['maxlength' => true]) ?>
+                        <?= $form->field($model, 'is_spouse_dzo')->dropDownList(['1' => 'Да','0' => 'Нет'],['prompt' => 'Выберите из списка']); ?>
+                        <?= $form->field($model, 'child_count')->textInput(['maxlength' => true]) ?>
+                    </div>
+                </div>
+
+            </div>
+            <div class="card-footer">
+
+                <?= Html::submitButton(
+                    '<i class="fas fa-save"></i> Сохранить заявку',
+                    [
+                        'class' => 'btn btn-info',
+                        'id' => 'btn-save',
+                    ]
+                ) ?>
+                <?= Html::submitButton(
+                    '<i class="fas fa-user-check"></i> Отправить заявку на проверку куратору',
+                    [
+                        'class' => 'btn btn-success',
+                        'id' => 'btn-save',
+                    ]
+                ) ?>
 
 
+                <?= Html::a(
+                    Yii::t('app', 'Отмена'),
+                    ['create'],
+                    ['class' => 'btn btn-default float-right']
+                ) ?>
 
-    <div class="form-group">
-        <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
+
+            </div>
+            <?php ActiveForm::end(); ?>
+        </div>
     </div>
-
-    <?php ActiveForm::end(); ?>
-
 </div>

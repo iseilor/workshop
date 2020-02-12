@@ -31,13 +31,6 @@ class m000001_000006_create_jk_order_table extends Migration
                 'deleted_at' => Schema::TYPE_INTEGER,
                 'deleted_by' => Schema::TYPE_INTEGER,
 
-                'family_count' => Schema::TYPE_INTEGER,
-                'family_spouse' => Schema::TYPE_BOOLEAN,
-                'family_do'=> Schema::TYPE_BOOLEAN,
-                'family_work'=> Schema::TYPE_BOOLEAN,
-                'family_child_18'=> Schema::TYPE_INTEGER,
-                'family_child_23'=> Schema::TYPE_INTEGER,
-                'family_child'=> Schema::TYPE_INTEGER,
 
                 'percent_count'=> Schema::TYPE_INTEGER,
                 'percent_years'=> Schema::TYPE_INTEGER,
@@ -46,7 +39,19 @@ class m000001_000006_create_jk_order_table extends Migration
 
                 'progress'=> Schema::TYPE_INTEGER,
                 'status'=> Schema::TYPE_INTEGER,
-                'sum'=> Schema::TYPE_INTEGER
+                'sum'=> Schema::TYPE_INTEGER,
+
+                'is_mortgage'=>Schema::TYPE_BOOLEAN,    //Оформлена ипотека
+                'mortgage_file'=>$this->string(),       // Кредитный договор с акктуальным графиком платежей
+
+                // Семья
+                'is_spouse'=>Schema::TYPE_BOOLEAN,      // Наличие супруга, супруги
+                'spouse_fio'=>$this->string(),          // ФИО супруги
+                'is_spouse_dzo'=>Schema::TYPE_BOOLEAN,  // Супруга работник общества или ДЗО
+                'child_count'=> $this->integer(),       // Кол-во детей
+                'child_count_18'=> $this->integer(),    // Кол-во до 18 лет
+                'child_count_23'=> $this->integer()     // Кол-во до 23 лет
+
             ],
             $tableOptions
         );

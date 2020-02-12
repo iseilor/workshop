@@ -23,6 +23,7 @@ class ProfileUpdateForm extends Model
     public $phone_work;
     //public $work_date;
     public $experience;
+    public $address;
 
     public $passport_seria;
     public $passport_number;
@@ -55,6 +56,7 @@ class ProfileUpdateForm extends Model
         $this->position = $user->position;
         $this->department = $user->department;
         $this->phone_work = $user->phone_work;
+        $this->address = $user->address;
 
         $this->passport_seria = $user->passport_seria;
         $this->passport_number = $user->passport_number;
