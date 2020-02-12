@@ -23,6 +23,7 @@ $config = [
     ],
     'layout' => 'index',
     'language' => 'ru-RU',
+    'timeZone' => 'Europe/Moscow',
     'defaultRoute' => 'main/default/index',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',

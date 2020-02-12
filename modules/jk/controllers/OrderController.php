@@ -129,6 +129,8 @@ class OrderController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $model->upload();
+            $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

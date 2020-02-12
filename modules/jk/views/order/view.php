@@ -29,6 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
+            'mortgage_file',
             'created_at:datetime',
             'created_by',
             'updated_at:datetime',

@@ -5,13 +5,15 @@ namespace app\modules\jk\models;
 use app\models\Model;
 use app\modules\jk\Module;
 use Yii;
+use yii\helpers\FileHelper;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "jk_order".
  *
- * @property int $id
- * @property int $created_at
- * @property int $created_by
+ * @property int      $id
+ * @property int      $created_at
+ * @property int      $created_by
  * @property int|null $updated_at
  * @property int|null $updated_by
  * @property int|null $deleted_at
@@ -19,6 +21,12 @@ use Yii;
  */
 class Order extends Model
 {
+
+    /**
+     * @var \yii\web\UploadedFile|null
+     */
+
+
     /**
      * {@inheritdoc}
      */
@@ -35,6 +43,10 @@ class Order extends Model
         return [
             [['is_mortgage'], 'required'],
             [['created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by'], 'integer'],
+
+            [['mortgage_file'], 'safe'],
+            [['mortgage_file'], 'file', 'extensions' => 'pdf, docx'],
+            [['mortgage_file'], 'file', 'maxSize' => '2048000'],
         ];
     }
 
@@ -52,8 +64,8 @@ class Order extends Model
             'deleted_at' => Yii::t('app', 'Deleted At'),
             'deleted_by' => Yii::t('app', 'Deleted By'),
 
-            'is_mortgage'=> Module::t('module', 'Is Mortgage'),
-            'mortgage_file'=> Module::t('module', 'Mortgage File'),
+            'is_mortgage' => Module::t('module', 'Is Mortgage'),
+            'mortgage_file' => Module::t('module', 'Mortgage File'),
 
             'is_spouse' => Module::t('module', 'Is Spouse'),
             'spouse_fio' => Module::t('module', 'Spouse Fio'),
@@ -70,6 +82,20 @@ class Order extends Model
     public static function find()
     {
         return new OrderQuery(get_called_class());
+    }
+
+    // Загрузка файлов
+    public function upload()
+    {
+        $this->mortgage_file = UploadedFile::getInstance($this, 'mortgage_file');
+        if ($this->mortgage_file) {
+            $pathDir = Yii::$app->params['module']['jk']['order']['filePath'] .$this->id;
+            FileHelper::createDirectory($pathDir, $mode = 0775, $recursive = true);
+            $fileName = 'mortgage_file_'.$this->id . '.' . $this->mortgage_file->extension;
+            $this->mortgage_file->saveAs($pathDir. '/'.$fileName);
+            $this->mortgage_file = $fileName;
+        }
+        return true;
     }
 
 

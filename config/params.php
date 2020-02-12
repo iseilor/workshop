@@ -26,7 +26,8 @@ return [
         'jk' => [
             'icon' => '<i class="fas fa-home"></i>',
             'order' => [
-                'icon' => '<i class="fas fa-ruble-sign nav-icon"></i>'
+                'icon' => '<i class="fas fa-ruble-sign nav-icon"></i>',
+                'filePath' => 'files/jk/order/',
             ],
             'percent' => [
                 'icon' => '<i class="fas fa-percent nav-icon"></i>'
