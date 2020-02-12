@@ -52,7 +52,10 @@ return [
             'photoDefault' => 'files/user/photo/0.jpg'
         ],
         'admin' => [
-            'icon' => '<i class="fas fa-home"></i>'
+            'icon' => '<i class="fas fa-home"></i>',
+            'ad'=>[
+                'icon'=>'<i class="fas fa-ad"></i>'
+            ]
         ],
         'main' => [
             'icon' => '<i class="fas fa-home"></i>'

@@ -20,8 +20,21 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="icon">
                 <i class="fas fa-users"></i>
             </div>
-            <a href="<?= Url::to(['/admin/mrf']); ?>" class="small-box-footer">Перейти <i
+            <a href="<?= Url::to(['/admin/user']); ?>" class="small-box-footer">Перейти <i
                     class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="small-box bg-info">
+            <div class="inner">
+                <h3>AD</h3>
+                <p>Active Directory</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-ad"></i>
+            </div>
+            <a href="<?= Url::to(['/admin/ad']); ?>" class="small-box-footer">Перейти <i
+                        class="fas fa-arrow-circle-right"></i></a>
         </div>
     </div>
     <div class="col-md-3">
