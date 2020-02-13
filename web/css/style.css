@@ -50,3 +50,6 @@ a.a-color-blue:hover{
     color: #0056b3;
     text-decoration: none;
 }
+.hide{
+    display: none;!important;
+}
