@@ -20,6 +20,12 @@ return [
         ],
         'save' => [
             'icon' => '<i class="fas fa-save nav-icon"></i>'
+        ],
+        'email' => [
+            'icon' => '<i class="fas fa-envelope"></i>'
+        ],
+        'user' => [
+            'icon' => '<i class="fas fa-user"></i>'
         ]
     ],
     'module' => [
@@ -54,8 +60,8 @@ return [
         ],
         'admin' => [
             'icon' => '<i class="fas fa-home"></i>',
-            'ad'=>[
-                'icon'=>'<i class="fas fa-ad"></i>'
+            'ad' => [
+                'icon' => '<i class="fas fa-ad"></i>'
             ]
         ],
         'main' => [

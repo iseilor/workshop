@@ -51,9 +51,10 @@ $img = $bundle->baseUrl . '/img/percent_form_family_income_black.png';
                             </li>
                             <li>Максимальный размер компенсации процентов не может быть больше <strong>1 млн.руб.</strong> за весь период действия дополнительного соглашения
                             </li>
-                            <li>Вы можете ознакомиться с <?= Html::a('нормативными документами', ['/jk/doc'],['class'=>'a-color-blue']) ?> по жилищной кампании</li>
-                            <li>Вы можете поискать ответ на ваш вопрос среди <?= Html::a('часто задаваемых вопросов', ['/jk/faq'],['class'=>'a-color-blue']) ?> по жилищной кампании</li>
-                            <li>Если вы не нашли нужную вам информацию, то вы всегда можете связаться с <?= Html::a('куратором', ['/jk/doc'],['class'=>'a-color-blue']) ?> по жилищной кампании и получить ответы на все
+                            <li>Вы можете ознакомиться с <?= Html::a('нормативными документами', ['/jk/doc'], ['class' => 'a-color-blue']) ?> по жилищной кампании</li>
+                            <li>Вы можете поискать ответ на ваш вопрос среди <?= Html::a('часто задаваемых вопросов', ['/jk/faq'], ['class' => 'a-color-blue']) ?> по жилищной кампании</li>
+                            <li>Если вы не нашли нужную вам информацию, то вы всегда можете связаться с <?= Html::a('куратором', ['/jk/doc'], ['class' => 'a-color-blue']) ?> по жилищной кампании и
+                                получить ответы на все
                                 интересующие вас вопросы
                             </li>
                         </ul>
@@ -111,36 +112,39 @@ $img = $bundle->baseUrl . '/img/percent_form_family_income_black.png';
                 </div>
             </div>
             <div class="card-footer">
-                <!--<?= Html::button(
-                    '<i class="fas fa-calculator nav-icon"></i> Рассчитать',
-                    [
-                        'class' => 'btn btn-info',
-                        'id' => 'percent-calc',
-                        'data' => ['url' => Url::home() . 'jk/percent/calc']
-                    ]
-                ) ?>-->
                 <?= Html::submitButton(
                     '<i class="fas fa-calculator nav-icon"></i> Рассчитать',
                     [
                         'class' => 'btn btn-success',
                         'id' => 'btn-save',
+                        'title'=>'Рассчитать максимально возможный размер материальной помощи, без учета решения жилищной комиссии и утвержденного бюджета на соответствующий год'
                     ]
                 ) ?>
-                <!--<?= Html::submitButton(
-                    '<i class="fas fa-calculator nav-icon"></i> Отправить расчёт на email',
+                <?= Html::submitButton(
+                    Yii::$app->params['btn']['email']['icon'] . ' Отправить расчёт на email',
                     [
                         'class' => 'btn btn-info',
                         'id' => 'btn-save',
+                        'title'=>'Отправить предварительные рассчёты вам на email'
                     ]
                 ) ?>
-                    <?= Html::submitButton(
-                    '<i class="fas fa-calculator nav-icon"></i> Оформить заявку на помощь',
+                <?= Html::submitButton(
+                    Yii::$app->params['btn']['user']['icon'].' Написать куратору',
                     [
                         'class' => 'btn btn-info',
                         'id' => 'btn-save',
+                        'title'=>'Связаться с куратором Жилищной Кампании'
                     ]
-                ) ?>-->
-                    <?= Html::a(
+                ) ?>
+                <?= Html::submitButton(
+                    Yii::$app->params['module']['jk']['order']['icon'].' Оформить заявку',
+                    [
+                        'class' => 'btn btn-primary',
+                        'id' => 'btn-save',
+                        'title'=>'Приступить к оформлению материальной помощи по жилищной программе'
+                    ]
+                ) ?>
+                <?= Html::a(
                     Yii::t('app', '<i class="fas fa-ban"></i> Отмена'),
                     ['create'],
                     ['class' => 'btn btn-default float-right']

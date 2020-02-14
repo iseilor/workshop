@@ -85,15 +85,14 @@ class Percent extends \yii\db\ActiveRecord
             ['area_total', 'compare', 'compareValue' => 0, 'operator' => '>=', 'type' => 'number'],
             ['area_total', 'compare', 'compareValue' => 1000, 'operator' => '<=', 'type' => 'number'],
             [
-                ['area_total','family_count'],
+                ['area_total', 'family_count'],
                 function () {
-                    if ($this->area_total && $this->family_count){
+                    if ($this->area_total && $this->family_count) {
                         $KNP = Module::getKNP($this->family_count);
-                        if ($this->area_total>$KNP){
+                        if ($this->area_total > $KNP) {
                             $this->addError('area_total', "Площадь уже имеющегося у вас жилья превышает корпоративную норму, в вашем случае она состоявляет не более $KNP м2");
                         }
                     }
-
                 }
             ],
 
@@ -135,6 +134,14 @@ class Percent extends \yii\db\ActiveRecord
             // Сумма процентов
             ['percent_count', 'compare', 'compareValue' => 1, 'operator' => '>=', 'type' => 'number'],
             ['percent_count', 'compare', 'compareValue' => 10000000, 'operator' => '<=', 'type' => 'number'],
+            [
+                ['percent_count'],
+                function () {
+                    if ($this->percent_count !='' && $this->bank_credit!='' && $this->percent_count > $this->bank_credit) {
+                        $this->addError('percent_count', 'Сумма компенсации процентов не может быть больше размера кредита в банке');
+                    }
+                }
+            ],
 
             // Процентная ставка
             [['percent_rate'], 'match', 'pattern' => '/^\s*[-+]?[0-9]*[.,]?[0-9]+([eE][-+]?[0-9]+)?\s*$/'],
@@ -180,7 +187,7 @@ class Percent extends \yii\db\ActiveRecord
     }
 
     // Описание поля + картинка
-    public function attributeDescription($img='')
+    public function attributeDescription($img = '')
     {
         return [
             'family_count' => 'К членам семьи Работника для целей настоящего Положения относятся следующие лица:<br>
@@ -190,11 +197,11 @@ class Percent extends \yii\db\ActiveRecord
                                - дети Работника старше 18 лет, ставшие инвалидами до достижения ими возраста 18 лет;<br/>
                                - дети Работника в возрасте до 23 лет, обучающиеся в образовательных учреждениях по очной форме обучения.',
             'family_income0' => 'Порядок расчета среднемесячного дохода на одного члена семьи за последние 12 месяцев рассчитывается следующим образом:<br>
-                                <img src="'.$img.'" style="opacity: 0.5;"><br/>где:<br/>
+                                <img src="' . $img . '" style="opacity: 0.5;"><br/>где:<br/>
                                 - <strong>СД</strong> - среднемесячный доход на одного члена семьи за последние 12 месяцев;<br>
                                 - <strong>СДС</strong> - суммарный доход семьи за вычетом налоговых удержаний за последние 12 месяцев без учета районного коэффициента и северной надбавки;<br>
                                 - <strong>КЧС</strong> - количество членов семьи работника на дату подачи заявления об оказании помощи, включая работника.</br>',
-            'family_income'=>'Берется доход по справке о доходах и суммах налога физического лица за соответствующий год<br/>
+            'family_income' => 'Берется доход по справке о доходах и суммах налога физического лица за соответствующий год<br/>
                               по всем членам семьи и делится на 12 месяцев и кол-во членов семьи<br/>
                               (например: доход по справке 100 руб., НДФЛ 13 руб., 2 члена семьи,<br/>
                               среднемесячный доход = (100-13)/2/12 = 3,6 руб.)',
@@ -281,7 +288,6 @@ class Percent extends \yii\db\ActiveRecord
     public function beforeSave($insert)
     {
         if (parent::beforeSave($insert)) {
-
             $this->calc();
             return true;
         } else {
@@ -293,8 +299,8 @@ class Percent extends \yii\db\ActiveRecord
     /**
      * Основаня функация расчёта суммы и срока компенсации процентов
      */
-    public function calc(){
-
+    public function calc()
+    {
         // Максимальный срок компенсации процентов (кол-во лет до пенсии, но не более 10 лет)
         $user = User::findOne(Yii::$app->user->identity->getId());
         $this->compensation_years = $user->getPensionYears();
@@ -310,12 +316,12 @@ class Percent extends \yii\db\ActiveRecord
         $KNP = Module::getKNP($this->family_count); // Корпоративная норма площади жилья KNP
 
         // Если покупается больше нормы, то сотруднику возмещается только норма
-        $areaBuy = $this->area_buy;
-        if ($areaBuy>$KNP){
+        /*$areaBuy = $this->area_buy;
+        if ($areaBuy > $KNP) {
             $areaBuy = $KNP;
-        }
+        }*/
 
-        $KUKN = $KNP / ($areaBuy - ($this->cost_user / $this->cost_total * $areaBuy)); // Коэффициент учёта корпоративной нормы KUKN
+        $KUKN = $KNP / ( $this->area_buy - ($this->cost_user / $this->cost_total *  $this->area_buy)); // Коэффициент учёта корпоративной нормы KUKN
 
         if ($KUKN > 1) {
             $KUKN = 1;
@@ -324,6 +330,5 @@ class Percent extends \yii\db\ActiveRecord
 
         // Не больше 1 млн.руб
         $this->compensation_count = min($maxMoney, $this->percent_count, 1000000);
-
     }
 }
