@@ -34,16 +34,15 @@ class m000001_000002_create_jk_zaim_table extends Migration
             'gender' => Schema::TYPE_BOOLEAN . ' NOT NULL',
             'experience' => Schema::TYPE_INTEGER . ' NOT NULL',
 
-
             'family_count'=> Schema::TYPE_INTEGER . ' NOT NULL',
             'family_income'=> Schema::TYPE_INTEGER . ' NOT NULL',
 
-            'area_total'=> Schema::TYPE_INTEGER . ' NOT NULL',
-            'area_buy'=> Schema::TYPE_INTEGER . ' NOT NULL',
+            'area_total'=> $this->float()->notNull(),
+            'area_buy'=> $this->float()->notNull(),
 
-            'cost_total'=> Schema::TYPE_INTEGER . ' NOT NULL',
-            'cost_user' => Schema::TYPE_INTEGER . ' NOT NULL',
-            'bank_credit' => Schema::TYPE_INTEGER . ' NOT NULL',
+            'cost_total'=> $this->float()->notNull(),
+            'cost_user' => $this->float()->notNull(),
+            'bank_credit' => $this->float()->notNull(),
 
             'min_id'=> Schema::TYPE_INTEGER . ' NOT NULL',
 

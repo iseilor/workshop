@@ -62,8 +62,6 @@ class Zaim extends Model
                     'experience',
                     'family_count',
                     'family_income',
-                    'cost_total',
-                    'cost_user',
                     'compensation_count',
                     'compensation_years'
                 ],
@@ -78,20 +76,6 @@ class Zaim extends Model
             // Доход на одного члена семьи
             ['family_income', 'compare', 'compareValue' => 0, 'operator' => '>', 'type' => 'number'],
             ['family_income', 'compare', 'compareValue' => 1000000, 'operator' => '<=', 'type' => 'number'],
-
-            // Прожиточный минимум в регионе покупки жилья
-            /*[
-                ['family_income', 'min_id'],
-                function () {
-                    if ($this->min_id && $this->family_income) {
-                        $min = Min::findOne($this->min_id);
-                        if ($this->family_income <= $min->min) {
-                            $this->addError('family_income', "Вы не можете указать среднемесячный доход ниже прожиточного минимума области, в которой приобритается квартира (".$min->title.": "
-                                                           .$min->min." руб.)");
-                        }
-                    }
-                }
-            ],*/
 
             // Кол-во имеющегося жилья
             [['area_total'], 'match', 'pattern' => '/^\s*[-+]?[0-9]*[.,]?[0-9]+([eE][-+]?[0-9]+)?\s*$/'],
@@ -115,6 +99,7 @@ class Zaim extends Model
             ['area_buy', 'compare', 'compareValue' => 500, 'operator' => '<=', 'type' => 'number'],
 
             // Полная стоимость жилья
+            [['cost_total'], 'match', 'pattern' => '/^\s*[-+]?[0-9]*[.,]?[0-9]+([eE][-+]?[0-9]+)?\s*$/'],
             ['cost_total', 'compare', 'compareValue' => 1, 'operator' => '>=', 'type' => 'number'],
             ['cost_total', 'compare', 'compareValue' => 10000000, 'operator' => '<=', 'type' => 'number'],
             [
@@ -133,10 +118,12 @@ class Zaim extends Model
             ],
 
             // Собственные средства работника
+            [['cost_user'], 'match', 'pattern' => '/^\s*[-+]?[0-9]*[.,]?[0-9]+([eE][-+]?[0-9]+)?\s*$/'],
             ['cost_user', 'compare', 'compareValue' => 0, 'operator' => '>=', 'type' => 'number'],
             ['cost_user', 'compare', 'compareValue' => 10000000, 'operator' => '<=', 'type' => 'number'],
 
             // Размер кредита в банке
+            [['bank_credit'], 'match', 'pattern' => '/^\s*[-+]?[0-9]*[.,]?[0-9]+([eE][-+]?[0-9]+)?\s*$/'],
             ['bank_credit', 'compare', 'compareValue' => 0, 'operator' => '>=', 'type' => 'number'],
             ['bank_credit', 'compare', 'compareValue' => 10000000, 'operator' => '<=', 'type' => 'number'],
         ];
@@ -271,6 +258,10 @@ class Zaim extends Model
         // Заменяем запятые на точки
         $this->area_total = str_replace(",", ".", $this->area_total);
         $this->area_buy = str_replace(",", ".", $this->area_buy);
+
+        $this->cost_total = str_replace(",", ".", $this->cost_total);
+        $this->cost_user = str_replace(",", ".", $this->cost_user);
+        $this->bank_credit = str_replace(",", ".", $this->bank_credit);
         return parent::beforeValidate();
     }
 
