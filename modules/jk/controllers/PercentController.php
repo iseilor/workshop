@@ -179,51 +179,6 @@ class PercentController extends Controller
         throw new NotFoundHttpException(Yii::t('app\jk', 'The requested page does not exist.'));
     }
 
-    // Рассчитать
-    public function actionCalc()
-    {
-        $percent = new Percent();
-        $percent->load(Yii::$app->request->post());
-
-        // TODO: научиться менять запятые на точки на уровен модели
-        $percent->area_buy = str_replace(",", ".", $percent->area_buy);
-        $percent->area_total = str_replace(",", ".", $percent->area_total);
-        $percent->percent_rate = str_replace(",", ".", $percent->percent_rate);
-
-        // Максимальный срок компенсации процентов (кол-во лет до пенсии, но не более 10 лет)
-        $user = User::findOne(Yii::$app->user->identity->getId());
-        $maxPercentYears = $user->getPensionYears();
-        if ($maxPercentYears > 10) {
-            $maxPercentYears = 10;
-        }
-        if ($maxPercentYears < 0) {
-            $maxPercentYears = 0;
-        }
-
-        // Ставка компенсации процентов SKP
-        $SKP = Module::getSKP($percent->family_income);
-
-        // Корпоративная норма площади жилья KNP
-        $KNP = Module::getKNP($percent->family_count);
-
-        // Коэффициент учёта корпоративной нормы KUKN
-        $KUKN = $KNP / ($percent->area_buy - ($percent->cost_user / $percent->cost_total * $percent->area_buy));
-
-
-        if ($KUKN > 1) {
-            $KUKN = 1;
-        }
-        $maxPercentMoney = round($percent->percent_count * ($SKP / $percent->percent_rate) * $KUKN, -3);
-
-
-        return $this->renderPartial(
-            'result_success',
-            [
-                'maxPercentYears' => $maxPercentYears,
-                'maxPercentMoney' => $maxPercentMoney
-            ]
-        );
-    }
 
     // Отправить письмо
     public function actionSendEmail()

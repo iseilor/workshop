@@ -154,3 +154,22 @@ $img = $bundle->baseUrl . '/img/percent_form_family_income_black.png';
         </div>
     </div>
 </div>
+
+<?php
+$script = <<< JS
+/*$('#percent-percent_rate').inputmask("decimal", {
+    min: 1, 
+    max: 100, 
+    allowMinus: false, 
+    allowPlus: false,
+    digits: 2,
+    rightAlign: false,
+    groupSeparator: " ",
+    radixPoint: [",","."],
+    autoGroup: true,
+    });*/
+//$("#percent-percent_rate").inputmask('decimal', {regex: "^[0-9]{1,2}(\\.\\d{1,2})?$"});
+//$('#percent-percent_rate').inputmask({ mask: "(9)|(9,9{1,2})|(9.9{1,2})"})
+JS;
+$this->registerJs($script, yii\web\View::POS_READY);
+

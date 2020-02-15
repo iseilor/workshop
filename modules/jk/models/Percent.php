@@ -13,29 +13,30 @@ use yii\db\Expression;
 /**
  * This is the model class for table "jk_percent".
  *
- * @property int $id
- * @property string $created_at
- * @property int $created_by
+ * @property int         $id
+ * @property string      $created_at
+ * @property int         $created_by
  * @property string|null $updated_at
- * @property int|null $updated_by
- * @property string $date_birth
- * @property int $gender
- * @property int $experience
- * @property int $family_count
- * @property int $family_income
- * @property int $area_total
- * @property int $area_buy
- * @property int $cost_total
- * @property int $cost_user
- * @property int $bank_credit
- * @property int|null $loan
- * @property int|null $percent_count
- * @property float|null $percent_rate
- * @property int|null $compensation_count
- * @property int|null $compensation_years
+ * @property int|null    $updated_by
+ * @property string      $date_birth
+ * @property int         $gender
+ * @property int         $experience
+ * @property int         $family_count
+ * @property int         $family_income
+ * @property int         $area_total
+ * @property int         $area_buy
+ * @property float         $cost_total
+ * @property float         $cost_user
+ * @property float         $bank_credit
+ * @property float|null    $loan
+ * @property float|null    $percent_count
+ * @property float|null  $percent_rate
+ * @property int|null    $compensation_count
+ * @property int|null    $compensation_years
  */
 class Percent extends \yii\db\ActiveRecord
 {
+
     /**
      * {@inheritdoc}
      */
@@ -60,15 +61,10 @@ class Percent extends \yii\db\ActiveRecord
                     'experience',
                     'family_count',
                     'family_income',
-                    'cost_total',
-                    'cost_user',
-                    'bank_credit',
-                    'loan',
-                    'percent_count',
                     'compensation_count',
-                    'compensation_years'
+                    'compensation_years',
                 ],
-                'integer'
+                'integer',
             ],
 
 
@@ -93,7 +89,7 @@ class Percent extends \yii\db\ActiveRecord
                             $this->addError('area_total', "Площадь уже имеющегося у вас жилья превышает корпоративную норму, в вашем случае она состоявляет не более $KNP м2");
                         }
                     }
-                }
+                },
             ],
 
             // Кол-во приобритаемого жилья
@@ -102,51 +98,58 @@ class Percent extends \yii\db\ActiveRecord
             ['area_buy', 'compare', 'compareValue' => 500, 'operator' => '<=', 'type' => 'number'],
 
             // Полная стоимость жилья
+            [['cost_total'], 'match', 'pattern' => '/^\s*[-+]?[0-9]*[.,]?[0-9]+([eE][-+]?[0-9]+)?\s*$/'],
             ['cost_total', 'compare', 'compareValue' => 1, 'operator' => '>=', 'type' => 'number'],
             ['cost_total', 'compare', 'compareValue' => 10000000, 'operator' => '<=', 'type' => 'number'],
             [
                 ['cost_total', 'cost_user', 'bank_credit'],
                 function () {
-                    if ($this->loan > 0) {
-                        if ($this->cost_total != ($this->cost_user + $this->bank_credit + $this->loan)) {
-                            $this->addError('cost_total', 'Полная стоимость жилья = Собственные средства работника + Размер кредита Банка + Размер займа (если предоставлялся)');
-                        }
-                    } else {
-                        if ($this->cost_total != ($this->cost_user + $this->bank_credit)) {
-                            $this->addError('cost_total', 'Полная стоимость жилья = Собственные средства работника + Размер кредита Банка + Размер займа (если предоставлялся)');
+                    if (is_numeric($this->cost_total) && is_numeric($this->cost_user) && is_numeric($this->bank_credit)) {
+                        if ($this->loan > 0) {
+                            if ($this->cost_total != ($this->cost_user + $this->bank_credit + $this->loan)) {
+                                $this->addError('cost_total', 'Полная стоимость жилья = Собственные средства работника + Размер кредита Банка + Размер займа (если предоставлялся)');
+                            }
+                        } else {
+                            if ($this->cost_total != ($this->cost_user + $this->bank_credit)) {
+                                $this->addError('cost_total', 'Полная стоимость жилья = Собственные средства работника + Размер кредита Банка + Размер займа (если предоставлялся)');
+                            }
                         }
                     }
-                }
+                },
             ],
 
             // Собственные средства работника
+            [['cost_user'], 'match', 'pattern' => '/^\s*[-+]?[0-9]*[.,]?[0-9]+([eE][-+]?[0-9]+)?\s*$/'],
             ['cost_user', 'compare', 'compareValue' => 0, 'operator' => '>=', 'type' => 'number'],
             ['cost_user', 'compare', 'compareValue' => 10000000, 'operator' => '<=', 'type' => 'number'],
 
             // Размер кредита в банке
+            [['bank_credit'], 'match', 'pattern' => '/^\s*[-+]?[0-9]*[.,]?[0-9]+([eE][-+]?[0-9]+)?\s*$/'],
             ['bank_credit', 'compare', 'compareValue' => 1, 'operator' => '>=', 'type' => 'number'],
             ['bank_credit', 'compare', 'compareValue' => 10000000, 'operator' => '<=', 'type' => 'number'],
 
             // Займ
+            [['loan'], 'match', 'pattern' => '/^\s*[-+]?[0-9]*[.,]?[0-9]+([eE][-+]?[0-9]+)?\s*$/'],
             ['loan', 'compare', 'compareValue' => 0, 'operator' => '>=', 'type' => 'number'],
             ['loan', 'compare', 'compareValue' => 1000000, 'operator' => '<=', 'type' => 'number'],
 
             // Сумма процентов
+            [['percent_count'], 'match', 'pattern' => '/^\s*[-+]?[0-9]*[.,]?[0-9]+([eE][-+]?[0-9]+)?\s*$/'],
             ['percent_count', 'compare', 'compareValue' => 1, 'operator' => '>=', 'type' => 'number'],
             ['percent_count', 'compare', 'compareValue' => 10000000, 'operator' => '<=', 'type' => 'number'],
             [
                 ['percent_count'],
                 function () {
-                    if ($this->percent_count !='' && $this->bank_credit!='' && $this->percent_count > $this->bank_credit) {
+                    if ($this->percent_count != '' && $this->bank_credit != '' && $this->percent_count > $this->bank_credit) {
                         $this->addError('percent_count', 'Сумма компенсации процентов не может быть больше размера кредита в банке');
                     }
-                }
+                },
             ],
 
             // Процентная ставка
             [['percent_rate'], 'match', 'pattern' => '/^\s*[-+]?[0-9]*[.,]?[0-9]+([eE][-+]?[0-9]+)?\s*$/'],
             ['percent_rate', 'compare', 'compareValue' => 0, 'operator' => '>', 'type' => 'number'],
-            ['percent_rate', 'compare', 'compareValue' => 100, 'operator' => '<', 'type' => 'number'],
+            ['percent_rate', 'compare', 'compareValue' => 1000000, 'operator' => '<', 'type' => 'number'],
         ];
     }
 
@@ -207,12 +210,12 @@ class Percent extends \yii\db\ActiveRecord
                               среднемесячный доход = (100-13)/2/12 = 3,6 руб.)',
             'area_total' => 'Рассчитывается без учета приобретаемого жилья (с помощью Жилищной программы),<br>и с учетом жилых помещений, по которым в течение 5 лет до подачи заявления осуществлялись сделки ',
             'area_buy' => 'Поле должно быть не меньше 1',
-            'cost_total' => 'Полная стоимость жилья = Собственные средства работника + Размер кредита Банка + Размер займа (если предоставлялся)',
+            'cost_total' => 'Полная стоимость жилья = Собственные средства работника<br/> + Размер кредита Банка + Размер займа (если предоставлялся)',
             'cost_user' => 'Собственные средства работника',
             'bank_credit' => 'Данные вводятся без учёта требуемого займа',
             'loan' => 'Размер займа от компании, если он ранее предоставлялся',
             'percent_count' => 'По полю указывается сумма процентов (без учета основного долга)<br/>за текущий год согласно Графику платежей Ипотечного договора',
-            'percent_rate' => 'Процентная ставка в банке'
+            'percent_rate' => 'Процентная ставка в банке',
         ];
     }
 
@@ -239,7 +242,7 @@ class Percent extends \yii\db\ActiveRecord
             'bank_credit' => 'Данные вводятся без учёта требуемого займа',
             'loan' => 'Размер займа от компании, если он ранее предоставлялся',
             'percent_count' => 'Полная сумма по переплаченным процентам за кредит',
-            'percent_rate' => 'Процентная ставка в банке'
+            'percent_rate' => 'Процентная ставка в банке',
         ];
     }
 
@@ -281,6 +284,13 @@ class Percent extends \yii\db\ActiveRecord
         $this->percent_rate = str_replace(",", ".", $this->percent_rate);
         $this->area_total = str_replace(",", ".", $this->area_total);
         $this->area_buy = str_replace(",", ".", $this->area_buy);
+
+        $this->cost_total = str_replace(",", ".", $this->cost_total);
+        $this->cost_user = str_replace(",", ".", $this->cost_user);
+        $this->bank_credit = str_replace(",", ".", $this->bank_credit);
+        $this->loan = str_replace(",", ".", $this->loan);
+        $this->percent_count = number_format(str_replace(",", ".", $this->percent_count), 2, '.', '');
+        $this->percent_rate = number_format(str_replace(",", ".", $this->percent_rate), 2, '.', '');
         return parent::beforeValidate();
     }
 
@@ -321,7 +331,7 @@ class Percent extends \yii\db\ActiveRecord
             $areaBuy = $KNP;
         }*/
 
-        $KUKN = $KNP / ( $this->area_buy - ($this->cost_user / $this->cost_total *  $this->area_buy)); // Коэффициент учёта корпоративной нормы KUKN
+        $KUKN = $KNP / ($this->area_buy - ($this->cost_user / $this->cost_total * $this->area_buy)); // Коэффициент учёта корпоративной нормы KUKN
 
         if ($KUKN > 1) {
             $KUKN = 1;
