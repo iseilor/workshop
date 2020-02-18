@@ -24,10 +24,25 @@ use yii\web\IdentityInterface;
  * @property int $status
  *
  * @property int $birth_date
- * @property int $work_date
  * @property int $gender
  *
+ * WORK
+ * @property int $work_date
+ * @property boolean $work_is_young
+ * @property boolean $work_is_transferred
+ * @property boolean $work_department
+ * @property boolean $work_department_full
+ * @property boolean $work_phone
+ * @property int $user_social_id
  *
+ * PASSPORT -------------------------------------------------------
+ * @property int $passport_series
+ * @property int $passport_number
+ * @property int $passport_date
+ * @property string $passport_code
+ * @property string $passport_department
+ * @property string $passport_registration
+ * @property string $passport_file
  *
  */
 class User extends \yii\db\ActiveRecord implements IdentityInterface
@@ -91,21 +106,30 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             'fio' => Module::t('module', 'FIO'),
             'photo' => Module::t('module', 'Photo'),
 
+            // WORK
             'position' => Module::t('module', 'Position'),
-            'department' => Module::t('module', 'Department'),
-            'phone_work' => Module::t('module', 'Phone Work'),
-            'address'=> Module::t('module', 'Address'),
+            'work_department' => Module::t('module', 'Work Department'),
+            'work_department_full' => Module::t('module', 'Work Department Full'),
+            'work_phone' => Module::t('module', 'Work Phone'),
+            'work_address' => Module::t('module', 'Work Address'),
+            'work_is_young' => Module::t('module', 'Work Is Young'),
+            'work_is_transferred' => Module::t('module', 'Work Is Transferred'),
+            'user_social_id' => Module::t('module', 'User Social Id'),
 
             'birth_date' => Module::t('module', 'Birth Date'),
             'work_date' => Module::t('module', 'Work Date'),
             'experience' => Module::t('module', 'Experience'),
             'gender' => Module::t('module', 'Gender'),
 
-            'passport_seria' => Module::t('module', 'Passport Seria'),
+            // PASSPORT
+            'passport_series' => Module::t('module', 'Passport Series'),
             'passport_number' => Module::t('module', 'Passport Number'),
             'passport_date' => Module::t('module', 'Passport Date'),
-            'passport_scan1' => Module::t('module', 'Passport Scan1'),
-            'passport_scan2' => Module::t('module', 'Passport Scan2'),
+            'passport_code' => Module::t('module', 'Passport Code'),
+            'passport_department' => Module::t('module', 'Passport Department'),
+            'passport_registration' => Module::t('module', 'Passport Registration'),
+            'passport_file' => Module::t('module', 'Passport File'),
+
 
             'snils_number' => Module::t('module', 'Snils Number'),
             'snils_scan' => Module::t('module', 'Snils Scan'),
@@ -310,7 +334,11 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     // Получить стаж, кол-во полных лет
     public function getExperience()
     {
-        return intdiv(mktime() - $this->work_date, 31556926);
+        if ($this->work_date) {
+            return intdiv(mktime() - $this->work_date, 31556926);
+        } else {
+            return false;
+        }
     }
 
 
@@ -357,7 +385,8 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     }
 
     // Описание про пользователя
-    public function getTooltip(){
-       return Yii::$app->view->renderFile('@app/modules/user/views/default/tooltip.php',['model'=>$this]);
+    public function getTooltip()
+    {
+        return Yii::$app->view->renderFile('@app/modules/user/views/default/tooltip.php', ['model' => $this]);
     }
 }

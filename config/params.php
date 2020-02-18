@@ -62,7 +62,10 @@ return [
             'icon' => '<i class="fas fa-home"></i>',
             'ad' => [
                 'icon' => '<i class="fas fa-ad"></i>'
-            ]
+            ],
+            'user-social'=>[
+                'icon'=>'<i class="fas fa-users"></i>'
+            ],
         ],
         'main' => [
             'icon' => '<i class="fas fa-home"></i>'

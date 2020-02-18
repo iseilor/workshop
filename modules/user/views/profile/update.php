@@ -4,12 +4,14 @@ use app\modules\user\Module;
 
 use kartik\file\FileInput;
 use yii\bootstrap\ActiveForm;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\jui\DatePicker;
 
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\user\models\User */
+/* @var $socials app\modules\admin\models\UserSocial */
 
 $this->title = '<i class="fas fa-user-edit"></i> ' . Module::t('module', 'Profile Update');
 $this->params['breadcrumbs'][] = ['label' => '<i class="fas fa-user"></i> ' . Module::t('module', 'Profile'), 'url' => ['index']];
@@ -73,20 +75,41 @@ $this->params['breadcrumbs'][] = $this->title;
                 ) ?>
 
             </div>
+            <!-- Сотрудник -->
             <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="tab-2-tab">
-                <?= $form->field($model, 'email')->textInput(['disabled' => 'disabled']) ?>
-                <?= $form->field($model, 'position')->textInput(['disabled' => 'disabled']) ?>
-                <?= $form->field($model, 'department')->textInput(['disabled' => 'disabled']) ?>
-                <?= $form->field($model, 'address')->textInput(['disabled' => 'disabled']) ?>
-                <?= $form->field($model, 'phone_work')->textInput(['disabled' => 'disabled']) ?>
-                <?= $form->field($model, 'experience')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['experience']]) ?>
+                <div class="row">
+                    <div class="col-md-6">
+                        <?= $form->field($model, 'email')->textInput(['disabled' => 'disabled']) ?>
+                        <?= $form->field($model, 'position')->textInput(['disabled' => 'disabled']) ?>
+                        <?= $form->field($model, 'work_department')->textInput(['disabled' => 'disabled']) ?>
+                        <?= $form->field($model, 'work_department_full')->textInput(['disabled' => 'disabled']) ?>
+                        <?= $form->field($model, 'work_address')->textInput(['disabled' => 'disabled']) ?>
+                        <?= $form->field($model, 'work_phone')->textInput(['disabled' => 'disabled']) ?>
+                    </div>
+                    <div class="col-md-6">
+                        <?= $form->field($model, 'experience')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['experience']]) ?>
+                        <?= $form->field($model, 'user_social_id')->dropDownList(ArrayHelper::map($socials, 'id', 'title'), ['prompt' => 'Выберите...']) ?>
+                        <?= $form->field($model, 'work_is_young')->checkbox(['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['work_is_young']]) ?>
+                        <?= $form->field($model, 'work_is_transferred')->checkbox(['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['work_is_transferred']]) ?>
+                    </div>
+                </div>
             </div>
             <div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby="tab-3-tab">
-                <?= $form->field($model, 'passport_seria')->textInput() ?>
-                <?= $form->field($model, 'passport_number')->textInput() ?>
-                <?= $form->field($model, 'passport_date')->textInput() ?>
-                <?= $form->field($model, 'passport_scan1')->textInput() ?>
-                <?= $form->field($model, 'passport_scan2')->textInput() ?>
+                <div class="row">
+                    <div class="col-md-4">
+                        <?= $form->field($model, 'passport_file')->fileInput() ?>
+                        <?= $form->field($model, 'passport_series')->textInput() ?>
+                        <?= $form->field($model, 'passport_number')->textInput() ?>
+                    </div>
+                    <div class="col-md-4">
+                        <?= $form->field($model, 'passport_department')->textInput() ?>
+                        <?= $form->field($model, 'passport_date')->textInput() ?>
+                        <?= $form->field($model, 'passport_code')->textInput() ?>
+                    </div>
+                    <div class="col-md-4">
+                        <?= $form->field($model, 'passport_registration')->textInput() ?>
+                    </div>
+                </div>
             </div>
             <div class="tab-pane fade" id="tab-4" role="tabpanel" aria-labelledby="tab-4-tab">
                 <?= $form->field($model, 'snils_number')->textInput() ?>

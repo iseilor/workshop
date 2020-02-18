@@ -64,9 +64,10 @@ $img = $bundle->baseUrl . '/img/percent_form_family_income_black.png';
                         <?= $form->field($model, 'family_count')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['family_count']]) ?>
                         <?= $form->field($model, 'family_income')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription($img)['family_income']]) ?>
                         <?= $form->field($model, 'area_total')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['area_total']]) ?>
+                        <?= $form->field($model, 'area_buy')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['area_buy']]) ?>
                     </div>
                     <div class="col-md-4">
-                        <?= $form->field($model, 'area_buy')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['area_buy']]) ?>
+
                         <?= $form->field($model, 'cost_total')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['cost_total']]) ?>
                         <?= $form->field($model, 'cost_user')->textInput([
                             'data-toggle' => "tooltip",

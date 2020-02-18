@@ -34,26 +34,34 @@ class m000000_000001_create_user_table extends Migration
             'gender'=>$this->boolean(),
             'phone_mobile'=>$this->string(20),
             'phone_work'=>$this->string(20),
+            'work_is_young'=>$this->boolean(),          // Молодой сотрудник
+            'work_is_transferred'=>$this->boolean(),    // Переведённый сотрудник сотрудник
+            'user_social_id'=>$this->integer(),         // Социальная категория
 
             'photo'=>$this->string(),
             'fio'=> $this->string(),
 
             'position'=> $this->string(),
-            'department'=> $this->string(),
-            'tab_number'=> $this->string(),
-            'telephone_number'=> $this->string(),
+            'work_department'=> $this->string(),        // Подразделение
+            'work_department_full'=> $this->string(),   // Полный путь подразделения
+            'work_phone'=> $this->string(),             // Рабочий телефон
 
-            'passport_seria'=> $this->integer(),
+            'tab_number'=> $this->string(),
+            'work_address'=>$this->string(),
+
+            // PASSPORT
+            'passport_series'=> $this->integer(),
             'passport_number'=> $this->integer(),
             'passport_date'=> $this->integer(),
-            'passport_scan1'=> $this->string(),
-            'passport_scan2'=> $this->string(),
+            'passport_code'=> $this->string(),
+            'passport_department'=>$this->string(),
+            'passport_registration'=>$this->string(),
+            'passport_file'=> $this->string(),
 
+            // SNILS
             'snils_number'=>$this->string(),
-            'snils_scan'=>$this->string(),
-
-            'address'=>$this->string()
-
+            'snils_date'=>$this->integer(),
+            'snils_file'=>$this->string(),
 
         ], $tableOptions);
 
@@ -74,11 +82,9 @@ class m000000_000001_create_user_table extends Migration
 
     public function addData()
     {
-        return "INSERT INTO {{%user}} (`id`,`username`,`auth_key`,`password_hash`,`email`,`status`,`created_at`,`updated_at`,`fio`,`photo`,`position`,`department`, `gender`,`birth_date`,`work_date`,`phone_work`,`address`)
+        return "INSERT INTO {{%user}} (`id`,`username`,`auth_key`,`password_hash`,`email`,`status`,`created_at`,`updated_at`,`fio`,`photo`,`position`,`work_department`,`work_department_full`,`work_phone`, `gender`,`birth_date`,`work_date`,`phone_work`,`work_address`)
         VALUES 
-        (1,'obedkinav@ya.ru', 'a7wRnPzutnPTQUd80EnGuJH3L4PFdfUc', '$2y$13\$j7aNZGyUxzCzp7pep5UwcuQ.J682wrjD5xwd6NjOGM8uYn/Oo23.S', 'obedkinav@ya.ru',	1,	1579187759,	1579187759,'Объедкин Алексей Валерьевич','1.jpg','Главный специалист','Отдел эксплутации',1,573436800,1525132800, '8 (495) 855-44-18','108811, Российская Федерация, г. Москва, км Киевское шоссе 22-й (п Московский), д. 6, строение 1'),
-        (2,'Yuliya_Shilkina@center.rt.ru ', 'a7wRnPzutnPTQUd80EnGuJH3L3PFdfUc', '$2y$13\$j7aNZGyUxzCzp8pep5UwcuQ.J682wrjD5xwd6NjOGM8uYn/Oo23.S', 'shilkina@rt.ru',	1,	1579187759,	1579187759,'Шилкина Юлия Алексеевна','2.jpg','Главный специалист','Отдел тестирования',0,573436800,1525132800, '8 (495) 855-44-18','170100, Российская Федерация, Тверская обл., г. Тверь, ул. Симеоновская, д. 28'),
-        (3,'ekaterina.zinchuk@rt.ru ', 'a6wRnPzutnPTQUd80EnGuJH3L3PFdfUc', '$3y$13\$j7aNZGyUxzCzp8pep5UwcuQ.J682wrjD5xwd6NjOGM8uYn/Oo23.S', 'zinchuk@rt.ru',	1,	1579187759,	1579187759,'Зинчук Екатерина Алексеевна','3.jpg','Главный специалист','Отдел тестирования',0,573436800,1525132800, '8 (495) 855-44-18','392002, Российская Федерация, Тамбовская обл., г. Тамбов, ул. Советская, д. 36')";
+        (1,'obedkinav@ya.ru', 'a7wRnPzutnPTQUd80EnGuJH3L4PFdfUc', '$2y$13\$j7aNZGyUxzCzp7pep5UwcuQ.J682wrjD5xwd6NjOGM8uYn/Oo23.S', 'obedkinav@ya.ru',	1,	1579187759,	1579187759,'Объедкин Алексей Валерьевич','1.jpg','Главный специалист','Отдел эксплутации','Группировка_Центр | Блок информационных технологий | Департамент эксплуатации информационных систем и платформ | Отдел эксплуатации систем поддержки операций','+7 (495) 855-44-18, внутр. (701) 1-4418',1,573436800,1525132800, '8 (495) 855-44-18','108811, Российская Федерация, г. Москва, км Киевское шоссе 22-й (п Московский), д. 6, строение 1')";
 
 
     }

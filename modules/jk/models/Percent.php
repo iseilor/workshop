@@ -13,26 +13,26 @@ use yii\db\Expression;
 /**
  * This is the model class for table "jk_percent".
  *
- * @property int         $id
- * @property string      $created_at
- * @property int         $created_by
+ * @property int $id
+ * @property string $created_at
+ * @property int $created_by
  * @property string|null $updated_at
- * @property int|null    $updated_by
- * @property string      $date_birth
- * @property int         $gender
- * @property int         $experience
- * @property int         $family_count
- * @property int         $family_income
- * @property int         $area_total
- * @property int         $area_buy
- * @property float         $cost_total
- * @property float         $cost_user
- * @property float         $bank_credit
- * @property float|null    $loan
- * @property float|null    $percent_count
- * @property float|null  $percent_rate
- * @property int|null    $compensation_count
- * @property int|null    $compensation_years
+ * @property int|null $updated_by
+ * @property string $date_birth
+ * @property int $gender
+ * @property int $experience
+ * @property int $family_count
+ * @property int $family_income
+ * @property int $area_total
+ * @property int $area_buy
+ * @property float $cost_total
+ * @property float $cost_user
+ * @property float $bank_credit
+ * @property float|null $loan
+ * @property float|null $percent_count
+ * @property float|null $percent_rate
+ * @property int|null $compensation_count
+ * @property int|null $compensation_years
  */
 class Percent extends \yii\db\ActiveRecord
 {
@@ -95,7 +95,7 @@ class Percent extends \yii\db\ActiveRecord
             // Кол-во приобритаемого жилья
             [['area_buy'], 'match', 'pattern' => '/^\s*[-+]?[0-9]*[.,]?[0-9]+([eE][-+]?[0-9]+)?\s*$/'],
             ['area_buy', 'compare', 'compareValue' => 1, 'operator' => '>=', 'type' => 'number'],
-            ['area_buy', 'compare', 'compareValue' => 500, 'operator' => '<=', 'type' => 'number'],
+            ['area_buy', 'compare', 'compareValue' => 1000, 'operator' => '<=', 'type' => 'number'],
 
             // Полная стоимость жилья
             [['cost_total'], 'match', 'pattern' => '/^\s*[-+]?[0-9]*[.,]?[0-9]+([eE][-+]?[0-9]+)?\s*$/'],
@@ -105,12 +105,14 @@ class Percent extends \yii\db\ActiveRecord
                 ['cost_total', 'cost_user', 'bank_credit'],
                 function () {
                     if (is_numeric($this->cost_total) && is_numeric($this->cost_user) && is_numeric($this->bank_credit)) {
+                        $i =10;
                         if ($this->loan > 0) {
-                            if ($this->cost_total != ($this->cost_user + $this->bank_credit + $this->loan)) {
+                            $k = $this->cost_total - $this->cost_user - $this->bank_credit - $this->loan;
+                            if (abs($this->cost_total - $this->cost_user - $this->bank_credit - $this->loan) > 0.00001) {
                                 $this->addError('cost_total', 'Полная стоимость жилья = Собственные средства работника + Размер кредита Банка + Размер займа (если предоставлялся)');
                             }
                         } else {
-                            if ($this->cost_total != ($this->cost_user + $this->bank_credit)) {
+                            if (abs($this->cost_total - $this->cost_user - $this->bank_credit) > 0.00001) {
                                 $this->addError('cost_total', 'Полная стоимость жилья = Собственные средства работника + Размер кредита Банка + Размер займа (если предоставлялся)');
                             }
                         }
@@ -289,14 +291,15 @@ class Percent extends \yii\db\ActiveRecord
         $this->cost_user = str_replace(",", ".", $this->cost_user);
         $this->bank_credit = str_replace(",", ".", $this->bank_credit);
         $this->loan = str_replace(",", ".", $this->loan);
-        $this->percent_count = number_format(str_replace(",", ".", $this->percent_count), 2, '.', '');
-        $this->percent_rate = number_format(str_replace(",", ".", $this->percent_rate), 2, '.', '');
+        $this->percent_count = str_replace(",", ".", $this->percent_count);
+        $this->percent_rate = str_replace(",", ".", $this->percent_rate);
         return parent::beforeValidate();
     }
 
     // Рассчитываем все ставки перед сохранением
     public function beforeSave($insert)
     {
+        $i = 10;
         if (parent::beforeSave($insert)) {
             $this->calc();
             return true;
@@ -336,7 +339,14 @@ class Percent extends \yii\db\ActiveRecord
         if ($KUKN > 1) {
             $KUKN = 1;
         }
-        $maxMoney = round($this->percent_count * ($SKP / $this->percent_rate) * $KUKN, -3);
+
+        // Итоговый коэффициент
+        $itogKoef = $SKP / $this->percent_rate;
+        if ($itogKoef > 1) {
+            $itogKoef = 1;
+        }
+
+        $maxMoney = round($this->percent_count * $itogKoef * $KUKN, -3);
 
         // Не больше 1 млн.руб
         $this->compensation_count = min($maxMoney, $this->percent_count, 1000000);

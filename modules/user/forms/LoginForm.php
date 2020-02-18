@@ -113,8 +113,10 @@ class LoginForm extends Model
 
         $user->fio = $this->userAD->cn[0];
         $user->position = $this->userAD->title[0];
-        $user->department = $this->userAD->department[0];
-        $user->address = $this->userAD->extensionattribute11[0];
+        $user->work_department = $this->userAD->department[0];
+        $user->work_department_full = $this->userAD->description[0];
+        $user->work_phone = $this->userAD->telephonenumber[0];
+        $user->work_address = $this->userAD->extensionattribute11[0];
 
         if ($user->save()) {
             return $user;

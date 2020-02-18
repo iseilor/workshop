@@ -70,6 +70,7 @@ use yii\helpers\Url;
                             'items' => [
 
                                 ['label' => Yii::$app->params['module']['user']['icon2'] . ' <p>Пользователи</p>', 'url' => ['/admin/user']],
+                                ['label' => Yii::$app->params['module']['admin']['user-social']['icon'] . ' <p>Социальные категории</p>', 'url' => ['/admin/user-social/index']],
                                 ['label' => Yii::$app->params['module']['admin']['ad']['icon'] . ' <p>Active Directory</p>', 'url' => ['/admin/ad/index']],
                                 ['label' => Yii::$app->params['module']['jk']['min']['icon'] . ' <p>Минимумы</p>', 'url' => ['/jk/min/admin']],
                                 ['label' => Yii::$app->params['module']['jk']['doc']['icon'] . ' <p>Документы</p>', 'url' => ['/jk/doc/admin']],

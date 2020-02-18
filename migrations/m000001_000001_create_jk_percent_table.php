@@ -40,13 +40,13 @@ class m000001_000001_create_jk_percent_table extends Migration
             'area_total'=> Schema::TYPE_FLOAT . ' NOT NULL',
             'area_buy'=> Schema::TYPE_FLOAT . ' NOT NULL',
 
-            'cost_total'=>  $this->float()->notNull(),
-            'cost_user' => Schema::TYPE_FLOAT . ' NOT NULL',
-            'bank_credit' => Schema::TYPE_FLOAT . ' NOT NULL',
-            'loan'=> Schema::TYPE_FLOAT,
+            'cost_total'=>  $this->double()->notNull(),
+            'cost_user' => $this->double()->notNull(),
+            'bank_credit' => $this->double()->notNull(),
+            'loan'=> $this->double(),
 
-            'percent_count' => Schema::TYPE_FLOAT . ' NOT NULL',
-            'percent_rate' => Schema::TYPE_FLOAT . ' NOT NULL',
+            'percent_count' => $this->double()->notNull(),
+            'percent_rate' => $this->double()->notNull(),
 
             'compensation_count'=> Schema::TYPE_INTEGER . ' NOT NULL',
             'compensation_years'=> Schema::TYPE_INTEGER . ' NOT NULL'
