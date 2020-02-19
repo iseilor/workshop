@@ -53,6 +53,7 @@ return [
     'Passport File' => 'Копия паспорта, все страницы (PDF)',
 
     // СНИСЛ
-    'Snils Number' => 'СНИЛС номер',
-    'Snils Scan' => 'СНИЛС скан'
+    'Snils Number' => 'Номер',
+    'Snils Date' => 'Дата выдачи',
+    'Snils File' => 'Копия СНИЛС, лицевая сторона (JPG, PNG)'
 ];

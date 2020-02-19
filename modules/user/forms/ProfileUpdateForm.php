@@ -6,6 +6,7 @@ use app\modules\user\models\User;
 use yii\base\Model;
 use yii\db\ActiveQuery;
 use Yii;
+use yii\helpers\FileHelper;
 use yii\imagine\Image;
 use yii\web\UploadedFile;
 
@@ -37,8 +38,10 @@ class ProfileUpdateForm extends Model
     public $passport_registration;
     public $passport_file;
 
+    // SNILS
     public $snils_number;
-    public $snils_scan;
+    public $snils_date;
+    public $snils_file;
 
     /**
      * @var User
@@ -76,6 +79,11 @@ class ProfileUpdateForm extends Model
         $this->passport_registration = $user->passport_registration;
         $this->passport_file = $user->passport_file;
 
+        // SNILS
+        $this->snils_number = $user->snils_number;
+        $this->snils_date = $user->snils_date;
+        $this->snils_file = $user->snils_file;
+
         parent::__construct($config);
     }
 
@@ -102,7 +110,12 @@ class ProfileUpdateForm extends Model
             [['photo'], 'file', 'maxSize'=>'2048000'],
 
             [['work_is_young','work_is_transferred','user_social_id'], 'safe'],
+
             [['passport_series','passport_number','passport_date','passport_code','passport_department','passport_file','passport_registration'], 'safe'],
+            [['passport_file'], 'file', 'extensions'=>'pdf'],
+            [['passport_file'], 'file', 'maxSize'=>'10240000'],
+
+            [['snils_number','snils_date','snils_file'], 'safe'],
         ];
     }
 
@@ -111,34 +124,38 @@ class ProfileUpdateForm extends Model
         if ($this->validate()) {
             $user = $this->_user;
 
+            // GENERAL
+            $user->gender = $this->gender;
+            $user->fio = $this->fio;
             $user->email = $this->email;
             $user->birth_date = $this->birth_date;
 
-            // Стаж
-            //$user->work_date = $this->work_date;
-            $user->work_date =  mktime() - $this->experience* 31556926;
-
-            $user->gender = $this->gender;
-            $user->fio = $this->fio;
-
-            //$user->position = $this->position;
-            //$user->department = $this->department;
-            //$user->phone_work = $this->phone_work;
+            // WORK
+            $user->work_date =  mktime() - $this->experience* 31556926; // Стаж
             $user->work_is_young = $this->work_is_young;
             $user->work_is_transferred = $this->work_is_transferred;
             $user->user_social_id = $this->user_social_id;
 
+            // PASSPORT
             $user->passport_series = $this->passport_series;
             $user->passport_number = $this->passport_number;
             $user->passport_date = $this->passport_date;
-            $user->passport_scan1 = $this->passport_scan1;
-            $user->passport_scan2 = $this->passport_scan2;
+            $user->passport_code = $this->passport_code;
+            $user->passport_department = $this->passport_department;
+            $user->passport_registration = $this->passport_registration;
 
-            $this->photo = UploadedFile::getInstance($this, 'photo');
+            // SNILS
+            $user->snils_number = $this->snils_number;
+            $user->snils_date = $this->snils_date;
+
+            // Загрузка файлов
+            $this->upload();
+
+            /*$this->photo = UploadedFile::getInstance($this, 'photo');
             if ($this->photo){
                 $this->upload();
                 $user->photo =   $this->_user->id . '.' . $this->photo->extension;
-            }
+            }*/
 
             return $user->save();
         } else {
@@ -151,12 +168,47 @@ class ProfileUpdateForm extends Model
     {
 
         if ($this->validate()) {
-            $this->photo->saveAs(Yii::$app->params['module']['user']['photoPath'].$this->_user->id . '.' . $this->photo->extension);
+            //$this->photo->saveAs(Yii::$app->params['module']['user']['photoPath'].$this->_user->id . '.' . $this->photo->extension);
             //$this->photo->saveAs(Yii::$app->params['module']['jk']['doc']['filePath'].$this->id . '.' . $this->file->extension);
+
+            // Passport
+            $this->passport_file = UploadedFile::getInstance($this, 'passport_file');
+            if ($this->passport_file){
+                $passportFileDir = Yii::$app->params['module']['user']['passport']['path'];
+                $passportFileName = 'passport_'.$this->_user->id .'_'.date('YmdHis'). '.' . $this->passport_file->extension;
+                FileHelper::createDirectory( $passportFileDir, $mode = 0777, $recursive = true);
+                $this->passport_file->saveAs($passportFileDir. '/'.$passportFileName);
+                $this->_user->passport_file = $passportFileName;
+            }
+
+            // SNILS
+            $this->snils_file = UploadedFile::getInstance($this, 'snils_file');
+            if ($this->snils_file){
+                $snilsFileDir = Yii::$app->params['module']['user']['snils']['path'];
+                $snilsFileName = 'snils_'.$this->_user->id .'_'.date('YmdHis'). '.' . $this->snils_file->extension;
+                FileHelper::createDirectory( $snilsFileDir, $mode = 0777, $recursive = true);
+                $this->snils_file->saveAs($snilsFileDir. '/'.$snilsFileName);
+                $this->_user->snils_file = $snilsFileName;
+            }
+
             return true;
         } else {
             return false;
         }
+    }
+
+    // Загрузка файлов
+    public function upload2()
+    {
+        $this->mortgage_file = UploadedFile::getInstance($this, 'mortgage_file');
+        if ($this->mortgage_file) {
+            $pathDir = Yii::$app->params['module']['jk']['order']['filePath'] .$this->id;
+            FileHelper::createDirectory($pathDir, $mode = 0775, $recursive = true);
+            $fileName = 'mortgage_file_'.$this->id . '.' . $this->mortgage_file->extension;
+            $this->mortgage_file->saveAs($pathDir. '/'.$fileName);
+            $this->mortgage_file = $fileName;
+        }
+        return true;
     }
 
 

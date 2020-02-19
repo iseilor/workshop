@@ -44,6 +44,11 @@ use yii\web\IdentityInterface;
  * @property string $passport_registration
  * @property string $passport_file
  *
+ * SNILS ----------------------------------------------------------
+ * @property string $snils_number
+ * @property int $snils_date
+ * @property string $snils_file
+ *
  */
 class User extends \yii\db\ActiveRecord implements IdentityInterface
 {
@@ -131,8 +136,10 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             'passport_file' => Module::t('module', 'Passport File'),
 
 
+            // SNILS
             'snils_number' => Module::t('module', 'Snils Number'),
-            'snils_scan' => Module::t('module', 'Snils Scan'),
+            'snils_date' => Module::t('module', 'Snils Date'),
+            'snils_file' => Module::t('module', 'Snils File'),
         ];
     }
 

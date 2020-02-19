@@ -97,13 +97,35 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby="tab-3-tab">
                 <div class="row">
                     <div class="col-md-4">
-                        <?= $form->field($model, 'passport_file')->fileInput() ?>
+                        <?php
+                        $passportFile = '';
+                        if ($model->passport_file) {
+                            $passportFile = 'Паспорт: ' . Html::a(
+                                    Yii::$app->params['module']['user']['passport']['icon'] . ' Мой паспорт',
+                                    Yii::$app->homeUrl . Yii::$app->params['module']['user']['passport']['path'] . $model->passport_file,
+                                    ['target' => '_blank']
+                                );
+                        }
+                        ?>
+                        <?= $form->field($model, 'passport_file')->fileInput()->hint($passportFile) ?>
                         <?= $form->field($model, 'passport_series')->textInput() ?>
                         <?= $form->field($model, 'passport_number')->textInput() ?>
                     </div>
                     <div class="col-md-4">
                         <?= $form->field($model, 'passport_department')->textInput() ?>
-                        <?= $form->field($model, 'passport_date')->textInput() ?>
+                        <?= $form->field($model, 'passport_date')->widget(
+                            DatePicker::classname(),
+                            [
+                                'language' => 'ru',
+                                'dateFormat' => 'dd.MM.yyyy',
+                                'options' => ['class' => 'form-control'],
+                                'clientOptions' => [
+                                    'changeMonth' => true,
+                                    'yearRange' => '1950:2020',
+                                    'changeYear' => true
+                                ],
+                            ]
+                        ) ?>
                         <?= $form->field($model, 'passport_code')->textInput() ?>
                     </div>
                     <div class="col-md-4">
@@ -112,8 +134,31 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
             </div>
             <div class="tab-pane fade" id="tab-4" role="tabpanel" aria-labelledby="tab-4-tab">
+                <?php
+                $snilsFile = '';
+                if ($model->passport_file) {
+                    $passportFile = 'СНИСЛ: ' . Html::a(
+                            Yii::$app->params['module']['user']['snils']['icon'] . ' Мой СНИЛС',
+                            Yii::$app->homeUrl . Yii::$app->params['module']['user']['snils']['path'] . $model->snils_file,
+                            ['target' => '_blank']
+                        );
+                }
+                ?>
+                <?= $form->field($model, 'snils_file')->fileInput()->hint($passportFile) ?>
                 <?= $form->field($model, 'snils_number')->textInput() ?>
-                <?= $form->field($model, 'snils_scan')->textInput() ?>
+                <?= $form->field($model, 'snils_date')->widget(
+                    DatePicker::classname(),
+                    [
+                        'language' => 'ru',
+                        'dateFormat' => 'dd.MM.yyyy',
+                        'options' => ['class' => 'form-control'],
+                        'clientOptions' => [
+                            'changeMonth' => true,
+                            'yearRange' => '1950:2020',
+                            'changeYear' => true
+                        ],
+                    ]
+                ) ?>
             </div>
         </div>
     </div>

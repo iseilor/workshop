@@ -56,15 +56,23 @@ return [
             'icon' => '<i class="fas fa-home"></i>',
             'icon2' => '<i class="fas fa-users"></i>',
             'photoPath' => 'files/user/photo/',
-            'photoDefault' => 'files/user/photo/0.jpg'
+            'photoDefault' => 'files/user/photo/0.jpg',
+            'passport'=>[
+                'path'=>'files/user/passport/',
+                'icon'=>'<i class="far fa-address-card"></i>',
+            ],
+            'snils' =>[
+                'path'=>'files/user/snils/',
+                'icon'=>'<i class="far fa-address-card"></i>'
+            ],
         ],
         'admin' => [
             'icon' => '<i class="fas fa-home"></i>',
             'ad' => [
                 'icon' => '<i class="fas fa-ad"></i>'
             ],
-            'user-social'=>[
-                'icon'=>'<i class="fas fa-users"></i>'
+            'user-social' => [
+                'icon' => '<i class="fas fa-users"></i>'
             ],
         ],
         'main' => [
