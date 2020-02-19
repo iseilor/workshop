@@ -82,7 +82,9 @@ class ProfileUpdateForm extends Model
         // SNILS
         $this->snils_number = $user->snils_number;
         $this->snils_date = $user->snils_date;
-        $this->snils_file = $user->snils_file;
+        if ($user->snils_file){
+            $this->snils_file = Yii::$app->homeUrl.Yii::$app->params['module']['user']['snils']['path'] . $user->snils_file;
+        }
 
         parent::__construct($config);
     }
