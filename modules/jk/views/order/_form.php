@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\jui\Tabs;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
@@ -12,14 +13,14 @@ use yii\widgets\ActiveForm;
     <div class="row">
         <div class="col-md-12">
 
-            <div class="card card-primary">
+            <div class="card card-primary card-outline">
                 <div class="card-header">
                     <h3 class="card-title"><i class="fas fa-ruble-sign"></i> Оформление заявки на участие в Жилищной Кампании</h3>
                 </div>
 
                 <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
                 <div class="card-body">
-                    <div class="callout callout-info">
+                    <!--<div class="callout callout-info">
                         <h3><i class="fas fa-info"></i> Инструкция</h3>
                         <ul>
                             <li>Чтобы не потерять уже введенные данные, нажмите кнопку <strong>Сохранить заявку</strong>, и вы всегда потом сможете вернуться к её дозаполнению</li>
@@ -27,19 +28,39 @@ use yii\widgets\ActiveForm;
                             <li>После того, как вы заполните все необходимые поля, нажмите кнопку <strong>Отправить заявку на проверку куратору</strong></li>
                         </ul>
                     </div>
+                    -->
                     <div class="row">
-                        <div class="col-md-4">
-                            <?= $form->field($model, 'is_mortgage')->dropDownList(['1' => 'Да', '0' => 'Нет'], ['prompt' => 'Выберите из списка']); ?>
-                            <?= $form->field($model, 'mortgage_file',['options' => ['class' => 'form-group hide']])->fileInput()->hint('* Прикрепите кредитный договор с актуальным графиком платежей в формате PDF'); ?>
-                        </div>
-                        <div class="col-md-4">
-                            <?= $form->field($model, 'is_spouse')->dropDownList(['1' => 'Да', '0' => 'Нет'], ['prompt' => 'Выберите из списка']); ?>
-                            <?= $form->field($model, 'spouse_fio')->textInput(['maxlength' => true]) ?>
-                            <?= $form->field($model, 'is_spouse_dzo')->dropDownList(['1' => 'Да', '0' => 'Нет'], ['prompt' => 'Выберите из списка']); ?>
-                            <?= $form->field($model, 'child_count')->textInput(['maxlength' => true]) ?>
+                        <div class="col-md-12">
+                            <div class="card card-primary card-outline card-outline-tabs" style="border-top: none;">
+                                <div class="card-header p-0 border-bottom-0">
+                                    <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" id="tab-family-tab" data-toggle="pill" href="#tab-family" role="tab" aria-controls="tab-family" aria-selected="true">Семья</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="tab-house-tab" data-toggle="pill" href="#tab-house" role="tab" aria-controls="tab-house" aria-selected="false">Жильё</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="tab-money-tab" data-toggle="pill" href="#tab-money" role="tab" aria-controls="tab-money" aria-selected="false">Доходы</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="card-body">
+                                    <div class="tab-content" id="custom-tabs-three-tabContent">
+                                        <div class="tab-pane fade active show" id="tab-family" role="tabpanel" aria-labelledby="tab-family-tab">
+                                            <?= $this->render('_form_tab_family', ['model' => $model, 'form' => $form]) ?>
+                                        </div>
+                                        <div class="tab-pane fade" id="tab-house" role="tabpanel" aria-labelledby="tab-house-tab">
+                                            <?= $this->render('_form_tab_house', ['model' => $model, 'form' => $form]) ?>
+                                        </div>
+                                        <div class="tab-pane fade" id="tab-money" role="tabpanel" aria-labelledby="tab-money-tab">
+                                            <?= $this->render('_form_tab_money', ['model' => $model, 'form' => $form]) ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
                 </div>
                 <div class="card-footer">
 
@@ -76,7 +97,10 @@ use yii\widgets\ActiveForm;
 
                 </div>
                 <?php ActiveForm::end(); ?>
+
             </div>
+
+
         </div>
     </div>
 
@@ -95,3 +119,4 @@ $(document).ready(function() {
 });
 JS;
 $this->registerJs($script, yii\web\View::POS_READY);
+

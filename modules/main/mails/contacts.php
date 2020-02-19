@@ -5,7 +5,7 @@ use yii\helpers\Url;
 
 <p>
     На портале <?php echo Html::a(Yii::$app->name, 'http://'.$_SERVER['SERVER_NAME'].Url::home()); ?>
-    пользователь <strong><?=$contactForm->name;?></strong>
+    пользователь <strong><?=$contactForm->fil;?></strong>
     (<a href="mailto:<?=$contactForm->email;?>"><?=$contactForm->email;?></a>)
     оставил следующее сообщение:
 </p>

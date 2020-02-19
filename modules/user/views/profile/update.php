@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </ul>
     </div>
 
-    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+    <?php $form = ActiveForm::begin(['options' => ['id'=>'profile-update','enctype' => 'multipart/form-data']]); ?>
 
     <div class="card-body">
         <div class="tab-content" id="custom-tabs-three-tabContent">
@@ -182,3 +182,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php ActiveForm::end(); ?>
 </div>
+
+<?php
+$this->registerJsFile('/js/index.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+?>
