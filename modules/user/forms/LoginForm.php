@@ -110,6 +110,7 @@ class LoginForm extends Model
         $user->email = $this->username;
         $user->status = User::STATUS_ACTIVE;
         $user->setPassword($this->password);
+        $user->photo = Yii::$app->params['module']['user']['photo']['default'];
 
         $user->fio = $this->userAD->cn[0];
         $user->position = $this->userAD->title[0];

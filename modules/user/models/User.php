@@ -25,6 +25,7 @@ use yii\web\IdentityInterface;
  *
  * @property int $birth_date
  * @property int $gender
+ * @property string $photo
  *
  * WORK
  * @property int $work_date

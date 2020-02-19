@@ -15,6 +15,7 @@ class AppAssetAdminLTE extends AssetBundle
 
     public $css
         = [
+            'plugins/ekko-lightbox/ekko-lightbox.css',
             'plugins/toastr/toastr.css',
             'plugins/fontawesome-free/css/all.css',
             'dist/css/adminlte.css',
@@ -24,8 +25,8 @@ class AppAssetAdminLTE extends AssetBundle
     public $js
         = [
             //'plugins/jquery/jquery.js',
-
             //'plugins/jquery-ui/jquery-ui.js',
+            'plugins/ekko-lightbox/ekko-lightbox.min.js',
             'plugins/toastr/toastr.min.js',
             'plugins/inputmask/min/jquery.inputmask.bundle.min.js',
             'plugins/bootstrap/js/bootstrap.bundle.js',

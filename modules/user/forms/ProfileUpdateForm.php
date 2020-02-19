@@ -55,9 +55,9 @@ class ProfileUpdateForm extends Model
         $this->email = $user->email;
         $this->birth_date = $user->birth_date;
 
-
         $this->gender = $user->gender;
         $this->fio = $user->fio;
+        $this->photo = Yii::$app->homeUrl.Yii::$app->params['module']['user']['photo']['path'] . $user->photo;
 
         // WORK
         $this->experience = $user->getExperience();
@@ -116,6 +116,8 @@ class ProfileUpdateForm extends Model
             [['passport_file'], 'file', 'maxSize'=>'10240000'],
 
             [['snils_number','snils_date','snils_file'], 'safe'],
+            [['snils_file'], 'file', 'extensions'=>'jpg,png'],
+            [['snils_file'], 'file', 'maxSize'=>'2048000'],
         ];
     }
 
@@ -151,12 +153,6 @@ class ProfileUpdateForm extends Model
             // Загрузка файлов
             $this->upload();
 
-            /*$this->photo = UploadedFile::getInstance($this, 'photo');
-            if ($this->photo){
-                $this->upload();
-                $user->photo =   $this->_user->id . '.' . $this->photo->extension;
-            }*/
-
             return $user->save();
         } else {
             return false;
@@ -168,8 +164,20 @@ class ProfileUpdateForm extends Model
     {
 
         if ($this->validate()) {
-            //$this->photo->saveAs(Yii::$app->params['module']['user']['photoPath'].$this->_user->id . '.' . $this->photo->extension);
-            //$this->photo->saveAs(Yii::$app->params['module']['jk']['doc']['filePath'].$this->id . '.' . $this->file->extension);
+
+            // Photo
+            $this->photo = UploadedFile::getInstance($this, 'photo');
+            if ($this->photo){
+                $photoFileDir = Yii::$app->params['module']['user']['photo']['path'];
+                $date = date('YmdHis');
+                $photoFileName = 'photo_'.$this->_user->id .'_thumb_'.$date. '.' . $this->photo->extension;
+                $photoFileOrigName = 'photo_'.$this->_user->id .'_orig_'.$date. '.' . $this->photo->extension;
+                FileHelper::createDirectory( $photoFileDir, $mode = 0777, $recursive = true);
+                $this->photo->saveAs($photoFileDir. '/'.$photoFileOrigName);
+                Image::thumbnail($photoFileDir.$photoFileOrigName, 250, 250)
+                    ->save(Yii::getAlias($photoFileDir. $photoFileName), ['quality' => 100]);
+                $this->_user->photo = $photoFileName;
+            }
 
             // Passport
             $this->passport_file = UploadedFile::getInstance($this, 'passport_file');
@@ -197,19 +205,7 @@ class ProfileUpdateForm extends Model
         }
     }
 
-    // Загрузка файлов
-    public function upload2()
-    {
-        $this->mortgage_file = UploadedFile::getInstance($this, 'mortgage_file');
-        if ($this->mortgage_file) {
-            $pathDir = Yii::$app->params['module']['jk']['order']['filePath'] .$this->id;
-            FileHelper::createDirectory($pathDir, $mode = 0775, $recursive = true);
-            $fileName = 'mortgage_file_'.$this->id . '.' . $this->mortgage_file->extension;
-            $this->mortgage_file->saveAs($pathDir. '/'.$fileName);
-            $this->mortgage_file = $fileName;
-        }
-        return true;
-    }
+
 
 
     public function attributeLabels()

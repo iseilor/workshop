@@ -25,11 +25,7 @@ use yii\helpers\Url;
 
                     <?php
                     $userPhoto = Yii::$app->user->identity->photo;
-                    if (isset($userPhoto) && $userPhoto){
-                        $userPhotoPath = Yii::$app->homeUrl.Yii::$app->params['module']['user']['photoPath'].$userPhoto;
-                    }else{
-                        $userPhotoPath = Yii::$app->homeUrl.Yii::$app->params['module']['user']['photoDefault'];
-                    }
+                    $userPhotoPath = Yii::$app->homeUrl.Yii::$app->params['module']['user']['photo']['path'].$userPhoto;
                     ?>
                     <?= Html::img($userPhotoPath, ['title' => Yii::$app->user->identity->username,'class'=>'img-circle elevation-2']) ?>
                 </div>

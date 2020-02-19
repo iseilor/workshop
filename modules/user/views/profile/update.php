@@ -51,28 +51,39 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="tab-content" id="custom-tabs-three-tabContent">
             <div class="tab-pane fade active show" id="tab-1" role="tabpanel" aria-labelledby="tab-1-tab">
 
-                <?= $form->field($model, 'photo')->fileInput() ?>
-                <?= $form->field($model, 'fio')->textInput(['maxlength' => true, 'disabled' => 'disabled']) ?>
-                <?= $form->field($model, 'gender')->dropDownList(
-                    [
-                        '1' => 'Мужской',
-                        '0' => 'Женский',
-                    ],
-                    ['prompt' => 'Выберите из списка']
-                ); ?>
-                <?= $form->field($model, 'birth_date')->widget(
-                    DatePicker::classname(),
-                    [
-                        'language' => 'ru',
-                        'dateFormat' => 'dd.MM.yyyy',
-                        'options' => ['class' => 'form-control'],
-                        'clientOptions' => [
-                            'changeMonth' => true,
-                            'yearRange' => '1950:2002',
-                            'changeYear' => true
-                        ],
-                    ]
-                ) ?>
+                <div class="row">
+                    <div class="col-md-4">
+                        <?= $form->field($model, 'photo')->fileInput() ?>
+                        <?php
+                        $imgThumb = Html::img($model->photo, ['height' => '250', 'class' => 'img-circle','style'=>'border:3px solid #adb5bd; padding: 5px;']);
+                        $imgOrigPath = str_replace('thumb','orig',$model->photo);
+                        echo Html::a($imgThumb,$imgOrigPath,['data-toggle'=>'lightbox','data-title'=>$model->fio,'title'=>$model->fio]);
+                        ?>
+                    </div>
+                    <div class="col-md-4">
+                        <?= $form->field($model, 'fio')->textInput(['maxlength' => true, 'disabled' => 'disabled']) ?>
+                        <?= $form->field($model, 'gender')->dropDownList(
+                            [
+                                '1' => 'Мужской',
+                                '0' => 'Женский',
+                            ],
+                            ['prompt' => 'Выберите из списка']
+                        ); ?>
+                        <?= $form->field($model, 'birth_date')->widget(
+                            DatePicker::classname(),
+                            [
+                                'language' => 'ru',
+                                'dateFormat' => 'dd.MM.yyyy',
+                                'options' => ['class' => 'form-control'],
+                                'clientOptions' => [
+                                    'changeMonth' => true,
+                                    'yearRange' => '1950:2002',
+                                    'changeYear' => true
+                                ],
+                            ]
+                        ) ?>
+                    </div>
+                </div>
 
             </div>
             <!-- Сотрудник -->
@@ -134,31 +145,35 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
             </div>
             <div class="tab-pane fade" id="tab-4" role="tabpanel" aria-labelledby="tab-4-tab">
-                <?php
-                $snilsFile = '';
-                if ($model->passport_file) {
-                    $passportFile = 'СНИСЛ: ' . Html::a(
-                            Yii::$app->params['module']['user']['snils']['icon'] . ' Мой СНИЛС',
-                            Yii::$app->homeUrl . Yii::$app->params['module']['user']['snils']['path'] . $model->snils_file,
-                            ['target' => '_blank']
-                        );
-                }
-                ?>
-                <?= $form->field($model, 'snils_file')->fileInput()->hint($passportFile) ?>
-                <?= $form->field($model, 'snils_number')->textInput() ?>
-                <?= $form->field($model, 'snils_date')->widget(
-                    DatePicker::classname(),
-                    [
-                        'language' => 'ru',
-                        'dateFormat' => 'dd.MM.yyyy',
-                        'options' => ['class' => 'form-control'],
-                        'clientOptions' => [
-                            'changeMonth' => true,
-                            'yearRange' => '1950:2020',
-                            'changeYear' => true
-                        ],
-                    ]
-                ) ?>
+                <div class="row">
+                    <div class="col-md-4">
+                        <?php
+                        $snilsFile = '';
+                        if ($model->passport_file) {
+                            $passportFile = 'СНИСЛ: ' . Html::a(
+                                    Yii::$app->params['module']['user']['snils']['icon'] . ' Мой СНИЛС',
+                                    Yii::$app->homeUrl . Yii::$app->params['module']['user']['snils']['path'] . $model->snils_file,
+                                    ['target' => '_blank']
+                                );
+                        }
+                        ?>
+                        <?= $form->field($model, 'snils_file')->fileInput()->hint($passportFile) ?>
+                        <?= $form->field($model, 'snils_number')->textInput() ?>
+                        <?= $form->field($model, 'snils_date')->widget(
+                            DatePicker::classname(),
+                            [
+                                'language' => 'ru',
+                                'dateFormat' => 'dd.MM.yyyy',
+                                'options' => ['class' => 'form-control'],
+                                'clientOptions' => [
+                                    'changeMonth' => true,
+                                    'yearRange' => '1950:2020',
+                                    'changeYear' => true
+                                ],
+                            ]
+                        ) ?>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
