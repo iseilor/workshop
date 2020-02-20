@@ -28,7 +28,10 @@ class AppAssetAdminLTE extends AssetBundle
             //'plugins/jquery-ui/jquery-ui.js',
             'plugins/ekko-lightbox/ekko-lightbox.min.js',
             'plugins/toastr/toastr.min.js',
-            'plugins/inputmask/min/jquery.inputmask.bundle.min.js',
+
+            //'plugins/inputmask/jquery.inputmask.bundle.js',
+            'plugins/inputmask/jquery.inputmask.bundle.js',
+
             'plugins/bootstrap/js/bootstrap.bundle.js',
             'dist/js/adminlte.js',
             'dist/js/demo.js',

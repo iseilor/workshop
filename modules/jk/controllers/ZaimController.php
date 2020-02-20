@@ -94,11 +94,12 @@ class ZaimController extends Controller
         // Прожиточный минимум
         $mins = Min::find()->orderBy('title')->all();
 
-        if ($model->experience<1){
-            Yii::$app->session->setFlash('warning', "К сожалению, вы не можете воспользоваться Жилищной Программой, т.к. ваш общий стаж работы в компании менее 1 года");
-            return $this->redirect(['/main/default/index']);
-        }else{
-            if ($user->getIsJKAccess()){
+
+        if ($user->getIsJKAccess()) {
+            if ($model->experience < 1) {
+                Yii::$app->session->setFlash('warning', "К сожалению, вы не можете воспользоваться Жилищной Программой, т.к. ваш общий стаж работы в компании менее 1 года");
+                return $this->redirect(['/main/default/index']);
+            } else {
                 return $this->render(
                     'create',
                     [
@@ -106,15 +107,11 @@ class ZaimController extends Controller
                         'mins' => $mins
                     ]
                 );
-            }else{
-                Yii::$app->session->setFlash('warning', "Чтобы воспользоваться калькулятором займа вам необходимо дозаполнить ваш профиль: возраст, пол и дата трудоустройства");
-                return $this->redirect(['/user/profile/update']);
             }
+        } else {
+            Yii::$app->session->setFlash('warning', "Чтобы воспользоваться калькулятором займа вам необходимо дозаполнить ваш профиль: возраст, пол и дата трудоустройства");
+            return $this->redirect(['/user/profile/update']);
         }
-
-
-
-
     }
 
     /**
@@ -182,20 +179,23 @@ class ZaimController extends Controller
 
 
     // Отправить письмо
-    public function actionSendEmail(){
+    public function actionSendEmail()
+    {
         $model = new Zaim();
         $model->load(Yii::$app->request->post());
 
         $user = User::findOne(Yii::$app->user->identity->getId());
-        $model->gender=$user->gender;
-        $model->date_birth=$user->birth_date;
-        $model->experience=$user->getExperience();
+        $model->gender = $user->gender;
+        $model->date_birth = $user->birth_date;
+        $model->experience = $user->getExperience();
 
-        return Yii::$app->mailer->compose('@app/modules/jk/mails/zaim',
-                                          [
-                                              'model' => $model,
-                                              'user'=>$user
-                                          ])
+        return Yii::$app->mailer->compose(
+            '@app/modules/jk/mails/zaim',
+            [
+                'model' => $model,
+                'user' => $user
+            ]
+        )
             ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->id])
             ->setTo($user->email)
             ->setSubject('WORKSHOP / Жилищная кампания / Калькулятор займа')

@@ -74,7 +74,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             [
                                 'language' => 'ru',
                                 'dateFormat' => 'dd.MM.yyyy',
-                                'options' => ['class' => 'form-control'],
+                                'options' => ['class' => 'form-control inputmask-date'],
                                 'clientOptions' => [
                                     'changeMonth' => true,
                                     'yearRange' => '1950:2002',
@@ -129,7 +129,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             [
                                 'language' => 'ru',
                                 'dateFormat' => 'dd.MM.yyyy',
-                                'options' => ['class' => 'form-control'],
+                                'options' => ['class' => 'form-control inputmask-date'],
                                 'clientOptions' => [
                                     'changeMonth' => true,
                                     'yearRange' => '1950:2020',
@@ -163,7 +163,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             [
                                 'language' => 'ru',
                                 'dateFormat' => 'dd.MM.yyyy',
-                                'options' => ['class' => 'form-control'],
+                                'options' => ['class' => 'form-control inputmask-date'],
                                 'clientOptions' => [
                                     'changeMonth' => true,
                                     'yearRange' => '1950:2020',
@@ -184,5 +184,5 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 
 <?php
-$this->registerJsFile('/js/index.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+$this->registerJsFile(Yii::$app->homeUrl.'js/index.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 ?>

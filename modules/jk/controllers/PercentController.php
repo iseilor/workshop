@@ -101,22 +101,24 @@ class PercentController extends Controller
             return $this->redirect(['update', 'id' => $model->id]);
         }
 
-        // Не проходит по стажу
-        if ($model->experience < 1) {
-            Yii::$app->session->setFlash('warning', "К сожалению, вы не можете воспользоваться Жилищной Программой, т.к. ваш общий стаж работы в компании менее 1 года");
-            return $this->redirect(['/main/default/index']);
-        } else {
-            if ($user->getIsJKAccess()) {
+        // Заполнен профиль или нет
+        if ($user->getIsJKAccess()) {
+
+            // Хватает стажа или нет
+            if ($model->experience < 1) {
+                Yii::$app->session->setFlash('warning', "К сожалению, вы не можете воспользоваться Жилищной Программой, т.к. ваш общий стаж работы в компании менее 1 года");
+                return $this->redirect(['/main/default/index']);
+            } else {
                 return $this->render(
                     'create',
                     [
                         'model' => $model,
                     ]
                 );
-            } else {
-                Yii::$app->session->setFlash('warning', "Чтобы воспользоваться калькулятором компенсации процентов вам необходимо дозаполнить ваш профиль: возраст, пол и дата трудоустройства");
-                return $this->redirect(['/user/profile/update']);
             }
+        } else {
+            Yii::$app->session->setFlash('warning', "Чтобы воспользоваться калькулятором компенсации процентов вам необходимо дозаполнить ваш профиль: возраст, пол и дата трудоустройства");
+            return $this->redirect(['/user/profile/update']);
         }
     }
 
