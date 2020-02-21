@@ -117,7 +117,7 @@ class PercentController extends Controller
                 );
             }
         } else {
-            Yii::$app->session->setFlash('warning', "Чтобы воспользоваться калькулятором компенсации процентов вам необходимо дозаполнить ваш профиль: возраст, пол и дата трудоустройства");
+            Yii::$app->session->setFlash('warning', "Чтобы воспользоваться калькулятором компенсации процентов вам необходимо заполнить ваш профиль: возраст, пол и дата трудоустройства");
             return $this->redirect(['/user/profile/update']);
         }
     }

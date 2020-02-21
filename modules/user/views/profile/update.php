@@ -153,8 +153,6 @@ $this->params['breadcrumbs'][] = $this->title;
                             echo Html::a($snilsImg, $model->snils_file, ['data-toggle' => 'lightbox', 'data-title' => 'СНИЛС: '.$model->fio, 'title' => 'СНИЛС: '.$model->fio]);
                         }
                         ?>
-
-
                     </div>
                     <div class="col-md-4">
                         <?= $form->field($model, 'snils_number')->textInput() ?>
