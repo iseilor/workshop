@@ -147,12 +147,17 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="tab-pane fade" id="tab-4" role="tabpanel" aria-labelledby="tab-4-tab">
                 <div class="row">
                     <div class="col-md-4">
-                        <?= $form->field($model, 'snils_file')->fileInput() ?>
-                        <?php if($model->snils_file){
-                            $snilsImg = Html::img($model->snils_file, ['height' => '250', 'style' => 'border:3px solid #adb5bd; padding: 5px;']);
-                            echo Html::a($snilsImg, $model->snils_file, ['data-toggle' => 'lightbox', 'data-title' => 'СНИЛС: '.$model->fio, 'title' => 'СНИЛС: '.$model->fio]);
+                        <?php
+                        $snilsFile = '';
+                        if ($model->snils_file) {
+                            $snilsFile = 'СНИЛС: ' . Html::a(
+                                    Yii::$app->params['module']['user']['snils']['icon'] . ' Мой СНИЛС',
+                                    Yii::$app->homeUrl . Yii::$app->params['module']['user']['snils']['path'] . $model->snils_file,
+                                    ['target' => '_blank']
+                                );
                         }
                         ?>
+                        <?= $form->field($model, 'snils_file')->fileInput()->hint($snilsFile) ?>
                     </div>
                     <div class="col-md-4">
                         <?= $form->field($model, 'snils_number')->textInput() ?>

@@ -82,9 +82,7 @@ class ProfileUpdateForm extends Model
         // SNILS
         $this->snils_number = $user->snils_number;
         $this->snils_date = $user->snils_date;
-        if ($user->snils_file){
-            $this->snils_file = Yii::$app->homeUrl.Yii::$app->params['module']['user']['snils']['path'] . $user->snils_file;
-        }
+        $this->snils_file = $user->snils_file;
 
         parent::__construct($config);
     }
@@ -118,7 +116,7 @@ class ProfileUpdateForm extends Model
             [['passport_file'], 'file', 'maxSize'=>'10240000'],
 
             [['snils_number','snils_date','snils_file'], 'safe'],
-            [['snils_file'], 'file', 'extensions'=>'jpg,png'],
+            [['snils_file'], 'file', 'extensions'=>'pdf'],
             [['snils_file'], 'file', 'maxSize'=>'2048000'],
         ];
     }

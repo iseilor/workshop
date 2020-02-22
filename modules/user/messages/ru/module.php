@@ -55,5 +55,5 @@ return [
     // СНИСЛ
     'Snils Number' => 'Номер',
     'Snils Date' => 'Дата выдачи',
-    'Snils File' => 'Копия СНИЛС, лицевая сторона (JPG, PNG)'
+    'Snils File' => 'Копия СНИЛС (PDF)'
 ];
