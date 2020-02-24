@@ -67,10 +67,28 @@ class Order extends Model
             'is_mortgage' => Module::t('module', 'Is Mortgage'),
             'mortgage_file' => Module::t('module', 'Mortgage File'),
 
+            // Семья
             'is_spouse' => Module::t('module', 'Is Spouse'),
             'spouse_fio' => Module::t('module', 'Spouse Fio'),
-            'is_spouse_dzo' => Module::t('module', 'Is Spouse Dzo'),
+            'spouse_is_dzo' => Module::t('module', 'Spouse Is Dzo'),
+            'spouse_is_do'=>Module::t('module', 'Spouse Is Do'),
+            'spouse_is_work'=>Module::t('module', 'Spouse Is Work'),
             'child_count' => Module::t('module', 'Child Count'),
+            'child_count_18'=> Module::t('module', 'Child Count 18'),
+            'child_count_23'=> Module::t('module', 'Child Count 23'),
+
+            // Жильё
+            'is_participate'=> Module::t('module', 'Is Participate'),
+            'percent_sum'=> Module::t('module', 'Percent Sum'),
+            'target_mortgage'=> Module::t('module', 'Target Mortgage'),
+            'property_type'=> Module::t('module', 'Property Type'),
+
+            // Доходы
+            'salary'=>Module::t('module','Salary'),
+            'total_sum_income'=>Module::t('module','Total Sum Income'),
+            'total_sum_nalog'=>Module::t('module','Total Sum Nalog'),
+            'month_pay'=>Module::t('module','Month Pay'),
+            'month_my_pay'=>Module::t('module','Month My Pay'),
 
         ];
     }

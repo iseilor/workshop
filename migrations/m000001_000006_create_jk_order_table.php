@@ -38,10 +38,10 @@ class m000001_000006_create_jk_order_table extends Migration
                 'zaim_years'=> Schema::TYPE_INTEGER,
 
                 'progress'=> Schema::TYPE_INTEGER,
-                'status'=> Schema::TYPE_INTEGER,
+                'status_id'=> Schema::TYPE_INTEGER,
                 'sum'=> Schema::TYPE_INTEGER,
 
-                'is_mortgage'=>Schema::TYPE_BOOLEAN,    //Оформлена ипотека
+                'is_mortgage'=>Schema::TYPE_BOOLEAN,    // Оформлена ипотека
                 'mortgage_file'=>$this->string(),       // Кредитный договор с акктуальным графиком платежей
 
                 // Семья
@@ -49,11 +49,23 @@ class m000001_000006_create_jk_order_table extends Migration
                 'spouse_fio'=>$this->string(),          // ФИО супруги
                 'spouse_is_dzo'=>$this->boolean(),      // Супруга работник общества или ДЗО
                 'spouse_is_do'=>$this->boolean(),       // Супруга в ДО
-                'spouse_is_work'=>$this->boolean(),      // Супруга официально работает
+                'spouse_is_work'=>$this->boolean(),     // Супруга официально работает
                 'child_count'=> $this->integer(),       // Кол-во детей
                 'child_count_18'=> $this->integer(),    // Кол-во до 18 лет
-                'child_count_23'=> $this->integer()    // Кол-во до 23 лет
+                'child_count_23'=> $this->integer(),    // Кол-во до 23 лет
 
+                // Жильё
+                'is_participate'=>$this->boolean(),     // Ранее не участоваол
+                'percent_sum'=>$this->text(),           // Сумма процентов
+                'target_mortgage'=>$this->integer(),    // Цель ипотеки
+                'property_type'=>$this->integer(),      // Тип собственности
+
+                // Доходы
+                'salary'=>$this->double(),              // Оклад
+                'total_sum_income'=>$this->double(),    // Общая сумма дохода за 1 год
+                'total_sum_nalog'=>$this->double(),     // Общая сумма удержаннаго налога за 1 год
+                'month_pay'=>$this->double(),           // Среднемесячные платежи
+                'month_my_pay'=>$this->double(),        // Мои среднемесячные платежи
 
             ],
             $tableOptions
@@ -65,11 +77,11 @@ class m000001_000006_create_jk_order_table extends Migration
     public function addData()
     {
         $now = strtotime(date('d.m.Y H:i:s'));
-        return "INSERT INTO {{%jk_order}} (`created_at`,`created_by`,`progress`,`status`,`sum`)
+        return "INSERT INTO {{%jk_order}} (`created_at`,`created_by`,`progress`,`status_id`,`sum`)
         VALUES
         ($now,1,70,1,1000000),
-        ($now,2,50,2,700000),
-        ($now,3,20,3,400000)";
+        ($now,2,50,1,700000),
+        ($now,3,20,1,400000)";
     }
 
     /**
