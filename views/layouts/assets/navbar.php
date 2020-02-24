@@ -164,8 +164,14 @@ use yii\widgets\Menu;
                     );
                 } else {
                     echo Html::a(
-                        '<i class="fas fa-user-circle"></i> Профиль',
+                        '<i class="fas fa-briefcase"></i> Мой кабинет',
                         Url::home() . 'user/profile',
+                        ['class' => 'dropdown-item']
+                    );
+                    echo '<div class="dropdown-divider"></div>';
+                    echo Html::a(
+                        '<i class="fas fa-user-circle"></i> Мой профиль',
+                        Url::home() . 'user/profile/update',
                         ['class' => 'dropdown-item']
                     );
                     echo '<div class="dropdown-divider"></div>';

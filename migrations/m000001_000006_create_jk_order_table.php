@@ -45,12 +45,15 @@ class m000001_000006_create_jk_order_table extends Migration
                 'mortgage_file'=>$this->string(),       // Кредитный договор с акктуальным графиком платежей
 
                 // Семья
-                'is_spouse'=>Schema::TYPE_BOOLEAN,      // Наличие супруга, супруги
+                'is_spouse'=>$this->integer(),          // Наличие супруга, супруги (Да, Нет, Разведён)
                 'spouse_fio'=>$this->string(),          // ФИО супруги
-                'is_spouse_dzo'=>Schema::TYPE_BOOLEAN,  // Супруга работник общества или ДЗО
+                'spouse_is_dzo'=>$this->boolean(),      // Супруга работник общества или ДЗО
+                'spouse_is_do'=>$this->boolean(),       // Супруга в ДО
+                'spouse_is_work'=>$this->boolean(),      // Супруга официально работает
                 'child_count'=> $this->integer(),       // Кол-во детей
                 'child_count_18'=> $this->integer(),    // Кол-во до 18 лет
-                'child_count_23'=> $this->integer()     // Кол-во до 23 лет
+                'child_count_23'=> $this->integer()    // Кол-во до 23 лет
+
 
             ],
             $tableOptions

@@ -35,13 +35,13 @@ use yii\widgets\ActiveForm;
                                 <div class="card-header p-0 border-bottom-0">
                                     <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
                                         <li class="nav-item">
-                                            <a class="nav-link active" id="tab-family-tab" data-toggle="pill" href="#tab-family" role="tab" aria-controls="tab-family" aria-selected="true">Семья</a>
+                                            <a class="nav-link active" id="tab-family-tab" data-toggle="pill" href="#tab-family" role="tab" aria-controls="tab-family" aria-selected="true"><i class="fas fa-users"></i> Семья</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" id="tab-house-tab" data-toggle="pill" href="#tab-house" role="tab" aria-controls="tab-house" aria-selected="false">Жильё</a>
+                                            <a class="nav-link" id="tab-house-tab" data-toggle="pill" href="#tab-house" role="tab" aria-controls="tab-house" aria-selected="false"><i class="fas fa-home"></i> Жильё</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" id="tab-money-tab" data-toggle="pill" href="#tab-money" role="tab" aria-controls="tab-money" aria-selected="false">Доходы</a>
+                                            <a class="nav-link" id="tab-money-tab" data-toggle="pill" href="#tab-money" role="tab" aria-controls="tab-money" aria-selected="false"><i class="fas fa-ruble-sign"></i> Доходы</a>
                                         </li>
                                     </ul>
                                 </div>

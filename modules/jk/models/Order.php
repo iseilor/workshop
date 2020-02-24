@@ -41,7 +41,7 @@ class Order extends Model
     public function rules()
     {
         return [
-            [['is_mortgage','is_spouse'], 'required'],
+
             [['created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by'], 'integer'],
 
             [['mortgage_file'], 'safe'],
