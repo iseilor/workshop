@@ -82,6 +82,10 @@ return [
         ],
         'chat' => [
             'icon' => '<i class="fas fa-comments"></i>'
+        ],
+        'news'=>[
+            'icon'=>'<i class="fas fa-bullhorn"></i>',
+            'path'=>'files/news/'
         ]
     ]
 ];

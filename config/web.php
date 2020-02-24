@@ -19,7 +19,8 @@ $config = [
         'app\modules\admin\Bootstrap',
         'app\modules\main\Bootstrap',
         'app\modules\jk\Bootstrap',
-        'app\modules\chat\Bootstrap'
+        'app\modules\chat\Bootstrap',
+        'app\modules\news\Bootstrap'
     ],
     'layout' => 'index',
     'language' => 'ru-RU',
@@ -46,6 +47,9 @@ $config = [
         ],
         'chat' => [
             'class' => 'app\modules\chat\Module',
+        ],
+        'news' => [
+            'class' => 'app\modules\news\Module',
         ],
 
     ],
