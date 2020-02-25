@@ -28,6 +28,12 @@ return [
             'icon' => '<i class="fas fa-user"></i>'
         ]
     ],
+    'file'=>[
+        'img'=>[
+            'extensions'=>'jpg,jpeg,png,bmp'
+        ],
+    ],
+
     'module' => [
         'jk' => [
             'icon' => '<i class="fas fa-home"></i>',

@@ -3,6 +3,7 @@
 /* @var $this yii\web\View */
 $this->title = Yii::$app->name;
 
+use yii\helpers\Html;
 use yii\helpers\Url;
 
 ?>
@@ -16,9 +17,9 @@ use yii\helpers\Url;
                 <p>Всегда свежая информация</p>
             </div>
             <div class="icon">
-                <i class="fas fa-newspaper"></i>
+                <?=Yii::$app->params['module']['news']['icon']?>
             </div>
-            <a href="#" class="small-box-footer">Перейти <i class="fas fa-arrow-circle-right"></i></a>
+            <?=Html::a('Перейти <i class="fas fa-arrow-circle-right"></i>',Url::to('news'),['class'=>'small-box-footer'])?>
         </div>
     </div>
 

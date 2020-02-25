@@ -34,6 +34,8 @@ class News extends Model
         return 'news';
     }
 
+
+
     /**
      * {@inheritdoc}
      */
@@ -46,7 +48,7 @@ class News extends Model
             [['title', 'img'], 'string', 'max' => 255],
 
             [['img'], 'safe'],
-            [['img'], 'file', 'extensions'=>'jpg, png'],
+            [['img'], 'file', 'extensions'=>Yii::$app->params['file']['img']['extensions']],
             [['img'], 'file', 'maxSize'=>'2048000'],
         ];
     }

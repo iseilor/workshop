@@ -156,6 +156,7 @@ $config = [
                 '<_a:error>' => 'main/default/<_a>',
 
                 '<_m:(user)>/<id:\d+>' => 'user/default/view',
+                '<_m:(news)>/<id:\d+>' => 'news/default/view',
                 '<_a:(login|logout|signup|confirm-email|request-password-reset|password-reset)>' => 'user/default/<_a>',
 
                 '<_m:[\w\-]+>/<_c:[\w\-]+>/<id:\d+>' => '<_m>/<_c>/view',

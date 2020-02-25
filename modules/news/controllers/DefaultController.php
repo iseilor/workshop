@@ -2,6 +2,7 @@
 
 namespace app\modules\news\controllers;
 
+use app\modules\news\models\News;
 use app\modules\news\models\NewsSearch;
 use Yii;
 use yii\web\Controller;
@@ -12,10 +13,11 @@ use yii\web\Controller;
 class DefaultController extends Controller
 {
 
+
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
+        return $this->render('/news/post', [
+            'model' => News::findOne($id),
         ]);
     }
 

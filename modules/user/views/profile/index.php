@@ -174,7 +174,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                                 </small>';
                                                                 }
                                     ],
-                                    [
+                                    /*[
                                         'label' => 'Статус',
                                         'format' => 'raw',
                                         'value' => function ($data) {
@@ -192,7 +192,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                             }
                                             return $status;
                                         }
-                                    ],
+                                    ],*/
                                     [
                                         'class' => ActionColumn::className(),
                                         'controller' => '/jk/order',
