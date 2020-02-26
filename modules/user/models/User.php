@@ -59,6 +59,10 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     const STATUS_WAIT = 2;
     const SCENARIO_PROFILE = 'profile';
 
+    const ROLE_USER = 0;
+    const ROLE_MANAGER = 1;
+    const ROLE_ADMIN = 2;
+
     /**
      * {@inheritdoc}
      */
@@ -71,7 +75,6 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return [
             ['username', 'required'],
-            //['username', 'match', 'pattern' => '#^[\w_-]+$#is'],
             ['username', 'unique', 'targetClass' => self::className(), 'message' => 'This username has already been taken.'],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
@@ -157,6 +160,9 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return ArrayHelper::getValue(self::getStatusesArray(), $this->status);
     }
+    public function getRoleName(){
+        return ArrayHelper::getValue(self::getRolesArray(), $this->role_id);
+    }
 
     public static function getStatusesArray()
     {
@@ -164,6 +170,14 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             self::STATUS_BLOCKED => 'Заблокирован',
             self::STATUS_ACTIVE => 'Активен',
             self::STATUS_WAIT => 'Ожидает подтверждения',
+        ];
+    }
+
+    public static function getRolesArray(){
+        return [
+            self::ROLE_USER => 'Пользователь',
+            self::ROLE_MANAGER => 'Куратор',
+            self::ROLE_ADMIN => 'Админ',
         ];
     }
 

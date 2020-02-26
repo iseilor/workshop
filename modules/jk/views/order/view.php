@@ -32,6 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'mortgage_file',
             'created_at:datetime',
             'created_by',
+            'status_id',
             'updated_at:datetime',
             'updated_by',
             'deleted_at',

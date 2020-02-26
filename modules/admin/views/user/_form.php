@@ -9,27 +9,27 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="user-form">
+<div class="card">
 
+    <div class="card-body">
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'fio')->textInput(['maxlength' => true,'disabled'=>'disabled']) ?>
 
-    <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'newPassword')->passwordInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'newPasswordRepeat')->passwordInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'email')->textInput(['maxlength' => true,'disabled'=>'disabled']) ?>
 
     <?= $form->field($model, 'status')->dropDownList(User::getStatusesArray()) ?>
 
+    <?= $form->field($model, 'role_id')->dropDownList(User::getRolesArray()) ?>
+
     <div class="form-group">
         <?= Html::submitButton(
-            $model->isNewRecord ? Yii::t('app', 'BUTTON_CREATE') : Yii::t('app', 'BUTTON_CREATE'),
+            $model->isNewRecord ? Yii::t('app', 'Save') : Yii::t('app', 'Save'),
             ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']
         ) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
+    </div>
 
 </div>

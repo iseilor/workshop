@@ -6,6 +6,7 @@ use app\modules\jk\Module;
 use Yii;
 use app\modules\jk\models\Order;
 use app\modules\jk\models\OrderSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -18,6 +19,8 @@ class OrderController extends Controller
 
     public $icon = '';
     public $parent = '';
+
+
 
     public function __construct($id, $module, $config = [])
     {
@@ -39,6 +42,15 @@ class OrderController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
                 ],
             ],
         ];
@@ -105,8 +117,9 @@ class OrderController extends Controller
     {
         $model = new Order();
 
+        $model->status_id=1;
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['update', 'id' => $model->id]);
         }
 
         return $this->render(
@@ -130,8 +143,18 @@ class OrderController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             $model->upload();
+
+            if (isset(Yii::$app->request->post()['check'])){
+                $model->status_id=2;
+            }
             $model->save();
-            return $this->redirect(['view', 'id' => $model->id]);
+
+            if ($model->status_id==1){
+                return $this->redirect(['update', 'id' => $model->id]);
+            }else{
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+
         }
 
         return $this->render(
@@ -140,6 +163,10 @@ class OrderController extends Controller
                 'model' => $model,
             ]
         );
+    }
+
+    public function actionCheck($id){
+
     }
 
     /**

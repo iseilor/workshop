@@ -2,6 +2,7 @@
 
 namespace app\modules\admin\models;
 
+use app\modules\admin\Module;
 use yii\helpers\ArrayHelper;
 use Yii;
 
@@ -18,6 +19,7 @@ class User extends \app\modules\user\models\User
         return ArrayHelper::merge(parent::rules(), [
             [['newPassword', 'newPasswordRepeat'], 'required', 'on' => self::SCENARIO_ADMIN_CREATE],
             ['newPassword', 'string', 'min' => 6],
+            [['role_id'],'safe'],
             ['newPasswordRepeat', 'compare', 'compareAttribute' => 'newPassword'],
         ]);
     }
@@ -25,8 +27,8 @@ class User extends \app\modules\user\models\User
     public function scenarios()
     {
         $scenarios = parent::scenarios();
-        $scenarios[self::SCENARIO_ADMIN_CREATE] = ['username', 'email', 'status', 'newPassword', 'newPasswordRepeat'];
-        $scenarios[self::SCENARIO_ADMIN_UPDATE] = ['username', 'email', 'status', 'newPassword', 'newPasswordRepeat'];
+        $scenarios[self::SCENARIO_ADMIN_CREATE] = ['username', 'email', 'status'];
+        $scenarios[self::SCENARIO_ADMIN_UPDATE] = ['username', 'email', 'status', 'role_id'];
         return $scenarios;
     }
 
@@ -35,6 +37,9 @@ class User extends \app\modules\user\models\User
         return ArrayHelper::merge(parent::attributeLabels(), [
             'newPassword' => Yii::t('app', 'USER_NEW_PASSWORD'),
             'newPasswordRepeat' => Yii::t('app', 'USER_REPEAT_PASSWORD'),
+            'status'=>Module::t('module','Status'),
+            'role_id'=>Module::t('module','Role Id')
+
         ]);
     }
 

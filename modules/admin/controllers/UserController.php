@@ -78,7 +78,7 @@ class UserController extends Controller
         $model->scenario = User::SCENARIO_ADMIN_UPDATE;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,

@@ -14,6 +14,8 @@ use yii\widgets\Pjax;
 /* @var $this yii\web\View */
 /* @var $model app\modules\user\models\User */
 /* @var $percentDataProvider yii\data\ActiveDataProvider */
+/* @var $zaimDataProvider yii\data\ActiveDataProvider */
+/* @var $orderDataProvider yii\data\ActiveDataProvider */
 
 $this->title = Module::t('module', 'Profile');
 $this->params['breadcrumbs'][] = $this->title;
@@ -142,64 +144,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         ) ?>
                     </div>
                     <div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby="tab-3-tab">
-                        <h3>Ваши заявки по жилищной кампании</h3>
-                        <?= GridView::widget(
-                            [
-                                'dataProvider' => $orderDataProvider,
-                                'columns' => [
-                                    ['class' => 'yii\grid\SerialColumn'],
-                                    [
-                                        'class' => LinkColumn::className(),
-                                        'attribute' => 'id',
-                                        'url' => function ($data) {
-                                            return Url::to(['/jk/order/' . $data->id]);
-                                        },
-                                    ],
-                                    'created_at:datetime',
-                                    [
-                                        'label' => 'Прогресс',
-                                        'format' => 'raw',
-                                        'value' => function ($data) {
-                                            return '<div class="progress progress-sm">
-                                                            <div class="progress-bar bg-green" 
-                                                            role="progressbar" 
-                                                            aria-volumenow="' . $data['progress'] . '" 
-                                                            aria-volumemin="0" 
-                                                            aria-volumemax="100" 
-                                                            style="width: ' . $data['progress'] . '%">
-                                                    </div>
-                                                </div>
-                                                <small>
-                                                    ' . $data['progress'] . '% выполнено
-                                                </small>';
-                                                                }
-                                    ],
-                                    /*[
-                                        'label' => 'Статус',
-                                        'format' => 'raw',
-                                        'value' => function ($data) {
-                                            $status = '<span class="badge badge-success">Проверка завершена</span>';
-                                            switch ($data['status']) {
-                                                case 1:
-                                                    $status = '<span class="badge badge-success">Проверка завершена</span>';
-                                                    break;
-                                                case 2:
-                                                    $status = '<span class="badge badge-warning">Досыл документов</span>';
-                                                    break;
-                                                case 3:
-                                                    $status = '<span class="badge badge-danger">Неверные данные</span>';
-                                                    break;
-                                            }
-                                            return $status;
-                                        }
-                                    ],*/
-                                    [
-                                        'class' => ActionColumn::className(),
-                                        'controller' => '/jk/order',
-                                    ]
-                                ],
-                            ]
-                        ) ?>
+                        <?=$this->render('index_order', ['orderDataProvider' => $orderDataProvider]) ?>
                     </div>
                 </div>
             </div>

@@ -18,6 +18,7 @@ use yii\web\UploadedFile;
  * @property int|null $updated_by
  * @property int|null $deleted_at
  * @property int|null $deleted_by
+ * @property int      $status_id
  */
 class Order extends Model
 {

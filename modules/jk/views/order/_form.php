@@ -11,6 +11,8 @@ use yii\widgets\ActiveForm;
 
 
     <div class="row">
+
+
         <div class="col-md-12">
 
             <div class="card card-primary card-outline">
@@ -20,15 +22,11 @@ use yii\widgets\ActiveForm;
 
                 <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
                 <div class="card-body">
-                    <!--<div class="callout callout-info">
-                        <h3><i class="fas fa-info"></i> Инструкция</h3>
-                        <ul>
-                            <li>Чтобы не потерять уже введенные данные, нажмите кнопку <strong>Сохранить заявку</strong>, и вы всегда потом сможете вернуться к её дозаполнению</li>
-                            <li>Если у вас возникли какие-то вопросы, то нажмите кнопку <strong>Написать куратору</strong>, и ответсвенный сотрудник ответит на все интересующие вас вопросы</li>
-                            <li>После того, как вы заполните все необходимые поля, нажмите кнопку <strong>Отправить заявку на проверку куратору</strong></li>
-                        </ul>
+                    <div class="alert alert-info alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <h5><i class="icon fas fa-info"></i> Информация</h5>
+                        После того, как вы заполните все необходимые поля и прикрепите документы по всем членам семьи, вы сможете передать заявку на проверку куратору жилищной кампании
                     </div>
-                    -->
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card card-primary card-outline card-outline-tabs" style="border-top: none;">
@@ -69,6 +67,8 @@ use yii\widgets\ActiveForm;
                         [
                             'class' => 'btn btn-info',
                             'id' => 'btn-save',
+                            'value'=>1,
+                            'name'=>'save'
                         ]
                     ) ?>
 
@@ -76,14 +76,16 @@ use yii\widgets\ActiveForm;
                         '<i class="fas fa-comments"></i> Написать куратору',
                         [
                             'class' => 'btn btn-success',
-                            'id' => 'btn-save',
+                            'id' => 'btn-message',
                         ]
                     ) ?>
                     <?= Html::submitButton(
-                        '<i class="fas fa-check-square"></i> Отправить заявку на проверку куратору',
+                        '<i class="fas fa-check-square"></i> Отправить куратору',
                         [
                             'class' => 'btn btn-success',
-                            'id' => 'btn-save',
+                            'id' => 'btn-check',
+                            'value'=>1,
+                            'name'=>'check'
                         ]
                     ) ?>
 

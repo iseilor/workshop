@@ -2,6 +2,7 @@
 
 namespace app\modules\admin\models;
 
+use app\modules\admin\Module;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -9,17 +10,20 @@ use yii\data\ActiveDataProvider;
 class UserSearch extends Model
 {
     public $id;
+    public $fio;
     public $username;
     public $email;
     public $status;
+    public $role_id;
+
     public $date_from;
     public $date_to;
 
     public function rules()
     {
         return [
-            [['id', 'status'], 'integer'],
-            [['username', 'email'], 'safe'],
+            [['id', 'status', 'role_id'], 'integer'],
+            [['username', 'email','fio','role_id'], 'safe'],
             [['date_from', 'date_to'], 'date', 'format' => 'php:Y-m-d'],
         ];
     }
@@ -33,6 +37,7 @@ class UserSearch extends Model
             'username' => Yii::t('app', 'USER_USERNAME'),
             'email' => Yii::t('app', 'USER_EMAIL'),
             'status' => Yii::t('app', 'USER_STATUS'),
+            'role_id' => Module::t('module', 'Role Id'),
         ];
     }
 
@@ -40,12 +45,14 @@ class UserSearch extends Model
     {
         $query = User::find();
 
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-            'sort' => [
-                'defaultOrder' => ['id' => SORT_DESC],
-            ],
-        ]);
+        $dataProvider = new ActiveDataProvider(
+            [
+                'query' => $query,
+                'sort' => [
+                    'defaultOrder' => ['id' => SORT_DESC],
+                ],
+            ]
+        );
         $this->load($params);
 
         if (!$this->validate()) {
@@ -53,12 +60,23 @@ class UserSearch extends Model
             return $dataProvider;
         }
 
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'status' => $this->status,
-        ]);
+        $query->andFilterWhere(
+            [
+                'id' => $this->id,
+                'status' => $this->status,
+            ]
+        );
+
+        $query->andFilterWhere(
+            [
+                'id' => $this->id,
+                'role_id' => $this->role_id,
+            ]
+        );
+
 
         $query
+            ->andFilterWhere(['like', 'fio', $this->fio])
             ->andFilterWhere(['like', 'username', $this->username])
             ->andFilterWhere(['like', 'email', $this->email]);
 

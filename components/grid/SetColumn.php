@@ -29,7 +29,7 @@ class SetColumn extends DataColumn
         $value = $this->getDataCellValue($model, $key, $index);
         $name = $this->getStatusName($model, $key, $index, $value);
         $class = ArrayHelper::getValue($this->cssCLasses, $value, 'default');
-        $html = Html::tag('span', Html::encode($name), ['class' => 'label label-' . $class]);
+        $html = Html::tag('span', Html::encode($name), ['class' => 'badge bg-' . $class]);
         return $value === null ? $this->grid->emptyCell : $html;
     }
 

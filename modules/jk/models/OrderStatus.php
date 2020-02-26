@@ -71,4 +71,25 @@ class OrderStatus extends Model
     {
         return new OrderStatusQuery(get_called_class());
     }
+
+
+    /**
+     * Получить плашку текущего статуса
+     * @return string
+     */
+    public function getStatusLabel(){
+        return '<span class="badge bg-'.$this->color.'" title="'.$this->description.'">'.$this->title.'</span>';
+    }
+
+
+    /**
+     * Получить progressbar текущего статуса
+     * @return string
+     */
+    public function getProgressBar(){
+        return '<div class="progress progress-sm" title="'.$this->description.'">
+                    <div class="progress-bar bg-'.$this->color.'" role="progressbar" aria-volumenow="' . $this->progress . '" aria-volumemin="0" aria-volumemax="100" style="width: ' . $this->progress . '%"></div>
+                </div>
+                <small>' . $this->progress . '% выполнено</small>';
+    }
 }

@@ -5,65 +5,66 @@ use app\components\grid\LinkColumn;
 use app\components\grid\SetColumn;
 use app\modules\admin\components\UserStatusColumn;
 use app\modules\admin\models\User;
+use app\modules\user\Module;
 use kartik\date\DatePicker;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\admin\models\UserSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Users');
+$this->title = Module::t('module', 'Users');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="user-index">
+<div class="card">
 
+    <div class="card-body">
 
+        <?php Pjax::begin(); ?>
+        <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Create User'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
-    <?php Pjax::begin(); ?>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            'id',
+        <?= GridView::widget(
             [
-                'filter' =>
-                    Html::tag(
-                        'div',
-                        Html::tag('div', Html::activeTextInput($searchModel, 'date_from', ['class' => 'form-control']), ['class' => 'col-xs-6']) .
-                        Html::tag('div', Html::activeTextInput($searchModel, 'date_to', ['class' => 'form-control']), ['class' => 'col-xs-6']),
-                        ['class' => 'row']
-                    ),
-                'attribute' => 'created_at',
-                'format' => 'datetime',
-            ],
-            [
-                'class' => LinkColumn::className(),
-                'attribute' => 'username',
-            ],
-            'email:email',
-            [
-                'class' => SetColumn::className(),
-                'filter' => User::getStatusesArray(),
-                'attribute' => 'status',
-                'name' => 'statusName',
-                'cssCLasses' => [
-                    User::STATUS_ACTIVE => 'success',
-                    User::STATUS_WAIT => 'warning',
-                    User::STATUS_BLOCKED => 'default',
+                'dataProvider' => $dataProvider,
+                //'filterModel' => $searchModel,
+                'columns' => [
+                    'id',
+                    'attribute' => 'created_at:datetime',
+                    [
+                        'class' => LinkColumn::className(),
+                        'attribute' => 'fio',
+                    ],
+                    'email:email',
+                    [
+                        'class' => SetColumn::className(),
+                        'filter' => User::getStatusesArray(),
+                        'attribute' => 'status',
+                        'name' => 'statusName',
+                        'cssCLasses' => [
+                            User::STATUS_ACTIVE => 'success',
+                            User::STATUS_WAIT => 'warning',
+                            User::STATUS_BLOCKED => 'default',
+                        ],
+                    ],
+                    [
+                        'class' => SetColumn::className(),
+                        'filter' => User::getRolesArray(),
+                        'attribute' => 'role_id',
+                        'name' => 'roleName',
+                        'cssCLasses' => [
+                            User::ROLE_USER => 'success',
+                            User::ROLE_MANAGER => 'warning',
+                            User::ROLE_ADMIN => 'danger',
+                        ],
+                    ],
+
+                    ['class' => ActionColumn::className()],
                 ],
-            ],
+            ]
+        ); ?>
 
-            ['class' => ActionColumn::className()],
-        ],
-    ]); ?>
-
-    <?php Pjax::end(); ?>
-
+        <?php Pjax::end(); ?>
+    </div>
 </div>

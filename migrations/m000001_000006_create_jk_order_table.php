@@ -38,7 +38,7 @@ class m000001_000006_create_jk_order_table extends Migration
                 'zaim_years'=> Schema::TYPE_INTEGER,
 
                 'progress'=> Schema::TYPE_INTEGER,
-                'status_id'=> Schema::TYPE_INTEGER,
+                'status_id'=> $this->integer()->notNull(),
                 'sum'=> Schema::TYPE_INTEGER,
 
                 'is_mortgage'=>Schema::TYPE_BOOLEAN,    // Оформлена ипотека
