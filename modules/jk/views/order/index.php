@@ -1,5 +1,6 @@
 <?php
 
+use app\modules\jk\Module;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
@@ -7,16 +8,13 @@ use yii\widgets\Pjax;
 /* @var $searchModel app\modules\jk\models\OrderSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Orders');
+$this->title = Module::t('module', 'Orders');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="order-index">
+<div class="card">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <div class="card-body">
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Create Order'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
 
     <?php Pjax::begin(); ?>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -28,10 +26,10 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'created_at',
+            'created_at:datetime',
             'created_by',
-            'updated_at',
-            'updated_by',
+            //'updated_at',
+            //'updated_by',
             //'deleted_at',
             //'deleted_by',
 
@@ -40,5 +38,6 @@ $this->params['breadcrumbs'][] = $this->title;
     ]); ?>
 
     <?php Pjax::end(); ?>
+    </div>
 
 </div>

@@ -2,7 +2,9 @@
 
 namespace app\modules\jk\controllers;
 
+use app\modules\jk\models\OrderStage;
 use app\modules\jk\Module;
+use app\modules\user\models\User;
 use Yii;
 use app\modules\jk\models\Order;
 use app\modules\jk\models\OrderSearch;
@@ -21,13 +23,12 @@ class OrderController extends Controller
     public $parent = '';
 
 
-
     public function __construct($id, $module, $config = [])
     {
         parent::__construct($id, $module, $config);
         $this->icon = Yii::$app->params['module']['jk']['order']['icon'];
         $this->parent = [
-            'label' => Yii::$app->params['module']['jk']['icon'].' '.Module::t('module','JK'),
+            'label' => Yii::$app->params['module']['jk']['icon'] . ' ' . Module::t('module', 'JK'),
             'url' => ['/jk']
         ];
     }
@@ -117,7 +118,7 @@ class OrderController extends Controller
     {
         $model = new Order();
 
-        $model->status_id=1;
+        $model->status_id = 1;
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['update', 'id' => $model->id]);
         }
@@ -144,17 +145,18 @@ class OrderController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             $model->upload();
 
-            if (isset(Yii::$app->request->post()['check'])){
-                $model->status_id=2;
+            if (isset(Yii::$app->request->post()['check'])) {
+                $model->status_id = 2;
             }
             $model->save();
 
-            if ($model->status_id==1){
+            if ($model->status_id == 1) {
                 return $this->redirect(['update', 'id' => $model->id]);
-            }else{
+            } else {
+                // Отправляем письмо кураторам
+                $this->actionSendEmailCurator($model);
                 return $this->redirect(['view', 'id' => $model->id]);
             }
-
         }
 
         return $this->render(
@@ -165,9 +167,35 @@ class OrderController extends Controller
         );
     }
 
-    public function actionCheck($id){
+    // Проверка куратором
+    public function actionCheck($id)
+    {
+        $orderStage = new OrderStage();
 
+        $orderStage->order_id = $id;
+
+        if (isset(Yii::$app->request->post()['status_id'])) {
+            $orderStage->status_id = Yii::$app->request->post()['status_id'];
+        }
+
+        if ($orderStage->load(Yii::$app->request->post()) && $orderStage->save()) {
+            $order = $this->findModel($id);
+            $order->status_id = $orderStage->status_id;
+            $order->save();
+
+            return $this->redirect(['index']);
+        }
+
+        return $this->render(
+            'check',
+            [
+                'order' => $this->findModel($id),
+                'stage' => $orderStage,
+                'user' => User::findOne($this->findModel($id)->created_by)
+            ]
+        );
     }
+
 
     /**
      * Deletes an existing Order model.
@@ -197,5 +225,38 @@ class OrderController extends Controller
         }
 
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
+    }
+
+    // Отправляем письма кураторам
+    public function actionSendEmailCurator($order)
+    {
+
+        // Ищем всех кураторов
+        $curators = User::findAll(['role_id'=>1]);
+
+        // Автор заявки
+        $user = User::findOne(Yii::$app->user->identity->getId());
+
+        // Отправляем письма всем кураторам
+        foreach ($curators as $curator) {
+            Yii::$app->mailer->compose(
+                '@app/modules/jk/mails/order_curator',
+                [
+                    'user' => $user,
+                    'curator' => $curator,
+                    'order' => $order
+                ]
+            )
+                ->setFrom('workshop@tr.ru')
+                ->setTo($user->email)
+                ->setSubject('WORKSHOP / ЖК / Куратору')
+                ->send();
+        }
+        return true;
+    }
+
+    // Отправить п
+    public function actionSendEmailUser($orderStage){
+
     }
 }

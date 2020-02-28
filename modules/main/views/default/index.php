@@ -1,27 +1,34 @@
 <?php
 
 /* @var $this yii\web\View */
+
+/* @var $list Array */
 $this->title = Yii::$app->name;
 
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\widgets\ListView;
 
 ?>
 
+
+<div class="row">
+    <?php
+    foreach ($list as $item) {
+        echo $this->render(
+            'index_item',
+            [
+                'item' => $item
+            ]
+        );
+    }
+    ?>
+</div>
+
+
 <div class="row">
 
-    <div class="col-md-3">
-        <div class="small-box bg-primary">
-            <div class="inner">
-                <h3>Новости</h3>
-                <p>Всегда свежая информация</p>
-            </div>
-            <div class="icon">
-                <?=Yii::$app->params['module']['news']['icon']?>
-            </div>
-            <?=Html::a('Перейти <i class="fas fa-arrow-circle-right"></i>',Url::to('news'),['class'=>'small-box-footer'])?>
-        </div>
-    </div>
+
 
     <div class="col-md-3">
         <div class="small-box bg-success">

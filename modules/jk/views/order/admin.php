@@ -2,6 +2,7 @@
 
 use app\components\grid\ActionColumn;
 use app\components\grid\LinkColumn;
+use app\modules\jk\models\OrderStatus;
 use app\modules\jk\Module;
 use yii\helpers\Html;
 use yii\grid\GridView;
@@ -68,52 +69,33 @@ $this->params['breadcrumbs'][] = $this->title;
                         }
                     ],
                     [
-                        'label' => 'Документы',
+                        'label' => 'Статус',
                         'format' => 'raw',
-                        'value' => function () {
-                            return '
-                            <a class="btn btn-danger" href="/jk/order/1" title="Паспорт" aria-label="Просмотр" data-pjax="0"><i class="fas fa-file-powerpoint"></i></a>
-                            <a class="btn btn-warning" href="/jk/order/1" title="Кредитный договор" aria-label="Просмотр" data-pjax="0"><i class="fas fa-file-invoice-dollar"></i></a>
-                            <a class="btn btn-success" href="/jk/order/1" title="График платежей" aria-label="Просмотр" data-pjax="0"><i class="fas fa-file-alt"></i></a>';
+                        'value' => function ($data) {
+                            $status = OrderStatus::findOne($data['status_id']);
+                            return $status->getStatusLabel();
                         }
                     ],
                     [
                         'label' => 'Прогресс',
                         'format' => 'raw',
                         'value' => function ($data) {
-                            return '<div class="progress progress-sm">
-                                    <div class="progress-bar bg-green" 
-                                    role="progressbar" 
-                                    aria-volumenow="' . $data['progress'] . '" 
-                                    aria-volumemin="0" 
-                                    aria-volumemax="100" 
-                                    style="width: ' . $data['progress'] . '%">
-                            </div>
-                        </div>
-                        <small>
-                            ' . $data['progress'] . '% выполнено
-                        </small>';
+                            $status = OrderStatus::findOne($data['status_id']);
+                            return $status->getProgressBar();
                         }
                     ],
                     [
-                        'label' => 'Статус',
+                        'label' => 'Документы',
                         'format' => 'raw',
-                        'value' => function ($data) {
-                            $status = '<span class="badge badge-success">Проверка завершена</span>';
-                            switch ($data['status']) {
-                                case 1:
-                                    $status = '<span class="badge badge-success">Проверка завершена</span>';
-                                    break;
-                                case 2:
-                                    $status = '<span class="badge badge-warning">Досыл документов</span>';
-                                    break;
-                                case 3:
-                                    $status = '<span class="badge badge-danger">Неверные данные</span>';
-                                    break;
-                            }
-                            return $status;
+                        'value' => function () {
+                            return '
+                            <a class="btn btn-primary" href="/jk/order/1" title="Паспорт" aria-label="Просмотр" data-pjax="0"><i class="fas fa-file-powerpoint"></i></a>
+                            <a class="btn btn-primary" href="/jk/order/1" title="Кредитный договор" aria-label="Просмотр" data-pjax="0"><i class="fas fa-file-invoice-dollar"></i></a>
+                            <a class="btn btn-danger" href="/jk/order/1" title="График платежей" aria-label="Просмотр" data-pjax="0"><i class="fas fa-file-alt"></i></a>';
                         }
                     ],
+
+
                     ['class' => ActionColumn::className()],
                 ],
             ]

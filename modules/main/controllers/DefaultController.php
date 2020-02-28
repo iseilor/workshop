@@ -1,11 +1,13 @@
 <?php
 
 namespace app\modules\main\controllers;
+
 use app\modules\main\models\ContactForm;
 use app\modules\user\models\User;
 use Yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
+use yii\helpers\Url;
 use yii\web\Controller;
 
 /**
@@ -49,7 +51,46 @@ class DefaultController extends Controller
 
     public function actionIndex()
     {
-        return $this->render('index');
+        $list = [
+            [
+                'col' => 3,
+                'bg' => 'info',
+                'title' => 'Новости',
+                'description' => 'Всегда свежая информация',
+                'icon' => Yii::$app->params['module']['news']['icon'],
+                'link' => Url::to('news')
+            ],
+            [
+                'col' => 3,
+                'bg' => 'info',
+                'title' => 'Курс',
+                'description' => 'Всегда свежая информация',
+                'icon' => '<i class="fas fa-ruble-sign"></i>',
+                'link' => Url::to('news')
+            ],
+            [
+                'col' => 3,
+                'bg' => 'info',
+                'title' => 'Погода',
+                'description' => 'Всегда свежая информация',
+                'icon' => '<i class="fas fa-temperature-high"></i>',
+                'link' => Url::to('news')
+            ],
+            [
+                'col' => 3,
+                'bg' => 'danger',
+                'title' => '00:00',
+                'description' => 'Всегда свежая информация',
+                'icon' => '<i class="far fa-clock"></i>',
+                'link' => Url::to('news')
+            ],
+        ];
+        return $this->render(
+            'index',
+            [
+                'list' => $list
+            ]
+        );
     }
 
     public function actionAbout()
@@ -62,11 +103,11 @@ class DefaultController extends Controller
         $model = new ContactForm();
         $post = false;
 
-        if (Yii::$app->request->post()){
+        if (Yii::$app->request->post()) {
             $model->load(Yii::$app->request->post());
-            $user =  $user = User::findOne(Yii::$app->user->identity->getId());
+            $user = $user = User::findOne(Yii::$app->user->identity->getId());
             $model->name = $user->username;
-            $model->email=$user->email;
+            $model->email = $user->email;
             $post = true;
         }
 
@@ -74,9 +115,12 @@ class DefaultController extends Controller
             Yii::$app->session->setFlash('contactFormSubmitted');
             return $this->refresh();
         } else {
-            return $this->render('feedback', [
-                'model' => $model,
-            ]);
+            return $this->render(
+                'feedback',
+                [
+                    'model' => $model,
+                ]
+            );
         }
     }
 }

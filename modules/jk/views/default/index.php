@@ -93,7 +93,7 @@ use yii\helpers\Url; ?>
             <div class="icon">
                 <i class="fas fa-file"></i>
             </div>
-            <a href="<?= Url::to(['/']); ?>" class="small-box-footer">Перейти <i
+            <a href="<?= Url::to(['/jk/order/create']); ?>" class="small-box-footer">Перейти <i
                         class="fas
              fa-arrow-circle-right"></i></a>
         </div>

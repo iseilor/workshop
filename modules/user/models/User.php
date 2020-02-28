@@ -399,9 +399,9 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     // Получаем путь до фотографии пользователя
     public function getPhotoPath()
     {
-        $photoPath = Yii::$app->homeUrl . Yii::$app->params['module']['user']['photoDefault'];
+        $photoPath = Yii::$app->homeUrl . Yii::$app->params['module']['user']['photo']['path'].Yii::$app->params['module']['user']['photo']['default'];
         if (isset($this->photo) && $this->photo) {
-            $photoPath = Yii::$app->homeUrl . Yii::$app->params['module']['user']['photoPath'] . $this->photo;
+            $photoPath = Yii::$app->homeUrl . Yii::$app->params['module']['user']['photo']['path'] . $this->photo;
         }
         return $photoPath;
     }

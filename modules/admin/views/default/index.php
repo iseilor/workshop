@@ -77,7 +77,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             [
                                 Html::a('Калькуляторы процентов', Url::to('jk/percent')),
                                 Html::a('Калькуляторы займов', Url::to('jk/zaim')),
-                                Html::a('Заявки', Url::to('jk/order')),
+                                Html::a('Заявки', Url::to('jk/order/admin')),
                                 Html::a('Вопросы', Url::to('jk/faq/admin')),
                                 Html::a('Документы', Url::to('jk/doc/admin')),
                             ],

@@ -75,11 +75,6 @@ $config = [
             'cookieValidationKey' => 'm71YjtB7X51bk2lS2s7sHiedVrgUg2SN',
         ],
 
-        /*'response' => [
-            'format' => yii\web\Response::FORMAT_JSON,
-            'charset' => 'UTF-8',
-        ],*/
-
         'formatter' => [
             'dateFormat' => 'php:d.m.Y',
             'datetimeFormat' => 'php:d.m.Y H:i:s',
@@ -104,9 +99,6 @@ $config = [
 
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
-            // send all mails to a file by default. You have to set
-            // 'useFileTransport' to false and configure a transport
-            // for the mailer to send real emails.
             'useFileTransport' => false,
             /*'transport' => [
                 'class' => 'Swift_SmtpTransport',

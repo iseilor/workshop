@@ -81,7 +81,7 @@ class m000001_000006_create_jk_order_table extends Migration
         VALUES
         ($now,1,70,1,1000000),
         ($now,2,50,1,700000),
-        ($now,3,20,1,400000)";
+        ($now,2,20,1,400000)";
     }
 
     /**
