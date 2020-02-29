@@ -1,7 +1,7 @@
 <?php
 
-
 use yii\helpers\ArrayHelper;
+require(__DIR__ . '/functions.php');
 
 $params = ArrayHelper::merge(
     require(__DIR__ . '/params.php'),
@@ -23,7 +23,7 @@ $config = [
         'app\modules\news\Bootstrap'
     ],
     'layout' => 'index',
-    'language' => 'ru-RU',
+    'language' => 'ru',
     'timeZone' => 'Europe/Moscow',
     'defaultRoute' => 'main/default/index',
     'aliases' => [
@@ -76,11 +76,15 @@ $config = [
         ],
 
         'formatter' => [
+            'class' => 'yii\i18n\Formatter',
             'dateFormat' => 'php:d.m.Y',
             'datetimeFormat' => 'php:d.m.Y H:i:s',
             'timeFormat' => 'php:H:i:s',
             'thousandSeparator' => ' ',
             'decimalSeparator' => ',',
+            'timeZone' => 'Europe/Moscow',
+            'locale' => 'ru-RU'
+
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',

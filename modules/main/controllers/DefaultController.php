@@ -2,8 +2,10 @@
 
 namespace app\modules\main\controllers;
 
+use app\modules\jk\Module;
 use app\modules\main\models\ContactForm;
 use app\modules\user\models\User;
+use DateTime;
 use Yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
@@ -44,13 +46,18 @@ class DefaultController extends Controller
             'captcha' => [
                 'class' => 'yii\captcha\CaptchaAction',
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
-            ]
+            ],
         ];
     }
 
 
+    /**
+     * @return string
+     * @throws \yii\base\InvalidConfigException
+     */
     public function actionIndex()
     {
+
         $list = [
             [
                 'col' => 3,
@@ -58,37 +65,116 @@ class DefaultController extends Controller
                 'title' => 'Новости',
                 'description' => 'Всегда свежая информация',
                 'icon' => Yii::$app->params['module']['news']['icon'],
-                'link' => Url::to('news')
+                'url' => Url::to('news'),
+                'link' => 'Перейти <i class="fas fa-arrow-circle-right"></i>',
             ],
             [
                 'col' => 3,
                 'bg' => 'info',
-                'title' => 'Курс',
-                'description' => 'Всегда свежая информация',
+                'title' => '<span class="curs">&nbsp;<span class="curs-1"><i class="fas fa-dollar-sign"></i> 66.90</span><span class="curs-2"><i class="fas fa-euro-sign"></i> 73.91</span><span class="curs-3"><i class="fas fa-gas-pump"></i> 49.91</span></span>',
+                'description' => '<span class="curs">&nbsp;<span class="curs-1">USD ЦБ</span><span class="curs-2">EURO ЦБ</span><span class="curs-3">Нефть</span></span>',
                 'icon' => '<i class="fas fa-ruble-sign"></i>',
-                'link' => Url::to('news')
+                'url' => '#',
+                'link' => 'Курсы ЦБ РФ на ' . Yii::$app->formatter->asDate(new DateTime()),
             ],
             [
                 'col' => 3,
                 'bg' => 'info',
-                'title' => 'Погода',
-                'description' => 'Всегда свежая информация',
+                'title' => '+5&degC',
+                'description' => '<i class="fas fa-wind"></i>2-3м/с | <i class="fas fa-tint"></i>78% | <i class="fas fa-tachometer-alt"></i>736ммрт.ст.
+',
                 'icon' => '<i class="fas fa-temperature-high"></i>',
-                'link' => Url::to('news')
+                'url' => '#',
+                'link' => 'Москва, Румянцево, БЦ Comcity',
+            ],
+            [
+                'col' => 3,
+                'bg' => 'success',
+                'title' => '<span class="clock">
+                                <span class="hou">00</span><span class="del">:</span><span class="min">00</span><span class="del">:</span><span class="sec">00</span>
+                            </span>',
+                'description' => mb_ucfirst(Yii::$app->formatter->asDate(new DateTime(), 'php:l, d F Y')),
+                'icon' => '<i class="far fa-clock"></i>',
+                'url' => '#',
+                'link' => 'МСК',
+            ],
+            [
+                'col' => 3,
+                'bg' => 'purple',
+                'title' => Module::t('module', 'JK'),
+                'description' => Module::t('module', 'jk'),
+                'icon' => Yii::$app->params['module']['jk']['icon'],
+                'url' => Url::to(['/jk/']),
+                'link' => 'Перейти <i class="fas fa-arrow-circle-right"></i>',
+            ],
+            [
+                'col' => 3,
+                'bg' => 'secondary',
+                'title' => 'ДМС',
+                'description' => 'Медицинское страхование',
+                'icon' => '<i class="fas fa-heartbeat"></i>',
+                'url' => '#',
+                'link' => 'Перейти <i class="fas fa-arrow-circle-right"></i>',
+            ],
+            [
+                'col' => 3,
+                'bg' => 'secondary',
+                'title' => 'Путёвки',
+                'description' => 'Курорты и санатории',
+                'icon' => '<i class="fas fa-plane"></i>',
+                'url' => '#',
+                'link' => 'Перейти <i class="fas fa-arrow-circle-right"></i>',
+            ],
+            [
+                'col' => 3,
+                'bg' => 'secondary',
+                'title' => 'ПП',
+                'description' => 'Пенсионные программы',
+                'icon' => '<i class="fas fa-hands-helping"></i>',
+                'url' => '#',
+                'link' => 'Перейти <i class="fas fa-arrow-circle-right"></i>',
+            ],
+            [
+                'col' => 3,
+                'bg' => 'secondary',
+                'title' => 'Отчёты',
+                'description' => 'Статистика и отчёты',
+                'icon' => '<i class="fas fa-file-alt"></i>',
+                'url' => '#',
+                'link' => 'Перейти <i class="fas fa-arrow-circle-right"></i>',
+            ],
+            [
+                'col' => 3,
+                'bg' => 'secondary',
+                'title' => 'KPI',
+                'description' => 'Ключевые показатели',
+                'icon' => '<i class="fas fa-file-alt"></i>',
+                'url' => '#',
+                'link' => 'Перейти <i class="fas fa-arrow-circle-right"></i>',
+            ],
+            [
+                'col' => 3,
+                'bg' => 'primary',
+                'title' => 'Чат',
+                'description' => 'Корпоративный чат',
+                'icon' => '<i class="fas fa-comments"></i>',
+                'url' => '#',
+                'link' => 'Перейти <i class="fas fa-arrow-circle-right"></i>',
             ],
             [
                 'col' => 3,
                 'bg' => 'danger',
-                'title' => '00:00',
-                'description' => 'Всегда свежая информация',
-                'icon' => '<i class="far fa-clock"></i>',
-                'link' => Url::to('news')
+                'title' => 'Admin',
+                'description' => 'Панель администратора',
+                'icon' => '<i class="fas fa-tools"></i>',
+                'url' => Url::to(['/admin/']),
+                'link' => 'Перейти <i class="fas fa-arrow-circle-right"></i>',
             ],
         ];
         return $this->render(
             'index',
             [
-                'list' => $list
+                'list' => $list,
             ]
         );
     }

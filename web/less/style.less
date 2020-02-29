@@ -2,19 +2,22 @@
 .form-group.has-error .help-block {
   color: #dd4b39;
 }
-.form-group.has-error .form-control,
-.form-group.has-error .input-group-addon {
+
+.form-group.has-error .form-control, .form-group.has-error .input-group-addon {
   border-color: #dd4b39;
   box-shadow: none;
 }
+
 .form-group.has-error label {
   color: #dd4b39;
 }
+
 /*Отмечатем звёздочкой поля обязательные для заполнения*/
 div.required label:after {
   content: " *";
   color: red;
 }
+
 /*Стили для колонки управления записями*/
 .grid-view td.action-column {
   white-space: nowrap;
@@ -22,76 +25,95 @@ div.required label:after {
   letter-spacing: 0.1em;
   max-width: 7em;
 }
+
 a.workshop-link {
   font-weight: bold;
   color: #0056b3;
   text-decoration: none;
 }
+
 a.btn-a {
   text-decoration: none;
   color: #ffffff;
 }
+
+
 .tooltip-inner {
   text-align: left;
   min-width: 100px;
   max-width: 100%;
 }
+
 a.a-color-blue {
   color: #007bff;
   text-decoration: none;
 }
+
 a.a-color-blue:hover {
   color: #0056b3;
   text-decoration: none;
 }
+
 .hide {
   display: none !important;
 }
+
+// Мигающие часы на главной странице ----------------------------------------------------------------------------------
 @-webkit-keyframes pulsate {
   0% {
-    opacity: 0;
+    opacity: 0.0;
   }
   50% {
-    opacity: 1;
+    opacity: 1.0;
   }
   100% {
-    opacity: 0;
+    opacity: 0.0;
   }
 }
+
 @-moz-keyframes pulsate {
   0% {
-    opacity: 0;
+    opacity: 0.0;
   }
   50% {
-    opacity: 1;
+    opacity: 1.0;
   }
   100% {
-    opacity: 0;
+    opacity: 0.0;
   }
 }
+
 @keyframes pulsate {
   0% {
-    opacity: 0;
+    opacity: 0.0;
   }
   50% {
-    opacity: 1;
+    opacity: 1.0;
   }
   100% {
-    opacity: 0;
+    opacity: 0.0;
   }
 }
-.clock .del {
-  -webkit-animation: pulsate 1s ease-out;
-  -webkit-animation-iteration-count: infinite;
-  -moz-animation: pulsate 1s ease-out;
-  -moz-animation-iteration-count: infinite;
-  animation: pulsate 1s ease-out;
-  animation-iteration-count: infinite;
-  opacity: 0;
+
+.clock {
+  .del {
+    -webkit-animation: pulsate 1s ease-out;
+    -webkit-animation-iteration-count: infinite;
+    -moz-animation: pulsate 1s ease-out;
+    -moz-animation-iteration-count: infinite;
+    animation: pulsate 1s ease-out;
+    animation-iteration-count: infinite;
+    opacity: 0.0;
+  }
 }
-.curs span {
-  display: none;
-}
-.curs span:first-child {
-  display: inline;
+
+// Биржевые курсы ------------------------------------------------------------------------------------------------------
+.curs {
+
+  span {
+    display: none;
+  }
+  span:first-child{
+    display: inline;
+  }
 }

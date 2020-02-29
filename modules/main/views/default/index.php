@@ -10,118 +10,51 @@ use yii\helpers\Url;
 use yii\widgets\ListView;
 
 ?>
-
-
-<div class="row">
-    <?php
-    foreach ($list as $item) {
-        echo $this->render(
-            'index_item',
-            [
-                'item' => $item
-            ]
-        );
-    }
-    ?>
-</div>
-
-
-<div class="row">
-
-
-
-    <div class="col-md-3">
-        <div class="small-box bg-success">
-            <div class="inner">
-                <h3>Отчёты</h3>
-                <p>Статистика и отчёты</p>
-            </div>
-            <div class="icon">
-                <i class="fas fa-file-alt"></i>
-            </div>
-            <a href="#" class="small-box-footer">Перейти <i class="fas fa-arrow-circle-right"></i></a>
-        </div>
+    <div class="row">
+        <?php
+        foreach ($list as $item) {
+            echo $this->render(
+                'index_item',
+                [
+                    'item' => $item,
+                ]
+            );
+        }
+        ?>
     </div>
+<?php
 
-    <div class="col-md-3">
-        <div class="small-box bg-warning">
-            <div class="inner">
-                <h3>Чат</h3>
-                <p>Общение сотрудников</p>
-            </div>
-            <div class="icon">
-                <i class="fas fa-comments"></i>
-            </div>
-            <a href="#" class="small-box-footer">Перейти <i class="fas fa-arrow-circle-right"></i></a>
-        </div>
-    </div>
-
-    <div class="col-md-3">
-        <div class="small-box bg-danger">
-            <div class="inner">
-                <h3>Админка</h3>
-                <p>Административная панель</p>
-            </div>
-            <div class="icon">
-                <i class="fas fa-tools"></i>
-            </div>
-            <a href="<?= Url::to(['/admin/']); ?>" class="small-box-footer">Перейти <i
-                        class="fas fa-arrow-circle-right"></i></a>
-        </div>
-    </div>
-
-    <div class="col-md-3">
-        <div class="small-box bg-info">
-            <div class="inner">
-                <h3><?= \app\modules\jk\Module::t('module', 'JK') ?></h3>
-                <p><?= \app\modules\jk\Module::t('module', 'jk') ?></p>
-            </div>
-            <div class="icon">
-                <?= Yii::$app->params['module']['jk']['icon'] ?>
-            </div>
-            <a href="<?= Url::to(['/jk/']); ?>" class="small-box-footer">Перейти <i
-                        class="fas fa-arrow-circle-right"></i></a>
-        </div>
-    </div>
-
-    <div class="col-md-3">
-        <div class="small-box bg-info">
-            <div class="inner">
-                <h3>ДМС</h3>
-                <p>Медицинское страхование</p>
-            </div>
-            <div class="icon">
-                <i class="fas fa-heartbeat"></i>
-            </div>
-            <a href="#" class="small-box-footer">Перейти <i class="fas fa-arrow-circle-right"></i></a>
-        </div>
-    </div>
-
-    <div class="col-md-3">
-        <div class="small-box bg-info">
-            <div class="inner">
-                <h3>Путёвки</h3>
-                <p>Путёвки и лечение</p>
-            </div>
-            <div class="icon">
-                <i class="fas fa-plane"></i>
-            </div>
-            <a href="#" class="small-box-footer">Перейти <i class="fas fa-arrow-circle-right"></i></a>
-        </div>
-    </div>
-
-    <div class="col-md-3">
-        <div class="small-box bg-info">
-            <div class="inner">
-                <h3>ПП</h3>
-                <p>Пенсионная программа</p>
-            </div>
-            <div class="icon">
-                <i class="fas fa-hands-helping"></i>
-            </div>
-            <a href="#" class="small-box-footer">Перейти <i class="fas fa-arrow-circle-right"></i></a>
-        </div>
-    </div>
-
-
-</div>
+$this->registerJs(<<<JS
+     // Таймер
+     function time() {
+		var date = new Date();
+		var hou = date.getHours().toString();
+		var min = date.getMinutes().toString();
+		var sec = date.getSeconds().toString();
+		hou = (hou<10)?0+hou:hou;
+		min = (min<10)?0+min:min;
+		sec = (sec<10)?0+sec:sec;
+		$('.clock .hou').html(hou);
+		$('.clock .min').html(min);
+		$('.clock .sec').html(sec);
+		setTimeout(time,1000);
+	}
+	time();
+	
+	// Курсы валют
+	function curs(){
+        if ($('.curs-1').is(":visible")){
+            $(".curs-1").fadeOut(500,"linear");
+            $(".curs-2").fadeIn(800,"linear");
+        }else if ($('.curs-2').is(":visible")){
+            $(".curs-2").fadeOut(500,"linear");
+            $(".curs-3").fadeIn(800,"linear");
+        }else if ($('.curs-3').is(":visible")){
+            $(".curs-3").fadeOut(500,"linear");
+            $(".curs-1").fadeIn(800,"linear");
+        }
+        setTimeout(curs,10000);
+	}
+    curs();
+JS
+);
