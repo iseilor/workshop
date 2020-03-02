@@ -194,6 +194,7 @@ class DefaultController extends Controller
             $user = $user = User::findOne(Yii::$app->user->identity->getId());
             $model->name = $user->username;
             $model->email = $user->email;
+            $model->fio = $user->fio;
             $post = true;
         }
 
