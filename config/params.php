@@ -28,9 +28,9 @@ return [
             'icon' => '<i class="fas fa-user"></i>'
         ]
     ],
-    'file'=>[
-        'img'=>[
-            'extensions'=>'jpg,jpeg,png,bmp'
+    'file' => [
+        'img' => [
+            'extensions' => 'jpg,jpeg,png,bmp'
         ],
     ],
 
@@ -89,9 +89,26 @@ return [
         'chat' => [
             'icon' => '<i class="fas fa-comments"></i>'
         ],
-        'news'=>[
-            'icon'=>'<i class="fas fa-bullhorn"></i>',
-            'path'=>'files/news/'
+        'news' => [
+            'icon' => '<i class="fas fa-bullhorn"></i>',
+            'path' => 'files/news/'
+        ]
+    ],
+
+    //----------------------------------------------------------------------------------------------
+    'widget' => [
+        'MaskedInput' => [
+            // Параметры для денежных полей
+            'clientOptionsMoney' => [
+                'rightAlign' => false,
+                'alias' => 'decimal',
+                'digits' => 0,
+                'digitsOptional' => false,
+                'radixPoint' => ',',
+                'groupSeparator' => ' ',
+                'autoGroup' => true,
+                'removeMaskOnSubmit' => true
+            ]
         ]
     ]
 ];

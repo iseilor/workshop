@@ -1,5 +1,15 @@
-<?= $form->field($model, 'salary')->textInput(['maxlength' => true]) ?>
-<?= $form->field($model, 'total_sum_income')->textInput(['maxlength' => true]) ?>
-<?= $form->field($model, 'total_sum_nalog')->textInput(['maxlength' => true]) ?>
-<?= $form->field($model, 'month_pay')->textInput(['maxlength' => true]) ?>
-<?= $form->field($model, 'month_my_pay')->textInput(['maxlength' => true]) ?>
+<?php
+use yii\widgets\MaskedInput;
+?>
+
+<div class="row">
+    <div class="col-md-6">
+        <?= $form->field($model, 'salary')->widget(MaskedInput::className(), ['clientOptions' => Yii::$app->params['widget']['MaskedInput']['clientOptionsMoney']]) ?>
+        <?= $form->field($model, 'total_sum_income')->widget(MaskedInput::className(), ['clientOptions' => Yii::$app->params['widget']['MaskedInput']['clientOptionsMoney']]) ?>
+        <?= $form->field($model, 'total_sum_nalog')->widget(MaskedInput::className(), ['clientOptions' => Yii::$app->params['widget']['MaskedInput']['clientOptionsMoney']]) ?>
+    </div>
+    <div class="col-md-6">
+        <?= $form->field($model, 'month_pay')->widget(MaskedInput::className(), ['clientOptions' => Yii::$app->params['widget']['MaskedInput']['clientOptionsMoney']]) ?>
+        <?= $form->field($model, 'month_my_pay')->widget(MaskedInput::className(), ['clientOptions' => Yii::$app->params['widget']['MaskedInput']['clientOptionsMoney']]) ?>
+    </div>
+</div>
