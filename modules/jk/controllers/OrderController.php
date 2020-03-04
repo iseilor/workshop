@@ -5,6 +5,7 @@ namespace app\modules\jk\controllers;
 use app\modules\jk\models\OrderStage;
 use app\modules\jk\Module;
 use app\modules\user\models\User;
+use app\modules\user\models\UserChildSearch;
 use Yii;
 use app\modules\jk\models\Order;
 use app\modules\jk\models\OrderSearch;
@@ -142,6 +143,7 @@ class OrderController extends Controller
     {
         $model = $this->findModel($id);
 
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             $model->upload();
 
@@ -159,10 +161,14 @@ class OrderController extends Controller
             }
         }
 
+        $userChildSearchModel = new UserChildSearch();
+        $userChildDataProvider = $userChildSearchModel->search(Yii::$app->request->queryParams);
+
         return $this->render(
             'update',
             [
                 'model' => $model,
+                'userChildDataProvider'=>$userChildDataProvider
             ]
         );
     }

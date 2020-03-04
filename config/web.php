@@ -51,6 +51,7 @@ $config = [
         'news' => [
             'class' => 'app\modules\news\Module',
         ],
+        'gridview' => ['class' => 'kartik\grid\Module']
 
     ],
     'components' => [
@@ -165,6 +166,7 @@ $config = [
             ]
 
         ],
+
     ],
     'params' => $params,
 ];

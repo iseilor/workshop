@@ -4,6 +4,7 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\jk\models\Order */
+/* @var $userChildDataProvider \yii\data\ActiveDataProvider */
 
 $this->title = Yii::t(
     'app',
@@ -22,5 +23,6 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
     '_form',
     [
         'model' => $model,
+        'userChildDataProvider'=>$userChildDataProvider
     ]
 ) ?>

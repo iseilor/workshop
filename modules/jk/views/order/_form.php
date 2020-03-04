@@ -7,6 +7,7 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model app\modules\jk\models\Faq */
 /* @var $form yii\widgets\ActiveForm */
+/* @var $userChildDataProvider \yii\data\ActiveDataProvider */
 ?>
 
     <div class="row">
@@ -45,7 +46,13 @@ use yii\widgets\ActiveForm;
                                 <div class="card-body">
                                     <div class="tab-content" id="custom-tabs-three-tabContent">
                                         <div class="tab-pane fade active show" id="tab-family" role="tabpanel" aria-labelledby="tab-family-tab">
-                                            <?= $this->render('_form_tab_family', ['model' => $model, 'form' => $form]) ?>
+                                            <?= $this->render('_form_tab_family',
+                                                              [
+                                                                  'model' => $model,
+                                                                  'form' => $form,
+                                                                  'userChildDataProvider'=>$userChildDataProvider
+
+                                                              ]) ?>
                                         </div>
                                         <div class="tab-pane fade" id="tab-house" role="tabpanel" aria-labelledby="tab-house-tab">
                                             <?= $this->render('_form_tab_house', ['model' => $model, 'form' => $form]) ?>
