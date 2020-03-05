@@ -1,6 +1,9 @@
 <?php
 
+use kartik\icons\Icon;
+
 return [
+    'icon-framework' => Icon::FAS,
     'adminEmail' => '',
     'supportEmail' => ['obedkinav@ya.ru'],
     'senderEmail' => 'workshop@rt.ru',
@@ -90,9 +93,16 @@ return [
             'icon' => '<i class="fas fa-comments"></i>'
         ],
         'news' => [
-            'icon' => '<i class="fas fa-bullhorn"></i>',
+            'iconClass' => 'newspaper',
+            'icon' => '<i class="fas fa-comments"></i>',
             'path' => 'files/news/'
+        ],
+
+        // Нештатные ситуации
+        'ns' => [
+            'iconClass' => 'bell',
         ]
+
     ],
 
     //----------------------------------------------------------------------------------------------

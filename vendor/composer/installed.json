@@ -168,7 +168,7 @@
         "version_normalized": "3.4.1.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/twbs/bootstrap.git",
+            "url": "git@github.com:twbs/bootstrap.git",
             "reference": "68b0d231a13201eb14acd3dc84e51543d16e5f7e"
         },
         "dist": {
@@ -214,7 +214,7 @@
         "version_normalized": "3.4.1.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/jquery/jquery-dist.git",
+            "url": "git@github.com:jquery/jquery-dist.git",
             "reference": "15bc73803f76bc53b654b9fdbbbc096f56d7c03d"
         },
         "dist": {
@@ -613,6 +613,46 @@
             }
         ],
         "description": "BDD assertion library for PHPUnit"
+    },
+    {
+        "name": "components/flag-icon-css",
+        "version": "3.4.6",
+        "version_normalized": "3.4.6.0",
+        "source": {
+            "type": "git",
+            "url": "git@github.com:lipis/flag-icon-css.git",
+            "reference": "f4376babc181c3753197c269b9086943ea781efc"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/lipis/flag-icon-css/zipball/f4376babc181c3753197c269b9086943ea781efc",
+            "reference": "f4376babc181c3753197c269b9086943ea781efc",
+            "shasum": ""
+        },
+        "time": "2020-02-04T16:13:49+00:00",
+        "type": "component",
+        "extra": {
+            "component": {
+                "name": "flag-icon-css",
+                "files": [
+                    "less/**",
+                    "css/**",
+                    "flags/**"
+                ]
+            }
+        },
+        "installation-source": "dist",
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Panayiotis Lipiridis (Lipis)",
+                "email": "lipiridis@gmail.com"
+            }
+        ],
+        "description": "CSS for vector based country flags"
     },
     {
         "name": "doctrine/instantiator",
@@ -1455,6 +1495,60 @@
             "extension",
             "helper",
             "utilities",
+            "yii",
+            "yii2"
+        ]
+    },
+    {
+        "name": "kartik-v/yii2-icons",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/kartik-v/yii2-icons.git",
+            "reference": "81d174a445d66042f257e2818d6e2e09ebdd8a15"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/kartik-v/yii2-icons/zipball/81d174a445d66042f257e2818d6e2e09ebdd8a15",
+            "reference": "81d174a445d66042f257e2818d6e2e09ebdd8a15",
+            "shasum": ""
+        },
+        "require": {
+            "components/flag-icon-css": "*",
+            "kartik-v/yii2-krajee-base": ">=1.9",
+            "yiisoft/yii2-jui": "*"
+        },
+        "time": "2019-05-25T07:24:34+00:00",
+        "type": "yii2-extension",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.4.x-dev"
+            }
+        },
+        "installation-source": "source",
+        "autoload": {
+            "psr-4": {
+                "kartik\\icons\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Kartik Visweswaran",
+                "email": "kartikv2@gmail.com",
+                "homepage": "http://demos.krajee.com/"
+            }
+        ],
+        "description": "Set of icon frameworks for use in Yii Framework 2.0",
+        "homepage": "https://github.com/kartik-v/yii2-icons",
+        "keywords": [
+            "extension",
+            "font",
+            "icon",
             "yii",
             "yii2"
         ]

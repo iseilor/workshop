@@ -56,6 +56,7 @@ class ComposerStaticInitecbe9ee047cdfe8ad4a5b4da8c33329a
         'k' => 
         array (
             'kartik\\plugins\\fileinput\\' => 25,
+            'kartik\\icons\\' => 13,
             'kartik\\helpers\\' => 15,
             'kartik\\grid\\' => 12,
             'kartik\\form\\' => 12,
@@ -215,6 +216,10 @@ class ComposerStaticInitecbe9ee047cdfe8ad4a5b4da8c33329a
         'kartik\\plugins\\fileinput\\' => 
         array (
             0 => __DIR__ . '/..' . '/kartik-v/bootstrap-fileinput',
+        ),
+        'kartik\\icons\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-icons/src',
         ),
         'kartik\\helpers\\' => 
         array (

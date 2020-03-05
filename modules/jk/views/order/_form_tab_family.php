@@ -11,6 +11,7 @@ if (isset($model->child_count) && $model->child_count > 0) {
 }
 
 use app\components\grid\ActionColumn;
+use kartik\icons\Icon;
 use yii\grid\GridView;
 use yii\widgets\MaskedInput; ?>
 
@@ -52,14 +53,14 @@ use yii\widgets\MaskedInput; ?>
                             'template' => '{delete}',
                             'buttons' => [
                                 'delete' => function ($url,$model) {
-                                    return '<button type="button" class="btn btn-danger btn-xs">Добавить</button>';
+                                    return '<button type="button" class="btn btn-danger btn-xs">'.Icon::show('trash').'</button>';
                                 },
                             ],
                         ],
                     ],
                 ]
             ); ?>
-            <button type="button" class="btn btn-block btn-success btn-xs">Success</button>
+            <button type="button" class="btn btn-success btn-xs"><?=Icon::show('baby')?> Добавить ребёнка</button>
         </div>
     </div>
 

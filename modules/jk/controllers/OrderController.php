@@ -124,10 +124,14 @@ class OrderController extends Controller
             return $this->redirect(['update', 'id' => $model->id]);
         }
 
+        $userChildSearchModel = new UserChildSearch();
+        $userChildDataProvider = $userChildSearchModel->search(Yii::$app->request->queryParams);
+
         return $this->render(
             'create',
             [
                 'model' => $model,
+                'userChildDataProvider'=>$userChildDataProvider
             ]
         );
     }

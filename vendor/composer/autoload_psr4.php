@@ -22,6 +22,7 @@ return array(
     'phpDocumentor\\Reflection\\' => array($vendorDir . '/phpdocumentor/reflection-common/src', $vendorDir . '/phpdocumentor/reflection-docblock/src', $vendorDir . '/phpdocumentor/type-resolver/src'),
     'mihaildev\\ckeditor\\' => array($vendorDir . '/mihaildev/yii2-ckeditor'),
     'kartik\\plugins\\fileinput\\' => array($vendorDir . '/kartik-v/bootstrap-fileinput'),
+    'kartik\\icons\\' => array($vendorDir . '/kartik-v/yii2-icons/src'),
     'kartik\\helpers\\' => array($vendorDir . '/kartik-v/yii2-helpers/src'),
     'kartik\\grid\\' => array($vendorDir . '/kartik-v/yii2-grid/src'),
     'kartik\\form\\' => array($vendorDir . '/kartik-v/yii2-widget-activeform/src'),

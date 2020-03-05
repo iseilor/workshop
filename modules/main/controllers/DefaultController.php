@@ -6,6 +6,7 @@ use app\modules\jk\Module;
 use app\modules\main\models\ContactForm;
 use app\modules\user\models\User;
 use DateTime;
+use kartik\icons\Icon;
 use Yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
@@ -170,6 +171,16 @@ class DefaultController extends Controller
                 'url' => Url::to(['/admin/']),
                 'link' => 'Перейти <i class="fas fa-arrow-circle-right"></i>',
             ],
+            [
+                'col' => 3,
+                'bg' => 'secondary',
+                'title' => 'Аварии',
+                'description' => 'Нештатные ситуации',
+                'icon' => Icon::show(Yii::$app->params['module']['ns']['iconClass']),
+                'url' => '#',
+                'link' => 'Перейти <i class="fas fa-arrow-circle-right"></i>',
+            ],
+
         ];
         return $this->render(
             'index',

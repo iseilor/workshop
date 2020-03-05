@@ -31,7 +31,8 @@
         "yiisoft/yii2-httpclient": "~2.0.0",
         "mihaildev/yii2-ckeditor": "*",
         "vova07/yii2-imperavi-widget": "*",
-        "kartik-v/yii2-builder": "dev-master"
+        "kartik-v/yii2-builder": "dev-master",
+        "kartik-v/yii2-icons": "@dev"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
