@@ -40,7 +40,7 @@ $img = $bundle->baseUrl . '/img/percent_form_family_income_black.png';
             ); ?>
             <div class="card-body">
                 <div class="row">
-                    <div class="callout callout-info">
+                    <!--<div class="callout callout-info">
                         <h5>Инструкция по работе с калькулятором суммы компенсации процентов</h5>
                         <ul>
                             <li>Начните заполнять форму и вы увидите <strong>подсказки</strong> и примеры заполнения по каждому полю</li>
@@ -58,7 +58,7 @@ $img = $bundle->baseUrl . '/img/percent_form_family_income_black.png';
                                 интересующие вас вопросы
                             </li>
                         </ul>
-                    </div>
+                    </div>-->
                     <div class="col-md-4">
                         <?= $form->field($model, 'family_count')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['family_count']]) ?>
                         <?= $form->field($model, 'family_income')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription($img)['family_income']]) ?>

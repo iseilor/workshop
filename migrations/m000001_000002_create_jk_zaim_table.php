@@ -23,31 +23,28 @@ class m000001_000002_create_jk_zaim_table extends Migration
         $this->createTable('{{%jk_zaim}}', [
             'id' => Schema::TYPE_PK,
 
-            'created_at' => Schema::TYPE_DATETIME . ' NOT NULL',
-            'created_by' => Schema::TYPE_INTEGER . ' NOT NULL',
-            'updated_at' => Schema::TYPE_DATETIME,
-            'updated_by' => Schema::TYPE_INTEGER,
-            'deleted_at' => Schema::TYPE_DATETIME,
-            'deleted_by' => Schema::TYPE_INTEGER,
+            'created_at' => $this->integer()->notNull(),
+            'created_by' => $this->integer()->notNull(),
+            'updated_at' => $this->integer(),
+            'updated_by' => $this->integer(),
+            'deleted_at' => $this->integer(),
+            'deleted_by' => $this->integer(),
 
-            'date_birth' => Schema::TYPE_INTEGER . ' NOT NULL',
-            'gender' => Schema::TYPE_BOOLEAN . ' NOT NULL',
-            'experience' => Schema::TYPE_INTEGER . ' NOT NULL',
+            'date_birth' => $this->integer()->notNull(),
+            'gender' => $this->boolean()->notNull(),
+            'experience' => $this->integer()->notNull(),
 
-            'family_count'=> Schema::TYPE_INTEGER . ' NOT NULL',
-            'family_income'=> Schema::TYPE_INTEGER . ' NOT NULL',
+            'family_count'=> $this->integer()->notNull(),
+            'family_income'=> $this->double()->notNull(),
 
             'area_total'=> $this->double()->notNull(),
             'area_buy'=> $this->double()->notNull(),
 
             'cost_total'=> $this->double()->notNull(),
-            'cost_user' => $this->double()->notNull(),
-            'bank_credit' => $this->double(),
+            'min_id'=> $this->integer()->notNull(),
 
-            'min_id'=> Schema::TYPE_INTEGER . ' NOT NULL',
-
-            'compensation_count'=> Schema::TYPE_INTEGER . ' NOT NULL',
-            'compensation_years'=> Schema::TYPE_INTEGER. ' NOT NULL'
+            'compensation_count'=> $this->integer()->notNull(),
+            'compensation_years'=> $this->integer()->notNull(),
 
         ], $tableOptions);
     }

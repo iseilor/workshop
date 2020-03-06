@@ -112,8 +112,8 @@ return [
             'clientOptionsMoney' => [
                 'rightAlign' => false,
                 'alias' => 'decimal',
-                'digits' => 0,
-                'digitsOptional' => false,
+                'digits' => 2,
+                'digitsOptional' => true,
                 'radixPoint' => ',',
                 'groupSeparator' => ' ',
                 'autoGroup' => true,
