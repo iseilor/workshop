@@ -168,7 +168,7 @@
         "version_normalized": "3.4.1.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/twbs/bootstrap.git",
+            "url": "git@github.com:twbs/bootstrap.git",
             "reference": "68b0d231a13201eb14acd3dc84e51543d16e5f7e"
         },
         "dist": {
@@ -257,7 +257,7 @@
         "version_normalized": "1.3.2.0",
         "source": {
             "type": "git",
-            "url": "git@github.com:bestiejs/punycode.js.git",
+            "url": "https://github.com/bestiejs/punycode.js.git",
             "reference": "38c8d3131a82567bfef18da09f7f4db68c84f8a3"
         },
         "dist": {
@@ -1026,8 +1026,8 @@
     },
     {
         "name": "illuminate/contracts",
-        "version": "v6.17.1",
-        "version_normalized": "6.17.1.0",
+        "version": "v6.16.0",
+        "version_normalized": "6.16.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/illuminate/contracts.git",
@@ -1917,17 +1917,17 @@
     },
     {
         "name": "phpdocumentor/reflection-docblock",
-        "version": "5.1.0",
-        "version_normalized": "5.1.0.0",
+        "version": "5.0.0",
+        "version_normalized": "5.0.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
-            "reference": "cd72d394ca794d3466a3b2fc09d5a6c1dc86b47e"
+            "reference": "a48807183a4b819072f26e347bbd0b5199a9d15f"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/cd72d394ca794d3466a3b2fc09d5a6c1dc86b47e",
-            "reference": "cd72d394ca794d3466a3b2fc09d5a6c1dc86b47e",
+            "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/a48807183a4b819072f26e347bbd0b5199a9d15f",
+            "reference": "a48807183a4b819072f26e347bbd0b5199a9d15f",
             "shasum": ""
         },
         "require": {
@@ -1941,7 +1941,7 @@
             "doctrine/instantiator": "^1",
             "mockery/mockery": "^1"
         },
-        "time": "2020-02-22T12:28:44+00:00",
+        "time": "2020-02-09T09:16:15+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1972,28 +1972,29 @@
     },
     {
         "name": "phpdocumentor/type-resolver",
-        "version": "1.1.0",
-        "version_normalized": "1.1.0.0",
+        "version": "1.0.1",
+        "version_normalized": "1.0.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/phpDocumentor/TypeResolver.git",
-            "reference": "7462d5f123dfc080dfdf26897032a6513644fc95"
+            "reference": "2e32a6d48972b2c1976ed5d8967145b6cec4a4a9"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/7462d5f123dfc080dfdf26897032a6513644fc95",
-            "reference": "7462d5f123dfc080dfdf26897032a6513644fc95",
+            "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/2e32a6d48972b2c1976ed5d8967145b6cec4a4a9",
+            "reference": "2e32a6d48972b2c1976ed5d8967145b6cec4a4a9",
             "shasum": ""
         },
         "require": {
-            "php": "^7.2",
+            "php": "^7.1",
             "phpdocumentor/reflection-common": "^2.0"
         },
         "require-dev": {
-            "ext-tokenizer": "^7.2",
-            "mockery/mockery": "~1"
+            "ext-tokenizer": "^7.1",
+            "mockery/mockery": "~1",
+            "phpunit/phpunit": "^7.0"
         },
-        "time": "2020-02-18T18:59:58+00:00",
+        "time": "2019-08-22T18:11:29+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -4462,17 +4463,17 @@
     },
     {
         "name": "tightenco/collect",
-        "version": "v6.17.0",
-        "version_normalized": "6.17.0.0",
+        "version": "v6.16.0",
+        "version_normalized": "6.16.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/tightenco/collect.git",
-            "reference": "bc554bfb79fc02b4e6e1dd463a7fa8470119e9ab"
+            "reference": "75e997d1803c2e979ce6f314a5df8a97a8af93b0"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/tightenco/collect/zipball/bc554bfb79fc02b4e6e1dd463a7fa8470119e9ab",
-            "reference": "bc554bfb79fc02b4e6e1dd463a7fa8470119e9ab",
+            "url": "https://api.github.com/repos/tightenco/collect/zipball/75e997d1803c2e979ce6f314a5df8a97a8af93b0",
+            "reference": "75e997d1803c2e979ce6f314a5df8a97a8af93b0",
             "shasum": ""
         },
         "require": {
@@ -4484,7 +4485,7 @@
             "nesbot/carbon": "^2.23.0",
             "phpunit/phpunit": "^7.0"
         },
-        "time": "2020-02-25T19:45:47+00:00",
+        "time": "2020-02-18T17:25:13+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {

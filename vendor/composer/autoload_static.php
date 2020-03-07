@@ -56,12 +56,16 @@ class ComposerStaticInitecbe9ee047cdfe8ad4a5b4da8c33329a
         'k' => 
         array (
             'kartik\\plugins\\fileinput\\' => 25,
+            'kartik\\icons\\' => 13,
             'kartik\\helpers\\' => 15,
+            'kartik\\grid\\' => 12,
             'kartik\\form\\' => 12,
             'kartik\\file\\' => 12,
             'kartik\\field\\' => 13,
+            'kartik\\dialog\\' => 14,
             'kartik\\datetime\\' => 16,
             'kartik\\date\\' => 12,
+            'kartik\\builder\\' => 15,
             'kartik\\base\\' => 12,
         ),
         'c' => 
@@ -213,9 +217,17 @@ class ComposerStaticInitecbe9ee047cdfe8ad4a5b4da8c33329a
         array (
             0 => __DIR__ . '/..' . '/kartik-v/bootstrap-fileinput',
         ),
+        'kartik\\icons\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-icons/src',
+        ),
         'kartik\\helpers\\' => 
         array (
             0 => __DIR__ . '/..' . '/kartik-v/yii2-helpers/src',
+        ),
+        'kartik\\grid\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-grid/src',
         ),
         'kartik\\form\\' => 
         array (
@@ -229,6 +241,10 @@ class ComposerStaticInitecbe9ee047cdfe8ad4a5b4da8c33329a
         array (
             0 => __DIR__ . '/..' . '/kartik-v/yii2-field-range/src',
         ),
+        'kartik\\dialog\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-dialog/src',
+        ),
         'kartik\\datetime\\' => 
         array (
             0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-datetimepicker/src',
@@ -236,6 +252,10 @@ class ComposerStaticInitecbe9ee047cdfe8ad4a5b4da8c33329a
         'kartik\\date\\' => 
         array (
             0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-datepicker/src',
+        ),
+        'kartik\\builder\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-builder/src',
         ),
         'kartik\\base\\' => 
         array (

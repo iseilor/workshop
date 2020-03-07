@@ -27,8 +27,6 @@ use yii\db\Expression;
  * @property int $area_total
  * @property int $area_buy
  * @property int $cost_total
- * @property int $cost_user
- * @property int $bank_credit
  * @property int $min_id
  * @property int|null $compensation_count
  * @property int|null $compensation_years
@@ -50,7 +48,7 @@ class Zaim extends Model
     {
         return [
             [
-                ['date_birth', 'gender', 'experience', 'family_count', 'family_income', 'area_total', 'area_buy', 'cost_total', 'cost_user', 'min_id'],
+                ['date_birth', 'gender', 'experience', 'family_count', 'family_income', 'area_total', 'area_buy', 'cost_total', 'min_id'],
                 'required'
             ],
             [['created_at', 'updated_at', 'date_birth'], 'safe'],
@@ -60,10 +58,7 @@ class Zaim extends Model
                     'updated_by',
                     'gender',
                     'experience',
-                    'family_count',
-                    'family_income',
-                    'compensation_count',
-                    'compensation_years'
+                    'family_count'
                 ],
                 'integer'
             ],
@@ -73,14 +68,14 @@ class Zaim extends Model
             ['family_count', 'compare', 'compareValue' => 0, 'operator' => '>', 'type' => 'number'],
             ['family_count', 'compare', 'compareValue' => 10, 'operator' => '<=', 'type' => 'number'],
 
-            // Доход на одного члена семьи
-            ['family_income', 'compare', 'compareValue' => 0, 'operator' => '>', 'type' => 'number'],
-            ['family_income', 'compare', 'compareValue' => 1000000, 'operator' => '<=', 'type' => 'number'],
+
+            [['family_income','area_total','area_buy','cost_total'],'filter',
+                'filter' => function ($value) {
+                    return str_replace(" ", "", $value);
+                }
+            ],
 
             // Кол-во имеющегося жилья
-            [['area_total'], 'match', 'pattern' => '/^\s*[-+]?[0-9]*[.,]?[0-9]+([eE][-+]?[0-9]+)?\s*$/'],
-            ['area_total', 'compare', 'compareValue' => 0, 'operator' => '>=', 'type' => 'number'],
-            ['area_total', 'compare', 'compareValue' => 1000, 'operator' => '<=', 'type' => 'number'],
             [
                 ['area_total', 'family_count'],
                 function () {
@@ -92,40 +87,6 @@ class Zaim extends Model
                     }
                 }
             ],
-
-            // Кол-во приобритаемого жилья
-            [['area_buy'], 'match', 'pattern' => '/^\s*[-+]?[0-9]*[.,]?[0-9]+([eE][-+]?[0-9]+)?\s*$/'],
-            ['area_buy', 'compare', 'compareValue' => 1, 'operator' => '>=', 'type' => 'number'],
-            ['area_buy', 'compare', 'compareValue' => 500, 'operator' => '<=', 'type' => 'number'],
-
-            // Полная стоимость жилья
-            [['cost_total'], 'match', 'pattern' => '/^\s*[-+]?[0-9]*[.,]?[0-9]+([eE][-+]?[0-9]+)?\s*$/'],
-            ['cost_total', 'compare', 'compareValue' => 1, 'operator' => '>=', 'type' => 'number'],
-            ['cost_total', 'compare', 'compareValue' => 10000000, 'operator' => '<=', 'type' => 'number'],
-            [
-                ['cost_total', 'cost_user', 'bank_credit'],
-                function () {
-                    if (!isset($this->bank_credit) || $this->bank_credit==''){
-                        $this->bank_credit= 0;
-                    }
-                    if ($this->cost_total - $this->cost_user - $this->bank_credit>1000000) {
-                        $this->addError('cost_total', 'Полная стоимость жилья должна = собственные средства + ипотека + займ (который вам может выдать компания, но не более 1 млн.руб)');
-                    }
-                    if ($this->cost_total < $this->cost_user + $this->bank_credit) {
-                        $this->addError('cost_total', 'Полная стоимость жилья не может быть меньше суммы собственных средств и ипотеки в банке');
-                    }
-                }
-            ],
-
-            // Собственные средства работника
-            [['cost_user'], 'match', 'pattern' => '/^\s*[-+]?[0-9]*[.,]?[0-9]+([eE][-+]?[0-9]+)?\s*$/'],
-            ['cost_user', 'compare', 'compareValue' => 0, 'operator' => '>=', 'type' => 'number'],
-            ['cost_user', 'compare', 'compareValue' => 10000000, 'operator' => '<=', 'type' => 'number'],
-
-            // Размер кредита в банке
-            [['bank_credit'], 'match', 'pattern' => '/^\s*[-+]?[0-9]*[.,]?[0-9]+([eE][-+]?[0-9]+)?\s*$/'],
-            ['bank_credit', 'compare', 'compareValue' => 0, 'operator' => '>=', 'type' => 'number'],
-            ['bank_credit', 'compare', 'compareValue' => 10000000, 'operator' => '<=', 'type' => 'number'],
         ];
     }
 
@@ -150,8 +111,6 @@ class Zaim extends Model
             'area_total' => Module::t('module', 'Area Total'),
             'area_buy' => Module::t('module', 'Area Buy'),
             'cost_total' => Module::t('module', 'Cost Total'),
-            'cost_user' => Module::t('module', 'Cost User'),
-            'bank_credit' => Module::t('module', 'Bank Credit'),
             'min_id' => Module::t('module', 'RF Area'),
             'compensation_count' => Module::t('module', 'Compensation Count'),
             'compensation_years' => Module::t('module', 'Compensation Years'),
@@ -180,8 +139,6 @@ class Zaim extends Model
             'area_total' => 'Рассчитывается без учета приобретаемого жилья (с помощью Жилищной программы),<br>и с учетом жилых помещений, по которым в течение 5 лет до подачи заявления осуществлялись сделки ',
             'area_buy' => 'Поле должно быть не меньше 1',
             'cost_total' => 'Полная стоимость жилья = Собственные средства работника + Размер кредита Банка + Размер займа (если предоставлялся)',
-            'cost_user' => 'Собственные средства работника',
-            'bank_credit' => 'Данные вводятся без учёта требуемого займа',
             'min_id' => Module::t('module', 'RF Area'),
         ];
     }
@@ -210,8 +167,6 @@ class Zaim extends Model
                             и с учетом жилых / не жилых помещений, по которым в течение 5 лет до подачи<br>
                             заявления осуществлялись сделки ',
             'area_buy' => 'Поле должно быть не меньше 1',
-            'cost_total' => 'Полная стоимость жилья = Собственные средства работника + Размер кредита Банка + Размер займа (если предоставлялся)',
-            'cost_user' => 'Собственные средства работника',
             'bank_credit' => 'Данные вводятся без учёта требуемого займа',
 
         ];
@@ -226,26 +181,7 @@ class Zaim extends Model
         return new ZaimQuery(get_called_class());
     }
 
-    public function behaviors()
-    {
-        return [
-            'timestamp' => [
-                'class' => TimestampBehavior::className(),
-                'attributes' => [
-                    BaseActiveRecord::EVENT_BEFORE_INSERT => ['created_at'],
-                    BaseActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
-                ],
-                'value' => function () {
-                    return new Expression('NOW()');
-                },
-            ],
-            [
-                'class' => BlameableBehavior::className(),
-                'createdByAttribute' => 'created_by',
-                //'updatedByAttribute' => 'updated_by',
-            ],
-        ];
-    }
+
 
     public function getMin()
     {
@@ -258,10 +194,7 @@ class Zaim extends Model
         // Заменяем запятые на точки
         $this->area_total = str_replace(",", ".", $this->area_total);
         $this->area_buy = str_replace(",", ".", $this->area_buy);
-
         $this->cost_total = str_replace(",", ".", $this->cost_total);
-        $this->cost_user = str_replace(",", ".", $this->cost_user);
-        $this->bank_credit = str_replace(",", ".", $this->bank_credit);
         return parent::beforeValidate();
     }
 
@@ -317,34 +250,36 @@ class Zaim extends Model
         }
 
         // Вариант 2 -------------------------------------------------------------------------------------------------
-        $KNP = Module::getKNP($this->family_count); // Корпоративная норма площади жилья KNP
-        // Коэффициент
-        $koef = $KNP / ($this->area_buy - $this->cost_user * $this->area_buy / $this->cost_total);
-        $koef = min($koef, 1);
-        // Максимальный размер займа (Вариант 2)
-        $maxMoney2 = $koef * ($this->cost_total - $this->cost_user - $this->bank_credit);
+        // $KNP = Module::getKNP($this->family_count); // Корпоративная норма площади жилья KNP
+        // // Коэффициент
+        // // $koef = $KNP / ($this->area_buy - $this->cost_user * $this->area_buy / $this->cost_total);
+        // // $koef = min($koef, 1);
+        // // Максимальный размер займа (Вариант 2)
+        // // $maxMoney2 = $koef * ($this->cost_total - $this->cost_user - $this->bank_credit);
+        // // C учётом правок, получаем, что необходимость всегда 1 млн руб
+        //
+        $maxMoney2 = 1000000;
 
         // Вариант 3 -------------------------------------------------------------------------------------------------
-        // Потребность
-        $need = $this->cost_total-$this->cost_user-$this->bank_credit;
-        // Превышение корпоративной нормы
-        $pkn = $this->area_buy-$KNP;
-        // Площадь оплачиваемая работником за счёт собственных средств
-        $porsss = ($this->cost_user+$this->bank_credit)/$this->cost_total*$this->area_buy;
-        // Коэффициент учёта корпоративной нормы
-        $kukn = $KNP/($this->area_buy-$porsss);
-        if ($kukn>1){
-            $kukn = 1;
-        }
-
-        // Максимальный размер займа
-        $mrz = $kukn*$this->cost_total;
-        $maxMoney3 = min($mrz, $need, 1000000);
-        $maxMoney3 = round($maxMoney3,-3);
-
+        // // Потребность
+        // $need = $this->cost_total-$this->cost_user-$this->bank_credit;
+        // // Превышение корпоративной нормы
+        // $pkn = $this->area_buy-$KNP;
+        // // Площадь оплачиваемая работником за счёт собственных средств
+        // $porsss = ($this->cost_user+$this->bank_credit)/$this->cost_total*$this->area_buy;
+        // // Коэффициент учёта корпоративной нормы
+        // $kukn = $KNP/($this->area_buy-$porsss);
+        // if ($kukn>1){
+        //     $kukn = 1;
+        // }
+        // // Максимальный размер займа
+        // $mrz = $kukn*$this->cost_total;
+        // $maxMoney3 = min($mrz, $need, 1000000);
+        // $maxMoney3 = round($maxMoney3,-3);
+        $maxMoney3 = 1000000;
 
         // Выбираем минимальное значение или 1 млн рублей
-        $this->compensation_count = min($maxMoney1, $maxMoney3, 1000000);
+        $this->compensation_count = min($maxMoney1, $maxMoney2,$maxMoney3);
     }
 
 }

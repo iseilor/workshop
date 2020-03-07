@@ -1,6 +1,9 @@
 <?php
 
+use kartik\icons\Icon;
+
 return [
+    'icon-framework' => Icon::FAS,
     'adminEmail' => '',
     'supportEmail' => ['obedkinav@ya.ru'],
     'senderEmail' => 'workshop@rt.ru',
@@ -28,9 +31,9 @@ return [
             'icon' => '<i class="fas fa-user"></i>'
         ]
     ],
-    'file'=>[
-        'img'=>[
-            'extensions'=>'jpg,jpeg,png,bmp'
+    'file' => [
+        'img' => [
+            'extensions' => 'jpg,jpeg,png,bmp'
         ],
     ],
 
@@ -89,9 +92,33 @@ return [
         'chat' => [
             'icon' => '<i class="fas fa-comments"></i>'
         ],
-        'news'=>[
-            'icon'=>'<i class="fas fa-bullhorn"></i>',
-            'path'=>'files/news/'
+        'news' => [
+            'iconClass' => 'newspaper',
+            'icon' => '<i class="fas fa-comments"></i>',
+            'path' => 'files/news/'
+        ],
+
+        // Нештатные ситуации
+        'ns' => [
+            'iconClass' => 'bell',
+        ]
+
+    ],
+
+    //----------------------------------------------------------------------------------------------
+    'widget' => [
+        'MaskedInput' => [
+            // Параметры для денежных полей
+            'clientOptionsMoney' => [
+                'rightAlign' => false,
+                'alias' => 'decimal',
+                'digits' => 2,
+                'digitsOptional' => true,
+                'radixPoint' => ',',
+                'groupSeparator' => ' ',
+                'autoGroup' => true,
+                'removeMaskOnSubmit' => true
+            ]
         ]
     ]
 ];

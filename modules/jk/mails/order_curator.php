@@ -18,6 +18,8 @@ use yii\helpers\Url;
     <li><strong>ФИО сотрудника:</strong> <?=$user->fio?></li>
     <li><strong>Должность:</strong> <?=$user->position?></li>
     <li><strong>Подразделение:</strong> <?=$user->work_department?></li>
+    <li><strong>Адрес:</strong> <?=$user->work_address?></li>
+
     <li><strong>Номер заявки:</strong> <?=$order->id?></li>
 </ul>
 <?php

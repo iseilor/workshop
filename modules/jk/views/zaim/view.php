@@ -56,7 +56,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'cost_user',
             'bank_credit',
             'min.title',
-            'compensation_result',
             'compensation_count',
             'compensation_years',
         ],

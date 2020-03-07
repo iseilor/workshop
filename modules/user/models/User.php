@@ -34,6 +34,7 @@ use yii\web\IdentityInterface;
  * @property boolean $work_department
  * @property boolean $work_department_full
  * @property boolean $work_phone
+ * @property string  $work_address
  * @property int $user_social_id
  *
  * PASSPORT -------------------------------------------------------

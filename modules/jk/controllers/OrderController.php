@@ -5,6 +5,7 @@ namespace app\modules\jk\controllers;
 use app\modules\jk\models\OrderStage;
 use app\modules\jk\Module;
 use app\modules\user\models\User;
+use app\modules\user\models\UserChildSearch;
 use Yii;
 use app\modules\jk\models\Order;
 use app\modules\jk\models\OrderSearch;
@@ -123,10 +124,14 @@ class OrderController extends Controller
             return $this->redirect(['update', 'id' => $model->id]);
         }
 
+        $userChildSearchModel = new UserChildSearch();
+        $userChildDataProvider = $userChildSearchModel->search(Yii::$app->request->queryParams);
+
         return $this->render(
             'create',
             [
                 'model' => $model,
+                'userChildDataProvider'=>$userChildDataProvider
             ]
         );
     }
@@ -141,6 +146,7 @@ class OrderController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             $model->upload();
@@ -159,10 +165,14 @@ class OrderController extends Controller
             }
         }
 
+        $userChildSearchModel = new UserChildSearch();
+        $userChildDataProvider = $userChildSearchModel->search(Yii::$app->request->queryParams);
+
         return $this->render(
             'update',
             [
                 'model' => $model,
+                'userChildDataProvider'=>$userChildDataProvider
             ]
         );
     }
@@ -248,7 +258,7 @@ class OrderController extends Controller
                 ]
             )
                 ->setFrom('workshop@tr.ru')
-                ->setTo($user->email)
+                ->setTo($curator->email)
                 ->setSubject('WORKSHOP / ЖК / Куратору')
                 ->send();
         }
