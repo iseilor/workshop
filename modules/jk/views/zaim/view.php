@@ -53,8 +53,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'area_total',
             'area_buy',
             'cost_total',
-            'cost_user',
-            'bank_credit',
             'min.title',
             'compensation_count',
             'compensation_years',

@@ -4,10 +4,12 @@
 use app\components\grid\ActionColumn;
 use app\components\grid\LinkColumn;
 use app\modules\jk\models\OrderStatus;
+use kartik\icons\Icon;
 use yii\grid\GridView;
+use yii\helpers\Html;
 use yii\helpers\Url; ?>
 
-<h3>Мои заявки по жилищной кампании</h3>
+    <h3>Мои заявки по жилищной кампании</h3>
 <?= GridView::widget(
     [
         'dataProvider' => $orderDataProvider,
@@ -37,10 +39,19 @@ use yii\helpers\Url; ?>
                     return $status->getProgressBar();
                 }
             ],
+
             [
                 'class' => ActionColumn::className(),
                 'controller' => '/jk/order',
-            ]
+                'template' => '{view} {history} {delete}',
+                'buttons' => [
+                    'history' => function ($url, $model) {
+                        return Html::a(Icon::show('history'),
+                                       Url::to(['/jk/order/' . $model->id . '/history']),
+                                       ['class' => 'btn btn-sm btn-info','title'=>'История движения заявки']);
+                    },
+                ],
+            ],
         ],
     ]
 ) ?>

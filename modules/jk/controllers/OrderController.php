@@ -3,6 +3,8 @@
 namespace app\modules\jk\controllers;
 
 use app\modules\jk\models\OrderStage;
+use app\modules\jk\models\OrderStageSearch;
+use app\modules\jk\models\ZaimSearch;
 use app\modules\jk\Module;
 use app\modules\user\models\User;
 use app\modules\user\models\UserChildSearch;
@@ -121,6 +123,14 @@ class OrderController extends Controller
 
         $model->status_id = 1;
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            // Сразу делаем первый этап, когда была создана заявка
+            $orderStage = new OrderStage();
+            $orderStage->order_id=$model->id;
+            $orderStage->status_id = 1;
+            $orderStage->comment = 'Автоматический комментарий: заявка создана сотрудником на портале';
+            $orderStage->save();
+
             return $this->redirect(['update', 'id' => $model->id]);
         }
 
@@ -151,8 +161,16 @@ class OrderController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             $model->upload();
 
+            // Отправлено на проверку куратору
             if (isset(Yii::$app->request->post()['check'])) {
                 $model->status_id = 2;
+
+                $orderStage = new OrderStage();
+                $orderStage->order_id = $id;
+                $orderStage->status_id = 2;
+                $orderStage->comment = 'Заявка переведена для проверки куратором';
+                $orderStage->save();
+
             }
             $model->save();
 
@@ -202,6 +220,24 @@ class OrderController extends Controller
                 'order' => $this->findModel($id),
                 'stage' => $orderStage,
                 'user' => User::findOne($this->findModel($id)->created_by)
+            ]
+        );
+    }
+
+
+    public function actionHistory($id)
+    {
+
+        // Займы текущего пользователя
+        $orderStageSearchModel = new OrderStageSearch();
+        $stages = $orderStageSearchModel->search(['OrderStageSearch'=>['order_id' => $id]]);
+
+
+        return $this->render(
+            'history',
+            [
+                'model' => $this->findModel($id),
+                'stages'=>$stages
             ]
         );
     }

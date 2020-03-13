@@ -36,8 +36,8 @@ class OrderStage extends Model
     {
         return [
             [['order_id', 'status_id', 'comment'], 'required'],
-            [['created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by', 'status_id'], 'integer'],
-            [['order_id', 'comment'], 'string', 'max' => 255],
+            [['created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by', 'status_id','order_id'], 'integer'],
+            [[ 'comment'], 'string', 'max' => 255],
         ];
     }
 

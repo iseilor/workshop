@@ -16,6 +16,7 @@ use Yii;
  * @property int|null $deleted_at
  * @property int|null $deleted_by
  * @property string $title
+ * @property string $title_long
  * @property int|null $progress
  * @property string|null $color
  * @property string|null $description
@@ -36,10 +37,10 @@ class OrderStatus extends Model
     public function rules()
     {
         return [
-            [['created_at', 'created_by', 'title'], 'required'],
+            [['created_at', 'created_by', 'title','title_long','icon'], 'required'],
             [['created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by', 'progress'], 'integer'],
             [['description'], 'string'],
-            [['title', 'color'], 'string', 'max' => 255],
+            [['title', 'color','long','icon'], 'string', 'max' => 255],
         ];
     }
 

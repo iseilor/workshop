@@ -31,7 +31,7 @@ class m000001_000008_create_jk_order_stage_table extends Migration
                 'updated_by' => $this->integer(),
                 'deleted_at' => $this->integer(),
                 'deleted_by' => $this->integer(),
-                'order_id' => $this->string()->notNull(),
+                'order_id' => $this->integer()->notNull(),
                 'status_id' => $this->integer()->notNull(),
                 'comment' => $this->string()->notNull()
 

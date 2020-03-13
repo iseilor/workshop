@@ -412,4 +412,10 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return Yii::$app->view->renderFile('@app/modules/user/views/default/tooltip.php', ['model' => $this]);
     }
+
+    // Ссылка на пользователя
+    public static function getUserLink($id){
+        $user = User::findOne($id);
+        return Yii::$app->view->renderFile('@app/modules/user/views/default/ling.php', ['model' => $user]);
+    }
 }
