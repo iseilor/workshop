@@ -6,7 +6,7 @@ use yii\db\Schema;
 /**
  * Handles the creation of table `{{%jk_zaim}}`.
  */
-class m000001_000002_create_jk_zaim_table extends Migration
+class m000001_000020_create_jk_zaim_table extends Migration
 {
     /**
      * {@inheritdoc}

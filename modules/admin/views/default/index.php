@@ -81,6 +81,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 Html::a('Заявки', Url::to('jk/order/admin')),
                                 Html::a('Вопросы', Url::to('jk/faq/admin')),
                                 Html::a('Документы', Url::to('jk/doc/admin')),
+                                Html::a('Типы займов', Url::to('jk/zaim-type/index')),
                             ],
                             [
                                 'item' => function ($item, $index) {

@@ -50,6 +50,9 @@ class Order extends Model
             // Семья
             [['is_spouse','spouse_fio','spouse_is_dzo','spouse_is_do','spouse_is_work','child_count','child_count_18','child_count_23'],'safe'],
 
+            // Жильё
+            [['zaim_type'],'safe'],
+
             // Доходы
             [['salary', 'total_sum_income', 'total_sum_nalog', 'month_pay', 'month_my_pay'], 'safe'],
             [
@@ -95,6 +98,7 @@ class Order extends Model
             'child_count_23' => Module::t('module', 'Child Count 23'),
 
             // Жильё
+            'zaim_type' => Module::t('zaim_type', 'Zaim Type'),
             'is_participate' => Module::t('module', 'Is Participate'),
             'percent_sum' => Module::t('module', 'Percent Sum'),
             'target_mortgage' => Module::t('module', 'Target Mortgage'),

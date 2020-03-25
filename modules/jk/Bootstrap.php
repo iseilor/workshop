@@ -15,6 +15,7 @@ class Bootstrap implements BootstrapInterface
             'basePath' => '@app/modules/jk/messages',
             'fileMap' => [
                 'modules/jk/module' => 'module.php',
+                'modules/jk/zaim_type' => 'zaim_type.php',
             ],
         ];
     }

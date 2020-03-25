@@ -55,6 +55,8 @@ class m000001_000006_create_jk_order_table extends Migration
                 'child_count_23'=> $this->integer(),    // Кол-во до 23 лет
 
                 // Жильё
+                'zaim_type'=>$this->integer(),          // Тип займа
+
                 'is_participate'=>$this->boolean(),     // Ранее не участоваол
                 'percent_sum'=>$this->text(),           // Сумма процентов
                 'target_mortgage'=>$this->integer(),    // Цель ипотеки
