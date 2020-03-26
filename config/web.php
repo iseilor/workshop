@@ -7,7 +7,11 @@ $params = ArrayHelper::merge(
     require(__DIR__ . '/params.php'),
     require(__DIR__ . '/params-local.php')
 );
-$db = require __DIR__ . '/db.php';
+
+$db = ArrayHelper::merge(
+    require(__DIR__ . '/db.php'),
+    require(__DIR__ . '/db-local.php')
+);
 
 $config = [
     'id' => 'WORKSHOP',
