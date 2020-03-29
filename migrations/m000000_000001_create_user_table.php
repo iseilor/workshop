@@ -45,6 +45,7 @@ class m000000_000001_create_user_table extends Migration
             'work_department'=> $this->string(),        // Подразделение
             'work_department_full'=> $this->string(),   // Полный путь подразделения
             'work_phone'=> $this->string(),             // Рабочий телефон
+            'department_id'=>$this->integer(),          // ID подразделения
 
             'tab_number'=> $this->string(),
             'work_address'=>$this->string(),

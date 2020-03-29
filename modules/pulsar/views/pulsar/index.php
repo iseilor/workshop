@@ -1,5 +1,6 @@
 <?php
 
+use app\components\grid\ActionColumn;
 use app\modules\pulsar\Module;
 use yii\helpers\Html;
 use yii\grid\GridView;
@@ -27,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
             'id',
             'created_at:datetime',
-            'created_by:user',
+            'created_by',
             //'updated_at',
             //'updated_by',
             //'deleted_at',
@@ -38,7 +39,9 @@ $this->params['breadcrumbs'][] = $this->title;
             //'health_comment',
             //'mood_comment',
             //'job_comment',
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => ActionColumn::className(),
+            ],
         ],
     ]); ?>
 

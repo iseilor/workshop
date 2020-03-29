@@ -4,6 +4,7 @@ return [
     'Pulsar' => 'Пульсар',
     'Pulsars' => 'Пульсары',
     'Create Pulsar'=>'Добавить пульсар',
+    'Pulsars Statistics'=>'Пульсары. Статистика',
 
     'Health' => 'Здоровье',
     'Mood' => 'Настроение',

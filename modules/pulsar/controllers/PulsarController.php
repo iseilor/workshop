@@ -5,6 +5,7 @@ namespace app\modules\pulsar\controllers;
 use Yii;
 use app\modules\pulsar\models\Pulsar;
 use app\modules\pulsar\models\PulsarSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -14,6 +15,7 @@ use yii\filters\VerbFilter;
  */
 class PulsarController extends Controller
 {
+
     /**
      * {@inheritdoc}
      */
@@ -24,6 +26,15 @@ class PulsarController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
                 ],
             ],
         ];

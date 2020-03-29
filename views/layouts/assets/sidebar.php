@@ -62,6 +62,14 @@ use yii\helpers\Url;
                                 ['label' => '<i class="fas fa-user nav-icon"></i> <p>Куратор</p>', 'url' => ['/jk/']],
                             ]
                         ],
+                        [
+                            'label' => Icon::show('heartbeat',['class'=>'nav-icon']).' <p>Пульсар  <i class="right fas fa-angle-left"></i></p>',
+                            'url' => ['#'],
+                            'items' => [
+                                ['label' => Icon::show('plus',['class'=>'nav-icon']).' <p>Добавить</p>', 'url' => ['/pulsar/pulsar/create']],
+                                ['label' => Icon::show('chart-bar',['class'=>'nav-icon']).' <p>Статистика</p>', 'url' => ['/pulsar/default/index']]
+                            ]
+                        ],
                         ['label' => Icon::show('heartbeat',['class'=>'nav-icon']) .' <p>Страхование</p>', 'url' => ['/404']],
                         ['label' => Icon::show('plane',['class'=>'nav-icon']) .' <p>Путёвки</p>', 'url' => ['/404']],
                         ['label' => Icon::show('hands-helping',['class'=>'nav-icon']) .' <p>Пенсия</p>', 'url' => ['/404']],
@@ -69,7 +77,7 @@ use yii\helpers\Url;
                         ['label' => Icon::show('file-alt',['class'=>'nav-icon']) .' <p>KPI</p>', 'url' => ['/404']],
                         ['label' => Icon::show(Yii::$app->params['module']['ns']['iconClass'],['class'=>'nav-icon']) .' <p>Аварии</p>', 'url' => ['/404']],
                         ['label' => Icon::show('comments',['class'=>'nav-icon']) .' <p>Чат</p>', 'url' => ['/404']],
-                        [
+                        /*[
                             'label' => '<i class="nav-icon fas fa-tachometer-alt"></i> <p>Админка <i class="right fas fa-angle-left"></i></p>',
                             'url' => ['/admin/default/index'],
                             'items' => [
@@ -83,7 +91,7 @@ use yii\helpers\Url;
                                 ['label' => Yii::$app->params['module']['jk']['zaim']['icon'] . ' <p>Займы</p>', 'url' => ['/jk/zaim/admin']],
                                 ['label' => Yii::$app->params['module']['jk']['order']['icon'] . ' <p>Заявки</p>', 'url' => ['/jk/order/admin']],
                             ]
-                        ],
+                        ],*/
 
                     ],
                 ]
