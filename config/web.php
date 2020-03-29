@@ -24,7 +24,8 @@ $config = [
         'app\modules\main\Bootstrap',
         'app\modules\jk\Bootstrap',
         'app\modules\chat\Bootstrap',
-        'app\modules\news\Bootstrap'
+        'app\modules\news\Bootstrap',
+        'app\modules\pulsar\Bootstrap'
     ],
     'layout' => 'index',
     'language' => 'ru',
@@ -54,6 +55,12 @@ $config = [
         ],
         'news' => [
             'class' => 'app\modules\news\Module',
+        ],
+        'task' => [
+            'class' => 'app\modules\task\Module',
+        ],
+        'pulsar' => [
+            'class' => 'app\modules\pulsar\Module',
         ],
         'gridview' => ['class' => 'kartik\grid\Module']
 

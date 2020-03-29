@@ -53,13 +53,22 @@ $config = [
         'db' => $db,
     ],
     'params' => $params,
-    /*
+
     'controllerMap' => [
-        'fixture' => [ // Fixture generation command line.
-            'class' => 'yii\faker\FixtureController',
+        'migrate-task' => [
+            'class' => 'yii\console\controllers\MigrateController',
+            //'migrationNamespaces' => ['app\modules\task\migrations'],
+            'migrationPath' => '@app/modules/task/migrations',
+            'migrationTable' => 'migration_task',
+        ],
+        'migrate-pulsar' => [
+            'class' => 'yii\console\controllers\MigrateController',
+            //'migrationNamespaces' => ['app\modules\task\migrations'],
+            'migrationPath' => '@app/modules/pulsar/migrations',
+            'migrationTable' => 'migration_pulsar',
         ],
     ],
-    */
+
 ];
 
 if (YII_ENV_DEV) {

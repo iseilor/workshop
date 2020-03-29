@@ -21,6 +21,7 @@ return array(
     'vova07\\imperavi\\' => array($vendorDir . '/vova07/yii2-imperavi-widget/src'),
     'phpDocumentor\\Reflection\\' => array($vendorDir . '/phpdocumentor/reflection-common/src', $vendorDir . '/phpdocumentor/reflection-docblock/src', $vendorDir . '/phpdocumentor/type-resolver/src'),
     'mihaildev\\ckeditor\\' => array($vendorDir . '/mihaildev/yii2-ckeditor'),
+    'kartik\\rating\\' => array($vendorDir . '/kartik-v/yii2-widget-rating/src'),
     'kartik\\plugins\\fileinput\\' => array($vendorDir . '/kartik-v/bootstrap-fileinput'),
     'kartik\\icons\\' => array($vendorDir . '/kartik-v/yii2-icons/src'),
     'kartik\\helpers\\' => array($vendorDir . '/kartik-v/yii2-helpers/src'),

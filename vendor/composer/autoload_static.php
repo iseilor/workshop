@@ -55,6 +55,7 @@ class ComposerStaticInitecbe9ee047cdfe8ad4a5b4da8c33329a
         ),
         'k' => 
         array (
+            'kartik\\rating\\' => 14,
             'kartik\\plugins\\fileinput\\' => 25,
             'kartik\\icons\\' => 13,
             'kartik\\helpers\\' => 15,
@@ -212,6 +213,10 @@ class ComposerStaticInitecbe9ee047cdfe8ad4a5b4da8c33329a
         'mihaildev\\ckeditor\\' => 
         array (
             0 => __DIR__ . '/..' . '/mihaildev/yii2-ckeditor',
+        ),
+        'kartik\\rating\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-rating/src',
         ),
         'kartik\\plugins\\fileinput\\' => 
         array (
