@@ -118,6 +118,7 @@ class LoginForm extends Model
         $user->work_department_full = $this->userAD->extensionattribute2[0];
         $user->work_phone = $this->userAD->telephonenumber[0];
         $user->work_address = $this->userAD->extensionattribute11[0];
+        $user->department_id = 1;
 
         $user->role_id = 0;
 
