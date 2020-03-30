@@ -2,6 +2,7 @@
 
 namespace app\modules\user\models;
 
+use app\modules\pulsar\models\Pulsar;
 use app\modules\user\controllers\DefaultController;
 use app\modules\user\Module;
 use Yii;
@@ -29,10 +30,13 @@ use yii\web\IdentityInterface;
  *
  * WORK
  * @property int $work_date
+ * @property int $department_id
+ *
  * @property boolean $work_is_young
  * @property boolean $work_is_transferred
  * @property boolean $work_department
  * @property boolean $work_department_full
+ *
  * @property boolean $work_phone
  * @property string  $work_address
  * @property int $user_social_id
@@ -417,5 +421,10 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     public static function getUserLink($id){
         $user = User::findOne($id);
         return Yii::$app->view->renderFile('@app/modules/user/views/default/ling.php', ['model' => $user]);
+    }
+
+    // Связь с Пульсаром
+    public function getPulsar(){
+        return $this->hasOne(Pulsar::className(), ['created_by' => 'id'])->where('created_at>=' . strtotime(date('d.m.Y')))->orderBy('created_at DESC');
     }
 }

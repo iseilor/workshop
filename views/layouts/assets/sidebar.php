@@ -67,7 +67,8 @@ use yii\helpers\Url;
                             'url' => ['#'],
                             'items' => [
                                 ['label' => Icon::show('plus',['class'=>'nav-icon']).' <p>Добавить</p>', 'url' => ['/pulsar/pulsar/create']],
-                                ['label' => Icon::show('chart-bar',['class'=>'nav-icon']).' <p>Статистика</p>', 'url' => ['/pulsar/default/index']]
+                                ['label' => Icon::show('chart-bar',['class'=>'nav-icon']).' <p>Статистика</p>', 'url' => ['/pulsar/default/index']],
+                                ['label' => Icon::show('table',['class'=>'nav-icon']).' <p>Таблица</p>', 'url' => ['/pulsar/default/table']],
                             ]
                         ],
                         ['label' => Icon::show('heartbeat',['class'=>'nav-icon']) .' <p>Страхование</p>', 'url' => ['/404']],

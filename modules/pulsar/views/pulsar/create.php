@@ -7,8 +7,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 
 
-$this->title = Module::t('module', 'Create Pulsar');
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'Pulsars'), 'url' => ['index']];
+$this->title = \kartik\icons\Icon::show('plus').Module::t('module', 'Create Pulsar');
+$this->params['breadcrumbs'][] = ['label' => \kartik\icons\Icon::show('heartbeat').Module::t('module', 'Pulsars'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="pulsar-create">

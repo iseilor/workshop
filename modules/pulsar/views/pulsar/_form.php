@@ -8,6 +8,14 @@ use kartik\rating\StarRating;
 /* @var $this yii\web\View */
 /* @var $model app\modules\pulsar\models\Pulsar */
 /* @var $form yii\widgets\ActiveForm */
+
+// В текущий день больше нельзя создавать пульсары
+$disabled = [];
+$disabledStar = false;
+if (isset($disable) && $disable) {
+    $disabled = ['disabled' => 'disabled'];
+    $disabledStar = true;
+}
 ?>
 
 <div class="row">
@@ -24,7 +32,7 @@ use kartik\rating\StarRating;
                                 'theme' => 'krajee-fas',
                                 'step' => 1,
                                 'showClear' => false,
-                                //'showCaption' => false,
+                                'disabled' => $disabledStar,
                                 'starCaptions' => [
                                     1 => 'Госпитализирован в больницу',
                                     2 => 'Болею дома',
@@ -35,7 +43,7 @@ use kartik\rating\StarRating;
                             ],
                         ]);
                         ?>
-                        <?= $form->field($model, 'health_comment')->textarea() ?>
+                        <?= $form->field($model, 'health_comment')->textarea($disabled) ?>
                     </div>
                     <div class="col-md-4">
                         <?php
@@ -45,7 +53,7 @@ use kartik\rating\StarRating;
                                 'theme' => 'krajee-fas',
                                 'step' => 1,
                                 'showClear' => false,
-                                //'showCaption' => false,
+                                'disabled' => $disabledStar,
                                 'starCaptions' => [
                                     1 => 'Готов убивать',
                                     2 => 'Настроение плохое',
@@ -56,7 +64,7 @@ use kartik\rating\StarRating;
                             ],
                         ]);
                         ?>
-                        <?= $form->field($model, 'mood_comment')->textarea() ?>
+                        <?= $form->field($model, 'mood_comment')->textarea($disabled) ?>
                     </div>
                     <div class="col-md-4">
                         <?php
@@ -66,7 +74,7 @@ use kartik\rating\StarRating;
                                 'theme' => 'krajee-fas',
                                 'step' => 1,
                                 'showClear' => false,
-                                //'showCaption' => false,
+                                'disabled' => $disabledStar,
                                 'starCaptions' => [
                                     1 => 'Не буду работать',
                                     2 => 'Не хочу работать',
@@ -77,16 +85,16 @@ use kartik\rating\StarRating;
                             ],
                         ]);
                         ?>
-                        <?= $form->field($model, 'job_comment')->textarea() ?>
+                        <?= $form->field($model, 'job_comment')->textarea($disabled) ?>
                     </div>
                 </div>
             </div>
-            <div class="card-footer">
-
-                <?= Html::submitButton(Yii::t('app', 'Save'),
-                    ['class' => 'btn btn-success']) ?>
-
-            </div>
+            <?php if (!(isset($disable) && $disable)): ?>
+                <div class="card-footer">
+                    <?= Html::submitButton(\kartik\icons\Icon::show('save') . Yii::t('app', 'Save'),
+                        ['class' => 'btn btn-success']) ?>
+                </div>
+            <?php endif; ?>
             <?php ActiveForm::end(); ?>
         </div>
     </div>

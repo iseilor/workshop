@@ -75,15 +75,31 @@ class PulsarController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Pulsar();
+        // Создавали пульсар уже сегодня
+        $user_id=Yii::$app->user->identity->id;
+        $pulsarUserTodayCount = count(Pulsar::find()->where('created_by='.$user_id.' and created_at>='.strtotime(date('d.m.Y')))->all());
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($pulsarUserTodayCount>0){
+            $id = Pulsar::find()->where('created_by='.$user_id.' and created_at>='.strtotime(date('d.m.Y')))->max('id');
+            $model = $this->findModel($id);
+            Yii::$app->session->setFlash('info', "Вы сегодня уже заполнили Пульсар");
+            return $this->render('disable', [
+                'model' => $model,
+            ]);
+        }else{
+            $model = new Pulsar();
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                //return $this->redirect(['view', 'id' => $model->id]);
+                Yii::$app->session->setFlash('success', "Спасибо. Ваш пульсар успешно сохранён");
+                return $this->render('disable', [
+                    'model' => $model,
+                ]);
+            }
+            return $this->render('create', [
+                'model' => $model,
+            ]);
         }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
     }
 
     /**
@@ -115,7 +131,7 @@ class PulsarController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        //$this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }

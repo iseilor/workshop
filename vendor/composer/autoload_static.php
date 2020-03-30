@@ -67,6 +67,7 @@ class ComposerStaticInitecbe9ee047cdfe8ad4a5b4da8c33329a
             'kartik\\datetime\\' => 16,
             'kartik\\date\\' => 12,
             'kartik\\builder\\' => 15,
+            'kartik\\bs4dropdown\\' => 19,
             'kartik\\base\\' => 12,
         ),
         'c' => 
@@ -261,6 +262,10 @@ class ComposerStaticInitecbe9ee047cdfe8ad4a5b4da8c33329a
         'kartik\\builder\\' => 
         array (
             0 => __DIR__ . '/..' . '/kartik-v/yii2-builder/src',
+        ),
+        'kartik\\bs4dropdown\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-bootstrap4-dropdown/src',
         ),
         'kartik\\base\\' => 
         array (

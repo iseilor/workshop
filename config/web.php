@@ -171,7 +171,7 @@ $config = [
                 '<_m:[\w\-]+>/<_c:[\w\-]+>/<id:\d+>/<_a:[\w\-]+>' => '<_m>/<_c>/<_a>',
                 '<_m:[\w\-]+>' => '<_m>/default/index',
 
-                '<_m:[\w\-]+>/<_a:(admin)>' => '<_m>/default/admin',
+                '<_m:[\w\-]+>/<_a:(admin|table)>' => '<_m>/default/<_a>',
                 '<_m:[\w\-]+>/<_c:[\w\-]+>' => '<_m>/<_c>/index',
 
             ]

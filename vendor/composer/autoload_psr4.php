@@ -33,6 +33,7 @@ return array(
     'kartik\\datetime\\' => array($vendorDir . '/kartik-v/yii2-widget-datetimepicker/src'),
     'kartik\\date\\' => array($vendorDir . '/kartik-v/yii2-widget-datepicker/src'),
     'kartik\\builder\\' => array($vendorDir . '/kartik-v/yii2-builder/src'),
+    'kartik\\bs4dropdown\\' => array($vendorDir . '/kartik-v/yii2-bootstrap4-dropdown/src'),
     'kartik\\base\\' => array($vendorDir . '/kartik-v/yii2-krajee-base/src'),
     'cebe\\markdown\\' => array($vendorDir . '/cebe/markdown'),
     'bubasuma\\simplechat\\' => array($vendorDir . '/bubasuma/yii2-simplechat'),

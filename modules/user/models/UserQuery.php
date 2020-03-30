@@ -9,6 +9,7 @@ namespace app\modules\user\models;
  */
 class UserQuery extends \yii\db\ActiveQuery
 {
+
     /*public function active()
     {
         return $this->andWhere('[[status]]=1');
@@ -30,5 +31,11 @@ class UserQuery extends \yii\db\ActiveQuery
     public function one($db = null)
     {
         return parent::one($db);
+    }
+
+    // Список сотрудников работающих в этом подразделении
+    public function byDepartment($department_id)
+    {
+        return $this->andWhere('[[department_id]]=' . $department_id);
     }
 }
