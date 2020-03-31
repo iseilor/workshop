@@ -6,7 +6,7 @@ use yii\db\Schema;
 /**
  * Handles the creation of table `{{%jk_percent}}`.
  */
-class m000001_000001_create_jk_percent_table extends Migration
+class m200331_000001_create_jk_percent_table extends Migration
 {
 
     /**

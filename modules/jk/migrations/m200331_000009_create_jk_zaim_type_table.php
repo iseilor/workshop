@@ -5,7 +5,7 @@ use yii\db\Migration;
 /**
  * Handles the creation of table `{{%jk_zaim_type}}`.
  */
-class m000001_000021_create_jk_zaim_type_table extends Migration
+class m200331_000009_create_jk_zaim_type_table extends Migration
 {
 
     /**

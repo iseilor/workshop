@@ -7,7 +7,7 @@ use yii\db\mysql\Schema;
 /**
  * Handles the creation of table `{{%jk_order}}`.
  */
-class m000001_000006_create_jk_order_table extends Migration
+class m200331_000010_create_jk_order_table extends Migration
 {
     /**
      * {@inheritdoc}

@@ -55,6 +55,11 @@ $config = [
     'params' => $params,
 
     'controllerMap' => [
+        'migrate-jk' => [
+            'class' => 'yii\console\controllers\MigrateController',
+            'migrationPath' => '@app/modules/jk/migrations',
+            'migrationTable' => 'migration_jk',
+        ],
         'migrate-task' => [
             'class' => 'yii\console\controllers\MigrateController',
             //'migrationNamespaces' => ['app\modules\task\migrations'],
