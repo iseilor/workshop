@@ -31,8 +31,14 @@ class DefaultController extends Controller
         foreach ($userIdsVoted as $item) {
             $userIds[] = $item['created_by'];
         }
-        $usersNotVoted = User::find()->select('id,fio')->where('department_id=1 and id NOT IN(' . implode(',', $userIds) . ')')->orderBy('fio')->asArray()->all();
-        $usersVoted = User::find()->where('department_id=1 and id IN(' . implode(',', $userIds) . ')')->all();
+        $whereNotIn = '';
+        $usersVoted = []; // Никто ещй не проголосовал
+        if (count($userIds)){
+            $whereNotIn = " and id NOT IN(" . implode(',', $userIds) . ")";
+            $whereIn = " and id IN(" . implode(',', $userIds) . ")";
+            $usersVoted = User::find()->where('department_id=1 '.$whereIn)->all();
+        }
+        $usersNotVoted = User::find()->select('id,fio')->where('department_id=1 '.$whereNotIn)->orderBy('fio')->asArray()->all();
 
         // Результаты голосования ЗДОРОВЬЕ
         $healthVoted = Pulsar::find()->select('count(*) as health_count,health_value')->where('created_at>=' . strtotime(date('d.m.Y')))->groupBy('health_value')->asArray()->all();
