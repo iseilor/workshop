@@ -1,5 +1,6 @@
 <?php
 
+use kartik\icons\Icon;
 use yii\helpers\Html;
 use yii\jui\Tabs;
 use yii\widgets\ActiveForm;
@@ -30,22 +31,34 @@ use yii\widgets\ActiveForm;
                                 <div class="card-header p-0 border-bottom-0">
                                     <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
                                         <li class="nav-item">
-                                            <a class="nav-link active" id="tab-family-tab" data-toggle="pill" href="#tab-family" role="tab" aria-controls="tab-family" aria-selected="true"><i
+                                            <a class="nav-link active" id="tab-params-tab" data-toggle="pill" href="#tab-params" role="tab" aria-controls="tab-params" aria-selected="true">
+                                                <?=Icon::show('list')?>Общие параметры</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link " id="tab-family-tab" data-toggle="pill" href="#tab-family" role="tab" aria-controls="tab-family" aria-selected="false"><i
                                                         class="fas fa-users"></i> Семья</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" id="tab-house-tab" data-toggle="pill" href="#tab-house" role="tab" aria-controls="tab-house" aria-selected="false"><i
-                                                        class="fas fa-home"></i> Жильё</a>
+                                                        class="fas fa-home"></i> Жилое помещение</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="tab-ipoteka-tab" data-toggle="pill" href="#tab-ipoteka" role="tab" aria-controls="tab-ipoteka" aria-selected="false">
+                                                <?=Icon::show('file-invoice-dollar')?>Ипотека</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" id="tab-money-tab" data-toggle="pill" href="#tab-money" role="tab" aria-controls="tab-money" aria-selected="false"><i
-                                                        class="fas fa-ruble-sign"></i> Доходы</a>
+                                                        class="fas fa-ruble-sign"></i> Финансы</a>
                                         </li>
+
                                     </ul>
                                 </div>
                                 <div class="card-body">
                                     <div class="tab-content" id="custom-tabs-three-tabContent">
-                                        <div class="tab-pane fade active show" id="tab-family" role="tabpanel" aria-labelledby="tab-family-tab">
+                                        <div class="tab-pane fade active show" id="tab-params" role="tabpanel" aria-labelledby="tab-params-tab">
+                                            <?= $this->render('_form_tab_params', ['model' => $model, 'form' => $form]) ?>
+                                        </div>
+                                        <div class="tab-pane fade" id="tab-family" role="tabpanel" aria-labelledby="tab-family-tab">
                                             <?= $this->render('_form_tab_family',
                                                               [
                                                                   'model' => $model,
@@ -57,9 +70,13 @@ use yii\widgets\ActiveForm;
                                         <div class="tab-pane fade" id="tab-house" role="tabpanel" aria-labelledby="tab-house-tab">
                                             <?= $this->render('_form_tab_house', ['model' => $model, 'form' => $form]) ?>
                                         </div>
+                                        <div class="tab-pane fade" id="tab-ipoteka" role="tabpanel" aria-labelledby="tab-ipoteka-tab">
+                                            <?= $this->render('_form_tab_ipoteka', ['model' => $model, 'form' => $form]) ?>
+                                        </div>
                                         <div class="tab-pane fade" id="tab-money" role="tabpanel" aria-labelledby="tab-money-tab">
                                             <?= $this->render('_form_tab_money', ['model' => $model, 'form' => $form]) ?>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>

@@ -29,6 +29,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
+            [
+                'attribute' => 'is_participate',
+                'label'=>'Ранее участвовали в программе',
+                'value' => ($model->is_participate)?$model->getParticipateList()[$model->is_participate]:'Не указано'
+            ],
             'mortgage_file',
             'created_at:datetime',
             'created_by',

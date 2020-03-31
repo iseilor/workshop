@@ -9,6 +9,7 @@ use yii\db\mysql\Schema;
  */
 class m200331_000010_create_jk_order_table extends Migration
 {
+
     /**
      * {@inheritdoc}
      */
@@ -19,56 +20,68 @@ class m200331_000010_create_jk_order_table extends Migration
             $tableOptions
                 = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         }
-
         $this->createTable(
             '{{%jk_order}}',
             [
                 'id' => $this->primaryKey(),
-                'created_at' => Schema::TYPE_INTEGER . ' NOT NULL',
-                'created_by' => Schema::TYPE_INTEGER . ' NOT NULL',
-                'updated_at' => Schema::TYPE_INTEGER,
-                'updated_by' => Schema::TYPE_INTEGER,
-                'deleted_at' => Schema::TYPE_INTEGER,
-                'deleted_by' => Schema::TYPE_INTEGER,
+                'created_at' => $this->integer()->notNull(),
+                'created_by' => $this->integer()->notNull(),
+                'updated_at' => $this->integer(),
+                'updated_by' => $this->integer(),
+                'deleted_at' => $this->integer(),
+                'deleted_by' => $this->integer(),
+
+                'percent_count' => $this->integer(),
+                'percent_years' => $this->integer(),
+                'zaim_count' => $this->integer(),
+                'zaim_years' => $this->integer(),
+
+                'progress' => $this->integer(),
+                'status_id' => $this->integer()->notNull(),
+                'sum' => $this->integer(),
 
 
-                'percent_count'=> Schema::TYPE_INTEGER,
-                'percent_years'=> Schema::TYPE_INTEGER,
-                'zaim_count'=> Schema::TYPE_INTEGER,
-                'zaim_years'=> Schema::TYPE_INTEGER,
-
-                'progress'=> Schema::TYPE_INTEGER,
-                'status_id'=> $this->integer()->notNull(),
-                'sum'=> Schema::TYPE_INTEGER,
-
-                'is_mortgage'=>Schema::TYPE_BOOLEAN,    // Оформлена ипотека
-                'mortgage_file'=>$this->string(),       // Кредитный договор с акктуальным графиком платежей
+                // Параметры
+                'is_participate' => $this->boolean(),     // Ранее участвовали
+                'is_mortgage' => $this->boolean(),        // Оформлена ипотека
+                'mortgage_file' => $this->string(),       // Кредитный договор с акктуальным графиком платежей
 
                 // Семья
-                'is_spouse'=>$this->integer(),          // Наличие супруга, супруги (Да, Нет, Разведён)
-                'spouse_fio'=>$this->string(),          // ФИО супруги
-                'spouse_is_dzo'=>$this->boolean(),      // Супруга работник общества или ДЗО
-                'spouse_is_do'=>$this->boolean(),       // Супруга в ДО
-                'spouse_is_work'=>$this->boolean(),     // Супруга официально работает
-                'child_count'=> $this->integer(),       // Кол-во детей
-                'child_count_18'=> $this->integer(),    // Кол-во до 18 лет
-                'child_count_23'=> $this->integer(),    // Кол-во до 23 лет
+                'is_spouse' => $this->integer(),          // Наличие супруга, супруги (Да, Нет, Разведён)
+                'spouse_fio' => $this->string(),          // ФИО супруги
+                'spouse_is_dzo' => $this->boolean(),      // Супруга работник общества или ДЗО
+                'spouse_is_do' => $this->boolean(),       // Супруга в ДО
+                'spouse_is_work' => $this->boolean(),     // Супруга официально работает
+                'child_count' => $this->integer(),        // Кол-во детей
+                'child_count_18' => $this->integer(),     // Кол-во до 18 лет
+                'child_count_23' => $this->integer(),     // Кол-во до 23 лет
+
+                'family_own' => $this->text(),            // ЖП в собственности
+                'family_rent' => $this->text(),           // ЖП в аренде
+                'family_address' => $this->text(),        // В настоящий момент проживаем
+                'family_deal' => $this->text(),           // Операции с квартирами за последний 5 лет
 
                 // Жильё
-                'zaim_type'=>$this->integer(),          // Тип займа
+                'jp_type' => $this->integer(),            // Тип жилого помещения
+                'jp_params' => $this->text(),             // Параметры жилого помещения
+                'jp_date' => $this->integer(),            // Дата сдачи жилого помещения
+                'jp_dist' => $this->integer(),            // Расстояние до рабочего места
+                'jp_own' => $this->integer(),             // Тип собственности жилого помещения
+                'jp_part'=>$this->text(),                 // Доли в жилом помещении
 
-                'is_participate'=>$this->boolean(),     // Ранее не участоваол
-                'percent_sum'=>$this->text(),           // Сумма процентов
-                'target_mortgage'=>$this->integer(),    // Цель ипотеки
-                'property_type'=>$this->integer(),      // Тип собственности
+                // Ипотека
+                'ipoteka_size' => $this->integer(),       // Размер ипотеки
+                'ipoteka_params' => $this->text(),        // Параметры ипотеки
+                'ipoteka_user' => $this->integer(),       // Собственные средства
+                'ipoteka_summa' => $this->text(),         // Сумма процентов подлежащих уплате за текущий год
+                'ipoteka_target' => $this->integer(),     // Цель ипотечного договора
 
                 // Доходы
-                'salary'=>$this->double(),              // Оклад
-                'total_sum_income'=>$this->double(),    // Общая сумма дохода за 1 год
-                'total_sum_nalog'=>$this->double(),     // Общая сумма удержаннаго налога за 1 год
-                'month_pay'=>$this->double(),           // Среднемесячные платежи
-                'month_my_pay'=>$this->double(),        // Мои среднемесячные платежи
-
+                'salary' => $this->double(),              // Оклад
+                'total_sum_income' => $this->double(),    // Общая сумма дохода за 1 год
+                'total_sum_nalog' => $this->double(),     // Общая сумма удержаннаго налога за 1 год
+                'month_pay' => $this->double(),           // Среднемесячные платежи
+                'month_my_pay' => $this->double(),        // Мои среднемесячные платежи
             ],
             $tableOptions
         );
