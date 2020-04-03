@@ -13,59 +13,64 @@ use yii\web\IdentityInterface;
 /**
  * This is the model class for table "user".
  *
- * @property int $id
- * @property int $created_at
- * @property int $updated_at
- * @property string $username
+ * @property int         $id
+ * @property int         $created_at
+ * @property int         $updated_at
+ * @property string      $username
  * @property string|null $auth_key
  * @property string|null $email_confirm_token
- * @property string $password_hash
+ * @property string      $password_hash
  * @property string|null $password_reset_token
- * @property string $email
- * @property int $status
+ * @property string      $email
+ * @property int         $status
  *
- * @property int $birth_date
- * @property int $gender
- * @property string $photo
+ * @property int         $birth_date
+ * @property int         $gender
+ * @property string      $photo
  *
  * WORK
- * @property int $work_date
- * @property int $department_id
+ * @property int         $work_date
+ * @property int         $department_id
  *
- * @property boolean $work_is_young
- * @property boolean $work_is_transferred
- * @property boolean $work_department
- * @property boolean $work_department_full
+ * @property boolean     $work_is_young
+ * @property boolean     $work_is_transferred
+ * @property boolean     $work_department
+ * @property boolean     $work_department_full
  *
- * @property boolean $work_phone
- * @property string  $work_address
- * @property int $user_social_id
+ * @property boolean     $work_phone
+ * @property string      $work_address
+ * @property int         $user_social_id
  *
  * PASSPORT -------------------------------------------------------
- * @property int $passport_series
- * @property int $passport_number
- * @property int $passport_date
- * @property string $passport_code
- * @property string $passport_department
- * @property string $passport_registration
- * @property string $passport_file
+ * @property int         $passport_series
+ * @property int         $passport_number
+ * @property int         $passport_date
+ * @property string      $passport_code
+ * @property string      $passport_department
+ * @property string      $passport_registration
+ * @property string      $passport_file
  *
  * SNILS ----------------------------------------------------------
- * @property string $snils_number
- * @property int $snils_date
- * @property string $snils_file
+ * @property string      $snils_number
+ * @property int         $snils_date
+ * @property string      $snils_file
  *
  */
 class User extends \yii\db\ActiveRecord implements IdentityInterface
 {
 
     const STATUS_BLOCKED = 0;
+
     const STATUS_ACTIVE = 1;
+
     const STATUS_WAIT = 2;
+
     const SCENARIO_PROFILE = 'profile';
 
     const ROLE_USER = 0;
+
     const ROLE_MANAGER = 1;
+
     const ROLE_ADMIN = 2;
 
     /**
@@ -165,7 +170,9 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return ArrayHelper::getValue(self::getStatusesArray(), $this->status);
     }
-    public function getRoleName(){
+
+    public function getRoleName()
+    {
         return ArrayHelper::getValue(self::getRolesArray(), $this->role_id);
     }
 
@@ -178,7 +185,8 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
         ];
     }
 
-    public static function getRolesArray(){
+    public static function getRolesArray()
+    {
         return [
             self::ROLE_USER => 'Пользователь',
             self::ROLE_MANAGER => 'Куратор',
@@ -222,6 +230,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
      * Finds user by username
      *
      * @param string $username
+     *
      * @return static|null
      */
     public static function findByUsername($username)
@@ -233,6 +242,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
      * Validates password
      *
      * @param string $password password to validate
+     *
      * @return boolean if password provided is valid for current user
      */
     public function validatePassword($password)
@@ -271,6 +281,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
      * Finds user by password reset token
      *
      * @param string $token password reset token
+     *
      * @return static|null
      */
     public static function findByPasswordResetToken($token)
@@ -290,6 +301,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
      * Finds out if password reset token is valid
      *
      * @param string $token password reset token
+     *
      * @return boolean
      */
     public static function isPasswordResetTokenValid($token)
@@ -321,6 +333,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
 
     /**
      * @param string $email_confirm_token
+     *
      * @return static|null
      */
     public static function findByEmailConfirmToken($email_confirm_token)
@@ -404,7 +417,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     // Получаем путь до фотографии пользователя
     public function getPhotoPath()
     {
-        $photoPath = Yii::$app->homeUrl . Yii::$app->params['module']['user']['photo']['path'].Yii::$app->params['module']['user']['photo']['default'];
+        $photoPath = Yii::$app->homeUrl . Yii::$app->params['module']['user']['photo']['path'] . Yii::$app->params['module']['user']['photo']['default'];
         if (isset($this->photo) && $this->photo) {
             $photoPath = Yii::$app->homeUrl . Yii::$app->params['module']['user']['photo']['path'] . $this->photo;
         }
@@ -418,13 +431,43 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     }
 
     // Ссылка на пользователя
-    public static function getUserLink($id){
+    public static function getUserLink($id)
+    {
         $user = User::findOne($id);
         return Yii::$app->view->renderFile('@app/modules/user/views/default/ling.php', ['model' => $user]);
     }
 
     // Связь с Пульсаром
-    public function getPulsar(){
+    public function getPulsar()
+    {
         return $this->hasOne(Pulsar::className(), ['created_by' => 'id'])->where('created_at>=' . strtotime(date('d.m.Y')))->orderBy('created_at DESC');
+    }
+
+    public static function getGenderList()
+    {
+        return [
+            '1' => 'Мужской',
+            '0' => 'Женский',
+        ];
+    }
+
+    public static function getGenderName($value)
+    {
+        if ($value) {
+            return (self::getGenderList()[$value]) ? self::getGenderList()[$value] : 'Неверно указан пол';
+        } else {
+            return false;
+        }
+
+    }
+
+    // Смотрим, заполнен ли паспорт пользователя
+    public function isPassport(){
+        if (isset($this->passport_series) && isset($this->passport_number) && isset($this->passport_date) && isset($this->passport_code)
+            && isset($this->passport_department) && isset($this->passport_registration) && isset($this->passport_file)){
+            return true;
+        }else{
+            return false;
+        }
     }
 }

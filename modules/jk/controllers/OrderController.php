@@ -119,8 +119,16 @@ class OrderController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Order();
+        // Смотрим, заполнины ли все поля у пользователя в профиле
+        $user = User::findOne(Yii::$app->user->identity->getId());
+        if (!$user->isPassport()){
+            Yii::$app->session->setFlash('warning', "Чтобы приступить к оформлению заявки на участие в Жилищной Кампании, 
+            вам необходимо заполнить все данные по вашему паспорту ");
+            return $this->redirect(['/user/profile/update']);
+        }
 
+
+        $model = new Order();
         $model->status_id = 1;
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 

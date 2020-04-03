@@ -112,6 +112,7 @@ class ProfileUpdateForm extends Model
             [['work_is_young','work_is_transferred','user_social_id'], 'safe'],
 
             [['passport_series','passport_number','passport_date','passport_code','passport_department','passport_file','passport_registration'], 'safe'],
+            [['passport_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'passport_date'],
             [['passport_file'], 'file', 'extensions'=>'pdf'],
             [['passport_file'], 'file', 'maxSize'=>'10240000'],
 
@@ -180,12 +181,12 @@ class ProfileUpdateForm extends Model
             }
 
             // Passport
-            $this->passport_file = UploadedFile::getInstance($this, 'passport_file');
-            if ($this->passport_file){
-                $passportFileDir = Yii::$app->params['module']['user']['passport']['path'];
-                $passportFileName = 'passport_'.$this->_user->id .'_'.date('YmdHis'). '.' . $this->passport_file->extension;
+            $passport_file = UploadedFile::getInstance($this, 'passport_file');
+            if ($passport_file){
+                $passportFileDir = Yii::$app->params['module']['user']['path'].$this->_user->id;
+                $passportFileName = $this->_user->id .'_passport_'.date('YmdHis'). '.' . $passport_file->extension;
                 FileHelper::createDirectory( $passportFileDir, $mode = 0777, $recursive = true);
-                $this->passport_file->saveAs($passportFileDir. '/'.$passportFileName);
+                $passport_file->saveAs($passportFileDir. '/'.$passportFileName);
                 $this->_user->passport_file = $passportFileName;
             }
 

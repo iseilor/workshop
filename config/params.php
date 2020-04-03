@@ -67,6 +67,7 @@ return [
         'user' => [
             'icon' => '<i class="fas fa-home"></i>',
             'icon2' => '<i class="fas fa-users"></i>',
+            'path'=>'files/user/',
             'photo' => [
                 'path' => 'files/user/photo/',
                 'default' => '0.jpg'

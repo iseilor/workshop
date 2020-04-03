@@ -174,19 +174,26 @@ class Order extends Model
     // Загрузка файлов
     public function upload()
     {
-        // Создаём директорию для файлов
+        // Создаём директорию для хранения файлов файлов
         $pathDir = Yii::$app->params['module']['jk']['order']['filePath'] . $this->id;
         FileHelper::createDirectory($pathDir, $mode = 0775, $recursive = true);
 
+        $ipoteka_file_dogovor = UploadedFile::getInstance($this, 'ipoteka_file_dogovor');
+        if ($ipoteka_file_dogovor) {
+            $fileName = 'jk_order_' . $this->id . '_ipoteka_file_dogovor_'.date('Ymd').'.' . $ipoteka_file_dogovor->extension;
+            $ipoteka_file_dogovor->saveAs($pathDir . '/' . $fileName);
+            $this->ipoteka_file_dogovor = $fileName;
+        }
 
+        /*
         $this->mortgage_file = UploadedFile::getInstance($this, 'mortgage_file');
         if ($this->mortgage_file) {
-
             $fileName = 'mortgage_file_' . $this->id . '.' . $this->mortgage_file->extension;
             $this->mortgage_file->saveAs($pathDir . '/' . $fileName);
             $this->mortgage_file = $fileName;
-        }
-        return true;
+        }*/
+
+        return $this->save();
     }
 
     //
