@@ -56,10 +56,10 @@ use yii\widgets\ActiveForm;
                                 <div class="card-body">
                                     <div class="tab-content" id="custom-tabs-three-tabContent">
                                         <div class="tab-pane fade active show" id="tab-params" role="tabpanel" aria-labelledby="tab-params-tab">
-                                            <?= $this->render('_form_tab_params', ['model' => $model, 'form' => $form]) ?>
+                                            <?= $this->render('form_tab_params', ['model' => $model, 'form' => $form]) ?>
                                         </div>
                                         <div class="tab-pane fade" id="tab-family" role="tabpanel" aria-labelledby="tab-family-tab">
-                                            <?= $this->render('_form_tab_family',
+                                            <?= $this->render('form_tab_family',
                                                               [
                                                                   'model' => $model,
                                                                   'form' => $form,
@@ -68,13 +68,13 @@ use yii\widgets\ActiveForm;
                                                               ]) ?>
                                         </div>
                                         <div class="tab-pane fade" id="tab-house" role="tabpanel" aria-labelledby="tab-house-tab">
-                                            <?= $this->render('_form_tab_house', ['model' => $model, 'form' => $form]) ?>
+                                            <?= $this->render('form_tab_house', ['model' => $model, 'form' => $form]) ?>
                                         </div>
                                         <div class="tab-pane fade" id="tab-ipoteka" role="tabpanel" aria-labelledby="tab-ipoteka-tab">
-                                            <?= $this->render('_form_tab_ipoteka', ['model' => $model, 'form' => $form]) ?>
+                                            <?= $this->render('form_tab_ipoteka', ['model' => $model, 'form' => $form]) ?>
                                         </div>
                                         <div class="tab-pane fade" id="tab-money" role="tabpanel" aria-labelledby="tab-money-tab">
-                                            <?= $this->render('_form_tab_money', ['model' => $model, 'form' => $form]) ?>
+                                            <?= $this->render('form_tab_money', ['model' => $model, 'form' => $form]) ?>
                                         </div>
 
                                     </div>

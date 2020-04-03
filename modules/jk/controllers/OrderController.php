@@ -105,7 +105,7 @@ class OrderController extends Controller
     public function actionView($id)
     {
         return $this->render(
-            'view',
+            'view/view',
             [
                 'model' => $this->findModel($id),
             ]
@@ -175,7 +175,7 @@ class OrderController extends Controller
             $model->save();
 
             if ($model->status_id == 1) {
-                return $this->redirect(['update', 'id' => $model->id]);
+                return $this->redirect(['view', 'id' => $model->id]);
             } else {
                 // Отправляем письмо кураторам
                 $this->actionSendEmailCurator($model);

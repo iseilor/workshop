@@ -9,12 +9,16 @@ $(document).ready(function () {
         });
 
         // Картинки
-        $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+        $(document).on('click', '[data-toggle="lightbox"]', function (event) {
             event.preventDefault();
             $(this).ekkoLightbox({
                 alwaysShowClose: true
             });
         });
+
+
+        // Кнопка прикрепить файлы
+        bsCustomFileInput.init();
 
 
         // https://github.com/RobinHerbots/Inputmask

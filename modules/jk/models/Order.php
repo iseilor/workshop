@@ -11,17 +11,24 @@ use yii\web\UploadedFile;
 /**
  * This is the model class for table "jk_order".
  *
- * @property int      $id
- * @property int      $created_at
- * @property int      $created_by
+ * @property int $id
+ * @property int $created_at
+ * @property int $created_by
  * @property int|null $updated_at
  * @property int|null $updated_by
  * @property int|null $deleted_at
  * @property int|null $deleted_by
- * @property int      $status_id
+ * @property int $status_id
  *
- * @property int      $salary
- * @property int      $jp_type
+ * @property int $salary
+ * @property int $jp_type
+ * @property int $jp_own
+ * @property string ipoteka_file_dogovor
+ * @property string ipoteka_file_grafic_first
+ * @property string ipoteka_file_grafic_now
+ * @property string ipoteka_file_refenance
+ * @property string ipoteka_file_spravka
+ * @property string ipoteka_file_bank_approval
  */
 class Order extends Model
 {
@@ -53,9 +60,20 @@ class Order extends Model
 
             // Жилое помещение
             [['jp_type', 'jp_params', 'jp_date', 'jp_dist', 'jp_own', 'jp_part'], 'safe'],
+            [['jp_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'jp_date'],
 
             // Ипотека
-            [['ipoteka_size', 'ipoteka_params', 'ipoteka_user'], 'safe'],
+            [['ipoteka_target', 'ipoteka_size', 'ipoteka_params', 'ipoteka_user', 'ipoteka_summa'], 'safe'],
+            [
+                ['ipoteka_file_dogovor', 'ipoteka_file_grafic_first', 'ipoteka_file_grafic_now', 'ipoteka_file_refenance', 'ipoteka_file_spravka', 'ipoteka_file_bank_approval'],
+                'file',
+                'extensions' => 'pdf, docx',
+            ],
+            [
+                ['ipoteka_file_dogovor', 'ipoteka_file_grafic_first', 'ipoteka_file_grafic_now', 'ipoteka_file_refenance', 'ipoteka_file_spravka', 'ipoteka_file_bank_approval'],
+                'file',
+                'maxSize' => '2048000',
+            ],
 
 
             // Доходы
@@ -115,9 +133,19 @@ class Order extends Model
             'jp_part' => Module::t('order', 'Jp Part'),
 
             // Ипотека
+            'ipoteka_target' => Module::t('order', 'Ipoteka Target'),
             'ipoteka_size' => Module::t('order', 'Ipoteka Size'),
-            'ipoteka_params' => Module::t('order', 'Ipoteka Params'),
             'ipoteka_user' => Module::t('order', 'Ipoteka User'),
+            'ipoteka_params' => Module::t('order', 'Ipoteka Params'),
+            'ipoteka_summa' => Module::t('order', 'Ipoteka Summa'),
+
+            'ipoteka_file_dogovor' => Module::t('order', 'Ipoteka File Dogovor'),
+            'ipoteka_file_grafic_first' => Module::t('order', 'Ipoteka File Grafic First'),
+            'ipoteka_file_grafic_now' => Module::t('order', 'Ipoteka File Grafic Now'),
+            'ipoteka_file_refenance' => Module::t('order', 'Ipoteka File Refenance'),
+            'ipoteka_file_spravka' => Module::t('order', 'Ipoteka File Spravka'),
+            'ipoteka_file_bank_approval' => Module::t('order', 'Ipoteka File Bank Approval'),
+
 
             'is_participate' => Module::t('module', 'Is Participate'),
             'percent_sum' => Module::t('module', 'Percent Sum'),
@@ -146,10 +174,14 @@ class Order extends Model
     // Загрузка файлов
     public function upload()
     {
+        // Создаём директорию для файлов
+        $pathDir = Yii::$app->params['module']['jk']['order']['filePath'] . $this->id;
+        FileHelper::createDirectory($pathDir, $mode = 0775, $recursive = true);
+
+
         $this->mortgage_file = UploadedFile::getInstance($this, 'mortgage_file');
         if ($this->mortgage_file) {
-            $pathDir = Yii::$app->params['module']['jk']['order']['filePath'] . $this->id;
-            FileHelper::createDirectory($pathDir, $mode = 0775, $recursive = true);
+
             $fileName = 'mortgage_file_' . $this->id . '.' . $this->mortgage_file->extension;
             $this->mortgage_file->saveAs($pathDir . '/' . $fileName);
             $this->mortgage_file = $fileName;
@@ -195,6 +227,16 @@ class Order extends Model
         ];
     }
 
+    // Расшифровака типа жилого помещения
+    public static function getJPTypeName($id = null)
+    {
+        if ($id) {
+            return (self::getJPTypeList()[$id]) ? self::getJPTypeList()[$id] : 'Неверный тип жилого помещения';
+        } else {
+            return false;
+        }
+    }
+
     // Тип собственности жилого помещения
     public static function getJPOwnList()
     {
@@ -205,4 +247,34 @@ class Order extends Model
             4 => 'Долевая собственность',
         ];
     }
+
+    // Расшифровака типа собственности
+    public static function getJPOwnName($id = null)
+    {
+        if ($id) {
+            return (self::getJPOwnList()[$id]) ? self::getJPOwnList()[$id] : 'Неверный тип собственности';
+        } else {
+            return false;
+        }
+    }
+
+    // Цель ипотечного договора
+    public static function getIpotekaTargetList()
+    {
+        return [
+            1 => 'Приобретение объекта недвижимости',
+            2 => 'Приобретение и др неотделимые улучшения объекта недвижимости',
+        ];
+    }
+
+    // Расшифровка цели ипотечного договора
+    public static function getIpotekaTargetName($id = null)
+    {
+        if ($id) {
+            return (self::getIpotekaTargetList()[$id]) ? self::getIpotekaTargetList()[$id] : 'Неверный тип собственности';
+        } else {
+            return false;
+        }
+    }
+
 }

@@ -7,6 +7,8 @@ use app\modules\user\models\User;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use yii\helpers\Html;
+use yii\helpers\Url;
 
 
 class Model extends ActiveRecord
@@ -26,6 +28,24 @@ class Model extends ActiveRecord
     {
         return $this->hasOne(User::className(), ['id' => 'deleted_by']);
     }
+
+    // Ссылка на пользователя который создал документ
+    public function getCreatedUserLink(){
+        $model= $this->hasOne(User::className(), ['id' => 'created_by'])->one();
+        return Html::a($model->fio,Url::to(['/user/'.$model->id]));
+    }
+
+    // Ссылка на пользователя который изменил документ
+    public function getUpdatedUserLink(){
+        $model= $this->hasOne(User::className(), ['id' => 'updated_by'])->one();
+        if ($model){
+            return Html::a($model->fio,Url::to(['/user/'.$model->id]));
+        }else{
+            false;
+        }
+    }
+
+
 
     public function behaviors()
     {

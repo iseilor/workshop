@@ -20,9 +20,9 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 
 
 <?= $this->render(
-    '_form',
+    'form/form',
     [
         'model' => $model,
-        'userChildDataProvider'=>$userChildDataProvider
+        'userChildDataProvider' => $userChildDataProvider,
     ]
 ) ?>

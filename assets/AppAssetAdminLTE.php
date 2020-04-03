@@ -33,6 +33,8 @@ class AppAssetAdminLTE extends AssetBundle
             'plugins/inputmask/jquery.inputmask.bundle.js',
 
             'plugins/bootstrap/js/bootstrap.bundle.js',
+            'plugins/bs-custom-file-input/bs-custom-file-input.min.js',
+
             'dist/js/adminlte.js',
             'dist/js/demo.js',
         ];

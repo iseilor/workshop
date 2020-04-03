@@ -38,7 +38,32 @@ use yii\widgets\Menu;
     </form>
 
     <ul class="navbar-nav ml-auto">
-
+        <li class="nav-item dropdown">
+            <a class="nav-link" data-toggle="dropdown" href="#">
+                <i class="far fa-heart"></i>
+                <span class="badge badge-info navbar-badge">1</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                <a href="#" class="dropdown-item">
+                    <!-- Message Start -->
+                    <div class="media">
+                        <div class="media-body">
+                            <h3 class="dropdown-item-title">
+                                Пульсар
+                                <span class="float-right text-sm text-danger"><i
+                                            class="fas fa-star"></i></span>
+                            </h3>
+                            <p class="text-sm">Не забудьте заполнить сегодня пульсар</p>
+                            <p class="text-sm text-muted"><i
+                                        class="far fa-clock mr-1"></i> 1
+                                час назад</p>
+                        </div>
+                    </div>
+                    <!-- Message End -->
+                </a>
+                <div class="dropdown-divider"></div>
+            </div>
+        </li>
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
                 <i class="far fa-comments"></i>

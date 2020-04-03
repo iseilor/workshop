@@ -67,14 +67,22 @@ class m200331_000010_create_jk_order_table extends Migration
                 'jp_date' => $this->integer(),            // Дата сдачи жилого помещения
                 'jp_dist' => $this->integer(),            // Расстояние до рабочего места
                 'jp_own' => $this->integer(),             // Тип собственности жилого помещения
-                'jp_part'=>$this->text(),                 // Доли в жилом помещении
+                'jp_part' => $this->text(),                 // Доли в жилом помещении
 
                 // Ипотека
-                'ipoteka_size' => $this->integer(),       // Размер ипотеки
-                'ipoteka_params' => $this->text(),        // Параметры ипотеки
-                'ipoteka_user' => $this->integer(),       // Собственные средства
-                'ipoteka_summa' => $this->text(),         // Сумма процентов подлежащих уплате за текущий год
                 'ipoteka_target' => $this->integer(),     // Цель ипотечного договора
+                'ipoteka_size' => $this->integer(),       // Размер ипотеки
+                'ipoteka_user' => $this->integer(),       // Собственные средства
+                'ipoteka_params' => $this->text(),        // Параметры ипотеки
+                'ipoteka_summa' => $this->text(),         // Сумма процентов подлежащих уплате за текущий год
+
+                'ipoteka_file_dogovor' => $this->string(),          // Договор ипотеки
+                'ipoteka_file_grafic_first' => $this->string(),     // Первоначальный График платежей
+                'ipoteka_file_grafic_now' => $this->string(),       // Акктуальный график платежей
+                'ipoteka_file_refenance' => $this->string(),        // Договор рефинансирования ипотеки
+                'ipoteka_file_spravka' => $this->string(),          // Справка из банка об актуальной ставке договора рефинансирования
+                'ipoteka_file_bank_approval' => $this->string(),    // Одобрение из банка
+
 
                 // Доходы
                 'salary' => $this->double(),              // Оклад
