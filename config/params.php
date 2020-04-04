@@ -9,9 +9,9 @@ return [
     'senderEmail' => 'workshop@rt.ru',
     'senderName' => 'WORKSHOP',
     'user.passwordResetTokenExpire' => 3600,
-
     'bsDependencyEnabled' => false, // Для Kartic не грузим Bootstrap
 
+    // Шаблон поля для прикрепления файлов
     'ad' => [
         'account_suffix' => '',
         'hosts' => [],

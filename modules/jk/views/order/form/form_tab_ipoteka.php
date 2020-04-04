@@ -14,21 +14,29 @@
     <div class="col-md-6">
         <?= $form->field($model, 'ipoteka_summa')->textarea(); ?>
     </div>
-    <div class="col-md-12">
-        <!--<div class="form-group">
-            <label for="exampleInputFile">File input</label>
-            <div class="input-group">
-                <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="exampleInputFile" title="dsf">
-                    <label class="custom-file-label" for="exampleInputFile">Выберите файл</label>
-                </div>
-            </div>
-        </div>-->
-        <?= $form->field($model, 'ipoteka_file_dogovor')->fileInput() ?>
-        <?= $form->field($model, 'ipoteka_file_grafic_first')->fileInput() ?>
-        <?= $form->field($model, 'ipoteka_file_grafic_now')->fileInput() ?>
-        <?= $form->field($model, 'ipoteka_file_refenance')->fileInput() ?>
-        <?= $form->field($model, 'ipoteka_file_spravka')->fileInput() ?>
-        <?= $form->field($model, 'ipoteka_file_bank_approval')->fileInput() ?>
+    <div class="col-md-4">
+        <?= $form->field($model, 'ipoteka_file_dogovor_form', [
+            'template' => getFileInputTemplate($model->ipoteka_file_dogovor,$model->attributeLabels()['ipoteka_file_dogovor'].'.pdf'),
+        ])->fileInput(['class' => 'custom-file-input']) ?>
+
+        <?= $form->field($model, 'ipoteka_file_grafic_first_form', [
+            'template' => getFileInputTemplate($model->ipoteka_file_grafic_first,$model->attributeLabels()['ipoteka_file_grafic_first'].'.pdf'),
+        ])->fileInput(['class' => 'custom-file-input']) ?>
+    </div>
+    <div class="col-md-4">
+        <?= $form->field($model, 'ipoteka_file_grafic_now_form', [
+            'template' => getFileInputTemplate($model->ipoteka_file_grafic_now,$model->attributeLabels()['ipoteka_file_grafic_now'].'.pdf'),
+        ])->fileInput(['class' => 'custom-file-input']) ?>
+        <?= $form->field($model, 'ipoteka_file_refenance_form', [
+            'template' => getFileInputTemplate($model->ipoteka_file_refenance,$model->attributeLabels()['ipoteka_file_refenance'].'.pdf'),
+        ])->fileInput(['class' => 'custom-file-input']) ?>
+    </div>
+    <div class="col-md-4">
+        <?= $form->field($model, 'ipoteka_file_spravka_form', [
+            'template' => getFileInputTemplate($model->ipoteka_file_spravka,$model->attributeLabels()['ipoteka_file_spravka'].'.pdf'),
+        ])->fileInput(['class' => 'custom-file-input']) ?>
+        <?= $form->field($model, 'ipoteka_file_bank_approval_form', [
+            'template' => getFileInputTemplate($model->ipoteka_file_bank_approval,$model->attributeLabels()['ipoteka_file_bank_approval'].'.pdf'),
+        ])->fileInput(['class' => 'custom-file-input']) ?>
     </div>
 </div>

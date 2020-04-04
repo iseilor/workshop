@@ -11,6 +11,8 @@ $this->title = Icon::show('file', ['framework' => Icon::FAR]) . 'Заявка �
 $this->params['breadcrumbs'][] = ['label' => Icon::show('home') . 'ЖК', 'url' => ['/module/jk']];
 $this->params['breadcrumbs'][] = ['label' => Icon::show('copy', ['framework' => Icon::FAR]) . Module::t('order', 'Orders'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
+$this->title .= ' <span class="badge bg-success">новая</span>';
 \yii\web\YiiAsset::register($this);
 ?>
 
@@ -57,6 +59,9 @@ $this->params['breadcrumbs'][] = $this->title;
                         </div>
                     <?php endforeach;?>
                 </div>
+            </div>
+            <div class="card-footer">
+                123
             </div>
         </div>
     </div>

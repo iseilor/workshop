@@ -12,6 +12,11 @@ use yii\widgets\DetailView;
         ],
         'created_at:datetime',
         [
+            'label' => 'Статус',
+            'format' => 'raw',
+            'value' => '<span class="badge bg-success">новая</span>',
+        ],
+        [
             'label' => 'Автор',
             'format' => 'raw',
             'value' => $model->getCreatedUserLink(),

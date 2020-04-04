@@ -11,28 +11,41 @@ use yii\web\UploadedFile;
 /**
  * This is the model class for table "jk_order".
  *
- * @property int $id
- * @property int $created_at
- * @property int $created_by
+ * @property int      $id
+ * @property int      $created_at
+ * @property int      $created_by
  * @property int|null $updated_at
  * @property int|null $updated_by
  * @property int|null $deleted_at
  * @property int|null $deleted_by
- * @property int $status_id
+ * @property int      $status_id
  *
- * @property int $salary
- * @property int $jp_type
- * @property int $jp_own
- * @property string ipoteka_file_dogovor
- * @property string ipoteka_file_grafic_first
- * @property string ipoteka_file_grafic_now
- * @property string ipoteka_file_refenance
- * @property string ipoteka_file_spravka
- * @property string ipoteka_file_bank_approval
+ * @property int      $salary
+ * @property int      $jp_type
+ * @property int      $jp_own
+ * @property string   ipoteka_file_dogovor
+ * @property string   ipoteka_file_dogovor_form
+ * @property string   ipoteka_file_grafic_first
+ * @property string   ipoteka_file_grafic_now
+ * @property string   ipoteka_file_refenance
+ * @property string   ipoteka_file_spravka
+ * @property string   ipoteka_file_bank_approval
  */
 class Order extends Model
 {
 
+
+    public $ipoteka_file_dogovor_form = '';
+
+    public $ipoteka_file_grafic_first_form = '';
+
+    public $ipoteka_file_grafic_now_form = '';
+
+    public $ipoteka_file_refenance_form = '';
+
+    public $ipoteka_file_spravka_form = '';
+
+    public $ipoteka_file_bank_approval_form = '';
 
     /**
      * {@inheritdoc}
@@ -65,13 +78,10 @@ class Order extends Model
             // Ипотека
             [['ipoteka_target', 'ipoteka_size', 'ipoteka_params', 'ipoteka_user', 'ipoteka_summa'], 'safe'],
             [
-                ['ipoteka_file_dogovor', 'ipoteka_file_grafic_first', 'ipoteka_file_grafic_now', 'ipoteka_file_refenance', 'ipoteka_file_spravka', 'ipoteka_file_bank_approval'],
+                ['ipoteka_file_dogovor_form', 'ipoteka_file_grafic_first_form', 'ipoteka_file_grafic_now_form', 'ipoteka_file_refenance_form', 'ipoteka_file_spravka_form', 'ipoteka_file_bank_approval_form'],
                 'file',
+                'skipOnEmpty' => true,
                 'extensions' => 'pdf, docx',
-            ],
-            [
-                ['ipoteka_file_dogovor', 'ipoteka_file_grafic_first', 'ipoteka_file_grafic_now', 'ipoteka_file_refenance', 'ipoteka_file_spravka', 'ipoteka_file_bank_approval'],
-                'file',
                 'maxSize' => '2048000',
             ],
 
@@ -87,9 +97,6 @@ class Order extends Model
             ],
 
 
-            [['mortgage_file'], 'safe'],
-            [['mortgage_file'], 'file', 'extensions' => 'pdf, docx'],
-            [['mortgage_file'], 'file', 'maxSize' => '2048000'],
         ];
     }
 
@@ -146,6 +153,13 @@ class Order extends Model
             'ipoteka_file_spravka' => Module::t('order', 'Ipoteka File Spravka'),
             'ipoteka_file_bank_approval' => Module::t('order', 'Ipoteka File Bank Approval'),
 
+            'ipoteka_file_dogovor_form' => Module::t('order', 'Ipoteka File Dogovor'),
+            'ipoteka_file_grafic_first_form' => Module::t('order', 'Ipoteka File Grafic First'),
+            'ipoteka_file_grafic_now_form' => Module::t('order', 'Ipoteka File Grafic Now'),
+            'ipoteka_file_refenance_form' => Module::t('order', 'Ipoteka File Refenance'),
+            'ipoteka_file_spravka_form' => Module::t('order', 'Ipoteka File Spravka'),
+            'ipoteka_file_bank_approval_form' => Module::t('order', 'Ipoteka File Bank Approval'),
+
 
             'is_participate' => Module::t('module', 'Is Participate'),
             'percent_sum' => Module::t('module', 'Percent Sum'),
@@ -178,20 +192,47 @@ class Order extends Model
         $pathDir = Yii::$app->params['module']['jk']['order']['filePath'] . $this->id;
         FileHelper::createDirectory($pathDir, $mode = 0775, $recursive = true);
 
-        $ipoteka_file_dogovor = UploadedFile::getInstance($this, 'ipoteka_file_dogovor');
+        $ipoteka_file_dogovor = UploadedFile::getInstance($this, 'ipoteka_file_dogovor_form');
         if ($ipoteka_file_dogovor) {
-            $fileName = 'jk_order_' . $this->id . '_ipoteka_file_dogovor_'.date('Ymd').'.' . $ipoteka_file_dogovor->extension;
+            $fileName = 'jk_order_' . $this->id . '_ipoteka_file_dogovor_' . date('YmdHis') . '.' . $ipoteka_file_dogovor->extension;
             $ipoteka_file_dogovor->saveAs($pathDir . '/' . $fileName);
             $this->ipoteka_file_dogovor = $fileName;
         }
 
-        /*
-        $this->mortgage_file = UploadedFile::getInstance($this, 'mortgage_file');
-        if ($this->mortgage_file) {
-            $fileName = 'mortgage_file_' . $this->id . '.' . $this->mortgage_file->extension;
-            $this->mortgage_file->saveAs($pathDir . '/' . $fileName);
-            $this->mortgage_file = $fileName;
-        }*/
+        $ipoteka_file_grafic_first = UploadedFile::getInstance($this, 'ipoteka_file_grafic_first_form');
+        if ($ipoteka_file_grafic_first) {
+            $fileName = 'jk_order_' . $this->id . '_ipoteka_file_grafic_first_' . date('YmdHis') . '.' . $ipoteka_file_grafic_first->extension;
+            $ipoteka_file_grafic_first->saveAs($pathDir . '/' . $fileName);
+            $this->ipoteka_file_grafic_first = $fileName;
+        }
+
+        $ipoteka_file_grafic_now = UploadedFile::getInstance($this, 'ipoteka_file_grafic_now_form');
+        if ($ipoteka_file_grafic_now) {
+            $fileName = 'jk_order_' . $this->id . '_ipoteka_file_grafic_now_' . date('YmdHis') . '.' . $ipoteka_file_grafic_now->extension;
+            $ipoteka_file_grafic_now->saveAs($pathDir . '/' . $fileName);
+            $this->ipoteka_file_grafic_now = $fileName;
+        }
+
+        $ipoteka_file_refenance = UploadedFile::getInstance($this, 'ipoteka_file_refenance_form');
+        if ($ipoteka_file_refenance) {
+            $fileName = 'jk_order_' . $this->id . '_ipoteka_file_refenance_' . date('YmdHis') . '.' . $ipoteka_file_refenance->extension;
+            $ipoteka_file_refenance->saveAs($pathDir . '/' . $fileName);
+            $this->ipoteka_file_refenance = $fileName;
+        }
+
+        $ipoteka_file_spravka = UploadedFile::getInstance($this, 'ipoteka_file_spravka_form');
+        if ($ipoteka_file_spravka) {
+            $fileName = 'jk_order_' . $this->id . '_ipoteka_file_spravka_' . date('YmdHis') . '.' . $ipoteka_file_spravka->extension;
+            $ipoteka_file_spravka->saveAs($pathDir . '/' . $fileName);
+            $this->ipoteka_file_spravka = $fileName;
+        }
+
+        $ipoteka_file_bank_approval = UploadedFile::getInstance($this, 'ipoteka_file_bank_approval_form');
+        if ($ipoteka_file_bank_approval) {
+            $fileName = 'jk_order_' . $this->id . '_ipoteka_file_bank_approval_' . date('YmdHis') . '.' . $ipoteka_file_bank_approval->extension;
+            $ipoteka_file_bank_approval->saveAs($pathDir . '/' . $fileName);
+            $this->ipoteka_file_bank_approval = $fileName;
+        }
 
         return $this->save();
     }

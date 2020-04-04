@@ -95,7 +95,7 @@ use yii\widgets\ActiveForm;
                         ]
                     ) ?>
 
-                    <?= Html::submitButton(
+                    <!--<?= Html::submitButton(
                         '<i class="fas fa-comments"></i> Написать куратору',
                         [
                             'class' => 'btn btn-success',
@@ -110,7 +110,7 @@ use yii\widgets\ActiveForm;
                             'value' => 1,
                             'name' => 'check'
                         ]
-                    ) ?>
+                    ) ?>-->
 
 
                     <?= Html::a(

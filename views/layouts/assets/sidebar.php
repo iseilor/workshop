@@ -14,7 +14,7 @@ use yii\helpers\Url;
         <img src="<?= Yii::$app->homeUrl ?>img/rt_logo.jpg" alt="<?= Yii::$app->id; ?>"
              class="brand-image img-circle elevation-3"
              style="opacity: .8">
-        <span class="brand-text font-weight-light"><?= Yii::$app->id; ?></span>
+        <span class="brand-text font-weight-light">#СИДИМДОМА</span>
     </a>
 
     <div class="sidebar">
