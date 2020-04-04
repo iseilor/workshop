@@ -126,6 +126,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             'photo' => Module::t('module', 'Photo'),
 
             // WORK
+            'tab_number'=> Module::t('module', 'Tab Number'),
             'position' => Module::t('module', 'Position'),
             'work_department' => Module::t('module', 'Work Department'),
             'work_department_full' => Module::t('module', 'Work Department Full'),

@@ -98,6 +98,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?= $form->field($model, 'work_phone')->textInput(['disabled' => 'disabled']) ?>
                     </div>
                     <div class="col-md-6">
+                        <?= $form->field($model, 'tab_number')->textInput() ?>
                         <?= $form->field($model, 'experience')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['experience']]) ?>
                         <?= $form->field($model, 'user_social_id')->dropDownList(ArrayHelper::map($socials, 'id', 'title'), ['prompt' => 'Выберите...']) ?>
                         <?= $form->field($model, 'work_is_young')->checkbox(['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['work_is_young']]) ?>

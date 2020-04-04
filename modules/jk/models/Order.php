@@ -11,29 +11,35 @@ use yii\web\UploadedFile;
 /**
  * This is the model class for table "jk_order".
  *
- * @property int      $id
- * @property int      $created_at
- * @property int      $created_by
+ * @property int $id
+ * @property int $created_at
+ * @property int $created_by
  * @property int|null $updated_at
  * @property int|null $updated_by
  * @property int|null $deleted_at
  * @property int|null $deleted_by
- * @property int      $status_id
+ * @property int $status_id
  *
- * @property int      $salary
- * @property int      $jp_type
- * @property int      $jp_own
- * @property string   ipoteka_file_dogovor
- * @property string   ipoteka_file_dogovor_form
- * @property string   ipoteka_file_grafic_first
- * @property string   ipoteka_file_grafic_now
- * @property string   ipoteka_file_refenance
- * @property string   ipoteka_file_spravka
- * @property string   ipoteka_file_bank_approval
+ * @property int $salary
+ * @property int $jp_type
+ * @property int $jp_own
+ *
+ * @property string ipoteka_file_dogovor
+ * @property string ipoteka_file_dogovor_form
+ * @property string ipoteka_file_grafic_first
+ * @property string ipoteka_file_grafic_now
+ * @property string ipoteka_file_refenance
+ * @property string ipoteka_file_spravka
+ * @property string ipoteka_file_bank_approval
+ *
+ * @property double money_oklad
+ * @property double money_summa_year
+ * @property double money_nalog_year
+ * @property double money_month_pay
+ * @property double money_my_pay
  */
 class Order extends Model
 {
-
 
     public $ipoteka_file_dogovor_form = '';
 
@@ -78,23 +84,29 @@ class Order extends Model
             // Ипотека
             [['ipoteka_target', 'ipoteka_size', 'ipoteka_params', 'ipoteka_user', 'ipoteka_summa'], 'safe'],
             [
-                ['ipoteka_file_dogovor_form', 'ipoteka_file_grafic_first_form', 'ipoteka_file_grafic_now_form', 'ipoteka_file_refenance_form', 'ipoteka_file_spravka_form', 'ipoteka_file_bank_approval_form'],
+                [
+                    'ipoteka_file_dogovor_form',
+                    'ipoteka_file_grafic_first_form',
+                    'ipoteka_file_grafic_now_form',
+                    'ipoteka_file_refenance_form',
+                    'ipoteka_file_spravka_form',
+                    'ipoteka_file_bank_approval_form',
+                ],
                 'file',
                 'skipOnEmpty' => true,
                 'extensions' => 'pdf, docx',
                 'maxSize' => '2048000',
             ],
 
-
-            // Доходы
-            [['salary', 'total_sum_income', 'total_sum_nalog', 'month_pay', 'month_my_pay'], 'safe'],
-            [
+            // Финансы
+            [['money_oklad', 'money_summa_year', 'money_nalog_year', 'money_month_pay', 'money_my_pay'], 'safe'],
+            /*[
                 ['salary'],
                 'filter',
                 'filter' => function ($value) {
                     return str_replace(" ", "", $value);
                 },
-            ],
+            ],*/
 
 
         ];
@@ -166,13 +178,12 @@ class Order extends Model
             'target_mortgage' => Module::t('module', 'Target Mortgage'),
             'property_type' => Module::t('module', 'Property Type'),
 
-            // Доходы
-            'salary' => Module::t('module', 'Salary'),
-            'total_sum_income' => Module::t('module', 'Total Sum Income'),
-            'total_sum_nalog' => Module::t('module', 'Total Sum Nalog'),
-            'month_pay' => Module::t('module', 'Month Pay'),
-            'month_my_pay' => Module::t('module', 'Month My Pay'),
-
+            // Финансы
+            'money_oklad' => Module::t('order', 'Money Oklad'),
+            'money_summa_year' => Module::t('order', 'Money Summa Year'),
+            'money_nalog_year' => Module::t('order', 'Money Nalog Year'),
+            'money_month_pay' => Module::t('order', 'Money Month Pay'),
+            'money_my_pay' => Module::t('order', 'Money My Pay'),
         ];
     }
 

@@ -84,12 +84,13 @@ class m200331_000010_create_jk_order_table extends Migration
                 'ipoteka_file_bank_approval' => $this->string(),    // Одобрение из банка
 
 
-                // Доходы
-                'salary' => $this->double(),              // Оклад
-                'total_sum_income' => $this->double(),    // Общая сумма дохода за 1 год
-                'total_sum_nalog' => $this->double(),     // Общая сумма удержаннаго налога за 1 год
-                'month_pay' => $this->double(),           // Среднемесячные платежи
-                'month_my_pay' => $this->double(),        // Мои среднемесячные платежи
+                // Финансы
+                'money_oklad' => $this->double(),               // Оклад
+                'money_summa_year' => $this->double(),          // Общая сумма дохода за 1 год
+                'money_nalog_year' => $this->double(),          // Общая сумма удержаннаго налога за 1 год
+                'money_month_pay' => $this->double(),           // Среднемесячные платежи
+                'money_my_pay' => $this->double(),              // Мои среднемесячные платежи
+
             ],
             $tableOptions
         );

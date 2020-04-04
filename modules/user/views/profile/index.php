@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <b>ID</b> <a class="float-right"><?= Yii::$app->user->identity->id ?></a>
                     </li>
                     <li class="list-group-item">
-                        <b>Табельный номер</b> <a class="float-right"><?= Yii::$app->user->identity->id ?></a>
+                        <b>Табельный номер</b> <a class="float-right"><?= $model->tab_number ?></a>
                     </li>
                     <li class="list-group-item">
                         <b>Дата рождения</b> <a class="float-right"><?= Yii::$app->formatter->format($model->birth_date, 'date'); ?></a>

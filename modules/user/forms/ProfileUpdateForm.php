@@ -19,6 +19,7 @@ class ProfileUpdateForm extends Model
     public $fio;
     public $photo;
 
+    public $tab_number;
     public $position;
     public $work_department;
     public $work_department_full;
@@ -60,6 +61,7 @@ class ProfileUpdateForm extends Model
         $this->photo = Yii::$app->homeUrl.Yii::$app->params['module']['user']['photo']['path'] . $user->photo;
 
         // WORK
+        $this->tab_number=$user->tab_number;
         $this->experience = $user->getExperience();
         $this->position = $user->position;
         $this->work_department = $user->work_department;
@@ -90,7 +92,7 @@ class ProfileUpdateForm extends Model
     public function rules()
     {
         return [
-            [['gender','birth_date','experience'], 'required'],
+            [['gender','birth_date','experience','tab_number'], 'required'],
             [
                 'email',
                 'unique',
@@ -134,6 +136,7 @@ class ProfileUpdateForm extends Model
             $user->birth_date = $this->birth_date;
 
             // WORK
+            $user->tab_number=$this->tab_number;
             $user->work_date =  mktime() - $this->experience* 31556926; // Стаж
             $user->work_is_young = $this->work_is_young;
             $user->work_is_transferred = $this->work_is_transferred;

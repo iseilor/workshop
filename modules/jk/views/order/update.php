@@ -1,5 +1,6 @@
 <?php
 
+use app\modules\jk\Module;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
@@ -8,12 +9,12 @@ use yii\helpers\Html;
 
 $this->title = Yii::t(
     'app',
-    'Update Order: {name}',
+    'Изменить заявку №{name}',
     [
         'name' => $model->id,
     ]
 );
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Orders'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Module::t('order', 'Orders'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>

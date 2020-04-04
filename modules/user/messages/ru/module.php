@@ -11,6 +11,7 @@ return [
     'Remember Me' => 'Запомнить меня',
     'Verify Code' => 'Код',
     'Photo' => 'Фотография',
+    'Tab Number'=>'Табельный номер',
 
     'Profile' => 'Профиль',
     'Profile Update' => 'Редактировать профиль',

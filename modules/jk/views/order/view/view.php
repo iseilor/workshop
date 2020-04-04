@@ -61,7 +61,7 @@ $this->title .= ' <span class="badge bg-success">новая</span>';
                 </div>
             </div>
             <div class="card-footer">
-                123
+                <?= Html::a('Изменить заявку', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
             </div>
         </div>
     </div>

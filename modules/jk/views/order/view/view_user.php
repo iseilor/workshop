@@ -15,6 +15,7 @@ $user = $model->createdUser;
             'label' => 'ID сотрудника',
             'value' => $user->id,
         ],
+        'tab_number',
         [
             'label' => 'ФИО',
             'format' => 'raw',
