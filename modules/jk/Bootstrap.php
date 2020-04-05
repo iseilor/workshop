@@ -16,7 +16,8 @@ class Bootstrap implements BootstrapInterface
             'fileMap' => [
                 'modules/jk/module' => 'module.php',
                 'modules/jk/zaim_type' => 'zaim_type.php',
-                'modules/jk/order'=>'order.php'
+                'modules/jk/order'=>'order.php',
+                'modules/jk/stop'=>'stop.php'
             ],
         ];
     }

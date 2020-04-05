@@ -5,7 +5,7 @@ use yii\db\Migration;
 /**
  * Handles the creation of table `{{%user_child}}`.
  */
-class m000000_000001_create_user_child_table extends Migration
+class m200405_183301_create_user_child_table extends Migration
 {
     /**
      * {@inheritdoc}
@@ -26,14 +26,27 @@ class m000000_000001_create_user_child_table extends Migration
             'updated_by' => $this->integer(),
             'deleted_at' => $this->integer(),
             'deleted_by' => $this->integer(),
+
             'user_id'=> $this->integer() . ' NOT NULL',
-            'number'=> $this->integer() . ' NOT NULL',
             'fio'=> $this->string() . ' NOT NULL',
-            'date'=> $this->integer() . ' NOT NULL'
+            'gender'=> $this->boolean() . ' NOT NULL',
+            'date'=> $this->integer() . ' NOT NULL',
 
+            'file_passport'=>$this->string(),
+            'file_registration'=>$this->string(),
+            'file_birth'=>$this->string(),
+            'file_address'=>$this->string(),
+            'file_ejd'=>$this->string(),
+            'file_personal'=>$this->string(),
+
+            'is_invalid'=>$this->boolean(),
+            'file_invalid'=>$this->string(),
+            'file_posobie'=>$this->string(),
+
+            'is_study'=>$this->boolean(),
+            'file_study'=>$this->string(),
+            'file_scholarship'=>$this->string()
         ], $tableOptions);
-
-        $this->execute($this->addData());
     }
 
     /**
@@ -42,18 +55,5 @@ class m000000_000001_create_user_child_table extends Migration
     public function safeDown()
     {
         $this->dropTable('{{%user_child}}');
-    }
-
-    public function addData()
-    {
-        $now = strtotime(date('d.m.Y H:i:s'));
-        return "INSERT INTO {{%user_child}} (`created_at`,`created_by`,`user_id`,`number`,`fio`,`date`)
-        VALUES
-            ($now,1,1,1,'Иванова София Алексеевна',$now),
-            ($now,1,1,2,'Иванова Полина Алексеевна',$now),
-            ($now,1,1,3,'Иванова Анастасия Алексеевна',$now),
-            ($now,1,2,1,'Иванова София Алексеевна',$now),
-            ($now,1,2,2,'Иванова Полина Алексеевна',$now),
-            ($now,1,2,3,'Иванова Анастасия Алексеевна',$now)";
     }
 }

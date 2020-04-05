@@ -81,6 +81,9 @@ return [
                 'icon' => '<i class="far fa-address-card"></i>'
             ],
         ],
+        'child'=>[
+            'filePath'=>'files/user/',
+        ],
         'admin' => [
             'icon' => '<i class="fas fa-home"></i>',
             'ad' => [

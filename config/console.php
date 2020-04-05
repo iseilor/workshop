@@ -55,6 +55,11 @@ $config = [
     'params' => $params,
 
     'controllerMap' => [
+        'migrate-user' => [
+            'class' => 'yii\console\controllers\MigrateController',
+            'migrationPath' => '@app/modules/user/migrations',
+            'migrationTable' => 'migration_user',
+        ],
         'migrate-jk' => [
             'class' => 'yii\console\controllers\MigrateController',
             'migrationPath' => '@app/modules/jk/migrations',
@@ -62,13 +67,11 @@ $config = [
         ],
         'migrate-task' => [
             'class' => 'yii\console\controllers\MigrateController',
-            //'migrationNamespaces' => ['app\modules\task\migrations'],
             'migrationPath' => '@app/modules/task/migrations',
             'migrationTable' => 'migration_task',
         ],
         'migrate-pulsar' => [
             'class' => 'yii\console\controllers\MigrateController',
-            //'migrationNamespaces' => ['app\modules\task\migrations'],
             'migrationPath' => '@app/modules/pulsar/migrations',
             'migrationTable' => 'migration_pulsar',
         ],

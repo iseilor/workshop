@@ -1,12 +1,13 @@
 <?php
 
-namespace app\modules\user\models;
+namespace app\modules\jk\models;
 
-use app\modules\user\Module;
+use app\models\Model;
+use app\modules\jk\Module;
 use Yii;
 
 /**
- * This is the model class for table "user_child".
+ * This is the model class for table "jk_order_stop".
  *
  * @property int $id
  * @property int $created_at
@@ -15,19 +16,18 @@ use Yii;
  * @property int|null $updated_by
  * @property int|null $deleted_at
  * @property int|null $deleted_by
- * @property int $user_id
- * @property int $number
- * @property string $fio
- * @property int $date
+ * @property string $title
+ * @property string $description
+ * @property string $status_ids
  */
-class UserChild extends \yii\db\ActiveRecord
+class Stop extends Model
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'user_child';
+        return 'jk_order_stop';
     }
 
     /**
@@ -36,9 +36,9 @@ class UserChild extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['created_at', 'created_by', 'user_id', 'number', 'fio', 'date'], 'required'],
-            [['created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by', 'user_id', 'number', 'date'], 'integer'],
-            [['fio'], 'string', 'max' => 255],
+            [['title', 'description', 'status_ids'], 'required'],
+            [['created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by'], 'integer'],
+            [['title', 'description', 'status_ids'], 'string', 'max' => 255],
         ];
     }
 
@@ -55,19 +55,18 @@ class UserChild extends \yii\db\ActiveRecord
             'updated_by' => Yii::t('app', 'Updated By'),
             'deleted_at' => Yii::t('app', 'Deleted At'),
             'deleted_by' => Yii::t('app', 'Deleted By'),
-            'user_id' => Yii::t('app', 'User ID'),
-            'number' => Yii::t('app', 'Number'),
-            'fio' => Module::t('module', 'Fio'),
-            'date' => Module::t('module', 'Date'),
+            'title' => Yii::t('app', 'Title'),
+            'description' => Yii::t('app', 'Description'),
+            'status_ids' => Module::t('stop', 'Status Ids'),
         ];
     }
 
     /**
      * {@inheritdoc}
-     * @return UserChildQuery the active query used by this AR class.
+     * @return StopQuery the active query used by this AR class.
      */
     public static function find()
     {
-        return new UserChildQuery(get_called_class());
+        return new StopQuery(get_called_class());
     }
 }

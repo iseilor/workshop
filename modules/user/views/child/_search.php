@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\user\models\UserChildSearch */
+/* @var $model app\modules\user\models\ChildSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="user-child-search">
+<div class="child-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -34,11 +34,35 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'user_id') ?>
 
-    <?php // echo $form->field($model, 'number') ?>
-
     <?php // echo $form->field($model, 'fio') ?>
 
+    <?php // echo $form->field($model, 'gender') ?>
+
     <?php // echo $form->field($model, 'date') ?>
+
+    <?php // echo $form->field($model, 'file_passport') ?>
+
+    <?php // echo $form->field($model, 'file_registration') ?>
+
+    <?php // echo $form->field($model, 'file_birth') ?>
+
+    <?php // echo $form->field($model, 'file_address') ?>
+
+    <?php // echo $form->field($model, 'file_ejd') ?>
+
+    <?php // echo $form->field($model, 'file_personal') ?>
+
+    <?php // echo $form->field($model, 'is_invalid') ?>
+
+    <?php // echo $form->field($model, 'file_invalid') ?>
+
+    <?php // echo $form->field($model, 'file_posobie') ?>
+
+    <?php // echo $form->field($model, 'is_study') ?>
+
+    <?php // echo $form->field($model, 'file_study') ?>
+
+    <?php // echo $form->field($model, 'file_scholarship') ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>

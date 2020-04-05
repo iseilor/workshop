@@ -28,7 +28,9 @@ class Module extends \yii\base\Module implements BootstrapInterface
             'basePath' => '@app/modules/user/messages',
             'fileMap' => [
                 'modules/user/module' => 'module.php',
+                'modules/user/child' => 'child.php',
             ],
+
         ];
     }
 

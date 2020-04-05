@@ -154,6 +154,10 @@ $config = [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
+            'normalizer' => [
+                'class' => 'yii\web\UrlNormalizer',
+                'normalizeTrailingSlash' => true,
+            ],
 
             'rules' => [
 

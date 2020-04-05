@@ -1,15 +1,15 @@
 <?php
 
-namespace app\modules\user\models;
+namespace app\modules\jk\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\modules\user\models\UserChild;
+use app\modules\jk\models\Stop;
 
 /**
- * UserChildSearch represents the model behind the search form of `app\modules\user\models\UserChild`.
+ * StopSearch represents the model behind the search form of `app\modules\jk\models\Stop`.
  */
-class UserChildSearch extends UserChild
+class StopSearch extends Stop
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class UserChildSearch extends UserChild
     public function rules()
     {
         return [
-            [['id', 'created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by', 'user_id', 'number', 'date'], 'integer'],
-            [['fio'], 'safe'],
+            [['id', 'created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by'], 'integer'],
+            [['title', 'description', 'status_ids'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class UserChildSearch extends UserChild
      */
     public function search($params)
     {
-        $query = UserChild::find();
+        $query = Stop::find();
 
         // add conditions that should always apply here
 
@@ -65,12 +65,11 @@ class UserChildSearch extends UserChild
             'updated_by' => $this->updated_by,
             'deleted_at' => $this->deleted_at,
             'deleted_by' => $this->deleted_by,
-            'user_id' => $this->user_id,
-            'number' => $this->number,
-            'date' => $this->date,
         ]);
 
-        $query->andFilterWhere(['like', 'fio', $this->fio]);
+        $query->andFilterWhere(['like', 'title', $this->title])
+            ->andFilterWhere(['like', 'description', $this->description])
+            ->andFilterWhere(['like', 'status_ids', $this->status_ids]);
 
         return $dataProvider;
     }

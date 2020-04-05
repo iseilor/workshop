@@ -1,13 +1,13 @@
 <?php
 
-namespace app\modules\user\models;
+namespace app\modules\jk\models;
 
 /**
- * This is the ActiveQuery class for [[UserChild]].
+ * This is the ActiveQuery class for [[Stop]].
  *
- * @see UserChild
+ * @see Stop
  */
-class UserChildQuery extends \yii\db\ActiveQuery
+class StopQuery extends \yii\db\ActiveQuery
 {
     /*public function active()
     {
@@ -16,7 +16,7 @@ class UserChildQuery extends \yii\db\ActiveQuery
 
     /**
      * {@inheritdoc}
-     * @return UserChild[]|array
+     * @return Stop[]|array
      */
     public function all($db = null)
     {
@@ -25,7 +25,7 @@ class UserChildQuery extends \yii\db\ActiveQuery
 
     /**
      * {@inheritdoc}
-     * @return UserChild|array|null
+     * @return Stop|array|null
      */
     public function one($db = null)
     {

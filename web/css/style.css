@@ -21,6 +21,7 @@ div.required label:after {
   text-align: center;
   letter-spacing: 0.1em;
   max-width: 7em;
+  width: 140px;
 }
 a.workshop-link {
   font-weight: bold;
@@ -94,4 +95,9 @@ a.a-color-blue:hover {
 }
 .curs span:first-child {
   display: inline;
+}
+.custom-file-label::after {
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  content: "\f0c6";
 }

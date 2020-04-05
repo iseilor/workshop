@@ -61,7 +61,8 @@ $this->title .= ' <span class="badge bg-success">новая</span>';
                 </div>
             </div>
             <div class="card-footer">
-                <?= Html::a('Изменить заявку', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+                <?= Html::a(Icon::show('edit').'Изменить заявку', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+                <?= Html::a(Icon::show('stop').'Отозвать заявку', ['update', 'id' => $model->id], ['class' => 'btn btn-danger float-right']) ?>
             </div>
         </div>
     </div>

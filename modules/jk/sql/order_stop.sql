@@ -1,0 +1,1 @@
+INSERT INTO workshop.jk_order_stop (created_at, created_by, title, description, status_ids) VALUES (1585134258, 1, 'Название', 'Описание', '1,2,3');

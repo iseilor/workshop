@@ -1,4 +1,5 @@
 <?php
+
 namespace app\components\grid;
 
 use Closure;
@@ -8,18 +9,22 @@ use yii\helpers\Url;
 
 class LinkColumn extends DataColumn
 {
+
     /**
      * @var callable
      */
     public $url;
+
     /**
      * @var bool
      */
     public $targetBlank = false;
+
     /**
      * @var string
      */
     public $controller;
+
     /**
      * @inheritdoc
      */
@@ -39,8 +44,8 @@ class LinkColumn extends DataColumn
         if ($this->url instanceof Closure) {
             return call_user_func($this->url, $model, $key, $index);
         } else {
-            $params = is_array($key) ? $key : ['id' => (string) $key];
-            $params[0] = $this->controller ? $this->controller . '/view' : 'view';
+            $params = is_array($key) ? $key : ['id' => (string)$key];
+            $params[0] = $this->controller ? $this->controller : 'view';
             return Url::toRoute($params);
         }
     }

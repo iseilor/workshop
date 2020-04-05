@@ -132,6 +132,8 @@ class OrderController extends Controller
         $model->status_id = 1;
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
+            $model->upload();
+
             // Сразу делаем первый этап, когда была создана заявка
             $orderStage = new OrderStage();
             $orderStage->order_id=$model->id;
@@ -139,7 +141,7 @@ class OrderController extends Controller
             $orderStage->comment = 'Автоматический комментарий: заявка создана сотрудником на портале';
             $orderStage->save();
 
-            return $this->redirect(['update', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         $userChildSearchModel = new UserChildSearch();
