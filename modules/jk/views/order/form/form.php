@@ -63,7 +63,7 @@ use yii\widgets\ActiveForm;
                                                               [
                                                                   'model' => $model,
                                                                   'form' => $form,
-                                                                  'userChildDataProvider'=>$userChildDataProvider
+                                                                  //'userChildDataProvider'=>$userChildDataProvider
 
                                                               ]) ?>
                                         </div>

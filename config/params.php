@@ -82,7 +82,7 @@ return [
             ],
         ],
         'child'=>[
-            'filePath'=>'files/user/',
+            'filePath'=>'files/child/',
         ],
         'admin' => [
             'icon' => '<i class="fas fa-home"></i>',

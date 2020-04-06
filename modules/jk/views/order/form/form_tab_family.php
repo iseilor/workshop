@@ -41,25 +41,7 @@ use yii\widgets\MaskedInput; ?>
         <div class="form-group is-child <?= $isChildClass ?>">
             <label class="control-label" for="order-child_count">Дети</label>
             <div class="help-block">* Вся таблица по кол-ву детей должна быть заполнена</div>
-            <?= GridView::widget(
-                [
-                    'dataProvider' => $userChildDataProvider,
-                    'columns' => [
-                        ['class' => 'yii\grid\SerialColumn'],
-                        'fio',
-                        'date:date',
-                        [
-                            'class' => ActionColumn::className(),
-                            'template' => '{delete}',
-                            'buttons' => [
-                                'delete' => function ($url, $model) {
-                                    return '<button type="button" class="btn btn-danger btn-xs">' . Icon::show('trash') . '</button>';
-                                },
-                            ],
-                        ],
-                    ],
-                ]
-            ); ?>
+
             <button type="button" class="btn btn-success btn-xs"><?= Icon::show('baby') ?> Добавить ребёнка</button>
         </div>
     </div>

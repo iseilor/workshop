@@ -1,6 +1,7 @@
 <?php
 
 use app\modules\main\Module;
+use kartik\icons\Icon;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\Menu;
@@ -197,6 +198,12 @@ use yii\widgets\Menu;
                     echo Html::a(
                         '<i class="fas fa-user-circle"></i> Мой профиль',
                         Url::home() . 'user/profile/update',
+                        ['class' => 'dropdown-item']
+                    );
+                    echo '<div class="dropdown-divider"></div>';
+                    echo Html::a(
+                        Icon::show('baby').'Мои дети',
+                        Url::home() . 'user/child',
                         ['class' => 'dropdown-item']
                     );
                     echo '<div class="dropdown-divider"></div>';

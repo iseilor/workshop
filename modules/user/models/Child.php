@@ -4,11 +4,14 @@ namespace app\modules\user\models;
 
 use app\models\Model;
 use app\modules\user\Module;
+use kartik\icons\Icon;
 use Yii;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\helpers\FileHelper;
+use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\web\UploadedFile;
 
 /**
@@ -119,6 +122,7 @@ class Child extends Model
             'fio' => Module::t('child', 'Fio'),
             'gender' => Module::t('child', 'Gender'),
             'date' => Module::t('child', 'Date'),
+            'age'=>Module::t('child', 'Age'),
 
             'file_passport' => Module::t('child', 'File Passport'),
             'file_registration' => Module::t('child', 'File Registration'),
@@ -128,8 +132,12 @@ class Child extends Model
             'file_personal' => Module::t('child', 'File Personal'),
 
             'file_passport_form' => Module::t('child', 'File Passport'),
+            'passportLink'=>Module::t('child', 'File Passport'),
+
             'file_registration_form' => Module::t('child', 'File Registration'),
             'file_birth_form' => Module::t('child', 'File Birth'),
+            'birthLink' => Module::t('child', 'File Birth'),
+
             'file_address_form' => Module::t('child', 'File Address'),
             'file_ejd_form' => Module::t('child', 'File Ejd'),
             'file_personal_form' => Module::t('child', 'File Personal'),
@@ -207,4 +215,28 @@ class Child extends Model
         }
         return $this->save();
     }
+
+    // Возраст ребёнка
+    public function getAge(){
+        return intdiv(mktime() - $this->date, 31556926);
+    }
+
+    // Короткая ссылка с иконкой на паспорт
+    public function getPassportLink(){
+        if ($this->file_passport){
+            return Html::a(Icon::show('file-pdf'),Url::to('/'.Yii::$app->params['module']['child']['filePath'].$this->id.'/'.$this->file_passport),['title'=>'Паспорт '.$this->fio,'target'=>'_blank']);
+        }else{
+            return false;
+        }
+    }
+
+    // Короткая ссылка с иконкой на свидетельство
+    public function getBirthLink(){
+        if ($this->file_passport){
+            return Html::a(Icon::show('file-pdf'),'123',['Свидетельство о рождении'.$this->fio]);
+        }else{
+            return false;
+        }
+    }
+
 }

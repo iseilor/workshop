@@ -3,6 +3,7 @@
 use app\modules\user\Module;
 
 use kartik\file\FileInput;
+use kartik\icons\Icon;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
@@ -40,6 +41,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 <a class="nav-link" id="tab-4-tab" data-toggle="pill" href="#tab-4" role="tab" aria-controls="tab-4"
                    aria-selected="true">
                     <i class="far fa-id-card"></i> СНИЛС
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="tab-5-tab" data-toggle="pill" href="#tab-5" role="tab" aria-controls="tab-5"
+                   aria-selected="true">
+                    <?=Icon::show('baby')?>Дети
                 </a>
             </li>
         </ul>
@@ -177,6 +184,9 @@ $this->params['breadcrumbs'][] = $this->title;
                         ) ?>
                     </div>
                 </div>
+            </div>
+            <div class="tab-pane fade" id="tab-5" role="tabpanel" aria-labelledby="tab-5-tab">
+                <?= $this->render('update_child', ['model' => $model]) ?>
             </div>
         </div>
     </div>

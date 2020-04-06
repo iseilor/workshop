@@ -55,16 +55,27 @@ $this->params['breadcrumbs'][] = $this->title;
                             }
                         ],
                         'date:date',
-                        //'file_passport',
+                        'age',
+                        'passportLink:html',
+                        'birthLink:html',
                         //'file_registration',
-                        //'file_birth',
                         //'file_address',
                         //'file_ejd',
                         //'file_personal',
-                        //'is_invalid',
+                        [
+                            'attribute' => 'is_invalid',
+                             'content'=>function($data){
+                                return (isset($data->is_invalid) && $data->is_invalid) ? '<span class="badge badge-danger">Да</span>' : 'Нет';
+                            }
+                        ],
                         //'file_invalid',
                         //'file_posobie',
-                        //'is_study',
+                        [
+                            'attribute' => 'is_study',
+                            'content'=>function($data){
+                                return (isset($data->is_study) && $data->is_study) ? '<span class="badge badge-info">Да</span>' : 'Нет';
+                            }
+                        ],
                         //'file_study',
                         //'file_scholarship',
 

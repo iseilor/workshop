@@ -2,6 +2,7 @@
 
 use app\components\grid\ActionColumn;
 use app\components\grid\LinkColumn;
+use app\modules\user\models\ChildSearch;
 use app\modules\user\Module;
 
 
@@ -89,6 +90,12 @@ $this->params['breadcrumbs'][] = $this->title;
                             <?= Yii::$app->params['module']['jk']['order']['icon'] ?> Заявки
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="tab-4-tab" data-toggle="pill" href="#tab-4" role="tab" aria-controls="tab-4"
+                           aria-selected="true">
+                            <?=\kartik\icons\Icon::show('baby')?>Дети
+                        </a>
+                    </li>
                 </ul>
             </div>
             <div class="card-body">
@@ -145,6 +152,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
                     <div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby="tab-3-tab">
                         <?=$this->render('index_order', ['orderDataProvider' => $orderDataProvider]) ?>
+                    </div>
+                    <div class="tab-pane fade" id="tab-4" role="tabpanel" aria-labelledby="tab-4-tab">
+                        <?= $this->render('profile_child', ['model' => $model]) ?>
                     </div>
                 </div>
             </div>
