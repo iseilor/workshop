@@ -5,9 +5,9 @@ namespace app\modules\jk\models;
 /**
  * This is the ActiveQuery class for [[Stop]].
  *
- * @see Stop
+ * @see OrderStop
  */
-class StopQuery extends \yii\db\ActiveQuery
+class OrderStopQuery extends \yii\db\ActiveQuery
 {
     /*public function active()
     {
@@ -16,7 +16,7 @@ class StopQuery extends \yii\db\ActiveQuery
 
     /**
      * {@inheritdoc}
-     * @return Stop[]|array
+     * @return OrderStop[]|array
      */
     public function all($db = null)
     {
@@ -25,7 +25,7 @@ class StopQuery extends \yii\db\ActiveQuery
 
     /**
      * {@inheritdoc}
-     * @return Stop|array|null
+     * @return OrderStop|array|null
      */
     public function one($db = null)
     {

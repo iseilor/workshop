@@ -1,108 +1,54 @@
 <?php
 
 /* @var $this yii\web\View */
-$icon = '<i class="nav-icon fas fa-home"></i>';
-$this->title = $icon . ' Жилищная компания <span class="badge bg-danger">Админка</span>';
+$this->title = '<span class="badge bg-danger">Админка</span>';
+$this->params['breadcrumbs'][] = ['label' => 'ЖК', 'url' => ['/jk']];
 $this->params['breadcrumbs'][] = $this->title;
 
+use kartik\icons\Icon;
+use yii\helpers\Html;
 use yii\helpers\Url; ?>
 
-
-
-<div class="row">
-    <div class="col-md-3">
-        <div class="small-box bg-primary">
-            <div class="inner">
-                <h3>Проценты</h3>
-                <p>Калькулятор процентов</p>
+<section class="content">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title"><?=Icon::show('tools')?>Панель администратора жилищной кампании</h3>
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <i class="fas fa-minus"></i></button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                    <i class="fas fa-times"></i></button>
             </div>
-            <div class="icon">
-                <i class="fas fa-percent"></i>
-            </div>
-            <a href="<?= Url::to(['/jk/percent/create']); ?>" class="small-box-footer">Перейти <i
-                        class="fas fa-arrow-circle-right"></i></a>
+        </div>
+        <div class="card-body">
+            <ul>
+                <li>Калькуляторы
+                    <ul>
+                        <li>Проценты</li>
+                        <li>Займы</li>
+                    </ul>
+                </li>
+                <li>Заявки
+                    <ul>
+                        <li>Новые</li>
+                        <li>В работе</li>
+                        <li>На согласовании</li>
+                        <li>На комиссии</li>
+                        <li>Отозваны</li>
+                    </ul>
+                </li>
+                <li>Справочники
+                    <ul>
+                        <li>Статусы заявок</li>
+                        <li><?=Html::a(Icon::show('undo').'Причины возвратов',Url::to(['/jk/order-stop']))?></li>
+                    </ul>
+                </li>
+                <li>Документы</li>
+                <li>Вопросы</li>
+            </ul>
+        </div>
+        <div class="card-footer">
+            <span class="text-danger"><?=Icon::show('exclamation')?> Будьте очень внимательны при работе с административной панелью</span>
         </div>
     </div>
-    <div class="col-md-3">
-        <div class="small-box bg-primary">
-            <div class="inner">
-                <h3>Займы</h3>
-                <p>Калькуляторы займа</p>
-            </div>
-            <div class="icon">
-                <i class="fas fa-ruble-sign"></i>
-            </div>
-            <a href="<?= Url::to(['/jk/zaim/create']); ?>" class="small-box-footer">Перейти <i
-                        class="fas
-             fa-arrow-circle-right"></i></a>
-        </div>
-    </div>
-
-    <div class="col-md-3">
-        <!-- small box -->
-        <div class="small-box bg-primary">
-            <div class="inner">
-                <h3>Заявки</h3>
-                <p>Подать заявку</p>
-            </div>
-            <div class="icon">
-                <i class="fas fa-file"></i>
-            </div>
-            <a href="<?= Url::to(['/']); ?>" class="small-box-footer">Перейти <i
-                    class="fas
-             fa-arrow-circle-right"></i></a>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="small-box bg-info">
-            <div class="inner">
-                <h3>Вопросы</h3>
-                <p>Ответы на вопросы</p>
-            </div>
-            <div class="icon">
-                <i class="fas fa-question"></i>
-            </div>
-            <a href="<?= Url::to(['/jk/faq']); ?>" class="small-box-footer">Перейти <i
-                    class="fas fa-arrow-circle-right"></i></a>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="small-box bg-info">
-            <div class="inner">
-                <h3>Документы</h3>
-                <p>Нормативная документация</p>
-            </div>
-            <div class="icon">
-                <i class="fas fa-file-word"></i>
-            </div>
-            <a href="<?= Url::to(['/jk/doc']); ?>" class="small-box-footer">Перейти <i class="fas
-            fa-arrow-circle-right"></i></a>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="small-box bg-info">
-            <div class="inner">
-                <h3>ПМ 2020</h3>
-                <p>Прожиточный минимум 2020</p>
-            </div>
-            <div class="icon">
-                <i class="fas fa-wallet"></i>
-            </div>
-            <a href="<?= Url::to(['/jk/min/admin']); ?>" class="small-box-footer">Перейти <i
-                        class="fas fa-arrow-circle-right"></i></a>
-        </div>
-    </div>
-    <!--<div class="col-md-3">
-        <div class="small-box bg-success">
-            <div class="inner">
-                <h3>Куратор</h3>
-                <p>Горшкова Лада</p>
-            </div>
-            <div class="icon">
-                <i class="fas fa-user"></i>
-            </div>
-            <a href="<?= Url::to(['site/dev']); ?>" class="small-box-footer">Перейти <i
-                    class="fas fa-arrow-circle-right"></i></a>
-        </div>
-    </div>-->
-</div>
+</section>

@@ -28,7 +28,7 @@ class m200404_175000_create_jk_order_stop_table extends Migration
             'deleted_by' => $this->integer(),
             'title' => $this->string()->notNull(),
             'description' => $this->string()->notNull(),
-            'status_ids' => $this->string()->notNull(),
+            'order_status_id' => $this->string()->notNull(),
         ], $tableOptions);
         $this->execute(file_get_contents(__DIR__ . '/../sql/order_stop.sql'));
     }

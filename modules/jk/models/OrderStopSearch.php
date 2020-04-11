@@ -4,12 +4,12 @@ namespace app\modules\jk\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\modules\jk\models\Stop;
+use app\modules\jk\models\OrderStop;
 
 /**
  * StopSearch represents the model behind the search form of `app\modules\jk\models\Stop`.
  */
-class StopSearch extends Stop
+class OrderStopSearch extends OrderStop
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class StopSearch extends Stop
     public function rules()
     {
         return [
-            [['id', 'created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by'], 'integer'],
-            [['title', 'description', 'status_ids'], 'safe'],
+            [['id', 'created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by','order_status_id'], 'integer'],
+            [['title', 'description'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class StopSearch extends Stop
      */
     public function search($params)
     {
-        $query = Stop::find();
+        $query = OrderStop::find();
 
         // add conditions that should always apply here
 
@@ -65,12 +65,11 @@ class StopSearch extends Stop
             'updated_by' => $this->updated_by,
             'deleted_at' => $this->deleted_at,
             'deleted_by' => $this->deleted_by,
+            'order_status_id' => $this->order_status_id,
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'status_ids', $this->status_ids]);
-
+            ->andFilterWhere(['like', 'description', $this->description]);
         return $dataProvider;
     }
 }

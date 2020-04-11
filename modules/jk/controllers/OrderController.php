@@ -193,14 +193,14 @@ class OrderController extends Controller
             }
         }
 
-        $userChildSearchModel = new UserChildSearch();
-        $userChildDataProvider = $userChildSearchModel->search(Yii::$app->request->queryParams);
+        //$userChildSearchModel = new UserChildSearch();
+        //$userChildDataProvider = $userChildSearchModel->search(Yii::$app->request->queryParams);
 
         return $this->render(
             'update',
             [
                 'model' => $model,
-                'userChildDataProvider'=>$userChildDataProvider
+                //'userChildDataProvider'=>$userChildDataProvider
             ]
         );
     }

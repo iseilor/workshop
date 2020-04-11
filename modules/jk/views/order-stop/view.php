@@ -1,14 +1,16 @@
 <?php
 
+use app\modules\jk\Module;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\jk\models\Stop */
+/* @var $model app\modules\jk\models\OrderStop */
 
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'ЖК', 'url' => ['/jk']];
-$this->params['breadcrumbs'][] = ['label' => \app\modules\jk\Module::t('stop', 'Stops'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Админка', 'url' => ['/jk/admin']];
+$this->params['breadcrumbs'][] = ['label' => Module::t('stop', 'Stops'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
@@ -38,7 +40,11 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
                         'title',
                         'description',
-                        'status_ids',
+                        [
+                                'label'=>'Статус заявки',
+                            'value'=>$model->orderStatus->title
+                        ],
+
                     ],
                 ]) ?>
             </div>

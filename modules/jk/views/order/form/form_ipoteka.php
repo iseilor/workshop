@@ -1,17 +1,11 @@
 <div class="row">
     <div class="col-md-4">
         <?= $form->field($model, 'ipoteka_target')->dropDownList($model->getIpotekaTargetList(), ['prompt' => 'Выберите ...']); ?>
-    </div>
-    <div class="col-md-4">
         <?= $form->field($model, 'ipoteka_size')->textInput(); ?>
-    </div>
-    <div class="col-md-4">
         <?= $form->field($model, 'ipoteka_user')->textInput(); ?>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-4">
         <?= $form->field($model, 'ipoteka_params')->textarea(); ?>
-    </div>
-    <div class="col-md-6">
         <?= $form->field($model, 'ipoteka_summa')->textarea(); ?>
     </div>
     <div class="col-md-4">
@@ -22,6 +16,18 @@
         <?= $form->field($model, 'ipoteka_file_grafic_first_form', [
             'template' => getFileInputTemplate($model->ipoteka_file_grafic_first,$model->attributeLabels()['ipoteka_file_grafic_first'].'.pdf'),
         ])->fileInput(['class' => 'custom-file-input']) ?>
+
+    </div>
+
+
+    <div class="col-md-6">
+
+    </div>
+    <div class="col-md-6">
+
+    </div>
+    <div class="col-md-4">
+
     </div>
     <div class="col-md-4">
         <?= $form->field($model, 'ipoteka_file_grafic_now_form', [

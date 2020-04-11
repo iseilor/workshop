@@ -2,19 +2,26 @@
 
 use app\components\grid\ActionColumn;
 use app\components\grid\LinkColumn;
+use app\modules\jk\models\OrderStatus;
 use app\modules\jk\Module;
 use kartik\icons\Icon;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\Url;
 use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\modules\jk\models\StopSearch */
+/* @var $searchModel app\modules\jk\models\OrderStopSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
+$this->params['breadcrumbs'][] = ['label' => 'ЖК', 'url' => ['/jk']];
+$this->params['breadcrumbs'][] = ['label' => 'Админка', 'url' => ['/jk/admin']];
 $this->title = Module::t('stop', 'Stops');
 $this->params['breadcrumbs'][] = $this->title;
+
+$orderStatuses = OrderStatus::find()->all();
+$orderStatuses = ArrayHelper::map($orderStatuses, 'id', 'title');
 ?>
 
 <div class="row">
@@ -37,8 +44,8 @@ $this->params['breadcrumbs'][] = $this->title;
                             'class' => LinkColumn::className(),
                             'attribute' => 'id',
                         ],
-                        'created_at:datetime',
-                        [
+                        //'created_at:datetime',
+                        /*[
                             'class' => LinkColumn::className(),
                             'label' => Yii::t('app', 'Created By'),
                             'attribute' => 'created_by',
@@ -46,13 +53,18 @@ $this->params['breadcrumbs'][] = $this->title;
                             'url' => function ($data) {
                                 return Url::to(['/user/'.$data->created_by ]);
                             },
-                        ],
+                        ],*/
                         [
                             'class' => LinkColumn::className(),
                             'attribute' => 'title',
                         ],
-                        'description',
-                        'status_ids',
+                        [
+                            'attribute' => 'order_status_id',
+                            'filter' => $orderStatuses,
+                            'content' => function ($data) {
+                                return $data->orderStatus['title'];
+                            },
+                        ],
                         [
                             'class' => ActionColumn::className(),
                         ],

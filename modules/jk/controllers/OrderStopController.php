@@ -3,8 +3,8 @@
 namespace app\modules\jk\controllers;
 
 use Yii;
-use app\modules\jk\models\Stop;
-use app\modules\jk\models\StopSearch;
+use app\modules\jk\models\OrderStop;
+use app\modules\jk\models\OrderStopSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -12,7 +12,7 @@ use yii\filters\VerbFilter;
 /**
  * StopController implements the CRUD actions for Stop model.
  */
-class StopController extends Controller
+class OrderStopController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -35,7 +35,7 @@ class StopController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new StopSearch();
+        $searchModel = new OrderStopSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -64,7 +64,7 @@ class StopController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Stop();
+        $model = new OrderStop();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -112,13 +112,15 @@ class StopController extends Controller
     /**
      * Finds the Stop model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
+     *
      * @param integer $id
-     * @return Stop the loaded model
+     *
+     * @return OrderStop the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Stop::findOne($id)) !== null) {
+        if (($model = OrderStop::findOne($id)) !== null) {
             return $model;
         }
 

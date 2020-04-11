@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\jk\models\StopSearch */
+/* @var $model app\modules\jk\models\OrderStopSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 

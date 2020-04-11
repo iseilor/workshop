@@ -18,9 +18,9 @@ use Yii;
  * @property int|null $deleted_by
  * @property string $title
  * @property string $description
- * @property string $status_ids
+ * @property int $order_status_id
  */
-class Stop extends Model
+class OrderStop extends Model
 {
     /**
      * {@inheritdoc}
@@ -36,9 +36,9 @@ class Stop extends Model
     public function rules()
     {
         return [
-            [['title', 'description', 'status_ids'], 'required'],
-            [['created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by'], 'integer'],
-            [['title', 'description', 'status_ids'], 'string', 'max' => 255],
+            [['title', 'description', 'order_status_id'], 'required'],
+            [['created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by','order_status_id'], 'integer'],
+            [['title', 'description'], 'string', 'max' => 255],
         ];
     }
 
@@ -57,16 +57,21 @@ class Stop extends Model
             'deleted_by' => Yii::t('app', 'Deleted By'),
             'title' => Yii::t('app', 'Title'),
             'description' => Yii::t('app', 'Description'),
-            'status_ids' => Module::t('stop', 'Status Ids'),
+            'order_status_id' => Module::t('stop', 'Order Status'),
         ];
     }
 
     /**
      * {@inheritdoc}
-     * @return StopQuery the active query used by this AR class.
+     * @return OrderStopQuery the active query used by this AR class.
      */
     public static function find()
     {
-        return new StopQuery(get_called_class());
+        return new OrderStopQuery(get_called_class());
+    }
+
+    public function getOrderStatus()
+    {
+        return $this->hasOne(OrderStatus::className(), ['id' => 'order_status_id']);
     }
 }

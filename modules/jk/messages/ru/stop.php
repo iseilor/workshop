@@ -4,5 +4,5 @@ return [
     'Create Stop'=>'Добавить причину отказа',
     'Update Stop: {name}'=>'Именить причину отказа: {name}',
 
-    'Status Ids'=>'Статусы заявки'
+    'Order Status'=>'Статус заявки'
 ];
