@@ -42,9 +42,11 @@ class m200331_000010_create_jk_order_table extends Migration
 
 
                 // Параметры
-                'is_participate' => $this->boolean(),     // Ранее участвовали
-                'is_mortgage' => $this->boolean(),        // Оформлена ипотека
-                'mortgage_file' => $this->string(),       // Кредитный договор с акктуальным графиком платежей
+                'is_agree_personal_data'=>$this->boolean()->notNull(),      // Обработка персональных данных
+                'file_agree_personal_data'=>$this->string(),                // Файл оброботки персональных данных
+                'is_participate' => $this->boolean(),                       // Ранее участвовали
+                'is_mortgage' => $this->boolean(),                          // Оформлена ипотека
+                'mortgage_file' => $this->string(),                         // Кредитный договор с акктуальным графиком платежей
 
                 // Семья
                 'is_spouse' => $this->integer(),          // Наличие супруга, супруги (Да, Нет, Разведён)
@@ -94,19 +96,8 @@ class m200331_000010_create_jk_order_table extends Migration
             ],
             $tableOptions
         );
-        $this->execute($this->addData());
     }
 
-    // Добавление первоначальных данных
-    public function addData()
-    {
-        $now = strtotime(date('d.m.Y H:i:s'));
-        return "INSERT INTO {{%jk_order}} (`created_at`,`created_by`,`progress`,`status_id`,`sum`)
-        VALUES
-        ($now,1,70,1,1000000),
-        ($now,2,50,1,700000),
-        ($now,2,20,1,400000)";
-    }
 
     /**
      * {@inheritdoc}

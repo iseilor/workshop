@@ -11,35 +11,40 @@ use yii\web\UploadedFile;
 /**
  * This is the model class for table "jk_order".
  *
- * @property int $id
- * @property int $created_at
- * @property int $created_by
+ * @property int      $id
+ * @property int      $created_at
+ * @property int      $created_by
  * @property int|null $updated_at
  * @property int|null $updated_by
  * @property int|null $deleted_at
  * @property int|null $deleted_by
- * @property int $status_id
+ * @property int      $status_id
  *
- * @property int $salary
- * @property int $jp_type
- * @property int $jp_own
+ * @property boolean  $is_participate
+ * @property boolean  $is_mortgage
  *
- * @property string ipoteka_file_dogovor
- * @property string ipoteka_file_dogovor_form
- * @property string ipoteka_file_grafic_first
- * @property string ipoteka_file_grafic_now
- * @property string ipoteka_file_refenance
- * @property string ipoteka_file_spravka
- * @property string ipoteka_file_bank_approval
+ * @property int      $salary
+ * @property int      $jp_type
+ * @property int      $jp_own
  *
- * @property double money_oklad
- * @property double money_summa_year
- * @property double money_nalog_year
- * @property double money_month_pay
- * @property double money_my_pay
+ * @property string   ipoteka_file_dogovor
+ * @property string   ipoteka_file_dogovor_form
+ * @property string   ipoteka_file_grafic_first
+ * @property string   ipoteka_file_grafic_now
+ * @property string   ipoteka_file_refenance
+ * @property string   ipoteka_file_spravka
+ * @property string   ipoteka_file_bank_approval
+ *
+ * @property double   money_oklad
+ * @property double   money_summa_year
+ * @property double   money_nalog_year
+ * @property double   money_month_pay
+ * @property double   money_my_pay
  */
 class Order extends Model
 {
+
+    public $file_agree_personal_data_form;
 
     public $ipoteka_file_dogovor_form = '';
 
@@ -68,10 +73,12 @@ class Order extends Model
     {
         return [
 
-            [['created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by'], 'integer'],
-
             // Общие параметры заявки
-            [['is_participate'], 'safe'],
+            [['is_participate', 'is_mortgage'], 'required'],
+            [['is_agree_personal_data'], 'required'],
+            [['is_agree_personal_data'], 'compare', 'compareValue' => 1, 'message' => 'Обязательно дать согласие на обработку персональных данных'],
+            [['file_agree_personal_data_form'], 'safe'],
+            [['file_agree_personal_data_form'], 'file', 'extensions' => 'pdf, docx', 'maxSize' => '2048000'],
 
             // Семья
             [['is_spouse', 'spouse_fio', 'spouse_is_dzo', 'spouse_is_do', 'spouse_is_work', 'child_count', 'child_count_18', 'child_count_23'], 'safe'],
@@ -100,13 +107,6 @@ class Order extends Model
 
             // Финансы
             [['money_oklad', 'money_summa_year', 'money_nalog_year', 'money_month_pay', 'money_my_pay'], 'safe'],
-            /*[
-                ['salary'],
-                'filter',
-                'filter' => function ($value) {
-                    return str_replace(" ", "", $value);
-                },
-            ],*/
 
 
         ];
@@ -126,8 +126,14 @@ class Order extends Model
             'deleted_at' => Yii::t('app', 'Deleted At'),
             'deleted_by' => Yii::t('app', 'Deleted By'),
 
+            // Параметры
+            'is_agree_personal_data' => Module::t('order', 'Agree Personal Data'),
+            'file_agree_personal_data' => Module::t('order', 'Agree Personal Data'),
+            'file_agree_personal_data_form' => Module::t('order', 'Agree Personal Data'),
             'is_mortgage' => Module::t('module', 'Is Mortgage'),
             'mortgage_file' => Module::t('module', 'Mortgage File'),
+            'is_participate' => Module::t('module', 'Is Participate'),
+            'participateLabel' => Module::t('module', 'Is Participate'),
 
             // Семья
             'is_spouse' => Module::t('module', 'Is Spouse'),
@@ -173,7 +179,8 @@ class Order extends Model
             'ipoteka_file_bank_approval_form' => Module::t('order', 'Ipoteka File Bank Approval'),
 
 
-            'is_participate' => Module::t('module', 'Is Participate'),
+
+
             'percent_sum' => Module::t('module', 'Percent Sum'),
             'target_mortgage' => Module::t('module', 'Target Mortgage'),
             'property_type' => Module::t('module', 'Property Type'),
@@ -202,6 +209,13 @@ class Order extends Model
         // Создаём директорию для хранения файлов файлов
         $pathDir = Yii::$app->params['module']['jk']['order']['filePath'] . $this->id;
         FileHelper::createDirectory($pathDir, $mode = 0775, $recursive = true);
+
+        $file_agree_personal_data = UploadedFile::getInstance($this, 'file_agree_personal_data_form');
+        if ($file_agree_personal_data) {
+            $fileName = 'jk_order_' . $this->id . '_file_agree_personal_data_' . date('YmdHis') . '.' . $file_agree_personal_data->extension;
+            $file_agree_personal_data->saveAs($pathDir . '/' . $fileName);
+            $this->file_agree_personal_data = $fileName;
+        }
 
         $ipoteka_file_dogovor = UploadedFile::getInstance($this, 'ipoteka_file_dogovor_form');
         if ($ipoteka_file_dogovor) {
@@ -274,6 +288,18 @@ class Order extends Model
             0 => 'Нет, не участвовали',
         ];
     }
+
+    // Плашка красного и зелёного цвета. Если уже участововали [1]-красный
+    public function getParticipateLabel()
+    {
+        $title = self::getParticipateList()[$this->is_participate];
+        if ($this->is_participate) {
+            return '<span class="badge bg-red">'.$title.'</span>';
+        } else {
+            return '<span class="badge bg-green">'.$title.'</span>';
+        }
+    }
+
 
     // Тип жилого помещения
     public static function getJPTypeList()
