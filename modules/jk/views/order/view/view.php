@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = ['label' => Icon::show('home') . 'ЖК', 'url' 
 $this->params['breadcrumbs'][] = ['label' => Icon::show('copy', ['framework' => Icon::FAR]) . Module::t('order', 'Orders'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
-$this->title .= ' <span class="badge bg-success">новая</span>';
+$this->title .= ' '.$model->status->label;
 \yii\web\YiiAsset::register($this);
 ?>
 
@@ -64,7 +64,7 @@ $this->title .= ' <span class="badge bg-success">новая</span>';
             </div>
             <div class="card-footer">
                 <?= Html::a(Icon::show('edit').'Изменить заявку', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-                <?= Html::a(Icon::show('stop').'Отозвать заявку', ['update', 'id' => $model->id], ['class' => 'btn btn-danger float-right']) ?>
+                <?= Html::a(Icon::show('stop').'Отозвать заявку', ['stop', 'id' => $model->id], ['class' => 'btn btn-danger float-right']) ?>
             </div>
         </div>
     </div>

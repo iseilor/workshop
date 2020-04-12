@@ -82,6 +82,11 @@ class OrderStatus extends Model
         return '<span class="badge bg-'.$this->color.'" title="'.$this->description.'">'.$this->title.'</span>';
     }
 
+    // TODO: Все перенести из функции выше в эту функцию
+    public function getLabel(){
+        return '<span class="badge bg-'.$this->color.'" title="'.$this->description.'">'.$this->title.'</span>';
+    }
+
 
     /**
      * Получить progressbar текущего статуса

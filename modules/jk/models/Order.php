@@ -336,4 +336,9 @@ class Order extends Model
         }
     }
 
+    public function getStatus()
+    {
+        return $this->hasOne(OrderStatus::className(), ['id' => 'status_id']);
+    }
+
 }

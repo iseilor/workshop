@@ -14,7 +14,7 @@ use yii\widgets\DetailView;
         [
             'label' => 'Статус',
             'format' => 'raw',
-            'value' => '<span class="badge bg-success">новая</span>',
+            'value' => $model->status->label,
         ],
         [
             'label' => 'Автор',

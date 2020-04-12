@@ -4,6 +4,7 @@ namespace app\modules\jk\controllers;
 
 use app\modules\jk\models\OrderStage;
 use app\modules\jk\models\OrderStageSearch;
+use app\modules\jk\models\Stop;
 use app\modules\jk\models\ZaimSearch;
 use app\modules\jk\Module;
 use app\modules\user\models\User;
@@ -23,6 +24,7 @@ class OrderController extends Controller
 {
 
     public $icon = '';
+
     public $parent = '';
 
 
@@ -32,7 +34,7 @@ class OrderController extends Controller
         $this->icon = Yii::$app->params['module']['jk']['order']['icon'];
         $this->parent = [
             'label' => Yii::$app->params['module']['jk']['icon'] . ' ' . Module::t('module', 'JK'),
-            'url' => ['/jk']
+            'url' => ['/jk'],
         ];
     }
 
@@ -62,6 +64,7 @@ class OrderController extends Controller
 
     /**
      * Lists all Order models.
+     *
      * @return mixed
      */
     public function actionIndex()
@@ -80,6 +83,7 @@ class OrderController extends Controller
 
     /**
      * Lists all Order models.
+     *
      * @return mixed
      */
     public function actionAdmin()
@@ -98,7 +102,9 @@ class OrderController extends Controller
 
     /**
      * Displays a single Order model.
+     *
      * @param integer $id
+     *
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -115,13 +121,14 @@ class OrderController extends Controller
     /**
      * Creates a new Order model.
      * If creation is successful, the browser will be redirected to the 'view' page.
+     *
      * @return mixed
      */
     public function actionCreate()
     {
         // Смотрим, заполнины ли все поля у пользователя в профиле
         $user = User::findOne(Yii::$app->user->identity->getId());
-        if (!$user->isPassport()){
+        if (!$user->isPassport()) {
             Yii::$app->session->setFlash('warning', "Чтобы приступить к оформлению заявки на участие в Жилищной Кампании, 
             вам необходимо заполнить все данные по вашему паспорту ");
             return $this->redirect(['/user/profile/update']);
@@ -136,7 +143,7 @@ class OrderController extends Controller
 
             // Сразу делаем первый этап, когда была создана заявка
             $orderStage = new OrderStage();
-            $orderStage->order_id=$model->id;
+            $orderStage->order_id = $model->id;
             $orderStage->status_id = 1;
             $orderStage->comment = 'Автоматический комментарий: заявка создана сотрудником на портале';
             $orderStage->save();
@@ -159,7 +166,9 @@ class OrderController extends Controller
     /**
      * Updates an existing Order model.
      * If update is successful, the browser will be redirected to the 'view' page.
+     *
      * @param integer $id
+     *
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -205,6 +214,28 @@ class OrderController extends Controller
         );
     }
 
+    // Остановить заявку
+    public function actionStop($id)
+    {
+        $model = new Stop();
+        $order = $this->findModel($id);
+
+        $model->order_id = $id;
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            // Присваиваем статус отмена
+            $order->status_id=15;
+            $order->save();
+
+            return $this->redirect(['view', 'id' => $id]);
+        }
+
+        return $this->render('stop', [
+            'model' => $model,
+            'order' => $order,
+        ]);
+    }
+
     // Проверка куратором
     public function actionCheck($id)
     {
@@ -229,7 +260,7 @@ class OrderController extends Controller
             [
                 'order' => $this->findModel($id),
                 'stage' => $orderStage,
-                'user' => User::findOne($this->findModel($id)->created_by)
+                'user' => User::findOne($this->findModel($id)->created_by),
             ]
         );
     }
@@ -240,14 +271,14 @@ class OrderController extends Controller
 
         // Займы текущего пользователя
         $orderStageSearchModel = new OrderStageSearch();
-        $stages = $orderStageSearchModel->search(['OrderStageSearch'=>['order_id' => $id]]);
+        $stages = $orderStageSearchModel->search(['OrderStageSearch' => ['order_id' => $id]]);
 
 
         return $this->render(
             'history',
             [
                 'model' => $this->findModel($id),
-                'stages'=>$stages
+                'stages' => $stages,
             ]
         );
     }
@@ -256,7 +287,9 @@ class OrderController extends Controller
     /**
      * Deletes an existing Order model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
+     *
      * @param integer $id
+     *
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -270,7 +303,9 @@ class OrderController extends Controller
     /**
      * Finds the Order model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
+     *
      * @param integer $id
+     *
      * @return Order the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -288,7 +323,7 @@ class OrderController extends Controller
     {
 
         // Ищем всех кураторов
-        $curators = User::findAll(['role_id'=>1]);
+        $curators = User::findAll(['role_id' => 1]);
 
         // Автор заявки
         $user = User::findOne(Yii::$app->user->identity->getId());
@@ -300,7 +335,7 @@ class OrderController extends Controller
                 [
                     'user' => $user,
                     'curator' => $curator,
-                    'order' => $order
+                    'order' => $order,
                 ]
             )
                 ->setFrom('workshop@tr.ru')
@@ -312,7 +347,8 @@ class OrderController extends Controller
     }
 
     // Отправить п
-    public function actionSendEmailUser($orderStage){
+    public function actionSendEmailUser($orderStage)
+    {
 
     }
 }
