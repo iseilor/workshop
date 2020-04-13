@@ -1,6 +1,8 @@
 <?php
 
+use app\components\grid\ActionColumn;
 use app\modules\jk\Module;
+
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
@@ -30,55 +32,16 @@ $this->params['breadcrumbs'][] = $this->title;
                                          'filterModel' => $searchModel,
                                          'columns' => [
                                              ['class' => 'yii\grid\SerialColumn'],
-
                                              'id',
-                                             'created_at:datetime',
-                                             'created_by',
+                                             //'created_at:datetime',
+                                             //'created_by',
                                              //'updated_at',
                                              //'updated_by',
                                              //'deleted_at',
                                              //'deleted_by',
                                              'question',
-                                             //'answer:ntext',
-
-                                             [
-
-                                                 'class' => 'yii\grid\ActionColumn',
-                                                 'template' => '{view} {update} {delete}',
-                                                 'buttons' => [
-                                                     'view' => function ($url, $model) {
-                                                         return Html::a(
-                                                             '<i class="fas fa-eye"></i>',
-                                                             $url,
-                                                             [
-                                                                 'title' => 'Просмотр',
-                                                             ]
-                                                         );
-                                                     },
-                                                     'update' => function ($url, $model) {
-                                                         return Html::a(
-                                                             '<i class="fas fa-edit"></i>',
-                                                             $url,
-                                                             [
-                                                                 'title' => 'Изменить',
-                                                             ]
-                                                         );
-                                                     },
-                                                     'delete' => function ($url, $model) {
-                                                         return Html::a(
-                                                             '<i class="fas fa-trash"></i>',
-                                                             $url,
-                                                             [
-                                                                 'title' => 'Удалить',
-                                                                 'data' => [
-                                                                     'method' => 'post',
-                                                                     'confirm' => 'Are you sure you want to delete this item?',
-                                                                 ]
-                                                             ]
-                                                         );
-                                                     },
-                                                 ],
-                                             ]
+                                             'answer:ntext',
+                                             ['class' => ActionColumn::className()],
                                          ],
                                      ]); ?>
 

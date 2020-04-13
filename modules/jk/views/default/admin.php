@@ -24,11 +24,11 @@ use yii\helpers\Url; ?>
             <ul>
                 <li>Калькуляторы
                     <ul>
-                        <li>Проценты</li>
-                        <li>Займы</li>
+                        <li><?=Html::a(Icon::show('percent').'Проценты',Url::to(['/jk/percent/']))?></li>
+                        <li><?=Html::a(Icon::show('wallet').'Займы',Url::to(['/jk/zaim/']))?></li>
                     </ul>
                 </li>
-                <li>Заявки
+                <li><?=Html::a(Icon::show('ruble-sign').'Заявки',Url::to(['/jk/order/']))?>
                     <ul>
                         <li>Новые</li>
                         <li>В работе</li>
@@ -44,8 +44,8 @@ use yii\helpers\Url; ?>
                         <li><?=Html::a(Icon::show('undo').'Причины возвратов',Url::to(['/jk/order-stop']))?></li>
                     </ul>
                 </li>
-                <li>Документы</li>
-                <li>Вопросы</li>
+               <li><?=Html::a(Icon::show('file-word').'Документы',Url::to(['/jk/doc/admin']))?></li>
+               <li><?=Html::a(Icon::show('question').'Вопросы',Url::to(['/jk/faq/admin']))?></li>
             </ul>
         </div>
         <div class="card-footer">
