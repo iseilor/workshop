@@ -2,7 +2,7 @@
 
 namespace app\modules\user\controllers;
 
-use app\modules\admin\models\UserSocial;
+
 use app\modules\jk\models\OrderSearch;
 use app\modules\jk\models\PercentSearch;
 use app\modules\jk\models\ZaimSearch;
@@ -94,7 +94,7 @@ class ProfileController extends Controller
     {
         $user = $this->findModel();
         $model = new ProfileUpdateForm($user);
-        $socials = UserSocial::find()->orderBy('id')->all();
+
 
         if ($model->load(Yii::$app->request->post()) && $model->update()) {
             //$model->img = UploadedFile::getInstance($model, 'img');
@@ -106,7 +106,7 @@ class ProfileController extends Controller
                 'update',
                 [
                     'model' => $model,
-                    'socials' => $socials,
+
                 ]
             );
         }

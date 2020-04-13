@@ -39,7 +39,6 @@ use yii\web\IdentityInterface;
  *
  * @property boolean     $work_phone
  * @property string      $work_address
- * @property int         $user_social_id
  *
  * PASSPORT -------------------------------------------------------
  * @property int         $passport_series
@@ -134,7 +133,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             'work_address' => Module::t('module', 'Work Address'),
             'work_is_young' => Module::t('module', 'Work Is Young'),
             'work_is_transferred' => Module::t('module', 'Work Is Transferred'),
-            'user_social_id' => Module::t('module', 'User Social Id'),
+
 
             'birth_date' => Module::t('module', 'Birth Date'),
             'work_date' => Module::t('module', 'Work Date'),

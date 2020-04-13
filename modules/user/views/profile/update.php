@@ -12,7 +12,7 @@ use yii\jui\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\user\models\User */
-/* @var $socials app\modules\admin\models\UserSocial */
+
 
 $this->title = '<i class="fas fa-user-edit"></i> ' . Module::t('module', 'Profile Update');
 $this->params['breadcrumbs'][] = ['label' => '<i class="fas fa-user"></i> ' . Module::t('module', 'Profile'), 'url' => ['index']];
@@ -107,7 +107,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="col-md-6">
                         <?= $form->field($model, 'tab_number')->textInput() ?>
                         <?= $form->field($model, 'experience')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['experience']]) ?>
-                        <?= $form->field($model, 'user_social_id')->dropDownList(ArrayHelper::map($socials, 'id', 'title'), ['prompt' => 'Выберите...']) ?>
                         <?= $form->field($model, 'work_is_young')->checkbox(['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['work_is_young']]) ?>
                         <?= $form->field($model, 'work_is_transferred')->checkbox(['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['work_is_transferred']]) ?>
                     </div>

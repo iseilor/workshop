@@ -28,7 +28,7 @@ class ProfileUpdateForm extends Model
     public $work_address;
     public $work_is_young;
     public $work_is_transferred;
-    public $user_social_id;
+
 
     // PASSPORT
     public $passport_series;
@@ -70,7 +70,7 @@ class ProfileUpdateForm extends Model
         $this->work_address = $user->work_address;
         $this->work_is_young = $user->work_is_young;
         $this->work_is_transferred = $user->work_is_transferred;
-        $this->user_social_id = $user->user_social_id;
+
 
         // PASSPORT
         $this->passport_series = $user->passport_series;
@@ -111,7 +111,7 @@ class ProfileUpdateForm extends Model
             [['photo'], 'file', 'extensions'=>'jpg, png'],
             [['photo'], 'file', 'maxSize'=>'2048000'],
 
-            [['work_is_young','work_is_transferred','user_social_id'], 'safe'],
+            [['work_is_young','work_is_transferred'], 'safe'],
 
             [['passport_series','passport_number','passport_date','passport_code','passport_department','passport_file','passport_registration'], 'safe'],
             [['passport_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'passport_date'],
@@ -140,7 +140,7 @@ class ProfileUpdateForm extends Model
             $user->work_date =  mktime() - $this->experience* 31556926; // Стаж
             $user->work_is_young = $this->work_is_young;
             $user->work_is_transferred = $this->work_is_transferred;
-            $user->user_social_id = $this->user_social_id;
+
 
             // PASSPORT
             $user->passport_series = $this->passport_series;

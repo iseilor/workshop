@@ -42,7 +42,6 @@ return [
     'Work Department' => 'Подразделение',
     'Work Department Full' => 'Полный путь подразделения',
     'Work Phone' => 'Рабочий телефон',
-    'User Social Id' => 'Социальная категория',
     'Work Address' => 'Адрес рабочего места',
     'Work Is Young' => 'Молодой работник',
     'Work Is Transferred' => 'Переведённый работник',
