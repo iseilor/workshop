@@ -42,26 +42,33 @@ class m200331_000010_create_jk_order_table extends Migration
 
 
                 // Параметры
-                'is_agree_personal_data'=>$this->boolean()->notNull(),      // Обработка персональных данных
-                'file_agree_personal_data'=>$this->string(),                // Файл оброботки персональных данных
+                'is_agree_personal_data' => $this->boolean()->notNull(),      // Обработка персональных данных
+                'file_agree_personal_data' => $this->string(),                // Файл оброботки персональных данных
                 'is_participate' => $this->boolean(),                       // Ранее участвовали
                 'is_mortgage' => $this->boolean(),                          // Оформлена ипотека
                 'mortgage_file' => $this->string(),                         // Кредитный договор с акктуальным графиком платежей
 
                 // Семья
+                'social_id' => $this->integer(),                        // Социальная категория
+                'resident_count' => $this->integer(),                   // Кол-во проживающих с работником
+                'resident_type' => $this->integer(),                    // Категория проживающих
+                'family_address' => $this->text(),                      // В настоящий семья проживает момент проживает
+                'resident_own' => $this->text(),                        // Собственность места проживания
+                'family_rent' => $this->text(),                         // ЖП в аренде
+                'family_own' => $this->text(),                          // ЖП в собственности
+                'family_deal' => $this->text(),                         // Операции с квартирами за последний 5 лет
+                'file_family_big' => $this->text(),                     // Удостоверение многодетной семьи
+                'file_social_protection' => $this->text(),              // Удоствоерение из соц.защиты
+                'file_rent'=>$this->string(),                           // Договор аренды
+                'file_social_contract'=>$this->string(),                // Договор социального найма
+
+                // Жена
                 'is_spouse' => $this->integer(),          // Наличие супруга, супруги (Да, Нет, Разведён)
                 'spouse_fio' => $this->string(),          // ФИО супруги
                 'spouse_is_dzo' => $this->boolean(),      // Супруга работник общества или ДЗО
                 'spouse_is_do' => $this->boolean(),       // Супруга в ДО
                 'spouse_is_work' => $this->boolean(),     // Супруга официально работает
-                'child_count' => $this->integer(),        // Кол-во детей
-                'child_count_18' => $this->integer(),     // Кол-во до 18 лет
-                'child_count_23' => $this->integer(),     // Кол-во до 23 лет
 
-                'family_own' => $this->text(),            // ЖП в собственности
-                'family_rent' => $this->text(),           // ЖП в аренде
-                'family_address' => $this->text(),        // В настоящий момент проживаем
-                'family_deal' => $this->text(),           // Операции с квартирами за последний 5 лет
 
                 // Жильё
                 'jp_type' => $this->integer(),            // Тип жилого помещения

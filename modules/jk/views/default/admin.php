@@ -39,7 +39,7 @@ use yii\helpers\Url; ?>
                 </li>
                 <li>Справочники
                     <ul>
-                        <li>Статусы заявок</li>
+                        <li><?=Html::a(Icon::show('list').'Статусы заявок',Url::to(['/jk/order-status']))?></li>
                         <li><?=Html::a(Icon::show('users').'Социальные группы',Url::to(['/jk/social']))?></li>
                         <li><?=Html::a(Icon::show('undo').'Причины возвратов',Url::to(['/jk/order-stop']))?></li>
                     </ul>

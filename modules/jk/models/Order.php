@@ -27,6 +27,11 @@ use yii\web\UploadedFile;
  * @property int      $jp_type
  * @property int      $jp_own
  *
+ * @property string   file_family_big
+ * @property string   file_social_protection
+ * @property string   file_rent
+ * @property string   file_social_contract
+ *
  * @property string   ipoteka_file_dogovor
  * @property string   ipoteka_file_dogovor_form
  * @property string   ipoteka_file_grafic_first
@@ -45,6 +50,14 @@ class Order extends Model
 {
 
     public $file_agree_personal_data_form;
+
+    public $file_family_big_form;
+
+    public $file_social_protection_form;
+
+    public $file_rent_form;
+
+    public $file_social_contract_form;
 
     public $ipoteka_file_dogovor_form = '';
 
@@ -81,8 +94,12 @@ class Order extends Model
             [['file_agree_personal_data_form'], 'file', 'extensions' => 'pdf, docx', 'maxSize' => '2048000'],
 
             // Семья
-            [['is_spouse', 'spouse_fio', 'spouse_is_dzo', 'spouse_is_do', 'spouse_is_work', 'child_count', 'child_count_18', 'child_count_23'], 'safe'],
-            [['family_own', 'family_rent', 'family_address', 'family_deal'], 'safe'],
+            [['family_own', 'family_rent', 'family_address', 'family_deal', 'social_id', 'resident_count', 'resident_type', 'resident_own'], 'safe'],
+            [['file_family_big_form', 'file_social_protection_form', 'file_rent_form', 'file_social_contract_form'], 'file', 'skipOnEmpty' => true, 'extensions' => 'pdf', 'maxSize' => '2048000'],
+
+            // Супруга
+            [['is_spouse', 'spouse_fio', 'spouse_is_dzo', 'spouse_is_do', 'spouse_is_work'], 'safe'],
+
 
             // Жилое помещение
             [['jp_type', 'jp_params', 'jp_date', 'jp_dist', 'jp_own', 'jp_part'], 'safe'],
@@ -136,6 +153,19 @@ class Order extends Model
             'participateLabel' => Module::t('module', 'Is Participate'),
 
             // Семья
+            'social_id' => Module::t('order', 'Social'),
+            'resident_count' => Module::t('order', 'Resident Count'),
+            'resident_type' => Module::t('order', 'Resident Type'),
+            'resident_own' => Module::t('order', 'Resident Own'),
+            'file_family_big' => Module::t('order', 'File Family Big'),
+            'file_social_protection' => Module::t('order', 'File Social Protection'),
+            'file_rent' => Module::t('order', 'File Rent'),
+            'file_social_contract' => Module::t('order', 'File Social Contract'),
+            'file_family_big_form' => Module::t('order', 'File Family Big'),
+            'file_social_protection_form' => Module::t('order', 'File Social Protection'),
+            'file_rent_form' => Module::t('order', 'File Rent'),
+            'file_social_contract_form' => Module::t('order', 'File Social Contract'),
+
             'is_spouse' => Module::t('module', 'Is Spouse'),
             'spouse_fio' => Module::t('module', 'Spouse Fio'),
             'spouse_is_dzo' => Module::t('module', 'Spouse Is Dzo'),
@@ -179,8 +209,6 @@ class Order extends Model
             'ipoteka_file_bank_approval_form' => Module::t('order', 'Ipoteka File Bank Approval'),
 
 
-
-
             'percent_sum' => Module::t('module', 'Percent Sum'),
             'target_mortgage' => Module::t('module', 'Target Mortgage'),
             'property_type' => Module::t('module', 'Property Type'),
@@ -210,11 +238,24 @@ class Order extends Model
         $pathDir = Yii::$app->params['module']['jk']['order']['filePath'] . $this->id;
         FileHelper::createDirectory($pathDir, $mode = 0775, $recursive = true);
 
-        $file_agree_personal_data = UploadedFile::getInstance($this, 'file_agree_personal_data_form');
-        if ($file_agree_personal_data) {
-            $fileName = 'jk_order_' . $this->id . '_file_agree_personal_data_' . date('YmdHis') . '.' . $file_agree_personal_data->extension;
-            $file_agree_personal_data->saveAs($pathDir . '/' . $fileName);
-            $this->file_agree_personal_data = $fileName;
+
+        // Все поля с файлами
+        $fields = [
+            'file_agree_personal_data',     // Персональные данные
+            'file_family_big',              // Удостоверение многодетной семьи
+            'file_social_protection',       // Справка из социальной защиты
+            'file_rent',                    // Договор аренды
+            'file_social_contract',         // Договор социального найма
+        ];
+
+        // Сохраняем данные
+        foreach ($fields as $field) {
+            $file = UploadedFile::getInstance($this, $field . '_form');
+            if ($file) {
+                $fileName = 'jk_order_' . $this->id . '_' . $field . '_' . date('YmdHis') . '.' . $file->extension;
+                $file->saveAs($pathDir . '/' . $fileName);
+                $this->{$field} = $fileName;
+            }
         }
 
         $ipoteka_file_dogovor = UploadedFile::getInstance($this, 'ipoteka_file_dogovor_form');
@@ -294,9 +335,9 @@ class Order extends Model
     {
         $title = self::getParticipateList()[$this->is_participate];
         if ($this->is_participate) {
-            return '<span class="badge bg-red">'.$title.'</span>';
+            return '<span class="badge bg-red">' . $title . '</span>';
         } else {
-            return '<span class="badge bg-green">'.$title.'</span>';
+            return '<span class="badge bg-green">' . $title . '</span>';
         }
     }
 
@@ -309,6 +350,16 @@ class Order extends Model
             2 => 'Покупка квартиры (вторичка)',
             3 => 'Покупка дома',
             4 => 'Строительство дома',
+        ];
+    }
+
+    // Типы проживающих рядом с сотрудником
+    public static function getResidentTypeList()
+    {
+        return [
+            1 => 'Члены семьи (супруг(а), дети)',
+            2 => 'Родственники',
+            3 => 'Соседи',
         ];
     }
 
@@ -362,9 +413,15 @@ class Order extends Model
         }
     }
 
+    // Статус заявки
     public function getStatus()
     {
         return $this->hasOne(OrderStatus::className(), ['id' => 'status_id']);
     }
 
+    // Социальная категория
+    public function getSocial()
+    {
+        return $this->hasOne(Social::className(), ['id' => 'social_id']);
+    }
 }
