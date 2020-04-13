@@ -13,12 +13,12 @@ use yii\widgets\DetailView;
     'attributes' => [
         [
             'attribute' => 'social_id',
-            'value' => $model->social->title,
+            'value' => ($model->social)?$model->social->title:'',
         ],
         'resident_count',
         [
             'attribute' => 'resident_type',
-            'value' => Order::getResidentTypeList()[$model->resident_type],
+            'value' => ($model->resident_type)?Order::getResidentTypeList()[$model->resident_type]:'',
         ],
         'family_address:ntext',
         'resident_own:ntext',
