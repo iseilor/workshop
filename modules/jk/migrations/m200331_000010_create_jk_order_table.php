@@ -62,12 +62,8 @@ class m200331_000010_create_jk_order_table extends Migration
                 'file_rent'=>$this->string(),                           // Договор аренды
                 'file_social_contract'=>$this->string(),                // Договор социального найма
 
-                // Жена
-                'is_spouse' => $this->integer(),          // Наличие супруга, супруги (Да, Нет, Разведён)
-                'spouse_fio' => $this->string(),          // ФИО супруги
-                'spouse_is_dzo' => $this->boolean(),      // Супруга работник общества или ДЗО
-                'spouse_is_do' => $this->boolean(),       // Супруга в ДО
-                'spouse_is_work' => $this->boolean(),     // Супруга официально работает
+                // Супруга
+
 
 
                 // Жильё

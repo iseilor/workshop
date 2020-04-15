@@ -16,6 +16,7 @@ class Bootstrap implements BootstrapInterface
             'fileMap' => [
                 'modules/user/module' => 'module.php',
                 'modules/user/child' => 'child.php',
+                'modules/user/spouse' => 'spouse.php',
             ],
         ];
     }
