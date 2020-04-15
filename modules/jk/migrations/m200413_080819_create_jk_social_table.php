@@ -7,6 +7,7 @@ use yii\db\Migration;
  */
 class m200413_080819_create_jk_social_table extends Migration
 {
+
     /**
      * {@inheritdoc}
      */
@@ -26,8 +27,8 @@ class m200413_080819_create_jk_social_table extends Migration
             'updated_by' => $this->integer(),
             'deleted_at' => $this->integer(),
             'deleted_by' => $this->integer(),
-            'title'=>$this->string()->notNull(),
-            'description'=>$this->text()->notNull()
+            'title' => $this->string()->notNull(),
+            'description' => $this->text()->notNull(),
         ], $tableOptions);
         $this->execute(file_get_contents(__DIR__ . '/../sql/jk_social.sql'));
     }
