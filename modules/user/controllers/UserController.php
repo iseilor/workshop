@@ -22,7 +22,7 @@ class UserController extends Controller
     public function actionPd($id)
     {
         $user =  User::findOne($id);
-        $filePath = Yii::getAlias('@app').'/modules/user/files/personal_data.docx';
+        $filePath = Yii::getAlias('@app').'/modules/user/files/user_personal_data.docx';
         $templateProcessor = new TemplateProcessor($filePath);
         $templateProcessor->setValue(
             ['FIO', 'PASSPORT_SERIES','PASSPORT_NUMBER','PASSPORT_DATE','PASSPORT_DEPARTMENT',

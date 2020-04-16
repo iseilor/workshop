@@ -26,14 +26,14 @@ echo GridView::widget([
     'columns' => [
         ['class' => 'yii\grid\SerialColumn'],
         [
-            'class' => LinkColumn::className(),
+            'class' => LinkColumn::class,
             'attribute' => 'id',
             'url' => function ($data) {
                 return Url::to(['/user/child/' . $data->id]);
             },
         ],
         [
-            'class' => LinkColumn::className(),
+            'class' => LinkColumn::class,
             'attribute' => 'fio',
             'url' => function ($data) {
                 return Url::to(['/user/child/' . $data->id]);
