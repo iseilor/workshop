@@ -1,5 +1,19 @@
 <?php
 
+
+use yii\bootstrap4\Modal;
+
+Modal::begin([
+    'title' => 'Hello world',
+    'toggleButton' => ['label' => 'Редактировать супругу'],
+    'size'=>Modal::SIZE_EXTRA_LARGE
+]);
+
+echo 'Say hello...';
+
+Modal::end();
+
+
 $isSpouseClass = 'hide';
 if (isset($model->is_spouse) && $model->is_spouse == 1) {
     $isSpouseClass = '';

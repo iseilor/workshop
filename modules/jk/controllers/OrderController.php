@@ -9,6 +9,7 @@ use app\modules\jk\models\ZaimSearch;
 use app\modules\jk\Module;
 use app\modules\user\models\User;
 use app\modules\user\models\UserChildSearch;
+use PhpOffice\PhpWord\TemplateProcessor;
 use Yii;
 use app\modules\jk\models\Order;
 use app\modules\jk\models\OrderSearch;
@@ -133,6 +134,10 @@ class OrderController extends Controller
             вам необходимо заполнить все данные по вашему паспорту ");
             return $this->redirect(['/user/profile/update']);
         }
+
+
+
+
 
 
         $model = new Order();
