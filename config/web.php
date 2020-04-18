@@ -25,7 +25,8 @@ $config = [
         'app\modules\jk\Bootstrap',
         'app\modules\chat\Bootstrap',
         'app\modules\news\Bootstrap',
-        'app\modules\pulsar\Bootstrap'
+        'app\modules\pulsar\Bootstrap',
+        'app\modules\nsi\Bootstrap'
     ],
     'layout' => 'index',
     'language' => 'ru',
@@ -61,6 +62,9 @@ $config = [
         ],
         'pulsar' => [
             'class' => 'app\modules\pulsar\Module',
+        ],
+        'nsi' => [
+            'class' => 'app\modules\nsi\Module',
         ],
         'gridview' => ['class' => 'kartik\grid\Module']
 

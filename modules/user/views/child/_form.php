@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\jui\DatePicker;
 use yii\widgets\ActiveForm;
 
@@ -39,9 +40,17 @@ use yii\widgets\ActiveForm;
                         ) ?>
                     </div>
                     <div class="col-md-4">
+
                         <?= $form->field($model, 'file_passport_form', [
                             'template' => getFileInputTemplate($model->file_passport, $model->attributeLabels()['file_passport'] . '.pdf'),
                         ])->fileInput(['class' => 'custom-file-input']) ?>
+                        <blockquote>
+                            <p>
+                                Скачайте и подпишите согласие на обработку персональных данных по вашему ребёнку:<br/>
+                                <?= Html::a(\kartik\icons\Icon::show('file-pdf') . 'Согласие по ПД',
+                                    Url::to(['/user/child/' . $model->id . '/pd'])) ?><br/>
+                            </p>
+                        </blockquote>
                         <?= $form->field($model, 'file_personal_form', [
                             'template' => getFileInputTemplate($model->file_personal, $model->attributeLabels()['file_personal'] . '.pdf'),
                         ])->fileInput(['class' => 'custom-file-input']) ?>

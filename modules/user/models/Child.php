@@ -99,7 +99,7 @@ class Child extends Model
                 'file',
                 'skipOnEmpty' => true,
                 'extensions' => 'pdf',
-                'maxSize' => '2048',
+                'maxSize' => '20000',
             ],
         ];
     }
@@ -141,6 +141,7 @@ class Child extends Model
             'file_address_form' => Module::t('child', 'File Address'),
             'file_ejd_form' => Module::t('child', 'File Ejd'),
             'file_personal_form' => Module::t('child', 'File Personal'),
+            'personalDataLink' => Module::t('child', 'File PD'),
 
             'is_invalid' => Module::t('child', 'Is Invalid'),
             'file_invalid' => Module::t('child', 'File Invalid'),
@@ -234,6 +235,16 @@ class Child extends Model
     public function getBirthLink(){
         if ($this->file_passport){
             return Html::a(Icon::show('file-pdf'),'123',['Свидетельство о рождении'.$this->fio]);
+        }else{
+            return false;
+        }
+    }
+
+    // Ссылка на файл с персональными данными
+    public function getPersonalDataLink(){
+        if ($this->file_personal){
+            return Html::a(Icon::show('file-pdf'),Url::to('/'.Yii::$app->params['module']['child']['filePath'].$this->id.'/'.$this->file_personal),
+                ['title'=>'Согласие на обработку персональных данных по ребёнку '.$this->fio,'target'=>'_blank']);
         }else{
             return false;
         }

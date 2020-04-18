@@ -24,9 +24,9 @@ $this->title .= ' '.$model->status->label;
                 $tabs = [
                     ['name' => Icon::show('list').'Параметры', 'id' => 'params', 'tab-class' => 'active', 'selected' => 'true', 'tabs-class'=>'show active'],
                     ['name' => Icon::show('user').'Сотрудник', 'id' => 'user', 'tab-class' => '', 'selected' => 'false','tabs-class'=>''],
-                    ['name' => Icon::show('users').'Семья', 'id' => 'family', 'tab-class' => '', 'selected' => 'false','tabs-class'=>''],
                     ['name' => Icon::show('female').'Супруг(а)', 'id' => 'spouse', 'tab-class' => '', 'selected' => 'false','tabs-class'=>''],
                     ['name' => Icon::show('baby').'Дети', 'id' => 'child', 'tab-class' => '', 'selected' => 'false','tabs-class'=>''],
+                    ['name' => Icon::show('users').'Семья', 'id' => 'family', 'tab-class' => '', 'selected' => 'false','tabs-class'=>''],
                     ['name' => Icon::show('home').'ЖП', 'id' => 'house', 'tab-class' => '', 'selected' => 'false','tabs-class'=>''],
                     ['name' => Icon::show('file-invoice-dollar').'Ипотека', 'id' => 'ipoteka', 'tab-class' => '', 'selected' => 'false','tabs-class'=>''],
                     ['name' => Icon::show('ruble-sign').'Финансы', 'id' => 'money', 'tab-class' => '', 'selected' => 'false','tabs-class'=>''],

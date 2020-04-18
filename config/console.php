@@ -75,6 +75,11 @@ $config = [
             'migrationPath' => '@app/modules/pulsar/migrations',
             'migrationTable' => 'migration_pulsar',
         ],
+        'migrate-nsi' => [
+            'class' => 'yii\console\controllers\MigrateController',
+            'migrationPath' => '@app/modules/nsi/migrations',
+            'migrationTable' => 'migration_nsi',
+        ],
     ],
 
 ];

@@ -22,21 +22,21 @@ return [
     ],
     'btn' => [
         'send' => [
-            'icon' => '<i class="fas fa-paper-plane"></i>'
+            'icon' => '<i class="fas fa-paper-plane"></i>',
         ],
         'save' => [
-            'icon' => '<i class="fas fa-save nav-icon"></i>'
+            'icon' => '<i class="fas fa-save nav-icon"></i>',
         ],
         'email' => [
-            'icon' => '<i class="fas fa-envelope"></i>'
+            'icon' => '<i class="fas fa-envelope"></i>',
         ],
         'user' => [
-            'icon' => '<i class="fas fa-user"></i>'
-        ]
+            'icon' => '<i class="fas fa-user"></i>',
+        ],
     ],
     'file' => [
         'img' => [
-            'extensions' => 'jpg,jpeg,png,bmp'
+            'extensions' => 'jpg,jpeg,png,bmp',
         ],
     ],
 
@@ -48,29 +48,29 @@ return [
                 'filePath' => 'files/jk/order/',
             ],
             'percent' => [
-                'icon' => '<i class="fas fa-percent nav-icon"></i>'
+                'icon' => '<i class="fas fa-percent nav-icon"></i>',
             ],
             'zaim' => [
-                'icon' => '<i class="fas fa-wallet nav-icon"></i>'
+                'icon' => '<i class="fas fa-wallet nav-icon"></i>',
             ],
             'doc' => [
                 'filePath' => 'files/jk/doc/',
-                'icon' => '<i class="fas fa-file-word nav-icon"></i>'
+                'icon' => '<i class="fas fa-file-word nav-icon"></i>',
             ],
             'faq' => [
-                'icon' => '<i class="fas fa-question nav-icon"></i>'
+                'icon' => '<i class="fas fa-question nav-icon"></i>',
             ],
             'min' => [
-                'icon' => '<i class="fas fa-wallet nav-icon"></i>'
-            ]
+                'icon' => '<i class="fas fa-wallet nav-icon"></i>',
+            ],
         ],
         'user' => [
             'icon' => '<i class="fas fa-home"></i>',
             'icon2' => '<i class="fas fa-users"></i>',
-            'path'=>'files/user/',
+            'path' => 'files/user/',
             'photo' => [
                 'path' => 'files/user/photo/',
-                'default' => '0.jpg'
+                'default' => '0.jpg',
             ],
             'passport' => [
                 'path' => 'files/user/passport/',
@@ -78,37 +78,37 @@ return [
             ],
             'snils' => [
                 'path' => 'files/user/snils/',
-                'icon' => '<i class="far fa-address-card"></i>'
+                'icon' => '<i class="far fa-address-card"></i>',
             ],
         ],
-        'child'=>[
-            'filePath'=>'files/child/',
+        'child' => [
+            'filePath' => 'files/child/',
         ],
         'admin' => [
             'icon' => '<i class="fas fa-home"></i>',
             'ad' => [
-                'icon' => '<i class="fas fa-ad"></i>'
+                'icon' => '<i class="fas fa-ad"></i>',
             ],
             'user-social' => [
-                'icon' => '<i class="fas fa-users"></i>'
+                'icon' => '<i class="fas fa-users"></i>',
             ],
         ],
         'main' => [
-            'icon' => '<i class="fas fa-home"></i>'
+            'icon' => '<i class="fas fa-home"></i>',
         ],
         'chat' => [
-            'icon' => '<i class="fas fa-comments"></i>'
+            'icon' => '<i class="fas fa-comments"></i>',
         ],
         'news' => [
             'iconClass' => 'newspaper',
             'icon' => '<i class="fas fa-comments"></i>',
-            'path' => 'files/news/'
+            'path' => 'files/news/',
         ],
 
         // Нештатные ситуации
         'ns' => [
             'iconClass' => 'bell',
-        ]
+        ],
 
     ],
 
@@ -124,8 +124,17 @@ return [
                 'radixPoint' => ',',
                 'groupSeparator' => ' ',
                 'autoGroup' => true,
-                'removeMaskOnSubmit' => true
-            ]
-        ]
-    ]
+                'removeMaskOnSubmit' => true,
+            ],
+        ],
+    ],
+    'card' => [
+        'header' => [
+            'tools' => '<div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                        <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
+                        <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+                       </div>',
+        ],
+    ],
 ];
