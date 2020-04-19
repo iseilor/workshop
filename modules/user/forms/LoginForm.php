@@ -2,6 +2,7 @@
 
 namespace app\modules\user\forms;
 
+use app\modules\user\models\Ad;
 use app\modules\user\models\User;
 use app\modules\user\Module;
 use Yii;
@@ -74,7 +75,10 @@ class LoginForm extends Model
 
             // Ищем пользователя в DB
             if (!$this->getUser()) {
-                $this->createUserDB();
+                $ad = new Ad();
+                $ad->createUserByEmail(($this->username));
+
+                //$this->createUserDB();
                 $this->_user = false;
             };
         }

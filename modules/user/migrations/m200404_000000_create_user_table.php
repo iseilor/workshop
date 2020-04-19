@@ -5,7 +5,7 @@ use yii\db\Migration;
 /**
  * Handles the creation of table `{{%user}}`.
  */
-class m000000_000001_create_user_table extends Migration
+class m200404_000000_create_user_table extends Migration
 {
     /**
      * {@inheritdoc}
@@ -40,11 +40,13 @@ class m000000_000001_create_user_table extends Migration
             'photo'=>$this->string(),
             'fio'=> $this->string(),
 
+            // Работа
             'position'=> $this->string(),
             'work_department'=> $this->string(),        // Подразделение
             'work_department_full'=> $this->string(),   // Полный путь подразделения
             'work_phone'=> $this->string(),             // Рабочий телефон
             'department_id'=>$this->integer(),          // ID подразделения
+            'manager_id'=>$this->integer(),             // Руководитель из AD
 
             'tab_number'=> $this->string(),
             'work_address'=>$this->string(),
