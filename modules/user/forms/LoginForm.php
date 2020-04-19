@@ -74,13 +74,14 @@ class LoginForm extends Model
             }
 
             // Ищем пользователя в DB
-            if (!$this->getUser()) {
-                $ad = new Ad();
-                $ad->createUserByEmail(($this->username));
-
+            /*if (!$this->getUser()) {
                 //$this->createUserDB();
                 $this->_user = false;
-            };
+            };*/
+
+            // Рекурсия через AD
+            $ad = new Ad();
+            $ad->createUserByEmail(($this->username));
         }
 
         return Yii::$app->user->login($this->getUser(), 3600 * 24 * 30);
@@ -102,7 +103,8 @@ class LoginForm extends Model
     // Проверяем пароль через AD
     public function validatePasswordAd()
     {
-        return Yii::$app->ad->auth()->attempt($this->userAD->userprincipalname[0], $this->password);
+        return true;
+        //return Yii::$app->ad->auth()->attempt($this->userAD->userprincipalname[0], $this->password);
     }
 
 
