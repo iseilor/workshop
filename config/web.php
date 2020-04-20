@@ -99,7 +99,8 @@ $config = [
             'thousandSeparator' => ' ',
             'decimalSeparator' => ',',
             'timeZone' => 'Europe/Moscow',
-            'locale' => 'ru-RU'
+            'locale' => 'ru-RU',
+            'nullDisplay' => ''
 
         ],
         'cache' => [

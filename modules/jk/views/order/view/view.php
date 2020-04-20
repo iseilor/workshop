@@ -63,8 +63,13 @@ $this->title .= ' '.$model->status->label;
                 </div>
             </div>
             <div class="card-footer">
-                <?= Html::a(Icon::show('edit').'Изменить заявку', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-                <?= Html::a(Icon::show('stop').'Отозвать заявку', ['stop', 'id' => $model->id], ['class' => 'btn btn-danger float-right']) ?>
+                <?= Html::a(Icon::show('check').'Отравить куратору на проверку', ['sendEmailManager', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+                <?= Html::a(Icon::show('tasks').'Отравить руководителю на согласование', ['manager', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+
+                <div class="float-right">
+                    <?= Html::a(Icon::show('edit').'Изменить заявку', ['update', 'id' => $model->id], ['class' => 'btn btn-warning']) ?>
+                    <?= Html::a(Icon::show('stop').'Отозвать заявку', ['stop', 'id' => $model->id], ['class' => 'btn btn-danger']) ?>
+                </div>
             </div>
         </div>
     </div>

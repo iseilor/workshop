@@ -39,6 +39,7 @@ use yii\web\IdentityInterface;
  *
  * @property boolean     $work_phone
  * @property string      $work_address
+ * @property int         $manager_id
  *
  * PASSPORT -------------------------------------------------------
  * @property int         $passport_series
@@ -469,5 +470,18 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
         }else{
             return false;
         }
+    }
+
+
+    // Цеподчка подчинённости
+    public function getManagerList(){
+        $list = [];
+        $manager_id = $this->manager_id;
+        while (isset($manager_id)){
+            $list[]= $manager_id;
+            $manager = User::findOne($manager_id);
+            $manager_id = $manager->manager_id;
+        }
+        return $list;
     }
 }

@@ -18,7 +18,8 @@ class Bootstrap implements BootstrapInterface
                 'modules/jk/zaim_type' => 'zaim_type.php',
                 'modules/jk/order'=>'order.php',
                 'modules/jk/stop'=>'stop.php',
-                'modules/jk/social'=>'social.php'
+                'modules/jk/social'=>'social.php',
+                'modules/jk/agreement'=>'agreement.php',
             ],
         ];
     }

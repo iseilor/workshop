@@ -73,7 +73,8 @@ class m200404_000000_create_user_table extends Migration
         $this->createIndex('idx-user-email', '{{%user}}', 'email');
         $this->createIndex('idx-user-status', '{{%user}}', 'status');
 
-        $this->execute($this->addData());
+        //$this->execute($this->addData());
+        $this->execute(file_get_contents(__DIR__ . '/../sql/user.sql'));
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace app\modules\jk\controllers;
 
+use app\modules\jk\models\Agreement;
 use app\modules\jk\models\OrderStage;
 use app\modules\jk\models\OrderStageSearch;
 use app\modules\jk\models\Stop;
@@ -136,13 +137,12 @@ class OrderController extends Controller
         }
 
 
-
-
-
-
         $model = new Order();
         $model->status_id = 1;
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            // Строчим цепочку согласования
+            Agreement::createAgreementList($model->id);
 
             $model->upload();
 
@@ -229,7 +229,7 @@ class OrderController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
             // Присваиваем статус отмена
-            $order->status_id=15;
+            $order->status_id = 15;
             $order->save();
 
             return $this->redirect(['view', 'id' => $id]);
@@ -351,9 +351,15 @@ class OrderController extends Controller
         return true;
     }
 
-    // Отправить п
-    public function actionSendEmailUser($orderStage)
+    // Отправляем письмо руководителю
+    public function actionManager($id)
     {
-
+        Agreement::sendEmailManager($id);
+        return $this->render(
+            'manager',
+            [
+                'model' => $this->findModel($id),
+            ]
+        );
     }
 }
