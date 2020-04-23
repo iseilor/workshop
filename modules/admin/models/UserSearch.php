@@ -49,7 +49,7 @@ class UserSearch extends Model
             [
                 'query' => $query,
                 'sort' => [
-                    'defaultOrder' => ['id' => SORT_DESC],
+                    'defaultOrder' => ['id' => SORT_ASC],
                 ],
             ]
         );

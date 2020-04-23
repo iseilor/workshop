@@ -202,6 +202,13 @@ use yii\widgets\Menu;
                     );
                     echo '<div class="dropdown-divider"></div>';
                     echo Html::a(
+                        Icon::show('id-card').'Моя карточка',
+                        Url::to( '/user/'.Yii::$app->user->identity->getId()),
+                        ['class' => 'dropdown-item']
+                    );
+
+                    echo '<div class="dropdown-divider"></div>';
+                    echo Html::a(
                         Icon::show('baby').'Мои дети',
                         Url::home() . 'user/child',
                         ['class' => 'dropdown-item']

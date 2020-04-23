@@ -186,5 +186,4 @@ class Agreement extends Model
                 ->send();
         }
     }
-
 }

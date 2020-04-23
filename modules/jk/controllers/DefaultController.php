@@ -18,6 +18,10 @@ class DefaultController extends Controller
         return $this->render('index');
     }
 
+    public function actionCurator(){
+        return $this->render('curator');
+    }
+
     // Предварительный экран, при выборе калькулятора
     public function actionCalc(){
         return $this->render('calc');

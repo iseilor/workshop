@@ -2,12 +2,14 @@
 
 namespace app\modules\user\controllers;
 
+use app\modules\admin\models\UserSearch;
 use app\modules\jk\models\Percent;
 use app\modules\user\forms\EmailConfirmForm;
 use app\modules\user\forms\LoginForm;
 use app\modules\user\forms\PasswordResetRequestForm;
 use app\modules\user\forms\PasswordResetForm;
 use app\modules\user\forms\SignupForm;
+use app\modules\user\models\ChildSearch;
 use app\modules\user\models\User;
 use yii\base\InvalidParamException;
 use yii\filters\AccessControl;
@@ -63,6 +65,8 @@ class DefaultController extends Controller
         return $this->redirect(['profile/index'], 301);
     }
 
+
+
     public function actionView($id)
     {
 
@@ -72,6 +76,17 @@ class DefaultController extends Controller
                 'model' => $this->findModel($id),
             ]
         );
+    }
+
+    // Список пользователей системы
+    public function actionUsers(){
+        $searchModel = new UserSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('users', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
     public function getName($id){

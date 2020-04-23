@@ -164,6 +164,8 @@ $config = [
                 'normalizeTrailingSlash' => true,
             ],
 
+
+
             'rules' => [
 
                 '' => 'main/default/index',
@@ -174,7 +176,7 @@ $config = [
 
                 '<_m:(user)>/<id:\d+>' => 'user/default/view',
                 '<_m:(news)>/<id:\d+>' => 'news/default/view',
-                '<_a:(login|logout|signup|confirm-email|request-password-reset|password-reset)>' => 'user/default/<_a>',
+                '<_a:(login|logout|signup|confirm-email|request-password-reset|password-reset|users)>' => 'user/default/<_a>',
 
                 '<_m:[\w\-]+>/<_c:[\w\-]+>/<id:\d+>' => '<_m>/<_c>/view',
                 '<_m:[\w\-]+>/<_c:[\w\-]+>/<id:\d+>/<_a:[\w\-]+>' => '<_m>/<_c>/<_a>',

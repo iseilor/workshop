@@ -1,5 +1,4 @@
 $(document).ready(function () {
-
     // Отправить сообщение в чат
     $('#chat-form').on('beforeSubmit', function(){
         $.ajax({
@@ -9,7 +8,6 @@ $(document).ready(function () {
             success: function (result) {
                 $('#chat-form').find('input').val('');
                 chatListUpdate();
-
             },
             error: function () {
                 alert('Ошибка')

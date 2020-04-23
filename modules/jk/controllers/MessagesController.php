@@ -3,16 +3,16 @@
 namespace app\modules\jk\controllers;
 
 use Yii;
-use app\modules\jk\models\Agreement;
-use app\modules\jk\models\AgreementSearch;
+use app\modules\jk\models\Messages;
+use app\modules\jk\models\MessagesSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * AgreementController implements the CRUD actions for Agreement model.
+ * MessagesController implements the CRUD actions for Messages model.
  */
-class AgreementController extends Controller
+class MessagesController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -30,12 +30,12 @@ class AgreementController extends Controller
     }
 
     /**
-     * Lists all Agreement models.
+     * Lists all Messages models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new AgreementSearch();
+        $searchModel = new MessagesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class AgreementController extends Controller
     }
 
     /**
-     * Displays a single Agreement model.
+     * Displays a single Messages model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -58,13 +58,13 @@ class AgreementController extends Controller
     }
 
     /**
-     * Creates a new Agreement model.
+     * Creates a new Messages model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Agreement();
+        $model = new Messages();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -76,7 +76,7 @@ class AgreementController extends Controller
     }
 
     /**
-     * Updates an existing Agreement model.
+     * Updates an existing Messages model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -96,40 +96,7 @@ class AgreementController extends Controller
     }
 
     /**
-     * Согласование заявки
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionCheck($id)
-    {
-        $model = $this->findModel($id);
-
-        if (Yii::$app->request->post()){
-            $model->is_approval = $_POST['is_approval'];
-            $model->approval_at=time();
-        }
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-
-            // Письмо сотруднику
-            if ($model->is_approval){
-                $model->sendEmailUserManagerSuccess(); // Если успешно
-            }else{
-                $model->sendEmailUserManagerDanger(); // Если не успешно
-            }
-
-            // Письмо-согласования следующему руководителю по цеппочке
-            Agreement::sendEmailManager($model->order_id);
-
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-        return $this->render('check', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Deletes an existing Agreement model.
+     * Deletes an existing Messages model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -143,15 +110,15 @@ class AgreementController extends Controller
     }
 
     /**
-     * Finds the Agreement model based on its primary key value.
+     * Finds the Messages model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Agreement the loaded model
+     * @return Messages the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Agreement::findOne($id)) !== null) {
+        if (($model = Messages::findOne($id)) !== null) {
             return $model;
         }
 
