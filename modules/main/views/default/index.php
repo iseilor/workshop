@@ -24,9 +24,6 @@ use yii\widgets\ListView;
     </div>
 <?php
 
-
-echo Url::base(true).Url::to('/user/1');
-
 $this->registerJs(<<<JS
      // Таймер
      function time() {

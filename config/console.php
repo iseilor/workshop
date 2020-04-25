@@ -80,6 +80,11 @@ $config = [
             'migrationPath' => '@app/modules/nsi/migrations',
             'migrationTable' => 'migration_nsi',
         ],
+        'migrate-project' => [
+            'class' => 'yii\console\controllers\MigrateController',
+            'migrationPath' => '@app/modules/project/migrations',
+            'migrationTable' => 'migration_project',
+        ],
     ],
 
 ];

@@ -62,7 +62,7 @@ class DefaultController extends Controller
         $list = [
             [
                 'col' => 3,
-                'bg' => 'info',
+                'bg' => 'primary',
                 'title' => 'Новости',
                 'description' => 'Всегда свежая информация',
                 'icon' => Yii::$app->params['module']['news']['icon'],
@@ -71,7 +71,7 @@ class DefaultController extends Controller
             ],
             [
                 'col' => 3,
-                'bg' => 'info',
+                'bg' => 'primary',
                 'title' => '<span class="curs">&nbsp;<span class="curs-1"><i class="fas fa-dollar-sign"></i> 66.90</span><span class="curs-2"><i class="fas fa-euro-sign"></i> 73.91</span><span class="curs-3"><i class="fas fa-gas-pump"></i> 49.91</span></span>',
                 'description' => '<span class="curs">&nbsp;<span class="curs-1">USD ЦБ</span><span class="curs-2">EURO ЦБ</span><span class="curs-3">Нефть</span></span>',
                 'icon' => '<i class="fas fa-ruble-sign"></i>',
@@ -80,7 +80,7 @@ class DefaultController extends Controller
             ],
             [
                 'col' => 3,
-                'bg' => 'info',
+                'bg' => 'primary',
                 'title' => '+5&degC',
                 'description' => '<i class="fas fa-wind"></i>2-3м/с | <i class="fas fa-tint"></i>78% | <i class="fas fa-tachometer-alt"></i>736ммрт.ст.
 ',
@@ -101,7 +101,7 @@ class DefaultController extends Controller
             ],
             [
                 'col' => 3,
-                'bg' => 'purple',
+                'bg' => 'indigo',
                 'title' => Module::t('module', 'JK'),
                 'description' => Module::t('module', 'jk'),
                 'icon' => Yii::$app->params['module']['jk']['icon'],
@@ -110,7 +110,7 @@ class DefaultController extends Controller
             ],
             [
                 'col' => 3,
-                'bg' => 'teal',
+                'bg' => 'indigo',
                 'title' => 'Пульсар',
                 'description' => 'Мониторинг подразделения',
                 'icon' => Icon::show('heartbeat'),
@@ -119,20 +119,20 @@ class DefaultController extends Controller
             ],
             [
                 'col' => 3,
-                'bg' => 'primary',
-                'title' => 'Чат',
-                'description' => 'Корпоративный чат',
-                'icon' => '<i class="fas fa-comments"></i>',
-                'url' => '#',
+                'bg' => 'indigo',
+                'title' => 'Проекты',
+                'description' => 'Задачи и отчёты',
+                'icon' => Icon::show('folder-open'),
+                'url' => Url::to(['/project/']),
                 'link' => 'Перейти <i class="fas fa-arrow-circle-right"></i>',
             ],
             [
                 'col' => 3,
-                'bg' => 'danger',
-                'title' => 'Admin',
-                'description' => 'Панель администратора',
-                'icon' => '<i class="fas fa-tools"></i>',
-                'url' => Url::to(['/admin/']),
+                'bg' => 'secondary',
+                'title' => 'KPI',
+                'description' => 'Ключевые показатели',
+                'icon' => Icon::show('thumbs-up'),
+                'url' => '#',
                 'link' => 'Перейти <i class="fas fa-arrow-circle-right"></i>',
             ],
             [
@@ -155,6 +155,24 @@ class DefaultController extends Controller
             ],
             [
                 'col' => 3,
+                'bg' => 'warning',
+                'title' => 'Чат',
+                'description' => 'Корпоративный чат',
+                'icon' => '<i class="fas fa-comments"></i>',
+                'url' => '#',
+                'link' => 'Перейти <i class="fas fa-arrow-circle-right"></i>',
+            ],
+            [
+                'col' => 3,
+                'bg' => 'danger',
+                'title' => 'Admin',
+                'description' => 'Панель администратора',
+                'icon' => '<i class="fas fa-tools"></i>',
+                'url' => Url::to(['/admin/']),
+                'link' => 'Перейти <i class="fas fa-arrow-circle-right"></i>',
+            ],
+            /*[
+                'col' => 3,
                 'bg' => 'secondary',
                 'title' => 'ПП',
                 'description' => 'Пенсионные программы',
@@ -165,31 +183,12 @@ class DefaultController extends Controller
             [
                 'col' => 3,
                 'bg' => 'secondary',
-                'title' => 'Отчёты',
-                'description' => 'Статистика и отчёты',
-                'icon' => '<i class="fas fa-file-alt"></i>',
-                'url' => '#',
-                'link' => 'Перейти <i class="fas fa-arrow-circle-right"></i>',
-            ],
-            [
-                'col' => 3,
-                'bg' => 'secondary',
-                'title' => 'KPI',
-                'description' => 'Ключевые показатели',
-                'icon' => '<i class="fas fa-file-alt"></i>',
-                'url' => '#',
-                'link' => 'Перейти <i class="fas fa-arrow-circle-right"></i>',
-            ],
-
-            [
-                'col' => 3,
-                'bg' => 'secondary',
                 'title' => 'Аварии',
                 'description' => 'Нештатные ситуации',
                 'icon' => Icon::show(Yii::$app->params['module']['ns']['iconClass']),
                 'url' => '#',
                 'link' => 'Перейти <i class="fas fa-arrow-circle-right"></i>',
-            ],
+            ],*/
 
         ];
         return $this->render(

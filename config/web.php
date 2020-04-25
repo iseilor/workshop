@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\ArrayHelper;
+
 require(__DIR__ . '/functions.php');
 
 $params = ArrayHelper::merge(
@@ -26,7 +27,8 @@ $config = [
         'app\modules\chat\Bootstrap',
         'app\modules\news\Bootstrap',
         'app\modules\pulsar\Bootstrap',
-        'app\modules\nsi\Bootstrap'
+        'app\modules\nsi\Bootstrap',
+        'app\modules\project\Bootstrap',
     ],
     'layout' => 'index',
     'language' => 'ru',
@@ -36,7 +38,7 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm' => '@vendor/npm-asset',
         '@adminlte' => '@vendor/almasaeed2010/adminlte',
-        '@files' => 'files'
+        '@files' => 'files',
     ],
     'modules' => [
         'main' => [
@@ -57,17 +59,11 @@ $config = [
         'news' => [
             'class' => 'app\modules\news\Module',
         ],
-        'task' => [
-            'class' => 'app\modules\task\Module',
-        ],
-        'pulsar' => [
-            'class' => 'app\modules\pulsar\Module',
-        ],
-        'nsi' => [
-            'class' => 'app\modules\nsi\Module',
-        ],
-        'gridview' => ['class' => 'kartik\grid\Module']
-
+        'task' => ['class' => 'app\modules\task\Module'],
+        'pulsar' => ['class' => 'app\modules\pulsar\Module'],
+        'nsi' => ['class' => 'app\modules\nsi\Module'],
+        'gridview' => ['class' => 'kartik\grid\Module'],
+        'project' => ['class' => 'app\modules\project\Module'],
     ],
     'components' => [
         'ad' => [
@@ -82,7 +78,7 @@ $config = [
                         'username' => $params['ad']['username'],
                         'password' => $params['ad']['password'],
                         'port' => $params['ad']['port'],
-                    ]
+                    ],
                 ],
             ],
         ],
@@ -100,14 +96,14 @@ $config = [
             'decimalSeparator' => ',',
             'timeZone' => 'Europe/Moscow',
             'locale' => 'ru-RU',
-            'nullDisplay' => ''
+            'nullDisplay' => '',
 
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
         'assetManager' => [
-            'linkAssets' => true
+            'linkAssets' => true,
         ],
         'user' => [
             'identityClass' => 'app\modules\user\models\User',
@@ -165,7 +161,6 @@ $config = [
             ],
 
 
-
             'rules' => [
 
                 '' => 'main/default/index',
@@ -185,7 +180,7 @@ $config = [
                 '<_m:[\w\-]+>/<_a:(admin|table)>' => '<_m>/default/<_a>',
                 '<_m:[\w\-]+>/<_c:[\w\-]+>' => '<_m>/<_c>/index',
 
-            ]
+            ],
 
         ],
 
