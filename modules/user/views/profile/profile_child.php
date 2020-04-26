@@ -42,7 +42,7 @@ echo GridView::widget([
         'date:date',
         'age',
         [
-            'class' => ActionColumn::className(),
+            'class' => ActionColumn::class,
             'controller' => '/user/child',
         ],
     ],

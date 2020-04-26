@@ -18,23 +18,28 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="row">
     <div class="col-md-12">
-        <div class="card card-primary">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title"><?= $this->title; ?></h3>
+                <?= Yii::$app->params['card']['header']['tools'] ?>
+            </div>
             <div class="card-body">
-
                 <p>
                     <?= Html::a(Icon::show('plus') . Module::t('child', 'Create Child'), ['create'], ['class' => 'btn btn-success']) ?>
                 </p>
-
                 <?php Pjax::begin(); ?>
                 <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
                 <?= GridView::widget([
                     'dataProvider' => $dataProvider,
                     //'filterModel' => $searchModel,
+                    'pager' => [
+                        'class' => 'app\widgets\LinkPager',
+                    ],
                     'columns' => [
                         ['class' => 'yii\grid\SerialColumn'],
                         [
-                            'class' => LinkColumn::className(),
+                            'class' => LinkColumn::class,
                             'attribute' => 'id',
                         ],
                         //'created_at',
@@ -45,7 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         //'deleted_by',
                         //'user_id',
                         [
-                            'class' => LinkColumn::className(),
+                            'class' => LinkColumn::class,
                             'attribute' => 'fio',
                         ],
                         [
@@ -56,7 +61,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
                         'date:date',
                         'age',
-                        'passportLink:html',
+                        //'passportLink:html',
                         'birthLink:html',
                         //'file_registration',
                         //'file_address',
@@ -79,7 +84,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         //'file_study',
                         //'file_scholarship',
 
-                        ['class' => ActionColumn::className()],
+                        ['class' => ActionColumn::class],
                     ],
                 ]); ?>
 

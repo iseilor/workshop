@@ -24,7 +24,7 @@ class ChildController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -157,20 +157,38 @@ class ChildController extends Controller
                 'PASSPORT_DEPARTMENT',
                 'PASSPORT_CODE',
                 'PASSPORT_REGISTRATION',
+
                 'CHILD_FIO',
+                'BIRTH_SERIES',
+                'BIRTH_NUMBER',
+                'BIRTH_DEPARTMENT',
+                'BIRTH_CODE',
+                'BIRTH_DATE',
+                'ADDRESS_REGISTRATION',
                 'CHILD_DATE',
+
                 'DATE',
             ],
+
+
             [
                 $user->fio,
                 $user->passport_series,
                 $user->passport_number,
-                $user->passport_date,
+                date('d.m.Y',$user->passport_date),
                 $user->passport_department,
                 $user->passport_code,
                 $user->passport_registration,
+
                 $child->fio,
-                $child->date,
+                $child->birth_series,
+                $child->birth_number,
+                $child->birth_department,
+                $child->birth_code,
+                date('d.m.Y',$child->birth_date),
+                $child->address_registration,
+                date('d.m.Y',$child->date),
+
                 date('d.m.Y'),
             ]
         );

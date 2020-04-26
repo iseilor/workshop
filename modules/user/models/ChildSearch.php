@@ -73,16 +73,7 @@ class ChildSearch extends Child
         ]);
 
         $query->andFilterWhere(['like', 'fio', $this->fio])
-            ->andFilterWhere(['like', 'file_passport', $this->file_passport])
-            ->andFilterWhere(['like', 'file_registration', $this->file_registration])
-            ->andFilterWhere(['like', 'file_birth', $this->file_birth])
-            ->andFilterWhere(['like', 'file_address', $this->file_address])
-            ->andFilterWhere(['like', 'file_ejd', $this->file_ejd])
-            ->andFilterWhere(['like', 'file_personal', $this->file_personal])
-            ->andFilterWhere(['like', 'file_invalid', $this->file_invalid])
-            ->andFilterWhere(['like', 'file_posobie', $this->file_posobie])
-            ->andFilterWhere(['like', 'file_study', $this->file_study])
-            ->andFilterWhere(['like', 'file_scholarship', $this->file_scholarship]);
+            ->andFilterWhere(['like', 'passport_file', $this->passport_file]);
 
         return $dataProvider;
     }

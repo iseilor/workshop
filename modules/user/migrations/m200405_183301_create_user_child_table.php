@@ -31,21 +31,36 @@ class m200405_183301_create_user_child_table extends Migration
             'fio'=> $this->string() . ' NOT NULL',
             'gender'=> $this->boolean() . ' NOT NULL',
             'date'=> $this->integer() . ' NOT NULL',
+            'passport_file'=>$this->string(),
 
-            'file_passport'=>$this->string(),
-            'file_registration'=>$this->string(),
-            'file_birth'=>$this->string(),
-            'file_address'=>$this->string(),
-            'file_ejd'=>$this->string(),
-            'file_personal'=>$this->string(),
+            // Школьник/студент
+            'is_study'=>$this->boolean(),
+            'file_study'=>$this->string(),
+            'file_scholarship'=>$this->string(),
 
+             // Инвалид
             'is_invalid'=>$this->boolean(),
             'file_invalid'=>$this->string(),
             'file_posobie'=>$this->string(),
 
-            'is_study'=>$this->boolean(),
-            'file_study'=>$this->string(),
-            'file_scholarship'=>$this->string()
+             // Св-во о рождении
+            'birth_series'=>$this->string()->notNull(),
+            'birth_number'=>$this->string()->notNull(),
+            'birth_date'=>$this->integer()->notNull(),
+            'birth_department'=>$this->string()->notNull(),
+            'birth_code'=>$this->string()->notNull(),
+            'birth_address'=>$this->string()->notNull(),
+            'birth_file'=>$this->string(),
+
+            // Проживание ребёнка
+            'address_registration'=>$this->string(),
+            'registration_file'=>$this->string(),
+            'address_mother_file'=>$this->string(),
+            'address_father_file'=>$this->string(),
+            'ejd_file'=>$this->string(),
+
+            // Обработка персональных данных
+            'file_personal'=>$this->string(),
         ], $tableOptions);
     }
 

@@ -101,3 +101,10 @@ a.a-color-blue:hover {
   font-weight: 900;
   content: "\f0c6";
 }
+.ui-datepicker {
+  z-index: 3 !important;
+}
+.hint-block {
+  color: #6c757d;
+  font-size: 0.7rem;
+}
