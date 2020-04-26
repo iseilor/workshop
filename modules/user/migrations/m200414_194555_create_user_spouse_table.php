@@ -25,35 +25,37 @@ class m200414_194555_create_user_spouse_table extends Migration
             'deleted_at' => $this->integer(),
             'deleted_by' => $this->integer(),
 
+            // Общие параметры
             'user_id'=> $this->integer() . ' NOT NULL', // Сотрудник
             'fio'=> $this->string() . ' NOT NULL',      // ФИО супруги
             'gender'=> $this->boolean() . ' NOT NULL',  // Пол
             'date'=> $this->integer() . ' NOT NULL',    // Дата рождения
+            'marriage_file'=>$this->string(),           // Свидетельство о заключении/расторжения брака / копию решения суда
 
-            'passport_series'=>$this->string(),         // Паспорт
+            // Паспорт
+            'passport_series'=>$this->string(),
             'passport_number'=>$this->string(),
             'passport_date'=>$this->integer(),
             'passport_department'=>$this->string(),
             'passport_code'=>$this->string(),
+            'passport_registration'=>$this->text(),
             'passport_file'=>$this->string(),
 
-            'agree_personal_data' => $this->boolean(),      // Обработка персональных данных
-            'agree_personal_data_file' => $this->string(),
+            // Адрес
+            'registration_file'=>$this->string(),       // Документ о временной регистрации (при наличии)
+            'edj_file'=>$this->string(),                // Единый жилищный документ
 
-            'edj'=>$this->string(),             // Единый жилищный документ
-            'edj_file'=>$this->string(),
-
+            // Трудоустройство
             'is_work' => $this->boolean(),           // Супруга официально работает
-            'is_rtk'=>$this->boolean(),              // Работает в Обществе
-            'is_do' => $this->boolean(),             // Супруга в декретном отпуске
+            'is_rtk'=>$this->boolean(),                         // Работает в Обществе
+            'is_do' => $this->boolean(),                        // Супруга в декретном отпуске
+            'explanatory_note_file'=>$this->string(),           // Пояснительная записка
+            'work_file'=>$this->string(),                       // Трудовая книжка
+            'unemployment_file'=>$this->string(),               // Справка о безработице
+            'salary_file'=>$this->string(),                     // Справка о заработной плате (о сумме получаемых пособий)
 
-            'marriage_file'=>$this->string(), // Свидетельство о заключении/расторжения брака / копию решения суда
-            'registration_file'=>$this->string(), // Документ о временной регистрации (при наличии)
-
-            'explanatory_note_file'=>$this->string(),       // Пояснительная записка
-            'work_file'=>$this->string(),                   // Трудовая книжка
-            'unemployment_file'=>$this->string(),           // Справка о безработице
-            'salary_file'=>$this->string(),                 // Справка о заработной плате (о сумме получаемых пособий)
+            // Персональные данные
+            'personal_data_file' => $this->string(),
 
         ], $tableOptions);
     }

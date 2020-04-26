@@ -42,13 +42,6 @@ $this->params['breadcrumbs'][] = $this->title;
                             'class' => LinkColumn::class,
                             'attribute' => 'id',
                         ],
-                        //'created_at',
-                        //'created_by',
-                        //'updated_at',
-                        //'updated_by',
-                        //'deleted_at',
-                        //'deleted_by',
-                        //'user_id',
                         [
                             'class' => LinkColumn::class,
                             'attribute' => 'fio',
@@ -61,29 +54,27 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
                         'date:date',
                         'age',
-                        //'passportLink:html',
-                        'birthLink:html',
-                        //'file_registration',
-                        //'file_address',
-                        //'file_ejd',
-                        //'file_personal',
+                        'passportLink:raw',
+                        'birthLink:raw',
                         [
                             'attribute' => 'is_invalid',
                              'content'=>function($data){
                                 return (isset($data->is_invalid) && $data->is_invalid) ? '<span class="badge badge-danger">Да</span>' : 'Нет';
                             }
                         ],
-                        //'file_invalid',
-                        //'file_posobie',
                         [
                             'attribute' => 'is_study',
                             'content'=>function($data){
                                 return (isset($data->is_study) && $data->is_study) ? '<span class="badge badge-info">Да</span>' : 'Нет';
                             }
                         ],
-                        //'file_study',
-                        //'file_scholarship',
-
+                        [
+                            'attribute' => 'file_personal',
+                            'label'=>'ПД',
+                            'content'=>function($data){
+                                return $data->personalLink;
+                            }
+                        ],
                         ['class' => ActionColumn::class],
                     ],
                 ]); ?>

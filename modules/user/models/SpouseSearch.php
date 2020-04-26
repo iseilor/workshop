@@ -17,8 +17,8 @@ class SpouseSearch extends Spouse
     public function rules()
     {
         return [
-            [['id', 'created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by', 'user_id', 'gender', 'date', 'passport_date', 'agree_personal_data', 'is_work', 'is_rtk', 'is_do'], 'integer'],
-            [['fio', 'passport_series', 'passport_number', 'passport_department', 'passport_code', 'passport_file', 'agree_personal_data_file', 'edj', 'edj_file', 'marriage_file', 'registration_file', 'explanatory_note_file', 'work_file', 'unemployment_file', 'salary_file'], 'safe'],
+            [['id', 'created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by', 'user_id', 'gender', 'date', 'passport_date', 'is_work', 'is_rtk', 'is_do'], 'integer'],
+            [['fio', 'passport_series', 'passport_number', 'passport_department', 'passport_code', 'passport_file', 'edj_file', 'marriage_file', 'registration_file', 'explanatory_note_file', 'work_file', 'unemployment_file', 'salary_file'], 'safe'],
         ];
     }
 
@@ -69,7 +69,6 @@ class SpouseSearch extends Spouse
             'gender' => $this->gender,
             'date' => $this->date,
             'passport_date' => $this->passport_date,
-            'agree_personal_data' => $this->agree_personal_data,
             'is_work' => $this->is_work,
             'is_rtk' => $this->is_rtk,
             'is_do' => $this->is_do,
@@ -81,9 +80,6 @@ class SpouseSearch extends Spouse
             ->andFilterWhere(['like', 'passport_department', $this->passport_department])
             ->andFilterWhere(['like', 'passport_code', $this->passport_code])
             ->andFilterWhere(['like', 'passport_file', $this->passport_file])
-            ->andFilterWhere(['like', 'agree_personal_data_file', $this->agree_personal_data_file])
-            ->andFilterWhere(['like', 'edj', $this->edj])
-            ->andFilterWhere(['like', 'edj_file', $this->edj_file])
             ->andFilterWhere(['like', 'marriage_file', $this->marriage_file])
             ->andFilterWhere(['like', 'registration_file', $this->registration_file])
             ->andFilterWhere(['like', 'explanatory_note_file', $this->explanatory_note_file])

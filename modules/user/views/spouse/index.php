@@ -1,5 +1,8 @@
 <?php
 
+use app\components\grid\LinkColumn;
+use app\modules\user\Module;
+use kartik\icons\Icon;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
@@ -7,13 +10,13 @@ use yii\widgets\Pjax;
 /* @var $searchModel app\modules\user\models\SpouseSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Spouses');
+$this->title = Module::t('spouse', 'Spouses');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="spouse-index">
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create Spouse'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Icon::show('plus').Module::t('spouse', 'Create Spouse'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php Pjax::begin(); ?>
@@ -24,26 +27,19 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'created_at',
-            'created_by',
-            'updated_at',
-            'updated_by',
-            //'deleted_at',
-            //'deleted_by',
-            //'user_id',
-            //'fio',
-            //'gender',
-            //'date',
-            //'passport_series',
-            //'passport_number',
-            //'passport_date',
-            //'passport_department',
-            //'passport_code',
-            //'passport_file',
-            //'agree_personal_data',
-            //'agree_personal_data_file',
+            [
+                'class' => LinkColumn::class,
+                'attribute' => 'id',
+            ],
+            [
+                'class' => LinkColumn::class,
+                'attribute' => 'fio',
+            ],
+            'user_id',
+            'gender',
+            'date:date',
+            'passport_file',
+            'personal_data_file',
             //'edj',
             //'edj_file',
             //'is_work',

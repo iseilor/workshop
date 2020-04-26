@@ -280,8 +280,9 @@ class Child extends Model
     public function getPassportLink()
     {
         if ($this->passport_file) {
-            return Html::a(Icon::show('file-pdf'), Url::to('/' . Yii::$app->params['module']['child']['filePath'] . $this->id . '/' . $this->passport_file),
-                ['title' => 'Паспорт ' . $this->fio, 'target' => '_blank']);
+            return Html::a(Icon::show('file-pdf').'Паспорт',
+                Url::to('/' . Yii::$app->params['module']['child']['filePath'] . $this->id . '/' . $this->passport_file,true),
+                ['title' => 'Паспорт ' . $this->fio,'data-pjax'=>"0", 'target1' => '_blank']);
         } else {
             return false;
         }
@@ -290,8 +291,19 @@ class Child extends Model
     // Короткая ссылка с иконкой на свидетельство
     public function getBirthLink()
     {
-        if ($this->passport_file) {
-            return Html::a(Icon::show('file-pdf'), '123', ['Свидетельство о рождении' . $this->fio]);
+        if ($this->birth_file) {
+            return Html::a(Icon::show('file-pdf').'Свидетельство', Url::to('/' . Yii::$app->params['module']['child']['filePath'] . $this->id . '/' . $this->birth_file,true),
+                ['title' => 'Свидетельство о рождении ' . $this->fio, 'target' => '_blank','data-pjax'=>"0"]);
+        } else {
+            return false;
+        }
+    }
+
+    // Ссылка на согласие обработки персональных данных
+    public function getPersonalLink(){
+        if ($this->file_personal) {
+            return Html::a(Icon::show('file-pdf').'Согласие', Url::to('/' . Yii::$app->params['module']['child']['filePath'] . $this->id . '/' . $this->file_personal,true),
+                ['title' => 'Согласие на обработку персональных данных ' . $this->fio, 'target' => '_blank','data-pjax'=>"0"]);
         } else {
             return false;
         }

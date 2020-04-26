@@ -2,6 +2,8 @@
 
 namespace app\modules\user\controllers;
 
+use app\modules\user\models\User;
+use PhpOffice\PhpWord\TemplateProcessor;
 use Yii;
 use app\modules\user\models\Spouse;
 use app\modules\user\models\SpouseSearch;
@@ -14,6 +16,7 @@ use yii\filters\VerbFilter;
  */
 class SpouseController extends Controller
 {
+
     /**
      * {@inheritdoc}
      */
@@ -31,6 +34,7 @@ class SpouseController extends Controller
 
     /**
      * Lists all Spouse models.
+     *
      * @return mixed
      */
     public function actionIndex()
@@ -46,7 +50,9 @@ class SpouseController extends Controller
 
     /**
      * Displays a single Spouse model.
+     *
      * @param integer $id
+     *
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -60,6 +66,7 @@ class SpouseController extends Controller
     /**
      * Creates a new Spouse model.
      * If creation is successful, the browser will be redirected to the 'view' page.
+     *
      * @return mixed
      */
     public function actionCreate()
@@ -67,6 +74,7 @@ class SpouseController extends Controller
         $model = new Spouse();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $model->upload();
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -78,7 +86,9 @@ class SpouseController extends Controller
     /**
      * Updates an existing Spouse model.
      * If update is successful, the browser will be redirected to the 'view' page.
+     *
      * @param integer $id
+     *
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -87,6 +97,7 @@ class SpouseController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $model->upload();
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -98,7 +109,9 @@ class SpouseController extends Controller
     /**
      * Deletes an existing Spouse model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
+     *
      * @param integer $id
+     *
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -112,7 +125,9 @@ class SpouseController extends Controller
     /**
      * Finds the Spouse model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
+     *
      * @param integer $id
+     *
      * @return Spouse the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -123,5 +138,38 @@ class SpouseController extends Controller
         }
 
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
+    }
+
+    // Выгрузить согласие на обработку персональных данных
+    public function actionPd($id)
+    {
+        $user = Spouse::findOne($id);
+        $filePath = Yii::getAlias('@app') . '/modules/user/files/user_personal_data.docx';
+        $templateProcessor = new TemplateProcessor($filePath);
+        $templateProcessor->setValue(
+            [
+                'FIO',
+                'PASSPORT_SERIES',
+                'PASSPORT_NUMBER',
+                'PASSPORT_DATE',
+                'PASSPORT_DEPARTMENT',
+                'PASSPORT_CODE',
+                'PASSPORT_REGISTRATION',
+                'DATE',
+            ],
+            [
+                $user->fio,
+                $user->passport_series,
+                $user->passport_number,
+                date('d.m.Y', $user->passport_date),
+                $user->passport_department,
+                $user->passport_code,
+                $user->passport_registration,
+                date('d.m.Y'),
+            ]
+        );
+        $fileUrl = '/files/spouse/' . $id . '/spouse_' . $id . '_pd_' . date('YmdHis') . '.docx';
+        $templateProcessor->saveAs(Yii::getAlias('@app') . '/web' . $fileUrl);
+        return Yii::$app->response->sendFile(Yii::getAlias('@webroot') . $fileUrl);
     }
 }

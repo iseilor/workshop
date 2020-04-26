@@ -84,6 +84,9 @@ return [
         'child' => [
             'filePath' => 'files/child/',
         ],
+        'spouse' => [
+            'filePath' => 'files/spouse/',
+        ],
         'admin' => [
             'icon' => '<i class="fas fa-home"></i>',
             'ad' => [
