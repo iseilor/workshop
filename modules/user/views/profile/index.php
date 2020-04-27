@@ -2,7 +2,9 @@
 
 use app\components\grid\ActionColumn;
 use app\components\grid\LinkColumn;
+use app\modules\user\controllers\UserController;
 use app\modules\user\models\ChildSearch;
+use app\modules\user\models\User;
 use app\modules\user\Module;
 
 
@@ -93,7 +95,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <li class="nav-item">
                         <a class="nav-link" id="tab-4-tab" data-toggle="pill" href="#tab-4" role="tab" aria-controls="tab-4"
                            aria-selected="true">
-                            <?=\kartik\icons\Icon::show('baby')?>Дети
+                            <?= \kartik\icons\Icon::show('baby') ?>Дети
                         </a>
                     </li>
                 </ul>
@@ -120,7 +122,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     [
                                         'class' => ActionColumn::className(),
                                         'controller' => '/jk/percent',
-                                    ]
+                                    ],
                                 ],
                             ]
                         ) ?>
@@ -145,16 +147,23 @@ $this->params['breadcrumbs'][] = $this->title;
                                     [
                                         'class' => ActionColumn::className(),
                                         'controller' => '/jk/zaim',
-                                    ]
+                                    ],
                                 ],
                             ]
                         ) ?>
                     </div>
                     <div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby="tab-3-tab">
-                        <?=$this->render('index_order', ['orderDataProvider' => $orderDataProvider]) ?>
+                        <?= $this->render('index_order', ['orderDataProvider' => $orderDataProvider]) ?>
                     </div>
                     <div class="tab-pane fade" id="tab-4" role="tabpanel" aria-labelledby="tab-4-tab">
-                        <?= $this->render('profile_child', ['model' => $model]) ?>
+                        <?php
+                        $searchModel = new ChildSearch(['user_id' => Yii::$app->user->identity->id]);
+                        $dataProvider = $searchModel->search([]);
+                        echo $this->render('@app/modules/user/views/child/grid-view', [
+                            'searchModel' => $searchModel,
+                            'dataProvider' => $dataProvider,
+                        ]);
+                        ?>
                     </div>
                 </div>
             </div>

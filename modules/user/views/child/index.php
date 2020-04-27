@@ -54,11 +54,9 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
                         'date:date',
                         'age',
-                        'passportLink:raw',
-                        'birthLink:raw',
                         [
                             'attribute' => 'is_invalid',
-                             'content'=>function($data){
+                            'content'=>function($data){
                                 return (isset($data->is_invalid) && $data->is_invalid) ? '<span class="badge badge-danger">Да</span>' : 'Нет';
                             }
                         ],
@@ -68,13 +66,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                 return (isset($data->is_study) && $data->is_study) ? '<span class="badge badge-info">Да</span>' : 'Нет';
                             }
                         ],
-                        [
-                            'attribute' => 'file_personal',
-                            'label'=>'ПД',
-                            'content'=>function($data){
-                                return $data->personalLink;
-                            }
-                        ],
+                        'passportLink:raw',
+                        'birthLink:raw',
+                        'personalLink:raw',
                         ['class' => ActionColumn::class],
                     ],
                 ]); ?>

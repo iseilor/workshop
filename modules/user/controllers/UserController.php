@@ -8,6 +8,7 @@ use app\modules\jk\models\PercentSearch;
 use app\modules\jk\models\ZaimSearch;
 use app\modules\user\forms\PasswordChangeForm;
 use app\modules\user\forms\ProfileUpdateForm;
+use app\modules\user\models\ChildSearch;
 use app\modules\user\models\User;
 use PhpOffice\PhpWord\TemplateProcessor;
 use yii\filters\AccessControl;

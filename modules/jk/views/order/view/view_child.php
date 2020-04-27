@@ -32,7 +32,7 @@ $dataProvider = $searchModel->search(['user_id='.Yii::$app->user->identity->id])
         'age',
         'passportLink:html',
         'birthLink:html',
-        'personalDataLink:html',
+        'personalLink:html',
         [
             'attribute' => 'is_invalid',
             'content'=>function($data){

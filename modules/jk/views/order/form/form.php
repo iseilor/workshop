@@ -27,6 +27,7 @@ use yii\widgets\ActiveForm;
                                     <?php
                                     $tabs = [
                                         ['name' => Icon::show('list') . 'Параметры', 'id' => 'params', 'tab-class' => 'active', 'selected' => 'true', 'tabs-class' => 'show active'],
+                                        ['name' => Icon::show('user') . 'Кандидат', 'id' => 'user', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
                                         ['name' => Icon::show('female') . 'Супруг(а)', 'id' => 'spouse', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
                                         ['name' => Icon::show('baby') . 'Дети', 'id' => 'child', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
                                         ['name' => Icon::show('users') . 'Семья', 'id' => 'family', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
@@ -70,9 +71,9 @@ use yii\widgets\ActiveForm;
                 <div class="card-footer">
 
                     <?= Html::submitButton(
-                        '<i class="fas fa-save"></i> Сохранить заявку',
+                        Icon::show('save').'Сохранить заявку',
                         [
-                            'class' => 'btn btn-info',
+                            'class' => 'btn btn-success',
                             'id' => 'btn-save',
                             'value' => 1,
                             'name' => 'save',
