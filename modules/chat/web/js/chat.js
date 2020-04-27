@@ -7,7 +7,7 @@ $(document).ready(function () {
             data: $(this).serialize(),
             success: function (result) {
                 $('#chat-form').find('input').val('');
-                chatListUpdate();
+                //chatListUpdate();
             },
             error: function () {
                 alert('Ошибка')

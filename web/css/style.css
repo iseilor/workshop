@@ -108,3 +108,7 @@ a.a-color-blue:hover {
   color: #6c757d;
   font-size: 0.7rem;
 }
+.back-to-top {
+  z-index: 1033;
+  bottom: 3rem;
+}

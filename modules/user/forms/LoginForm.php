@@ -60,7 +60,7 @@ class LoginForm extends Model
     public function login()
     {
         // Заглушка для тестирования вне AD
-        if ($this->username != 'obedkinav@ya.ru') {
+        if ($this->username != 'obedkinav@ya.ru' && $this->username !='aleksey.voronin@rt.ru0') {
             // Ищем пользователя в AD
             if (!$this->userAD = $this->findUserAd()) {
                 $this->addError('username', 'Не найдена ваша корпоративная учётная запись');

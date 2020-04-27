@@ -159,7 +159,7 @@ class DefaultController extends Controller
                 'title' => 'Чат',
                 'description' => 'Корпоративный чат',
                 'icon' => '<i class="fas fa-comments"></i>',
-                'url' => '#',
+                'url' => Url::to(['/chat'],true),
                 'link' => 'Перейти <i class="fas fa-arrow-circle-right"></i>',
             ],
             [

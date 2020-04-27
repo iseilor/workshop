@@ -40,6 +40,7 @@ class m200404_000000_create_user_table extends Migration
             'photo'=>$this->string(),
             'fio'=> $this->string(),
 
+
             // Работа
             'position'=> $this->string(),
             'work_department'=> $this->string(),        // Подразделение

@@ -425,6 +425,21 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
         return $photoPath;
     }
 
+
+    /*
+    //
+    public function getAvatar(){
+        if(isset($this->photo)){
+$userPhoto = Yii::$app->user->identity->photo;
+$userPhotoPath = Yii::$app->homeUrl.Yii::$app->params['module']['user']['photo']['path'].$userPhoto;
+?>
+retrun Html::img($userPhotoPath, ['title' => Yii::$app->user->identity->username,'class'=>'img-circle elevation-2']) ?>
+}
+        }
+
+    }*/
+
+
     // Описание про пользователя
     public function getTooltip()
     {
