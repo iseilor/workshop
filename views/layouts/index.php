@@ -30,7 +30,7 @@ AppAssetAdminLTE::register($this);
     <link rel="icon" href="<?= Yii::$app->homeUrl ?>favicon.ico" type="image/x-icon">
 
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini layout-navbar-fixed  layout-footer-fixed layout-fixed">
 <?php $this->beginBody() ?>
 <div class="wrapper">
 

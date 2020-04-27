@@ -15,6 +15,7 @@ class AppAssetAdminLTE extends AssetBundle
 
     public $css
         = [
+            'plugins/overlayScrollbars/css/OverlayScrollbars.min.css',
             'plugins/ekko-lightbox/ekko-lightbox.css',
             'plugins/toastr/toastr.css',
             'plugins/fontawesome-free/css/all.css',
@@ -26,6 +27,7 @@ class AppAssetAdminLTE extends AssetBundle
         = [
             //'plugins/jquery/jquery.js',
             //'plugins/jquery-ui/jquery-ui.js',
+            'plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js',
             'plugins/ekko-lightbox/ekko-lightbox.min.js',
             'plugins/toastr/toastr.min.js',
 
