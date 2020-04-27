@@ -80,7 +80,7 @@ class Spouse extends Model
     public function rules()
     {
         return [
-            [['fio', 'gender', 'date', 'is_work'], 'required'],
+            [['fio', 'gender', 'date', 'type'], 'required'],
             [['created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by', 'user_id', 'gender', 'is_work', 'is_rtk', 'is_do'], 'integer'],
             [
                 [
@@ -137,6 +137,7 @@ class Spouse extends Model
             'deleted_by' => Yii::t('app', 'Deleted By'),
 
             // Общие параметры
+            'type'=> Module::t('spouse', 'Type'),
             'user_id' => Module::t('spouse', 'User ID'),
             'fio' => Module::t('spouse', 'Fio'),
             'gender' => Module::t('spouse', 'Gender'),
@@ -205,6 +206,16 @@ class Spouse extends Model
         return [
             1 => 'Мужской',
             0 => 'Женский',
+        ];
+    }
+
+    // Наличие супруги
+    public static function getTypeList()
+    {
+        return [
+            0 => 'Нет',
+            1 => 'Да',
+            2 => 'Разведён',
         ];
     }
 

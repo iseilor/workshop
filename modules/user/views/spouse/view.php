@@ -45,6 +45,10 @@ $this->params['breadcrumbs'][] = $this->title;
                             'value' => $model->getCreatedUserLink(),
                         ],
                         [
+                            'attribute' => 'type',
+                            'value' => Spouse::getTypeList()[$model->type],
+                        ],
+                        [
                             'attribute' => 'user_id',
                             'format' => 'raw',
                             'value' => $model->getCreatedUserLink(),

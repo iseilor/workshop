@@ -1,5 +1,6 @@
 <?php
 
+use app\modules\user\models\Spouse;
 use yii\jui\DatePicker;
 
 ?>

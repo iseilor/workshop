@@ -4,6 +4,8 @@ return [
     'Spouses'=>'Супруги',
     'Update Spouse: {name}'=>'Изменить супруг(а/у): {name}',
 
+    'Type'=>'Наличие супруги',
+
     'User ID' => 'Сотрудник',
     'Fio' => 'ФИО',
     'Gender' => 'Пол',

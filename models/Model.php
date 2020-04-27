@@ -113,10 +113,10 @@ class Model extends ActiveRecord
     }
 
     // Логическое удаление
-    public function delete()
+    /*public function delete()
     {
         $this->deleted_at = date('U');
         $this->deleted_by = Yii::$app->user->identity->getId();
         $this->save();
-    }
+    }*/
 }

@@ -26,6 +26,8 @@ class m200414_194555_create_user_spouse_table extends Migration
             'deleted_by' => $this->integer(),
 
             // Общие параметры
+            'type'=>$this->integer()->notNull(),        // Наличие супруги
+
             'user_id'=> $this->integer() . ' NOT NULL', // Сотрудник
             'fio'=> $this->string() . ' NOT NULL',      // ФИО супруги
             'gender'=> $this->boolean() . ' NOT NULL',  // Пол
