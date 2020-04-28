@@ -51,11 +51,13 @@ $this->params['breadcrumbs'][] = $this->title;
                         <li class="nav-item active">
                             <a href="#" class="nav-link">
                                 <i class="fas fa-user"></i> Иванов Иван Иванович
+                                <span class="badge bg-danger float-right">10</span>
                             </a>
                         </li>
                         <li class="nav-item active">
                             <a href="#" class="nav-link">
                                 <i class="fas fa-user"></i> Петров Пётр Сергеевич
+                                <span class="badge bg-warning float-right">4</span>
                             </a>
                         </li>
                         <li class="nav-item active">

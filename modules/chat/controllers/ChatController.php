@@ -14,6 +14,7 @@ use yii\filters\VerbFilter;
  */
 class ChatController extends Controller
 {
+
     /**
      * {@inheritdoc}
      */
@@ -31,6 +32,7 @@ class ChatController extends Controller
 
     /**
      * Lists all Chat models.
+     *
      * @return mixed
      */
     public function actionIndex()
@@ -46,7 +48,9 @@ class ChatController extends Controller
 
     /**
      * Displays a single Chat model.
+     *
      * @param integer $id
+     *
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -60,6 +64,7 @@ class ChatController extends Controller
     /**
      * Creates a new Chat model.
      * If creation is successful, the browser will be redirected to the 'view' page.
+     *
      * @return mixed
      */
     public function actionCreate()
@@ -79,7 +84,9 @@ class ChatController extends Controller
     /**
      * Updates an existing Chat model.
      * If update is successful, the browser will be redirected to the 'view' page.
+     *
      * @param integer $id
+     *
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -99,7 +106,9 @@ class ChatController extends Controller
     /**
      * Deletes an existing Chat model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
+     *
      * @param integer $id
+     *
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -113,7 +122,9 @@ class ChatController extends Controller
     /**
      * Finds the Chat model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
+     *
      * @param integer $id
+     *
      * @return Chat the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -128,7 +139,8 @@ class ChatController extends Controller
 
 
     // Отправить сообщение
-    public function actionSend(){
+    public function actionSend()
+    {
         $model = new Chat();
         $model->load(Yii::$app->request->post());
         $model->group_id = 1;
@@ -138,12 +150,27 @@ class ChatController extends Controller
     }
 
     // Получить список сообщений
-    public function actionList(){
+    public function actionList()
+    {
         $searchModel = new ChatSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         return $this->renderPartial('list', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
+    }
+
+    // Получить сообщения за последние time-секунд
+    public function actionMessages($time)
+    {
+        $now = time();
+        $messages = Chat::find()
+            ->select('message, user.fio')
+            ->where(['>=', 'chat.created_at', $now - $time])
+            ->andWhere('chat.created_by!='.Yii::$app->user->identity->id)
+            ->leftJoin('user', 'user.id = chat.created_by')
+            ->asArray()
+            ->all();
+        echo json_encode($messages);
     }
 }

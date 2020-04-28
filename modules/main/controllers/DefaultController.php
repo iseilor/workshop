@@ -2,6 +2,7 @@
 
 namespace app\modules\main\controllers;
 
+use app\modules\chat\models\Chat;
 use app\modules\jk\Module;
 use app\modules\main\models\ContactForm;
 use app\modules\user\models\User;
@@ -159,7 +160,7 @@ class DefaultController extends Controller
                 'title' => 'Чат',
                 'description' => 'Корпоративный чат',
                 'icon' => '<i class="fas fa-comments"></i>',
-                'url' => Url::to(['/chat'],true),
+                'url' => Url::to(['/chat'], true),
                 'link' => 'Перейти <i class="fas fa-arrow-circle-right"></i>',
             ],
             [

@@ -17,6 +17,10 @@ class DefaultController extends Controller
      */
     public function actionIndex()
     {
+
+
+
+
         $model = new Chat();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
