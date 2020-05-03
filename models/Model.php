@@ -41,7 +41,7 @@ class Model extends ActiveRecord
     public function getCreatedUserLink()
     {
         $model = $this->hasOne(User::class, ['id' => 'created_by'])->one();
-        return Html::a($model->fio, Url::to(['/user/' . $model->id]));
+        return Html::a($model->fio, Url::to(['/user/' . $model->id],true));
     }
 
     // Ссылка на пользователя, который изменил документ

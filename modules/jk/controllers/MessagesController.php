@@ -2,6 +2,7 @@
 
 namespace app\modules\jk\controllers;
 
+use app\modules\user\models\User;
 use Yii;
 use app\modules\jk\models\Messages;
 use app\modules\jk\models\MessagesSearch;
@@ -14,6 +15,7 @@ use yii\filters\VerbFilter;
  */
 class MessagesController extends Controller
 {
+
     /**
      * {@inheritdoc}
      */
@@ -31,22 +33,33 @@ class MessagesController extends Controller
 
     /**
      * Lists all Messages models.
+     *
      * @return mixed
      */
     public function actionIndex()
     {
+        $user = false;
+        if (isset($_GET['user'])) {
+            $user = User::findOne($_GET['user']);
+        }
+
+        $message =  new Messages();
         $searchModel = new MessagesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'user' => $user,
+            'message'=>$message
         ]);
     }
 
     /**
      * Displays a single Messages model.
+     *
      * @param integer $id
+     *
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -60,6 +73,7 @@ class MessagesController extends Controller
     /**
      * Creates a new Messages model.
      * If creation is successful, the browser will be redirected to the 'view' page.
+     *
      * @return mixed
      */
     public function actionCreate()
@@ -78,7 +92,9 @@ class MessagesController extends Controller
     /**
      * Updates an existing Messages model.
      * If update is successful, the browser will be redirected to the 'view' page.
+     *
      * @param integer $id
+     *
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -98,7 +114,9 @@ class MessagesController extends Controller
     /**
      * Deletes an existing Messages model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
+     *
      * @param integer $id
+     *
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -112,7 +130,9 @@ class MessagesController extends Controller
     /**
      * Finds the Messages model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
+     *
      * @param integer $id
+     *
      * @return Messages the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -123,5 +143,14 @@ class MessagesController extends Controller
         }
 
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
+    }
+
+    // Отправка сообщений
+    public function actionSend(){
+        $model = new Messages();
+        $model->load(Yii::$app->request->post());
+        $model->is_curator = true;
+        $model->save();
+        return true;
     }
 }

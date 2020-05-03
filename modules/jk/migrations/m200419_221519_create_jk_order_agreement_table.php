@@ -31,7 +31,7 @@ class m200419_221519_create_jk_order_agreement_table extends Migration
             'user_id' => $this->integer()->notNull(),       // ID пользователя
             'receipt_at' => $this->integer(),               // Когда поступила на согласование
             'approval_at' => $this->integer(),              // Когда фактически была согласована
-            'is_approval'=>$this->boolean(),                // Согласовано или нет
+            'approval'=>$this->integer(),                   // Согласовано или нет
             'comment'=>$this->text(),                       // Комментарий при согласовании
         ], $tableOptions);
     }

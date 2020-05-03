@@ -2,6 +2,9 @@
 
 namespace app\modules\jk\controllers;
 
+use app\modules\jk\models\Order;
+use app\modules\jk\models\Status;
+use app\modules\user\models\User;
 use Yii;
 use app\modules\jk\models\Agreement;
 use app\modules\jk\models\AgreementSearch;
@@ -14,6 +17,7 @@ use yii\filters\VerbFilter;
  */
 class AgreementController extends Controller
 {
+
     /**
      * {@inheritdoc}
      */
@@ -31,6 +35,7 @@ class AgreementController extends Controller
 
     /**
      * Lists all Agreement models.
+     *
      * @return mixed
      */
     public function actionIndex()
@@ -46,7 +51,9 @@ class AgreementController extends Controller
 
     /**
      * Displays a single Agreement model.
+     *
      * @param integer $id
+     *
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -60,6 +67,7 @@ class AgreementController extends Controller
     /**
      * Creates a new Agreement model.
      * If creation is successful, the browser will be redirected to the 'view' page.
+     *
      * @return mixed
      */
     public function actionCreate()
@@ -78,7 +86,9 @@ class AgreementController extends Controller
     /**
      * Updates an existing Agreement model.
      * If update is successful, the browser will be redirected to the 'view' page.
+     *
      * @param integer $id
+     *
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -97,7 +107,9 @@ class AgreementController extends Controller
 
     /**
      * Согласование заявки
+     *
      * @param integer $id
+     *
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -105,33 +117,46 @@ class AgreementController extends Controller
     {
         $model = $this->findModel($id);
 
-        if (Yii::$app->request->post()){
-            $model->is_approval = $_POST['is_approval'];
-            $model->approval_at=time();
+        if (Yii::$app->request->post()) {
+            $model->approval = $_POST['approval'];
+            $model->approval_at = time();
         }
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
-            // Письмо сотруднику
-            if ($model->is_approval){
-                $model->sendEmailUserManagerSuccess(); // Если успешно
-            }else{
-                $model->sendEmailUserManagerDanger(); // Если не успешно
-            }
+            // Если успешно согласовано
+            if ($model->approval==Agreement::APPROVAL_YES) {
+                Agreement::sendEmailManager($model->order_id); // Письмо следующем руководителю
+                $model->sendEmailUserManagerSuccess(); // Письмо сотруднику, что соглссовано
+            } else {
+                $model->sendEmailUserManagerDanger(); // Письмо сотруднику, что не согласовано
 
-            // Письмо-согласования следующему руководителю по цеппочке
-            Agreement::sendEmailManager($model->order_id);
+                // Ставим статус, что заявка не согласована
+                $order = Order::findOne($model->order_id);
+                $order->status_id=Status::findOne(['code'=>'MANAGER_NO'])->id;
+                $order->save();
+            }
 
             return $this->redirect(['view', 'id' => $model->id]);
         }
+
+        $order = Order::findOne($model->order_id);
+        $user = User::findOne($model->created_by);
+        $agreementSearchModel = new AgreementSearch();
+        $agreementDataProvider = $agreementSearchModel->search(['AgreementSearch'=>['order_id' => $order->id]]);
         return $this->render('check', [
             'model' => $model,
+            'order' => $order,
+            'user'  => $user,
+            'agreementDataProvider'=>$agreementDataProvider
         ]);
     }
 
     /**
      * Deletes an existing Agreement model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
+     *
      * @param integer $id
+     *
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -145,7 +170,9 @@ class AgreementController extends Controller
     /**
      * Finds the Agreement model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
+     *
      * @param integer $id
+     *
      * @return Agreement the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */

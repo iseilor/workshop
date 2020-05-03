@@ -5,7 +5,9 @@ namespace app\modules\jk\models;
 use app\models\Model;
 use app\modules\jk\Module;
 use Yii;
+use yii\helpers\ArrayHelper;
 use yii\helpers\FileHelper;
+use yii\helpers\Html;
 use yii\web\UploadedFile;
 
 /**
@@ -22,6 +24,7 @@ use yii\web\UploadedFile;
  *
  * @property boolean  $is_participate
  * @property boolean  $is_mortgage
+ * @property int      $type
  *
  * @property int      $salary
  * @property int      $jp_type
@@ -49,6 +52,10 @@ use yii\web\UploadedFile;
 class Order extends Model
 {
 
+    const TYPE_PERCENT = 1;
+
+    const TYPE_ZAIM = 2;
+
     public $file_agree_personal_data_form;
 
     public $file_family_big_form;
@@ -70,6 +77,10 @@ class Order extends Model
     public $ipoteka_file_spravka_form = '';
 
     public $ipoteka_file_bank_approval_form = '';
+
+    /**
+     * @var mixed|null
+     */
 
     /**
      * {@inheritdoc}
@@ -151,6 +162,10 @@ class Order extends Model
             'mortgage_file' => Module::t('module', 'Mortgage File'),
             'is_participate' => Module::t('module', 'Is Participate'),
             'participateLabel' => Module::t('module', 'Is Participate'),
+            'type'=>Module::t('order','Type'),
+            'typeName'=>Module::t('order','Type'),
+            'statusName'=>Module::t('order','Status'),
+
 
             // Семья
             'social_id' => Module::t('order', 'Social'),
@@ -416,12 +431,53 @@ class Order extends Model
     // Статус заявки
     public function getStatus()
     {
-        return $this->hasOne(OrderStatus::className(), ['id' => 'status_id']);
+        return $this->hasOne(Status::class, ['id' => 'status_id']);
+    }
+
+    // Название статуса
+    public function getStatusName(){
+        return $this->status->title;
+    }
+
+    // Шильдик статуса
+    public function getStatusBadge(){
+        return Html::tag('<span>', $this->statusName, ['class' => 'badge bg-'.$this->status->color,]);
     }
 
     // Социальная категория
     public function getSocial()
     {
-        return $this->hasOne(Social::className(), ['id' => 'social_id']);
+        return $this->hasOne(Social::class, ['id' => 'social_id']);
+    }
+
+    // Типы заявок
+    public static function getTypesArray()
+    {
+        return [
+            self::TYPE_PERCENT => 'Проценты',
+            self::TYPE_ZAIM => 'Займ',
+        ];
+    }
+
+    // Наименование типа заявки
+    public function getTypeName()
+    {
+        return ArrayHelper::getValue(self::getTypesArray(), $this->type);
+    }
+
+    // Предварительное сохранение
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+
+            // Сохраняем тип заявки
+            if ($this->is_mortgage) {
+                $this->type = self::TYPE_PERCENT;
+            } else {
+                $this->type = self::TYPE_ZAIM;
+            }
+            return true;
+        }
+        return false;
     }
 }

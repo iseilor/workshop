@@ -191,19 +191,19 @@ use yii\widgets\Menu;
                 } else {
                     echo Html::a(
                         '<i class="fas fa-briefcase"></i> Мой кабинет',
-                        Url::home() . 'user/profile',
+                        Url::home() . 'user/cabinet',
                         ['class' => 'dropdown-item']
                     );
                     echo '<div class="dropdown-divider"></div>';
                     echo Html::a(
                         '<i class="fas fa-user-circle"></i> Мой профиль',
-                        Url::home() . 'user/profile/update',
+                        Url::home() . 'user/profile',
                         ['class' => 'dropdown-item']
                     );
                     echo '<div class="dropdown-divider"></div>';
                     echo Html::a(
                         Icon::show('id-card').'Моя карточка',
-                        Url::to( '/user/'.Yii::$app->user->identity->getId()),
+                        Url::to( '/user/'.Yii::$app->user->identity->getId(),true),
                         ['class' => 'dropdown-item']
                     );
 

@@ -27,7 +27,7 @@ class DefaultController extends Controller
         return [
             'access' => [
                 'only' => ['feedback'],
-                'class' => AccessControl::className(),
+                'class' => AccessControl::class,
                 'rules' => [
                     [
                         'actions' => ['feedback'],

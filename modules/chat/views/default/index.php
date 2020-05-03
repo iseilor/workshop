@@ -164,7 +164,7 @@ $(document).ready(function() {
     });
     
     // Обновление списка сообщений
-    setInterval(function(){
+    /*setInterval(function(){
          $.pjax.reload({
             container: '#pjax-messages',
             async: true,
@@ -172,7 +172,7 @@ $(document).ready(function() {
          }).done(function() {
             //toastr["success"]("Информация по кандидату успешно обновлена", "Успех");
          });
-    }, 1000);
+    }, 1000);*/
 });
 JS;
 $this->registerJs($script, yii\web\View::POS_READY);

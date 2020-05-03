@@ -1,21 +1,21 @@
 <?php
 
-use app\components\grid\ActionColumn;
-use app\modules\jk\Module;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 /* @var $this yii\web\View */
-/* @var $searchModel app\modules\jk\models\OrderStatusSearch */
+/* @var $searchModel app\modules\jk\models\MessagesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Module::t('module', 'Order Statuses');
+$this->title = Yii::t('app', 'Messages');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="order-status-index">
+<div class="messages-index">
+
+    <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Module::t('module', 'Create Order Status'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Create Messages'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php Pjax::begin(); ?>
@@ -28,20 +28,17 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'created_at:datetime',
+            'created_at',
             'created_by',
-            //'updated_at',
-            //'updated_by',
+            'updated_at',
+            'updated_by',
             //'deleted_at',
             //'deleted_by',
-            'title',
-            'progress',
-            'color',
-            //'description:ntext',
+            //'user_id',
+            //'message:ntext',
+            //'view_at',
 
-            [
-                'class' => ActionColumn::className(),
-            ]
+            ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
 

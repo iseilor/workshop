@@ -6,6 +6,8 @@ use kartik\icons\Icon;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
+use yii\widgets\ListView;
+use yii\widgets\Pjax;
 
 /* @var $model app\modules\jk\models\Percent */
 /* @var $mins app\modules\jk\models\Min */
@@ -44,11 +46,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
 
             </div>
-            <div class="card card-primary">
+            <div class="card card-primary d-none">
                 <div class="card-header">
                     <h3 class="card-title">Полезная информация</h3>
                 </div>
-                <!-- /.card-header -->
                 <div class="card-body">
                     <strong><i class="fas fa-book mr-1"></i> Education</strong>
 
@@ -80,7 +81,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
                 </div>
-                <!-- /.card-body -->
             </div>
         </div>
         <div class="col-md-9 h-100">
@@ -91,37 +91,36 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
                 <div class="card-body card-primary cardutline direct-chat direct-chat-primary">
                     <div class="direct-chat-messages h-100" id="messages">
-                        <!-- Message. Default to the left -->
-                        <div class="direct-chat-msg">
-                            <div class="direct-chat-infos clearfix">
-                                <span class="direct-chat-name float-left">Alexander Pierce</span>
-                                <span class="direct-chat-timestamp float-right">23 Jan 2:00 pm</span>
-                            </div>
+                        <?php
 
-                            <img class="direct-chat-img" src="<?= Url::home() ?>img/main/team/8.jpg" alt="Message User Image">
-                            <!-- /.direct-chat-img -->
-                            <div class="direct-chat-text">
-                                Is this template really for free? That's unbelievable!
-                            </div>
-                            <!-- /.direct-chat-text -->
-                        </div>
-                        <!-- /.direct-chat-msg -->
+                        $searchModel = new \app\modules\jk\models\MessagesSearch();
+                        $dataProvider = $searchModel->search(['where' => 'user_id=' . Yii::$app->user->identity->getId(), 'order' => ['id' => SORT_DESC], 'limit' => 1000]);
 
-                        <!-- Message to the right -->
-                        <div class="direct-chat-msg right">
-                            <div class="direct-chat-infos clearfix">
-                                <span class="direct-chat-name float-right">Sarah Bullock</span>
-                                <span class="direct-chat-timestamp float-left">23 Jan 2:05 pm</span>
-                            </div>
-                            <!-- /.direct-chat-infos -->
-                            <img class="direct-chat-img" src="<?= Url::home() ?>img/main/team/8.jpg" alt="Message User Image">
-                            <!-- /.direct-chat-img -->
-                            <div class="direct-chat-text">
-                                You better believe it!
-                            </div>
-                            <!-- /.direct-chat-text -->
-                        </div>
-                        <!-- /.direct-chat-msg -->
+                        /*$dataProvider = new ActiveDataProvider([
+                            'query' =>Chat::find()->orderBy(['created_at'=>SORT_DESC]),
+                            'totalCount' => 1000,
+                            'pagination' => [
+                                'pageSize' =>1000,
+                            ],
+                        ]);*/
+
+
+                        Pjax::begin(['id' => 'pjax-messages']);
+                        echo ListView::widget(
+                            [
+                                'dataProvider' => $dataProvider,
+                                'itemView' => 'message',
+                                'layout' => '{items}',
+                                'options' => [
+                                    'tag' => false,
+                                ],
+                                'itemOptions' => [
+                                    'tag' => false,
+                                ],
+                            ]
+                        );
+                        Pjax::end();
+                        ?>
                     </div>
                 </div>
                 <div class="card-footer" style="display: block;">
@@ -147,21 +146,34 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?php
 $js = <<<JS
-        $('form').on('beforeSubmit', function(){
-        var data = $(this).serialize();
-        $.ajax({
-            url: this.action,
-            type: 'POST',
-            data: data,
-            success: function(res){
-                $('#messages').html(res);
-            },
-            error: function(){
-                alert('Error!');
-            }
+
+        // Отравка сообщения
+        $('#chat-form').on('beforeSubmit', function(){
+            $.ajax({
+                url: $(this).attr('action'),
+                type: 'POST',
+                data: $(this).serialize(),
+                success: function (result) {
+                    $('#chat-form').find('input').val('');
+                    $("html, body").animate({ scrollTop: $(document).height() }, "slow");
+                },
+                error: function () {
+                    alert('Ошибка')
+                }
+            });
+            return false;
         });
-        return false;
-        });
+
+        // Обновление списка сообщений
+        setInterval(function(){
+             $.pjax.reload({
+                container: '#pjax-messages',
+                async: true,
+                timeout: false
+             }).done(function() {
+                
+             });
+        }, 1000);
 JS;
 $this->registerJs($js);
 ?>

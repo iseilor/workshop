@@ -19,4 +19,10 @@ use yii\helpers\Url;
     <li><strong>Подразделение:</strong> <?= $user->work_department ?></li>
     <li><strong>Заявка:</strong> <?= Html::a($agreement->order_id,  Url::base(true).Url::to('/jk/order/' . $agreement->order_id)) ?></li>
 </ul>
-<p><?= Html::a('Согласовать заявку', Url::base(true).Url::to('/jk/agreement/'.$agreement->id.'/check')) ?></p>
+<p>
+    <?= Html::a('Согласовать заявку', Url::base(true).Url::to('/jk/agreement/'.$agreement->id.'/check')) ?>
+</p>
+<p>
+    Другие заявки, ожидающие вашего согласования, вы можете посмотреть на портале в личном кабинете руководителя
+    <?= Html::a('Личный кабинет', Url::base(true).Url::to('/user/cabinet/')) ?>
+</p>

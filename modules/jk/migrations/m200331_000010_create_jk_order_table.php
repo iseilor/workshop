@@ -31,6 +31,8 @@ class m200331_000010_create_jk_order_table extends Migration
                 'deleted_at' => $this->integer(),
                 'deleted_by' => $this->integer(),
 
+
+
                 'percent_count' => $this->integer(),
                 'percent_years' => $this->integer(),
                 'zaim_count' => $this->integer(),
@@ -42,10 +44,11 @@ class m200331_000010_create_jk_order_table extends Migration
 
                 // Параметры
                 'is_agree_personal_data' => $this->boolean()->notNull(),                 // Обработка персональных данных
-                'file_agree_personal_data' => $this->string(),                // Файл оброботки персональных данных
-                'is_participate' => $this->boolean(),                // Ранее участвовали
-                'is_mortgage' => $this->boolean(),                // Оформлена ипотека
-                'mortgage_file' => $this->string(),                // Кредитный договор с акктуальным графиком платежей
+                'file_agree_personal_data' => $this->string(),                           // Файл оброботки персональных данных
+                'is_participate' => $this->boolean(),                                    // Ранее участвовали
+                'is_mortgage' => $this->boolean(),                                       // Оформлена ипотека
+                'mortgage_file' => $this->string(),                                      // Кредитный договор с акктуальным графиком платежей
+                'type'=>$this->integer()->notNull(),                                    // Тип заявки
 
                 // Семья
                 'social_id' => $this->integer(),                // Социальная категория
@@ -103,14 +106,12 @@ class m200331_000010_create_jk_order_table extends Migration
 
                 // Ипотека.Файлы
                 'ipoteka_kredit_dogovor_file' => $this->string(),                // Кредитный договор с акктуальным графиком платежей
-                'ipoteka_dogovor_file' => $this->string(),                // Договор ипотеки
-                'ipoteka_grafic_first_file' => $this->string(),                // Первоначальный График платежей
-                'ipoteka_grafic_now_file' => $this->string(),                // Акктуальный график платежей
-                'ipoteka_refenance_file' => $this->string(),                // Договор рефинансирования ипотеки
-                'ipoteka_spravka_file' => $this->string(),                // Справка из банка об актуальной ставке договора рефинансирования
-
-                'ipoteka_bank_approval_file' => $this->string(),                // Одобрение из банка
-
+                'ipoteka_file_dogovor' => $this->string(),                // Договор ипотеки
+                'ipoteka_file_grafic_first' => $this->string(),                // Первоначальный График платежей
+                'ipoteka_file_grafic_now' => $this->string(),                // Акктуальный график платежей
+                'ipoteka_file_refenance' => $this->string(),                // Договор рефинансирования ипотеки
+                'ipoteka_file_spravka' => $this->string(),                // Справка из банка об актуальной ставке договора рефинансирования
+                'ipoteka_file_bank_approval' => $this->string(),                // Одобрение из банка
 
                 // Финансы
                 'money_oklad' => $this->double(),                // Оклад

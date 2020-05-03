@@ -11,14 +11,16 @@ use app\modules\jk\models\Agreement;
  */
 class AgreementSearch extends Agreement
 {
+    public $approvalName;
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['id', 'created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by', 'order_id', 'receipt_at', 'approval_at'], 'integer'],
-            [['user_id', 'comment'], 'safe'],
+            [['id', 'created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at',
+                'deleted_by', 'order_id', 'receipt_at', 'approval_at','user_id','approval'], 'integer'],
+            [[ 'comment','approvalName'], 'safe'],
         ];
     }
 
@@ -68,10 +70,13 @@ class AgreementSearch extends Agreement
             'order_id' => $this->order_id,
             'receipt_at' => $this->receipt_at,
             'approval_at' => $this->approval_at,
+            'user_id'=>$this->user_id,
+            'approval'=>$this->approval
         ]);
 
-        $query->andFilterWhere(['like', 'user_id', $this->user_id])
-            ->andFilterWhere(['like', 'comment', $this->comment]);
+        $query ->andFilterWhere(['like', 'comment', $this->comment]);
+
+        //$query ->andFilterWhere(['>', 'receipt_at', 0]);
 
         return $dataProvider;
     }

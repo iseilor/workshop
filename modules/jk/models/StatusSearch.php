@@ -4,12 +4,12 @@ namespace app\modules\jk\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\modules\jk\models\OrderStatus;
+use app\modules\jk\models\Status;
 
 /**
  * OrderStatusSearch represents the model behind the search form of `app\modules\jk\models\OrderStatus`.
  */
-class OrderStatusSearch extends OrderStatus
+class StatusSearch extends Status
 {
     /**
      * {@inheritdoc}
@@ -18,7 +18,7 @@ class OrderStatusSearch extends OrderStatus
     {
         return [
             [['id', 'created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by', 'progress'], 'integer'],
-            [['title', 'color', 'description'], 'safe'],
+            [['title', 'description'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class OrderStatusSearch extends OrderStatus
      */
     public function search($params)
     {
-        $query = OrderStatus::find();
+        $query = Status::find();
 
         // add conditions that should always apply here
 
@@ -69,7 +69,6 @@ class OrderStatusSearch extends OrderStatus
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'color', $this->color])
             ->andFilterWhere(['like', 'description', $this->description]);
 
         return $dataProvider;

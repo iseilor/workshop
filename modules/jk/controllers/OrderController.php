@@ -5,6 +5,7 @@ namespace app\modules\jk\controllers;
 use app\modules\jk\models\Agreement;
 use app\modules\jk\models\OrderStage;
 use app\modules\jk\models\OrderStageSearch;
+use app\modules\jk\models\Status;
 use app\modules\jk\models\Stop;
 use app\modules\jk\models\ZaimSearch;
 use app\modules\jk\Module;
@@ -15,6 +16,7 @@ use Yii;
 use app\modules\jk\models\Order;
 use app\modules\jk\models\OrderSearch;
 use yii\filters\AccessControl;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -52,7 +54,7 @@ class OrderController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
-            'access' => [
+            /*'access' => [
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
@@ -60,7 +62,7 @@ class OrderController extends Controller
                         'roles' => ['@'],
                     ],
                 ],
-            ],
+            ],*/
         ];
     }
 
@@ -156,14 +158,11 @@ class OrderController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        //$userChildSearchModel = new UserChildSearch();
-        //$userChildDataProvider = $userChildSearchModel->search(Yii::$app->request->queryParams);
-
         return $this->render(
             'create',
             [
                 'model' => $model,
-                //'userChildDataProvider'=>$userChildDataProvider
+
             ]
         );
     }
@@ -207,8 +206,6 @@ class OrderController extends Controller
             }
         }
 
-        //$userChildSearchModel = new UserChildSearch();
-        //$userChildDataProvider = $userChildSearchModel->search(Yii::$app->request->queryParams);
 
         return $this->render(
             'update',
@@ -351,15 +348,17 @@ class OrderController extends Controller
         return true;
     }
 
-    // Отправляем письмо руководителю
+    // Запускаем процесс согласования заявки
     public function actionManager($id)
     {
         Agreement::sendEmailManager($id);
-        return $this->render(
-            'manager',
-            [
-                'model' => $this->findModel($id),
-            ]
-        );
+        $order=Order::findOne($id);
+        $order->status_id=Status::findOne(['code'=>'MANAGER_WAIT'])->id;
+        $order->save();
+
+        Yii::$app->session->setFlash('success', "Начат процесс согласования вашей заявки на оказание материальной помощи<br/>
+        Вы будите получать email-уведомления, а также можете смотреть через личный кабинет, у кого из руководителей заявка в данный момент находится на согласовании");
+        return $this->redirect(['/jk/order/view/','id'=>$id]);
+
     }
 }

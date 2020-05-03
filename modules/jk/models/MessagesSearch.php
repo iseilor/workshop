@@ -17,7 +17,7 @@ class MessagesSearch extends Messages
     public function rules()
     {
         return [
-            [['id', 'created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by', 'user_id', 'view_at'], 'integer'],
+            [['id', 'created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by', 'user_id'], 'integer'],
             [['message'], 'safe'],
         ];
     }
@@ -66,7 +66,6 @@ class MessagesSearch extends Messages
             'deleted_at' => $this->deleted_at,
             'deleted_by' => $this->deleted_by,
             'user_id' => $this->user_id,
-            'view_at' => $this->view_at,
         ]);
 
         $query->andFilterWhere(['like', 'message', $this->message]);

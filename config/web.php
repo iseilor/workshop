@@ -82,6 +82,9 @@ $config = [
                 ],
             ],
         ],
+
+
+
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'm71YjtB7X51bk2lS2s7sHiedVrgUg2SN',

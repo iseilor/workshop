@@ -2,7 +2,7 @@
 
 use app\components\grid\ActionColumn;
 use app\components\grid\LinkColumn;
-use app\modules\jk\models\OrderStatus;
+use app\modules\jk\models\Status;
 use app\modules\jk\Module;
 use kartik\icons\Icon;
 use yii\helpers\ArrayHelper;
@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Админка', 'url' => ['/jk/ad
 $this->title = Module::t('stop', 'Stops');
 $this->params['breadcrumbs'][] = $this->title;
 
-$orderStatuses = OrderStatus::find()->all();
+$orderStatuses = Status::find()->all();
 $orderStatuses = ArrayHelper::map($orderStatuses, 'id', 'title');
 ?>
 

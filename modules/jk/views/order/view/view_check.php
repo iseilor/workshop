@@ -46,36 +46,6 @@ $percent = number_format( $countApporoval/$countAll * 100, 0)
         'user.email:email',
         'receipt_at:datetime',
         'approval_at:datetime',
-        'approvalLabel:html'
-        /*[
-            'class' => LinkColumn::class,
-            'attribute' => 'fio',
-            'url' => function ($data) {
-                return Url::to(['/user/child/' . $data->id]);
-            },
-        ],
-        [
-            'attribute'=>'gender',
-            'content'=>function($data){
-                return Child::getGenderList()[$data->gender];
-            }
-        ],
-        'date:date',
-        'age',
-        'passportLink:html',
-        'birthLink:html',
-        'personalDataLink:html',
-        [
-            'attribute' => 'is_invalid',
-            'content'=>function($data){
-                return (isset($data->is_invalid) && $data->is_invalid) ? '<span class="badge badge-danger">Да</span>' : 'Нет';
-            }
-        ],
-        [
-            'attribute' => 'is_study',
-            'content'=>function($data){
-                return (isset($data->is_study) && $data->is_study) ? '<span class="badge badge-info">Да</span>' : 'Нет';
-            }
-        ],*/
+        'approvalBadge:html'
     ],
 ]); ?>

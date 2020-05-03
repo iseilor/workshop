@@ -3,8 +3,8 @@
 namespace app\modules\jk\controllers;
 
 use Yii;
-use app\modules\jk\models\OrderStatus;
-use app\modules\jk\models\OrderStatusSearch;
+use app\modules\jk\models\Status;
+use app\modules\jk\models\StatusSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -12,7 +12,7 @@ use yii\filters\VerbFilter;
 /**
  * OrderStatusController implements the CRUD actions for OrderStatus model.
  */
-class OrderStatusController extends Controller
+class StatusController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -35,7 +35,7 @@ class OrderStatusController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new OrderStatusSearch();
+        $searchModel = new StatusSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -64,7 +64,7 @@ class OrderStatusController extends Controller
      */
     public function actionCreate()
     {
-        $model = new OrderStatus();
+        $model = new Status();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -112,13 +112,15 @@ class OrderStatusController extends Controller
     /**
      * Finds the OrderStatus model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
+     *
      * @param integer $id
-     * @return OrderStatus the loaded model
+     *
+     * @return Status the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = OrderStatus::findOne($id)) !== null) {
+        if (($model = Status::findOne($id)) !== null) {
             return $model;
         }
 

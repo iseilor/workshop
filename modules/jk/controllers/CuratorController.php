@@ -29,19 +29,11 @@ class CuratorController extends Controller
     public function actionSend(){
         $model = new Messages();
         $model->load(Yii::$app->request->post());
-        $model->user_id = 1;
+        $model->user_id = Yii::$app->user->identity->id;
+        $model->is_curator = false;
         $model->save();
-        return $this->actionList();
+        return false;
     }
 
-    // Получение списка сообщений
-    public function actionList(){
-        $searchModel = new MessagesSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        return $this->renderPartial('messages', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }
 
 }

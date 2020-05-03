@@ -6,6 +6,8 @@ use app\models\Model;
 use app\modules\jk\Module;
 use app\modules\user\models\User;
 use Yii;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
 
 /**
  * This is the model class for table "jk_order_agreement".
@@ -21,11 +23,17 @@ use Yii;
  * @property string       $user_id
  * @property int|null     $receipt_at
  * @property int|null     $approval_at
- * @property boolean|null $is_approval
+ * @property boolean|null $approval
  * @property string|null  $comment
  */
 class Agreement extends Model
 {
+
+    const APPROVAL_YES = 1;
+
+    const APPROVAL_WAIT = 0;
+
+    const APPROVAL_NO = -1;
 
     /**
      * {@inheritdoc}
@@ -42,7 +50,7 @@ class Agreement extends Model
     {
         return [
             [['order_id', 'user_id'], 'required'],
-            [['is_approval','user_id', 'order_id', 'receipt_at', 'approval_at'], 'integer'],
+            [['approval', 'user_id', 'order_id', 'receipt_at', 'approval_at'], 'integer'],
             [['comment'], 'string'],
         ];
     }
@@ -52,34 +60,66 @@ class Agreement extends Model
      */
     public function attributeLabels()
     {
-        return [
-            'id' => Yii::t('app', 'ID'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'created_by' => Yii::t('app', 'Created By'),
-            'updated_at' => Yii::t('app', 'Updated At'),
-            'updated_by' => Yii::t('app', 'Updated By'),
-            'deleted_at' => Yii::t('app', 'Deleted At'),
-            'deleted_by' => Yii::t('app', 'Deleted By'),
 
-            'order_id' => Yii::t('app', 'Order ID'),
-            'user_id' => Yii::t('app', 'User ID'),
-            'receipt_at' => Module::t('agreement', 'Receipt At'),
-            'approval_at' => Module::t('agreement', 'Approval At'),
-            'is_approval' => Module::t('agreement', 'Is Approval'),
-            'approvalLabel'=>Module::t('agreement', 'Is Approval'),
-            'comment' => Yii::t('app', 'Comment'),
-        ];
+        return ArrayHelper::merge(
+            parent::attributeLabels(),
+            [
+                'created_at' => Yii::t('app', 'Created At'),
+                'createdUserLink' => Module::t('agreement', 'Created By'),
+
+                'order_id' => Module::t('agreement', 'Order ID'),
+                'user' => Module::t('agreement', 'User'),
+                'user_id' => Module::t('agreement', 'User'),
+                'receipt_at' => Module::t('agreement', 'Receipt At'),
+                'approval_at' => Module::t('agreement', 'Approval At'),
+                'approval' => Module::t('agreement', 'Approval'),
+                'approvalLabel' => Module::t('agreement', 'Approval'),
+                'approvalBadge' => Module::t('agreement', 'Approval'),
+                'comment' => Yii::t('app', 'Comment'),
+            ]
+        );
     }
 
     // Цветной статус согласования
     public function getApprovalLabel()
     {
-        if (isset($this->is_approval)) {
-            if ($this->is_approval == 1) {
-                return '<span class="badge bg-success" title="'.$this->comment.'">Согласовано</span>';
+        if (isset($this->approval)) {
+            if ($this->approval == 1) {
+                return '<span class="badge bg-success" title="' . $this->comment . '">Согласовано</span>';
             } else {
-                return '<span class="badge bg-danger" title="'.$this->comment.'">Не согласовано</span>';
+                return '<span class="badge bg-danger" title="' . $this->comment . '">Не согласовано</span>';
             }
+        }
+    }
+
+    // Типы согласований
+    public static function getApprovalsArray()
+    {
+        return [
+            self::APPROVAL_WAIT => 'На согласовании',
+            self::APPROVAL_YES => 'Согласовано',
+            self::APPROVAL_NO => 'Не согласовано',
+        ];
+    }
+
+    // Наименование типа заявки
+    public function getApprovalName()
+    {
+        return ArrayHelper::getValue(self::getApprovalsArray(), $this->approval);
+    }
+
+    // Цветная плашка согласования
+    public function getApprovalBadge()
+    {
+        if (isset($this->approval)) {
+            $cssCLasses = [
+                Agreement::APPROVAL_WAIT => 'warning',
+                Agreement::APPROVAL_YES => 'success',
+                Agreement::APPROVAL_NO => 'danger',
+            ];
+            return Html::tag('span', $this->getApprovalName(), ['class' => 'badge bg-' . $cssCLasses[$this->approval]]);
+        } else {
+            return false;
         }
     }
 
@@ -99,7 +139,14 @@ class Agreement extends Model
         $userOrder = User::findOne($order->created_by);
         $managerList = $userOrder->getManagerList(); // Получить цепочку согласования
         foreach ($managerList as $item) {
-            $agreement= new Agreement();
+
+            // Строим цепочку до Кима
+            $manager = User::findOne($item);
+            if ($manager->fio == 'Ким Дмитрий Матвеевич') {
+                break;
+            }
+
+            $agreement = new Agreement();
             $agreement->user_id = $item;
             $agreement->order_id = $order_id;
             $agreement->save();
@@ -113,7 +160,8 @@ class Agreement extends Model
     }
 
     // Отправляем письмо сотруднику, что один из руководителей согласовал его заявку
-    public function sendEmailUserManagerSuccess(){
+    public function sendEmailUserManagerSuccess()
+    {
         $manager = User::findOne($this->user_id);
         $user = User::findOne($this->created_by);
         Yii::$app->mailer->compose(
@@ -126,12 +174,13 @@ class Agreement extends Model
         )
             ->setFrom('workshop@tr.ru')
             ->setTo($user->email)
-            ->setSubject('WORKSHOP / Жилищная программа / Заявка №'.$this->order_id.' / Согласована '.$manager->fio)
+            ->setSubject('WORKSHOP / Жилищная программа / Заявка №' . $this->order_id . ' / Согласована ' . $manager->fio)
             ->send();
     }
 
     // Отправляем письмо сотруднику, что один из руководителей не согласовал его заявку
-    public function sendEmailUserManagerDanger(){
+    public function sendEmailUserManagerDanger()
+    {
         $manager = User::findOne($this->user_id);
         $user = User::findOne($this->created_by);
         Yii::$app->mailer->compose(
@@ -144,21 +193,23 @@ class Agreement extends Model
         )
             ->setFrom('workshop@tr.ru')
             ->setTo($user->email)
-            ->setSubject('WORKSHOP / Жилищная программа / Заявка №'.$this->order_id.' / НЕ Согласована '.$manager->fio)
+            ->setSubject('WORKSHOP / Жилищная программа / Заявка №' . $this->order_id . ' / НЕ Согласована ' . $manager->fio)
             ->send();
     }
 
 
     // Запускаем цепочку отравки сообщение руководителям для согласования
-    public static function sendEmailManager($order_id){
+    public static function sendEmailManager($order_id)
+    {
         $order = Order::findOne($order_id);
         $user = User::findOne($order->created_by);
-        $agreement = Agreement::find()->where(['order_id'=>$order_id,'approval_at'=>null])->one();
+        $agreement = Agreement::find()->where(['order_id' => $order_id, 'approval_at' => null])->one();
 
         // Отправляем письмо следующему по цепочке руководителю
         if ($agreement) {
             $manager = User::findOne($agreement->user_id);
-            $agreement->receipt_at=time(); // Ставим дату, когда письмо было передано руководителю
+            $agreement->receipt_at = time(); // Ставим дату, когда письмо было передано руководителю
+            $agreement->approval = Agreement::APPROVAL_WAIT;
             $agreement->save();
             Yii::$app->mailer->compose(
                 '@app/modules/jk/mails/manager/manager',
@@ -169,21 +220,27 @@ class Agreement extends Model
                 ]
             )
                 ->setFrom('workshop@tr.ru')
-                ->setTo($user->email)
-                ->setSubject('WORKSHOP / Жилищная программа / Заявка №'.$order_id.' / Согласование руководителем')
+                ->setTo($user->email) // TODO: Пока отправляем самому же сотруднику, просто в письме обращение к руководителю
+                ->setSubject('WORKSHOP / Жилищная программа / Заявка №' . $order_id . ' / Руководителю на согласование')
                 ->send();
-        }else{
+        } else {
+            // Ставим статус, что согласование руководителями завершено
+            $order = Order::findOne($order_id);
+            $order->status_id = Status::findOne(['code' => 'MANAGER_NO'])->id;
+            $order->save();
+
             Yii::$app->mailer->compose(
                 '@app/modules/jk/mails/manager/end',
                 [
                     'user' => $user,
-                    'order' => $order
+                    'order' => $order,
                 ]
             )
                 ->setFrom('workshop@tr.ru')
                 ->setTo($user->email)
-                ->setSubject('WORKSHOP / Жилищная программа / Заявка №'.$order_id.' / Согласование руководителями завершено')
+                ->setSubject('WORKSHOP / Жилищная программа / Заявка №' . $order_id . ' / Согласование руководителями завершено')
                 ->send();
         }
     }
+
 }

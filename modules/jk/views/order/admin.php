@@ -2,7 +2,7 @@
 
 use app\components\grid\ActionColumn;
 use app\components\grid\LinkColumn;
-use app\modules\jk\models\OrderStatus;
+use app\modules\jk\models\Status;
 use app\modules\jk\Module;
 use yii\helpers\Html;
 use yii\grid\GridView;
@@ -72,7 +72,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'label' => 'Статус',
                         'format' => 'raw',
                         'value' => function ($data) {
-                            $status = OrderStatus::findOne($data['status_id']);
+                            $status = Status::findOne($data['status_id']);
                             return $status->getStatusLabel();
                         }
                     ],
@@ -80,7 +80,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'label' => 'Прогресс',
                         'format' => 'raw',
                         'value' => function ($data) {
-                            $status = OrderStatus::findOne($data['status_id']);
+                            $status = Status::findOne($data['status_id']);
                             return $status->getProgressBar();
                         }
                     ],

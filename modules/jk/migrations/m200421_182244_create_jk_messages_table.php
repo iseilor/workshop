@@ -29,7 +29,7 @@ class m200421_182244_create_jk_messages_table extends Migration
 
             'user_id' => $this->integer()->notNull(),       // Сотрудник
             'message' => $this->text()->notNull(),          // Сообщение
-            'view_at' => $this->integer()                   // Просмотрено сообщение
+            'is_curator' => $this->boolean()->notNull()     // Куратор написал
         ], $tableOptions);
     }
 

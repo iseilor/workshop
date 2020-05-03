@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\jk\models\OrderStatus */
+/* @var $model app\modules\jk\models\Status */
 
 $this->title = Yii::t('app', 'Update Order Status: {name}', [
     'name' => $model->title,

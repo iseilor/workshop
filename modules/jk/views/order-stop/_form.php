@@ -1,6 +1,6 @@
 <?php
 
-use app\modules\jk\models\OrderStatus;
+use app\modules\jk\models\Status;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
@@ -16,7 +16,7 @@ use yii\widgets\ActiveForm;
         <div class="card card-primary">
             <div class="card-body">
                 <?php
-                $orderStatuses = OrderStatus::find()->all();
+                $orderStatuses = Status::find()->all();
                 $items = ArrayHelper::map($orderStatuses, 'id', 'title');
                 $params = ['prompt' => 'Выберите'];
                 echo $form->field($model, 'order_status_id')->dropDownList($items, $params);

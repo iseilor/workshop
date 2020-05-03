@@ -23,7 +23,7 @@ $script = <<< JS
                   success: function(data){
                         data = JSON.parse(data);
                         $.each(data,function(index, value){
-                            console.log(value.fio+': '+value.message);
+                            //console.log(value.fio+': '+value.message);
                             toastr["info"]("<strong>"+value.fio+"</strong>: "+value.message, "Чат");
                         });
                   }

@@ -6,7 +6,7 @@ use app\models\Model;
 use Yii;
 
 /**
- * This is the model class for table "jk_order_status".
+ * This is the model class for table "jk_status".
  *
  * @property int $id
  * @property int $created_at
@@ -21,14 +21,14 @@ use Yii;
  * @property string|null $color
  * @property string|null $description
  */
-class OrderStatus extends Model
+class Status extends Model
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'jk_order_status';
+        return 'jk_status';
     }
 
     /**
@@ -40,7 +40,7 @@ class OrderStatus extends Model
             [['created_at', 'created_by', 'title','title_long','icon'], 'required'],
             [['created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by', 'progress'], 'integer'],
             [['description'], 'string'],
-            [['title', 'color','long','icon'], 'string', 'max' => 255],
+            [['title','long','icon'], 'string', 'max' => 255],
         ];
     }
 
@@ -94,7 +94,7 @@ class OrderStatus extends Model
      */
     public function getProgressBar(){
         return '<div class="progress progress-sm" title="'.$this->description.'">
-                    <div class="progress-bar bg-'.$this->color.'" role="progressbar" aria-volumenow="' . $this->progress . '" aria-volumemin="0" aria-volumemax="100" style="width: ' . $this->progress . '%"></div>
+                    <div class="progress-bar bg-'.$this->color_id.'" role="progressbar" aria-volumenow="' . $this->progress . '" aria-volumemin="0" aria-volumemax="100" style="width: ' . $this->progress . '%"></div>
                 </div>
                 <small>' . $this->progress . '% выполнено</small>';
     }

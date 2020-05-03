@@ -3,7 +3,7 @@
 
 use app\components\grid\ActionColumn;
 use app\components\grid\LinkColumn;
-use app\modules\jk\models\OrderStatus;
+use app\modules\jk\models\Status;
 use kartik\icons\Icon;
 use yii\grid\GridView;
 use yii\helpers\Html;
@@ -27,7 +27,7 @@ use yii\helpers\Url; ?>
                 'label' => 'Статус',
                 'format' => 'raw',
                 'value' => function ($data) {
-                    $status = OrderStatus::findOne($data['status_id']);
+                    $status = Status::findOne($data['status_id']);
                     return $status->getStatusLabel();
                 }
             ],
@@ -35,7 +35,7 @@ use yii\helpers\Url; ?>
                 'label' => 'Прогресс',
                 'format' => 'raw',
                 'value' => function ($data) {
-                    $status = OrderStatus::findOne($data['status_id']);
+                    $status = Status::findOne($data['status_id']);
                     return $status->getProgressBar();
                 }
             ],

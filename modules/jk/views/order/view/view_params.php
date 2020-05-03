@@ -14,6 +14,7 @@ use yii\widgets\DetailView;
             'value' => $model->id,
         ],
         'created_at:datetime',
+        'typeName',
         [
             'label' => 'Статус',
             'format' => 'raw',

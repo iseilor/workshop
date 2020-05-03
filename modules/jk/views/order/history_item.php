@@ -1,12 +1,12 @@
 <?php
 
-use app\modules\jk\models\OrderStatus;
+use app\modules\jk\models\Status;
 use app\modules\user\models\User;
 use kartik\icons\Icon;
 
 /* @var $model app\modules\jk\models\OrderStage */
 
-$status = OrderStatus::findOne($model->status_id);
+$status = Status::findOne($model->status_id);
 $user = User::findOne($model->created_by);
 
 ?>

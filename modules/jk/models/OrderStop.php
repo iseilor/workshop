@@ -72,6 +72,6 @@ class OrderStop extends Model
 
     public function getOrderStatus()
     {
-        return $this->hasOne(OrderStatus::className(), ['id' => 'order_status_id']);
+        return $this->hasOne(Status::className(), ['id' => 'order_status_id']);
     }
 }

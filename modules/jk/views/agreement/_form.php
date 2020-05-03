@@ -16,7 +16,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'user_id')->textarea(['rows' => 6]) ?>
     <?= $form->field($model, 'receipt_at')->textInput() ?>
     <?= $form->field($model, 'approval_at')->textInput() ?>
-    <?= $form->field($model, 'is_approval')->textInput() ?>
+    <?= $form->field($model, 'approval')->textInput() ?>
     <?= $form->field($model, 'comment')->textarea(['rows' => 6]) ?>
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>

@@ -35,8 +35,8 @@ class Messages extends Model
     public function rules()
     {
         return [
-            [['user_id', 'message'], 'required'],
-            [['user_id', 'view_at'], 'integer'],
+            [['user_id', 'message','is_curator'], 'required'],
+            [['user_id'], 'integer'],
             [['message'], 'string'],
         ];
     }

@@ -5,7 +5,7 @@ namespace app\modules\jk\models;
 /**
  * This is the ActiveQuery class for [[OrderStatus]].
  *
- * @see OrderStatus
+ * @see Status
  */
 class OrderStatusQuery extends \yii\db\ActiveQuery
 {
@@ -16,7 +16,7 @@ class OrderStatusQuery extends \yii\db\ActiveQuery
 
     /**
      * {@inheritdoc}
-     * @return OrderStatus[]|array
+     * @return Status[]|array
      */
     public function all($db = null)
     {
@@ -25,7 +25,7 @@ class OrderStatusQuery extends \yii\db\ActiveQuery
 
     /**
      * {@inheritdoc}
-     * @return OrderStatus|array|null
+     * @return Status|array|null
      */
     public function one($db = null)
     {

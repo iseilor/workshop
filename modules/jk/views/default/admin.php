@@ -28,7 +28,7 @@ use yii\helpers\Url; ?>
                         <li><?=Html::a(Icon::show('wallet').'Займы',Url::to(['/jk/zaim/']))?></li>
                     </ul>
                 </li>
-                <li><?=Html::a(Icon::show('ruble-sign').'Заявки',Url::to(['/jk/order/']))?>
+                <li><?=Html::a(Icon::show('ruble-sign').'Все заявки',Url::to(['/jk/order/']))?>
                     <ul>
                         <li>Новые</li>
                         <li>В работе</li>
@@ -37,6 +37,7 @@ use yii\helpers\Url; ?>
                         <li>Отозваны</li>
                     </ul>
                 </li>
+                <li><?=Html::a(Icon::show('comments').'Сообщения куратору <span class="badge bg-danger">5</span>',Url::to(['/jk/messages']))?></li>
                 <li>Справочники
                     <ul>
                         <li><?=Html::a(Icon::show('list').'Статусы заявок',Url::to(['/jk/order-status']))?></li>
