@@ -78,6 +78,11 @@ class ChildController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
+        // Данные по адресу берём из родителя
+        $user = User::findOne(Yii::$app->user->identity->id);
+        $model->address_registration = $user->passport_registration;
+        $model->address_fact = $user->address_fact;
+
         return $this->render('create', [
             'model' => $model,
         ]);

@@ -49,11 +49,11 @@ class m200405_183301_create_user_child_table extends Migration
             'birth_date'=>$this->integer()->notNull(),
             'birth_department'=>$this->string()->notNull(),
             'birth_code'=>$this->string()->notNull(),
-            'birth_address'=>$this->string()->notNull(),
             'birth_file'=>$this->string(),
 
             // Проживание ребёнка
-            'address_registration'=>$this->string(),
+            'address_registration'=>$this->string()->notNull(),
+            'address_fact'=>$this->string()->notNull(),
             'registration_file'=>$this->string(),
             'address_mother_file'=>$this->string(),
             'address_father_file'=>$this->string(),

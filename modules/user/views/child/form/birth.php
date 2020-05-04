@@ -20,7 +20,6 @@ use yii\jui\DatePicker;
 ) ?>
 <?= $form->field($model, 'birth_department')->textInput(['maxlength' => true]) ?>
 <?= $form->field($model, 'birth_code')->textInput(['maxlength' => true]) ?>
-<?= $form->field($model, 'birth_address')->textInput(['maxlength' => true]) ?>
 <?= $form->field($model, 'birth_file_form', [
     'template' => getFileInputTemplate($model->birth_file, $model->attributeLabels()['birth_file'] . '.pdf'),
 ])->fileInput(['class' => 'custom-file-input']) ?>

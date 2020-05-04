@@ -6,6 +6,7 @@ use yii\helpers\Url;
 
 ?>
 <?= $form->field($model, 'address_registration')->textarea() ?>
+<?= $form->field($model, 'address_fact')->textarea() ?>
 
 <?= $form->field($model, 'registration_file_form', [
     'template' => getFileInputTemplate($model->registration_file,  'Свидетельство о регистрации.pdf'),

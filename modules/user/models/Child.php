@@ -34,8 +34,8 @@ use yii\web\UploadedFile;
  * @property ing         $birth_date
  * @property string      $birth_department
  * @property string      $birth_code
- * @property string      $birth_address
  * @property string      $birth_file
+ *
  *
  * @property string|null $passport_file
  * @property string|null $file_registration
@@ -45,6 +45,9 @@ use yii\web\UploadedFile;
  * @property string|null $file_address
  * @property string|null $file_ejd
  * @property string|null $file_personal
+ *
+ * @property string      $address_registration
+ * @property string      $address_fact
  *
  * @property int|null    $is_invalid
  * @property string|null $file_invalid
@@ -95,7 +98,7 @@ class Child extends Model
     public function rules()
     {
         return [
-            [['fio', 'gender', 'date', 'address_registration'], 'required'],
+            [['fio', 'gender', 'date', 'address_registration', 'address_fact'], 'required'],
             [['created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by', 'user_id', 'gender', 'is_invalid', 'is_study'], 'integer'],
             [['fio'], 'string', 'max' => 255],
             ['fio', 'match', 'pattern' => '~^(\p{L}|\p{Zs})+$~u'],
@@ -166,12 +169,12 @@ class Child extends Model
             'birth_date' => Module::t('child', 'Birth Date'),
             'birth_department' => Module::t('child', 'Birth Department'),
             'birth_code' => Module::t('child', 'Birth Code'),
-            'birth_address' => Module::t('child', 'Birth Address'),
             'birth_file' => Module::t('child', 'Birth File'),
             'birth_file_form' => Module::t('child', 'Birth File'),
 
             // Адрес
             'address_registration' => Module::t('child', 'Address Registration'),
+            'address_fact' => Module::t('child', 'Address Fact'),
             'registration_file' => Module::t('child', 'Registration File'),
             'registration_file_form' => Module::t('child', 'Registration File'),
             'address_mother_file' => Module::t('child', 'Address Mother'),
@@ -207,6 +210,14 @@ class Child extends Model
             // Обработка персональных данных
             'personalLink' => Module::t('child', 'File PD'),
             'file_personal_form' => Module::t('child', 'File Personal'),
+        ];
+    }
+
+    public function attributeHints()
+    {
+        return [
+            'address_registration' => 'Пример: 123456, г.Москва, ул.Ленина, д.1, кв.1',
+            'address_fact' => 'Пример: 123456, г.Москва, ул.Ленина, д.1, кв.1',
         ];
     }
 
