@@ -1,4 +1,4 @@
-<?= $form->field($model, 'is_study')->checkbox() ?>
+<?= $form->field($model, 'is_study')->checkbox()->hint($model->attributeHints()['is_study']) ?>
 <?= $form->field($model, 'file_study_form', [
     'options' => ['class' => (!$model->is_study) ? 'd-none':''],
     'template' => getFileInputTemplate($model->file_study, $model->attributeLabels()['file_study'] . '.pdf'),

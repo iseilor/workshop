@@ -6,12 +6,10 @@ use yii\helpers\Url;
 
 ?>
 <?= $form->field($model, 'address_registration')->textarea() ?>
-<?= $form->field($model, 'address_fact')->textarea() ?>
-
 <?= $form->field($model, 'registration_file_form', [
     'template' => getFileInputTemplate($model->registration_file,  'Свидетельство о регистрации.pdf'),
 ])->fileInput(['class' => 'custom-file-input']) ?>
-
+<?= $form->field($model, 'address_fact')->textarea() ?>
 <?= $form->field($model, 'address_mother_file_form', [
     'template' => getFileInputTemplate($model->address_mother_file,  'Заявление от матери.pdf'),
 ])->fileInput(['class' => 'custom-file-input'])->hint('Заявление составляются полностью от руки. '
@@ -26,4 +24,4 @@ use yii\helpers\Url;
 
 <?= $form->field($model, 'ejd_file_form', [
     'template' => getFileInputTemplate($model->ejd_file, $model->attributeLabels()['ejd_file'] . '.pdf'),
-])->fileInput(['class' => 'custom-file-input']) ?>
+])->fileInput(['class' => 'custom-file-input'])->hint($model->getAttributeHint('ejd_file_form')) ?>

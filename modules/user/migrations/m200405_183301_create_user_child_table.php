@@ -31,6 +31,14 @@ class m200405_183301_create_user_child_table extends Migration
             'fio'=> $this->string() . ' NOT NULL',
             'gender'=> $this->boolean() . ' NOT NULL',
             'date'=> $this->integer() . ' NOT NULL',
+
+            // Пасспорт
+            'passport_series'=>$this->string(),
+            'passport_number'=>$this->string(),
+            'passport_date'=>$this->integer(),
+            'passport_department'=>$this->text(),
+            'passport_code'=>$this->string(),
+            'passport_address'=>$this->text(),
             'passport_file'=>$this->string(),
 
             // Школьник/студент

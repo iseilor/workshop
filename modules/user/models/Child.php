@@ -104,8 +104,12 @@ class Child extends Model
             ['fio', 'match', 'pattern' => '~^(\p{L}|\p{Zs})+$~u'],
             [['date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'date'],
 
+            // Паспорт
+            [['passport_series', 'passport_number', 'passport_date', 'passport_department', 'passport_code','passport_address'], 'safe'],
+            [['passport_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'passport_date'],
+
             // Св-во о рождении
-            [['birth_series', 'birth_number', 'birth_date', 'birth_department', 'birth_code', 'birth_address'], 'required'],
+            [['birth_series', 'birth_number', 'birth_date', 'birth_department', 'birth_code'], 'required'],
             [['birth_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'birth_date'],
 
 
@@ -159,9 +163,15 @@ class Child extends Model
             'age' => Module::t('child', 'Age'),
 
             // Паспорт
-            'passport_file' => Module::t('child', 'Passport'),
-            'passport_file_form' => Module::t('child', 'Passport'),
-            'passportLink' => Module::t('child', 'Passport'),
+            'passport_series'=>Module::t('child', 'Passport Series'),
+            'passport_number'=>Module::t('child', 'Passport Number'),
+            'passport_date'=>Module::t('child', 'Passport Date'),
+            'passport_department'=>Module::t('child', 'Passport Department'),
+            'passport_code'=>Module::t('child', 'Passport Code'),
+            'passport_address'=>Module::t('child', 'Passport Address'),
+            'passport_file' => Module::t('child', 'Passport File'),
+            'passport_file_form' => Module::t('child', 'Passport File'),
+            'passportLink' => Module::t('child', 'Passport File'),
 
             // Св-во о рождении
             'birth_series' => Module::t('child', 'Birth Series'),
@@ -192,7 +202,6 @@ class Child extends Model
             'birthLink' => Module::t('child', 'File Birth'),
             'file_address_form' => Module::t('child', 'File Address'),
 
-
             // Инвалид
             'is_invalid' => Module::t('child', 'Is Invalid'),
             'file_invalid' => Module::t('child', 'File Invalid'),
@@ -216,8 +225,11 @@ class Child extends Model
     public function attributeHints()
     {
         return [
+            'is_study'=>'Дети в возрасте до 23 лет, обучающиеся в образовательном учреждении по очной форме обучения',
+            'is_invalid'=>'Дети старше 18 лет, ставшие инвалидами до достижения ими возраста 18 лет',
             'address_registration' => 'Пример: 123456, г.Москва, ул.Ленина, д.1, кв.1',
             'address_fact' => 'Пример: 123456, г.Москва, ул.Ленина, д.1, кв.1',
+            'ejd_file_form'=>'Если нет документа ЕЖД, то необходимо сюда прикрепить выписка из ДК, выписка из Лицевого счета и справку о составе семьи'
         ];
     }
 

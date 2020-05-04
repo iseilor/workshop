@@ -1,4 +1,4 @@
-<?= $form->field($model, 'is_invalid')->checkbox() ?>
+<?= $form->field($model, 'is_invalid')->checkbox()->hint($model->getAttributeHint('is_invalid')) ?>
 
 <?= $form->field($model, 'file_invalid_form', [
     'options' => ['class' => (!$model->is_invalid) ? 'd-none':''],

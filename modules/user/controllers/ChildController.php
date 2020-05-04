@@ -151,52 +151,80 @@ class ChildController extends Controller
         $child = Child::findOne($id);
         $user = User::findOne($child->user_id);
 
-        $filePath = Yii::getAlias('@app') . '/modules/user/files/child_personal_data.docx';
-        $templateProcessor = new TemplateProcessor($filePath);
-        $templateProcessor->setValue(
-            [
-                'USER_FIO',
-                'PASSPORT_SERIES',
-                'PASSPORT_NUMBER',
-                'PASSPORT_DATE',
-                'PASSPORT_DEPARTMENT',
-                'PASSPORT_CODE',
-                'PASSPORT_REGISTRATION',
+        // Разные файлы до 14 лет и после
+        if ($child->age >= 14) {
+            $filePath = Yii::getAlias('@app') . '/modules/user/files/user_personal_data.docx';
+            $templateProcessor = new TemplateProcessor($filePath);
+            $templateProcessor->setValue(
+                [
+                    'FIO',
+                    'PASSPORT_SERIES',
+                    'PASSPORT_NUMBER',
+                    'PASSPORT_DATE',
+                    'PASSPORT_DEPARTMENT',
+                    'PASSPORT_CODE',
+                    'PASSPORT_REGISTRATION',
+                    'DATE',
+                ],
+                [
+                    $child->fio,
+                    $child->passport_series,
+                    $child->passport_number,
+                    date('d.m.Y', $child->passport_date),
+                    $child->passport_department,
+                    $child->passport_code,
+                    $child->address_fact,
+                    date('d.m.Y'),
+                ]
+            );
+        } else {
+            $filePath = Yii::getAlias('@app') . '/modules/user/files/child_personal_data.docx';
+            $templateProcessor = new TemplateProcessor($filePath);
+            $templateProcessor->setValue(
+                [
+                    'USER_FIO',
+                    'PASSPORT_SERIES',
+                    'PASSPORT_NUMBER',
+                    'PASSPORT_DATE',
+                    'PASSPORT_DEPARTMENT',
+                    'PASSPORT_CODE',
+                    'PASSPORT_REGISTRATION',
 
-                'CHILD_FIO',
-                'BIRTH_SERIES',
-                'BIRTH_NUMBER',
-                'BIRTH_DEPARTMENT',
-                'BIRTH_CODE',
-                'BIRTH_DATE',
-                'ADDRESS_REGISTRATION',
-                'CHILD_DATE',
+                    'CHILD_FIO',
+                    'BIRTH_SERIES',
+                    'BIRTH_NUMBER',
+                    'BIRTH_DEPARTMENT',
+                    'BIRTH_CODE',
+                    'BIRTH_DATE',
+                    'ADDRESS_REGISTRATION',
+                    'CHILD_DATE',
 
-                'DATE',
-            ],
+                    'DATE',
+                ],
 
+                [
+                    $user->fio,
+                    $user->passport_series,
+                    $user->passport_number,
+                    date('d.m.Y', $user->passport_date),
+                    $user->passport_department,
+                    $user->passport_code,
+                    $user->passport_registration,
 
-            [
-                $user->fio,
-                $user->passport_series,
-                $user->passport_number,
-                date('d.m.Y',$user->passport_date),
-                $user->passport_department,
-                $user->passport_code,
-                $user->passport_registration,
+                    $child->fio,
+                    $child->birth_series,
+                    $child->birth_number,
+                    $child->birth_department,
+                    $child->birth_code,
+                    date('d.m.Y', $child->birth_date),
+                    $child->address_fact,
+                    date('d.m.Y', $child->date),
 
-                $child->fio,
-                $child->birth_series,
-                $child->birth_number,
-                $child->birth_department,
-                $child->birth_code,
-                date('d.m.Y',$child->birth_date),
-                $child->address_registration,
-                date('d.m.Y',$child->date),
+                    date('d.m.Y'),
+                ]
+            );
+        }
 
-                date('d.m.Y'),
-            ]
-        );
         $fileUrl = '/files/child/' . $id . '/' . $id . '_pd_' . date('YmdHis') . '.docx';
         $templateProcessor->saveAs(Yii::getAlias('@app') . '/web' . $fileUrl);
         return Yii::$app->response->sendFile(Yii::getAlias('@webroot') . $fileUrl);

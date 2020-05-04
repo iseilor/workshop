@@ -68,7 +68,7 @@ function childViewFieldFile($model, $field)
                         'birth_date:date',
                         'birth_department',
                         'birth_code',
-                        'birth_address',
+
                         childViewFieldFile($model, 'birth_file'),
 
                         // Адрес проживания

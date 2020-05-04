@@ -21,26 +21,35 @@ use yii\widgets\ActiveForm;
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-4">
-                        <h3><?=Icon::show('baby')?>Общие данные</h3>
+                        <h3><?= Icon::show('baby') ?>Общие данные</h3>
                         <?= $this->render('form/general', ['model' => $model, 'form' => $form]) ?>
-                        <hr/>
-                        <h3><?=Icon::show('user-graduate')?>Школьник/студент</h3>
-                        <?= $this->render('form/study', ['model' => $model, 'form' => $form]) ?>
-                        <hr/>
-                        <h3><?=Icon::show('wheelchair')?>Инвалид</h3>
-                        <?= $this->render('form/invalid', ['model' => $model, 'form' => $form]) ?>
+                        <div class="passport-block <?= (isset($model->date) && $model->age >= 14) ? '' : 'd-none'; ?>">
+                            <hr/>
+                            <h3><?= Icon::show('address-card') ?>Паспорт</h3>
+                            <?= $this->render('form/passport', ['model' => $model, 'form' => $form]) ?>
+                        </div>
                     </div>
                     <div class="col-md-4">
-                        <h3><?=Icon::show('address-book')?>Св-во о рождении</h3>
+                        <h3><?= Icon::show('address-book') ?>Св-во о рождении</h3>
                         <?= $this->render('form/birth', ['model' => $model, 'form' => $form]) ?>
+                        <div class="study-block <?= (isset($model->date) && $model->age >= 18) ? '' : 'd-none'; ?>">
+                            <hr/>
+                            <h3><?= Icon::show('user-graduate') ?>Студент</h3>
+                            <?= $this->render('form/study', ['model' => $model, 'form' => $form]) ?>
+                        </div>
+                        <div class="invalid-block <?= (isset($model->date) && $model->age >= 18) ? '' : 'd-none'; ?>">
+                            <hr/>
+                            <h3><?= Icon::show('wheelchair') ?>Инвалид</h3>
+                            <?= $this->render('form/invalid', ['model' => $model, 'form' => $form]) ?>
+                        </div>
                     </div>
                     <div class="col-md-4">
-                        <h3><?=Icon::show('map-marker-alt')?>Адрес проживания</h3>
+                        <h3><?= Icon::show('map-marker-alt') ?>Адрес</h3>
                         <?= $this->render('form/address', ['model' => $model, 'form' => $form]) ?>
                     </div>
                     <div class="col-md-12">
                         <hr/>
-                        <h3><?=Icon::show('lock')?>Обработка персональных данных</h3>
+                        <h3><?= Icon::show('lock') ?>Обработка персональных данных</h3>
                         <blockquote>
                             <p>
                                 Заполните все поля формы по вашему ребёнку выше. Проверьте введённые данные и сохраните их.
