@@ -53,6 +53,7 @@ return [
     'Passport Date' => 'Дата выдачи',
     'Passport Code' => 'Код подразделения',
     'Passport Registration' => 'Адрес регистрации',
+    'Address Fact'=>'Адрес фактического места проживания',
     'Passport File' => 'Копия паспорта, все страницы (PDF)',
 
     // СНИСЛ

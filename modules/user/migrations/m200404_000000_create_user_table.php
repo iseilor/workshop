@@ -60,6 +60,7 @@ class m200404_000000_create_user_table extends Migration
             'passport_department'=>$this->string(),
             'passport_registration'=>$this->string(),
             'passport_file'=> $this->string(),
+            'address_fact'=> $this->string(),
 
             // SNILS
             'snils_number'=>$this->string(),

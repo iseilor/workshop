@@ -103,7 +103,7 @@ class ProfileController extends Controller
             //return $this->goBack();
         } else {
             return $this->render(
-                'update',
+                'update/update',
                 [
                     'model' => $model,
 

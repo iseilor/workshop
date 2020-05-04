@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'title',
             'code',
             'progress',
-            'color_id',
+            'color',
             //'description:ntext',
 
             [

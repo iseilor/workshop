@@ -48,6 +48,7 @@ use yii\web\IdentityInterface;
  * @property string      $passport_code
  * @property string      $passport_department
  * @property string      $passport_registration
+ * @property string      $address_fact
  * @property string      $passport_file
  *
  * SNILS ----------------------------------------------------------
@@ -126,7 +127,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             'photo' => Module::t('module', 'Photo'),
 
             // WORK
-            'tab_number'=> Module::t('module', 'Tab Number'),
+            'tab_number' => Module::t('module', 'Tab Number'),
             'position' => Module::t('module', 'Position'),
             'work_department' => Module::t('module', 'Work Department'),
             'work_department_full' => Module::t('module', 'Work Department Full'),
@@ -148,14 +149,21 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             'passport_code' => Module::t('module', 'Passport Code'),
             'passport_department' => Module::t('module', 'Passport Department'),
             'passport_registration' => Module::t('module', 'Passport Registration'),
+            'address_fact' => Module::t('module', 'Address Fact'),
             'passport_file' => Module::t('module', 'Passport File'),
-
 
             // SNILS
             'snils_number' => Module::t('module', 'Snils Number'),
             'snils_date' => Module::t('module', 'Snils Date'),
             'snils_file' => Module::t('module', 'Snils File'),
         ];
+    }
+
+    public function attributeHints()
+    {
+        return [
+            'passport_registration' => 'Адрес регистрации из паспорта, вида: 123456, г.Москва, ул.Ленина, д.1, кв.1',
+            'address_fact' => 'Пример заполнения: 123456, г.Москва, ул.Ленина, д.1, кв.1'];
     }
 
     /**
@@ -478,22 +486,27 @@ retrun Html::img($userPhotoPath, ['title' => Yii::$app->user->identity->username
     }
 
     // Смотрим, заполнен ли паспорт пользователя
-    public function isPassport(){
+    public function isPassport()
+    {
         if (isset($this->passport_series) && isset($this->passport_number) && isset($this->passport_date) && isset($this->passport_code)
-            && isset($this->passport_department) && isset($this->passport_registration) && isset($this->passport_file)){
+            && isset($this->passport_department)
+            && isset($this->passport_registration)
+            && isset($this->passport_file)
+        ) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 
 
     // Цеподчка подчинённости
-    public function getManagerList(){
+    public function getManagerList()
+    {
         $list = [];
         $manager_id = $this->manager_id;
-        while (isset($manager_id)){
-            $list[]= $manager_id;
+        while (isset($manager_id)) {
+            $list[] = $manager_id;
             $manager = User::findOne($manager_id);
             $manager_id = $manager->manager_id;
         }

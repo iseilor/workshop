@@ -29,7 +29,6 @@ class ProfileUpdateForm extends Model
     public $work_is_young;
     public $work_is_transferred;
 
-
     // PASSPORT
     public $passport_series;
     public $passport_number;
@@ -37,6 +36,7 @@ class ProfileUpdateForm extends Model
     public $passport_code;
     public $passport_department;
     public $passport_registration;
+    public $address_fact;
     public $passport_file;
 
     // SNILS
@@ -79,6 +79,7 @@ class ProfileUpdateForm extends Model
         $this->passport_code = $user->passport_code;
         $this->passport_department = $user->passport_department;
         $this->passport_registration = $user->passport_registration;
+        $this->address_fact = $user->address_fact;
         $this->passport_file = $user->passport_file;
 
         // SNILS
@@ -92,11 +93,11 @@ class ProfileUpdateForm extends Model
     public function rules()
     {
         return [
-            [['gender','birth_date','experience','tab_number'], 'required'],
+            [['gender','birth_date','experience','tab_number','address_fact'], 'required'],
             [
                 'email',
                 'unique',
-                'targetClass' => User::className(),
+                'targetClass' => User::class,
                 'message' => Yii::t('app', 'ERROR_EMAIL_EXISTS'),
                 'filter' => ['<>', 'id', $this->_user->id],
             ],
@@ -113,7 +114,7 @@ class ProfileUpdateForm extends Model
 
             [['work_is_young','work_is_transferred'], 'safe'],
 
-            [['passport_series','passport_number','passport_date','passport_code','passport_department','passport_file','passport_registration'], 'safe'],
+            [['passport_series','passport_number','passport_date','passport_code','passport_department','passport_file','passport_registration','address_fact'], 'safe'],
             [['passport_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'passport_date'],
             [['passport_file'], 'file', 'extensions'=>'pdf'],
             [['passport_file'], 'file', 'maxSize'=>'10240000'],
@@ -149,6 +150,7 @@ class ProfileUpdateForm extends Model
             $user->passport_code = $this->passport_code;
             $user->passport_department = $this->passport_department;
             $user->passport_registration = $this->passport_registration;
+            $user->address_fact = $this->address_fact;
 
             // SNILS
             $user->snils_number = $this->snils_number;
@@ -215,6 +217,11 @@ class ProfileUpdateForm extends Model
     public function attributeLabels()
     {
         return User::attributeLabels();
+    }
+
+    public function attributeHints()
+    {
+        return User::attributeHints();
     }
 
     // Описание поля + картинка
