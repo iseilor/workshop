@@ -151,8 +151,8 @@ class ChildController extends Controller
         $child = Child::findOne($id);
         $user = User::findOne($child->user_id);
 
-        // Разные файлы до 14 лет и после
-        if ($child->age >= 14) {
+        // Разные файлы до 18 лет и после
+        if ($child->age >= 18) {
             $filePath = Yii::getAlias('@app') . '/modules/user/files/user_personal_data.docx';
             $templateProcessor = new TemplateProcessor($filePath);
             $templateProcessor->setValue(
