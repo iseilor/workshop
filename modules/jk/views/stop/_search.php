@@ -32,11 +32,11 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'deleted_by') ?>
 
-    <?php // echo $form->field($model, 'order_id') ?>
+    <?php // echo $form->field($model, 'title') ?>
 
-    <?php // echo $form->field($model, 'order_stop_id') ?>
+    <?php // echo $form->field($model, 'description') ?>
 
-    <?php // echo $form->field($model, 'comment') ?>
+    <?php // echo $form->field($model, 'status_ids') ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>

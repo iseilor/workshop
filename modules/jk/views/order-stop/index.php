@@ -3,34 +3,27 @@
 use app\components\grid\ActionColumn;
 use app\components\grid\LinkColumn;
 use app\modules\jk\models\Status;
-use app\modules\jk\Module;
-use kartik\icons\Icon;
+use app\modules\jk\models\Stop;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\grid\GridView;
-use yii\helpers\Url;
 use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\modules\jk\models\OrderStopSearch */
+/* @var $searchModel app\modules\jk\models\StopSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->params['breadcrumbs'][] = ['label' => 'ЖК', 'url' => ['/jk']];
-$this->params['breadcrumbs'][] = ['label' => 'Админка', 'url' => ['/jk/admin']];
-$this->title = Module::t('stop', 'Stops');
+$this->title = 'Отказы сотрудников от материальной помощи';
 $this->params['breadcrumbs'][] = $this->title;
-
-$orderStatuses = Status::find()->all();
-$orderStatuses = ArrayHelper::map($orderStatuses, 'id', 'title');
 ?>
-
 <div class="row">
     <div class="col-md-12">
-        <div class="card card-primary">
+        <div class="card  card-primary">
+            <div class="card-header">
+                <h3 class="card-title"><?= $this->title; ?></h3>
+                <?= Yii::$app->params['card']['header']['tools'] ?>
+            </div>
             <div class="card-body">
-                <p>
-                    <?= Html::a(Icon::show('plus') . Yii::t('app', 'Create'), ['create'], ['class' => 'btn btn-success']) ?>
-                </p>
 
                 <?php Pjax::begin(); ?>
                 <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -41,39 +34,34 @@ $orderStatuses = ArrayHelper::map($orderStatuses, 'id', 'title');
                     'columns' => [
                         ['class' => 'yii\grid\SerialColumn'],
                         [
-                            'class' => LinkColumn::className(),
+                            'class' => LinkColumn::class,
                             'attribute' => 'id',
                         ],
-                        //'created_at:datetime',
-                        /*[
-                            'class' => LinkColumn::className(),
-                            'label' => Yii::t('app', 'Created By'),
-                            'attribute' => 'created_by',
-                            'value' => 'createdUser.fio',
-                            'url' => function ($data) {
-                                return Url::to(['/user/'.$data->created_by ]);
-                            },
-                        ],*/
+                        'created_at:datetime',
+                        'createdUserLink:html',
                         [
-                            'class' => LinkColumn::className(),
-                            'attribute' => 'title',
+                            'attribute' => 'order_id',
+                            'value' => 'orderLink',
+                            'format'=>'html'
                         ],
                         [
-                            'attribute' => 'order_status_id',
-                            'filter' => $orderStatuses,
-                            'content' => function ($data) {
-                                return $data->orderStatus['title'];
-                            },
+                            'filter' => ArrayHelper::map(Status::find()->all(), 'id', 'title'),
+                            'attribute' => 'stopStatusId',
+                            'value' => 'stop.status.title',
                         ],
                         [
-                            'class' => ActionColumn::className(),
+                            'filter' => ArrayHelper::map(Stop::find()->all(), 'id', 'title'),
+                            'attribute' => 'stop_id',
+                            'value' => 'stop.title',
+                        ],
+                        'comment',
+                        [
+                            'class' => ActionColumn::class,
                         ],
                     ],
                 ]); ?>
-
                 <?php Pjax::end(); ?>
             </div>
         </div>
     </div>
 </div>
-

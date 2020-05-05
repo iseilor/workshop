@@ -9,20 +9,19 @@ use Yii;
 /**
  * This is the model class for table "jk_stop".
  *
- * @property int      $id
- * @property int      $created_at
- * @property int      $created_by
+ * @property int $id
+ * @property int $created_at
+ * @property int $created_by
  * @property int|null $updated_at
  * @property int|null $updated_by
  * @property int|null $deleted_at
  * @property int|null $deleted_by
- * @property int      $order_id
- * @property int      $order_stop_id
- * @property string   $comment
+ * @property string $title
+ * @property string $description
+ * @property int $status_id
  */
 class Stop extends Model
 {
-
     /**
      * {@inheritdoc}
      */
@@ -37,9 +36,9 @@ class Stop extends Model
     public function rules()
     {
         return [
-            [['order_stop_id', 'comment'], 'required'],
-            [['created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by', 'order_id', 'order_stop_id'], 'integer'],
-            [['comment'], 'string', 'max' => 255],
+            [['title', 'description', 'status_id'], 'required'],
+            [['created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by','status_id'], 'integer'],
+            [['title', 'description'], 'string', 'max' => 255],
         ];
     }
 
@@ -56,9 +55,10 @@ class Stop extends Model
             'updated_by' => Yii::t('app', 'Updated By'),
             'deleted_at' => Yii::t('app', 'Deleted At'),
             'deleted_by' => Yii::t('app', 'Deleted By'),
-            'order_id' => Yii::t('app', 'Order ID'),
-            'order_stop_id' => Module::t('stop', 'Order Stop'),
-            'comment' => Yii::t('app', 'Comment'),
+
+            'title' => Yii::t('app', 'Title'),
+            'description' => Yii::t('app', 'Description'),
+            'status_id' => Module::t('stop', 'Status'),
         ];
     }
 
@@ -69,5 +69,10 @@ class Stop extends Model
     public static function find()
     {
         return new StopQuery(get_called_class());
+    }
+
+    public function getStatus()
+    {
+        return $this->hasOne(Status::class, ['id' => 'status_id']);
     }
 }

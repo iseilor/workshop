@@ -17,8 +17,8 @@ class StopSearch extends Stop
     public function rules()
     {
         return [
-            [['id', 'created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by', 'order_id', 'order_stop_id'], 'integer'],
-            [['comment'], 'safe'],
+            [['id', 'created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by','status_id'], 'integer'],
+            [['title', 'description'], 'safe'],
         ];
     }
 
@@ -65,12 +65,11 @@ class StopSearch extends Stop
             'updated_by' => $this->updated_by,
             'deleted_at' => $this->deleted_at,
             'deleted_by' => $this->deleted_by,
-            'order_id' => $this->order_id,
-            'order_stop_id' => $this->order_stop_id,
+            'status_id' => $this->status_id,
         ]);
 
-        $query->andFilterWhere(['like', 'comment', $this->comment]);
-
+        $query->andFilterWhere(['like', 'title', $this->title])
+            ->andFilterWhere(['like', 'description', $this->description]);
         return $dataProvider;
     }
 }

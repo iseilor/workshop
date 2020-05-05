@@ -3,7 +3,7 @@
 namespace app\modules\jk\models;
 
 /**
- * This is the ActiveQuery class for [[Stop]].
+ * This is the ActiveQuery class for [[OrderStop]].
  *
  * @see OrderStop
  */

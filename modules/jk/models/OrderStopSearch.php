@@ -4,10 +4,10 @@ namespace app\modules\jk\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\modules\jk\models\OrderStop;
+use app\modules\jk\models\Stop;
 
 /**
- * StopSearch represents the model behind the search form of `app\modules\jk\models\Stop`.
+ * StopSearch represents the model behind the search form of `app\modules\jk\models\OrderStop`.
  */
 class OrderStopSearch extends OrderStop
 {
@@ -17,8 +17,8 @@ class OrderStopSearch extends OrderStop
     public function rules()
     {
         return [
-            [['id', 'created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by','order_status_id'], 'integer'],
-            [['title', 'description'], 'safe'],
+            [['id', 'created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by', 'order_id', 'stop_id'], 'integer'],
+            [['comment'], 'safe'],
         ];
     }
 
@@ -65,11 +65,12 @@ class OrderStopSearch extends OrderStop
             'updated_by' => $this->updated_by,
             'deleted_at' => $this->deleted_at,
             'deleted_by' => $this->deleted_by,
-            'order_status_id' => $this->order_status_id,
+            'order_id' => $this->order_id,
+            'stop_id' => $this->stop_id,
         ]);
 
-        $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'description', $this->description]);
+        $query->andFilterWhere(['like', 'comment', $this->comment]);
+
         return $dataProvider;
     }
 }

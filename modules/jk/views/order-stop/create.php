@@ -1,21 +1,20 @@
 <?php
 
-use app\modules\jk\Module;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\jk\models\OrderStop */
+/* @var $model app\modules\jk\models\Stop */
 
-$this->title = Module::t('stop', 'Create Stop');
-$this->params['breadcrumbs'][] = ['label' => 'ЖК', 'url' => ['/jk']];
-$this->params['breadcrumbs'][] = ['label' => 'Админка', 'url' => ['/jk/admin']];
-$this->params['breadcrumbs'][] = ['label' => Module::t('stop', 'Stops'), 'url' => ['index']];
+$this->title = Yii::t('app', 'Create Stop');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Stops'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
-
-
-
 ?>
+<div class="stop-create">
 
-<?= $this->render('_form', [
-    'model' => $model,
-]) ?>
+    <h1><?= Html::encode($this->title) ?></h1>
+
+    <?= $this->render('_form', [
+        'model' => $model,
+    ]) ?>
+
+</div>

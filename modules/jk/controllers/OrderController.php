@@ -5,6 +5,7 @@ namespace app\modules\jk\controllers;
 use app\modules\jk\models\Agreement;
 use app\modules\jk\models\OrderStage;
 use app\modules\jk\models\OrderStageSearch;
+use app\modules\jk\models\OrderStop;
 use app\modules\jk\models\Status;
 use app\modules\jk\models\Stop;
 use app\modules\jk\models\ZaimSearch;
@@ -219,8 +220,8 @@ class OrderController extends Controller
     // Остановить заявку
     public function actionStop($id)
     {
-        $model = new Stop();
-        $order = $this->findModel($id);
+        $model = new OrderStop();
+        $order = Order::findOne($id);
 
         $model->order_id = $id;
         if ($model->load(Yii::$app->request->post()) && $model->save()) {

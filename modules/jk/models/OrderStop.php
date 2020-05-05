@@ -4,24 +4,28 @@ namespace app\modules\jk\models;
 
 use app\models\Model;
 use app\modules\jk\Module;
+use app\modules\user\models\User;
 use Yii;
+use yii\helpers\Html;
+use yii\helpers\Url;
 
 /**
- * This is the model class for table "jk_order_stop".
+ * This is the model class for table "jk_stop".
  *
- * @property int $id
- * @property int $created_at
- * @property int $created_by
+ * @property int      $id
+ * @property int      $created_at
+ * @property int      $created_by
  * @property int|null $updated_at
  * @property int|null $updated_by
  * @property int|null $deleted_at
  * @property int|null $deleted_by
- * @property string $title
- * @property string $description
- * @property int $order_status_id
+ * @property int      $order_id
+ * @property int      $stop_id
+ * @property string   $comment
  */
 class OrderStop extends Model
 {
+
     /**
      * {@inheritdoc}
      */
@@ -36,9 +40,9 @@ class OrderStop extends Model
     public function rules()
     {
         return [
-            [['title', 'description', 'order_status_id'], 'required'],
-            [['created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by','order_status_id'], 'integer'],
-            [['title', 'description'], 'string', 'max' => 255],
+            [['stop_id', 'comment'], 'required'],
+            [['created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by', 'order_id', 'stop_id'], 'integer'],
+            [['comment'], 'string', 'max' => 255],
         ];
     }
 
@@ -49,29 +53,46 @@ class OrderStop extends Model
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'created_by' => Yii::t('app', 'Created By'),
-            'updated_at' => Yii::t('app', 'Updated At'),
-            'updated_by' => Yii::t('app', 'Updated By'),
-            'deleted_at' => Yii::t('app', 'Deleted At'),
-            'deleted_by' => Yii::t('app', 'Deleted By'),
-            'title' => Yii::t('app', 'Title'),
-            'description' => Yii::t('app', 'Description'),
-            'order_status_id' => Module::t('stop', 'Order Status'),
+            'created_at' => Module::t('order_stop', 'Created At'),
+            'created_by' => Module::t('order_stop', 'Created By'),
+            'createdUserLink'=> Module::t('order_stop', 'Created By'),
+            'order_id' => Module::t('order_stop', 'Order'),
+            'stop_id' => Module::t('order_stop', 'Stop'),
+            'comment' => Yii::t('app', 'Comment'),
         ];
     }
 
     /**
      * {@inheritdoc}
-     * @return OrderStopQuery the active query used by this AR class.
+     * @return StopQuery the active query used by this AR class.
      */
     public static function find()
     {
-        return new OrderStopQuery(get_called_class());
+        return new StopQuery(get_called_class());
     }
 
-    public function getOrderStatus()
+    // Связь с заявкой
+    public function getOrder()
     {
-        return $this->hasOne(Status::className(), ['id' => 'order_status_id']);
+        return $this->hasOne(Order::class, ['id' => 'order_id']);
     }
+    public function getOrderLink()
+    {
+        $model = $this->hasOne(Order::class, ['id' => 'order_id'])->one();
+        return Html::a($model->id, Url::to(['/jk/order/view' ,'id'=> $model->id],true));
+    }
+    // Связь с причиной отказа
+    public function getStop()
+    {
+        return $this->hasOne(Stop::class, ['id' => 'stop_id']);
+    }
+    public function getStopLink()
+    {
+        $model = $this->hasOne(Stop::class, ['id' => 'stop_id'])->one();
+        return Html::a($model->title, Url::to(['/jk/stop/view' ,'id'=> $model->id],true));
+    }
+
+
+
+
 }

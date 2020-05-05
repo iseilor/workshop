@@ -45,8 +45,6 @@ $this->params['breadcrumbs'][] = $this->title;
                         'attribute' => 'statusName',
                     ],
 
-
-
                     'createdUser.fio',
                     [
                         'class' => ActionColumn::class,

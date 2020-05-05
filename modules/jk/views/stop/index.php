@@ -1,47 +1,76 @@
 <?php
 
+use app\components\grid\ActionColumn;
+use app\components\grid\LinkColumn;
+use app\modules\jk\models\Status;
+use app\modules\jk\Module;
+use kartik\icons\Icon;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Url;
 use yii\widgets\Pjax;
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\jk\models\StopSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Stops');
+$this->params['breadcrumbs'][] = ['label' => 'ЖК', 'url' => ['/jk']];
+$this->params['breadcrumbs'][] = ['label' => 'Админка', 'url' => ['/jk/admin']];
+$this->title = Module::t('stop', 'Stops');
 $this->params['breadcrumbs'][] = $this->title;
+
+$statuses = Status::find()->all();
+$statuses = ArrayHelper::map($statuses, 'id', 'title');
 ?>
-<div class="stop-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title"><?= $this->title; ?></h3>
+                <?= Yii::$app->params['card']['header']['tools'] ?>
+            </div>
+            <div class="card-body">
+                <p>
+                    <?= Html::a(Icon::show('plus') . Yii::t('app', 'Create'), ['create'], ['class' => 'btn btn-success']) ?>
+                </p>
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Create Stop'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+                <?php Pjax::begin(); ?>
+                <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <?php Pjax::begin(); ?>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+                <?= GridView::widget([
+                    'dataProvider' => $dataProvider,
+                    'filterModel' => $searchModel,
+                    'pager' => [
+                        'class' => 'app\widgets\LinkPager',
+                    ],
+                    'columns' => [
+                        ['class' => 'yii\grid\SerialColumn'],
+                        [
+                            'class' => LinkColumn::class,
+                            'attribute' => 'id',
+                        ],
+                        [
+                            'class' => LinkColumn::class,
+                            'attribute' => 'title',
+                        ],
+                        [
+                            'attribute' => 'status_id',
+                            'filter' => $statuses,
+                            'content' => function ($data) {
+                                return $data->status->title;
+                            },
+                        ],
+                        [
+                            'class' => ActionColumn::class,
+                        ],
+                    ],
+                ]); ?>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'created_at',
-            'created_by',
-            'updated_at',
-            'updated_by',
-            //'deleted_at',
-            //'deleted_by',
-            //'order_id',
-            //'order_stop_id',
-            //'comment',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
-
-    <?php Pjax::end(); ?>
-
+                <?php Pjax::end(); ?>
+            </div>
+        </div>
+    </div>
 </div>
+

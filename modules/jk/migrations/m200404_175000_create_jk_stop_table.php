@@ -3,9 +3,9 @@
 use yii\db\Migration;
 
 /**
- * Handles the creation of table `{{%jk_order_stop}}`.
+ * Handles the creation of table `{{%jk_stop}}`.
  */
-class m200404_175000_create_jk_order_stop_table extends Migration
+class m200404_175000_create_jk_stop_table extends Migration
 {
 
     /**
@@ -18,7 +18,7 @@ class m200404_175000_create_jk_order_stop_table extends Migration
             $tableOptions
                 = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         }
-        $this->createTable('{{%jk_order_stop}}', [
+        $this->createTable('{{%jk_stop}}', [
             'id' => $this->primaryKey(),
             'created_at' => $this->integer()->notNull(),
             'created_by' => $this->integer()->notNull(),
@@ -26,11 +26,12 @@ class m200404_175000_create_jk_order_stop_table extends Migration
             'updated_by' => $this->integer(),
             'deleted_at' => $this->integer(),
             'deleted_by' => $this->integer(),
+
             'title' => $this->string()->notNull(),
             'description' => $this->string()->notNull(),
-            'order_status_id' => $this->string()->notNull(),
+            'status_id' => $this->string()->notNull(),
         ], $tableOptions);
-        $this->execute(file_get_contents(__DIR__ . '/../sql/order_stop.sql'));
+        $this->execute(file_get_contents(__DIR__ . '/../sql/jk_stop.sql'));
     }
 
     /**
@@ -38,6 +39,6 @@ class m200404_175000_create_jk_order_stop_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropTable('{{%jk_order_stop}}');
+        $this->dropTable('{{%jk_stop}}');
     }
 }

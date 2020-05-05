@@ -4,6 +4,6 @@ return [
     'Create Stop' => 'Добавить причину отказа',
     'Update Stop: {name}' => 'Именить причину отказа: {name}',
 
-    'Order Status' => 'Статус заявки',
+    'Status' => 'Статус заявки',
     'Order Stop' => 'Причина отказа',
 ];

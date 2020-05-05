@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\jk\models\OrderStopSearch */
+/* @var $model app\modules\jk\models\StopSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -32,11 +32,11 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'deleted_by') ?>
 
-    <?php // echo $form->field($model, 'title') ?>
+    <?php // echo $form->field($model, 'order_id') ?>
 
-    <?php // echo $form->field($model, 'description') ?>
+    <?php // echo $form->field($model, 'order_stop_id') ?>
 
-    <?php // echo $form->field($model, 'status_ids') ?>
+    <?php // echo $form->field($model, 'comment') ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>

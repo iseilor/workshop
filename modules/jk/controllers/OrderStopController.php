@@ -2,9 +2,10 @@
 
 namespace app\modules\jk\controllers;
 
-use Yii;
-use app\modules\jk\models\OrderStop;
 use app\modules\jk\models\OrderStopSearch;
+use Yii;
+use app\modules\jk\models\Stop;
+use app\modules\jk\models\StopSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -21,7 +22,7 @@ class OrderStopController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -64,7 +65,7 @@ class OrderStopController extends Controller
      */
     public function actionCreate()
     {
-        $model = new OrderStop();
+        $model = new Stop();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -115,12 +116,12 @@ class OrderStopController extends Controller
      *
      * @param integer $id
      *
-     * @return OrderStop the loaded model
+     * @return Stop the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = OrderStop::findOne($id)) !== null) {
+        if (($model = Stop::findOne($id)) !== null) {
             return $model;
         }
 
