@@ -171,13 +171,13 @@ $js = <<<JS
         });
 
         // Обновление списка сообщений
-        setInterval(function(){
+        /*setInterval(function(){
              $.pjax.reload({
                 container: '#pjax-messages',
                 async: true,
                 timeout: false
              });
-        }, 1000);
+        }, 1000);*/
 JS;
 $this->registerJs($js);
 ?>

@@ -15,7 +15,7 @@ use yii\helpers\Url;
 $url = Url::to('/chat/chat/messages',true);
 $script = <<< JS
     $(document).ready(function() {
-        var sec = 1;
+        /*var sec = 1;
         setInterval(function(){
              $.ajax({
                   url: '$url',
@@ -28,7 +28,7 @@ $script = <<< JS
                         });
                   }
              });
-        }, sec*1000);
+        }, sec*1000);*/
     });
 JS;
 $this->registerJs($script, yii\web\View::POS_READY);

@@ -1,5 +1,6 @@
 <?php
 
+use app\modules\jk\assets\JkOrderAsset;
 use kartik\icons\Icon;
 use yii\helpers\Html;
 use yii\jui\Tabs;
@@ -9,15 +10,15 @@ use yii\widgets\ActiveForm;
 /* @var $model app\modules\jk\models\Faq */
 /* @var $form yii\widgets\ActiveForm */
 /* @var $userChildDataProvider \yii\data\ActiveDataProvider */
-?>
 
+JkOrderAsset::register($this);
+?>
     <div class="row">
         <div class="col-md-12">
             <div class="card card-primary">
-                <div class="card-header">
+                <div class="card-header" data-intro="This is a tooltip!">
                     <h3 class="card-title"><i class="fas fa-ruble-sign"></i> Оформление заявки на участие в Жилищной Кампании</h3>
                 </div>
-
                 <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
                 <div class="card-body">
                     <div class="row">
@@ -63,45 +64,47 @@ use yii\widgets\ActiveForm;
                                             </div>
                                         <?php endforeach; ?>
                                     </div>
+
+
+
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+
+
+
                 <div class="card-footer">
+                    <?= Html::button(
+                        Icon::show('info').'Запустить помощника',
+                        [
+                            'class' => 'btn btn-primary',
+                            'id' => 'btn-helper',
+                            'onclick'=>"startIntro();"
+                        ]
+                    ) ?>
+
+
+                    <?= Html::submitButton(
+                        '<i class="fas fa-comments"></i> Написать куратору',
+                        [
+                            'class' => 'btn bg-indigo',
+                            'id' => 'btn-message',
+                        ]
+                    ) ?>
+
+
 
                     <?= Html::submitButton(
                         Icon::show('save').'Сохранить заявку',
                         [
-                            'class' => 'btn btn-success',
+                            'class' => 'btn btn-success float-right',
                             'id' => 'btn-save',
                             'value' => 1,
                             'name' => 'save',
                         ]
-                    ) ?>
-
-                    <!--<?= Html::submitButton(
-                        '<i class="fas fa-comments"></i> Написать куратору',
-                        [
-                            'class' => 'btn btn-success',
-                            'id' => 'btn-message',
-                        ]
-                    ) ?>
-                    <?= Html::submitButton(
-                        '<i class="fas fa-check-square"></i> Отправить куратору',
-                        [
-                            'class' => 'btn btn-success',
-                            'id' => 'btn-check',
-                            'value' => 1,
-                            'name' => 'check',
-                        ]
-                    ) ?>-->
-
-
-                    <?= Html::a(
-                        Yii::t('app', 'Отмена'),
-                        ['create'],
-                        ['class' => 'btn btn-default float-right']
                     ) ?>
 
 
@@ -145,7 +148,15 @@ $(document).ready(function() {
         }
     });
     
+   
 });
 JS;
-$this->registerJs($script, yii\web\View::POS_READY);
+$this->registerJs($script, yii\web\View::POS_LOAD);
+
+//$this->registerCssFile("@web/libs/driver.js-master/dist/driver.min.css",['position' => \yii\web\View::POS_HEAD]);
+//$this->registerJsFile("@web/libs/driver.js-master/dist/driver.min.js",['depends' => [\yii\web\JqueryAsset::class]]);
+//$this->registerJsFile("@app/modules/jk/web/js/jk-order-driver.js",['position' => \yii\web\View::POS_LOAD]);
+
+$this->registerCssFile("@web/libs/intro.js/minified/introjs.min.css",['position' => \yii\web\View::POS_HEAD]);
+$this->registerJsFile("@web/libs/intro.js/minified/intro.min.js",['depends' => [\yii\web\JqueryAsset::class]]);
 

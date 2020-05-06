@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ad5b3d476385f775b1bb526d91fa1c61",
+    "content-hash": "292d73581af7d16ace94dff95db106ec",
     "packages": [
         {
             "name": "adldap2/adldap2",
@@ -130,7 +130,7 @@
             "version": "3.3.11",
             "source": {
                 "type": "git",
-                "url": "git@github.com:RobinHerbots/Inputmask.git",
+                "url": "https://github.com/RobinHerbots/Inputmask.git",
                 "reference": "5e670ad62f50c738388d4dcec78d2888505ad77b"
             },
             "dist": {
@@ -429,6 +429,43 @@
                 "php"
             ],
             "time": "2019-10-30T14:39:59+00:00"
+        },
+        {
+            "name": "drnixx/yii2-jquery-migrate-asset",
+            "version": "3.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/DrNixx/yii2-jquery-migrate-asset.git",
+                "reference": "69d2e959702ba6c18e8cbb14aadc51500898eb7b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/DrNixx/yii2-jquery-migrate-asset/zipball/69d2e959702ba6c18e8cbb14aadc51500898eb7b",
+                "reference": "69d2e959702ba6c18e8cbb14aadc51500898eb7b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6.0",
+                "yiisoft/yii2": "~2.0.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "onix\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nick Panteleeff",
+                    "email": "drnix@chess-online.com"
+                }
+            ],
+            "description": "jQuery Migrate Assets for Yii2",
+            "time": "2018-06-09T15:01:46+00:00"
         },
         {
             "name": "edvlerblog/yii2-adldap-module",
@@ -6501,7 +6538,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.4.0"
+        "php": ">=7.0"
     },
     "platform-dev": []
 }
