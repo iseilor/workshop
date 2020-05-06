@@ -153,7 +153,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <?php
 $js = <<<JS
 
-        // Отравка сообщения
+        // Отправка сообщения
         $('#chat-form').on('beforeSubmit', function(){
             $.ajax({
                 url: $(this).attr('action'),

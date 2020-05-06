@@ -64,8 +64,8 @@ $this->title .= ' ' . $model->status->label;
             </div>
             <div class="card-footer">
                 <?php if ($model->status_id == \app\modules\jk\models\Status::findOne(['code' => 'NEW'])->id): ?>
-                    <!--<?= Html::a(Icon::show('check') . 'Отравить куратору на проверку', ['sendEmailManager', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>-->
-                    <?= Html::a(Icon::show('tasks') . 'Отравить руководителю на согласование', ['manager', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+                    <!--<?= Html::a(Icon::show('check') . 'Отправить куратору на проверку', ['sendEmailManager', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>-->
+                    <?= Html::a(Icon::show('tasks') . 'Отправить руководителю на согласование', ['manager', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
                 <?php endif; ?>
 
                 <div class="float-right">

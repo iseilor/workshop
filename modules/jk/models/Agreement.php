@@ -198,7 +198,7 @@ class Agreement extends Model
     }
 
 
-    // Запускаем цепочку отравки сообщение руководителям для согласования
+    // Запускаем цепочку отправки сообщение руководителям для согласования
     public static function sendEmailManager($order_id)
     {
         $order = Order::findOne($order_id);

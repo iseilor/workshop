@@ -146,7 +146,7 @@ $this->params['breadcrumbs'][] = $this->title;
 $script = <<< JS
 $(document).ready(function() {
     
-    // Отравка сообщения
+    // Отправка сообщения
     $('#chat-form').on('beforeSubmit', function(){
         $.ajax({
             url: $(this).attr('action'),
