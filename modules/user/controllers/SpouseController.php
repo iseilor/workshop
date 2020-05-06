@@ -78,6 +78,13 @@ class SpouseController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
+        // Ставим пол супруге на противоположные
+        $user = User::findOne(Yii::$app->user->identity->id);
+        if ($user->gender==1){
+            $model->gender=0;
+        }else{
+            $model->gender=1;
+        }
         return $this->render('create', [
             'model' => $model,
         ]);

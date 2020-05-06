@@ -80,7 +80,7 @@ class Spouse extends Model
     public function rules()
     {
         return [
-            [['fio', 'gender', 'date', 'type'], 'required'],
+            [['type'], 'required'],
             [['created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by', 'user_id', 'gender', 'is_work', 'is_rtk', 'is_do'], 'integer'],
             [
                 [

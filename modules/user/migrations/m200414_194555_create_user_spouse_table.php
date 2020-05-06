@@ -26,13 +26,13 @@ class m200414_194555_create_user_spouse_table extends Migration
             'deleted_by' => $this->integer(),
 
             // Общие параметры
-            'type'=>$this->integer()->notNull(),        // Наличие супруги
+            'type'=>$this->integer()->notNull(),            // Наличие супруги
 
-            'user_id'=> $this->integer() . ' NOT NULL', // Сотрудник
-            'fio'=> $this->string() . ' NOT NULL',      // ФИО супруги
-            'gender'=> $this->boolean() . ' NOT NULL',  // Пол
-            'date'=> $this->integer() . ' NOT NULL',    // Дата рождения
-            'marriage_file'=>$this->string(),           // Свидетельство о заключении/расторжения брака / копию решения суда
+            'user_id'=> $this->integer() . ' NOT NULL',     // Сотрудник
+            'fio'=> $this->string(),                        // ФИО супруги
+            'gender'=> $this->boolean(),                    // Пол
+            'date'=> $this->integer(),                      // Дата рождения
+            'marriage_file'=>$this->string(),               // Свидетельство о заключении/расторжения брака / копию решения суда
 
             // Паспорт
             'passport_series'=>$this->string(),
