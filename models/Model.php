@@ -41,7 +41,7 @@ class Model extends ActiveRecord
     public function getCreatedUserLink()
     {
         $model = $this->hasOne(User::class, ['id' => 'created_by'])->one();
-        return Html::a($model->fio, Url::to(['/user/' . $model->id],true));
+        return Html::a($model->fio, Url::to(['/user/' . $model->id], true));
     }
 
     // Ссылка на пользователя, который изменил документ
@@ -119,4 +119,21 @@ class Model extends ActiveRecord
         $this->deleted_by = Yii::$app->user->identity->getId();
         $this->save();
     }*/
+
+    public function getCreatedUserLabel()
+    {
+        $img = Html::img($this->createdUser->photoPath, ['alt' => $this->createdUser->fio, 'class' => 'table-avatar']);
+        $tooltip = $this->createdUser->tooltip;
+        return '<span style="float: left; margin-right: 0.5rem;">
+                                        ' . Html::a(
+                $img,
+                ['/user/' . $this->createdUser->id],
+                ['data-toggle' => 'tooltip', 'data-html' => 'true', 'data-original-title' => $tooltip]
+            ) . '
+                                    </span>
+                                    ' . Html::a($this->createdUser->fio,
+                ['/user/' . $this->createdUser->id],
+                ['data-toggle' => 'tooltip', 'data-html' => 'true', 'data-original-title' => $tooltip]) . '
+                                    <br><small>' . $this->createdUser->position . '</small>';
+    }
 }

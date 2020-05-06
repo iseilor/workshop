@@ -154,6 +154,8 @@ class Order extends Model
             'deleted_at' => Yii::t('app', 'Deleted At'),
             'deleted_by' => Yii::t('app', 'Deleted By'),
 
+            'createdUserLabel' => Module::t('order', 'User'),
+
             // Параметры
             'is_agree_personal_data' => Module::t('order', 'Agree Personal Data'),
             'file_agree_personal_data' => Module::t('order', 'Agree Personal Data'),

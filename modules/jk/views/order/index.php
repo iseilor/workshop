@@ -33,19 +33,29 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'class' => LinkColumn::class,
                         'attribute' => 'id',
+                        'contentOptions' => ['style' => 'max-width: 10px;'],
                     ],
-                    'created_at:datetime',
+                    'createdUserLabel:html',
                     [
                         'filter' => \app\modules\jk\models\Order::getTypesArray(),
                         'attribute' => 'type',
                         'value' => 'typeName',
                     ],
-                     [
+                    [
                         'filter' => ArrayHelper::map(Status::find()->all(), 'id', 'title'),
                         'attribute' => 'statusName',
+                        'value' => 'status.label',
+                        'format' => 'html',
                     ],
-
-                    'createdUser.fio',
+                    [
+                        'label' => 'Прогресс',
+                        'format' => 'raw',
+                        'value' => function ($data) {
+                            $status = Status::findOne($data['status_id']);
+                            return $status->getProgressBar();
+                        },
+                    ],
+                    'created_at:datetime',
                     [
                         'class' => ActionColumn::class,
                     ],
@@ -60,6 +70,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     'dataProvider' => $dataProvider,
                     'filterModel' => $searchModel,
                     'columns' => $gridColumns,
+                    'tableOptions' => [
+                        'class' => 'table table-striped projects',
+                        'style' => 'margin-bottom: 0',
+                    ],
                     'pager' => [
                         'class' => 'app\widgets\LinkPager',
                     ],
