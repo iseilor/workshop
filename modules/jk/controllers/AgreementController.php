@@ -125,10 +125,10 @@ class AgreementController extends Controller
 
             // Если успешно согласовано
             if ($model->approval==Agreement::APPROVAL_YES) {
-                Agreement::sendEmailManager($model->order_id); // Письмо следующем руководителю
-                $model->sendEmailUserManagerSuccess(); // Письмо сотруднику, что соглссовано
+                $model->sendEmailUserManagerSuccess();              // Письмо сотруднику, что заявка согласована
+                Agreement::sendEmailManager($model->order_id);      // Письмо следующем руководителю
             } else {
-                $model->sendEmailUserManagerDanger(); // Письмо сотруднику, что не согласовано
+                $model->sendEmailUserManagerDanger();               // Письмо сотруднику, что не согласовано
 
                 // Ставим статус, что заявка не согласована
                 $order = Order::findOne($model->order_id);

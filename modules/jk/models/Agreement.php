@@ -226,7 +226,7 @@ class Agreement extends Model
         } else {
             // Ставим статус, что согласование руководителями завершено
             $order = Order::findOne($order_id);
-            $order->status_id = Status::findOne(['code' => 'MANAGER_NO'])->id;
+            $order->status_id = Status::findOne(['code' => 'MANAGER_YES'])->id;
             $order->save();
 
             Yii::$app->mailer->compose(
