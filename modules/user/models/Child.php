@@ -101,7 +101,8 @@ class Child extends Model
             [['fio', 'gender', 'date', 'address_registration', 'address_fact'], 'required'],
             [['created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by', 'user_id', 'gender', 'is_invalid', 'is_study'], 'integer'],
             [['fio'], 'string', 'max' => 255],
-            ['fio', 'match', 'pattern' => '~^(\p{L}|\p{Zs})+$~u'],
+            // TODO: с этим не работает в FireFox
+            //['fio', 'match', 'pattern' => '~^(\p{L}|\p{Zs})+$~u'],
             [['date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'date'],
 
             // Паспорт
