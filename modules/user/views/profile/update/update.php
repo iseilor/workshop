@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ['name' => Icon::show('user-tie') . 'Сотрудник', 'id' => 'user', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
             ['name' => Icon::show('address-card') . 'Паспорт', 'id' => 'passport', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
             ['name' => Icon::show('id-card') . 'СНИЛС', 'id' => 'snils', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
-            ['name' => Icon::show('baby') . 'Дети', 'id' => 'childs', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
+            //['name' => Icon::show('baby') . 'Дети', 'id' => 'childs', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
         ];
         echo Html::ul($tabs, [
             'item' => function ($item, $index) {

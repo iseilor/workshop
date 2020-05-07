@@ -40,7 +40,9 @@ class ChildController extends Controller
     public function actionIndex()
     {
         $searchModel = new ChildSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $queryParams = Yii::$app->request->queryParams;
+        $queryParams['ChildSearch']['user_id']=Yii::$app->user->identity->id;
+        $dataProvider = $searchModel->search($queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
