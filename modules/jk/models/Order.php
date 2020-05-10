@@ -44,10 +44,13 @@ use yii\web\UploadedFile;
  * @property string   ipoteka_file_bank_approval
  *
  * @property double   money_oklad
+ * @property string   ndfl2_file
+ * @property boolean  is_do
+ * @property string   spravka_zp_file
  * @property double   money_summa_year
  * @property double   money_nalog_year
  * @property double   money_month_pay
- * @property double   money_my_pay
+ * @property double   money_user_pay
  */
 class Order extends Model
 {
@@ -77,6 +80,10 @@ class Order extends Model
     public $ipoteka_file_spravka_form = '';
 
     public $ipoteka_file_bank_approval_form = '';
+
+    public $ndfl2_file_form;
+
+    public $spravka_zp_file_form;
 
     /**
      * @var mixed|null
@@ -134,8 +141,18 @@ class Order extends Model
             ],
 
             // Финансы
-            [['money_oklad', 'money_summa_year', 'money_nalog_year', 'money_month_pay', 'money_my_pay'], 'safe'],
-
+            [['money_oklad', 'money_summa_year', 'money_nalog_year', 'money_month_pay', 'money_user_pay'], 'required'],
+            [['is_do'],'safe'],
+            [
+                [
+                    'ndfl2_file_form',
+                    'spravka_zp_file_form',
+                ],
+                'file',
+                'skipOnEmpty' => true,
+                'extensions' => 'pdf, docx',
+                'maxSize' => '2048000',
+            ],
 
         ];
     }
@@ -164,9 +181,9 @@ class Order extends Model
             'mortgage_file' => Module::t('module', 'Mortgage File'),
             'is_participate' => Module::t('module', 'Is Participate'),
             'participateLabel' => Module::t('module', 'Is Participate'),
-            'type'=>Module::t('order','Type'),
-            'typeName'=>Module::t('order','Type'),
-            'statusName'=>Module::t('order','Status'),
+            'type' => Module::t('order', 'Type'),
+            'typeName' => Module::t('order', 'Type'),
+            'statusName' => Module::t('order', 'Status'),
 
 
             // Семья
@@ -225,7 +242,6 @@ class Order extends Model
             'ipoteka_file_spravka_form' => Module::t('order', 'Ipoteka File Spravka'),
             'ipoteka_file_bank_approval_form' => Module::t('order', 'Ipoteka File Bank Approval'),
 
-
             'percent_sum' => Module::t('module', 'Percent Sum'),
             'target_mortgage' => Module::t('module', 'Target Mortgage'),
             'property_type' => Module::t('module', 'Property Type'),
@@ -235,7 +251,24 @@ class Order extends Model
             'money_summa_year' => Module::t('order', 'Money Summa Year'),
             'money_nalog_year' => Module::t('order', 'Money Nalog Year'),
             'money_month_pay' => Module::t('order', 'Money Month Pay'),
-            'money_my_pay' => Module::t('order', 'Money My Pay'),
+            'money_user_pay' => Module::t('order', 'Money User Pay'),
+            'ndfl2_file' => Module::t('order', '2 NDFL'),
+            'ndfl2_file_form' => Module::t('order', '2 NDFL'),
+            'spravka_zp_file' => Module::t('order', 'Spravka ZP'),
+            'spravka_zp_file_form' => Module::t('order', 'Spravka ZP'),
+            'is_do' => Module::t('order', 'Is DO'),
+        ];
+    }
+
+    public function attributeHints()
+    {
+        return [
+            'money_oklad' => 'Указывается на основании 2НДФЛ',
+            'money_summa_year' => 'Раздел 5 2НДФЛ',
+            'money_nalog_year' => 'Раздел 5 2НДФЛ',
+
+            'money_month_pay' => 'После оказания помощи совокупные среднемесячные платежи моей семьи по всем обязательствам, руб',
+            'money_user_pay' => 'После оказания помощи совокупные мои платежи, руб',
         ];
     }
 
@@ -251,10 +284,10 @@ class Order extends Model
     // Загрузка файлов
     public function upload()
     {
+
         // Создаём директорию для хранения файлов файлов
         $pathDir = Yii::$app->params['module']['jk']['order']['filePath'] . $this->id;
-        FileHelper::createDirectory($pathDir, $mode = 0775, $recursive = true);
-
+        FileHelper::createDirectory($pathDir, $mode = 0777, $recursive = true);
 
         // Все поля с файлами
         $fields = [
@@ -263,6 +296,16 @@ class Order extends Model
             'file_social_protection',       // Справка из социальной защиты
             'file_rent',                    // Договор аренды
             'file_social_contract',         // Договор социального найма
+
+            'ipoteka_file_dogovor',
+            'ipoteka_file_grafic_first',
+            'ipoteka_file_grafic_now',
+            'ipoteka_file_refenance',
+            'ipoteka_file_spravka',
+            'ipoteka_file_bank_approval',
+
+            'ndfl2_file',
+            'spravka_zp_file',
         ];
 
         // Сохраняем данные
@@ -273,48 +316,6 @@ class Order extends Model
                 $file->saveAs($pathDir . '/' . $fileName);
                 $this->{$field} = $fileName;
             }
-        }
-
-        $ipoteka_file_dogovor = UploadedFile::getInstance($this, 'ipoteka_file_dogovor_form');
-        if ($ipoteka_file_dogovor) {
-            $fileName = 'jk_order_' . $this->id . '_ipoteka_file_dogovor_' . date('YmdHis') . '.' . $ipoteka_file_dogovor->extension;
-            $ipoteka_file_dogovor->saveAs($pathDir . '/' . $fileName);
-            $this->ipoteka_file_dogovor = $fileName;
-        }
-
-        $ipoteka_file_grafic_first = UploadedFile::getInstance($this, 'ipoteka_file_grafic_first_form');
-        if ($ipoteka_file_grafic_first) {
-            $fileName = 'jk_order_' . $this->id . '_ipoteka_file_grafic_first_' . date('YmdHis') . '.' . $ipoteka_file_grafic_first->extension;
-            $ipoteka_file_grafic_first->saveAs($pathDir . '/' . $fileName);
-            $this->ipoteka_file_grafic_first = $fileName;
-        }
-
-        $ipoteka_file_grafic_now = UploadedFile::getInstance($this, 'ipoteka_file_grafic_now_form');
-        if ($ipoteka_file_grafic_now) {
-            $fileName = 'jk_order_' . $this->id . '_ipoteka_file_grafic_now_' . date('YmdHis') . '.' . $ipoteka_file_grafic_now->extension;
-            $ipoteka_file_grafic_now->saveAs($pathDir . '/' . $fileName);
-            $this->ipoteka_file_grafic_now = $fileName;
-        }
-
-        $ipoteka_file_refenance = UploadedFile::getInstance($this, 'ipoteka_file_refenance_form');
-        if ($ipoteka_file_refenance) {
-            $fileName = 'jk_order_' . $this->id . '_ipoteka_file_refenance_' . date('YmdHis') . '.' . $ipoteka_file_refenance->extension;
-            $ipoteka_file_refenance->saveAs($pathDir . '/' . $fileName);
-            $this->ipoteka_file_refenance = $fileName;
-        }
-
-        $ipoteka_file_spravka = UploadedFile::getInstance($this, 'ipoteka_file_spravka_form');
-        if ($ipoteka_file_spravka) {
-            $fileName = 'jk_order_' . $this->id . '_ipoteka_file_spravka_' . date('YmdHis') . '.' . $ipoteka_file_spravka->extension;
-            $ipoteka_file_spravka->saveAs($pathDir . '/' . $fileName);
-            $this->ipoteka_file_spravka = $fileName;
-        }
-
-        $ipoteka_file_bank_approval = UploadedFile::getInstance($this, 'ipoteka_file_bank_approval_form');
-        if ($ipoteka_file_bank_approval) {
-            $fileName = 'jk_order_' . $this->id . '_ipoteka_file_bank_approval_' . date('YmdHis') . '.' . $ipoteka_file_bank_approval->extension;
-            $ipoteka_file_bank_approval->saveAs($pathDir . '/' . $fileName);
-            $this->ipoteka_file_bank_approval = $fileName;
         }
 
         return $this->save();
@@ -437,13 +438,15 @@ class Order extends Model
     }
 
     // Название статуса
-    public function getStatusName(){
+    public function getStatusName()
+    {
         return $this->status->title;
     }
 
     // Шильдик статуса
-    public function getStatusBadge(){
-        return Html::tag('<span>', $this->statusName, ['class' => 'badge bg-'.$this->status->color,]);
+    public function getStatusBadge()
+    {
+        return Html::tag('<span>', $this->statusName, ['class' => 'badge bg-' . $this->status->color,]);
     }
 
     // Социальная категория

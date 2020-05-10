@@ -19,7 +19,7 @@ JkOrderAsset::register($this);
                 <div class="card-header" data-intro="This is a tooltip!">
                     <h3 class="card-title"><i class="fas fa-ruble-sign"></i> Оформление заявки на участие в Жилищной Кампании</h3>
                 </div>
-                <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+                <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data','id'=>'jk-order']]); ?>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-12">
@@ -147,9 +147,30 @@ $(document).ready(function() {
             $('.is-child').addClass('hide');
         }
     });
-    
-   
 });
+
+// Запоминаем активную вкладку
+$(function() {
+  $('a[data-toggle="pill"]').on('click', function (e) {
+    localStorage.setItem('lastTab', $(e.target).attr('id'));
+  });
+  var lastTab = localStorage.getItem('lastTab');
+  if (lastTab) {
+      $('#'+lastTab).tab('show');
+  }
+});
+
+// Если форма с TABS то перевключаем на первую вкладку с ошибкой
+$('#jk-order').on('afterValidate', function(event, messages, errorAttributes){
+    if(errorAttributes.length > 0) {
+        var errElement = $('#' + errorAttributes[0].id);
+        var pane = errElement.closest('.tab-pane');
+        var tabId = pane[0].id;
+        $('.nav-tabs a[href="#' + tabId + '"]').tab('show');
+        return false;
+    }
+});
+
 JS;
 $this->registerJs($script, yii\web\View::POS_LOAD);
 

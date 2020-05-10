@@ -32,7 +32,6 @@ class m200331_000010_create_jk_order_table extends Migration
                 'deleted_by' => $this->integer(),
 
 
-
                 'percent_count' => $this->integer(),
                 'percent_years' => $this->integer(),
                 'zaim_count' => $this->integer(),
@@ -48,7 +47,7 @@ class m200331_000010_create_jk_order_table extends Migration
                 'is_participate' => $this->boolean(),                                    // Ранее участвовали
                 'is_mortgage' => $this->boolean(),                                       // Оформлена ипотека
                 'mortgage_file' => $this->string(),                                      // Кредитный договор с акктуальным графиком платежей
-                'type'=>$this->integer()->notNull(),                                    // Тип заявки
+                'type' => $this->integer()->notNull(),                                    // Тип заявки
 
                 // Семья
                 'social_id' => $this->integer(),                // Социальная категория
@@ -85,12 +84,12 @@ class m200331_000010_create_jk_order_table extends Migration
                 'jp_pravo_document_file' => $this->text(),          // 2) копию правоустанавливающих документов на земельный участок;
                 'jp_grad_plane_file' => $this->text(),              // 3) копию градостроительного плана земельного участка (при наличии);
                 'jp_scheme_plane_org_file' => $this->text(),        // 4) копию схемы планировочной организации земельного участка с
-                                                                    // обозначением места размещения объекта индивидуального жилищного строительства/дома;
+                // обозначением места размещения объекта индивидуального жилищного строительства/дома;
                 'jp_building permit_file' => $this->text(),         // 5) копию разрешения на строительство дома – документ, выдаваемый федеральным органом
-                                                                    // исполнительной власти, органом исполнительной власти субьекта РФ или органом
-                                                                    // местного самоуправления в соответствии с их компетенции.
-                                                                    // схема планировочной организации земельного участка с обозначением
-                                                                    // места размещения объекта индивидуального жилищного строительства;
+                // исполнительной власти, органом исполнительной власти субьекта РФ или органом
+                // местного самоуправления в соответствии с их компетенции.
+                // схема планировочной организации земельного участка с обозначением
+                // места размещения объекта индивидуального жилищного строительства;
                 'jp_project_house_file' => $this->text(),           // 6) проект дома;
                 'jp_construction_estimate_file' => $this->text(),   // 7) смету строительства дома;
                 'jp_time_grafic_build_file' => $this->string(),     // 8) сроки и график строительства;
@@ -114,12 +113,14 @@ class m200331_000010_create_jk_order_table extends Migration
                 'ipoteka_file_bank_approval' => $this->string(),                // Одобрение из банка
 
                 // Финансы
-                'money_oklad' => $this->double(),                // Оклад
-                'money_summa_year' => $this->double(),                // Общая сумма дохода за 1 год
-                'money_nalog_year' => $this->double(),                // Общая сумма удержаннаго налога за 1 год
-                'money_month_pay' => $this->double(),                // Среднемесячные платежи
-                'money_my_pay' => $this->double(),                // Мои среднемесячные платежи
-
+                'money_oklad' => $this->double(),           // Оклад
+                'ndfl2_file' => $this->string(),            // 2 НДФЛ файл
+                'is_do' => $this->boolean(),                // В Декретном отпуске
+                'spravka_zp_file' => $this->string(),       // Справка о заработной плате
+                'money_summa_year' => $this->double(),      // Общая сумма дохода за 1 год
+                'money_nalog_year' => $this->double(),      // Общая сумма удержаннаго налога за 1 год
+                'money_month_pay' => $this->double(),       // Среднемесячные платежи
+                'money_user_pay' => $this->double(),        // Мои среднемесячные платежи
             ],
             $tableOptions
         );
