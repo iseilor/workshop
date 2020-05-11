@@ -34,17 +34,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => Yii::t('app','Created By'),
                 'value' => $model->createdUser->username,
             ],
-            'updated_at:datetime',
-            [
-                'label' => Yii::t('app','Updated By'),
-                'value' => $model->updatedUser->username,
-            ],
-            'deleted_at:datetime',
-            [
-                'label' => Yii::t('app','Deleted By'),
-                'value' => ($model->deletedUser)?$model->deletedUser->username:'',
-            ],
-
             'date_birth:date',
             'gender',
             'experience',
