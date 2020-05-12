@@ -20,6 +20,6 @@ use yii\helpers\Url;
     <div class="col-md-6">
         <?= $form->field($model, 'is_participate')->dropDownList($model->getParticipateList(), ['prompt' => 'Выберите ...']); ?>
 
-        <?= $form->field($model, 'is_mortgage')->dropDownList($model->getMortgageList(), ['prompt' => 'Выберите ...']); ?>
+
     </div>
 </div>

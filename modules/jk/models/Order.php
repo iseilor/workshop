@@ -35,6 +35,7 @@ use yii\web\UploadedFile;
  * @property string   file_rent
  * @property string   file_social_contract
  *
+ * @property double   ipoteka_percent
  * @property string   ipoteka_file_dogovor
  * @property string   ipoteka_file_dogovor_form
  * @property string   ipoteka_file_grafic_first
@@ -124,7 +125,9 @@ class Order extends Model
             [['jp_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'jp_date'],
 
             // Ипотека
-            [['ipoteka_target', 'ipoteka_size', 'ipoteka_params', 'ipoteka_user', 'ipoteka_summa'], 'safe'],
+            [['is_mortgage', 'ipoteka_target', 'ipoteka_size', 'ipoteka_user', 'ipoteka_grafic'], 'required'],
+            [['ipoteka_last_date', 'ipoteka_percent'], 'safe'],
+            [['ipoteka_last_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'ipoteka_last_date'],
             [
                 [
                     'ipoteka_file_dogovor_form',
@@ -142,7 +145,7 @@ class Order extends Model
 
             // Финансы
             [['money_oklad', 'money_summa_year', 'money_nalog_year', 'money_month_pay', 'money_user_pay'], 'required'],
-            [['is_do'],'safe'],
+            [['is_do'], 'safe'],
             [
                 [
                     'ndfl2_file_form',
@@ -177,7 +180,7 @@ class Order extends Model
             'is_agree_personal_data' => Module::t('order', 'Agree Personal Data'),
             'file_agree_personal_data' => Module::t('order', 'Agree Personal Data'),
             'file_agree_personal_data_form' => Module::t('order', 'Agree Personal Data'),
-            'is_mortgage' => Module::t('module', 'Is Mortgage'),
+            'is_mortgage' => Module::t('order', 'Is Mortgage'),
             'mortgage_file' => Module::t('module', 'Mortgage File'),
             'is_participate' => Module::t('module', 'Is Participate'),
             'participateLabel' => Module::t('module', 'Is Participate'),
@@ -227,6 +230,9 @@ class Order extends Model
             'ipoteka_user' => Module::t('order', 'Ipoteka User'),
             'ipoteka_params' => Module::t('order', 'Ipoteka Params'),
             'ipoteka_summa' => Module::t('order', 'Ipoteka Summa'),
+            'ipoteka_percent' => Module::t('order', 'Ipoteka Percent'),
+            'ipoteka_last_date' => Module::t('order', 'Ipoteka Last Date'),
+            'ipoteka_grafic' => Module::t('order', 'Ipoteka Grafic'),
 
             'ipoteka_file_dogovor' => Module::t('order', 'Ipoteka File Dogovor'),
             'ipoteka_file_grafic_first' => Module::t('order', 'Ipoteka File Grafic First'),
@@ -263,6 +269,8 @@ class Order extends Model
     public function attributeHints()
     {
         return [
+            'ipoteka_last_date' => 'Последняя дата платежа по ипотечному договору',
+            'ipoteka_grafic' => 'Сумма процентов подлежащая к уплате за текущий год согласно Графику платежей ипточеного договора (по месячно, без учета основного долга).<br/>Пример:<br/>02.01.2020 15 000 руб<br/>02.02.2020 14 500 руб.<br/>...',
             'money_oklad' => 'Указывается на основании 2НДФЛ',
             'money_summa_year' => 'Раздел 5 2НДФЛ',
             'money_nalog_year' => 'Раздел 5 2НДФЛ',
@@ -321,14 +329,6 @@ class Order extends Model
         return $this->save();
     }
 
-    //
-    public function beforeValidate()
-    {
-        // Пробелы в деньгах
-        //$this->salary = str_replace(" ", "", $this->salary);
-
-        return parent::beforeValidate();
-    }
 
     // Оформлена ипотека
     public static function getMortgageList()
@@ -484,5 +484,13 @@ class Order extends Model
             return true;
         }
         return false;
+    }
+
+    // Правим запятые на точки
+    public function beforeValidate()
+    {
+        // Заменяем запятые на точки
+        $this->ipoteka_percent = str_replace(",", ".", $this->ipoteka_percent);
+        return parent::beforeValidate();
     }
 }

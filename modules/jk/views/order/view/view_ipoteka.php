@@ -10,13 +10,18 @@ use yii\widgets\DetailView;
     'model' => $model,
     'attributes' => [
         [
+            'attribute'=>'is_mortgage',
+            'value'=>$model::getMortgageList()[$model->is_mortgage]
+        ],
+        [
             'label' => $model->attributeLabels()['ipoteka_target'],
             'value' => $model::getIpotekaTargetName($model->ipoteka_target),
         ],
-        'ipoteka_size:currency',
-        'ipoteka_user:currency',
-        'ipoteka_params:ntext',
-        'ipoteka_summa:ntext',
+        'ipoteka_size',
+        'ipoteka_user',
+        'ipoteka_percent',
+        'ipoteka_last_date:date',
+        'ipoteka_grafic:ntext',
         [
             'label' => $model->attributeLabels()['ipoteka_file_dogovor'],
             'format' => 'raw',

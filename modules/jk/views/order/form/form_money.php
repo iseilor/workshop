@@ -1,6 +1,7 @@
 <?php
 
 use yii\widgets\MaskedInput;
+use yii\jui\DatePicker;
 
 ?>
 <div class="row">

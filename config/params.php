@@ -128,8 +128,22 @@ return [
                 'radixPoint' => ',',
                 'groupSeparator' => ' ',
                 'autoGroup' => true,
+                'removeMaskOnSubmit' => false,
+            ],
+            // Параметры для денежных полей
+            'clientOptionsPercent' => [
+                'max'=>100,
+                'min'=>0,
+                'rightAlign' => false,
+                'alias' => 'decimal',
+                'digits' => 2,
+                'digitsOptional' => true,
+                'radixPoint' => ',',
+                'groupSeparator' => ' ',
+                'autoGroup' => true,
                 'removeMaskOnSubmit' => true,
             ],
+
         ],
     ],
     'card' => [
