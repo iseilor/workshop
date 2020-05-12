@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?php
                 $tabs = [
                     ['name' => Icon::show('percent') . 'Проценты', 'id' => 'percent', 'tab-class' => 'active', 'selected' => 'true', 'tabs-class' => 'show active'],
-                    ['name' => Icon::show('wallet') . 'Займы', 'id' => 'zaim', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => 'show active'],
+                    ['name' => Icon::show('wallet') . 'Займы', 'id' => 'zaim', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => 'show'],
                     ['name' => Icon::show('ruble-sign') . 'Заявки', 'id' => 'order', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => 'show '],
                     ['name' => Icon::show('check') . 'Согласования', 'id' => 'check', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
                     /*['name' => Icon::show('female') . 'Супруг(а)', 'id' => 'spouse', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
