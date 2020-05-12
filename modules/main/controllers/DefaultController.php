@@ -2,7 +2,6 @@
 
 namespace app\modules\main\controllers;
 
-use app\modules\chat\models\Chat;
 use app\modules\jk\Module;
 use app\modules\main\models\ContactForm;
 use app\modules\user\models\User;

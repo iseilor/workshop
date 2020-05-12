@@ -1,9 +1,9 @@
 <?php
 
 use app\modules\user\Module;
+use yii\bootstrap\ActiveForm;
 use yii\captcha\Captcha;
 use yii\helpers\Html;
-use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */

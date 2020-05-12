@@ -2,10 +2,10 @@
 
 namespace app\components\menu;
 
-use yii\widgets\Menu;
 use yii\helpers\ArrayHelper;
-use yii\helpers\Url;
 use yii\helpers\Html;
+use yii\helpers\Url;
+use yii\widgets\Menu;
 
 class MenuActive extends Menu
 {

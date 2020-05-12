@@ -2,13 +2,14 @@
 /* @var $userChildDataProvider \yii\data\ActiveDataProvider */
 
 
-use app\components\grid\ActionColumn;
 use app\modules\jk\models\Order;
 use app\modules\jk\models\Social;
 use kartik\icons\Icon;
 use yii\grid\GridView;
 use yii\helpers\ArrayHelper;
-use yii\widgets\MaskedInput; ?>
+use yii\widgets\MaskedInput;
+
+?>
 
 <div class="row">
     <div class="col-md-4">

@@ -1,6 +1,5 @@
 <?php
 
-use app\modules\jk\models\ZaimType;
 use yii\helpers\ArrayHelper;
 use yii\jui\DatePicker;
 

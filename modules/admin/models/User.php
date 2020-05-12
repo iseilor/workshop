@@ -3,8 +3,8 @@
 namespace app\modules\admin\models;
 
 use app\modules\admin\Module;
-use yii\helpers\ArrayHelper;
 use Yii;
+use yii\helpers\ArrayHelper;
 
 class User extends \app\modules\user\models\User
 {

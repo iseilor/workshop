@@ -4,7 +4,6 @@ namespace app\modules\jk\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\modules\jk\models\Percent;
 
 /**
  * PercentSearch represents the model behind the search form of `app\modules\jk\models\Percent`.

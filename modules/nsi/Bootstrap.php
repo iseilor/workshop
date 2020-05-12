@@ -2,8 +2,8 @@
 
 namespace app\modules\nsi;
 
-use yii\base\BootstrapInterface;
 use Yii;
+use yii\base\BootstrapInterface;
 
 class Bootstrap implements BootstrapInterface
 {

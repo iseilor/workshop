@@ -2,14 +2,14 @@
 
 namespace app\modules\jk\controllers;
 
-use app\modules\jk\Module;
-use Yii;
 use app\modules\jk\models\Doc;
 use app\modules\jk\models\DocSearch;
+use app\modules\jk\Module;
+use Yii;
 use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 
 /**

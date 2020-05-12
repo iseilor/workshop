@@ -3,12 +3,11 @@
 use app\components\grid\ActionColumn;
 use app\components\grid\LinkColumn;
 use app\components\grid\SetColumn;
-use app\modules\admin\components\UserStatusColumn;
 use app\modules\admin\models\User;
 use app\modules\user\Module;
 use kartik\date\DatePicker;
-use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Html;
 use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */

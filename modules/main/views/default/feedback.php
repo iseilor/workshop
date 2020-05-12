@@ -6,10 +6,10 @@
 
 /* @var $model app\models\ContactForm */
 
-use yii\helpers\Html;
+use app\modules\main\Module;
 use yii\bootstrap\ActiveForm;
 use yii\captcha\Captcha;
-use app\modules\main\Module;
+use yii\helpers\Html;
 use yii\helpers\Url;
 
 $this->title = '<i class="fas fa-envelope"></i> ' . Module::t('module', 'Feedback');

@@ -2,8 +2,8 @@
 
 use app\components\grid\ActionColumn;
 use app\modules\news\Module;
-use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Html;
 use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */

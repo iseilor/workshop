@@ -2,12 +2,12 @@
 
 namespace app\modules\nsi\controllers;
 
-use Yii;
 use app\modules\nsi\models\Color;
 use app\modules\nsi\models\ColorSearch;
+use Yii;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * ColorController implements the CRUD actions for Color model.

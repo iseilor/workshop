@@ -2,13 +2,13 @@
 
 namespace app\modules\pulsar\controllers;
 
-use Yii;
 use app\modules\pulsar\models\Pulsar;
 use app\modules\pulsar\models\PulsarSearch;
+use Yii;
 use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * PulsarController implements the CRUD actions for Pulsar model.

@@ -2,7 +2,6 @@
 
 use app\components\grid\Value5Column;
 use app\modules\pulsar\Module;
-
 use kartik\icons\Icon;
 use yii\grid\GridView;
 

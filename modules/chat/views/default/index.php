@@ -1,7 +1,5 @@
 <?php
 
-use app\modules\chat\assets\ChatAsset;
-
 use app\modules\chat\models\Chat;
 use app\modules\chat\models\ChatSearch;
 use kartik\icons\Icon;

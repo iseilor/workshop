@@ -1,6 +1,5 @@
 <?php
 
-use app\modules\jk\models\Order;
 use yii\widgets\DetailView;
 
 ?>

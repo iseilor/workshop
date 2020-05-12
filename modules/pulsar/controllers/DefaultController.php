@@ -4,7 +4,6 @@ namespace app\modules\pulsar\controllers;
 
 use app\modules\pulsar\models\Pulsar;
 use app\modules\user\models\User;
-use app\modules\user\models\UserQuery;
 use foo\bar;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;

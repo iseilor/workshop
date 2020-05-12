@@ -4,8 +4,8 @@ use app\components\grid\ActionColumn;
 use app\components\grid\LinkColumn;
 use app\modules\jk\models\Status;
 use app\modules\jk\Module;
-use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Html;
 use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */

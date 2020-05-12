@@ -4,7 +4,6 @@ namespace app\modules\pulsar\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\modules\pulsar\models\Pulsar;
 
 /**
  * PulsarSearch represents the model behind the search form of `app\modules\pulsar\models\Pulsar`.

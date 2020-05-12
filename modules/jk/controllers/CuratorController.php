@@ -2,9 +2,7 @@
 
 namespace app\modules\jk\controllers;
 
-use app\modules\chat\models\ChatSearch;
 use app\modules\jk\models\Messages;
-use app\modules\jk\models\MessagesSearch;
 use Yii;
 use yii\web\Controller;
 

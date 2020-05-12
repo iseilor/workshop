@@ -1,7 +1,6 @@
 <?php
 
-use app\modules\jk\models\Percent;
-use app\modules\jk\Module;
+use app\modules\jk\assets\PercentAsset;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
@@ -10,8 +9,6 @@ use yii\widgets\ActiveForm;
 /* @var $model app\modules\jk\models\Percent */
 
 /* @var $form yii\widgets\ActiveForm */
-
-use app\modules\jk\assets\PercentAsset;
 
 PercentAsset::register($this);
 

@@ -4,8 +4,8 @@ namespace app\modules\user\forms;
 
 use app\modules\user\models\User;
 use app\modules\user\Module;
-use yii\base\Model;
 use Yii;
+use yii\base\Model;
 
 /**
  * Password reset form

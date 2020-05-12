@@ -2,12 +2,12 @@
 
 namespace app\modules\jk\controllers;
 
-use Yii;
 use app\modules\jk\models\Min;
 use app\modules\jk\models\MinSearch;
+use Yii;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * MinController implements the CRUD actions for Min model.

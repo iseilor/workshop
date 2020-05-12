@@ -4,7 +4,6 @@ namespace app\modules\project\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\modules\project\models\Project;
 
 /**
  * ProjectSearch represents the model behind the search form of `app\modules\project\models\Project`.

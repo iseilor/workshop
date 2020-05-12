@@ -1,19 +1,39 @@
 <?php
 
-/* @var $this yii\web\View */
+/**
+ * @var $this yii\web\View
+ */
+
+
 $this->title = '<span class="badge bg-danger">Админка</span>';
 $this->params['breadcrumbs'][] = ['label' => 'ЖК', 'url' => ['/jk']];
 $this->params['breadcrumbs'][] = $this->title;
 
+use app\modules\jk\assets\JkAdminAsset;
 use app\modules\jk\models\Order;
 use app\modules\jk\models\OrderStop;
-use app\modules\jk\assets\JkAdminAsset;
+use app\modules\jk\models\Status;
+use app\modules\nsi\models\Color;
 use kartik\icons\Icon;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\helpers\ArrayHelper;
 
 JkAdminAsset::register($this);
 
+// Заявки, сгрупированные по статусам
+$ordersGroupStatus = Order::find()
+    ->select(['COUNT(*) AS cnt','status_id'])
+    ->groupBy(['status_id'])
+    ->all();
+$ordersGroupStatus = ArrayHelper::map($ordersGroupStatus, 'status_id', 'cnt');
+$statuses = ArrayHelper::map(Status::find()->where(['id'=>array_keys($ordersGroupStatus)])->all(), 'id', 'title');
+$statusColors = ArrayHelper::map(Status::find()->where(['id'=>array_keys($ordersGroupStatus)])->all(), 'id', 'color');
+foreach ($statusColors as $key=>&$value) {
+    $value=Color::getColorValues()[$value];
+}
+
+// Отказы
 $orderCount = Order::find()->count();
 $orderStopCount = OrderStop::find()->count();
 
@@ -67,7 +87,7 @@ $orderStopCount = OrderStop::find()->count();
             <div class="card-body">
                 <div class="chart">
                     <h6>Заявки</h6>
-                    <canvas id="voted1" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                    <canvas id="orders" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
                 </div>
             </div>
         </div>
@@ -127,6 +147,10 @@ $orderStopCount = OrderStop::find()->count();
 </section>
 
 <?php
-// Передаём параметры в JS
+// Заявки, сгруппированные по статусам
+$this->registerJsVar('ordersGroupStatus',$ordersGroupStatus, yii\web\View::POS_HEAD);
+$this->registerJsVar('statuses',$statuses, yii\web\View::POS_HEAD);
+$this->registerJsVar('statusColors',$statusColors, yii\web\View::POS_HEAD);
+// Отказы
 $this->registerJsVar('orderCount', $orderCount, yii\web\View::POS_HEAD);
 $this->registerJsVar('orderStopCount', $orderStopCount, yii\web\View::POS_HEAD);

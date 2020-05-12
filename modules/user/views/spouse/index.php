@@ -3,9 +3,10 @@
 use app\components\grid\LinkColumn;
 use app\modules\user\Module;
 use kartik\icons\Icon;
-use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Html;
 use yii\widgets\Pjax;
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\user\models\SpouseSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */

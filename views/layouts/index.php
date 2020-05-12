@@ -4,12 +4,12 @@
 
 /* @var $content string */
 
+use app\assets\AppAssetAdminLTE;
 use app\widgets\Alert;
-use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
+use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
-use app\assets\AppAssetAdminLTE;
 
 AppAssetAdminLTE::register($this);
 ?>

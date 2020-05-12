@@ -1,5 +1,7 @@
 <?php
+
 use app\modules\jk\Module;
+
 /* @var $this yii\web\View */
 /* @var $model app\modules\jk\models\Zaim */
 /* @var $model app\modules\jk\models\Min */

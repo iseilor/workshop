@@ -2,12 +2,12 @@
 
 namespace app\modules\admin\controllers;
 
-use Yii;
 use app\modules\admin\models\UserSocial;
 use app\modules\admin\models\UserSocialSearch;
+use Yii;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * UserSocialController implements the CRUD actions for UserSocial model.

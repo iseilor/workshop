@@ -7,7 +7,9 @@ use app\modules\jk\models\Status;
 use kartik\icons\Icon;
 use yii\grid\GridView;
 use yii\helpers\Html;
-use yii\helpers\Url; ?>
+use yii\helpers\Url;
+
+?>
 
     <h3>Мои заявки по жилищной кампании</h3>
 <?= GridView::widget(

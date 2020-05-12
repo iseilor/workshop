@@ -7,8 +7,8 @@
 /* @var $model app\models\LoginForm */
 
 use app\modules\user\Module;
-use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use yii\helpers\Html;
 
 $this->title = $model->icon . ' ' . Module::t('module', 'Login');
 $this->params['breadcrumbs'][] = $this->title;

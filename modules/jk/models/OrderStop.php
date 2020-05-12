@@ -4,7 +4,6 @@ namespace app\modules\jk\models;
 
 use app\models\Model;
 use app\modules\jk\Module;
-use app\modules\user\models\User;
 use Yii;
 use yii\helpers\Html;
 use yii\helpers\Url;

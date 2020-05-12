@@ -1,8 +1,8 @@
 <?php
 
 use app\modules\main\Module;
-use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Html;
 use yii\widgets\ListView;
 use yii\widgets\Pjax;
 

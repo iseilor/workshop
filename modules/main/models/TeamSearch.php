@@ -4,7 +4,6 @@ namespace app\modules\main\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\modules\main\models\Team;
 use yii\db\Expression;
 
 /**

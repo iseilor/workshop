@@ -3,12 +3,11 @@
 namespace app\modules\jk\controllers;
 
 use app\modules\jk\models\OrderStopSearch;
-use Yii;
 use app\modules\jk\models\Stop;
-use app\modules\jk\models\StopSearch;
+use Yii;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * StopController implements the CRUD actions for Stop model.

@@ -2,17 +2,13 @@
 
 use app\components\grid\ActionColumn;
 use app\components\grid\LinkColumn;
-use app\modules\user\controllers\UserController;
 use app\modules\user\models\ChildSearch;
-use app\modules\user\models\User;
 use app\modules\user\Module;
-
-
 use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\helpers\Url;
-
 use yii\widgets\Pjax;
+
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\user\models\User */

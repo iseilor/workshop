@@ -10,7 +10,6 @@ use yii\helpers\Url;
 use yii\widgets\Pjax;
 
 
-
 Pjax::begin();
 echo GridView::widget([
     'dataProvider' => $dataProvider,

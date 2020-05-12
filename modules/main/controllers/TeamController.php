@@ -2,12 +2,12 @@
 
 namespace app\modules\main\controllers;
 
-use Yii;
 use app\modules\main\models\Team;
 use app\modules\main\models\TeamSearch;
+use Yii;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * TeamController implements the CRUD actions for Team model.

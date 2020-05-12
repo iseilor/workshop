@@ -1,7 +1,6 @@
 <?php
 
 use app\modules\user\Module;
-
 use kartik\file\FileInput;
 use kartik\icons\Icon;
 use yii\bootstrap\ActiveForm;

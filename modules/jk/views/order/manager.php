@@ -3,7 +3,6 @@
 use app\components\grid\LinkColumn;
 use app\modules\jk\models\Agreement;
 use app\modules\jk\models\AgreementSearch;
-use app\modules\user\models\Child;
 use yii\grid\GridView;
 use yii\helpers\Url;
 

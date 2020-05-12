@@ -2,12 +2,12 @@
 
 namespace app\modules\chat\controllers;
 
-use Yii;
 use app\modules\chat\models\Chat;
 use app\modules\chat\models\ChatSearch;
+use Yii;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * ChatController implements the CRUD actions for Chat model.

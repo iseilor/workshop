@@ -1,7 +1,5 @@
 <?php
 
-use app\modules\jk\Module;
-
 return [
 
     // Заявка

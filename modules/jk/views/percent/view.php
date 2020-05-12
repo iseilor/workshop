@@ -1,7 +1,6 @@
 <?php
 
 use app\modules\jk\Module;
-use app\modules\user\models\User;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 

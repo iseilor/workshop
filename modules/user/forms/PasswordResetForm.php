@@ -3,6 +3,7 @@ namespace app\modules\user\forms;
 
 use app\modules\user\models\User;
 use yii\base\Model;
+
 /**
  * Password reset form
  */

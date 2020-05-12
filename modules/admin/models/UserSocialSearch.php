@@ -4,7 +4,6 @@ namespace app\modules\admin\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\modules\admin\models\UserSocial;
 
 /**
  * UserSocialSearch represents the model behind the search form of `app\modules\admin\models\UserSocial`.

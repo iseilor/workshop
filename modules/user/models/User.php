@@ -3,7 +3,6 @@
 namespace app\modules\user\models;
 
 use app\modules\pulsar\models\Pulsar;
-use app\modules\user\controllers\DefaultController;
 use app\modules\user\Module;
 use Yii;
 use yii\behaviors\TimestampBehavior;

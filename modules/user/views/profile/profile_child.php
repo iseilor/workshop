@@ -2,13 +2,14 @@
 
 use app\components\grid\ActionColumn;
 use app\components\grid\LinkColumn;
-use app\modules\user\models\Child;
 use app\modules\user\models\ChildSearch;
 use app\modules\user\Module;
 use kartik\icons\Icon;
 use yii\grid\GridView;
 use yii\helpers\Html;
-use yii\helpers\Url; ?>
+use yii\helpers\Url;
+
+?>
 
 <h3>Мои дети</h3>
 <p>

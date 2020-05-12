@@ -4,7 +4,6 @@ namespace app\modules\news\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\modules\news\models\News;
 
 /**
  * NewsSearch represents the model behind the search form of `app\modules\news\models\News`.

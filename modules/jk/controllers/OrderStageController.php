@@ -2,12 +2,12 @@
 
 namespace app\modules\jk\controllers;
 
-use Yii;
 use app\modules\jk\models\OrderStage;
 use app\modules\jk\models\OrderStageSearch;
+use Yii;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * OrderStageController implements the CRUD actions for OrderStage model.

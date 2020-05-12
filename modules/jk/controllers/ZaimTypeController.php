@@ -2,12 +2,12 @@
 
 namespace app\modules\jk\controllers;
 
-use Yii;
 use app\modules\jk\models\ZaimType;
 use app\modules\jk\models\ZaimTypeSearch;
+use Yii;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * ZaimTypeController implements the CRUD actions for ZaimType model.

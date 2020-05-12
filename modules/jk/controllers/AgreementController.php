@@ -2,15 +2,15 @@
 
 namespace app\modules\jk\controllers;
 
+use app\modules\jk\models\Agreement;
+use app\modules\jk\models\AgreementSearch;
 use app\modules\jk\models\Order;
 use app\modules\jk\models\Status;
 use app\modules\user\models\User;
 use Yii;
-use app\modules\jk\models\Agreement;
-use app\modules\jk\models\AgreementSearch;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * AgreementController implements the CRUD actions for Agreement model.

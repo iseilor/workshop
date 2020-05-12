@@ -1,8 +1,12 @@
 <?php
 
+use app\modules\pulsar\assets\PulsarAsset;
 use app\modules\pulsar\Module;
 use app\modules\user\models\User;
 use kartik\icons\Icon;
+use yii\console\widgets\Table;
+use yii\grid\GridView;
+use yii\helpers\Html;
 
 /* @var $users User */
 /* @var $usersVoted User */
@@ -20,11 +24,6 @@ $this->params['breadcrumbs'][] = [
     'url' => ['index'],
 ];
 $this->params['breadcrumbs'][] = $this->title;
-
-use app\modules\pulsar\assets\PulsarAsset;
-use yii\console\widgets\Table;
-use yii\grid\GridView;
-use yii\helpers\Html;
 
 PulsarAsset::register($this);
 

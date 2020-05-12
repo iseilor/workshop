@@ -1,6 +1,8 @@
 <?php
- use yii\jui\DatePicker;
- ?>
+
+use yii\jui\DatePicker;
+
+?>
 
 <div class="row">
     <div class="col-md-4">

@@ -1,12 +1,9 @@
 <?php
 
-use app\components\grid\ActionColumn;
 use app\components\grid\LinkColumn;
-use app\modules\user\models\Child;
-use app\modules\user\Module;
 use kartik\icons\Icon;
-use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\Pjax;
 

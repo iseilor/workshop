@@ -3,9 +3,9 @@
 namespace app\modules\user\forms;
 
 use app\modules\user\models\User;
+use Yii;
 use yii\base\Model;
 use yii\db\ActiveQuery;
-use Yii;
 use yii\helpers\FileHelper;
 use yii\imagine\Image;
 use yii\web\UploadedFile;

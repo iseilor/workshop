@@ -4,9 +4,9 @@ use app\components\grid\ActionColumn;
 use app\components\grid\LinkColumn;
 use app\modules\jk\models\Status;
 use app\modules\jk\Module;
+use kartik\export\ExportMenu;
 use yii\helpers\ArrayHelper;
 use yii\widgets\Pjax;
-use kartik\export\ExportMenu;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\nsi\models\ColorSearch */

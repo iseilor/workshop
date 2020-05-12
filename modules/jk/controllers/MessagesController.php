@@ -2,13 +2,13 @@
 
 namespace app\modules\jk\controllers;
 
-use app\modules\user\models\User;
-use Yii;
 use app\modules\jk\models\Messages;
 use app\modules\jk\models\MessagesSearch;
+use app\modules\user\models\User;
+use Yii;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * MessagesController implements the CRUD actions for Messages model.

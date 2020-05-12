@@ -1,5 +1,6 @@
 <?php
 
+use app\modules\jk\assets\PercentAsset;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
@@ -12,7 +13,6 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Percents'), 'url' =>
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 
-use app\modules\jk\assets\PercentAsset;
 PercentAsset::register($this);
 ?>
 <?= $this->render('_form', [

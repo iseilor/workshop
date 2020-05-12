@@ -2,8 +2,8 @@
 
 use app\modules\jk\Module;
 use kartik\icons\Icon;
-use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 use yii\widgets\ListView;

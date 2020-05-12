@@ -3,20 +3,18 @@
 namespace app\modules\user\controllers;
 
 use app\modules\admin\models\UserSearch;
-use app\modules\jk\models\Percent;
 use app\modules\user\forms\EmailConfirmForm;
 use app\modules\user\forms\LoginForm;
-use app\modules\user\forms\PasswordResetRequestForm;
 use app\modules\user\forms\PasswordResetForm;
+use app\modules\user\forms\PasswordResetRequestForm;
 use app\modules\user\forms\SignupForm;
-use app\modules\user\models\ChildSearch;
 use app\modules\user\models\User;
+use Yii;
 use yii\base\InvalidParamException;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
-use Yii;
 use yii\web\NotFoundHttpException;
 
 class DefaultController extends Controller

@@ -86,6 +86,8 @@ class Order extends Model
 
     public $spravka_zp_file_form;
 
+    public $cnt; // Нужно для группировки
+
     /**
      * @var mixed|null
      */

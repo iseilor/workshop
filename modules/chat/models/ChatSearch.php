@@ -4,7 +4,6 @@ namespace app\modules\chat\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\modules\chat\models\Chat;
 
 /**
  * ChatSearch represents the model behind the search form of `app\modules\chat\models\Chat`.

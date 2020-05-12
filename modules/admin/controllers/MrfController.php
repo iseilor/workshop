@@ -2,12 +2,12 @@
 
 namespace app\modules\admin\controllers;
 
-use Yii;
 use app\modules\admin\models\Mrf;
 use app\modules\admin\models\MrfSearch;
+use Yii;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * MrfController implements the CRUD actions for Mrf model.

@@ -4,7 +4,6 @@ namespace app\modules\nsi\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\modules\nsi\models\Color;
 
 /**
  * ColorSearch represents the model behind the search form of `app\modules\nsi\models\Color`.

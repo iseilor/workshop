@@ -2,12 +2,12 @@
 
 namespace app\modules\jk\controllers;
 
-use Yii;
 use app\modules\jk\models\Social;
 use app\modules\jk\models\SocialSearch;
+use Yii;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * SocialController implements the CRUD actions for Social model.

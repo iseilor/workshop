@@ -2,16 +2,15 @@
 
 namespace app\modules\jk\controllers;
 
-use app\modules\jk\Module;
-use app\modules\user\models\User;
-use Yii;
 use app\modules\jk\models\Percent;
 use app\modules\jk\models\PercentSearch;
+use app\modules\user\models\User;
+use Yii;
 use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 use yii\httpclient\Response;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 use yii\widgets\ActiveForm;
 
 /**

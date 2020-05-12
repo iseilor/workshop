@@ -2,12 +2,12 @@
 
 namespace app\modules\news\controllers;
 
-use Yii;
 use app\modules\news\models\News;
 use app\modules\news\models\NewsSearch;
+use Yii;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * NewsController implements the CRUD actions for News model.

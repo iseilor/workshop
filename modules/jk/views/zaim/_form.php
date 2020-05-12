@@ -1,22 +1,20 @@
 <?php
 
 
-use app\modules\jk\Module;
+use app\modules\jk\assets\ZaimAsset;
 use kartik\icons\Icon;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\jui\DatePicker;
 use yii\widgets\ActiveForm;
+use yii\widgets\MaskedInput;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\jk\models\Zaim */
 /* @var $form yii\widgets\ActiveForm */
 
 /* @var $mins app\modules\jk\models\Min */
-
-use app\modules\jk\assets\ZaimAsset;
-use yii\widgets\MaskedInput;
 
 ZaimAsset::register($this);
 

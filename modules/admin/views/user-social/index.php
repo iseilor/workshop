@@ -1,8 +1,8 @@
 <?php
 
 use app\components\grid\ActionColumn;
-use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\admin\models\UserSocialSearch */

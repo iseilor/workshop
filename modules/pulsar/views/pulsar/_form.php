@@ -1,8 +1,8 @@
 <?php
 
+use kartik\rating\StarRating;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use kartik\rating\StarRating;
 
 
 /* @var $this yii\web\View */

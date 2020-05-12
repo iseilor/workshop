@@ -2,12 +2,12 @@
 
 namespace app\modules\jk\controllers;
 
-use Yii;
 use app\modules\jk\models\Status;
 use app\modules\jk\models\StatusSearch;
+use Yii;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * OrderStatusController implements the CRUD actions for OrderStatus model.

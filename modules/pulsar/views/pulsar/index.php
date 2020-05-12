@@ -2,9 +2,10 @@
 
 use app\components\grid\ActionColumn;
 use app\modules\pulsar\Module;
-use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Html;
 use yii\widgets\Pjax;
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\pulsar\models\PulsarSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */

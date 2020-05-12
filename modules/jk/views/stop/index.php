@@ -5,9 +5,9 @@ use app\components\grid\LinkColumn;
 use app\modules\jk\models\Status;
 use app\modules\jk\Module;
 use kartik\icons\Icon;
+use yii\grid\GridView;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
-use yii\grid\GridView;
 use yii\helpers\Url;
 use yii\widgets\Pjax;
 

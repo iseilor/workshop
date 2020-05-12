@@ -2,13 +2,13 @@
 
 namespace app\modules\jk\controllers;
 
-use Yii;
 use app\modules\jk\models\Faq;
 use app\modules\jk\models\FaqSearch;
+use Yii;
 use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * FaqController implements the CRUD actions for Faq model.
