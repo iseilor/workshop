@@ -237,8 +237,18 @@ class OrderController extends Controller
         ]);
     }
 
-    // Проверка куратором
     public function actionCheck($id)
+    {
+        return $this->render(
+            'check/check',
+            [
+                'model' => $this->findModel($id),
+            ]
+        );
+    }
+
+    // Проверка куратором
+    public function actionCheck0($id)
     {
         $orderStage = new OrderStage();
 
@@ -257,7 +267,7 @@ class OrderController extends Controller
         }
 
         return $this->render(
-            'check',
+            'check0',
             [
                 'order' => $this->findModel($id),
                 'stage' => $orderStage,

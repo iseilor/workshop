@@ -70,6 +70,36 @@ class Order extends Model
 
     public $file_social_contract_form;
 
+    public $jp_dogovor_buy_file_form;
+
+    public $jp_act_file_form;
+
+    public $jp_egrp_file_form;
+
+    public $jp_own_land_file_form;
+
+    public $jp_own_house_file_form;
+
+    public $jp_dogovor_bron_file_form;
+
+    public $jp_pravo_document_file_form;
+
+    public $jp_grad_plane_file_form;
+
+    public $jp_scheme_plane_org_file_form;
+
+    public $jp_building_permit_file_form;
+
+    public $jp_project_house_file_form;
+
+    public $jp_construction_estimate_file_form;
+
+    public $jp_time_grafic_build_file_form;
+
+    public $jp_photo_file_form;
+
+    public $jp_template_report_file_form;
+
     public $ipoteka_file_dogovor_form = '';
 
     public $ipoteka_file_grafic_first_form = '';
@@ -123,8 +153,26 @@ class Order extends Model
 
 
             // Жилое помещение
-            [['jp_type', 'jp_params', 'jp_date', 'jp_dist', 'jp_own', 'jp_part'], 'safe'],
+            [
+                [
+                    'jp_type',
+                    'jp_address',
+                    'jp_room_count',
+                    'jp_area',
+                    'jp_cost',
+                    'jp_dogovor_date',
+                    'jp_registration_date',
+                    'jp_date',
+                    'jp_dist',
+                    'jp_own',
+                    'jp_part',
+                ],
+                'safe',
+            ],
             [['jp_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'jp_date'],
+            [['jp_dogovor_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'jp_dogovor_date'],
+            [['jp_registration_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'jp_registration_date'],
+
 
             // Ипотека
             [['is_mortgage', 'ipoteka_target', 'ipoteka_size', 'ipoteka_user', 'ipoteka_grafic'], 'required'],
@@ -190,7 +238,6 @@ class Order extends Model
             'typeName' => Module::t('order', 'Type'),
             'statusName' => Module::t('order', 'Status'),
 
-
             // Семья
             'social_id' => Module::t('order', 'Social'),
             'resident_count' => Module::t('order', 'Resident Count'),
@@ -220,11 +267,52 @@ class Order extends Model
 
             // Жилое помещение
             'jp_type' => Module::t('order', 'Jp Type'),
-            'jp_params' => Module::t('order', 'Jp Params'),
+            'jp_address' => Module::t('order', 'JP Address'),
+            'jp_room_count' => Module::t('order', 'JP Room Count'),
+            'jp_area' => Module::t('order', 'JP Area'),
+            'jp_cost' => Module::t('order', 'JP Cost'),
+            'jp_dogovor_date' => Module::t('order', 'JP Dogovor Date'),
+            'jp_registration_date' => Module::t('order', 'JP Registration Date'),
             'jp_date' => Module::t('order', 'Jp Date'),
             'jp_dist' => Module::t('order', 'Jp Dist'),
             'jp_own' => Module::t('order', 'Jp Own'),
             'jp_part' => Module::t('order', 'Jp Part'),
+
+            // Жилое помещение. Файлы
+            'jp_dogovor_buy_file_form' => Module::t('order', 'JP Dogovor Buy'),
+            'jp_act_file_form' => Module::t('order', 'JP Act'),
+            'jp_egrp_file_form' => Module::t('order', 'JP EGRP'),
+            'jp_own_land_file_form' => Module::t('order', 'JP Own Land'),
+            'jp_own_house_file_form' => Module::t('order', 'JP Own House'),
+
+            'jp_dogovor_buy_file' => Module::t('order', 'JP Dogovor Buy'),
+            'jp_act_file' => Module::t('order', 'JP Act'),
+            'jp_egrp_file' => Module::t('order', 'JP EGRP'),
+            'jp_own_land_file' => Module::t('order', 'JP Own Land'),
+            'jp_own_house_file' => Module::t('order', 'JP Own House'),
+
+            // Жилое помещения. Займ. Файлы
+            'jp_dogovor_bron_file' => Module::t('order', 'JP Dogovor Bron'),
+            'jp_pravo_document_file' => Module::t('order', 'JP Pravo Document'),
+            'jp_grad_plane_file' => Module::t('order', 'JP Grad Plan'),
+            'jp_scheme_plane_org_file' => Module::t('order', 'JP Scheme Plane Org'),
+            'jp_building_permit_file' => Module::t('order', 'JP Building Permit'),
+            'jp_project_house_file' => Module::t('order', 'JP Project House'),
+            'jp_construction_estimate_file' => Module::t('order', 'JP Construction Estimate'),
+            'jp_time_grafic_build_file' => Module::t('order', 'JP Time Grafic Build'),
+            'jp_photo_file' => Module::t('order', 'JP Photo'),
+            'jp_template_report_file' => Module::t('order', 'JP Template'),
+
+            'jp_dogovor_bron_file_form' => Module::t('order', 'JP Dogovor Bron'),
+            'jp_pravo_document_file_form' => Module::t('order', 'JP Pravo Document'),
+            'jp_grad_plane_file_form' => Module::t('order', 'JP Grad Plan'),
+            'jp_scheme_plane_org_file_form' => Module::t('order', 'JP Scheme Plane Org'),
+            'jp_building_permit_file_form' => Module::t('order', 'JP Building Permit'),
+            'jp_project_house_file_form' => Module::t('order', 'JP Project House'),
+            'jp_construction_estimate_file_form' => Module::t('order', 'JP Construction Estimate'),
+            'jp_time_grafic_build_file_form' => Module::t('order', 'JP Time Grafic Build'),
+            'jp_photo_file_form' => Module::t('order', 'JP Photo'),
+            'jp_template_report_file_form' => Module::t('order', 'JP Template'),
 
             // Ипотека
             'ipoteka_target' => Module::t('order', 'Ipoteka Target'),
@@ -271,6 +359,9 @@ class Order extends Model
     public function attributeHints()
     {
         return [
+            'jp_building_permit_file_form' => 'Документ, выдаваемый федеральным органом исполнительной власти, органом исполнительной власти субьекта РФ или органом местного самоуправления в соответствии с их компетенции. схема планировочной организации земельного участка с обозначением места размещения объекта индивидуального жилищного строительства',
+            'jp_scheme_plane_org_file_form'=>'C обозначением места размещения объекта индивидуального жилищного строительства/дома',
+
             'ipoteka_last_date' => 'Последняя дата платежа по ипотечному договору',
             'ipoteka_grafic' => 'Сумма процентов подлежащая к уплате за текущий год согласно Графику платежей ипточеного договора (по месячно, без учета основного долга).<br/>Пример:<br/>02.01.2020 15 000 руб<br/>02.02.2020 14 500 руб.<br/>...',
             'money_oklad' => 'Указывается на основании 2НДФЛ',
@@ -306,6 +397,23 @@ class Order extends Model
             'file_social_protection',       // Справка из социальной защиты
             'file_rent',                    // Договор аренды
             'file_social_contract',         // Договор социального найма
+
+            'jp_dogovor_buy_file',
+            'jp_act_file',
+            'jp_egrp_file',
+            'jp_own_land_file',
+            'jp_own_house_file',
+
+            'jp_dogovor_bron_file',
+            'jp_pravo_document_file',
+            'jp_grad_plane_file',
+            'jp_scheme_plane_org_file',
+            'jp_building_permit_file',
+            'jp_project_house_file',
+            'jp_construction_estimate_file',
+            'jp_time_grafic_build_file',
+            'jp_photo_file',
+            'jp_template_report_file',
 
             'ipoteka_file_dogovor',
             'ipoteka_file_grafic_first',

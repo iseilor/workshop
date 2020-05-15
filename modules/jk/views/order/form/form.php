@@ -12,6 +12,17 @@ use yii\widgets\ActiveForm;
 /* @var $userChildDataProvider \yii\data\ActiveDataProvider */
 
 JkOrderAsset::register($this);
+
+// Классы по ипотеки и по займу
+$field_percent = 'd-none';
+$field_zaim = 'd-none';
+if (isset($model->is_mortgage)) {
+    if ($model->is_mortgage) {
+        $field_percent = '';
+    } else {
+        $field_zaim = '';
+    }
+}
 ?>
     <div class="row">
         <div class="col-md-12">
@@ -19,7 +30,7 @@ JkOrderAsset::register($this);
                 <div class="card-header" data-intro="This is a tooltip!">
                     <h3 class="card-title"><i class="fas fa-ruble-sign"></i> Оформление заявки на участие в Жилищной Кампании</h3>
                 </div>
-                <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data','id'=>'jk-order']]); ?>
+                <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data', 'id' => 'jk-order']]); ?>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-12">
@@ -32,8 +43,8 @@ JkOrderAsset::register($this);
                                         ['name' => Icon::show('female') . 'Супруг(а)', 'id' => 'spouse', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
                                         ['name' => Icon::show('baby') . 'Дети', 'id' => 'child', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
                                         ['name' => Icon::show('users') . 'Семья', 'id' => 'family', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
-                                        ['name' => Icon::show('home') . 'ЖП', 'id' => 'house', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
                                         ['name' => Icon::show('file-invoice-dollar') . 'Ипотека', 'id' => 'ipoteka', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
+                                        ['name' => Icon::show('home') . 'ЖП', 'id' => 'house', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
                                         ['name' => Icon::show('ruble-sign') . 'Финансы', 'id' => 'money', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
                                     ];
                                     echo Html::ul($tabs, [
@@ -60,33 +71,29 @@ JkOrderAsset::register($this);
                                     <div class="tab-content" id="custom-tabs-three-tabContent">
                                         <?php foreach ($tabs as $tab): ?>
                                             <div class="tab-pane fade <?= $tab['tabs-class'] ?>" id="tabs-<?= $tab['id'] ?>" role="tabpanel" aria-labelledby="tab-<?= $tab['id'] ?>">
-                                                <?= $this->render('form_' . $tab['id'], ['model' => $model, 'form' => $form]) ?>
+                                                <?= $this->render('form_' . $tab['id'], [
+                                                    'model' => $model,
+                                                    'form' => $form,
+                                                    'field_percent' => $field_percent,
+                                                    'field_zaim' => $field_zaim,
+                                                ]) ?>
                                             </div>
                                         <?php endforeach; ?>
                                     </div>
-
-
-
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-
-
-
                 <div class="card-footer">
                     <?= Html::button(
-                        Icon::show('info').'Запустить помощника',
+                        Icon::show('info') . 'Запустить помощника',
                         [
                             'class' => 'btn btn-primary',
                             'id' => 'btn-helper',
-                            'onclick'=>"startIntro();"
+                            'onclick' => "startIntro();",
                         ]
                     ) ?>
-
-
                     <?= Html::submitButton(
                         '<i class="fas fa-comments"></i> Написать куратору',
                         [
@@ -94,11 +101,8 @@ JkOrderAsset::register($this);
                             'id' => 'btn-message',
                         ]
                     ) ?>
-
-
-
                     <?= Html::submitButton(
-                        Icon::show('save').'Сохранить заявку',
+                        Icon::show('save') . 'Сохранить заявку',
                         [
                             'class' => 'btn btn-success float-right',
                             'id' => 'btn-save',
@@ -106,14 +110,9 @@ JkOrderAsset::register($this);
                             'name' => 'save',
                         ]
                     ) ?>
-
-
                 </div>
                 <?php ActiveForm::end(); ?>
-
             </div>
-
-
         </div>
     </div>
 
@@ -147,6 +146,17 @@ $(document).ready(function() {
             $('.is-child').addClass('hide');
         }
     });
+    
+    // Перевключение на Проценты/Заим
+    $('#order-is_mortgage').on('change', function() {
+        if ($(this).val()==1){
+            $('.field-percent').removeClass('d-none');
+            $('.field-zaim').addClass('d-none');
+        }else{
+            $('.field-percent').addClass('d-none');
+            $('.field-zaim').removeClass('d-none');
+        }
+    });
 });
 
 // Запоминаем активную вкладку
@@ -174,10 +184,5 @@ $('#jk-order').on('afterValidate', function(event, messages, errorAttributes){
 JS;
 $this->registerJs($script, yii\web\View::POS_LOAD);
 
-//$this->registerCssFile("@web/libs/driver.js-master/dist/driver.min.css",['position' => \yii\web\View::POS_HEAD]);
-//$this->registerJsFile("@web/libs/driver.js-master/dist/driver.min.js",['depends' => [\yii\web\JqueryAsset::class]]);
-//$this->registerJsFile("@app/modules/jk/web/js/jk-order-driver.js",['position' => \yii\web\View::POS_LOAD]);
-
-$this->registerCssFile("@web/libs/intro.js/minified/introjs.min.css",['position' => \yii\web\View::POS_HEAD]);
-$this->registerJsFile("@web/libs/intro.js/minified/intro.min.js",['depends' => [\yii\web\JqueryAsset::class]]);
-
+$this->registerCssFile("@web/libs/intro.js/minified/introjs.min.css", ['position' => \yii\web\View::POS_HEAD]);
+$this->registerJsFile("@web/libs/intro.js/minified/intro.min.js", ['depends' => [\yii\web\JqueryAsset::class]]);

@@ -6,17 +6,6 @@ use yii\widgets\MaskedInput;
 /**
  * @var \app\modules\jk\models\Order $model
  */
-
-// Классы по ипотеки и по займу
-$for_ipoteka = 'd-none';
-$for_zaim = 'd-none';
-if (isset($model->is_mortgage)) {
-    if ($model->is_mortgage) {
-        $for_ipoteka = '';
-    } else {
-        $for_zaim = '';
-    }
-}
 ?>
 
     <div class="row">
@@ -25,11 +14,11 @@ if (isset($model->is_mortgage)) {
             <?= $form->field($model, 'ipoteka_target')->dropDownList($model->getIpotekaTargetList(), ['prompt' => 'Выберите ...']); ?>
             <?= $form->field($model, 'ipoteka_size')->widget(MaskedInput::class, ['clientOptions' => Yii::$app->params['widget']['MaskedInput']['clientOptionsMoney']]); ?>
             <?= $form->field($model, 'ipoteka_user')->widget(MaskedInput::class, ['clientOptions' => Yii::$app->params['widget']['MaskedInput']['clientOptionsMoney']]); ?>
-            <?= $form->field($model, 'ipoteka_percent', ['options' => ['class' => 'form-group for-ipoteka ' . $for_ipoteka]])->widget(MaskedInput::class, [
+            <?= $form->field($model, 'ipoteka_percent', ['options' => ['class' => 'form-group field-percent ' . $field_percent]])->widget(MaskedInput::class, [
                 'clientOptions' => Yii::$app->params['widget']['MaskedInput']['clientOptionsPercent'],
             ]);
             ?>
-            <?= $form->field($model, 'ipoteka_last_date', ['options' => ['class' => 'form-group for-ipoteka ' . $for_ipoteka]])->widget(DatePicker::class,
+            <?= $form->field($model, 'ipoteka_last_date', ['options' => ['class' => 'form-group field-percent ' . $field_percent]])->widget(DatePicker::class,
                 [
                     'language' => 'ru',
                     'dateFormat' => 'dd.MM.yyyy',
@@ -43,7 +32,7 @@ if (isset($model->is_mortgage)) {
             ) ?>
         </div>
         <div class="col-md-4">
-            <div class="for-ipoteka <?= $for_ipoteka ?>">
+            <div class="field-percent <?= $field_percent ?>">
                 <?= $form->field($model, 'ipoteka_file_dogovor_form', [
                     'template' => getFileInputTemplate($model->ipoteka_file_dogovor, $model->attributeLabels()['ipoteka_file_dogovor'] . '.pdf'),
                 ])->fileInput(['class' => 'custom-file-input']) ?>
@@ -64,7 +53,7 @@ if (isset($model->is_mortgage)) {
                 ])->fileInput(['class' => 'custom-file-input']) ?>
             </div>
 
-            <div class="for-zaim <?= $for_zaim ?>">
+            <div class="field-zaim <?= $field_zaim ?>">
                 <?= $form->field($model, 'ipoteka_file_bank_approval_form', [
                     'template' => getFileInputTemplate($model->ipoteka_file_bank_approval, $model->attributeLabels()['ipoteka_file_bank_approval'] . '.pdf'),
                 ])->fileInput(['class' => 'custom-file-input']) ?>
@@ -75,21 +64,3 @@ if (isset($model->is_mortgage)) {
         </div>
 
     </div>
-
-<?php
-$script = <<< JS
-$(document).ready(function() {
-    $('#order-is_mortgage').on('change', function() {
-        if ($(this).val()==1){
-            $('.for-ipoteka').removeClass('d-none');
-            $('.for-zaim').addClass('d-none');
-        }else{
-            $('.for-ipoteka').addClass('d-none');
-            $('.for-zaim').removeClass('d-none');
-        }
-        
-    });
-});
-JS;
-$this->registerJs($script, yii\web\View::POS_READY);
-?>

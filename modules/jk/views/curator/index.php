@@ -155,7 +155,14 @@ $js = <<<JS
                 data: $(this).serialize(),
                 success: function (result) {
                     $('#chat-form').find('input').val('');
-                    $("html, body").animate({ scrollTop: $(document).height() }, "slow");
+                    //$("html, body").animate({ scrollTop: $(document).height() }, "slow");
+                     $.pjax.reload({
+                        container: '#pjax-messages',
+                        async: true,
+                        timeout: false
+                     }).done(function() {
+                        
+                     });
                 },
                 error: function () {
                     alert('Ошибка')
@@ -165,7 +172,7 @@ $js = <<<JS
         });
 
         // Обновление списка сообщений
-        setInterval(function(){
+        /*setInterval(function(){
              $.pjax.reload({
                 container: '#pjax-messages',
                 async: true,
@@ -173,7 +180,7 @@ $js = <<<JS
              }).done(function() {
                 
              });
-        }, 1000);
+        }, 1000);*/
 JS;
 $this->registerJs($js);
 ?>

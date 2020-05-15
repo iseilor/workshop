@@ -1,23 +1,35 @@
 <?php
 
+
+use kartik\icons\Icon;
+use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\DetailView;
 
-?>
-    <!--'jp_type' => $this->integer(),            // Тип жилого помещения
-    'jp_params' => $this->text(),             // Параметры жилого помещения
-    'jp_date' => $this->integer(),            // Дата сдачи жилого помещения
-    'jp_dist' => $this->integer(),            // Расстояние до рабочего места
-    'jp_own' => $this->integer(),             // Тип собственности жилого помещения
-    'jp_part'=>$this->text(),
-    -->
-<?= DetailView::widget([
+
+// Путь до файла в этом VIEW
+function filePath($model, $attr)
+{
+    return ($model->{$attr}) ? Html::a(
+        Icon::show('file-pdf') . $model->attributeLabels()[$attr],
+        Url::to(['/' . Yii::$app->params['module']['jk']['order']['filePath'] . $model->id . '/' . $model->{$attr}]),
+        ['target' => '_blank']) : '';
+}
+
+
+echo DetailView::widget([
     'model' => $model,
     'attributes' => [
         [
             'label' => $model->attributeLabels()['jp_type'],
             'value' => $model::getJPTypeName($model->jp_type),
         ],
-        'jp_params',
+        'jp_address' ,
+        'jp_room_count',
+        'jp_area',
+        'jp_cost',
+        'jp_dogovor_date:date',
+        'jp_registration_date:date',
         'jp_date:date',
         [
             'label' => $model->attributeLabels()['jp_own'],
@@ -25,26 +37,82 @@ use yii\widgets\DetailView;
         ],
         'jp_part',
         'jp_dist',
-        /*[
-            'label' => 'Номер заявки',
-            'value' => $model->id,
-        ],
-        'created_at:datetime',
+
         [
-            'label' => 'Автор',
+            'attribute' => 'jp_dogovor_buy_file',
             'format' => 'raw',
-            'value' => $model->getCreatedUserLink(),
+            'value' => filePath($model, 'jp_dogovor_buy_file'),
         ],
-        'updated_at:datetime',
         [
-            'label' => 'Кем изменено',
+            'attribute' => 'jp_act_file',
             'format' => 'raw',
-            'value' => $model->getUpdatedUserLink(),
+            'value' => filePath($model, 'jp_act_file'),
         ],
         [
-            'attribute' => 'is_participate',
-            'label' => 'Ранее участвовали в программе',
-            'value' => ($model->is_participate) ? $model->getParticipateList()[$model->is_participate] : 'Не указано',
-        ],*/
+            'attribute' => 'jp_egrp_file',
+            'format' => 'raw',
+            'value' => filePath($model, 'jp_egrp_file'),
+        ],
+        [
+            'attribute' => 'jp_own_land_file',
+            'format' => 'raw',
+            'value' => filePath($model, 'jp_own_land_file'),
+        ],
+        [
+            'attribute' => 'jp_own_house_file',
+            'format' => 'raw',
+            'value' => filePath($model, 'jp_own_house_file'),
+        ],
+
+        [
+            'attribute' => 'jp_dogovor_bron_file',
+            'format' => 'raw',
+            'value' => filePath($model, 'jp_dogovor_bron_file'),
+        ],
+        [
+            'attribute' => 'jp_pravo_document_file',
+            'format' => 'raw',
+            'value' => filePath($model, 'jp_pravo_document_file'),
+        ],
+        [
+            'attribute' => 'jp_grad_plane_file',
+            'format' => 'raw',
+            'value' => filePath($model, 'jp_grad_plane_file'),
+        ],
+        [
+            'attribute' => 'jp_scheme_plane_org_file',
+            'format' => 'raw',
+            'value' => filePath($model, 'jp_scheme_plane_org_file'),
+        ],
+        [
+            'attribute' => 'jp_building_permit_file',
+            'format' => 'raw',
+            'value' => filePath($model, 'jp_building_permit_file'),
+        ],
+        [
+            'attribute' => 'jp_project_house_file',
+            'format' => 'raw',
+            'value' => filePath($model, 'jp_project_house_file'),
+        ],
+        [
+            'attribute' => 'jp_construction_estimate_file',
+            'format' => 'raw',
+            'value' => filePath($model, 'jp_construction_estimate_file'),
+        ],
+        [
+            'attribute' => 'jp_time_grafic_build_file',
+            'format' => 'raw',
+            'value' => filePath($model, 'jp_time_grafic_build_file'),
+        ],
+        [
+            'attribute' => 'jp_photo_file',
+            'format' => 'raw',
+            'value' => filePath($model, 'jp_photo_file'),
+        ],
+        [
+            'attribute' => 'jp_template_report_file',
+            'format' => 'raw',
+            'value' => filePath($model, 'jp_template_report_file'),
+        ],
     ],
-]) ?>
+]);

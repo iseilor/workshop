@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'deleted_by',
             'user_id',
             'message:ntext',
-            'view_at',
+            //'view_at',
         ],
     ]) ?>
 

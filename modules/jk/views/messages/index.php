@@ -126,7 +126,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 );
                 Pjax::end();
                 ?>
-
             </div>
             <div class="card-footer">
                 <?php $form = ActiveForm::begin(
@@ -137,7 +136,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ]
                 ); ?>
                 <div class="input-group">
-                    <?= $form->field($message, 'user_id')->hiddenInput(['value' => $user->id]); ?>
+                    <?= $form->field($message, 'user_id',['options'=>['class'=>'d-none']])->hiddenInput(['value' => $user->id])->label(false);; ?>
                     <?= $form->field($message, 'message', ['template' => '{input}']); ?>
                     <span class="input-group-append">
                         <?= Html::submitButton(Yii::$app->params['btn']['send']['icon'] . ' ' . Yii::t('app', 'Send'), ['class' => 'btn btn-primary', 'id' => 'btn-message-send']) ?>
@@ -161,7 +160,12 @@ $js = <<<JS
                 data: $(this).serialize(),
                 success: function (result) {
                     $('#chat-form').find('input').val('');
-                    $("html, body").animate({ scrollTop: $(document).height() }, "slow");
+                    //$("html, body").animate({ scrollTop: $(document).height() }, "slow");
+                    $.pjax.reload({
+                    container: '#pjax-messages',
+                    async: true,
+                    timeout: false
+                 });
                 },
                 error: function () {
                     alert('Ошибка')

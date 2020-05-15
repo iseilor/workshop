@@ -69,14 +69,9 @@ $snilsPath = Yii::$app->homeUrl . Yii::$app->params['module']['user']['snils']['
                     'updated_at:datetime',
                     'updated_by',
 
-                    'target_mortgage',
-                    'property_type',
 
-                    'salary',
-                    'total_sum_income',
-                    'total_sum_nalog',
-                    'month_pay',
-                    'month_my_pay'
+
+
                 ],
             ]
         ) ?>
