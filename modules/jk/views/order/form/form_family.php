@@ -19,14 +19,17 @@ use yii\widgets\MaskedInput;
             $params = ['prompt' => 'Выберите'];
             echo $form->field($model, 'social_id')->dropDownList($items, $params);
         ?>
-        <?= $form->field($model, 'resident_count')->textInput(); ?>
-        <?=$form->field($model, 'resident_type')->dropDownList(Order::getResidentTypeList(),  ['prompt' => 'Выберите']); ?>
         <?= $form->field($model, 'file_family_big_form', [
             'template' => getFileInputTemplate($model->file_family_big, $model->attributeLabels()['file_family_big'] . '.pdf'),
         ])->fileInput(['class' => 'custom-file-input']) ?>
         <?= $form->field($model, 'file_social_protection_form', [
             'template' => getFileInputTemplate($model->file_social_protection, $model->attributeLabels()['file_social_protection'] . '.pdf'),
         ])->fileInput(['class' => 'custom-file-input']) ?>
+
+
+        <?= $form->field($model, 'resident_count')->textInput(); ?>
+        <?=$form->field($model, 'resident_type')->dropDownList(Order::getResidentTypeList(),  ['prompt' => 'Выберите']); ?>
+
     </div>
     <div class="col-md-4">
         <?= $form->field($model, 'family_address')->textarea(); ?>
@@ -34,13 +37,15 @@ use yii\widgets\MaskedInput;
         <?= $form->field($model, 'file_rent_form', [
             'template' => getFileInputTemplate($model->file_rent, $model->attributeLabels()['file_rent'] . '.pdf'),
         ])->fileInput(['class' => 'custom-file-input']) ?>
+
+        <?= $form->field($model, 'family_rent')->textarea(['rows'=>5]); ?>
         <?= $form->field($model, 'file_social_contract_form', [
             'template' => getFileInputTemplate($model->file_social_contract, $model->attributeLabels()['file_social_contract'] . '.pdf'),
         ])->fileInput(['class' => 'custom-file-input']) ?>
     </div>
     <div class="col-md-4">
-        <?= $form->field($model, 'family_own')->textarea(); ?>
-        <?= $form->field($model, 'family_rent')->textarea(); ?>
-        <?= $form->field($model, 'family_deal')->textarea(); ?>
+        <?= $form->field($model, 'family_own')->textarea(['rows'=>10]); ?>
+
+        <?= $form->field($model, 'family_deal')->textarea(['rows'=>10]); ?>
     </div>
 </div>
