@@ -351,4 +351,9 @@ class Percent extends \yii\db\ActiveRecord
         // Не больше 1 млн.руб
         $this->compensation_count = min($maxMoney, $this->percent_count, 1000000);
     }
+
+    public function getOrder()
+    {
+        return $this->hasOne(Order::class, ['percent_id' => 'id']);
+    }
 }
