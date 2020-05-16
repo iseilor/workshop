@@ -19,7 +19,7 @@ use yii\helpers\Url;
     </div>
     <div class="col-md-6">
         <?= $form->field($model, 'is_participate')->dropDownList($model->getParticipateList(), ['prompt' => 'Выберите ...']); ?>
-
-
+        <?=$form->field($model,'percent_id',['options'=>['class'=>'d-none']])->hiddenInput();?>
+        <?=$form->field($model,'zaim_id',['options'=>['class'=>'d-none']])->hiddenInput();?>
     </div>
 </div>

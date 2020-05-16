@@ -139,14 +139,15 @@ class Order extends Model
 
             // Общие параметры заявки
             [['is_participate', 'is_mortgage'], 'required'],
+            [['percent_id','zaim_id'],'safe'],
             [['is_agree_personal_data'], 'required'],
             [['is_agree_personal_data'], 'compare', 'compareValue' => 1, 'message' => 'Обязательно дать согласие на обработку персональных данных'],
             [['file_agree_personal_data_form'], 'safe'],
             [['file_agree_personal_data_form'], 'file', 'extensions' => 'pdf, docx', 'maxSize' => '2048000'],
 
             // Семья
-            [['social_id', 'resident_count', 'resident_type', 'family_deal', 'resident_own','family_own','family_address'], 'required'],
-            [[ 'family_rent'], 'safe'],
+            [['social_id', 'resident_count', 'resident_type', 'family_deal', 'resident_own', 'family_own', 'family_address'], 'required'],
+            [['family_rent'], 'safe'],
             [['file_family_big_form', 'file_social_protection_form', 'file_rent_form', 'file_social_contract_form'], 'file', 'skipOnEmpty' => true, 'extensions' => 'pdf', 'maxSize' => '2048000'],
 
             // Супруга
@@ -375,9 +376,9 @@ class Order extends Model
                             Иванова И.И. - сделок не было',
             'family_address' => '<strong>Пример:</strong> 111111 г. Москва, ул. Нагатинская, д.1, стр.26, кв. 200, собственность моей матери, 2-х комнатная квартира, общей площадью 43 кв.м., фактически проживает 10 человек (с соседями/ родственниками).',
             'resident_own' => 'Если фактический адрес проживания отличается от адреса регистрации, то по фактическому адресу уточняется чья это собственность',
-            'family_rent'=>'Договор найма либо у Пользователя, либо Пользователь проживает в квартире, оформленной по договору социального найма.<br/><strong>Пример:</strong> ФИО, кол-во комнат, адрес, общая площадь',
-            'file_rent_form'=>'Договор аренды (при налии аренды)',
-            'file_social_contract_form'=>'Копия договора о социальном найме',
+            'family_rent' => 'Договор найма либо у Пользователя, либо Пользователь проживает в квартире, оформленной по договору социального найма.<br/><strong>Пример:</strong> ФИО, кол-во комнат, адрес, общая площадь',
+            'file_rent_form' => 'Договор аренды (при налии аренды)',
+            'file_social_contract_form' => 'Копия договора о социальном найме',
 
             'jp_building_permit_file_form' => 'Документ, выдаваемый федеральным органом исполнительной власти, органом исполнительной власти субьекта РФ или органом местного самоуправления в соответствии с их компетенции. схема планировочной организации земельного участка с обозначением места размещения объекта индивидуального жилищного строительства',
             'jp_scheme_plane_org_file_form' => 'C обозначением места размещения объекта индивидуального жилищного строительства/дома',
@@ -622,5 +623,19 @@ class Order extends Model
         // Заменяем запятые на точки
         $this->ipoteka_percent = str_replace(",", ".", $this->ipoteka_percent);
         return parent::beforeValidate();
+    }
+
+    // Загружаем данные из калькулятора процентов
+    public function loadDataPercent($percent_id)
+    {
+        $percent = Percent::findOne($percent_id);
+        $this->percent_id = $percent_id;
+        $this->is_mortgage = 1;
+        $this->resident_count = $percent->family_count;
+        $this->jp_area = $percent->area_buy;
+        $this->jp_cost = $percent->cost_total;
+        $this->ipoteka_user = $percent->cost_user;
+        $this->ipoteka_size = $percent->bank_credit;
+        $this->ipoteka_percent = $percent->percent_rate;
     }
 }

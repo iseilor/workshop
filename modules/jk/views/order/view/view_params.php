@@ -1,5 +1,6 @@
 <?php
 
+use app\modules\jk\models\Order;
 use kartik\icons\Icon;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -15,6 +16,16 @@ use yii\widgets\DetailView;
         ],
         'created_at:datetime',
         'typeName',
+        [
+            'label'=>'Калькулятор',
+            'format' => 'raw',
+            'value'  => function ($data) {
+                if ($data->type==Order::TYPE_PERCENT && $data->percent_id){
+                    return Html::a('Проценты №'.$data->percent_id,Url::to(['/jk/percent/update','id'=>$data->percent_id],true));
+                }
+
+            }
+        ],
         [
             'label' => 'Статус',
             'format' => 'raw',

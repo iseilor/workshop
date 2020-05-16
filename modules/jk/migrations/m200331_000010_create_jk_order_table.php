@@ -31,6 +31,9 @@ class m200331_000010_create_jk_order_table extends Migration
                 'deleted_at' => $this->integer(),
                 'deleted_by' => $this->integer(),
 
+                'percent_id'=>$this->integer(), // Если заявка создана на основании калькулятора процентов
+                'zaim_id'=>$this->integer(),    // Если заявка создана на основании калькулятора займа
+
                 'percent_count' => $this->integer(),
                 'percent_years' => $this->integer(),
                 'zaim_count' => $this->integer(),

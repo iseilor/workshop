@@ -31,6 +31,8 @@ if (isset($model->is_mortgage)) {
                     <h3 class="card-title"><i class="fas fa-ruble-sign"></i> Оформление заявки на участие в Жилищной Кампании</h3>
                 </div>
                 <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data', 'id' => 'jk-order']]); ?>
+
+
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-12">

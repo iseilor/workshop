@@ -140,6 +140,7 @@ class OrderController extends Controller
 
         $model = new Order();
         $model->status_id = 1;
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
             // Строчим цепочку согласования
@@ -155,6 +156,14 @@ class OrderController extends Controller
             $orderStage->save();
 
             return $this->redirect(['view', 'id' => $model->id]);
+        }
+
+        // Если заявка создана на основании калькулятора процентов или займа
+        if (isset($_GET['percent_id'])){
+            $model->loadDataPercent($_GET['percent_id']);
+        }
+        if (isset($_GET['zaim_id'])){
+            $model->zaim_id =  $_GET['zaim_id'];
         }
 
         return $this->render(
