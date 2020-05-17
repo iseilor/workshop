@@ -13,6 +13,7 @@ use yii\widgets\MaskedInput;
 
 <div class="row">
     <div class="col-md-4">
+        <?= $form->field($model, 'is_participate')->dropDownList($model->getParticipateList(), ['prompt' => 'Выберите ...']); ?>
         <?php
             $socials = Social::find()->all();
             $items = ArrayHelper::map($socials, 'id', 'title');

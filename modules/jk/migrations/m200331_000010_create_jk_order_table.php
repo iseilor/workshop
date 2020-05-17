@@ -44,7 +44,6 @@ class m200331_000010_create_jk_order_table extends Migration
                 'sum' => $this->integer(),
 
                 // Параметры
-                'is_agree_personal_data' => $this->boolean()->notNull(),                 // Обработка персональных данных
                 'file_agree_personal_data' => $this->string(),                           // Файл оброботки персональных данных
                 'is_participate' => $this->boolean(),                                    // Ранее участвовали
                 'type' => $this->integer()->notNull(),                                   // Тип заявки

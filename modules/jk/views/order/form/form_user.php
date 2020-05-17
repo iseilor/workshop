@@ -9,6 +9,41 @@ use yii\widgets\Pjax;
 
 $user = User::findOne(Yii::$app->user->identity->id);
 ?>
+
+
+    <h5>Обработка персональных данных сотрудника</h5>
+    <div class="row">
+        <div class="col-3">
+            <ul class="mailbox-attachments d-flex align-items-stretch clearfix">
+                <li style="width: 100%;">
+                    <span class="mailbox-attachment-icon"><i class="far fa-file-pdf"></i></span>
+                    <div class="mailbox-attachment-info">
+                        <?= Html::a(Icon::show('paperclip') . 'ПД. ' . Yii::$app->user->identity->fio . '.pdf',
+                            Url::to(['/user/user/' . Yii::$app->user->identity->id . '/pd'], true),
+                            ['class' => 'mailbox-attachment-name','target'=>'_blank']) ?>
+                        <span class="mailbox-attachment-size clearfix mt-1">
+                          <span>1,245 KB</span>
+                           <?= Html::a(Icon::show('cloud-download-alt'),
+                               Url::to('/user/user/' . Yii::$app->user->identity->id . '/pd', true),
+                               ['class' => 'btn btn-default btn-sm float-right','target'=>'_blank']) ?>
+                        </span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="col-9">
+            <p>Вам необходимо скачать и подписать согласие на обработку ваших персональных данных.<br/>
+                Далее подписанный документ необходимо прикрепить в поле ниже.<br/>
+                Если вы видите какие-то неверные данные, то вам необходимо
+                обновить их в личном кабинете, затем повторно вернуться к созданию заявки.
+            </p>
+            <?= $form->field($model, 'file_agree_personal_data_form', [
+                'template' => getFileInputTemplate($model->file_agree_personal_data, $model->attributeLabels()['file_agree_personal_data_form'] . '.pdf'),
+            ])->fileInput(['class' => 'custom-file-input']) ?>
+        </div>
+    </div>
+
+
     <p>
         <?= Html::a(Icon::show('edit') . 'Редактировать профиль',
             ['/user/profile/update'],

@@ -31,8 +31,8 @@ if (isset($model->is_mortgage)) {
                     <h3 class="card-title"><i class="fas fa-ruble-sign"></i> Оформление заявки на участие в Жилищной Кампании</h3>
                 </div>
                 <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data', 'id' => 'jk-order']]); ?>
-
-
+                <?= $form->field($model, 'percent_id', ['options' => ['class' => 'd-none']])->hiddenInput(); ?>
+                <?= $form->field($model, 'zaim_id', ['options' => ['class' => 'd-none']])->hiddenInput(); ?>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-12">
@@ -40,8 +40,7 @@ if (isset($model->is_mortgage)) {
                                 <div class="card-header p-0 border-bottom-0">
                                     <?php
                                     $tabs = [
-                                        ['name' => Icon::show('list') . 'Параметры', 'id' => 'params', 'tab-class' => 'active', 'selected' => 'true', 'tabs-class' => 'show active'],
-                                        ['name' => Icon::show('user') . 'Кандидат', 'id' => 'user', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
+                                        ['name' => Icon::show('user') . 'Кандидат', 'id' => 'user', 'tab-class' => 'active', 'selected' => true, 'tabs-class' => 'show active'],
                                         ['name' => Icon::show('female') . 'Супруг(а)', 'id' => 'spouse', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
                                         ['name' => Icon::show('baby') . 'Дети', 'id' => 'child', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
                                         ['name' => Icon::show('users') . 'Семья', 'id' => 'family', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
