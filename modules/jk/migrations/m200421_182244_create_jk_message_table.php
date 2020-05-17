@@ -3,9 +3,9 @@
 use yii\db\Migration;
 
 /**
- * Handles the creation of table `{{%jk_messages}}`.
+ * Handles the creation of table `{{%jk_message}}`.
  */
-class m200421_182244_create_jk_messages_table extends Migration
+class m200421_182244_create_jk_message_table extends Migration
 {
     /**
      * {@inheritdoc}
@@ -18,7 +18,7 @@ class m200421_182244_create_jk_messages_table extends Migration
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB';
         }
 
-        $this->createTable('{{%jk_messages}}', [
+        $this->createTable('{{%jk_message}}', [
             'id' => $this->primaryKey(),
             'created_at' => $this->integer() . ' NOT NULL',
             'created_by' => $this->integer() . ' NOT NULL',
@@ -38,6 +38,6 @@ class m200421_182244_create_jk_messages_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropTable('{{%jk_messages}}');
+        $this->dropTable('{{%jk_message}}');
     }
 }

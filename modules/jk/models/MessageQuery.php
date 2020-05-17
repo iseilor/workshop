@@ -3,11 +3,11 @@
 namespace app\modules\jk\models;
 
 /**
- * This is the ActiveQuery class for [[Messages]].
+ * This is the ActiveQuery class for [[Message]].
  *
- * @see Messages
+ * @see Message
  */
-class MessagesQuery extends \yii\db\ActiveQuery
+class MessageQuery extends \yii\db\ActiveQuery
 {
     /*public function active()
     {
@@ -16,7 +16,7 @@ class MessagesQuery extends \yii\db\ActiveQuery
 
     /**
      * {@inheritdoc}
-     * @return Messages[]|array
+     * @return Message[]|array
      */
     public function all($db = null)
     {
@@ -25,7 +25,7 @@ class MessagesQuery extends \yii\db\ActiveQuery
 
     /**
      * {@inheritdoc}
-     * @return Messages|array|null
+     * @return Message|array|null
      */
     public function one($db = null)
     {

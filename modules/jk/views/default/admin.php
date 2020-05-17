@@ -128,7 +128,7 @@ $orderStopCount = OrderStop::find()->count();
                 </li>
                 <li><?= Html::a(Icon::show('ruble-sign') . 'Заявки '.Html::tag('span',$orderCount,['class'=>'badge bg-success']),
                         Url::to(['/jk/order/'])) ?></li>
-                <li><?= Html::a(Icon::show('comments') . 'Сообщения куратору <span class="badge bg-danger">5</span>', Url::to(['/jk/messages'])) ?></li>
+                <li><?= Html::a(Icon::show('comments') . 'Сообщения куратору <span class="badge bg-danger">5</span>', Url::to(['/jk/message'])) ?></li>
                 <li>Справочники
                     <ul>
                         <li><?= Html::a(Icon::show('list') . 'Статусы заявок', Url::to(['/jk/status'])) ?></li>

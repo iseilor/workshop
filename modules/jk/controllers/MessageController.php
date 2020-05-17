@@ -2,18 +2,20 @@
 
 namespace app\modules\jk\controllers;
 
-use app\modules\jk\models\Messages;
-use app\modules\jk\models\MessagesSearch;
+use app\modules\jk\models\Message;
+use app\modules\jk\models\MessageSearch;
 use app\modules\user\models\User;
 use Yii;
+use yii\data\ActiveDataProvider;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
 /**
- * MessagesController implements the CRUD actions for Messages model.
+ * MessageController implements the CRUD actions for Message model.
  */
-class MessagesController extends Controller
+class MessageController extends Controller
 {
 
     /**
@@ -23,7 +25,7 @@ class MessagesController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -32,31 +34,55 @@ class MessagesController extends Controller
     }
 
     /**
-     * Lists all Messages models.
+     * Lists all Message models.
      *
      * @return mixed
      */
     public function actionIndex()
     {
+        // По умолчанию
         $user = false;
+        $messagesDataProvider = false;
+
+        // Получаем все записи с группированные по пользователям
+        $messagesGroup = Message::find()
+            ->select(['max(id) as max','user_id','count(*) as cnt'])
+            ->groupBy(['user_id'])
+            ->all();
+        $userLastMessage = ArrayHelper::map($messagesGroup, 'user_id', 'max');
+        $userMessagesCount =  ArrayHelper::map($messagesGroup, 'user_id', 'cnt');
+        $messagesCurator = Message::find()->select('*')->WHERE(['in', 'id', $userLastMessage]) ->andWhere(['is_curator'=>true])->all();
+        $messagesUser = Message::find()->select('*')->WHERE(['in', 'id', $userLastMessage]) ->andWhere(['is_curator'=>false])->all();
+
+        // Если открыта переписка с конкретным пользователем
         if (isset($_GET['user'])) {
             $user = User::findOne($_GET['user']);
+            $messagesQuery = Message::find()->where(['user_id' => $user->id]);
+            $messagesDataProvider = new ActiveDataProvider([
+                'query' => $messagesQuery,
+                'pagination' => [
+                    'pageSize' => 100,
+                ],
+                'sort' => [
+                    'defaultOrder' => [
+                        'created_at' => SORT_ASC,
+                    ]
+                ],
+            ]);
         }
 
-        $message =  new Messages();
-        $searchModel = new MessagesSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-            'user' => $user,
-            'message'=>$message
+            'messagesCurator'=>$messagesCurator,
+            'messagesUser'=>$messagesUser,
+            'userMessagesCount' => $userMessagesCount,
+            'user'=>$user,
+            'messagesDataProvider'=>$messagesDataProvider,
+            'message'=>   new Message()
         ]);
     }
 
     /**
-     * Displays a single Messages model.
+     * Displays a single Message model.
      *
      * @param integer $id
      *
@@ -71,14 +97,14 @@ class MessagesController extends Controller
     }
 
     /**
-     * Creates a new Messages model.
+     * Creates a new Message model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      *
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Messages();
+        $model = new Message();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -90,7 +116,7 @@ class MessagesController extends Controller
     }
 
     /**
-     * Updates an existing Messages model.
+     * Updates an existing Message model.
      * If update is successful, the browser will be redirected to the 'view' page.
      *
      * @param integer $id
@@ -112,7 +138,7 @@ class MessagesController extends Controller
     }
 
     /**
-     * Deletes an existing Messages model.
+     * Deletes an existing Message model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      *
      * @param integer $id
@@ -128,17 +154,17 @@ class MessagesController extends Controller
     }
 
     /**
-     * Finds the Messages model based on its primary key value.
+     * Finds the Message model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      *
      * @param integer $id
      *
-     * @return Messages the loaded model
+     * @return Message the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Messages::findOne($id)) !== null) {
+        if (($model = Message::findOne($id)) !== null) {
             return $model;
         }
 
@@ -147,10 +173,11 @@ class MessagesController extends Controller
 
     // Отправка сообщений
     public function actionSend(){
-        $model = new Messages();
+        $model = new Message();
         $model->load(Yii::$app->request->post());
         $model->is_curator = true;
         $model->save();
-        return true;
+        $model->sendEmail2User(); // Отрпавляем письмо сотруднику
+        return false;
     }
 }

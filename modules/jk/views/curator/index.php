@@ -93,22 +93,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="direct-chat-messages h-100" id="messages">
                         <?php
 
-                        $searchModel = new \app\modules\jk\models\MessagesSearch();
-                        $dataProvider = $searchModel->search(['where' => 'user_id=' . Yii::$app->user->identity->getId(), 'order' => ['id' => SORT_DESC], 'limit' => 1000]);
 
-                        /*$dataProvider = new ActiveDataProvider([
-                            'query' =>Chat::find()->orderBy(['created_at'=>SORT_DESC]),
-                            'totalCount' => 1000,
-                            'pagination' => [
-                                'pageSize' =>1000,
-                            ],
-                        ]);*/
 
 
                         Pjax::begin(['id' => 'pjax-messages']);
                         echo ListView::widget(
                             [
-                                'dataProvider' => $dataProvider,
+                                'dataProvider' => $messageDataProvider,
                                 'itemView' => 'message',
                                 'layout' => '{items}',
                                 'options' => [

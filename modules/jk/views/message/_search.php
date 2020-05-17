@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\jk\models\MessagesSearch */
+/* @var $model app\modules\jk\models\MessageSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="messages-search">
+<div class="message-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],

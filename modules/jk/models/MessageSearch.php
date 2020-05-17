@@ -6,9 +6,9 @@ use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
 /**
- * MessagesSearch represents the model behind the search form of `app\modules\jk\models\Messages`.
+ * MessageSearch represents the model behind the search form of `app\modules\jk\models\Message`.
  */
-class MessagesSearch extends Messages
+class MessageSearch extends Message
 {
     /**
      * {@inheritdoc}
@@ -39,7 +39,7 @@ class MessagesSearch extends Messages
      */
     public function search($params)
     {
-        $query = Messages::find();
+        $query = Message::find();
 
         // add conditions that should always apply here
 

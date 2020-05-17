@@ -3,16 +3,16 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\jk\models\Messages */
+/* @var $model app\modules\jk\models\Message */
 
-$this->title = Yii::t('app', 'Update Messages: {name}', [
+$this->title = Yii::t('app', 'Update Message: {name}', [
     'name' => $model->id,
 ]);
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Messages'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Message'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>
-<div class="messages-update">
+<div class="message-update">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

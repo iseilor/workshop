@@ -27,6 +27,14 @@ class Model extends ActiveRecord
         return $this->hasOne(User::class, ['id' => 'created_by']);
     }
 
+    public function getCreatedDate(){
+        return Yii::$app->formatter->asDate($this->created_at);
+    }
+
+    public function getCreatedDateTime(){
+        return Yii::$app->formatter->asDatetime($this->created_at);
+    }
+
     public function getUpdatedUser()
     {
         return $this->hasOne(User::class, ['id' => 'updated_by']);
