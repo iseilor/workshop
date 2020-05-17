@@ -25,13 +25,13 @@ class ZaimController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],
             ],
             'access' => [
-                'class' => AccessControl::className(),
+                'class' => AccessControl::class,
                 'rules' => [
                     [
                         'allow' => true,
@@ -104,12 +104,15 @@ class ZaimController extends Controller
         // Прожиточный минимум
         $mins = Min::find()->orderBy('title')->all();
 
-
         if ($user->getIsJKAccess()) {
             if ($model->experience < 1) {
                 Yii::$app->session->setFlash('warning', "К сожалению, вы не можете воспользоваться Жилищной Программой, т.к. ваш общий стаж работы в компании менее 1 года");
                 return $this->redirect(['/main/default/index']);
             } else {
+
+                Yii::$app->session->setFlash('primary', "Прежде чем приступить к заполнению форму рекомендуем вам ознакомиться с инструкцией ниже. Если у вас останутся
+                                какие-то вопросы, то вы можете запустить web-помощника по заполнению формы, он пошагово покажет какого типа данные и куда нужно вводить.
+                                Если же и после этого у вас останутся вопросы, то вы можете задать их напрямую куратору в вашем филиале.");
                 return $this->render(
                     'create',
                     [

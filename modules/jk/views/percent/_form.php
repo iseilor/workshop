@@ -156,10 +156,6 @@ $img = $bundle->baseUrl . '/img/percent_form_family_income_black.png';
                         ]
                     ) ?>
 
-                    <?php if ($model->id): ?>
-
-                    <?php endif; ?>
-
                     <div class="float-right">
                         <?= Html::a(
                             Yii::t('app', Icon::show('trash') . 'Очистить'),

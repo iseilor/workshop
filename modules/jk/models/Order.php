@@ -140,9 +140,7 @@ class Order extends Model
             // Общие параметры заявки
             [['is_participate', 'is_mortgage'], 'required'],
             [['percent_id','zaim_id'],'safe'],
-            [['is_agree_personal_data'], 'required'],
-            [['is_agree_personal_data'], 'compare', 'compareValue' => 1, 'message' => 'Обязательно дать согласие на обработку персональных данных'],
-            [['file_agree_personal_data_form'], 'safe'],
+             [['file_agree_personal_data_form'], 'safe'],
             [['file_agree_personal_data_form'], 'file', 'extensions' => 'pdf, docx', 'maxSize' => '2048000'],
 
             // Семья
@@ -229,7 +227,6 @@ class Order extends Model
             'createdUserLabel' => Module::t('order', 'User'),
 
             // Параметры
-            'is_agree_personal_data' => Module::t('order', 'Agree Personal Data'),
             'file_agree_personal_data' => Module::t('order', 'Agree Personal Data'),
             'file_agree_personal_data_form' => Module::t('order', 'Agree Personal Data'),
             'is_mortgage' => Module::t('order', 'Is Mortgage'),
@@ -637,5 +634,16 @@ class Order extends Model
         $this->ipoteka_user = $percent->cost_user;
         $this->ipoteka_size = $percent->bank_credit;
         $this->ipoteka_percent = $percent->percent_rate;
+    }
+
+    // Загружаем данные из калькулятора процентов
+    public function loadDataZaim($zaim_id)
+    {
+        $zaim = Zaim::findOne($zaim_id);
+        $this->zaim_id = $zaim_id;
+        $this->is_mortgage = 0;
+        $this->resident_count = $zaim->family_count;
+        $this->jp_area = $zaim->area_buy;
+        $this->jp_cost = $zaim->cost_total;
     }
 }

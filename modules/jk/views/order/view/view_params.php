@@ -21,9 +21,11 @@ use yii\widgets\DetailView;
             'format' => 'raw',
             'value'  => function ($data) {
                 if ($data->type==Order::TYPE_PERCENT && $data->percent_id){
-                    return Html::a('Проценты №'.$data->percent_id,Url::to(['/jk/percent/update','id'=>$data->percent_id],true));
+                    return Html::a('Калькулятор процентов №'.$data->percent_id,Url::to(['/jk/percent/update','id'=>$data->percent_id],true));
                 }
-
+                if ($data->type==Order::TYPE_ZAIM && $data->zaim_id){
+                    return Html::a('Калькулятор займа №'.$data->zaim_id,Url::to(['/jk/zaim/update','id'=>$data->zaim_id],true));
+                }
             }
         ],
         [
@@ -35,11 +37,6 @@ use yii\widgets\DetailView;
             'label' => 'Автор',
             'format' => 'raw',
             'value' => $model->getCreatedUserLink(),
-        ],
-        [
-            'label' => $model->attributeLabels()['is_agree_personal_data'],
-            'format' => 'raw',
-            'value' => ($model->is_agree_personal_data) ? '<span class="badge bg-green">Получено</span>':'<span class="badge bg-red">Не получено</span>'
         ],
         [
             'label' => $model->attributeLabels()['file_agree_personal_data'],
@@ -57,12 +54,6 @@ use yii\widgets\DetailView;
         [
             'attribute' => 'is_mortgage',
             'value'=>($model->is_mortgage)?'Да':'Нет'
-        ],
-        'updated_at:datetime',
-        [
-            'label' => 'Кем изменено',
-            'format' => 'raw',
-            'value' => $model->getUpdatedUserLink(),
         ],
     ],
 ]) ?>

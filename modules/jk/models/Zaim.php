@@ -282,4 +282,9 @@ class Zaim extends Model
         $this->compensation_count = min($maxMoney1, $maxMoney2,$maxMoney3);
     }
 
+    public function getOrder()
+    {
+        return $this->hasOne(Order::class, ['zaim_id' => 'id']);
+    }
+
 }

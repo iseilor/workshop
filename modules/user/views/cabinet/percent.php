@@ -40,7 +40,6 @@ $dataProvider = new ActiveDataProvider([
                 'class' => LinkColumn::class,
                 'url' => function ($data) {
                     if (isset($data->order)){
-                        $i =  Url::to(['/jk/order/view' ,'id'=>$data->order->id], true);
                         return Url::to(['/jk/order/view' ,'id'=>$data->order->id], true);
                     }else{
                         return false;

@@ -70,7 +70,7 @@ $img = $bundle->baseUrl . '/img/percent_form_family_income_black.png';
                         </div>
                         <div class="col-md-4">
                             <?= $form->field($model, 'cost_total')->widget(
-                                MaskedInput::className(),
+                                MaskedInput::class,
                                 [
                                     'options' => ['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['cost_total']],
                                     'clientOptions' => Yii::$app->params['widget']['MaskedInput']['clientOptionsMoney']
@@ -82,31 +82,72 @@ $img = $bundle->baseUrl . '/img/percent_form_family_income_black.png';
                         <?php if ($model->id): ?>
                             <div class="col-md-12">
                                 <?= $this->render('_result', ['model' => $model]); ?>
+                                <?= Html::a(
+                                    Yii::$app->params['module']['jk']['order']['icon'] . ' Оформить заявку на МП',
+                                    Url::to(['/jk/order/create','zaim_id'=>$model->id],true),
+                                    [
+                                        'class' => 'btn btn-success',
+                                        'id' => 'btn-save',
+                                        'title' => 'Приступить к оформлению материальной помощи по жилищной программе',
+                                    ]
+                                ) ?>
+                                <?= Html::submitButton(
+                                    Yii::$app->params['btn']['email']['icon'] . ' Отправить расчёт на email',
+                                    [
+                                        'class' => 'btn btn-warning',
+                                        'id' => 'btn-save',
+                                        'title' => 'Отправить предварительные рассчёты вам на email',
+                                    ]
+                                ) ?>
                             </div>
                         <?php endif; ?>
                     </div>
                 </div>
                 <div class="card-footer">
-                    <?= Html::submitButton(
-                        '<i class="fas fa-calculator nav-icon"></i> Рассчитать',
-                        ['class' => 'btn btn-success']
-                    ) ?>
+
                     <?= Html::button(
-                        Icon::show('info') . ' Инструкция',
+                        Icon::show('file-alt') . 'Инструкция',
                         [
-                            'class' => 'btn btn-info',
+                            'class' => 'btn btn-primary',
                             'id' => 'btn-instruction',
                             'data-toggle' => 'modal',
-                            'data-target' => '#modal-instruction'
+                            'data-target' => '#modal-instruction',
                         ]
                     ) ?>
 
+                    <?= Html::button(
+                        Icon::show('life-ring') . 'Помощник',
+                        [
+                            'class' => 'btn btn-primary',
+                            'id' => 'btn-helper',
+                            'onclick' => "startIntro();",
+                        ]
+                    ) ?>
 
                     <?= Html::a(
-                        Yii::t('app', 'Отмена'),
-                        ['create'],
-                        ['class' => 'btn btn-default float-right']
+                        Icon::show('user') . 'Куратор', Url::to(['/jk/curator'], true),
+                        [
+                            'class' => 'btn btn-primary',
+                            'id' => 'btn-save',
+                            'title' => 'Связаться с куратором Жилищной Кампании',
+                        ]
                     ) ?>
+
+                    <div class="float-right">
+                        <?= Html::a(
+                            Yii::t('app', Icon::show('trash') . 'Очистить'),
+                            ['create'],
+                            ['class' => 'btn btn-danger']
+                        ) ?>
+                        <?= Html::submitButton(
+                            Icon::show('calculator') . 'Рассчитать',
+                            [
+                                'class' => 'btn btn-success',
+                                'id' => 'btn-save',
+                                'title' => 'Рассчитать максимально возможный размер материальной помощи, без учета решения жилищной комиссии и утвержденного бюджета на соответствующий год',
+                            ]
+                        ) ?>
+                    </div>
                 </div>
                 <?php ActiveForm::end(); ?>
             </div>

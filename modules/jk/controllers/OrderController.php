@@ -163,7 +163,7 @@ class OrderController extends Controller
             $model->loadDataPercent($_GET['percent_id']);
         }
         if (isset($_GET['zaim_id'])){
-            $model->zaim_id =  $_GET['zaim_id'];
+            $model->loadDataZaim($_GET['zaim_id']);
         }
 
         return $this->render(
