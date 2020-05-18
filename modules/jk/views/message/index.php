@@ -17,6 +17,8 @@ use yii\widgets\Pjax;
 /* @var  $messagesCurator \app\modules\jk\models\Message */
 
 $this->title = Icon::show('comments').Module::t('message', 'Messages');
+$this->params['breadcrumbs'][] = ['label' => Icon::show('home'). 'ЖК', 'url' => ['/jk']];
+$this->params['breadcrumbs'][] = ['label' => Icon::show('tools'). 'Админка', 'url' => ['/jk/admin']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
     <div class="row">

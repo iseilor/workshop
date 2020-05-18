@@ -10,6 +10,7 @@ $this->params['breadcrumbs'][] = ['label' => 'ЖК', 'url' => ['/jk']];
 $this->params['breadcrumbs'][] = $this->title;
 
 use app\modules\jk\assets\JkAdminAsset;
+use app\modules\jk\models\Message;
 use app\modules\jk\models\Order;
 use app\modules\jk\models\OrderStop;
 use app\modules\jk\models\Status;
@@ -37,6 +38,18 @@ foreach ($statusColors as $key=>&$value) {
 $orderCount = Order::find()->count();
 $orderStopCount = OrderStop::find()->count();
 
+
+// Сообщения, ожидающие ответа от куратора
+$messagesGroup = Message::find()
+    ->select(['max(id) as max','user_id','count(*) as cnt'])
+    ->groupBy(['user_id'])
+    ->all();
+$userLastMessage = ArrayHelper::map($messagesGroup, 'user_id', 'max');
+$messagesUser = Message::find()->select('*')->WHERE(['in', 'id', $userLastMessage]) ->andWhere(['is_curator'=>false])->count();
+$messagesUserBadge = '';
+if ($messagesUser>0){
+    $messagesUserBadge = Html::tag('span',$messagesUser,['class'=>'badge bg-danger']);
+}
 ?>
 
 <div class="row">
@@ -128,7 +141,9 @@ $orderStopCount = OrderStop::find()->count();
                 </li>
                 <li><?= Html::a(Icon::show('ruble-sign') . 'Заявки '.Html::tag('span',$orderCount,['class'=>'badge bg-success']),
                         Url::to(['/jk/order/'])) ?></li>
-                <li><?= Html::a(Icon::show('comments') . 'Сообщения куратору <span class="badge bg-danger">5</span>', Url::to(['/jk/message'])) ?></li>
+                <li><?= Html::a(Icon::show('comments') . 'Сообщения куратору '.$messagesUserBadge ,
+                        Url::to(['/jk/message'])) ?>
+                </li>
                 <li>Справочники
                     <ul>
                         <li><?= Html::a(Icon::show('list') . 'Статусы заявок', Url::to(['/jk/status'])) ?></li>
