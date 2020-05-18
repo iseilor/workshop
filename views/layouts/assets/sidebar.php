@@ -51,7 +51,7 @@ use yii\helpers\Url;
                         ['label' => '<i class="nav-icon fas fa-tachometer-alt"></i> <p>Главная</p>', 'url' => ['/main/default/index']],
                         ['label' => Icon::show(Yii::$app->params['module']['news']['iconClass'],['class'=>'nav-icon']) .' <p>Новости</p>', 'url' => ['/news/default/index']],
                         [
-                            'label' => '<i class="nav-icon fas fa-home"></i> <p>Жильё  <i class="right fas fa-angle-left"></i></p>',
+                            'label' => '<i class="nav-icon fas fa-home"></i> <p>ЖК  <i class="right fas fa-angle-left"></i></p>',
                             'url' => ['#'],
                             'items' => [
                                 ['label' => '<i class="fas fa-calculator nav-icon"></i> <p>Проценты</p>', 'url' => ['/jk/percent/create']],
