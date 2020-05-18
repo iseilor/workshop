@@ -59,7 +59,7 @@ use yii\widgets\MaskedInput;
                 ])->fileInput(['class' => 'custom-file-input']) ?>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 field-percent  <?= $field_percent ?>">
             <?= $form->field($model, 'ipoteka_grafic')->textarea(['rows' => '15']); ?>
         </div>
 
