@@ -51,6 +51,5 @@ $dataProvider = new ActiveDataProvider([
                 'controller' => '/jk/percent',
             ],
         ],
-    ],
-
+    ]
 ) ?>
