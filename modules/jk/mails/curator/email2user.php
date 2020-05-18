@@ -17,7 +17,7 @@ use yii\helpers\Url;
     <li><strong>Сообщение:</strong> <?= $message->message ?></li>
 </ul>
 <p>
-    <?= Html::a('Просмотреть ответ куратора', Url::base(true).Url::to(['/jk/curator/'])) ?>
+    <?= Html::a('Просмотреть ответ куратора', Url::base(true).Url::to(['jk/curator/'])) ?>
 </p>
 
 <p>
