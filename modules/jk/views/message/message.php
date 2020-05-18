@@ -6,12 +6,12 @@
 use yii\helpers\Html;
 
 ?>
-<div class="direct-chat-msg <?= (Yii::$app->user->identity->id == $model->is_curator) ? 'right' : '' ?>">
+<div class="direct-chat-msg <?= ($model->is_curator) ? 'right' : '' ?>">
     <div class="direct-chat-infos clearfix">
-        <span class="direct-chat-name <?= (Yii::$app->user->identity->id == $model->is_curator) ? 'float-right' : 'float-left' ?>">
+        <span class="direct-chat-name <?= ($model->is_curator) ? 'float-right' : 'float-left' ?>">
             <?= $model->createdUser->fio ?>
         </span>
-        <span class="direct-chat-timestamp <?= (Yii::$app->user->identity->id == $model->is_curator) ? 'float-left' : 'float-right' ?>">
+        <span class="direct-chat-timestamp <?= ($model->is_curator) ? 'float-left' : 'float-right' ?>">
             <?= Yii::$app->formatter->asDatetime($model->created_at) ?>
         </span>
     </div>
