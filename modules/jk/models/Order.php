@@ -175,7 +175,7 @@ class Order extends Model
 
 
             // Ипотека
-            [['is_mortgage', 'ipoteka_target', 'ipoteka_size', 'ipoteka_user', 'ipoteka_grafic'], 'required'],
+            [['is_mortgage', 'ipoteka_target', 'ipoteka_size', 'ipoteka_user'], 'required'],
             [['ipoteka_last_date', 'ipoteka_percent'], 'safe'],
             [['ipoteka_last_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'ipoteka_last_date'],
             [
@@ -231,7 +231,7 @@ class Order extends Model
             'file_agree_personal_data_form' => Module::t('order', 'Agree Personal Data'),
             'is_mortgage' => Module::t('order', 'Is Mortgage'),
             'mortgage_file' => Module::t('module', 'Mortgage File'),
-            'is_participate' => Module::t('module', 'Is Participate'),
+            'is_participate' => Module::t('order', 'Is Participate'),
             'participateLabel' => Module::t('module', 'Is Participate'),
             'type' => Module::t('order', 'Type'),
             'typeName' => Module::t('order', 'Type'),
