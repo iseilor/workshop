@@ -1,16 +1,50 @@
+<?php
+
+use yii\helpers\Html;
+use yii\helpers\Url;
+use yii\widgets\MaskedInput;
+
+?>
 <div class="row">
     <div class="col-md-6">
+        <div class="alert alert-info alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <h5><i class="icon fas fa-info"></i> Информация</h5>
+            Поля ниже заполняются в автоматическом режиме из <strong>Active Directory</strong>. Если вы видите, что
+            какие-то данные по вам заполнены не верно, вам необходимо обратиться
+            к администратору Active Directory в вашем филиале, лучше это сделать через портал
+            <?= Html::a('helpme.rt.ru', Url::to('https://helpeme.rt.ru'), ['target' => '_blank']) ?>
+        </div>
         <?= $form->field($model, 'email')->textInput(['disabled' => 'disabled']) ?>
         <?= $form->field($model, 'position')->textInput(['disabled' => 'disabled']) ?>
         <?= $form->field($model, 'work_department')->textInput(['disabled' => 'disabled']) ?>
-        <?= $form->field($model, 'work_department_full')->textInput(['disabled' => 'disabled']) ?>
-        <?= $form->field($model, 'work_address')->textInput(['disabled' => 'disabled']) ?>
+        <?= $form->field($model, 'work_department_full')->textarea(['disabled' => 'disabled','rows'=>3]) ?>
+        <?= $form->field($model, 'work_address')->textarea(['disabled' => 'disabled']) ?>
         <?= $form->field($model, 'work_phone')->textInput(['disabled' => 'disabled']) ?>
     </div>
     <div class="col-md-6">
-        <?= $form->field($model, 'tab_number')->textInput() ?>
-        <?= $form->field($model, 'experience')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['experience']]) ?>
-        <?= $form->field($model, 'work_is_young')->checkbox(['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['work_is_young']]) ?>
-        <?= $form->field($model, 'work_is_transferred')->checkbox(['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['work_is_transferred']]) ?>
+        <div class="alert alert-info alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <h5><i class="icon fas fa-info"></i> Информация</h5>
+            Данные поля заполняются сотрудником самостоятельно и обязательны для заполнения при работе с порталом
+        </div>
+        <?= $form->field($model, 'tab_number')->widget(MaskedInput::class, [
+            'mask' => '999999[9]',
+            'clientOptions' => [
+                'clearIncomplete' => true
+            ]
+        ]) ?>
+        <?= $form->field($model, 'experience')->widget(MaskedInput::class, [
+            'mask' => '9[9]',
+            'clientOptions' => [
+                'clearIncomplete' => true
+            ]
+        ]) ?>
+        <?= $form->field($model, 'work_is_young')->checkbox(
+            ["template" => "<div class='checkbox'>\n{beginLabel}\n{input}\n{labelTitle}\n{endLabel}\n{hint}\n{error}\n</div>"]
+        ) ?>
+        <?= $form->field($model, 'work_is_transferred')->checkbox(
+            ["template" => "<div class='checkbox'>\n{beginLabel}\n{input}\n{labelTitle}\n{endLabel}\n{hint}\n{error}\n</div>"]
+        ) ?>
     </div>
 </div>
