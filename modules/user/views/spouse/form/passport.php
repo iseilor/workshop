@@ -2,15 +2,26 @@
 
 use yii\helpers\Html;
 use yii\jui\DatePicker;
+use yii\widgets\MaskedInput;
 
 /***
  * @var $model \app\modules\user\models\Spouse
  */
 
 ?>
-<?= $form->field($model, 'passport_series')->textInput(['maxlength' => true]) ?>
+<?= $form->field($model, 'passport_series')->widget(MaskedInput::class, [
+    'mask' => '9999',
+    'clientOptions' => [
+        'clearIncomplete' => true,
+    ],
+]) ?>
 
-<?= $form->field($model, 'passport_number')->textInput(['maxlength' => true]) ?>
+<?= $form->field($model, 'passport_number')->widget(MaskedInput::class, [
+    'mask' => '999999',
+    'clientOptions' => [
+        'clearIncomplete' => true,
+    ],
+]) ?>
 
 <?= $form->field($model, 'passport_date')->widget(
     DatePicker::class,
@@ -26,9 +37,14 @@ use yii\jui\DatePicker;
     ]
 ) ?>
 
-<?= $form->field($model, 'passport_department')->textInput(['maxlength' => true]) ?>
+<?= $form->field($model, 'passport_department')->textarea(['maxlength' => true]) ?>
 
-<?= $form->field($model, 'passport_code')->textInput(['maxlength' => true]) ?>
+<?= $form->field($model, 'passport_code')->widget(MaskedInput::class, [
+    'mask' => '999-999',
+    'clientOptions' => [
+        'clearIncomplete' => true,
+    ],
+]) ?>
 
 <?= $form->field($model, 'passport_registration')
     ->textarea([
