@@ -45,7 +45,12 @@ use yii\widgets\ActiveForm;
                     </div>
                     <div class="col-md-4">
                         <h3><?= Icon::show('map-marker-alt') ?>Адрес</h3>
-                        <?= $this->render('form/address', ['model' => $model, 'form' => $form]) ?>
+                        <?= $this->render('form/address',
+                            [
+                                'model' => $model,
+                                'form' => $form,
+                                'user' => $user,
+                            ]) ?>
                     </div>
                     <div class="col-md-12">
                         <hr/>

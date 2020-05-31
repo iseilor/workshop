@@ -41,7 +41,7 @@ class ChildController extends Controller
     {
         $searchModel = new ChildSearch();
         $queryParams = Yii::$app->request->queryParams;
-        $queryParams['ChildSearch']['user_id']=Yii::$app->user->identity->id;
+        $queryParams['ChildSearch']['user_id'] = Yii::$app->user->identity->id;
         $dataProvider = $searchModel->search($queryParams);
 
         return $this->render('index', [
@@ -87,6 +87,7 @@ class ChildController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'user' => $user,
         ]);
     }
 
@@ -108,8 +109,10 @@ class ChildController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
+        $user = User::findOne($model->user_id);
         return $this->render('update', [
             'model' => $model,
+            'user'=>$user
         ]);
     }
 
