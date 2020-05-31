@@ -31,15 +31,20 @@ class m200404_000000_create_user_table extends Migration
             'status' => $this->smallInteger()->notNull()->defaultValue(0),
             'birth_date' => $this->integer(),
             'work_date'=> $this->integer(),
-            'gender'=>$this->boolean(),
+
             'phone_mobile'=>$this->string(20),
             'phone_work'=>$this->string(20),
             'work_is_young'=>$this->boolean(),          // Молодой сотрудник
             'work_is_transferred'=>$this->boolean(),    // Переведённый сотрудник сотрудник
 
             'photo'=>$this->string(),
-            'fio'=> $this->string(),
+            'fio'=> $this->string()->notNull(),
+            'gender'=>$this->boolean()->notNull(),
 
+            'surname'=>$this->string()->notNull(),
+            'name'=>$this->string()->notNull(),
+            'patronymic'=>$this->string()->notNull(),
+            'auth_at'=>$this->integer(), // Авторизация последний раз
 
             // Работа
             'position'=> $this->string(),
@@ -75,8 +80,7 @@ class m200404_000000_create_user_table extends Migration
         $this->createIndex('idx-user-email', '{{%user}}', 'email');
         $this->createIndex('idx-user-status', '{{%user}}', 'status');
 
-        //$this->execute($this->addData());
-        $this->execute(file_get_contents(__DIR__ . '/../sql/user.sql'));
+        $this->execute(file_get_contents(__DIR__ . '/../sql/user-local.sql'));
     }
 
     /**
@@ -87,13 +91,4 @@ class m200404_000000_create_user_table extends Migration
         $this->dropTable('{{%user}}');
     }
 
-    public function addData()
-    {
-        $users[0] = " (1,'obedkinav@ya.ru', '123', '123', 'obedkinav@ya.ru',	1,	1579187759,	1579187759,'Объедкин Алексей Валерьевич','1.jpg','Главный специалист','Отдел эксплутации','Группировка_Центр | Блок информационных технологий | Департамент эксплуатации информационных систем и платформ | Отдел эксплуатации систем поддержки операций','+7 (495) 855-44-18, внутр. (701) 1-4418',1,573436800,1525132800, '8 (495) 855-44-18','108811, Российская Федерация, г. Москва, км Киевское шоссе 22-й (п Московский), д. 6, строение 1',2,1)";
-        for ($i = 2; $i <= 100; $i++) {
-            $users[$i-1]="(".$i.",'".$i."_iobedkinav@ya.ru', '123', '123','". $i."_obedkinav@ya.ru',	1,	1579187759,	1579187759,'Объедкин Алексей Валерьевич','1.jpg','Главный специалист','Отдел эксплутации','Группировка_Центр | Блок информационных технологий | Департамент эксплуатации информационных систем и платформ | Отдел эксплуатации систем поддержки операций','+7 (495) 855-44-18, внутр. (701) 1-4418',1,573436800,1525132800, '8 (495) 855-44-18','108811, Российская Федерация, г. Москва, км Киевское шоссе 22-й (п Московский), д. 6, строение 1',2,0)";
-        }
-        return "INSERT INTO {{%user}} (`id`,`username`,`auth_key`,`password_hash`,`email`,`status`,`created_at`,`updated_at`,`fio`,`photo`,`position`,`work_department`,`work_department_full`,`work_phone`, `gender`,`birth_date`,`work_date`,`phone_work`,`work_address`,`role_id`,`department_id`)
-        VALUES ".implode(",", $users);
-    }
 }
