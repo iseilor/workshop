@@ -41,6 +41,7 @@ class m200414_194555_create_user_spouse_table extends Migration
             'passport_department'=>$this->string(),
             'passport_code'=>$this->string(),
             'passport_registration'=>$this->text(),
+            'address_fact'=>$this->text(),
             'passport_file'=>$this->string(),
 
             // Адрес

@@ -19,6 +19,7 @@ return [
     'Passport Department' => 'Подразделение',
     'Passport Code' => 'Код',
     'Passport Registration' => 'Адрес регистрации',
+    'Address Fact'=>'Фактический адрес проживания',
     'Passport File' => 'Копия паспорта',
 
     // Адрес

@@ -29,6 +29,7 @@ use yii\web\UploadedFile;
  * @property string|null $passport_department
  * @property string|null $passport_code
  * @property string|null $passport_registration
+ * @property string|null $address_fact
  * @property string|null $passport_file
  *
  * @property string|null $personal_data_file
@@ -90,6 +91,7 @@ class Spouse extends Model
                     'passport_department',
                     'passport_code',
                     'passport_registration',
+                    'address_fact',
                     'explanatory_note_file',
                     'work_file',
                     'unemployment_file',
@@ -137,7 +139,7 @@ class Spouse extends Model
             'deleted_by' => Yii::t('app', 'Deleted By'),
 
             // Общие параметры
-            'type'=> Module::t('spouse', 'Type'),
+            'type' => Module::t('spouse', 'Type'),
             'user_id' => Module::t('spouse', 'User ID'),
             'fio' => Module::t('spouse', 'Fio'),
             'gender' => Module::t('spouse', 'Gender'),
@@ -158,6 +160,7 @@ class Spouse extends Model
             'passport_department' => Module::t('spouse', 'Passport Department'),
             'passport_code' => Module::t('spouse', 'Passport Code'),
             'passport_registration' => Module::t('spouse', 'Passport Registration'),
+            'address_fact' => Module::t('spouse', 'Address Fact'),
             'passport_file' => Module::t('spouse', 'Passport File'),
             'passport_file_form' => Module::t('spouse', 'Passport File'),
 
@@ -180,6 +183,14 @@ class Spouse extends Model
             'personal_data_file_form' => Module::t('spouse', 'Personal Data'),
             'personal_data_file' => Module::t('spouse', 'Personal Data'),
 
+        ];
+    }
+
+    public function attributeHints()
+    {
+        return [
+            'passport_registration' => 'Пример: 123456, г.Москва, ул.Ленина, д.1, кв.1',
+            'address_fact' => 'Пример: 123456, г.Москва, ул.Ленина, д.1, кв.1',
         ];
     }
 

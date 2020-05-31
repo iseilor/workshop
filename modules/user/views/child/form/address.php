@@ -8,13 +8,12 @@ use yii\helpers\Url;
 
 <?= $form->field($model, 'address_registration')
     ->textarea([
-        'readonly' => ($model->address_registration == $user->passport_registration) ? true : false,
-        'data-user-address-registation'=>$user->passport_registration
-
+        'readonly' => $model->address_registration == $user->passport_registration,
+        'data-user-address-registration'=>$user->passport_registration
     ])
     ->hint($model->attributeHints()['address_registration'] . '<br/>' .
         Html::checkbox('user_address_registration',
-            ($model->address_registration == $user->passport_registration) ? true : false,
+            $model->address_registration == $user->passport_registration,
             ['label' => 'Совпадает с адресом регистрации сотрудника', 'id' => 'user_address_registration'])
     ) ?>
 <?= $form->field($model, 'registration_file_form', [
@@ -24,13 +23,13 @@ use yii\helpers\Url;
 
 <?= $form->field($model, 'address_fact')
     ->textarea([
-        'readonly' => ($model->address_fact == $user->address_fact) ? true : false,
+        'readonly' => $model->address_fact == $user->address_fact,
         'data-user-address-fact'=>$user->address_fact
 
     ])
     ->hint($model->attributeHints()['address_fact'] . '<br/>' .
         Html::checkbox('user_address_fact',
-            ($model->address_fact == $user->address_fact) ? true : false,
+            $model->address_fact == $user->address_fact,
             ['label' => 'Совпадает с адресом фактического проживания сотрудника', 'id' => 'user_address_fact'])
     ) ?>
 
@@ -60,7 +59,7 @@ $(document).ready(function() {
     $('#user_address_registration').on('click', function() {
         if($(this).prop("checked")) {
             $('#child-address_registration').prop( "readonly", true );
-            $('#child-address_registration').val($('#child-address_registration').data('user-address-registation'));
+            $('#child-address_registration').val($('#child-address_registration').data('user-address-registration'));
         }else{
             $('#child-address_registration').prop( "readonly", false );
        }

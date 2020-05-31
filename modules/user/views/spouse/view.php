@@ -66,6 +66,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'passport_department',
                         'passport_code',
                         'passport_registration',
+                        'address_fact',
                         viewFieldFile($model, 'passport_file', Yii::$app->params['module']['spouse']['filePath'] . $model->id . '/' . $model->passport_file),
                         viewFieldFile($model, 'edj_file', Yii::$app->params['module']['spouse']['filePath'] . $model->id . '/' . $model->edj_file),
                         viewFieldFile($model, 'registration_file', Yii::$app->params['module']['spouse']['filePath'] . $model->id . '/' . $model->registration_file),

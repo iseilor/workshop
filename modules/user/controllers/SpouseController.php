@@ -80,13 +80,20 @@ class SpouseController extends Controller
 
         // Ставим пол супруге на противоположные
         $user = User::findOne(Yii::$app->user->identity->id);
-        if ($user->gender==1){
-            $model->gender=0;
-        }else{
-            $model->gender=1;
+        if ($user->gender == 1) {
+            $model->gender = 0;
+        } else {
+            $model->gender = 1;
         }
+
+        // Данные по адресу берём из сотрудника
+        $model->passport_registration = $user->passport_registration;
+        $model->address_fact = $user->address_fact;
+
+
         return $this->render('create', [
             'model' => $model,
+            'user' => $user,
         ]);
     }
 
@@ -107,9 +114,11 @@ class SpouseController extends Controller
             $model->upload();
             return $this->redirect(['view', 'id' => $model->id]);
         }
+        $user = User::findOne($model->user_id);
 
         return $this->render('update', [
             'model' => $model,
+            'user'=>$user
         ]);
     }
 
