@@ -4,6 +4,7 @@ use app\components\grid\ActionColumn;
 use app\components\grid\LinkColumn;
 use app\modules\user\models\ChildSearch;
 use app\modules\user\Module;
+use kartik\icons\Icon;
 use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -71,96 +72,38 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="col-md-9">
         <div class="card card-primary card-outline card-outline-tabs" style="border-top: none;">
             <div class="card-header p-0 border-bottom-0">
-                <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link active" id="tab-1-tab" data-toggle="pill" href="#tab-1" role="tab" aria-controls="tab-1">
-                            <?= Yii::$app->params['module']['jk']['percent']['icon'] ?> Проценты</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="tab-2-tab" data-toggle="pill" href="#tab-2" role="tab" aria-controls="tab-2"
-                           aria-selected="true">
-                            <?= Yii::$app->params['module']['jk']['zaim']['icon'] ?> Займы
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="tab-3-tab" data-toggle="pill" href="#tab-3" role="tab" aria-controls="tab-3"
-                           aria-selected="true">
-                            <?= Yii::$app->params['module']['jk']['order']['icon'] ?> Заявки
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="tab-4-tab" data-toggle="pill" href="#tab-4" role="tab" aria-controls="tab-4"
-                           aria-selected="true">
-                            <?= \kartik\icons\Icon::show('baby') ?>Дети
-                        </a>
-                    </li>
-                </ul>
+                <?php
+                $tabs = [
+                    ['name' => Icon::show('female') . 'Супруг(а)', 'id' => 'spouse', 'tab-class' => 'active', 'selected' => true, 'tabs-class' => 'show active'],
+                    ['name' => Icon::show('baby') . 'Дети', 'id' => 'child', 'tab-class' => '', 'selected' => false, 'tabs-class' => ''],
+                ];
+                echo Html::ul($tabs, [
+                    'item' => function ($item, $index) {
+                        return Html::tag(
+                            'li',
+                            Html::a($item['name'], '#tabs-' . $item['id'], [
+                                'class' => 'nav-link ' . $item['tab-class'],
+                                'id' => 'tab-' . $item['id'],
+                                'data-toggle' => 'pill',
+                                'role' => 'tab',
+                                'aria-controls' => 'tabs-' . $item['id'],
+                                'aria-selected' => $item['selected'],
+                            ]),
+                            ['class' => 'nav-item']
+                        );
+                    },
+                    'class' => 'nav nav-tabs',
+                    'id' => 'custom-tabs-three-tab',
+                    'role' => 'tablist',
+                ]) ?>
             </div>
             <div class="card-body">
                 <div class="tab-content" id="custom-tabs-three-tabContent">
-                    <div class="tab-pane fade active show" id="tab-1" role="tabpanel" aria-labelledby="tab-1-tab">
-                        <h3>Ваши предварительные расчёты по сумме компенсации процентов</h3>
-                        <?= GridView::widget(
-                            [
-                                'dataProvider' => $percentDataProvider,
-                                'columns' => [
-                                    ['class' => 'yii\grid\SerialColumn'],
-                                    [
-                                        'class' => LinkColumn::className(),
-                                        'attribute' => 'id',
-                                        'url' => function ($data) {
-                                            return Url::to(['/jk/percent/' . $data->id]);
-                                        },
-                                    ],
-                                    'created_at:datetime',
-                                    'compensation_count:decimal',
-                                    'compensation_years',
-                                    [
-                                        'class' => ActionColumn::className(),
-                                        'controller' => '/jk/percent',
-                                    ],
-                                ],
-                            ]
-                        ) ?>
-                    </div>
-                    <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="tab-2-tab">
-                        <h3>Ваши предвартельные расчёты по сумме займа</h3>
-                        <?= GridView::widget(
-                            [
-                                'dataProvider' => $zaimDataProvider,
-                                'columns' => [
-                                    ['class' => 'yii\grid\SerialColumn'],
-                                    [
-                                        'class' => LinkColumn::className(),
-                                        'attribute' => 'id',
-                                        'url' => function ($data) {
-                                            return Url::to(['/jk/zaim/' . $data->id]);
-                                        },
-                                    ],
-                                    'created_at:datetime',
-                                    'compensation_count:decimal',
-                                    'compensation_years',
-                                    [
-                                        'class' => ActionColumn::className(),
-                                        'controller' => '/jk/zaim',
-                                    ],
-                                ],
-                            ]
-                        ) ?>
-                    </div>
-                    <div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby="tab-3-tab">
-                        <?= $this->render('index_order', ['orderDataProvider' => $orderDataProvider]) ?>
-                    </div>
-                    <div class="tab-pane fade" id="tab-4" role="tabpanel" aria-labelledby="tab-4-tab">
-                        <?php
-                        $searchModel = new ChildSearch(['user_id' => Yii::$app->user->identity->id]);
-                        $dataProvider = $searchModel->search([]);
-                        echo $this->render('@app/modules/user/views/child/grid-view', [
-                            'searchModel' => $searchModel,
-                            'dataProvider' => $dataProvider,
-                        ]);
-                        ?>
-                    </div>
+                    <?php foreach ($tabs as $tab): ?>
+                        <div class="tab-pane fade <?= $tab['tabs-class'] ?>" id="tabs-<?= $tab['id'] ?>" role="tabpanel" aria-labelledby="tab-<?= $tab['id'] ?>">
+                            <?= $this->render('index/profile_' . $tab['id']) ?>
+                        </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
         </div>
