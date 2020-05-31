@@ -49,7 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </div>
 
-    <?php $form = ActiveForm::begin(['options' => ['id'=>'profile-update','enctype' => 'multipart/form-data']]); ?>
+    <?php $form = ActiveForm::begin(['options' => ['id'=>'profile-update','class'=>'form-tabs','enctype' => 'multipart/form-data']]); ?>
 
     <div class="card-body">
         <div class="tab-content" id="custom-tabs-three-tabContent">

@@ -28,7 +28,7 @@ $(document).ready(function () {
         });
 
         // Если форма с TABS то перевключаем на первую вкладку с ошибкой
-        $('form').on('afterValidate', function(event, messages, errorAttributes){
+        $('.form-tabs').on('afterValidate', function(event, messages, errorAttributes){
             if(errorAttributes.length > 0) {
                 var errElement = $('#' + errorAttributes[0].id);
                 var pane = errElement.closest('.tab-pane');
