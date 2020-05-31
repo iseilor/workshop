@@ -66,7 +66,3 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php ActiveForm::end(); ?>
 </div>
-
-<?php
-$this->registerJsFile(Yii::$app->homeUrl.'js/index.js', ['depends' => [\yii\web\JqueryAsset::class]]);
-?>

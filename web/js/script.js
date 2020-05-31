@@ -16,6 +16,27 @@ $(document).ready(function () {
             });
         });
 
+        // Запоминаем активную вкладку
+        $(function() {
+            $('a[data-toggle="pill"]').on('click', function (e) {
+                localStorage.setItem('lastTab', $(e.target).attr('id'));
+            });
+            var lastTab = localStorage.getItem('lastTab');
+            if (lastTab) {
+                $('#'+lastTab).tab('show');
+            }
+        });
+
+        // Если форма с TABS то перевключаем на первую вкладку с ошибкой
+        $('form').on('afterValidate', function(event, messages, errorAttributes){
+            if(errorAttributes.length > 0) {
+                var errElement = $('#' + errorAttributes[0].id);
+                var pane = errElement.closest('.tab-pane');
+                var tabId = pane[0].id;
+                $('.nav-tabs a[href="#' + tabId + '"]').tab('show');
+                return false;
+            }
+        });
 
         // Кнопка прикрепить файлы
         bsCustomFileInput.init();
