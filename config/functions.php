@@ -21,12 +21,16 @@ function getFileInputTemplate($file, $fileName)
     }
     return '{label}
         <div class="input-group">
+            <div class="input-group-prepend">
+                   <span class="input-group-text"><i class="fas fa-download"></i></span>
+            </div>
             <div class="custom-file">
+            
                 {input}
                 <label class="custom-file-label" for="exampleInputFile">' . $fileName . '</label>
             </div>
         </div>
-        {error}{hint}';
+        {hint}{error}';
 }
 
 // Отображение полей с файлами во View

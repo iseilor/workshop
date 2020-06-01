@@ -33,6 +33,7 @@ use yii\web\IdentityInterface;
  *
  * @property boolean     $work_is_young
  * @property boolean     $work_is_transferred
+ * @property string      $work_transferred_file
  * @property boolean     $work_department
  * @property boolean     $work_department_full
  *
@@ -74,6 +75,11 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     const ROLE_ADMIN = 2;
 
     /**
+     * @var mixed|null
+     */
+
+
+    /**
      * {@inheritdoc}
      */
     public static function tableName()
@@ -85,12 +91,12 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return [
             ['username', 'required'],
-            ['username', 'unique', 'targetClass' => self::className(), 'message' => 'This username has already been taken.'],
+            ['username', 'unique', 'targetClass' => self::class, 'message' => 'This username has already been taken.'],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
             ['email', 'required'],
             ['email', 'email'],
-            ['email', 'unique', 'targetClass' => self::className(), 'message' => 'This email address has already been taken.'],
+            ['email', 'unique', 'targetClass' => self::class, 'message' => 'This email address has already been taken.'],
             ['email', 'string', 'max' => 255],
 
             ['status', 'integer'],
@@ -134,6 +140,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             'work_address' => Module::t('module', 'Work Address'),
             'work_is_young' => Module::t('module', 'Work Is Young'),
             'work_is_transferred' => Module::t('module', 'Work Is Transferred'),
+            'work_transferred_file'=> Module::t('module', 'Work Transferred File'),
 
 
             'birth_date' => Module::t('module', 'Birth Date'),
@@ -161,7 +168,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     public function attributeHints()
     {
         return [
-            'experience'=>'Необходимо указать кол-во полных лет вашего общего стажа с учётом переводов из других подразделение и филиалов. 
+            'experience' => 'Необходимо указать кол-во полных лет вашего общего стажа с учётом переводов из других подразделение и филиалов. 
                             Если ваш стаж менее 1 года, то необходимо указать 0',
             'work_is_young' => '<strong>Молодой работник</strong> - сотрудник в возрасте до 35 лет (включительно), поступивший в 
                             Общество на работу после окончания среднего или высшего образовательного учреждения по полученной 
@@ -169,7 +176,8 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             'work_is_transferred' => '<strong>Переведенные работники</strong> - сотрудники, переведенные  не ранее чем за 5 лет до дня принятия 
                             ЖК решения об оказании помощи в интересах Общества из одного подразделения Общества в другое, находящиеся в 
                             разных населенных пунктах, расстояние между которыми не менее 50 км.',
-            'passport_department'=>'<strong>Пример</strong>: МВД Тверского района, г.Москва',
+            'work_transferred_file'=>'PDF, не более 2MB',
+            'passport_department' => '<strong>Пример</strong>: МВД Тверского района, г.Москва',
             'passport_registration' => 'Адрес регистрации из паспорта, вида: 123456, г.Москва, ул.Ленина, д.1, кв.1',
             'address_fact' => 'Пример заполнения: 123456, г.Москва, ул.Ленина, д.1, кв.1',
         ];

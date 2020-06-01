@@ -46,5 +46,22 @@ use yii\widgets\MaskedInput;
         <?= $form->field($model, 'work_is_transferred')->checkbox(
             ["template" => "<div class='checkbox'>\n{beginLabel}\n{input}\n{labelTitle}\n{endLabel}\n{hint}\n{error}\n</div>"]
         ) ?>
+        <?= $form->field($model, 'work_transferred_file', [
+            'options' => ['class' => (!$model->work_is_transferred) ? 'd-none':''],
+            'template' => getFileInputTemplate($model->work_transferred_file, $model->attributeLabels()['work_transferred_file'] . '.pdf'),
+        ])->fileInput(['class' => 'custom-file-input']) ?>
     </div>
 </div>
+
+<?php
+$script = <<< JS
+$(document).ready(function() {
+    
+    // Поле с заявлением о переводе показываем, когда включена галочка
+    $('#profileupdateform-work_is_transferred').on('click', function() {
+        $('.field-profileupdateform-work_transferred_file').toggleClass('d-none');
+    });
+});
+JS;
+$this->registerJs($script, yii\web\View::POS_READY);
+?>

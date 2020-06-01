@@ -28,6 +28,7 @@ class ProfileUpdateForm extends Model
     public $work_address;
     public $work_is_young;
     public $work_is_transferred;
+    public $work_transferred_file;
 
     // PASSPORT
     public $passport_series;
@@ -70,7 +71,7 @@ class ProfileUpdateForm extends Model
         $this->work_address = $user->work_address;
         $this->work_is_young = $user->work_is_young;
         $this->work_is_transferred = $user->work_is_transferred;
-
+        $this->work_transferred_file = $user->work_transferred_file;
 
         // PASSPORT
         $this->passport_series = $user->passport_series;
@@ -93,7 +94,7 @@ class ProfileUpdateForm extends Model
     public function rules()
     {
         return [
-            [['gender','birth_date','experience','tab_number','address_fact'], 'required'],
+            [['gender','birth_date','experience','tab_number'], 'required'],
             [
                 'email',
                 'unique',
@@ -112,7 +113,9 @@ class ProfileUpdateForm extends Model
             [['photo'], 'file', 'extensions'=>'jpg, png'],
             [['photo'], 'file', 'maxSize'=>'2048000'],
 
-            [['work_is_young','work_is_transferred'], 'safe'],
+            [['work_is_young','work_is_transferred','work_transferred_file'], 'safe'],
+            [['work_transferred_file'], 'file', 'extensions'=>'pdf'],
+            [['work_transferred_file'], 'file', 'maxSize'=>'2048000'],
 
             [['passport_series','passport_number','passport_date','passport_code','passport_department','passport_file','passport_registration','address_fact'], 'safe'],
             [['passport_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'passport_date'],
@@ -141,7 +144,6 @@ class ProfileUpdateForm extends Model
             $user->work_date =  mktime() - $this->experience* 31556926; // Стаж
             $user->work_is_young = $this->work_is_young;
             $user->work_is_transferred = $this->work_is_transferred;
-
 
             // PASSPORT
             $user->passport_series = $this->passport_series;
@@ -183,6 +185,16 @@ class ProfileUpdateForm extends Model
                 Image::thumbnail($photoFileDir.$photoFileOrigName, 250, 250)
                     ->save(Yii::getAlias($photoFileDir. $photoFileName), ['quality' => 100]);
                 $this->_user->photo = $photoFileName;
+            }
+
+            // Transferred file
+            $this->work_transferred_file = UploadedFile::getInstance($this, 'work_transferred_file');
+            if ($this->work_transferred_file){
+                $fileDir = Yii::$app->params['module']['user']['path'].$this->_user->id;
+                $fileName = $this->_user->id .' | '.$this->_user->fio.' | Заявление о переводе | '.date('d.m.Y H:i:s'). '.' . $this->work_transferred_file->extension;
+                FileHelper::createDirectory( $fileDir, $mode = 0777, $recursive = true);
+                $this->work_transferred_file->saveAs($fileDir. '/'.$fileName);
+                $this->_user->work_transferred_file = $fileName;
             }
 
             // Passport
