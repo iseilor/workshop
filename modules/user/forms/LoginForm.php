@@ -73,12 +73,6 @@ class LoginForm extends Model
                 return false;
             }
 
-            // Ищем пользователя в DB
-            /*if (!$this->getUser()) {
-                //$this->createUserDB();
-                $this->_user = false;
-            };*/
-
             // Рекурсия через AD
             $ad = new Ad();
             $ad->createUserByEmail(($this->username));

@@ -49,6 +49,21 @@ class Ad
             $user->department_id = 1;
             $user->role_id = 0;
 
+            // Пол Мужской
+            if (strtoupper($this->userAD->extensionattribute1[0])=='M'){
+                $user->gender=1;
+            }elseif(strtoupper($this->userAD->extensionattribute1[0])=='F'){
+                $user->gender=0;
+            }else{
+                // TODO: Такого быть не должно, но чтобы никого не обидеть не будем ставить никакой пол по умолчанию
+            }
+
+            // ФИО разбивка
+            $fio = explode(" ", $this->userAD->cn[0]);
+            $user->surname = $fio[0];
+            $user->name = $fio[1];
+            $user->patronymic = $fio[2];
+
             if ($user->save()) {
                 $this->createManager($email);
                 return $user;
