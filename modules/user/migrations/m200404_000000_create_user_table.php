@@ -36,6 +36,7 @@ class m200404_000000_create_user_table extends Migration
             'phone_work'=>$this->string(20),
             'work_is_young'=>$this->boolean(),          // Молодой сотрудник
             'work_is_transferred'=>$this->boolean(),    // Переведённый сотрудник сотрудник
+            'work_transferred_file'=>$this->string(),   // Заявление о переводе
 
             'photo'=>$this->string(),
             'fio'=> $this->string()->notNull(),

@@ -70,6 +70,8 @@ class m200405_183301_create_user_child_table extends Migration
             // Обработка персональных данных
             'file_personal'=>$this->string(),
         ], $tableOptions);
+
+        $this->execute(file_get_contents(__DIR__ . '/../sql/user_child-local.sql'));
     }
 
     /**
