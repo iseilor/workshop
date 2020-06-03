@@ -1,3 +1,6 @@
+.help-block {
+  margin-bottom: 0px;
+}
 /*Подсвечиваем поля краным при ошибках*/
 .form-group.has-error .help-block {
   color: #dd4b39;
