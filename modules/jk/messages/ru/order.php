@@ -74,11 +74,11 @@ return [
     'Ipoteka Summa' => 'Сумма процентов',
     'Ipoteka File Dogovor' => 'Договор ипотеки',
     'Ipoteka File Grafic First' => 'Первоначальный график платежей',
-    'Ipoteka File Grafic Now' => 'Акктуальный график платежей',
+    'Ipoteka File Grafic Now' => 'Актуальный график платежей',
     'Ipoteka File Refenance' => 'Договор рефенансирование ипотеки',
     'Ipoteka File Spravka' => 'Справка из банка об актуальной ставке договора рефинансирования',
     'Ipoteka File Bank Approval' => 'Одобрение из банка',
-    'Ipoteka Percent' => 'Ипотека %',
+    'Ipoteka Percent' => 'Процентная ставка по ипотеке',
     'Ipoteka Last Date' => 'Последняя дата платежа',
     'Ipoteka Grafic' => 'График платежей',
 
