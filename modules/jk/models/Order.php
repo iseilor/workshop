@@ -139,8 +139,8 @@ class Order extends Model
 
             // Общие параметры заявки
             [['is_participate', 'is_mortgage'], 'required'],
-            [['percent_id','zaim_id'],'safe'],
-             [['file_agree_personal_data_form'], 'safe'],
+            [['percent_id', 'zaim_id'], 'safe'],
+            [['file_agree_personal_data_form'], 'safe'],
             [['file_agree_personal_data_form'], 'file', 'extensions' => 'pdf, docx', 'maxSize' => '2048000'],
 
             // Семья
@@ -614,11 +614,16 @@ class Order extends Model
         return false;
     }
 
-    // Правим запятые на точки
+    // Правим запятые на точки в денежных полях
     public function beforeValidate()
     {
         // Заменяем запятые на точки
-        $this->ipoteka_percent = str_replace(",", ".", $this->ipoteka_percent);
+        $fields = ['ipoteka_percent','money_oklad','money_summa_year','money_nalog_year',
+                    'money_month_pay', 'money_user_pay'
+        ];
+        foreach ($fields as $field) {
+            $this->{$field} = str_replace(",", ".", $this->{$field});
+        }
         return parent::beforeValidate();
     }
 

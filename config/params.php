@@ -128,7 +128,7 @@ return [
                 'radixPoint' => ',',
                 'groupSeparator' => ' ',
                 'autoGroup' => true,
-                'removeMaskOnSubmit' => false,
+                'removeMaskOnSubmit' => true, // Убираем пробелы перещ SUBMIT
             ],
             // Параметры для денежных полей
             'clientOptionsPercent' => [
