@@ -98,7 +98,7 @@ class Model extends ActiveRecord
     {
         return [
             'TimestampBehavior' => [
-                'class' => TimestampBehavior::className(),
+                'class' => TimestampBehavior::class,
                 'attributes' => [
                     ActiveRecord::EVENT_BEFORE_INSERT => ['created_at'],
                     ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
@@ -108,7 +108,7 @@ class Model extends ActiveRecord
                 },
             ],
             'BlameableBehavior' => [
-                'class' => BlameableBehavior::className(),
+                'class' => BlameableBehavior::class,
                 'attributes' => [
                     ActiveRecord::EVENT_BEFORE_INSERT => ['created_by'],
                     ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_by'],
@@ -121,12 +121,12 @@ class Model extends ActiveRecord
     }
 
     // Логическое удаление
-    /*public function delete()
+    public function delete()
     {
         $this->deleted_at = date('U');
         $this->deleted_by = Yii::$app->user->identity->getId();
         $this->save();
-    }*/
+    }
 
     public function getCreatedUserLabel()
     {

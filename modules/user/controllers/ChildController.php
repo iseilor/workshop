@@ -42,7 +42,9 @@ class ChildController extends Controller
         $searchModel = new ChildSearch();
         $queryParams = Yii::$app->request->queryParams;
         $queryParams['ChildSearch']['user_id'] = Yii::$app->user->identity->id;
+
         $dataProvider = $searchModel->search($queryParams);
+        $dataProvider->query->andWhere(['deleted_at' => null]);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -112,7 +114,7 @@ class ChildController extends Controller
         $user = User::findOne($model->user_id);
         return $this->render('update', [
             'model' => $model,
-            'user'=>$user
+            'user' => $user,
         ]);
     }
 
@@ -125,11 +127,32 @@ class ChildController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
+
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
+        if (Yii::$app->request->isAjax) {
+            return $this->renderList();
+        } else {
+            return $this->redirect(['index']);
+        }
+    }
 
-        return $this->redirect(['index']);
+    protected function renderList()
+    {
+        $searchModel = new ChildSearch();
+        $queryParams = Yii::$app->request->queryParams;
+        $queryParams['ChildSearch']['user_id'] = Yii::$app->user->identity->id;
+
+        $dataProvider = $searchModel->search($queryParams);
+        $dataProvider->query->andWhere(['deleted_at' => null]);
+
+        $method = Yii::$app->request->isAjax ? 'renderAjax' : 'render';
+
+        return $this->$method('grid-view', [
+            //'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
     /**

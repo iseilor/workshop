@@ -24,56 +24,17 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= Yii::$app->params['card']['header']['tools'] ?>
             </div>
             <div class="card-body">
-                <p>
-                    <?= Html::a(Icon::show('plus') . Module::t('child', 'Create Child'), ['create'], ['class' => 'btn btn-success']) ?>
-                </p>
-                <?php Pjax::begin(); ?>
-                <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+                <?php
+                use app\modules\user\models\ChildSearch;
 
-                <?= GridView::widget([
-                    'dataProvider' => $dataProvider,
-                    //'filterModel' => $searchModel,
-                    'pager' => [
-                        'class' => 'app\widgets\LinkPager',
-                    ],
-                    'columns' => [
-                        ['class' => 'yii\grid\SerialColumn'],
-                        [
-                            'class' => LinkColumn::class,
-                            'attribute' => 'id',
-                        ],
-                        [
-                            'class' => LinkColumn::class,
-                            'attribute' => 'fio',
-                        ],
-                        [
-                            'attribute'=>'gender',
-                            'content'=>function($data){
-                                return Child::getGenderList()[$data->gender];
-                            }
-                        ],
-                        'date:date',
-                        'age',
-                        [
-                            'attribute' => 'is_invalid',
-                            'content'=>function($data){
-                                return (isset($data->is_invalid) && $data->is_invalid) ? '<span class="badge badge-danger">Да</span>' : 'Нет';
-                            }
-                        ],
-                        [
-                            'attribute' => 'is_study',
-                            'content'=>function($data){
-                                return (isset($data->is_study) && $data->is_study) ? '<span class="badge badge-info">Да</span>' : 'Нет';
-                            }
-                        ],
-                        'passportLink:raw',
-                        'birthLink:raw',
-                        'personalLink:raw',
-                        ['class' => ActionColumn::class],
-                    ],
-                ]); ?>
+                $searchModel = new ChildSearch(['user_id' => Yii::$app->user->identity->id]);
+                $dataProvider = $searchModel->search([]);
+                $dataProvider->query->andWhere(['deleted_at' => null]);
 
-                <?php Pjax::end(); ?>
+                echo $this->render('@app/modules/user/views/child/grid-view', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+                ]);?>
             </div>
             <div class="card-footer">
             </div>

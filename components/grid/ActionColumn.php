@@ -11,6 +11,8 @@ class ActionColumn extends \yii\grid\ActionColumn
         'class' => 'action-column',
     ];
 
+    public $gridViewId=''; // ID используется при AJAX-удалении
+
     public function init()
     {
         parent::init();
@@ -24,8 +26,9 @@ class ActionColumn extends \yii\grid\ActionColumn
             'delete',
             'trash',
             [
-                'data-confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
-                'data-method' => 'post',
+                //'data-confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
+                //'data-method' => 'post',
+                //'data-pjax' => 0,
             ]
         );
     }
@@ -45,7 +48,7 @@ class ActionColumn extends \yii\grid\ActionColumn
                         break;
                     case 'delete':
                         $title = Yii::t('yii', 'Delete');
-                        $class="btn-danger";
+                        $class="btn-danger btn-delete";
                         break;
                     default:
                         $title = ucfirst($name);
@@ -55,7 +58,7 @@ class ActionColumn extends \yii\grid\ActionColumn
                     [
                         'title' => $title,
                         'aria-label' => $title,
-                        'data-pjax' => '0',
+                        'data-pjax' => '0', // Для AJAX-удаления
                         'class' => 'btn btn-sm '.$class
                     ],
                     $additionalOptions,

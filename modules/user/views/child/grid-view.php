@@ -11,15 +11,13 @@ use yii\helpers\Url;
 use yii\widgets\Pjax;
 
 ?>
-
     <p>
         <?= Html::a(Icon::show('plus') . Module::t('child', 'Create Child'),
             ['/user/child/create'],
             ['class' => 'btn btn-success', 'target' => '_blank']) ?>
-        <?= Html::button(Icon::show('sync-alt') . 'Обновить таблицу с детьми',
+        <?= Html::button(Icon::show('sync-alt') . 'Обновить таблицу',
             ['class' => 'btn btn-primary', 'id' => 'btn-child-grid-view-update']) ?>
     </p>
-
 <?php
 Pjax::begin(['id' => 'child-grid-view']);
 echo GridView::widget([
@@ -35,28 +33,29 @@ echo GridView::widget([
             'attribute' => 'fio',
         ],
         [
-            'attribute'=>'gender',
-            'content'=>function($data){
+            'attribute' => 'gender',
+            'content' => function ($data) {
                 return Child::getGenderList()[$data->gender];
-            }
+            },
         ],
         'date:date',
         'age',
         [
             'attribute' => 'is_invalid',
-            'content'=>function($data){
+            'content' => function ($data) {
                 return (isset($data->is_invalid) && $data->is_invalid) ? '<span class="badge badge-danger">Да</span>' : 'Нет';
-            }
+            },
         ],
         [
             'attribute' => 'is_study',
-            'content'=>function($data){
+            'content' => function ($data) {
                 return (isset($data->is_study) && $data->is_study) ? '<span class="badge badge-info">Да</span>' : 'Нет';
-            }
+            },
         ],
         [
             'class' => ActionColumn::class,
             'controller' => '/user/child',
+            'gridViewId' => 'child-grid-view',
             'buttonOptions' => ['target' => '_blank'],
         ],
     ],

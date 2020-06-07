@@ -60,5 +60,28 @@ $(document).ready(function () {
                 }
             }
         }).mask('.inputmask-money');*/
+
+
+        // Ajax удаление
+        // TODO: Нужно сделать по уму
+        $('.btn-delete').on('click', function(e) {
+            e.preventDefault();
+            var row = $(this).parent().parent();
+            var deleteUrl = $(this).attr('href');
+            var pjaxContainer = 'child-grid-view';
+            var result = confirm('Вы действительно хотите удалить?');
+            if(result) {
+                $.ajax({
+                    url: deleteUrl,
+                    type: 'post',
+                    error: function(xhr, status, error) {
+                        alert('There was an error with your request.' + xhr.responseText);
+                    }
+                }).done(function(data) {
+                    //$.pjax.reload('#' + $.trim(pjaxContainer), {timeout: 3000});
+                    $(row).remove();
+                });
+            }
+        });
     });
 });

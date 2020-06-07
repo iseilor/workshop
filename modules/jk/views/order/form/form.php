@@ -30,7 +30,13 @@ if (isset($model->is_mortgage)) {
                 <div class="card-header" data-intro="This is a tooltip!">
                     <h3 class="card-title"><i class="fas fa-ruble-sign"></i> Оформление заявки на участие в Жилищной Кампании</h3>
                 </div>
-                <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data', 'id' => 'jk-order','class'=>'form-tabs']]); ?>
+                <?php $form = ActiveForm::begin(
+                        ['options' =>
+                            ['enctype' => 'multipart/form-data',
+                                'id' => 'jk-order',
+                                'class'=>'form-tabs',
+                                'data-pjax' => false
+                                ]]); ?>
                 <?= $form->field($model, 'percent_id', ['options' => ['class' => 'd-none']])->hiddenInput(); ?>
                 <?= $form->field($model, 'zaim_id', ['options' => ['class' => 'd-none']])->hiddenInput(); ?>
                 <div class="card-body">
@@ -158,6 +164,8 @@ $(document).ready(function() {
             $('.field-zaim').removeClass('d-none');
         }
     });
+    
+    
 });
 
 
