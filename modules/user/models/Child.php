@@ -106,32 +106,38 @@ class Child extends Model
             [['date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'date'],
 
             // Паспорт
-            [['passport_series', 'passport_number', 'passport_date', 'passport_department', 'passport_code','passport_address'], 'safe'],
+            [['passport_series', 'passport_number', 'passport_date', 'passport_department', 'passport_code', 'passport_address'], 'safe'],
             [['passport_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'passport_date'],
 
             // Св-во о рождении
             [['birth_series', 'birth_number', 'birth_date', 'birth_department', 'birth_code'], 'required'],
             [['birth_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'birth_date'],
-
-
-            // Файлы
             [
-                [
-                    'passport_file_form',
-                    'birth_file_form',
+                ['birth_date', 'date'],
+                function () {
+                    if ($this->birth_date && $this->date && $this->birth_date < $this->date) {
+                        $this->addError('birth_date', "Дата не может быть раньше даты рождения");
+                    }
+                }
+            ],
 
-                    'file_invalid_form',
-                    'file_posobie_form',
-                    'file_study_form',
-                    'file_scholarship_form',
+                // Файлы
+            [[
+                'passport_file_form',
+                'birth_file_form',
 
-                    'registration_file_form',
-                    'address_mother_file_form',
-                    'address_father_file_form',
-                    'ejd_file_form',
-                    'file_personal_form',
+                'file_invalid_form',
+                'file_posobie_form',
+                'file_study_form',
+                'file_scholarship_form',
 
-                ],
+                'registration_file_form',
+                'address_mother_file_form',
+                'address_father_file_form',
+                'ejd_file_form',
+                'file_personal_form',
+
+            ],
                 'file',
                 'skipOnEmpty' => true,
                 'extensions' => 'pdf',
@@ -164,12 +170,12 @@ class Child extends Model
             'age' => Module::t('child', 'Age'),
 
             // Паспорт
-            'passport_series'=>Module::t('child', 'Passport Series'),
-            'passport_number'=>Module::t('child', 'Passport Number'),
-            'passport_date'=>Module::t('child', 'Passport Date'),
-            'passport_department'=>Module::t('child', 'Passport Department'),
-            'passport_code'=>Module::t('child', 'Passport Code'),
-            'passport_address'=>Module::t('child', 'Passport Address'),
+            'passport_series' => Module::t('child', 'Passport Series'),
+            'passport_number' => Module::t('child', 'Passport Number'),
+            'passport_date' => Module::t('child', 'Passport Date'),
+            'passport_department' => Module::t('child', 'Passport Department'),
+            'passport_code' => Module::t('child', 'Passport Code'),
+            'passport_address' => Module::t('child', 'Passport Address'),
             'passport_file' => Module::t('child', 'Passport File'),
             'passport_file_form' => Module::t('child', 'Passport File'),
             'passportLink' => Module::t('child', 'Passport File'),
@@ -226,11 +232,11 @@ class Child extends Model
     public function attributeHints()
     {
         return [
-            'is_study'=>'Дети в возрасте до 23 лет, обучающиеся в образовательном учреждении по очной форме обучения',
-            'is_invalid'=>'Дети старше 18 лет, ставшие инвалидами до достижения ими возраста 18 лет',
+            'is_study' => 'Дети в возрасте до 23 лет, обучающиеся в образовательном учреждении по очной форме обучения',
+            'is_invalid' => 'Дети старше 18 лет, ставшие инвалидами до достижения ими возраста 18 лет',
             'address_registration' => 'Пример: 123456, г.Москва, ул.Ленина, д.1, кв.1',
             'address_fact' => 'Пример: 123456, г.Москва, ул.Ленина, д.1, кв.1',
-            'ejd_file_form'=>'Единый жилищный документ (действителен в течение 1 месяца со дня выдачи); (если в населенном пункте не выдается ЕЖД, могут быть предоставлены выписки из домовой книги и справки о составе семьи)'
+            'ejd_file_form' => 'Единый жилищный документ (действителен в течение 1 месяца со дня выдачи); (если в населенном пункте не выдается ЕЖД, могут быть предоставлены выписки из домовой книги и справки о составе семьи)',
         ];
     }
 
@@ -333,7 +339,6 @@ class Child extends Model
             return false;
         }
     }
-
 
 
 }
