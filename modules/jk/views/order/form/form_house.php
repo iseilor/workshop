@@ -2,6 +2,7 @@
 
 use yii\helpers\ArrayHelper;
 use yii\jui\DatePicker;
+use yii\widgets\MaskedInput;
 
 ?>
 
@@ -12,7 +13,7 @@ use yii\jui\DatePicker;
         <?= $form->field($model, 'jp_address')->textarea() ?>
         <?= $form->field($model, 'jp_room_count')->textInput() ?>
         <?= $form->field($model, 'jp_area')->textInput() ?>
-        <?= $form->field($model, 'jp_cost')->textInput() ?>
+        <?= $form->field($model, 'jp_cost')->widget(MaskedInput::class, ['clientOptions' => Yii::$app->params['widget']['MaskedInput']['clientOptionsMoney']]); ?>
         <?= $form->field($model, 'jp_dogovor_date')->widget(
             DatePicker::class,
             [

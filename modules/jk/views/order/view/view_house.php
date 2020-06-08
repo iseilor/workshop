@@ -27,7 +27,7 @@ echo DetailView::widget([
         'jp_address' ,
         'jp_room_count',
         'jp_area',
-        'jp_cost',
+        'jp_cost:currency',
         'jp_dogovor_date:date',
         'jp_registration_date:date',
         'jp_date:date',
