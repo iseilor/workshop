@@ -107,10 +107,23 @@ class Child extends Model
 
             // Паспорт
             [['passport_series', 'passport_number', 'passport_date', 'passport_department', 'passport_code', 'passport_address'], 'safe'],
+            [
+                'date',
+                function () {
+                    if ($this->date > 0 && time() - $this->date > 14 * 356 * 24 * 60 * 60) {
+                        $passport_attrs = ['passport_series', 'passport_number', 'passport_date', 'passport_department', 'passport_code', 'passport_address','passport_file_form'];
+                        foreach ($passport_attrs as $passport_attr) {
+                            if ($this->{$passport_attr} == '') {
+                                $this->addError($passport_attr, "Данное поле обязательно для заполнения для детей старше 14 лет");
+                            }
+                        }
+                    }
+                },
+            ],
             [['passport_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'passport_date'],
 
             // Св-во о рождении
-            [['birth_series', 'birth_number', 'birth_date', 'birth_department', 'birth_code'], 'required'],
+            [['birth_series', 'birth_number', 'birth_date', 'birth_department', 'birth_code','birth_file_form'], 'required'],
             [['birth_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'birth_date'],
             [
                 ['birth_date', 'date'],
@@ -118,26 +131,27 @@ class Child extends Model
                     if ($this->birth_date && $this->date && $this->birth_date < $this->date) {
                         $this->addError('birth_date', "Дата не может быть раньше даты рождения");
                     }
-                }
+                },
             ],
 
-                // Файлы
-            [[
-                'passport_file_form',
-                'birth_file_form',
+            // Файлы
+            [
+                [
+                    'passport_file_form',
+                    'birth_file_form',
 
-                'file_invalid_form',
-                'file_posobie_form',
-                'file_study_form',
-                'file_scholarship_form',
+                    'file_invalid_form',
+                    'file_posobie_form',
+                    'file_study_form',
+                    'file_scholarship_form',
 
-                'registration_file_form',
-                'address_mother_file_form',
-                'address_father_file_form',
-                'ejd_file_form',
-                'file_personal_form',
+                    'registration_file_form',
+                    'address_mother_file_form',
+                    'address_father_file_form',
+                    'ejd_file_form',
+                    'file_personal_form',
 
-            ],
+                ],
                 'file',
                 'skipOnEmpty' => true,
                 'extensions' => 'pdf',
@@ -257,6 +271,8 @@ class Child extends Model
         return $parent_behaviors;
     }
 
+
+
     // Пол ребёнка
     public static function getGenderList()
     {
@@ -264,6 +280,18 @@ class Child extends Model
             1 => 'Мужской',
             0 => 'Женский',
         ];
+    }
+
+    public function beforeValidate()
+    {
+        if ($_FILES["Child"]["name"]["birth_file_form"]){
+            $this->birth_file_form=$_FILES["Child"]["name"]["birth_file_form"];
+        }
+        if ($_FILES["Child"]["name"]["passport_file_form"]){
+            $this->passport_file_form=$_FILES["Child"]["name"]["passport_file_form"];
+        }
+        return parent::beforeValidate();
+
     }
 
     // Загрузка файлов
@@ -295,6 +323,10 @@ class Child extends Model
                 $fileName = 'child_' . $this->id . '_' . $field . '_' . date('YmdHis') . '.' . $file->extension;
                 $file->saveAs($pathDir . '/' . $fileName);
                 $this->{$field} = $fileName;
+
+                // Это нужно для валидации полей загрузки файлов
+                $field_form = $field.'_form';
+                $this->{$field_form} = $fileName;
             }
         }
         return $this->save();
@@ -339,6 +371,4 @@ class Child extends Model
             return false;
         }
     }
-
-
 }
