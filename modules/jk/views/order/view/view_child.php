@@ -6,8 +6,10 @@ use app\modules\user\models\ChildSearch;
 use yii\grid\GridView;
 use yii\helpers\Url;
 
-$searchModel = new ChildSearch();
-$dataProvider = $searchModel->search(['user_id='.Yii::$app->user->identity->id]);
+$searchModel = new ChildSearch(['user_id' => $model->created_by]);
+$dataProvider = $searchModel->search([]);
+$dataProvider->query->andWhere(['deleted_at' => null]);
+
 ?>
 
 
