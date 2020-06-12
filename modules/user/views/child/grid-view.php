@@ -27,10 +27,12 @@ echo GridView::widget([
         [
             'class' => LinkColumn::class,
             'attribute' => 'id',
+            'controller' => '/user/child/view',
         ],
         [
             'class' => LinkColumn::class,
             'attribute' => 'fio',
+            'controller' => '/user/child/view',
         ],
         [
             'attribute' => 'gender',
