@@ -284,10 +284,10 @@ class Child extends Model
 
     public function beforeValidate()
     {
-        if ($_FILES["Child"]["name"]["birth_file_form"]){
+        if (isset($_FILES["Child"]["name"]["birth_file_form"]) && $_FILES["Child"]["name"]["birth_file_form"]){
             $this->birth_file_form=$_FILES["Child"]["name"]["birth_file_form"];
         }
-        if ($_FILES["Child"]["name"]["passport_file_form"]){
+        if (isset($_FILES["Child"]["name"]["passport_file_form"]) && $_FILES["Child"]["name"]["passport_file_form"]){
             $this->passport_file_form=$_FILES["Child"]["name"]["passport_file_form"];
         }
         return parent::beforeValidate();
