@@ -103,6 +103,18 @@ class Spouse extends Model
             [['date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'date'],
             [['passport_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'passport_date'],
 
+            // Обязательные при наличии супруге
+            [
+                ['fio','gender','date'],
+                'required',
+                'when' => function ($model) {
+                    return $model->type == 1;
+                },
+                'whenClient' => "function (attribute, value) {
+                    return $('#spouse-type').val() == 1;
+                }",
+            ],
+
             // Файлы
             [
                 [
