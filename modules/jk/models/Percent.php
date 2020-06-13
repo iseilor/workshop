@@ -2,6 +2,7 @@
 
 namespace app\modules\jk\models;
 
+use app\models\Model;
 use app\modules\jk\Module;
 use app\modules\user\models\User;
 use Yii;
@@ -34,7 +35,7 @@ use yii\db\Expression;
  * @property int|null $compensation_count
  * @property int|null $compensation_years
  */
-class Percent extends \yii\db\ActiveRecord
+class Percent extends Model
 {
 
     /**
@@ -182,6 +183,8 @@ class Percent extends \yii\db\ActiveRecord
             'compensation_result' => Module::t('module', 'Compensation Result'),
             'compensation_count' => Module::t('module', 'Compensation Count'),
             'compensation_years' => Module::t('module', 'Compensation Years'),
+
+            'createdUserLabel'=>Module::t('module', 'Created User Label'),
         ];
     }
 

@@ -1,26 +1,38 @@
 <?php
 
-/**
- * @var $this yii\web\View
- */
-
-
-$this->title = '<span class="badge bg-danger">Админка</span>';
-$this->params['breadcrumbs'][] = ['label' => 'ЖК', 'url' => ['/jk']];
-$this->params['breadcrumbs'][] = $this->title;
-
 use app\modules\jk\assets\JkAdminAsset;
 use app\modules\jk\models\Message;
 use app\modules\jk\models\Order;
 use app\modules\jk\models\OrderStop;
+use app\modules\jk\models\Percent;
 use app\modules\jk\models\Status;
+use app\modules\jk\models\Zaim;
 use app\modules\nsi\models\Color;
 use kartik\icons\Icon;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
 
+
+/**
+ * @var $this yii\web\View
+ */
+
+$this->title = '<span class="badge bg-danger">'.Icon::show('tools').'Админка</span>';
+$this->params['breadcrumbs'][] = ['label' => 'ЖК', 'url' => ['/jk']];
+$this->params['breadcrumbs'][] = $this->title;
+
 JkAdminAsset::register($this);
+
+// Калькуляторы на компенсации процентов
+$percentsCount =  Percent::find()->count();                                         // Всего
+$percentY =  Percent::find()->where('compensation_count>0')->count();     // Положительных
+$percentN =  Percent::find()->where('compensation_count=0')->count();     // Отрицательных
+
+// Калькулятор займа
+$zaimsCount =  Zaim::find()->count();                                         // Всего
+$zaimY =  Zaim::find()->where('compensation_count>0')->count();     // Положительных
+$zaimN =  Zaim::find()->where('compensation_count=0')->count();     // Отрицательных
 
 // Заявки, сгрупированные по статусам
 $ordersGroupStatus = Order::find()
@@ -54,35 +66,39 @@ if ($messagesUser>0){
 
 <div class="row">
     <div class="col-12 col-sm-6 col-md-3">
-        <div class="info-box mb-3">
-            <span class="info-box-icon bg-primary elevation-1"><?=Icon::show('percent')?></span>
+
+        <?=Html::a('<div class="info-box mb-3">
+            <span class="info-box-icon bg-primary elevation-1">'.Icon::show('percent').'</span>
             <div class="info-box-content">
                 <span class="info-box-text">Проценты</span>
-                <span class="info-box-number">0</span>
+                <span class="info-box-number">'.$percentsCount.'</span>
             </div>
-        </div>
+        </div>',Url::to(['/jk/percent'],true));
+        ?>
         <div class="card">
             <div class="card-body">
                 <div class="chart">
                     <h6>Проценты</h6>
-                    <canvas id="voted1" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                    <canvas id="percents" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
                 </div>
             </div>
         </div>
     </div>
+
     <div class="col-12 col-sm-6 col-md-3">
-        <div class="info-box mb-3">
-            <span class="info-box-icon bg-primary elevation-1"><?=Icon::show('wallet')?></span>
+        <?=Html::a('<div class="info-box mb-3">
+            <span class="info-box-icon bg-primary elevation-1">'.Icon::show('wallet').'</span>
             <div class="info-box-content">
                 <span class="info-box-text">Займы</span>
-                <span class="info-box-number">0</span>
+                <span class="info-box-number">'.$zaimsCount.'</span>
             </div>
-        </div>
+        </div>',Url::to(['/jk/zaim'],true));
+        ?>
         <div class="card">
             <div class="card-body">
                 <div class="chart">
                     <h6>Займы</h6>
-                    <canvas id="voted1" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                    <canvas id="zaims" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
                 </div>
             </div>
         </div>
@@ -162,6 +178,14 @@ if ($messagesUser>0){
 </section>
 
 <?php
+// Проценты
+$this->registerJsVar('percentY', $percentY, yii\web\View::POS_HEAD);
+$this->registerJsVar('percentN', $percentN, yii\web\View::POS_HEAD);
+
+// Займа
+$this->registerJsVar('zaimY', $zaimY, yii\web\View::POS_HEAD);
+$this->registerJsVar('zaimN', $zaimN, yii\web\View::POS_HEAD);
+
 // Заявки, сгруппированные по статусам
 $this->registerJsVar('ordersGroupStatus',$ordersGroupStatus, yii\web\View::POS_HEAD);
 $this->registerJsVar('statuses',$statuses, yii\web\View::POS_HEAD);

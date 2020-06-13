@@ -103,6 +103,8 @@ class Spouse extends Model
             [['date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'date'],
             [['passport_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'passport_date'],
 
+            [['fio'], 'match', 'pattern' => '/^[а-яА-Я]+$/u', 'message' => 'Неверный формат ФИО'],
+
             // Обязательные при наличии супруге
             [
                 ['fio','gender','date'],
@@ -201,8 +203,10 @@ class Spouse extends Model
     public function attributeHints()
     {
         return [
+            'fio'=>'Пример: Иванова Анастасия Ивановна',
             'passport_registration' => 'Пример: 123456, г.Москва, ул.Ленина, д.1, кв.1',
             'address_fact' => 'Пример: 123456, г.Москва, ул.Ленина, д.1, кв.1',
+
         ];
     }
 

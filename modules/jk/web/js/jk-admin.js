@@ -1,3 +1,52 @@
+// Проценты ------------------------------------------------------------------------------------------------------------
+var donutChartCanvas = $('#percents').get(0).getContext('2d');
+var donutData = {
+    labels: [
+        'Одобрено',
+        'НЕ одобрено',
+    ],
+    datasets: [
+        {
+            data: [percentY, percentN],
+            backgroundColor: ['#00a65a','#f56954'],
+        }
+    ]
+};
+var donutOptions = {
+    maintainAspectRatio: false,
+    responsive: true,
+};
+var donutChart = new Chart(donutChartCanvas, {
+    type: 'doughnut',
+    data: donutData,
+    options: donutOptions
+});
+
+// Займа    ------------------------------------------------------------------------------------------------------------
+var donutChartCanvas = $('#zaims').get(0).getContext('2d');
+var donutData = {
+    labels: [
+        'Одобрено',
+        'НЕ одобрено',
+    ],
+    datasets: [
+        {
+            data: [zaimY, zaimN],
+            backgroundColor: ['#00a65a','#f56954'],
+        }
+    ]
+};
+var donutOptions = {
+    maintainAspectRatio: false,
+    responsive: true,
+};
+var donutChart = new Chart(donutChartCanvas, {
+    type: 'doughnut',
+    data: donutData,
+    options: donutOptions
+});
+
+
 // График заявки, сгруппированные по статусам --------------------------------------------------------------------------
 var donutChartCanvas = $('#orders').get(0).getContext('2d');
 var donutData = {
