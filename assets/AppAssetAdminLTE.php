@@ -39,7 +39,7 @@ class AppAssetAdminLTE extends AssetBundle
             'plugins/bootstrap-switch/js/bootstrap-switch.min.js',
 
             'dist/js/adminlte.js',
-            'dist/js/demo.js',
+            //'dist/js/demo.js',
         ];
     public $depends
         = [

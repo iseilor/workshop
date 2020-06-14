@@ -116,3 +116,15 @@ a.a-color-blue:hover {
   z-index: 1033;
   bottom: 3rem;
 }
+#chat-bot {
+  bottom: 3rem;
+  position: fixed;
+  right: 4rem;
+  z-index: 1033;
+}
+.chat-bot-sidebar {
+  color: white;
+}
+.chat-bot-sidebar a {
+  color: white;
+}

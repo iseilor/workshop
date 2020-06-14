@@ -90,6 +90,11 @@ $config = [
             'migrationPath' => '@app/modules/chat/migrations',
             'migrationTable' => 'migration_chat',
         ],
+        'migrate-bot' => [
+            'class' => 'yii\console\controllers\MigrateController',
+            'migrationPath' => '@app/modules/bot/migrations',
+            'migrationTable' => 'migration_bot',
+        ],
     ],
 
 ];

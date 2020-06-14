@@ -6,6 +6,7 @@
 
 use app\assets\AppAssetAdminLTE;
 use app\widgets\Alert;
+use kartik\icons\Icon;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\helpers\Html;
@@ -30,7 +31,7 @@ AppAssetAdminLTE::register($this);
     <link rel="icon" href="<?= Yii::$app->homeUrl ?>favicon.ico" type="image/x-icon">
 
 </head>
-<body class="hold-transition sidebar-mini layout-navbar-fixed1  layout-footer-fixed1 layout-fixed0">
+<body class="hold-transition sidebar-mini layout-navbar-fixed  layout-footer-fixed layout-fixed">
 <?php $this->beginBody() ?>
 <div class="wrapper">
 
@@ -70,20 +71,29 @@ AppAssetAdminLTE::register($this);
                 <?= Alert::widget() ?>
                 <?= $content ?>
             </div>
+
+            <a id="chat-bot" href="#" class="btn btn-primary" data-widget="control-sidebar" data-slide="true">
+                <i class="fas fa-robot"></i>
+                Чат-бот Ростик
+            </a>
+
             <a id="back-to-top" href="#" class="btn btn-primary back-to-top" role="button" aria-label="Scroll to top">
                 <i class="fas fa-chevron-up"></i>
             </a>
         </div>
-
     </div>
-    <aside class="control-sidebar control-sidebar-dark">
-        <!-- Control sidebar content goes here -->
-        <div class="p-3">
-            <h5>Title</h5>
-            <p>Sidebar content</p>
+    <?= $this->render('assets/footer'); ?>
+    <aside class="control-sidebar control-sidebar-dark chat-bot-sidebar">
+        <div class="p-3 control-sidebar-content">
+            <h5><?=Icon::show('robot')?>Чат-бот РОСТИК</h5>
+            <hr class="mb-2">
+            Укажите интересующий вас раздел<br/>
+            <a class="btn btn-primary btn-xs">Главная</a>
+            <a class="btn btn-primary btn-xs">Новости</a>
+            <a class="btn btn-primary btn-xs">ЖК</a>
         </div>
     </aside>
-    <?= $this->render('assets/footer'); ?>
+
 </div>
 <?php $this->endBody() ?>
 <script src="<?= Yii::$app->homeUrl ?>js/script.js"></script>

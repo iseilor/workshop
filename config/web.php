@@ -64,6 +64,9 @@ $config = [
         'nsi' => ['class' => 'app\modules\nsi\Module'],
         'gridview' => ['class' => 'kartik\grid\Module'],
         'project' => ['class' => 'app\modules\project\Module'],
+        'bot' => [
+            'class' => 'app\modules\bot\Module',
+        ],
     ],
     'components' => [
         'ad' => [
