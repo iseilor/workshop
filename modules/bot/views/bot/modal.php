@@ -18,7 +18,7 @@ use kartik\icons\Icon;
             <div class="card-footer">
                 <div class="float-right">
                     <button type="button" class="btn btn-success" data-dismiss="modal"><?= Icon::show('check') ?> Да, теперь мне всё понятно</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal"><?= Icon::show('check') ?> Нет, у меня остались вопросы</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><?= Icon::show('times') ?> Нет, у меня остались вопросы</button>
                 </div>
             </div>
         </div>
