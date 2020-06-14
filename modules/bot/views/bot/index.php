@@ -1,5 +1,7 @@
 <?php
 
+use app\components\grid\ActionColumn;
+use app\components\grid\LinkColumn;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
@@ -11,9 +13,6 @@ $this->title = Yii::t('app', 'Bots');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="bot-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <p>
         <?= Html::a(Yii::t('app', 'Create Bot'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
@@ -27,15 +26,26 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'title',
-            'title_link',
+            [
+                'class' => LinkColumn::class,
+                'attribute' => 'id',
+            ],
+            [
+                'class' => LinkColumn::class,
+                'attribute' => 'title',
+            ],
+            [
+                'class' => LinkColumn::class,
+                'attribute' => 'title_link',
+            ],
             'description:ntext',
             'text:ntext',
             'img',
+            'icon',
             'bot_id',
-
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => ActionColumn::class,
+            ],
         ],
     ]); ?>
 

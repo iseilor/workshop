@@ -27,9 +27,10 @@ class m200614_093237_create_bot_table extends Migration
             'description'=>$this->text()->notNull(),
             'text'=>$this->text()->notNull(),
             'img'=>$this->string(),
+            'icon'=>$this->string(),
             'bot_id'=>$this->integer()
         ]);
-        //$this->execute(file_get_contents(__DIR__ . '/../sql/bot.sql'));
+        $this->execute(file_get_contents(__DIR__ . '/../sql/bot.sql'));
     }
 
     /**

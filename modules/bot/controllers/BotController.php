@@ -5,6 +5,7 @@ namespace app\modules\bot\controllers;
 use Yii;
 use app\modules\bot\models\Bot;
 use app\modules\bot\models\BotSearch;
+use yii\helpers\Json;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -14,6 +15,7 @@ use yii\filters\VerbFilter;
  */
 class BotController extends Controller
 {
+
     /**
      * {@inheritdoc}
      */
@@ -31,6 +33,7 @@ class BotController extends Controller
 
     /**
      * Lists all Bot models.
+     *
      * @return mixed
      */
     public function actionIndex()
@@ -46,7 +49,9 @@ class BotController extends Controller
 
     /**
      * Displays a single Bot model.
+     *
      * @param integer $id
+     *
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -60,6 +65,7 @@ class BotController extends Controller
     /**
      * Creates a new Bot model.
      * If creation is successful, the browser will be redirected to the 'view' page.
+     *
      * @return mixed
      */
     public function actionCreate()
@@ -78,7 +84,9 @@ class BotController extends Controller
     /**
      * Updates an existing Bot model.
      * If update is successful, the browser will be redirected to the 'view' page.
+     *
      * @param integer $id
+     *
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -98,7 +106,9 @@ class BotController extends Controller
     /**
      * Deletes an existing Bot model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
+     *
      * @param integer $id
+     *
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -112,7 +122,9 @@ class BotController extends Controller
     /**
      * Finds the Bot model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
+     *
      * @param integer $id
+     *
      * @return Bot the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -123,5 +135,30 @@ class BotController extends Controller
         }
 
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
+    }
+
+    // Получаем дочерние элементы
+    public function actionChild($id)
+    {
+        $items = BotSearch::find()->where(['bot_id' => $id])->all();
+        $links = '';
+        foreach ($items as $item) {
+            $links .= $this->renderPartial('item', ['model' => $item]);
+        }
+        // Если есть дочерние элементы, то выводим их, если нет, то содержимое для модального окна
+        if ($links) {
+            return Json::encode([
+                'links' => $links,
+            ]);
+        } else {
+            $modal = Bot::findOne($id);
+            return Json::encode([
+                'modal'=>true,
+                'title'=>$modal->title,
+                'icon'=>$modal->icon,
+                'text' => $modal->text,
+            ]);
+
+        }
     }
 }

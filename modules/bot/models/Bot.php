@@ -20,6 +20,7 @@ use Yii;
  * @property string $description
  * @property string $text
  * @property string|null $img
+ * @property string|null $icon
  * @property int|null $bot_id
  */
 class Bot extends Model
@@ -41,7 +42,7 @@ class Bot extends Model
             [['title', 'title_link', 'description', 'text'], 'required'],
             [['created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by', 'bot_id'], 'integer'],
             [['description', 'text'], 'string'],
-            [['title', 'title_link', 'img'], 'string', 'max' => 255],
+            [['title', 'title_link', 'img','icon'], 'string', 'max' => 255],
         ];
     }
 
