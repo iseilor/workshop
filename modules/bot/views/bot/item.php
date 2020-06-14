@@ -2,6 +2,7 @@
 
 use kartik\icons\Icon;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 /* @var $model app\modules\bot\models\Bot */
 
@@ -11,4 +12,5 @@ use yii\helpers\Html;
     [
         'class' => 'btn btn-primary btn-xs btn-bot',
         'data-id' => $model->id,
+        'data-url'=>Url::to(['/bot/bot/'.$model->id.'/child'],true)
     ]) ?>

@@ -128,3 +128,6 @@ a.a-color-blue:hover {
 .chat-bot-sidebar a {
   color: white;
 }
+.btn-bot {
+  margin-right: 5px;
+}

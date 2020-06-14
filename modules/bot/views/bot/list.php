@@ -19,7 +19,7 @@ $(document).ready(function() {
         $(this).removeClass('btn-primary').addClass('btn-success');
         $.ajax({
            type : 'post',
-           url: '/bot/bot/'+$(this).data('id')+'/child',
+           url: $(this).data('url'),
            success: function(data) {
                data = JSON.parse(data);
                $(parent).next().remove();
