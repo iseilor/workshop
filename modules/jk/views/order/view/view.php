@@ -2,6 +2,7 @@
 
 use app\modules\jk\Module;
 use kartik\icons\Icon;
+use yii\bootstrap4\Modal;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
@@ -63,8 +64,12 @@ $this->title .= ' ' . $model->status->label;
                     </div>
                 </div>
                 <div class="card-footer">
+                    <!--<?= $this->render('btn_curator', ['model' => $model]) ?>-->
                     <?php if ($model->status_id == \app\modules\jk\models\Status::findOne(['code' => 'NEW'])->id): ?>
-                        <!--<?= Html::a(Icon::show('check') . 'Отправить куратору на проверку', ['sendEmailManager', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>-->
+                        <!--<?= Html::a(Icon::show('check') . 'Отправить куратору на проверку', ['', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+-->
+
+
                         <?= Html::a(Icon::show('tasks') . 'Отправить руководителю на согласование', ['manager', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
                     <?php endif; ?>
 
@@ -76,6 +81,9 @@ $this->title .= ' ' . $model->status->label;
             </div>
         </div>
     </div>
+
+
+
 
 <?php
 $script = <<< JS

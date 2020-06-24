@@ -190,7 +190,7 @@ class Order extends Model
                 'file',
                 'skipOnEmpty' => true,
                 'extensions' => 'pdf, docx',
-                'maxSize' => '2048000',
+                'maxSize' => '20048000',
             ],
 
             // Финансы
@@ -204,7 +204,7 @@ class Order extends Model
                 'file',
                 'skipOnEmpty' => true,
                 'extensions' => 'pdf, docx',
-                'maxSize' => '2048000',
+                'maxSize' => '20048000',
             ],
 
         ];

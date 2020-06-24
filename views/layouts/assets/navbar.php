@@ -16,11 +16,16 @@ use yii\widgets\Menu;
         'itemOptions' => ['class' => 'nav-item d-none d-sm-inline-block'],
         'linkTemplate' => '<a href="{url}" class="nav-link">{label}</a>',
         'items' => [
-            ['label' => '<i class="fas fa-bars"></i>', 'url' => '#', 'options' => ['class' => 'nav-item'], 'template' => '<a href="{url}" class="nav-link" data-widget="pushmenu">{label}</a>',],
-            ['label' => Module::t('module', 'Home'), 'url' => ['/main/default/index']],
-            ['label' => Module::t('module', 'Teams'), 'url' => ['/main/team/index']],
-            ['label' => Module::t('module', 'About project'), 'url' => ['/main/default/about']],
-            ['label' => Module::t('module', 'Feedback'), 'url' => ['/main/default/feedback']],
+            ['label' => '<i class="fas fa-bars"></i>', 'url' => '#', 'options' => ['class' => 'nav-item'], 'template' => '<a href="{url}" class="nav-link" data-widget="pushmenu">{label}</a>'],
+            ['label' => Icon::show('tachometer-alt') . Module::t('module', 'Home'), 'url' => ['/main/default/index']],
+            ['label' => Icon::show('users') . Module::t('module', 'Teams'), 'url' => ['/main/team/index']],
+            ['label' => Icon::show('info') . Module::t('module', 'About project'), 'url' => ['/main/default/about']],
+            [
+                'label' => Icon::show('confluence', ['framework' => Icon::FAB]) . 'Confluence',
+                'url' => Url::to('https://confluence.rt.ru/display/WSHOP'),
+                'template' => '<a href="{url}" class="nav-link" target="_blank" title="Проект в Confluence">{label}</a>'
+            ],
+            ['label' => Icon::show('envelope') . Module::t('module', 'Feedback'), 'url' => ['/main/default/feedback']],
         ],
     ]);
     ?>
@@ -202,14 +207,14 @@ use yii\widgets\Menu;
                     );
                     echo '<div class="dropdown-divider"></div>';
                     echo Html::a(
-                        Icon::show('id-card').'Моя карточка',
-                        Url::to( '/user/'.Yii::$app->user->identity->getId(),true),
+                        Icon::show('id-card') . 'Моя карточка',
+                        Url::to('/user/' . Yii::$app->user->identity->getId(), true),
                         ['class' => 'dropdown-item']
                     );
 
                     echo '<div class="dropdown-divider"></div>';
                     echo Html::a(
-                        Icon::show('baby').'Мои дети',
+                        Icon::show('baby') . 'Мои дети',
                         Url::home() . 'user/child',
                         ['class' => 'dropdown-item']
                     );

@@ -48,7 +48,7 @@ $dataProvider = new ActiveDataProvider([
             ],
             [
                 'class' => ActionColumn::class,
-                'controller' => '/jk/percent',
+                'controller' => '/jk/order',
             ],
         ],
     ]

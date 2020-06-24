@@ -13,6 +13,7 @@ use yii\widgets\Pjax;
 // Обновить можно всегда
 $spouse = Spouse::find()->where(['user_id' => $model->created_by])->one();
 
+
 if ($spouse) {
     echo DetailView::widget([
         'model' => $spouse,

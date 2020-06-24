@@ -111,7 +111,7 @@ class Child extends Model
                 'date',
                 function () {
                     if ($this->date > 0 && time() - $this->date > 14 * 356 * 24 * 60 * 60) {
-                        $passport_attrs = ['passport_series', 'passport_number', 'passport_date', 'passport_department', 'passport_code', 'passport_address','passport_file_form'];
+                        $passport_attrs = ['passport_series', 'passport_number', 'passport_date', 'passport_department', 'passport_code', 'passport_address'];
                         foreach ($passport_attrs as $passport_attr) {
                             if ($this->{$passport_attr} == '') {
                                 $this->addError($passport_attr, "Данное поле обязательно для заполнения для детей старше 14 лет");
@@ -123,7 +123,7 @@ class Child extends Model
             [['passport_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'passport_date'],
 
             // Св-во о рождении
-            [['birth_series', 'birth_number', 'birth_date', 'birth_department', 'birth_code','birth_file_form'], 'required'],
+            [['birth_series', 'birth_number', 'birth_date', 'birth_department', 'birth_code'], 'required'],
             [['birth_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'birth_date'],
             [
                 ['birth_date', 'date'],

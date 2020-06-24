@@ -366,6 +366,19 @@ class OrderController extends Controller
         return true;
     }
 
+    // Передаём заявку куратору на проверку
+    public function action2curator($id)
+    {
+        $order=Order::findOne($id);
+        $order->status_id=Status::findOne(['code'=>'MANAGER_WAIT'])->id;
+        $order->save();
+
+        Yii::$app->session->setFlash('success', "Начат процесс согласования вашей заявки на оказание материальной помощи<br/>
+        Вы будете получать email-уведомления, а также можете смотреть через личный кабинет, у кого из руководителей заявка в данный момент находится на согласовании");
+        return $this->redirect(['/jk/order/view/','id'=>$id]);
+
+    }
+
     // Запускаем процесс согласования заявки
     public function actionManager($id)
     {

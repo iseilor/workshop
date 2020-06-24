@@ -96,6 +96,7 @@ class Spouse extends Model
                     'work_file',
                     'unemployment_file',
                     'salary_file',
+                    'marriage_file'
                 ],
                 'string',
                 'max' => 255,
@@ -103,7 +104,7 @@ class Spouse extends Model
             [['date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'date'],
             [['passport_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'passport_date'],
 
-            [['fio'], 'match', 'pattern' => '/^[а-яА-Я]+$/u', 'message' => 'Неверный формат ФИО'],
+            [['fio'], 'match', 'pattern' => '/^[а-яА-Я ]+$/u', 'message' => 'Неверный формат ФИО'],
 
             // Обязательные при наличии супруге
             [
@@ -133,7 +134,7 @@ class Spouse extends Model
                 'file',
                 'skipOnEmpty' => true,
                 'extensions' => 'pdf',
-                'maxSize' => '1024000',
+                'maxSize' => '5000000',
             ],
         ];
     }
@@ -256,6 +257,7 @@ class Spouse extends Model
         // Все поля с файлами
         $fields = [
             'marriage_file',
+
             'passport_file',
             'registration_file',
             'edj_file',
