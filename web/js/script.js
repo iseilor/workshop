@@ -41,6 +41,8 @@ $(document).ready(function () {
         // Кнопка прикрепить файлы
         bsCustomFileInput.init();
 
+        //Initialize Select2 Elements
+        $('.select2').select2();
 
         // https://github.com/RobinHerbots/Inputmask
         //$(":input").inputmask();

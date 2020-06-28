@@ -19,6 +19,10 @@ class AppAssetAdminLTE extends AssetBundle
             'plugins/ekko-lightbox/ekko-lightbox.css',
             'plugins/toastr/toastr.css',
             'plugins/fontawesome-free/css/all.css',
+
+            'plugins/select2/css/select2.min.css',
+            'plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css',
+
             'dist/css/adminlte.css',
 
         ];
@@ -37,6 +41,9 @@ class AppAssetAdminLTE extends AssetBundle
             'plugins/bootstrap/js/bootstrap.bundle.js',
             'plugins/bs-custom-file-input/bs-custom-file-input.min.js',
             'plugins/bootstrap-switch/js/bootstrap-switch.min.js',
+
+            'plugins/select2/js/select2.full.min.js',
+
 
             'dist/js/adminlte.js',
             //'dist/js/demo.js',

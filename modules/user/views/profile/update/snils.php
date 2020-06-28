@@ -23,7 +23,11 @@
                 );
         }
         ?>
-        <?= $form->field($model, 'snils_file')->fileInput()->hint($snilsFile) ?>
+        <?= $form->field($model, 'snils_file', [
+            'template' => getFileInputTemplate($model->snils_file, $model->attributeLabels()['snils_file'] . '.pdf'),
+        ])->fileInput(['class' => 'custom-file-input']) ?>
+
+        
     </div>
     <div class="col-md-4">
         <?= $form->field($model, 'snils_number')->widget(MaskedInput::class, [

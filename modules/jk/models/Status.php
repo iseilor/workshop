@@ -37,10 +37,10 @@ class Status extends Model
     public function rules()
     {
         return [
-            [['created_at', 'created_by', 'title','title_long','icon'], 'required'],
+            [['title','icon'], 'required'],
             [['created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by', 'progress'], 'integer'],
-            [['description'], 'string'],
-            [['title','long','icon'], 'string', 'max' => 255],
+            [['description','color'], 'string'],
+            [['title','icon'], 'string', 'max' => 255],
         ];
     }
 

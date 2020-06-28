@@ -22,9 +22,6 @@ $config = [
         '@tests' => '@app/tests',
     ],
     'modules' => [
-        /*'simplechat' => [
-            'class' => 'bubasuma\simplechat\Module',
-        ],*/
         'admin' => [
             'class' => 'app\modules\admin\Module',
             'controllerNamespace' => 'app\modules\admin\commands',
@@ -36,6 +33,10 @@ $config = [
         'user' => [
             'class' => 'app\modules\user\Module',
             'controllerNamespace' => 'app\modules\user\commands',
+        ],
+        'project' => [
+            'class' => 'app\modules\project\Module',
+            'controllerNamespace' => 'app\modules\project\commands',
         ],
     ],
     'components' => [
