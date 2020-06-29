@@ -26,13 +26,13 @@ use yii\widgets\ActiveForm;
 ]); ?>
     <div class="card card-primary">
 
-        <div class="card-header">
+        <!--<div class="card-header">
             <h3 class="card-title"><?= Icon::show('filter') ?>Фильтр для сводного отчёта</h3>
             <?= Yii::$app->params['card']['header']['tools'] ?>
-        </div>
+        </div>-->
 
         <div class="card-body">
-            <div class="row">
+            <div class="form-row">
                 <div class="col-md-2">
                     <?= $form->field($model, 'date_start')->widget(
                         DatePicker::class,
@@ -69,25 +69,6 @@ use yii\widgets\ActiveForm;
                 </div>
                 <div class="col-md-2">
                     <?php
-                    echo $form->field($model, 'created')->widget(
-                        AutoComplete::class, [
-                        'clientOptions' => [
-                            'source' => User::find() ->select(['fio as value', 'fio as label','id as id'])->asArray() ->all(),
-                            'autoFill' => true,
-                            'minLength' => '3',
-                            'select' => new JsExpression("function( event, ui ) {
-                            $('#tasksearch-created_by').val(ui.item.id);
-                         }"),
-                        ],
-                        'options' => [
-                            'class' => 'form-control',
-                        ],
-                    ]);
-                    echo $form->field($model, 'created_by',['options'=>['class'=>'d-none']])->hiddenInput();
-                    ?>
-                </div>
-                <div class="col-md-2">
-                    <?php
                     $items = ArrayHelper::map(Project::find()->all(), 'id', 'title');
                     $params = [
                         'prompt' => 'Все',
@@ -107,13 +88,16 @@ use yii\widgets\ActiveForm;
                     ?>
                 </div>
                 <div class="col-md-2">
-                    <?php echo $form->field($model, 'rfc') ?>
+                    <div class="form-group" style="padding-top: 31px;">
+                        <?= Html::submitButton(Icon::show('sync-alt') . Yii::t('app', 'Обновить'), ['class' => 'form-control btn btn-success btn-block']) ?>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group" style="padding-top: 31px;">
+                        <?= Html::a(Icon::show('ban') . 'Отмена', ['index'], ['class' => 'form-control btn btn-info btn-block']) ?>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="card-footer">
-            <?= Html::submitButton(Icon::show('sync-alt') . Yii::t('app', 'Обновить отчёт'), ['class' => 'btn btn-success']) ?>
-            <?= Html::a(Icon::show('ban') . 'Сбросить параметры', ['index'], ['class' => 'btn btn-info']) ?>
         </div>
     </div>
 <?php ActiveForm::end(); ?>

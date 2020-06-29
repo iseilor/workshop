@@ -13,7 +13,9 @@ class TaskSearch extends Task
 {
 
     public $created;
+
     public $date_start;
+
     public $date_end;
 
     /**
@@ -22,11 +24,25 @@ class TaskSearch extends Task
     public function rules()
     {
         return [
-            [['created_by', 'project_id', 'status_id', 'progress','rfc'], 'integer'],
-            [['created'],'string'],
+            [['created_by', 'project_id', 'status_id', 'progress', 'rfc'], 'integer'],
+            [['created', 'date_start', 'date_end'], 'string'],
             [['comment', 'img'], 'safe'],
-            [['date_start'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'date_start'],
-            [['date_end'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'date_end'],
+
+            //[['date_start'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'date_start'],
+            //[['date_end'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'date_end'],
+            [['date_start'], 'date', 'format' => 'php:d.m.Y'],
+            [['date_end'], 'date', 'format' => 'php:d.m.Y'],
+            [
+                ['date_end', 'date_start'],
+                function () {
+                    if ($this->date_start && $this->date_end && strtotime($this->date_end) < strtotime($this->date_start)) {
+                        $this->addError('date_end', "Дата окончания не может быть меньше даты начала");
+                    }
+                },
+            ],
+
+            ['date_start', 'default', 'value' => $date = date('d.m.Y', strtotime("-7 day"))],
+            ['date_end', 'default', 'value' => date('d.m.Y')],
         ];
     }
 
@@ -79,6 +95,9 @@ class TaskSearch extends Task
             'progress' => $this->progress,
             'rfc' => $this->rfc,
         ]);
+
+        $query->andFilterWhere(['>=', 'created_at', strtotime($this->date_start)]);
+        $query->andFilterWhere(['<=', 'created_at', strtotime($this->date_end) + 86400]);
 
         $query->andFilterWhere(['like', 'comment', $this->comment])
             ->andFilterWhere(['like', 'img', $this->img]);

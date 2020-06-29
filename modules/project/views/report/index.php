@@ -22,7 +22,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php echo $this->render('_search', ['model' => $searchModel]); ?>
     <div class="card card-primary">
         <div class="card-header">
-            <h3 class="card-title"><?=Icon::show('table')?>Сводный отчёт по выполненным задачам за 27.06.2020-31.06.2020</h3>
+            <h3 class="card-title"><?=Icon::show('table')?>
+                Сводный отчёт по выполненным задачам за <?=$searchModel->date_start?> 00:00:00 - <?=$searchModel->date_end?> 23:59:59</h3>
             <?= Yii::$app->params['card']['header']['tools'] ?>
         </div>
         <div class="card-body">
@@ -47,7 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     if ($projectTitle!=$projectTitlePrev){
                         $projectTitlePrev = $projectTitle;
                         echo "<tr>
-                                    <td colspan='7'><h1>$projectTitle</h1></td>
+                                    <td colspan='7'><h3>$projectTitle</h3></td>
                                 </tr>";
                     }
 
