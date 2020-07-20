@@ -211,6 +211,7 @@ class Agreement extends Model
             $agreement->receipt_at = time(); // Ставим дату, когда письмо было передано руководителю
             $agreement->approval = Agreement::APPROVAL_WAIT;
             $agreement->save();
+            $subject = "$order_id";
             Yii::$app->mailer->compose(
                 '@app/modules/jk/mails/manager/manager',
                 [
@@ -221,7 +222,7 @@ class Agreement extends Model
             )
                 ->setFrom('workshop@tr.ru')
                 ->setTo($user->email) // TODO: Пока отправляем самому же сотруднику, просто в письме обращение к руководителю
-                ->setSubject('WORKSHOP / Жилищная программа / Заявка №' . $order_id . ' / Руководителю на согласование')
+                ->setSubject($subject)
                 ->send();
         } else {
             // Ставим статус, что согласование руководителями завершено

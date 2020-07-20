@@ -70,8 +70,8 @@ $this->title .= ' ' . $model->status->label;
 -->
 
 
-                        <?= Html::a(Icon::show('tasks') . 'Отправить руководителю на согласование', ['manager', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-                    <?php endif; ?>
+                          <?php endif; ?>
+                    <?= Html::a(Icon::show('tasks') . 'Отправить руководителю на согласование', ['manager', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
 
                     <div class="float-right">
                         <?= Html::a(Icon::show('edit') . 'Изменить заявку', ['update', 'id' => $model->id], ['class' => 'btn btn-warning']) ?>
