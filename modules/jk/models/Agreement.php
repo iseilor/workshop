@@ -211,7 +211,7 @@ class Agreement extends Model
             $agreement->receipt_at = time(); // Ставим дату, когда письмо было передано руководителю
             $agreement->approval = Agreement::APPROVAL_WAIT;
             $agreement->save();
-            $subject = "$order_id";
+            $subject = $order_id;
             Yii::$app->mailer->compose(
                 '@app/modules/jk/mails/manager/manager',
                 [
