@@ -53,7 +53,7 @@ class OrderController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
-            /*'access' => [
+            'access' => [
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
@@ -61,7 +61,7 @@ class OrderController extends Controller
                         'roles' => ['@'],
                     ],
                 ],
-            ],*/
+            ],
         ];
     }
 

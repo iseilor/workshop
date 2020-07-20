@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <thead>
                 <tr>
                     <th>Дата</th>
-                    <th>ФИО</th>
+                    <th>Сотрудник</th>
                     <th>Комментарий</th>
                     <th>Статус</th>
                     <th>Прогресс</th>
