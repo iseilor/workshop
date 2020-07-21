@@ -124,6 +124,10 @@ $config = [
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
             'useFileTransport' => false,
+            'messageConfig' => [
+                'charset' => 'UTF-8',
+                'from' => ['workshop@rt.ru' => 'WORKSHOP'],
+            ],
             /*'transport' => [
                 'class' => 'Swift_SmtpTransport',
                 'host' => 'smtp.gmail.com',

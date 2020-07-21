@@ -8,6 +8,7 @@ use app\modules\user\models\User;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
+use function GuzzleHttp\Psr7\str;
 
 /**
  * This is the model class for table "jk_order_agreement".
@@ -211,7 +212,6 @@ class Agreement extends Model
             $agreement->receipt_at = time(); // Ставим дату, когда письмо было передано руководителю
             $agreement->approval = Agreement::APPROVAL_WAIT;
             $agreement->save();
-            $subject = $order_id;
             Yii::$app->mailer->compose(
                 '@app/modules/jk/mails/manager/manager',
                 [
@@ -220,10 +220,10 @@ class Agreement extends Model
                     'agreement' => $agreement,
                 ]
             )
-                ->setFrom('workshop@tr.ru')
                 ->setTo($user->email) // TODO: Пока отправляем самому же сотруднику, просто в письме обращение к руководителю
-                ->setSubject($subject)
+                ->setSubject('Workshop / Жилищная кампания / Заявка #'.$order_id.' / Согласование руководителями')
                 ->send();
+
         } else {
             // Ставим статус, что согласование руководителями завершено
             $order = Order::findOne($order_id);
