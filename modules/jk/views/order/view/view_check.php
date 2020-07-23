@@ -12,7 +12,14 @@ $approvals = Agreement::find()->where(['order_id'=>$model->id])->andWhere(['not'
 
 $countAll = $dataProvider->count;
 $countApporoval = count($approvals);
-$percent = number_format( $countApporoval/$countAll * 100, 0)
+
+// Если TOP-менеджер то у него согласующих нет
+if ($countApporoval>0){
+    $percent = number_format( $countApporoval/$countAll * 100, 0);
+}else{
+    $percent = 100;
+}
+
 ?>
     Общий процесс согласования заявки:
     <div class="progress">
