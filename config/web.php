@@ -16,7 +16,7 @@ $db = ArrayHelper::merge(
 
 $config = [
     'id' => 'HR',
-    'name' => 'HR-портал МРФ "Центр"',
+    'name' => 'HR-портал МРФ "Центр" ПАО "Ростелеком"',
     'basePath' => dirname(__DIR__),
     'bootstrap' => [
         'log',
