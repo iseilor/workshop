@@ -13,10 +13,15 @@ use yii\base\Model;
  */
 class LoginForm extends Model
 {
+
     public $username;
+
     public $password;
+
     public $rememberMe = true;
+
     public $icon = '<i class="fas fa-sign-in-alt"></i>';
+
     public $userAD;
 
     private $_user = false;
@@ -55,37 +60,34 @@ class LoginForm extends Model
 
     /**
      * Logs in a user using the provided username and password.
+     *
      * @return boolean whether the user is logged in successfully
      */
     public function login()
     {
-        // Заглушка для тестирования вне AD
-        if ($this->username != 'obedkinav@ya.ru' && $this->username !='aleksey.voronin@rt.ru0') {
-            // Ищем пользователя в AD
-            if (!$this->userAD = $this->findUserAd()) {
-                $this->addError('username', 'Не найдена ваша корпоративная учётная запись');
-                return false;
-            }
-
-            // Проверяем пароль через AD
-            if (!$this->validatePasswordAd()) {
-                $this->addError('password', 'Вы указали неверный пароль');
-                return false;
-            }
-
-            // Рекурсия через AD
-            $ad = new Ad();
-            $ad->createUserByEmail(($this->username));
+        // Ищем пользователя в AD
+        if (!$this->userAD = $this->findUserAd()) {
+            $this->addError('username', 'Не найдена ваша корпоративная учётная запись');
+            return false;
         }
 
-        return Yii::$app->user->login($this->getUser(), 3600 * 24 * 30);
-
-        // Старая авторизация через БД
-        /*if ($this->validate()) {
-            return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
-        } else {
+        // Проверяем пароль через AD
+        if (!$this->validatePasswordAd()) {
+            $this->addError('password', 'Вы указали неверный пароль');
             return false;
-        }*/
+        }
+
+        // Рекурсия через AD
+        $ad = new Ad();
+        $ad->createUserByEmail(($this->username));
+
+        return Yii::$app->user->login($this->getUser(), 3600 * 24 * 30);
+    }
+
+    // Специальный быстрый вход
+    public function login2()
+    {
+        return Yii::$app->user->login($this->getUser(), 3600 * 24 * 30);
     }
 
     // Ищем пользователя в AD
@@ -121,11 +123,11 @@ class LoginForm extends Model
         $user->department_id = 1;
 
         // Пол Мужской
-        if (strtoupper($this->userAD->extensionattribute1[0])=='M'){
-            $user->gender=1;
-        }elseif(strtoupper($this->userAD->extensionattribute1[0])=='F'){
-            $user->gender=0;
-        }else{
+        if (strtoupper($this->userAD->extensionattribute1[0]) == 'M') {
+            $user->gender = 1;
+        } elseif (strtoupper($this->userAD->extensionattribute1[0]) == 'F') {
+            $user->gender = 0;
+        } else {
             // TODO: Такого быть не должно, но чтобы никого не обидеть не будем ставить никакой пол по умолчанию
         }
 
@@ -161,7 +163,7 @@ class LoginForm extends Model
         return [
             'username' => Module::t('module', 'Username'),
             'password' => Module::t('module', 'Password'),
-            'rememberMe' => Module::t('module', 'Remember Me')
+            'rememberMe' => Module::t('module', 'Remember Me'),
         ];
     }
 }

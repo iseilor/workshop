@@ -15,8 +15,8 @@ $db = ArrayHelper::merge(
 );
 
 $config = [
-    'id' => 'WORKSHOP',
-    'name' => 'WORKSHOP',
+    'id' => 'HR',
+    'name' => 'HR-портал МРФ "Центр"',
     'basePath' => dirname(__DIR__),
     'bootstrap' => [
         'log',
@@ -182,7 +182,7 @@ $config = [
 
                 '<_m:(user)>/<id:\d+>' => 'user/default/view',
                 '<_m:(news)>/<id:\d+>' => 'news/default/view',
-                '<_a:(login|logout|signup|confirm-email|request-password-reset|password-reset|users)>' => 'user/default/<_a>',
+                '<_a:(login|login2|logout|signup|confirm-email|request-password-reset|password-reset|users)>' => 'user/default/<_a>',
 
                 '<_m:[\w\-]+>/<_c:[\w\-]+>/<id:\d+>' => '<_m>/<_c>/view',
                 '<_m:[\w\-]+>/<_c:[\w\-]+>/<id:\d+>/<_a:[\w\-]+>' => '<_m>/<_c>/<_a>',
