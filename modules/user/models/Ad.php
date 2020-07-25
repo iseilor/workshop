@@ -37,7 +37,7 @@ class Ad
             $user->username = mb_strtolower($email);
             $user->email = mb_strtolower($email);
             $user->status = User::STATUS_ACTIVE;
-            $user->setPassword(123456);
+            $user->setPassword(12345678);
             $user->photo = Yii::$app->params['module']['user']['photo']['default'];
 
             $user->fio = $userAD->cn[0];

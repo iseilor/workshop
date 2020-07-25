@@ -10,8 +10,8 @@ use yii\helpers\Url;
 ?>
 
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <a href="<?= Yii::$app->homeUrl ?>" class="brand-link">
-        <img src="<?= Yii::$app->homeUrl ?>logo/logo.png" alt="<?= Yii::$app->name; ?>" title="<?= Yii::$app->name; ?>"
+    <a href="<?= Yii::$app->homeUrl ?>" class="brand-link" title='<?= Yii::$app->name; ?>'>
+        <img src="<?= Yii::$app->homeUrl ?>logo/logo.png" alt='<?= Yii::$app->name; ?>' title='<?= Yii::$app->name; ?>'
              class="brand-image img-circle elevation-3"
              style="opacity: .8">
         <span class="brand-text font-weight-light">ПАО Ростелеком</span>
@@ -71,14 +71,14 @@ use yii\helpers\Url;
                                 ['label' => Icon::show('table',['class'=>'nav-icon']).' <p>Таблица</p>', 'url' => ['/pulsar/default/table']],
                             ]
                         ],
-                        ['label' => Icon::show('heartbeat',['class'=>'nav-icon']) .' <p>Страхование</p>', 'url' => ['/404']],
+                        /*['label' => Icon::show('heartbeat',['class'=>'nav-icon']) .' <p>Страхование</p>', 'url' => ['/404']],
                         ['label' => Icon::show('plane',['class'=>'nav-icon']) .' <p>Путёвки</p>', 'url' => ['/404']],
                         ['label' => Icon::show('hands-helping',['class'=>'nav-icon']) .' <p>Пенсия</p>', 'url' => ['/404']],
                         ['label' => Icon::show('file-alt',['class'=>'nav-icon']) .' <p>Отчёты</p>', 'url' => ['/404']],
                         ['label' => Icon::show('file-alt',['class'=>'nav-icon']) .' <p>KPI</p>', 'url' => ['/404']],
                         ['label' => Icon::show(Yii::$app->params['module']['ns']['iconClass'],['class'=>'nav-icon']) .' <p>Аварии</p>', 'url' => ['/404']],
                         ['label' => Icon::show('comments',['class'=>'nav-icon']) .' <p>Чат</p>', 'url' => ['/chat/default/index']],
-                        /*[
+                        [
                             'label' => '<i class="nav-icon fas fa-tachometer-alt"></i> <p>Админка <i class="right fas fa-angle-left"></i></p>',
                             'url' => ['/admin/default/index'],
                             'items' => [
