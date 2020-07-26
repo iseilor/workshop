@@ -26,10 +26,10 @@ class Ad
     public function createUserByEmail($email)
     {
         // Если уже нашли пользователя в БД
-        if ($user = User::findByUsername($email)){
+        if ($user = User::findByUsername($email)) {
             $this->createManager($email);
             return $user;
-        }else{
+        } else {
             // Если не нашли пользователя в БД
             $user = new User();
             $userAD = $this->findUserByEmail($email);
@@ -50,11 +50,11 @@ class Ad
             $user->role_id = 0;
 
             // Пол Мужской
-            if (strtoupper($userAD->extensionattribute1[0])=='M'){
-                $user->gender=1;
-            }elseif(strtoupper($userAD->extensionattribute1[0])=='F'){
-                $user->gender=0;
-            }else{
+            if (strtoupper($userAD->extensionattribute1[0]) == 'M') {
+                $user->gender = 1;
+            } elseif (strtoupper($userAD->extensionattribute1[0]) == 'F') {
+                $user->gender = 0;
+            } else {
                 // TODO: Такого быть не должно, но чтобы никого не обидеть не будем ставить никакой пол по умолчанию
             }
 
@@ -88,11 +88,21 @@ class Ad
             if ($manager) {
                 $manager = $this->createUserByEmail($manager->getEmail());
                 $user = User::findByUsername($email);
-                if (!isset($user->manager_id)){
+                if (!isset($user->manager_id)) {
                     $user->manager_id = $manager->id;
                     $user->save();
                 }
             }
+        }
+    }
+
+    // Поиск сотрудников конркетного подразделения
+    public function findUserByDepartment()
+    {
+        $items = $this->provider->search('cn')->where('Extensionattribute13', '=', '01100.0214.Отдел эксплуатации систем поддержки операций')->limit(100)->get()->all();
+        foreach ($items as $item) {
+            $email = mb_strtolower($item->mail[0]);
+            $this->createUserByEmail($email);
         }
     }
 
