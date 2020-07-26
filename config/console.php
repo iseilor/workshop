@@ -16,6 +16,7 @@ $config = [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'app\commands',
+    'timeZone' => 'Europe/Moscow',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
@@ -38,6 +39,10 @@ $config = [
             'class' => 'app\modules\project\Module',
             'controllerNamespace' => 'app\modules\project\commands',
         ],
+        'pulsar' => [
+            'class' => 'app\modules\pulsar\Module',
+            'controllerNamespace' => 'app\modules\pulsar\commands',
+        ],
     ],
     'components' => [
         'cache' => [
@@ -52,6 +57,12 @@ $config = [
             ],
         ],
         'db' => $db,
+
+        'urlManager' => [
+
+            'baseUrl' => 'http://workshop/'
+
+        ]
     ],
     'params' => $params,
 

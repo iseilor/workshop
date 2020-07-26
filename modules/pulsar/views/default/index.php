@@ -1,6 +1,7 @@
 <?php
 
 use app\modules\pulsar\assets\PulsarAsset;
+use app\modules\pulsar\models\Pulsar;
 use app\modules\pulsar\Module;
 use app\modules\user\models\User;
 use kartik\icons\Icon;
@@ -28,13 +29,16 @@ $this->params['breadcrumbs'][] = $this->title;
 PulsarAsset::register($this);
 
 $canvas_style = 'min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;';
+
+$average= Pulsar::getAverageValue(date('d.m.Y'),2);
+$data = Pulsar::getDataValue(date('d.m.Y'),2);
 ?>
 
     <div class="row">
         <div class="col-md-3">
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title"><?= Icon::show('calendar-check') ?>Сегодня</h3>
+                    <h3 class="card-title"><?= Icon::show('calendar-check') ?>Сегодня <?=date('d.m.Y')?></h3>
                 </div>
                 <div class="card-body">
                     <div class="chart">
@@ -60,11 +64,23 @@ $canvas_style = 'min-height: 250px; height: 250px; max-height: 250px; max-width:
         <div class="col-md-3">
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title"><?= Icon::show('heart') ?>Здоровье</h3>
+                    <h3 class="card-title"><?= Icon::show('heart') ?>Здоровье сегодня</h3>
                 </div>
                 <div class="card-body">
                     <div class="chart">
-                        <h5>Текущий показатель: <span class="badge badge-info"><?=$healthAverage?></span>
+                        <h5>Текущий показатель: <span class="badge badge-info"><?=$average['health']?></span>
+                        </h5>
+                        <canvas id="health_today" style="<?= $canvas_style ?>"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title"><?= Icon::show('heart') ?>Здоровье за неделю</h3>
+                </div>
+                <div class="card-body">
+                    <div class="chart">
+                        <h5>Текущий показатель: <span class="badge badge-info"><?=$average['health']?></span>
                         </h5>
                         <canvas id="health_today" style="<?= $canvas_style ?>"></canvas>
                     </div>
@@ -74,11 +90,11 @@ $canvas_style = 'min-height: 250px; height: 250px; max-height: 250px; max-width:
         <div class="col-md-3">
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title"><?= Icon::show('smile') ?>Настроение</h3>
+                    <h3 class="card-title"><?= Icon::show('smile') ?>Настроение сегодня</h3>
                 </div>
                 <div class="card-body">
                     <div class="chart">
-                        <h5>Текущий показатель: <span class="badge badge-info"><?=$moodAverage?></span>
+                        <h5>Текущий показатель: <span class="badge badge-info"><?=$average['mood']?></span>
                         </h5>
                         <canvas id="mood_today" style="<?= $canvas_style ?>"></canvas>
                     </div>
@@ -88,11 +104,11 @@ $canvas_style = 'min-height: 250px; height: 250px; max-height: 250px; max-width:
         <div class="col-md-3">
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title"><?= Icon::show('desktop') ?>Работа</h3>
+                    <h3 class="card-title"><?= Icon::show('desktop') ?>Работа сегодня</h3>
                 </div>
                 <div class="card-body">
                     <div class="chart">
-                        <h5>Текущий показатель: <span class="badge badge-info"><?=$jobAverage?></span>
+                        <h5>Текущий показатель: <span class="badge badge-info"><?=$average['job']?></span>
                         </h5>
                         <canvas id="job_today" style="<?= $canvas_style ?>"></canvas>
                     </div>
@@ -107,7 +123,7 @@ $this->registerJsVar('usersCount', count($users), yii\web\View::POS_HEAD);
 $this->registerJsVar('usersVotedCount', count($usersVoted), yii\web\View::POS_HEAD);
 $this->registerJsVar('usersNotVotedCount', count($usersNotVoted), yii\web\View::POS_HEAD);
 
-$this->registerJsVar('healthData', $healthData, yii\web\View::POS_HEAD);
-$this->registerJsVar('moodData', $moodData, yii\web\View::POS_HEAD);
-$this->registerJsVar('jobData', $jobData, yii\web\View::POS_HEAD);
+$this->registerJsVar('healthData', $data['health'], yii\web\View::POS_HEAD);
+$this->registerJsVar('moodData', $data['mood'], yii\web\View::POS_HEAD);
+$this->registerJsVar('jobData', $data['job'], yii\web\View::POS_HEAD);
 ?>

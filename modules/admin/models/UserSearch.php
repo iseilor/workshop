@@ -15,6 +15,7 @@ class UserSearch extends Model
     public $email;
     public $status;
     public $role_id;
+    public $department_id;
 
     public $date_from;
     public $date_to;
@@ -22,7 +23,7 @@ class UserSearch extends Model
     public function rules()
     {
         return [
-            [['id', 'status', 'role_id'], 'integer'],
+            [['id', 'status', 'role_id','department_id'], 'integer'],
             [['username', 'email','fio','role_id'], 'safe'],
             [['date_from', 'date_to'], 'date', 'format' => 'php:Y-m-d'],
         ];
@@ -38,6 +39,7 @@ class UserSearch extends Model
             'email' => Yii::t('app', 'USER_EMAIL'),
             'status' => Yii::t('app', 'USER_STATUS'),
             'role_id' => Module::t('module', 'Role Id'),
+            'department_id'=> \app\modules\user\models\User::t('module', 'Department Id'),
         ];
     }
 
@@ -71,6 +73,13 @@ class UserSearch extends Model
             [
                 'id' => $this->id,
                 'role_id' => $this->role_id,
+            ]
+        );
+
+        $query->andFilterWhere(
+            [
+                'id' => $this->id,
+                'department_id' => $this->department_id,
             ]
         );
 

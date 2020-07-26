@@ -25,24 +25,24 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="card-body">
                 <?= GridView::widget([
                     'dataProvider' => $userDataProvider,
+                    'pager' => [
+                        'class' => 'app\widgets\LinkPager',
+                    ],
                     'columns' => [
                         ['class' => 'yii\grid\SerialColumn'],
-                        //'id',
+                        'id',
                         'fio',
                         'pulsar.created_at:datetime',
-                        //'pulsar.health_value',
-                        //'pulsar.mood_value',
-                        //'pulsar.job_value',
                         [
-                            'class' => Value5Column::className(),
+                            'class' => Value5Column::class,
                             'attribute' => 'pulsar.health_value',
                         ],
                         [
-                            'class' => Value5Column::className(),
+                            'class' => Value5Column::class,
                             'attribute' => 'pulsar.mood_value',
                         ],
                         [
-                            'class' => Value5Column::className(),
+                            'class' => Value5Column::class,
                             'attribute' => 'pulsar.job_value',
                         ],
                     ],

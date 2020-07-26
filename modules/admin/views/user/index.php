@@ -22,22 +22,25 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="card-body">
 
         <?php Pjax::begin(); ?>
-        <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+        <?php //echo $this->render('_search', ['model' => $searchModel]); ?>
 
         <?= GridView::widget(
             [
                 'dataProvider' => $dataProvider,
-                //'filterModel' => $searchModel,
+                'filterModel' => $searchModel,
+                'pager' => [
+                    'class' => 'app\widgets\LinkPager',
+                ],
                 'columns' => [
                     'id',
                     'attribute' => 'created_at:datetime',
                     [
-                        'class' => LinkColumn::className(),
+                        'class' => LinkColumn::class,
                         'attribute' => 'fio',
                     ],
                     'email:email',
                     [
-                        'class' => SetColumn::className(),
+                        'class' => SetColumn::class,
                         'filter' => User::getStatusesArray(),
                         'attribute' => 'status',
                         'name' => 'statusName',
@@ -47,8 +50,9 @@ $this->params['breadcrumbs'][] = $this->title;
                             User::STATUS_BLOCKED => 'default',
                         ],
                     ],
+                    'department_id',
                     [
-                        'class' => SetColumn::className(),
+                        'class' => SetColumn::class,
                         'filter' => User::getRolesArray(),
                         'attribute' => 'role_id',
                         'name' => 'roleName',
@@ -59,7 +63,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
                     ],
 
-                    ['class' => ActionColumn::className()],
+                    ['class' => ActionColumn::class],
                 ],
             ]
         ); ?>

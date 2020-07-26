@@ -4,6 +4,7 @@ namespace app\modules\pulsar\models;
 
 use app\models\Model;
 use app\modules\pulsar\Module;
+use app\modules\user\models\User;
 use Yii;
 
 /**
@@ -89,4 +90,92 @@ class Pulsar extends Model
     {
         return new PulsarQuery(get_called_class());
     }
+
+    // Список сотрудников не проголосовавших в определённую дату и в определённом подразделении
+    public static function usersNotVoted($department_id, $date)
+    {
+        // Выбираем тех, кто сегодня ещё не проголосовал
+        $userIdsVoted = Pulsar::find()->select('created_by')
+            ->where('created_at>=' . strtotime($date))
+            ->groupBy('created_by')->asArray()->all();
+        $userIds = [];
+        foreach ($userIdsVoted as $item) {
+            $userIds[] = $item['created_by'];
+        }
+        $whereNotIn = '';
+        $usersVoted = []; // Никто ещё не проголосовал
+        if (count($userIds)) {
+            $whereNotIn = " and id NOT IN(" . implode(',', $userIds) . ")";
+            $whereIn = " and id IN(" . implode(',', $userIds) . ")";
+            $usersVoted = User::find()->where('department_id=' . $department_id . ' ' . $whereIn)->all();
+        }
+        $usersNotVoted = User::find()->select('id,fio')->where('department_id=' . $department_id . ' ' . $whereNotIn)
+            ->orderBy('fio')->asArray()->all();
+
+        return $usersNotVoted;
+    }
+
+    // Среднее значение по здоровью за определённую дату
+    public static function getHealthAverage($date, $department_id)
+    {
+        return round(Pulsar::find()->where('pulsar.created_at>=' . strtotime($date) . ' and pulsar.created_at<=' . (strtotime($date) + 86400))
+            ->leftJoin('user', 'pulsar.created_by = user.id')
+            ->andWhere('user.department_id=' . $department_id)
+            ->average('health_value'), 1);
+    }
+
+    // Среднее значение по настроению за определённую дату
+    public static function getMoodAverage($date, $department_id)
+    {
+        return round(Pulsar::find()->where('pulsar.created_at>=' . strtotime($date) . ' and pulsar.created_at<=' . (strtotime($date) + 86400))
+            ->leftJoin('user', 'pulsar.created_by = user.id')
+            ->andWhere('user.department_id=' . $department_id)
+            ->average('mood_value'), 1);
+    }
+
+    // Среднее значение по работоспособности за определённую дату
+    public static function getJobAverage($date, $department_id)
+    {
+        return round(Pulsar::find()->where('pulsar.created_at>=' . strtotime($date) . ' and pulsar.created_at<=' . (strtotime($date) + 86400))
+            ->leftJoin('user', 'pulsar.created_by = user.id')
+            ->andWhere('user.department_id=' . $department_id)
+            ->average('job_value'), 1);
+    }
+
+    // Получить средние значения всех параметрах за указанную дату
+    public static function getAverageValue($date, $department_id)
+    {
+        $types = ['health', 'mood', 'job'];
+        $data = [];
+        foreach ($types as $type) {
+            $data[$type] = round(Pulsar::find()->where('pulsar.created_at>=' . strtotime($date) . ' and pulsar.created_at<=' . (strtotime($date) + 86400))
+                ->leftJoin('user', 'pulsar.created_by = user.id')
+                ->andWhere('user.department_id=' . $department_id)
+                ->average($type . '_value'), 1);
+        }
+        return $data;
+    }
+
+    // Разбивка по значениям за конкретную дату и конкретного подразделения
+    public static function getDataValue($date, $department_id)
+    {
+        $types = ['health', 'mood', 'job'];
+        $data = [];
+        foreach ($types as $type) {
+            $values = Pulsar::find()->select('count(*) as cnt, '.$type.'_value')
+                ->where('pulsar.created_at>=' . strtotime($date) . ' and pulsar.created_at<=' . (strtotime($date) + 86400))
+                ->leftJoin('user', 'pulsar.created_by = user.id')
+                ->andWhere('user.department_id=' . $department_id)
+                ->groupBy($type . '_value')
+                ->asArray()->all();
+            $dat = [0, 0, 0, 0, 0];
+            foreach ($values as $value) {
+                $dat[$value[$type.'_value'] - 1] = intval($value['cnt']);
+            }
+            $data[$type] = $dat;
+        }
+        return $data;
+    }
+
+
 }
