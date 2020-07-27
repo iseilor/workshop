@@ -71,36 +71,6 @@ class DefaultController extends Controller
             ],
             [
                 'col' => 3,
-                'bg' => 'primary',
-                'title' => '<span class="curs">&nbsp;<span class="curs-1"><i class="fas fa-dollar-sign"></i> 66.90</span><span class="curs-2"><i class="fas fa-euro-sign"></i> 73.91</span><span class="curs-3"><i class="fas fa-gas-pump"></i> 49.91</span></span>',
-                'description' => '<span class="curs">&nbsp;<span class="curs-1">USD ЦБ</span><span class="curs-2">EURO ЦБ</span><span class="curs-3">Нефть</span></span>',
-                'icon' => '<i class="fas fa-ruble-sign"></i>',
-                'url' => '#',
-                'link' => 'Курсы ЦБ РФ на ' . Yii::$app->formatter->asDate(new DateTime()),
-            ],
-            [
-                'col' => 3,
-                'bg' => 'primary',
-                'title' => '+5&degC',
-                'description' => '<i class="fas fa-wind"></i>2-3м/с | <i class="fas fa-tint"></i>78% | <i class="fas fa-tachometer-alt"></i>736ммрт.ст.
-',
-                'icon' => '<i class="fas fa-temperature-high"></i>',
-                'url' => '#',
-                'link' => 'Москва, Румянцево, БЦ Comcity',
-            ],
-            [
-                'col' => 3,
-                'bg' => 'success',
-                'title' => '<span class="clock">
-                                <span class="hou">00</span><span class="del">:</span><span class="min">00</span><span class="del">:</span><span class="sec">00</span>
-                            </span>',
-                'description' => mb_ucfirst(Yii::$app->formatter->asDate(new DateTime(), 'php:l, d F Y')),
-                'icon' => '<i class="far fa-clock"></i>',
-                'url' => '#',
-                'link' => 'МСК',
-            ],
-            [
-                'col' => 3,
                 'bg' => 'indigo',
                 'title' => Module::t('module', 'JK'),
                 'description' => Module::t('module', 'jk'),
@@ -117,6 +87,37 @@ class DefaultController extends Controller
                 'url' => Url::to(['/pulsar/']),
                 'link' => 'Перейти <i class="fas fa-arrow-circle-right"></i>',
             ],
+            /* [
+                 'col' => 3,
+                 'bg' => 'primary',
+                 'title' => '<span class="curs">&nbsp;<span class="curs-1"><i class="fas fa-dollar-sign"></i> 66.90</span><span class="curs-2"><i class="fas fa-euro-sign"></i> 73.91</span><span class="curs-3"><i class="fas fa-gas-pump"></i> 49.91</span></span>',
+                 'description' => '<span class="curs">&nbsp;<span class="curs-1">USD ЦБ</span><span class="curs-2">EURO ЦБ</span><span class="curs-3">Нефть</span></span>',
+                 'icon' => '<i class="fas fa-ruble-sign"></i>',
+                 'url' => '#',
+                 'link' => 'Курсы ЦБ РФ на ' . Yii::$app->formatter->asDate(new DateTime()),
+             ],
+             [
+                 'col' => 3,
+                 'bg' => 'primary',
+                 'title' => '+5&degC',
+                 'description' => '<i class="fas fa-wind"></i>2-3м/с | <i class="fas fa-tint"></i>78% | <i class="fas fa-tachometer-alt"></i>736ммрт.ст.
+ ',
+                 'icon' => '<i class="fas fa-temperature-high"></i>',
+                 'url' => '#',
+                 'link' => 'Москва, Румянцево, БЦ Comcity',
+             ],*/
+            [
+                'col' => 3,
+                'bg' => 'success',
+                'title' => '<span class="clock">
+                                <span class="hou">00</span><span class="del">:</span><span class="min">00</span><span class="del">:</span><span class="sec">00</span>
+                            </span>',
+                'description' => mb_ucfirst(Yii::$app->formatter->asDate(new DateTime(), 'php:l, d F Y')),
+                'icon' => '<i class="far fa-clock"></i>',
+                'url' => '#',
+                'link' => 'МСК',
+            ],
+
             /*
         [
             'col' => 3,

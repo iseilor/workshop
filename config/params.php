@@ -105,7 +105,7 @@ return [
         ],
         'news' => [
             'iconClass' => 'newspaper',
-            'icon' => '<i class="fas fa-comments"></i>',
+            'icon' => '<i class="fas fa-newspaper"></i>',
             'path' => 'files/news/',
         ],
 
