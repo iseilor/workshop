@@ -39,6 +39,8 @@ class m200328_094500_create_pulsar_table extends Migration
             ],
             $tableOptions
         );
+
+        $this->execute(file_get_contents(__DIR__ . '/../sql/pulsar.sql'));
     }
 
     /**

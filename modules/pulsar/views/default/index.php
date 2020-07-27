@@ -74,18 +74,6 @@ $data = Pulsar::getDataValue(date('d.m.Y'),2);
                     </div>
                 </div>
             </div>
-            <div class="card card-primary">
-                <div class="card-header">
-                    <h3 class="card-title"><?= Icon::show('heart') ?>Здоровье за неделю</h3>
-                </div>
-                <div class="card-body">
-                    <div class="chart">
-                        <h5>Текущий показатель: <span class="badge badge-info"><?=$average['health']?></span>
-                        </h5>
-                        <canvas id="health_today" style="<?= $canvas_style ?>"></canvas>
-                    </div>
-                </div>
-            </div>
         </div>
         <div class="col-md-3">
             <div class="card card-primary">
