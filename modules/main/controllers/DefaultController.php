@@ -4,6 +4,7 @@ namespace app\modules\main\controllers;
 
 use app\modules\jk\Module;
 use app\modules\main\models\ContactForm;
+use app\modules\news\models\NewsSearch;
 use app\modules\user\models\User;
 use DateTime;
 use kartik\icons\Icon;
@@ -193,10 +194,19 @@ class DefaultController extends Controller
         ],*/
 
         ];
+
+        // Новости
+        $searchModel = new NewsSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->setSort(['defaultOrder' => ['created_at' => SORT_DESC]]);
+        $dataProvider->setTotalCount(3);
+        $news = $dataProvider->getModels();
+
         return $this->render(
             'index',
             [
                 'list' => $list,
+                'news' => $news,
             ]
         );
     }

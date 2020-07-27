@@ -72,6 +72,11 @@ $config = [
             'migrationPath' => '@app/modules/user/migrations',
             'migrationTable' => 'migration_user',
         ],
+        'migrate-news' => [
+            'class' => 'yii\console\controllers\MigrateController',
+            'migrationPath' => '@app/modules/news/migrations',
+            'migrationTable' => 'migration_news',
+        ],
         'migrate-jk' => [
             'class' => 'yii\console\controllers\MigrateController',
             'migrationPath' => '@app/modules/jk/migrations',

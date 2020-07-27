@@ -3,6 +3,8 @@
 /* @var $this yii\web\View */
 
 /* @var $list Array */
+/* @var $news \app\modules\news\models\News */
+
 $this->title = Yii::$app->name;
 
 use yii\helpers\Html;
@@ -10,6 +12,19 @@ use yii\helpers\Url;
 use yii\widgets\ListView;
 
 ?>
+    <div class="row">
+        <?php
+        foreach ($news as $item) {
+            echo $this->render(
+                'news_item',
+                [
+                    'item' => $item,
+                ]
+            );
+        }
+        ?>
+    </div>
+
     <div class="row">
         <?php
         foreach ($list as $item) {
