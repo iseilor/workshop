@@ -95,26 +95,7 @@ var donutChart = new Chart(donutChartCanvas, {
 });
 
 
-
-
-
-var areaChartData = {
-    labels: ['01.04.2020', '02.04.2020', '03.04.2020', '04.04.2020', '05.04.2020', '06.04.2020', '07.04.2020'],
-    datasets: [
-        {
-            label: 'Здоровье',
-            backgroundColor: 'rgba(60,141,188,0.9)',
-            borderColor: 'rgba(60,141,188,0.8)',
-            pointRadius: true,
-            pointColor: '#3b8bba',
-            pointStrokeColor: 'rgba(60,141,188,1)',
-            pointHighlightFill: '#fff',
-            pointHighlightStroke: 'rgba(60,141,188,1)',
-            data: [28, 48, 40, 19, 86, 27, 90]
-        }
-    ]
-}
-
+// Общие параметры для линейных графиков на неделю ---------------------------------------------------------------------
 var areaChartOptions = {
     maintainAspectRatio: false,
     responsive: true,
@@ -135,7 +116,45 @@ var areaChartOptions = {
     }
 }
 
-var lineChartCanvas = $('#health_2').get(0).getContext('2d')
+var areaChartData = {
+    labels: dateWeek,
+    datasets: [
+        {
+            label: 'Здоровье',
+            backgroundColor: 'rgba(60,141,188,0.9)',
+            borderColor: 'rgba(60,141,188,0.8)',
+            pointRadius: true,
+            pointColor: '#3b8bba',
+            pointStrokeColor: 'rgba(60,141,188,1)',
+            pointHighlightFill: '#fff',
+            pointHighlightStroke: 'rgba(60,141,188,1)',
+            data: healthWeek
+        }
+    ]
+}
+
+
+//----------------------------------------------------------------------------------------------------------------------
+// Здоровье за неделю
+//----------------------------------------------------------------------------------------------------------------------
+areaChartData.labels = dateWeek;
+areaChartData.
+    datasets: [
+        {
+            label: 'Здоровье',
+            backgroundColor: 'rgba(60,141,188,0.9)',
+            borderColor: 'rgba(60,141,188,0.8)',
+            pointRadius: true,
+            pointColor: '#3b8bba',
+            pointStrokeColor: 'rgba(60,141,188,1)',
+            pointHighlightFill: '#fff',
+            pointHighlightStroke: 'rgba(60,141,188,1)',
+            data: healthWeek
+        }
+    ]
+}
+
+var lineChartCanvas = $('#health_week').get(0).getContext('2d')
 var lineChartOptions = jQuery.extend(true, {}, areaChartOptions)
 var lineChartData = jQuery.extend(true, {}, areaChartData)
 lineChartData.datasets[0].fill = false;

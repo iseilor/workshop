@@ -32,6 +32,8 @@ $canvas_style = 'min-height: 250px; height: 250px; max-height: 250px; max-width:
 
 $average= Pulsar::getAverageValue(date('d.m.Y'),2);
 $data = Pulsar::getDataValue(date('d.m.Y'),2);
+$dataWeek = Pulsar::getDataWeekValue(2);
+
 ?>
 
     <div class="row">
@@ -74,6 +76,16 @@ $data = Pulsar::getDataValue(date('d.m.Y'),2);
                     </div>
                 </div>
             </div>
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title"><?= Icon::show('heart') ?>Здоровье за неделю</h3>
+                </div>
+                <div class="card-body">
+                    <div class="chart">
+                        <canvas id="health_week" style="<?= $canvas_style ?>"></canvas>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="col-md-3">
             <div class="card card-primary">
@@ -111,7 +123,14 @@ $this->registerJsVar('usersCount', count($users), yii\web\View::POS_HEAD);
 $this->registerJsVar('usersVotedCount', count($usersVoted), yii\web\View::POS_HEAD);
 $this->registerJsVar('usersNotVotedCount', count($usersNotVoted), yii\web\View::POS_HEAD);
 
+// За сегодня
 $this->registerJsVar('healthData', $data['health'], yii\web\View::POS_HEAD);
 $this->registerJsVar('moodData', $data['mood'], yii\web\View::POS_HEAD);
 $this->registerJsVar('jobData', $data['job'], yii\web\View::POS_HEAD);
+
+// Линейные недельные графики
+$this->registerJsVar('healthWeek', $dataWeek['health'], yii\web\View::POS_HEAD);
+$this->registerJsVar('moodWeek', $dataWeek['mood'], yii\web\View::POS_HEAD);
+$this->registerJsVar('jobWeek', $dataWeek['job'], yii\web\View::POS_HEAD);
+$this->registerJsVar('dateWeek', $dataWeek['date'], yii\web\View::POS_HEAD);
 ?>

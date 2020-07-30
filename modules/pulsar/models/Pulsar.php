@@ -177,5 +177,19 @@ class Pulsar extends Model
         return $data;
     }
 
-
+    // Получение средних значений за неделю для графика
+    public static function getDataWeekValue($department_id){
+        $data = [];
+        $types = ['health', 'mood', 'job'];
+        $d = date('d.m.Y', strtotime( date('d.m.Y').' - 6 days'));
+        for ($i = 0; $i <= 6; $i++) {
+            $date= date('d.m.Y', strtotime( $d .' + '.$i.' day'));
+            $average = Pulsar::getAverageValue($date,$department_id);
+            $data['date'][]=$date;
+            foreach ($types as $type){
+                $data[$type][]=$average[$type];
+            }
+        }
+        return $data;
+    }
 }
