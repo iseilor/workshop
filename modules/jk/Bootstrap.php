@@ -22,6 +22,7 @@ class Bootstrap implements BootstrapInterface
                 'modules/jk/social'=>'social.php',
                 'modules/jk/agreement'=>'agreement.php',
                 'modules/jk/message'=>'message.php',
+                'modules/jk/rf'=>'rf.php',
             ],
         ];
     }

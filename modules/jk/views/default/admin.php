@@ -162,6 +162,7 @@ if ($messagesUser>0){
                 </li>
                 <li>Справочники
                     <ul>
+                        <li><?= Html::a(Icon::show('sitemap') . 'РФы и МРФы', Url::to(['/jk/rf'])) ?></li>
                         <li><?= Html::a(Icon::show('list') . 'Статусы заявок', Url::to(['/jk/status'])) ?></li>
                         <li><?= Html::a(Icon::show('users') . 'Социальные группы', Url::to(['/jk/social'])) ?></li>
                         <li><?= Html::a(Icon::show('undo') . 'Причины возвратов', Url::to(['/jk/stop'])) ?></li>
