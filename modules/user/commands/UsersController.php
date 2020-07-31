@@ -2,6 +2,7 @@
 
 namespace app\modules\user\commands;
 
+use app\modules\user\models\Ad;
 use app\modules\user\models\User;
 use yii\base\Model;
 use yii\console\Controller;
@@ -106,5 +107,30 @@ class UsersController extends Controller
             $this->stderr('Error!', Console::FG_RED, Console::BOLD);
         }
         echo PHP_EOL;
+    }
+
+    // Создание пользователей по списку email
+    public function actionCreate2(){
+        $ad = new Ad();
+        $emails = [
+            'ekaterina_bukata@center.rt.ru',
+            'marina.shishkina@center.rt.ru',
+            'marina_khachatryan@center.rt.ru',
+            'nina_p_naumova@center.rt.ru',
+            'olga_nesterova@center.rt.ru',
+            'evgeniya_sineva@center.rt.ru',
+            'galina_grebenik@center.rt.ru',
+            't.a.titova@center.rt.ru',
+            'marina_anikina@center.rt.ru',
+            'mariya_mukhina@rt.ru',
+            'darja_ruban@center.rt.ru',
+            'yuliya_shlogova@center.rt.ru',
+            'l_gorshkova@center.rt.ru'
+        ];
+        foreach ($emails as $email) {
+            $ad->createUserByEmail($email);
+            echo 'Пользователь с почтой '.$email.' успешно создан' . PHP_EOL;
+        }
+        echo 'Пользователи успешно заведены' . PHP_EOL;
     }
 }

@@ -30,7 +30,6 @@ class Module extends \yii\base\Module implements BootstrapInterface
                 'modules/user/module' => 'module.php',
                 'modules/user/child' => 'child.php',
             ],
-
         ];
     }
 
