@@ -45,6 +45,23 @@ $config = [
         ],
     ],
     'components' => [
+        'ad' => [
+            'class' => 'Edvlerblog\Adldap2\Adldap2Wrapper',
+            'providers' => [
+                'default' => [
+                    'autoconnect' => true,
+                    'config' => [
+                        'account_suffix' => $params['ad']['account_suffix'],
+                        'hosts' => $params['ad']['hosts'],
+                        'base_dn' => $params['ad']['base_dn'],
+                        'username' => $params['ad']['username'],
+                        'password' => $params['ad']['password'],
+                        'port' => $params['ad']['port'],
+                    ],
+                ],
+            ],
+        ],
+
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
@@ -59,9 +76,7 @@ $config = [
         'db' => $db,
 
         'urlManager' => [
-
             'baseUrl' => 'http://workshop/'
-
         ]
     ],
     'params' => $params,
