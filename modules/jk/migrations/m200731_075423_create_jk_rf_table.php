@@ -3,9 +3,9 @@
 use yii\db\Migration;
 
 /**
- * Class m200731_075423_create_jk_rf
+ * Class m200731_075423_create_jk_rf_table
  */
-class m200731_075423_create_jk_rf extends Migration
+class m200731_075423_create_jk_rf_table extends Migration
 {
     /**
      * {@inheritdoc}
@@ -51,6 +51,5 @@ class m200731_075423_create_jk_rf extends Migration
     public function safeDown()
     {
         $this->dropTable('{{%jk_rf}}');
-        return false;
     }
 }
