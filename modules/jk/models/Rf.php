@@ -52,6 +52,11 @@ class Rf extends Model
             [['coefficient', 'percent_max', 'loan_max'], 'number'],
             [['title', 'email', 'phone', 'address'], 'string', 'max' => 255],
             [['email'], 'email'],
+
+            ['coefficient', 'compare', 'compareValue' => 0, 'operator' => '>', 'type' => 'number'],
+            ['percent_max', 'compare', 'compareValue' => 0, 'operator' => '>', 'type' => 'number'],
+            ['loan_max', 'compare', 'compareValue' => 0, 'operator' => '>', 'type' => 'number'],
+
             [
                 ['user','user_id'],
                 function () {
