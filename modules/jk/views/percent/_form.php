@@ -135,6 +135,7 @@ $img = $bundle->baseUrl . '/img/percent_form_family_income_black.png';
                             'id' => 'btn-instruction',
                             'data-toggle' => 'modal',
                             'data-target' => '#modal-instruction',
+                            'hidden' => 'true',
                         ]
                     ) ?>
 
@@ -144,6 +145,7 @@ $img = $bundle->baseUrl . '/img/percent_form_family_income_black.png';
                             'class' => 'btn btn-primary',
                             'id' => 'btn-helper',
                             'onclick' => "startIntro();",
+                            'hidden' => 'true',
                         ]
                     ) ?>
 
@@ -153,6 +155,7 @@ $img = $bundle->baseUrl . '/img/percent_form_family_income_black.png';
                             'class' => 'btn btn-primary',
                             'id' => 'btn-save',
                             'title' => 'Связаться с куратором Жилищной Кампании',
+                            'hidden' => 'true',
                         ]
                     ) ?>
 
