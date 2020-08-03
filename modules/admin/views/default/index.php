@@ -58,6 +58,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?= Html::ul(
                             [
                                 Html::a('МРФы', Url::to('admin/mrf')),
+                                Html::a('Пенсионный возраст', Url::to('admin/retirement')),
                                 Html::a('Прожиточные минимумы', Url::to('jk/min/admin')),
                                 Html::a('Статусы заявок', Url::to('jk/order-status')),
                             ],
