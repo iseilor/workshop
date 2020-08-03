@@ -43,7 +43,7 @@ $img = $bundle->baseUrl . '/img/percent_form_family_income_black.png';
                         <div class="col-md-4">
                             <?= $form->field($model, 'family_count')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['family_count']]) ?>
                             <?= $form->field($model, 'family_income')->widget(
-                                MaskedInput::className(),
+                                MaskedInput::class,
                                 [
                                     'options' => ['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['family_income']],
                                     'clientOptions' => Yii::$app->params['widget']['MaskedInput']['clientOptionsMoney']
@@ -52,7 +52,7 @@ $img = $bundle->baseUrl . '/img/percent_form_family_income_black.png';
                         </div>
                         <div class="col-md-4">
                             <?= $form->field($model, 'area_total')->widget(
-                                MaskedInput::className(),
+                                MaskedInput::class,
                                 [
                                     'options' => ['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['area_total']],
                                     'clientOptions' => Yii::$app->params['widget']['MaskedInput']['clientOptionsMoney']
@@ -60,7 +60,7 @@ $img = $bundle->baseUrl . '/img/percent_form_family_income_black.png';
                             )
                             ?>
                             <?= $form->field($model, 'area_buy')->widget(
-                                MaskedInput::className(),
+                                MaskedInput::class,
                                 [
                                     'options' => ['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['area_buy']],
                                     'clientOptions' => Yii::$app->params['widget']['MaskedInput']['clientOptionsMoney']

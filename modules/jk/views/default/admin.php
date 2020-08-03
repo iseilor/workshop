@@ -169,7 +169,7 @@ if ($messagesUser>0){
                 <div class="col-md-6">
                     <h3><?=Icon::show('book')?>Справочники</h3>
                     <ul>
-                        <li><?= Html::a(Icon::show('map-marker-alt') . 'Регионы РФ', Url::to(['/jk/min'])) ?></li>
+                        <li><?= Html::a(Icon::show('map-marker-alt') . 'Субъекты РФ', Url::to(['/jk/min'])) ?></li>
                         <li><?= Html::a(Icon::show('sitemap') . 'РФы и МРФы', Url::to(['/jk/rf'])) ?></li>
                         <li><?= Html::a(Icon::show('list') . 'Статусы заявок', Url::to(['/jk/status'])) ?></li>
                         <li><?= Html::a(Icon::show('users') . 'Социальные группы', Url::to(['/jk/social'])) ?></li>
