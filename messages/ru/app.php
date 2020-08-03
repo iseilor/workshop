@@ -29,5 +29,8 @@ return [
     'Update' => 'Изменить',
     'Delete' => 'Удалить',
     'Send'=>'Отправить',
-    'Are you sure you want to delete this item?' => 'Вы действительноу уверены, что хотите удалить данный элемент?'
+    'Are you sure you want to delete this item?' => 'Вы действительноу уверены, что хотите удалить данный элемент?',
+
+    'Age' => 'Возраст',
+    'Gender' => 'Пол'
 ];
