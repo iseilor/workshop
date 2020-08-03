@@ -2,6 +2,7 @@
 
 namespace app\modules\jk\models;
 
+use app\models\Model;
 use app\modules\jk\Module;
 use Yii;
 
@@ -19,7 +20,7 @@ use Yii;
  * @property string $description
  * @property float $min
  */
-class Min extends \yii\db\ActiveRecord
+class Min extends Model
 {
     /**
      * {@inheritdoc}
@@ -35,7 +36,7 @@ class Min extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['created_at', 'created_by', 'title', 'description', 'min'], 'required'],
+            [['title', 'description', 'min'], 'required'],
             [['created_at', 'updated_at', 'deleted_at'], 'safe'],
             [['created_by', 'updated_by', 'deleted_by'], 'integer'],
             [['description'], 'string'],

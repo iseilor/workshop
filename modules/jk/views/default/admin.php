@@ -148,29 +148,37 @@ if ($messagesUser>0){
             <?= Yii::$app->params['card']['header']['tools'] ?>
         </div>
         <div class="card-body">
-            <ul>
-                <li>Калькуляторы
+            <div class="row">
+                <div class="col-md-6">
                     <ul>
-                        <li><?= Html::a(Icon::show('percent') . 'Проценты', Url::to(['/jk/percent/'])) ?></li>
-                        <li><?= Html::a(Icon::show('wallet') . 'Займы', Url::to(['/jk/zaim/'])) ?></li>
+                        <li>Калькуляторы
+                            <ul>
+                                <li><?= Html::a(Icon::show('percent') . 'Проценты', Url::to(['/jk/percent/'])) ?></li>
+                                <li><?= Html::a(Icon::show('wallet') . 'Займы', Url::to(['/jk/zaim/'])) ?></li>
+                            </ul>
+                        </li>
+                        <li><?= Html::a(Icon::show('ruble-sign') . 'Заявки '.Html::tag('span',$orderCount,['class'=>'badge bg-success']),
+                                Url::to(['/jk/order/'])) ?></li>
+                        <li><?= Html::a(Icon::show('comments') . 'Сообщения куратору '.$messagesUserBadge ,
+                                Url::to(['/jk/message'])) ?>
+                        </li>
+                        <li><?= Html::a(Icon::show('file-word') . 'Документы', Url::to(['/jk/doc/admin'])) ?></li>
+                        <li><?= Html::a(Icon::show('question') . 'Вопросы', Url::to(['/jk/faq/admin'])) ?></li>
                     </ul>
-                </li>
-                <li><?= Html::a(Icon::show('ruble-sign') . 'Заявки '.Html::tag('span',$orderCount,['class'=>'badge bg-success']),
-                        Url::to(['/jk/order/'])) ?></li>
-                <li><?= Html::a(Icon::show('comments') . 'Сообщения куратору '.$messagesUserBadge ,
-                        Url::to(['/jk/message'])) ?>
-                </li>
-                <li>Справочники
+                </div>
+                <div class="col-md-6">
+                    <h3><?=Icon::show('book')?>Справочники</h3>
                     <ul>
+                        <li><?= Html::a(Icon::show('map-marker-alt') . 'Регионы РФ', Url::to(['/jk/min'])) ?></li>
                         <li><?= Html::a(Icon::show('sitemap') . 'РФы и МРФы', Url::to(['/jk/rf'])) ?></li>
                         <li><?= Html::a(Icon::show('list') . 'Статусы заявок', Url::to(['/jk/status'])) ?></li>
                         <li><?= Html::a(Icon::show('users') . 'Социальные группы', Url::to(['/jk/social'])) ?></li>
                         <li><?= Html::a(Icon::show('undo') . 'Причины возвратов', Url::to(['/jk/stop'])) ?></li>
                     </ul>
-                </li>
-                <li><?= Html::a(Icon::show('file-word') . 'Документы', Url::to(['/jk/doc/admin'])) ?></li>
-                <li><?= Html::a(Icon::show('question') . 'Вопросы', Url::to(['/jk/faq/admin'])) ?></li>
-            </ul>
+                </div>
+            </div>
+
+
         </div>
         <div class="card-footer">
             <span class="text-danger"><?= Icon::show('exclamation') ?> Будьте очень внимательны при работе с административной панелью</span>

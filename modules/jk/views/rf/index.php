@@ -6,6 +6,7 @@ use app\modules\jk\Module;
 use kartik\icons\Icon;
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Url;
 use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
@@ -42,14 +43,28 @@ $this->params['breadcrumbs'][] = $this->title;
                             'class' => LinkColumn::class,
                             'attribute' => 'id',
                         ],
-                        'title',
-                        'user_id',
-                        'email:email',
-                        'phone',
-                        'address',
-                        'coefficient',
-                        'percent_max',
-                        'loan_max',
+                        [
+                            'class' => LinkColumn::class,
+                            'attribute' => 'title',
+                        ],
+                        [
+                            'label'=>'Сотрудник',
+                            'value'=>'userCurator.fio',
+                            'class' => LinkColumn::class,
+                            'url' => function ($data) {
+                                if (isset($data->user_id)){
+                                    return Url::to(['/user/'.$data->user_id], true);
+                                }else{
+                                    return false;
+                                }
+                            },
+                        ],
+                        //'email:email',
+                        //'phone',
+                        //'address',
+                        'coefficient:decimal',
+                        'percent_max:currency',
+                        'loan_max:currency',
                         ['class' => ActionColumn::class],
                     ],
                 ]); ?>

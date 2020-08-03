@@ -2,6 +2,8 @@
 
 use kartik\icons\Icon;
 use yii\helpers\Html;
+use yii\jui\AutoComplete;
+use yii\web\JsExpression;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
@@ -21,14 +23,41 @@ use yii\widgets\ActiveForm;
 
                 <div class="row">
                     <div class="col-md-4">
+
                         <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
                         <?= $form->field($model, 'description')->textarea(['rows' => 10]) ?>
                     </div>
                     <div class="col-md-4">
-                        <?= $form->field($model, 'user_id')->textInput() ?>
+
+
+                        <?php
+                        $data = \app\modules\user\models\User::find()
+                            ->select(["concat(fio,' [', email,']') as value", "concat(fio,' [', email,']') as label", 'id as id','email as email','work_address as address','work_phone as phone'])
+                            ->asArray()
+                            ->all();?>
+
+                        <?= $form->field($model, 'user')->widget(
+                                AutoComplete::class, [
+                                'clientOptions' => [
+                                    'source' => $data,
+                                    'minLength' => '3',
+                                    'autoFill' => true,
+                                    'select' => new JsExpression("function( event, ui ) {
+                                        $('#rf-user_id').val(ui.item.id);
+                                        $('#rf-email').val(ui.item.email);
+                                        $('#rf-phone').val(ui.item.phone);
+                                        $('#rf-address').val(ui.item.address);
+                                    }")
+                                ],
+                                'options'=>[
+                                    'class'=>'form-control'
+                                ]
+                            ]);
+                         ?>
+                        <?= $form->field($model, 'user_id',['options' => ['class' => 'd-none']])->hiddenInput() ?>
                         <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
                         <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
-                        <?= $form->field($model, 'address')->textarea(['rows'=>2]) ?>
+                        <?= $form->field($model, 'address')->textarea(['rows' => 3]) ?>
                     </div>
                     <div class="col-md-4">
                         <?= $form->field($model, 'coefficient')->textInput() ?>

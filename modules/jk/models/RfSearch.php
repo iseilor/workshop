@@ -78,6 +78,8 @@ class RfSearch extends Rf
             ->andFilterWhere(['like', 'phone', $this->phone])
             ->andFilterWhere(['like', 'address', $this->address]);
 
+        $query->andWhere('deleted_at is null');
+
         return $dataProvider;
     }
 }
