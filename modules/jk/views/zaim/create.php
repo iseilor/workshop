@@ -1,14 +1,14 @@
 <?php
 
 use app\modules\jk\Module;
+use kartik\icons\Icon;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\jk\models\Zaim */
 /* @var $model app\modules\jk\models\Min */
 
-$icon = '<i class="fas fa-calculator nav-icon"></i> ';
-$this->title = $icon.Module::t('module', 'Create Zaim');
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'Zaims'), 'url' => ['index']];
+$this->title =Icon::show('calculator').Module::t('zaim','Calculator Zaim');
+$this->params['breadcrumbs'][] = ['label' => Icon::show('home').Module::t('module','JK') , 'url' => ['/jk']];
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>

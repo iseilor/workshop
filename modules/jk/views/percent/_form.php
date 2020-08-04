@@ -1,6 +1,7 @@
 <?php
 
 use app\modules\jk\assets\PercentAsset;
+use app\modules\jk\Module;
 use kartik\icons\Icon;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -27,7 +28,7 @@ $img = $bundle->baseUrl . '/img/percent_form_family_income_black.png';
 
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title"><i class="fas fa-calculator nav-icon"></i> Калькулятор суммы компенсации процентов</h3>
+                    <h3 class="card-title"><?=Icon::show('calculator').Module::t('percent','Calculator Percent')?></h3>
                 </div>
                 <?php $form = ActiveForm::begin(
                     [
