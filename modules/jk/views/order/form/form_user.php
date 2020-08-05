@@ -9,6 +9,7 @@ use yii\widgets\Pjax;
 
 use yii\jui\DatePicker;
 use yii\widgets\MaskedInput;
+use app\modules\jk\models\Order;
 
 $user = User::findOne(Yii::$app->user->identity->id);
 ?>
@@ -48,6 +49,25 @@ echo DetailView::widget([
 Pjax::end();
 ?>
     </div>
+    <div class="row">
+        <div class="col-4">
+            <?= $form->field($usermd, 'work_is_young')->checkbox(
+                ["template" => "<div class='checkbox'>\n{beginLabel}\n{input}\n{labelTitle}\n{endLabel}\n{hint}\n{error}\n</div>"]
+            ) ?>
+        </div>
+        <div class="col-4">
+            <?= $form->field($usermd, 'work_is_transferred')->checkbox(
+                ["template" => "<div class='checkbox'>\n{beginLabel}\n{input}\n{labelTitle}\n{endLabel}\n{hint}\n{error}\n</div>"]
+            ) ?>
+        </div>
+        <div class="col-4">
+            <?= $form->field($usermd, 'work_transferred_file', [
+                'options' => ['class' => (!$usermd->work_is_transferred) ? 'd-none':''],
+                'template' => getFileInputTemplate($usermd->work_transferred_file, $usermd->attributeLabels()['work_transferred_file'] . '.pdf'),
+            ])->fileInput(['class' => 'custom-file-input']) ?>
+        </div>
+    </div>
+
 
     <h5>Паспортные данные</h5>
     <div class="row">
@@ -65,6 +85,8 @@ Pjax::end();
                     'clearIncomplete' => true,
                 ],
             ]) ?>
+
+            <?= $form->field($usermd, 'passport_registration')->textarea()->hint($usermd->attributeHints()['passport_registration']); ?>
         </div>
 
         <div class="col-4">
@@ -93,6 +115,31 @@ Pjax::end();
             ]) ?>
             <?= $form->field($usermd, 'passport_file', [
                 'template' => getFileInputTemplate($usermd->passport_file, $usermd->attributeLabels()['passport_file'] . '.pdf'),
+            ])->fileInput(['class' => 'custom-file-input']) ?>
+        </div>
+
+    </div>
+
+    <h5>Жилое помещение</h5>
+    <div class="row">
+        <div class="col-4">
+            <?= $form->field($model, 'jp_type')->dropDownList($model->getJPTypeList(), ['prompt' => 'Выберите ...']); ?>
+            <?= $form->field($model, 'jp_own')->dropDownList($model->getJPOwnList(), ['prompt' => 'Выберите ...']); ?>
+            <?= $form->field($model, 'file_rent_form', [
+                'template' => getFileInputTemplate($model->file_rent, $model->attributeLabels()['file_rent'] . '.pdf'),
+            ])->fileInput(['class' => 'custom-file-input']) ?>
+        </div>
+        <div class="col-4">
+            <?= $form->field($model, 'jp_area')->textInput() ?>
+            <?= $form->field($model, 'jp_room_count')->textInput() ?>
+            <?= $form->field($model, 'family_address')->textarea(); ?>
+
+        </div>
+        <div class="col-4">
+            <?= $form->field($model, 'resident_count')->textInput(); ?>
+            <?=$form->field($model, 'resident_type')->dropDownList(Order::getResidentTypeList(),  ['prompt' => 'Выберите']); ?>
+            <?= $form->field($model, 'file_social_contract_form', [
+                'template' => getFileInputTemplate($model->file_social_contract, $model->attributeLabels()['file_social_contract'] . '.pdf'),
             ])->fileInput(['class' => 'custom-file-input']) ?>
         </div>
 
@@ -155,6 +202,12 @@ $(document).ready(function() {
           toastr["success"]("Информация по кандидату успешно обновлена", "Успех");
         });
     });
+    
+    // Поле с заявлением о переводе показываем, когда включена галочка
+    $('#user-work_is_transferred').on('click', function() {
+        $('.field-user-work_transferred_file').toggleClass('d-none');
+    });
 });
 JS;
 $this->registerJs($script, yii\web\View::POS_READY);
+
