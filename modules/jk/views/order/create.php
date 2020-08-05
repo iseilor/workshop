@@ -15,7 +15,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('form/form', [
         'model' => $model,
-        'usermd' => $usermd
+        'usermd' => $usermd,
+        'spose' => $spose,
         //'userChildDataProvider'=>$userChildDataProvider
     ]) ?>
 

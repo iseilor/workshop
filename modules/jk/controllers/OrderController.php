@@ -10,6 +10,7 @@ use app\modules\jk\models\OrderStageSearch;
 use app\modules\jk\models\OrderStop;
 use app\modules\jk\models\Status;
 use app\modules\jk\Module;
+use app\modules\user\models\Spouse;
 use app\modules\user\models\User;
 use app\modules\user\models\UserChildSearch;
 use PhpOffice\PhpWord\TemplateProcessor;
@@ -141,6 +142,19 @@ class OrderController extends Controller
         $model = new Order();
         $model->status_id = 1;
 
+        if ($user) {
+            $spose = Spouse::findOne(['user_id' => $user->id]);
+        }
+        if (!$spose) {
+            $spose = new Spouse();
+        }
+
+
+//        var_dump(Yii::$app->request->post());
+//        var_dump($spose);
+//        die();
+
+
         // Обновлаяем паспортные данные
         // TODO Разобраться, почему не рабоате load() и убрать "педальный" метод
         if ($user && isset(Yii::$app->request->post()['User']) && is_array(Yii::$app->request->post()['User'])) {
@@ -154,6 +168,19 @@ class OrderController extends Controller
             }
 
             $user->save();
+        }
+
+        if (isset(Yii::$app->request->post()['Spouse']) && is_array(Yii::$app->request->post()['Spouse'])) {
+            if ($user) {
+                $spose->user_id = $user->id;
+            }
+
+            foreach (Yii::$app->request->post()['Spouse'] as $sposeKey => $sposeVal) {
+                $spose->$sposeKey = $sposeVal;
+            }
+
+            $spose->save();
+
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -186,6 +213,8 @@ class OrderController extends Controller
             [
                 'model' => $model,
                 'usermd' => $user,
+                'spose' => $spose,
+                //'spose' => $model,
                 //'model' => $user,
             ]
         );
@@ -205,13 +234,23 @@ class OrderController extends Controller
         $model = $this->findModel($id);
         $user = User::findOne(Yii::$app->user->identity->getId());
 
+        if ($user) {
+            $spose = Spouse::findOne(['user_id' => $user->id]);
+        }
+        if (!$spose) {
+            $spose = new Spouse();
+        }
+
+//        var_dump(Yii::$app->request->post());
+//        var_dump($spose);
+//        die();
 
         // Обновлаяем паспортные данные
         // TODO Разобраться, почему не рабоате load() и убрать "педальный" метод
         if ($user && isset(Yii::$app->request->post()['User']) && is_array(Yii::$app->request->post()['User'])) {
             foreach (Yii::$app->request->post()['User'] as $userKey => $userVal) {
                 if ($userKey == 'passport_date') {
-                    var_dump($userVal);
+                    //var_dump($userVal);
                     $user->$userKey = \Yii::$app->formatter->asTimestamp($userVal, 'php:d.m.Y');
                 } else {
                     $user->$userKey = $userVal;
@@ -220,6 +259,22 @@ class OrderController extends Controller
 
             $user->save();
         }
+
+        if (isset(Yii::$app->request->post()['Spouse']) && is_array(Yii::$app->request->post()['Spouse'])) {
+            if ($user) {
+                $spose->user_id = $user->id;
+            }
+
+            foreach (Yii::$app->request->post()['Spouse'] as $sposeKey => $sposeVal) {
+                $spose->$sposeKey = $sposeVal;
+            }
+
+            $spose->save();
+
+        }
+
+
+
 
         // $user->load(Yii::$app->request->post()) && $user->save()
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -253,6 +308,8 @@ class OrderController extends Controller
             [
                 'model' => $model,
                 'usermd' => $user,
+                'spose' => $spose,
+                //'spose' => $model,
                 //'userChildDataProvider'=>$userChildDataProvider
             ]
         );

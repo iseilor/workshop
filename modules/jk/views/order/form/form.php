@@ -81,6 +81,7 @@ if (isset($model->is_mortgage)) {
                                                 <?= $this->render('form_' . $tab['id'], [
                                                     'model' => $model,
                                                     'usermd' => $usermd,
+                                                    'spose' => $spose,
                                                     'form' => $form,
                                                     'field_percent' => $field_percent,
                                                     'field_zaim' => $field_zaim,
