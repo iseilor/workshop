@@ -46,7 +46,7 @@ if (isset($model->is_mortgage)) {
                                 <div class="card-header p-0 border-bottom-0">
                                     <?php
                                     $tabs = [
-                                        ['name' => Icon::show('user') . 'Кандидат', 'id' => 'user', 'tab-class' => 'active', 'selected' => true, 'tabs-class' => 'show active'],
+                                        ['name' => Icon::show('user') . 'Работник', 'id' => 'user', 'tab-class' => 'active', 'selected' => true, 'tabs-class' => 'show active'],
                                         ['name' => Icon::show('female') . 'Супруг(а)', 'id' => 'spouse', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
                                         ['name' => Icon::show('baby') . 'Дети', 'id' => 'child', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
                                         ['name' => Icon::show('users') . 'Семья', 'id' => 'family', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
@@ -80,6 +80,7 @@ if (isset($model->is_mortgage)) {
                                             <div class="tab-pane fade <?= $tab['tabs-class'] ?>" id="tabs-<?= $tab['id'] ?>" role="tabpanel" aria-labelledby="tab-<?= $tab['id'] ?>">
                                                 <?= $this->render('form_' . $tab['id'], [
                                                     'model' => $model,
+                                                    'usermd' => $usermd,
                                                     'form' => $form,
                                                     'field_percent' => $field_percent,
                                                     'field_zaim' => $field_zaim,

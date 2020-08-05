@@ -141,6 +141,21 @@ class OrderController extends Controller
         $model = new Order();
         $model->status_id = 1;
 
+        // Обновлаяем паспортные данные
+        // TODO Разобраться, почему не рабоате load() и убрать "педальный" метод
+        if ($user && isset(Yii::$app->request->post()['User']) && is_array(Yii::$app->request->post()['User'])) {
+            foreach (Yii::$app->request->post()['User'] as $userKey => $userVal) {
+                if ($userKey == 'passport_date') {
+                    var_dump($userVal);
+                    $user->$userKey = \Yii::$app->formatter->asTimestamp($userVal, 'php:d.m.Y');
+                } else {
+                    $user->$userKey = $userVal;
+                }
+            }
+
+            $user->save();
+        }
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
             // Строчим цепочку согласования
@@ -170,7 +185,8 @@ class OrderController extends Controller
             'create',
             [
                 'model' => $model,
-
+                'usermd' => $user,
+                //'model' => $user,
             ]
         );
     }
@@ -187,8 +203,25 @@ class OrderController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $user = User::findOne(Yii::$app->user->identity->getId());
 
 
+        // Обновлаяем паспортные данные
+        // TODO Разобраться, почему не рабоате load() и убрать "педальный" метод
+        if ($user && isset(Yii::$app->request->post()['User']) && is_array(Yii::$app->request->post()['User'])) {
+            foreach (Yii::$app->request->post()['User'] as $userKey => $userVal) {
+                if ($userKey == 'passport_date') {
+                    var_dump($userVal);
+                    $user->$userKey = \Yii::$app->formatter->asTimestamp($userVal, 'php:d.m.Y');
+                } else {
+                    $user->$userKey = $userVal;
+                }
+            }
+
+            $user->save();
+        }
+
+        // $user->load(Yii::$app->request->post()) && $user->save()
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             $model->upload();
 
@@ -219,6 +252,7 @@ class OrderController extends Controller
             'update',
             [
                 'model' => $model,
+                'usermd' => $user,
                 //'userChildDataProvider'=>$userChildDataProvider
             ]
         );

@@ -7,8 +7,96 @@ use yii\helpers\Url;
 use yii\widgets\DetailView;
 use yii\widgets\Pjax;
 
+use yii\jui\DatePicker;
+use yii\widgets\MaskedInput;
+
 $user = User::findOne(Yii::$app->user->identity->id);
 ?>
+    <h5>Данные работника</h5>
+    <div class="row">
+<?php Pjax::begin(['id' => 'user-info']);
+echo DetailView::widget([
+    'model' => $user,
+    'attributes' => [
+        'tab_number',
+        'fio',
+        [
+            'label' => $user->attributeLabels()['gender'],
+            'value' => User::getGenderName($user->gender),
+        ],
+        'birth_date:date',
+        'position',
+        'work_department_full',
+        'work_address',
+        'experience',
+//        [
+//            'label' => 'Паспорт',
+//            'format' => 'raw',
+//            'value' =>
+//                $user->passport_series . ' ' . $user->passport_number . '; ' .
+//                'Выдан: ' . $user->passport_department . '; ' .
+//                'Код подразделения: ' . $user->passport_code . '; ' .
+//                'Дата выдачи: ' . date('d.m.Y', $user->passport_date) . '; ' .
+//                'Адрес регистрации: ' . $user->passport_registration . ';<br/>' .
+//                Html::a(
+//                    Icon::show('file-pdf') . $user->attributeLabels()['passport_file'],
+//                    Url::to(['/' . Yii::$app->params['module']['user']['path'] . $user->id . '/' . $user->passport_file]),
+//                    ['target' => '_blank']),
+//        ],
+    ],
+]);
+Pjax::end();
+?>
+    </div>
+
+    <h5>Паспортные данные</h5>
+    <div class="row">
+        <div class="col-4">
+            <?= $form->field($usermd, 'passport_series')->widget(MaskedInput::class, [
+                'mask' => '9999',
+                'clientOptions' => [
+                    'clearIncomplete' => true,
+                ],
+            ]) ?>
+
+            <?= $form->field($usermd, 'passport_number')->widget(MaskedInput::class, [
+                'mask' => '999999',
+                'clientOptions' => [
+                    'clearIncomplete' => true,
+                ],
+            ]) ?>
+        </div>
+
+        <div class="col-4">
+            <?= $form->field($usermd, 'passport_date')->widget(
+                DatePicker::class,
+                [
+                    'language' => 'ru',
+                    'dateFormat' => 'dd.MM.yyyy',
+                    'options' => ['class' => 'form-control inputmask-date'],
+                    'clientOptions' => [
+                        'changeMonth' => true,
+                        'yearRange' => '1950:2020',
+                        'changeYear' => true,
+                    ],
+                ]
+            ) ?>
+            <?= $form->field($usermd, 'passport_department')->textarea() ?>
+        </div>
+
+        <div class="col-4">
+            <?= $form->field($usermd, 'passport_code')->widget(MaskedInput::class, [
+                'mask' => '999-999',
+                'clientOptions' => [
+                    'clearIncomplete' => true,
+                ],
+            ]) ?>
+            <?= $form->field($usermd, 'passport_file', [
+                'template' => getFileInputTemplate($usermd->passport_file, $usermd->attributeLabels()['passport_file'] . '.pdf'),
+            ])->fileInput(['class' => 'custom-file-input']) ?>
+        </div>
+
+    </div>
 
 
     <h5>Обработка персональных данных сотрудника</h5>
@@ -40,6 +128,7 @@ $user = User::findOne(Yii::$app->user->identity->id);
             <?= $form->field($model, 'file_agree_personal_data_form', [
                 'template' => getFileInputTemplate($model->file_agree_personal_data, $model->attributeLabels()['file_agree_personal_data_form'] . '.pdf'),
             ])->fileInput(['class' => 'custom-file-input']) ?>
+
         </div>
     </div>
 
@@ -51,39 +140,8 @@ $user = User::findOne(Yii::$app->user->identity->id);
         <?= Html::button(Icon::show('sync-alt') . 'Обновить информацию',
             ['class' => 'btn btn-primary', 'id' => 'btn-update']) ?>
     </p>
-<?php Pjax::begin(['id' => 'user-info']);
-echo DetailView::widget([
-    'model' => $user,
-    'attributes' => [
-        'tab_number',
-        'fio',
-        [
-            'label' => $user->attributeLabels()['gender'],
-            'value' => User::getGenderName($user->gender),
-        ],
-        'birth_date:date',
-        'position',
-        'work_department_full',
-        'work_address',
-        'experience',
-        [
-            'label' => 'Паспорт',
-            'format' => 'raw',
-            'value' =>
-                $user->passport_series . ' ' . $user->passport_number . '; ' .
-                'Выдан: ' . $user->passport_department . '; ' .
-                'Код подразделения: ' . $user->passport_code . '; ' .
-                'Дата выдачи: ' . date('d.m.Y', $user->passport_date) . '; ' .
-                'Адрес регистрации: ' . $user->passport_registration . ';<br/>' .
-                Html::a(
-                    Icon::show('file-pdf') . $user->attributeLabels()['passport_file'],
-                    Url::to(['/' . Yii::$app->params['module']['user']['path'] . $user->id . '/' . $user->passport_file]),
-                    ['target' => '_blank']),
-        ],
-    ],
-]);
-Pjax::end();
 
+<?php
 $script = <<< JS
 $(document).ready(function() {
     $('#btn-update').click(function(){
