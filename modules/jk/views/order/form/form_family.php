@@ -28,21 +28,15 @@ use yii\widgets\MaskedInput;
         ])->fileInput(['class' => 'custom-file-input']) ?>
 
 
-        <?= $form->field($model, 'resident_count')->textInput(); ?>
-        <?=$form->field($model, 'resident_type')->dropDownList(Order::getResidentTypeList(),  ['prompt' => 'Выберите']); ?>
-
     </div>
     <div class="col-md-4">
-        <?= $form->field($model, 'family_address')->textarea(); ?>
         <?= $form->field($model, 'resident_own')->textInput(); ?>
         <?= $form->field($model, 'file_rent_form', [
             'template' => getFileInputTemplate($model->file_rent, $model->attributeLabels()['file_rent'] . '.pdf'),
         ])->fileInput(['class' => 'custom-file-input']) ?>
 
         <?= $form->field($model, 'family_rent')->textarea(['rows'=>5]); ?>
-        <?= $form->field($model, 'file_social_contract_form', [
-            'template' => getFileInputTemplate($model->file_social_contract, $model->attributeLabels()['file_social_contract'] . '.pdf'),
-        ])->fileInput(['class' => 'custom-file-input']) ?>
+
     </div>
     <div class="col-md-4">
         <?= $form->field($model, 'family_own')->textarea(['rows'=>10]); ?>
