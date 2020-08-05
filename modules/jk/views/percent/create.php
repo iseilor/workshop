@@ -5,8 +5,11 @@
 /* @var $model app\modules\jk\models\Percent */
 /* @var $mins app\modules\jk\models\Min */
 
-$this->title = "<i class='fas fa-calculator nav-icon'></i> Калькулятор";
-$this->params['breadcrumbs'][] = ['label' => '<i class="nav-icon fas fa-home"></i> Жилищная компания', 'url' => ['/jk']];
+use app\modules\jk\Module;
+use kartik\icons\Icon;
+
+$this->title = Icon::show('calculator').Module::t('percent','Calculator Percent');
+$this->params['breadcrumbs'][] = ['label' => '<i class="nav-icon fas fa-home"></i> ЖК', 'url' => ['/jk']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 

@@ -2,6 +2,7 @@
 
 
 use app\modules\jk\assets\ZaimAsset;
+use app\modules\jk\Module;
 use kartik\icons\Icon;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
@@ -29,7 +30,7 @@ $img = $bundle->baseUrl . '/img/percent_form_family_income_black.png';
         <div class="col-md-12">
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title"><i class="fas fa-calculator nav-icon"></i> Калькулятор займа</h3>
+                    <h3 class="card-title"><?=Icon::show('calculator').Module::t('zaim','Calculator Zaim');?></h3>
                 </div>
                 <?php $form = ActiveForm::begin(
                     [
