@@ -112,16 +112,16 @@ a.a-color-blue:hover {
   color: #6c757d;
   font-size: 0.7rem;
 }
-.back-to-top {
-  z-index: 1033;
-  bottom: 3rem;
-}
-#chat-bot {
-  bottom: 3rem;
-  position: fixed;
-  right: 4rem;
-  z-index: 1033;
-}
+/*.back-to-top {*/
+/*  z-index: 1033;*/
+/*  bottom: 3rem;*/
+/*}*/
+/*#chat-bot {*/
+/*  bottom: 3rem;*/
+/*  position: fixed;*/
+/*  right: 4rem;*/
+/*  z-index: 1033;*/
+/*}*/
 .chat-bot-sidebar {
   color: white;
 }
@@ -130,4 +130,28 @@ a.a-color-blue:hover {
 }
 .btn-bot {
   margin-right: 5px;
+}
+
+/*#curator-contacts {*/
+/*  bottom: 3rem;*/
+/*  position: fixed;*/
+/*  right: 4rem;*/
+/*  z-index: 1033;*/
+/*}*/
+
+.right-bottom-side-bar {
+  position: fixed;
+  right: 0;
+  bottom: 3em;
+ /* width: 8em; */
+  margin-top: -2.5em;
+  z-index: 1033;
+}
+
+.jk-curator-info-card {
+  position: fixed;
+  right: 10px;
+  bottom: 100px;
+  z-index: 1200;
+  /*display: none;*/
 }
