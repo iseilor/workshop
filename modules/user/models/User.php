@@ -36,6 +36,7 @@ use yii\web\IdentityInterface;
  * @property string      $work_transferred_file
  * @property boolean     $work_department
  * @property boolean     $work_department_full
+ * @property string      $rf
  *
  * @property boolean     $work_phone
  * @property string      $work_address
@@ -200,6 +201,15 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     public function getRoleName()
     {
         return ArrayHelper::getValue(self::getRolesArray(), $this->role_id);
+    }
+
+    public function getRf() {
+        $depList = explode('|', $this->work_department_full);
+        if (isset($depList[2])) {
+            return trim($depList[2]);
+        }
+
+        return "";
     }
 
     public static function getStatusesArray()
