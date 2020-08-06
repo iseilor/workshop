@@ -2,6 +2,7 @@
 
 namespace app\modules\jk;
 
+use app\modules\jk\models\CorpNorm;
 use app\modules\user\models\User;
 use Yii;
 
@@ -36,7 +37,26 @@ class Module extends \yii\base\Module
      * @return float|int - Кол-во площади, м2
      */
     public static function getKNP($n){
-        switch ($n) {
+        $items = CorpNorm::find()->orderBy('number asc')->all();
+        $biggestItem = new CorpNorm();
+        $biggestItem->number = 0;
+        $biggestItem->area = 0;
+
+        foreach ($items as $item) {
+            if ($n == $item->number) {
+                return $item->area;
+            }
+            if ($item->number > $biggestItem->number) {
+                $biggestItem = $item;
+            }
+        }
+        if ($n > $biggestItem->number) {
+            return $biggestItem->area;
+        } else {
+            return 0;
+        }
+
+        /*switch ($n) {
             case 1:
                 return 35;
                 break;
@@ -46,7 +66,7 @@ class Module extends \yii\base\Module
             default:
                 return $n*20;
                 break;
-        }
+        }*/
     }
 
     // Ставка компенсации процентов SKP
