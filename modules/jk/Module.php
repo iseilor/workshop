@@ -38,22 +38,16 @@ class Module extends \yii\base\Module
      */
     public static function getKNP($n){
         $items = CorpNorm::find()->orderBy('number asc')->all();
-        $biggestItem = new CorpNorm();
-        $biggestItem->number = 0;
-        $biggestItem->area = 0;
 
-        foreach ($items as $item) {
-            if ($n == $item->number) {
-                return $item->area;
+        if ($n < 3) {
+            foreach ($items as $item) {
+                if ($n == $item->number) {
+                    return $item->area;
+                }
+                return 0;
             }
-            if ($item->number > $biggestItem->number) {
-                $biggestItem = $item;
-            }
-        }
-        if ($n > $biggestItem->number) {
-            return $biggestItem->area;
         } else {
-            return 0;
+            return $n*20;
         }
 
         /*switch ($n) {
