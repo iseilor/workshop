@@ -220,8 +220,17 @@ class Zaim extends Model
         // Прожиточный минимум в регионе покупки жилья
         $min = Min::findOne($this->min_id);
 
-        // Максимальный срок займа
+        // Нормативы оказания помощи
+        $standards = AidStandards::find()->all();
         $this->compensation_years = 10;
+
+        foreach ($standards as $standard) {
+            if ($this->family_income >= $standard->income_bottom && $this->family_income <= $standard->income_top) {
+                $this->compensation_years = $standard->compensation_years_zaim;
+            }
+        }
+        // Максимальный срок займа
+        /*$this->compensation_years = 10;
         if ($this->family_income > 35000) {
             $this->compensation_years = 7;
         } else {
@@ -234,7 +243,7 @@ class Zaim extends Model
                     $this->compensation_years = 10;
                 }
             }
-        }
+        }*/
 
         // Если лет до пенсии меньше, чем максимальный срок займа, то срок займа сокращаем до срока пенсии
         $pensionYears = $user->getPensionYears();

@@ -320,15 +320,39 @@ class Percent extends Model
         // Максимальный срок компенсации процентов (кол-во лет до пенсии, но не более 10 лет)
         $user = User::findOne(Yii::$app->user->identity->getId());
         $this->compensation_years = $user->getPensionYears();
+        $SKP = 12;
 
-        if ($this->compensation_years > 10) {
+        // Нормативы оказания помощи
+        $standards = AidStandards::find()->all();
+
+        foreach ($standards as $standard) {
+            if ($this->family_income >= $standard->income_bottom && $this->family_income <= $standard->income_top) {
+
+                if ($this->compensation_years > $standard->compensation_years_percent) {
+                    $this->compensation_years = $standard->compensation_years_percent;
+                }
+                if ($this->compensation_years < 0) {
+                    $this->compensation_years = 0;
+                }
+
+                // До 35 лет и после 35
+                if ($user->getYears() <= 35) {
+                    $SKP = $standard->skp_young;
+                } else {
+                    $SKP = $standard->skp;
+                }
+            }
+        }
+
+        //До введения справочника "Нормативы оказания помощи"
+        /*if ($this->compensation_years > 10) {
             $this->compensation_years = 10;
         }
         if ($this->compensation_years < 0) {
             $this->compensation_years = 0;
         }
 
-        $SKP = Module::getSKP($this->family_income); // Ставка компенсации процентов SKP
+        $SKP = Module::getSKP($this->family_income); // Ставка компенсации процентов SKP*/
         $KNP = Module::getKNP($this->family_count); // Корпоративная норма площади жилья KNP
 
         // Если покупается больше нормы, то сотруднику возмещается только норма
