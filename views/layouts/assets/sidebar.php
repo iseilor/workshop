@@ -14,7 +14,7 @@ use yii\helpers\Url;
         <img src="<?= Yii::$app->homeUrl ?>logo/logo.png" alt='<?= Yii::$app->name; ?>' title='<?= Yii::$app->name; ?>'
              class="brand-image img-circle elevation-3"
              style="opacity: .8">
-        <span class="brand-text font-weight-light">ПАО Ростелеком</span>
+        <span class="brand-text font-weight-light">Ростелеком</span>
     </a>
 
     <div class="sidebar">
@@ -31,7 +31,7 @@ use yii\helpers\Url;
                     <?= Html::img($userPhotoPath, ['title' => Yii::$app->user->identity->username,'class'=>'img-circle elevation-2']) ?>
                 </div>
                 <div class="info">
-                        <?=Html::a( 'Мой кабинет',Yii::$app->homeUrl.'user/profile',['title'=>Yii::$app->user->identity->username]);?>
+                        <?=Html::a( Yii::$app->user->identity->surname,Yii::$app->homeUrl.'user/profile',['title'=>Yii::$app->user->identity->username]);?>
                 </div>
             </div>
         <?php endif ?>
