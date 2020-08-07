@@ -2,6 +2,7 @@
 
 namespace app\modules\user\models;
 
+use app\modules\admin\models\Retirement;
 use app\modules\pulsar\models\Pulsar;
 use app\modules\user\Module;
 use Yii;
@@ -421,12 +422,15 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     // Дата выхода на пенсию
     public function getPensionDate()
     {
+        $pensionMale = Retirement::findOne(1);
+        $pensionFemale = Retirement::findOne(2);
+
         $date = '';
         if ($this->gender == 1) {
-            $date = date('d.m.Y', $this->birth_date + 65 * 31556926);
+            $date = date('d.m.Y', $this->birth_date + $pensionMale->age * 31556926);
         }
         if ($this->gender === 0) {
-            $date = date('d.m.Y', $this->birth_date + 60 * 31556926);
+            $date = date('d.m.Y', $this->birth_date + $pensionFemale->age * 31556926);
         }
         return $date;
     }
