@@ -7,11 +7,11 @@ use yii\widgets\DetailView;
 /* @var $model app\modules\admin\models\Retirement */
 
 $this->title = $model->gender;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Retirements'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Список'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="mrf-view">
+<div class="retirement-view">
 
 
     <p>
