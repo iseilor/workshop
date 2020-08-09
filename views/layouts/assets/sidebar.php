@@ -58,7 +58,7 @@ use yii\helpers\Url;
                             'items' => [
                                 [
                                     'label' => Icon::show('calculator', ['class' => 'nav-icon'])
-                                        . Html::tag('p', \app\modules\jk\Module::t('module', 'Calculator')),
+                                        . Html::tag('p', \app\modules\jk\Module::t('calculator', 'Calculator')),
                                     'url' => ['/jk/default/calc'],
                                 ],
                                 ['label' => '<i class="fas fa-ruble-sign nav-icon"></i> <p>Подать заявку</p>', 'url' => ['/jk/order/create']],
