@@ -198,4 +198,3 @@ $script = <<< JS
 //$('#percent-percent_rate').inputmask({ mask: "(9)|(9,9{1,2})|(9.9{1,2})"})
 JS;
 $this->registerJs($script, yii\web\View::POS_READY);
-
