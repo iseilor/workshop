@@ -59,13 +59,13 @@ $this->registerJs($js,\yii\web\view::POS_READY);
                 </div>
                 <h3 class="profile-username text-center"> <?= $curator->fio?></h3>
 
-                <p class="text-muted text-center">Куратор по жилищной кампании. <?= $curatorRf ?></p>
+                <p class="text-muted text-center">Ответственный по жилищной программе.<br/> <?= $curatorRf ?></p>
                 <ul class="list-group list-group-unbordered mb-3">
                     <li class="list-group-item">
                         <b>Телефон</b> <span class="float-right col-md-9"> <?= $curator->work_phone ?></span>
                     </li>
                     <li class="list-group-item">
-                        <b>Email</b> <a  class="float-right col-md-9" href="mailto:<?= $curator->email ?>?subject=Жилищьная%20компания"><?= $curator->email ?></a>
+                        <b>Email</b> <a  class="float-right col-md-9" href="mailto:<?= $curator->email ?>?subject=Жилищная%20программа"><?= $curator->email ?></a>
                     </li>
                     <li class="list-group-item">
                         <b>Адрес</b> <span class="float-right col-md-9"><?= $curator->work_address ?></span>

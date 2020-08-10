@@ -75,7 +75,7 @@ AppAssetAdminLTE::register($this);
                 <div class="right-bottom-side-bar">
                     <a id="jk-curator-contacts" href="#" class="btn btn-primary">
                         <i class="fas fa-id-card"></i>
-                        Связаться с куратором
+                        Связаться с ответственным
                     </a>
 
                     <a id="chat-bot" href="#" class="btn btn-primary" data-widget="control-sidebar" data-slide="true" style="display: none;">
