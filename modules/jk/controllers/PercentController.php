@@ -107,6 +107,9 @@ class PercentController extends Controller
             if ($model->experience < 1) {
                 Yii::$app->session->setFlash('warning', "К сожалению, вы не можете воспользоваться Жилищной Программой, т.к. ваш общий стаж работы в компании менее 1 года");
                 return $this->redirect(['/main/default/index']);
+            } elseif ($user->getYears() < 21 || $user->getPensionYears() < 0 ) {
+                Yii::$app->session->setFlash('warning', "К сожалению, вы не можете воспользоваться Жилищной Программой из-за ограничений по возрасту");
+                return $this->redirect(['/main/default/index']);
             } else {
 
                 Yii::$app->session->setFlash('primary', "Обращаем Ваше внимание, что Калькулятор считает МАКСИМАЛЬНО возможный размер материальной помощи,
