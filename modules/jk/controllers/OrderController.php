@@ -17,9 +17,11 @@ use PhpOffice\PhpWord\TemplateProcessor;
 use Yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
+use yii\helpers\FileHelper;
 use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\UploadedFile;
 
 /**
  * OrderController implements the CRUD actions for Order model.
@@ -160,8 +162,17 @@ class OrderController extends Controller
         if ($user && isset(Yii::$app->request->post()['User']) && is_array(Yii::$app->request->post()['User'])) {
             foreach (Yii::$app->request->post()['User'] as $userKey => $userVal) {
                 if ($userKey == 'passport_date') {
-                    var_dump($userVal);
                     $user->$userKey = \Yii::$app->formatter->asTimestamp($userVal, 'php:d.m.Y');
+                } elseif ($userKey == 'passport_file') {
+                    // Passport
+                    $passport_file = UploadedFile::getInstance($user, 'passport_file');
+                    if ($passport_file){
+                        $passportFileDir = Yii::$app->params['module']['user']['path'].$user->id;
+                        $passportFileName = $user->id .'_passport_'.date('YmdHis'). '.' . $passport_file->extension;
+                        FileHelper::createDirectory( $passportFileDir, $mode = 0777, $recursive = true);
+                        $passport_file->saveAs($passportFileDir. '/'.$passportFileName);
+                        $user->passport_file = $passportFileName;
+                    }
                 } else {
                     $user->$userKey = $userVal;
                 }
@@ -250,8 +261,17 @@ class OrderController extends Controller
         if ($user && isset(Yii::$app->request->post()['User']) && is_array(Yii::$app->request->post()['User'])) {
             foreach (Yii::$app->request->post()['User'] as $userKey => $userVal) {
                 if ($userKey == 'passport_date') {
-                    //var_dump($userVal);
                     $user->$userKey = \Yii::$app->formatter->asTimestamp($userVal, 'php:d.m.Y');
+                } elseif ($userKey == 'passport_file') {
+                    // Passport
+                    $passport_file = UploadedFile::getInstance($user, 'passport_file');
+                    if ($passport_file){
+                        $passportFileDir = Yii::$app->params['module']['user']['path'].$user->id;
+                        $passportFileName = $user->id .'_passport_'.date('YmdHis'). '.' . $passport_file->extension;
+                        FileHelper::createDirectory( $passportFileDir, $mode = 0777, $recursive = true);
+                        $passport_file->saveAs($passportFileDir. '/'.$passportFileName);
+                        $user->passport_file = $passportFileName;
+                    }
                 } else {
                     $user->$userKey = $userVal;
                 }
