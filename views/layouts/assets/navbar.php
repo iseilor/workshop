@@ -23,7 +23,7 @@ use yii\widgets\Menu;
             [
                 'label' => Icon::show('confluence', ['framework' => Icon::FAB]) . 'Confluence',
                 'url' => Url::to('https://confluence.rt.ru/display/WSHOP'),
-                'template' => '<a href="{url}" class="nav-link" target="_blank" title="Проект в Confluence">{label}</a>'
+                'template' => '<a href="{url}" class="nav-link" target="_blank" title="Проект в Confluence">{label}</a>',
             ],
             ['label' => Icon::show('envelope') . Module::t('module', 'Feedback'), 'url' => ['/main/default/feedback']],
         ],
@@ -44,14 +44,15 @@ use yii\widgets\Menu;
     </form>
 
     <ul class="navbar-nav ml-auto">
-        <li class="nav-item dropdown">
+        <!--// TODO: Потом это обязательно тоже сделаем-->
+        <!--<li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
                 <i class="far fa-heart"></i>
                 <span class="badge badge-info navbar-badge">1</span>
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <a href="#" class="dropdown-item">
-                    <!-- Message Start -->
+
                     <div class="media">
                         <div class="media-body">
                             <h3 class="dropdown-item-title">
@@ -65,7 +66,7 @@ use yii\widgets\Menu;
                                 час назад</p>
                         </div>
                     </div>
-                    <!-- Message End -->
+
                 </a>
                 <div class="dropdown-divider"></div>
             </div>
@@ -77,7 +78,7 @@ use yii\widgets\Menu;
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <a href="#" class="dropdown-item">
-                    <!-- Message Start -->
+
                     <div class="media">
                         <img src="<?= Yii::$app->homeUrl ?>img/user1-128x128.jpg"
                              alt="User Avatar"
@@ -95,11 +96,11 @@ use yii\widgets\Menu;
                                 часа назад</p>
                         </div>
                     </div>
-                    <!-- Message End -->
+
                 </a>
                 <div class="dropdown-divider"></div>
                 <a href="#" class="dropdown-item">
-                    <!-- Message Start -->
+
                     <div class="media">
                         <img src="<?= Yii::$app->homeUrl ?>img/user8-128x128.jpg"
                              alt="User Avatar"
@@ -116,11 +117,11 @@ use yii\widgets\Menu;
                                 часа назад</p>
                         </div>
                     </div>
-                    <!-- Message End -->
+
                 </a>
                 <div class="dropdown-divider"></div>
                 <a href="#" class="dropdown-item">
-                    <!-- Message Start -->
+
                     <div class="media">
                         <img src="<?= Yii::$app->homeUrl ?>img/user3-128x128.jpg"
                              alt="User Avatar"
@@ -138,7 +139,7 @@ use yii\widgets\Menu;
                                 часа назад</p>
                         </div>
                     </div>
-                    <!-- Message End -->
+
                 </a>
                 <div class="dropdown-divider"></div>
                 <a href="#" class="dropdown-item dropdown-footer">Смотреть
@@ -172,7 +173,7 @@ use yii\widgets\Menu;
                     все
                     уведомления</a>
             </div>
-        </li>
+        </li>-->
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
                 <i class="far fa-user"></i>
@@ -197,33 +198,21 @@ use yii\widgets\Menu;
                     echo Html::a(
                         '<i class="fas fa-briefcase"></i> Мой кабинет',
                         Url::home() . 'user/cabinet',
-                        ['class' => 'dropdown-item']
+                        ['class' => 'dropdown-item', 'title' => 'Ваша рабочая область']
                     );
                     echo '<div class="dropdown-divider"></div>';
                     echo Html::a(
                         '<i class="fas fa-user-circle"></i> Мой профиль',
                         Url::home() . 'user/profile',
-                        ['class' => 'dropdown-item']
+                        ['class' => 'dropdown-item', 'title' => 'Личные данные вашего профиля']
                     );
                     echo '<div class="dropdown-divider"></div>';
                     echo Html::a(
                         Icon::show('id-card') . 'Моя карточка',
-                        Url::to('/user/' . Yii::$app->user->identity->getId(), true),
-                        ['class' => 'dropdown-item']
+                        Url::home() . 'user/' . Yii::$app->user->identity->getId(),
+                        ['class' => 'dropdown-item', 'title' => 'Публичные данные вашего профиля']
                     );
 
-                    echo '<div class="dropdown-divider"></div>';
-                    echo Html::a(
-                        Icon::show('baby') . 'Мои дети',
-                        Url::home() . 'user/child',
-                        ['class' => 'dropdown-item']
-                    );
-                    echo '<div class="dropdown-divider"></div>';
-                    echo Html::a(
-                        '<i class="fas fa-user-shield"></i> Админка',
-                        Url::home() . 'admin',
-                        ['class' => 'dropdown-item']
-                    );
                     echo '<div class="dropdown-divider"></div>';
                     echo Html::a(
                         '<i class="fas fa-sign-out-alt"></i> Выйти',
@@ -235,34 +224,4 @@ use yii\widgets\Menu;
             </div>
         </li>
     </ul>
-
-    <?php /*echo Nav::widget([
-        'options' => ['class' => 'navbar-nav ml-auto'],
-        'activateParents' => true,
-        'items' => array_filter([
-
-            ['label' => Yii::t('app', 'NAV_HOME'), 'url' => ['/main/default/index']],
-            ['label' => Yii::t('app', 'NAW_CONTACT'), 'url' => ['/main/contact/index']],
-            Yii::$app->user->isGuest ?
-                ['label' => Yii::t('app', 'NAV_SIGNUP'), 'url' => ['/user/default/signup']] :
-                false,
-            Yii::$app->user->isGuest ?
-                ['label' => Yii::t('app', 'NAV_LOGIN'), 'url' => ['/user/default/login']] :
-                false,
-            !Yii::$app->user->isGuest ?
-                ['label' => Yii::t('app', 'NAV_ADMIN'), 'items' => [
-                    ['label' => Yii::t('app', 'NAV_ADMIN'), 'url' => ['/admin/default/index']],
-                    ['label' => Yii::t('app', 'ADMIN_USERS'), 'url' => ['/admin/users/index']],
-                ]] :
-                false,
-            !Yii::$app->user->isGuest ?
-                ['label' => Yii::t('app', 'NAV_PROFILE'), 'items' => [
-                    ['label' => Yii::t('app', 'NAV_PROFILE'), 'url' => ['/user/profile/index']],
-                    ['label' => Yii::t('app', 'NAV_LOGOUT'),
-                        'url' => ['/user/default/logout'],
-                        'linkOptions' => ['data-method' => 'post']]
-                ]] :
-                false,
-        ]),
-    ]);*/ ?>
 </nav>

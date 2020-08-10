@@ -26,7 +26,7 @@ if (isset($disable) && $disable) {
                 <div class="row">
                     <div class="col-md-4">
                         <?php
-                        echo $form->field($model, 'health_value')->widget(StarRating::classname(), [
+                        echo $form->field($model, 'health_value')->widget(StarRating::class, [
                             'pluginOptions' => [
                                 'size' => 'xl',
                                 'theme' => 'krajee-fas',
@@ -47,7 +47,7 @@ if (isset($disable) && $disable) {
                     </div>
                     <div class="col-md-4">
                         <?php
-                        echo $form->field($model, 'mood_value')->widget(StarRating::classname(), [
+                        echo $form->field($model, 'mood_value')->widget(StarRating::class, [
                             'pluginOptions' => [
                                 'size' => 'xl',
                                 'theme' => 'krajee-fas',
@@ -68,7 +68,7 @@ if (isset($disable) && $disable) {
                     </div>
                     <div class="col-md-4">
                         <?php
-                        echo $form->field($model, 'job_value')->widget(StarRating::classname(), [
+                        echo $form->field($model, 'job_value')->widget(StarRating::class, [
                             'pluginOptions' => [
                                 'size' => 'xl',
                                 'theme' => 'krajee-fas',
