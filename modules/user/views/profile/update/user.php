@@ -34,12 +34,6 @@ use yii\widgets\MaskedInput;
                 'clearIncomplete' => true
             ]
         ]) ?>
-        <?= $form->field($model, 'experience')->widget(MaskedInput::class, [
-            'mask' => '9[9]',
-            'clientOptions' => [
-                'clearIncomplete' => true
-            ]
-        ]) ?>
         <?= $form->field($model, 'work_is_young')->checkbox(
             ["template" => "<div class='checkbox'>\n{beginLabel}\n{input}\n{labelTitle}\n{endLabel}\n{hint}\n{error}\n</div>"]
         ) ?>
