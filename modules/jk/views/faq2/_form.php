@@ -10,7 +10,6 @@ use yii\widgets\ActiveForm;
 ?>
 
 
-
 <div class="row">
     <div class="col-md-12">
 
@@ -24,6 +23,7 @@ use yii\widgets\ActiveForm;
 
 
                 <?= $form->field($model, 'question')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'weight')->textInput(['maxlength' => true]) ?>
 
                 <?= $form->field($model, 'answer')->widget(
                     Widget::class,
@@ -44,9 +44,6 @@ use yii\widgets\ActiveForm;
                         ],
                     ]
                 ); ?>
-
-
-
 
 
             </div>

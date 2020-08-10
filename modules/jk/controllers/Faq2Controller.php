@@ -2,8 +2,8 @@
 
 namespace app\modules\jk\controllers;
 
-use app\modules\jk\models\Faq;
-use app\modules\jk\models\FaqSearch;
+use app\modules\jk\models\Faq2;
+use app\modules\jk\models\Faq2Search;
 use Yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
@@ -13,7 +13,7 @@ use yii\web\NotFoundHttpException;
 /**
  * FaqController implements the CRUD actions for Faq model.
  */
-class FaqController extends Controller
+class Faq2Controller extends Controller
 {
     /**
      * {@inheritdoc}
@@ -47,7 +47,7 @@ class FaqController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new FaqSearch();
+        $searchModel = new Faq2Search();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -58,7 +58,7 @@ class FaqController extends Controller
 
     public function actionAdmin()
     {
-        $searchModel = new FaqSearch();
+        $searchModel = new Faq2Search();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('admin', [
@@ -87,7 +87,7 @@ class FaqController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Faq();
+        $model = new Faq2();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -141,7 +141,7 @@ class FaqController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Faq::findOne($id)) !== null) {
+        if (($model = Faq2::findOne($id)) !== null) {
             return $model;
         }
 

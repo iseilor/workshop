@@ -7,7 +7,7 @@ use app\modules\jk\Module;
 use Yii;
 
 /**
- * This is the model class for table "jk_faq".
+ * This is the model class for table "jk_faq2".
  *
  * @property int $id
  * @property string $created_at
@@ -17,14 +17,14 @@ use Yii;
  * @property string $question
  * @property string $answer
  */
-class Faq extends Model
+class Faq2 extends Model
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'jk_faq';
+        return 'jk_faq2';
     }
 
     /**
@@ -33,9 +33,9 @@ class Faq extends Model
     public function rules()
     {
         return [
-            [['question', 'answer'], 'required'],
-            [['created_at', 'updated_at'], 'safe'],
-            [['created_by', 'updated_by'], 'integer'],
+            [['question', 'answer','weight'], 'required'],
+            [['created_at', 'updated_at','faq_id'], 'safe'],
+            [['weight','faq_id'], 'integer'],
             [['answer'], 'string'],
             [['question'], 'string', 'max' => 255],
         ];
@@ -52,8 +52,10 @@ class Faq extends Model
             'created_by' => Yii::t('app', 'Created By'),
             'updated_at' => Yii::t('app', 'Updated At'),
             'updated_by' => Yii::t('app', 'Updated By'),
-            'question' => Module::t('module', 'Question'),
-            'answer' => Module::t('module', 'Answer'),
+
+            'question' => Module::t('faq', 'Question'),
+            'answer' => Module::t('faq', 'Answer'),
+            'weight' => Module::t('faq', 'Weight'),
         ];
     }
 

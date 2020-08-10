@@ -21,7 +21,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
     <?= $form->field($model, 'annotation')->widget(
-        Widget::className(),
+        Widget::class,
         [
             'settings' => [
                 'lang' => 'ru',
@@ -41,7 +41,7 @@ use yii\widgets\ActiveForm;
     ); ?>
 
     <?= $form->field($model, 'text')->widget(
-        Widget::className(),
+        Widget::class,
         [
             'settings' => [
                 'lang' => 'ru',
