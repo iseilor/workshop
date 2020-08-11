@@ -68,7 +68,7 @@ use yii\helpers\Url;
                                 ['label' => '<i class="fas fa-file-word nav-icon"></i> <p>Документы</p>', 'url' => ['/jk/doc/index']],
                                 ['label' => '<i class="fas fa-question nav-icon"></i> <p>Частые вопросы</p>', 'url' => ['/jk/faq/index']],
                                 ['label' => '<i class="fas fa-question nav-icon"></i> <p>Частые вопросы 2</p>', 'url' => ['/jk/faq2/index']],
-                                ['label' => '<i class="fas fa-user nav-icon"></i> <p>Написать куратору</p>', 'url' => ['/jk/curator/index']],
+                                /*['label' => '<i class="fas fa-user nav-icon"></i> <p>Написать куратору</p>', 'url' => ['/jk/curator/index']],*/
                             ],
                         ],
                         /*[
