@@ -168,7 +168,7 @@ $user = User::findOne(Yii::$app->user->identity->id);
                         <div class="mailbox-attachment-info">
                             <?= Html::a(Icon::show('paperclip') . 'ПД. ' . Yii::$app->user->identity->fio . '.pdf',
                                 Url::to(['/user/user/' . Yii::$app->user->identity->id . '/pd'], true),
-                                ['class' => 'mailbox-attachment-name','target'=>'_blank']) ?>
+                                ['class' => 'mailbox-attachment-name']) ?>
                             <span class="mailbox-attachment-size clearfix mt-1">
                               <span>1,245 KB</span>
                                <?= Html::a(Icon::show('cloud-download-alt'),
