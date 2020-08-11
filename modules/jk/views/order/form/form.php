@@ -95,21 +95,21 @@ if (isset($model->is_mortgage)) {
                     </div>
                 </div>
                 <div class="card-footer">
-                    <?= Html::button(
-                        Icon::show('info') . 'Запустить помощника',
-                        [
-                            'class' => 'btn btn-primary',
-                            'id' => 'btn-helper',
-                            'onclick' => "startIntro();",
-                        ]
-                    ) ?>
-                    <?= Html::submitButton(
-                        '<i class="fas fa-comments"></i> Написать куратору',
-                        [
-                            'class' => 'btn bg-indigo',
-                            'id' => 'btn-message',
-                        ]
-                    ) ?>
+<!--                    --><?= "" // Html::button(
+//                        Icon::show('info') . 'Запустить помощника',
+//                        [
+//                            'class' => 'btn btn-primary',
+//                            'id' => 'btn-helper',
+//                            'onclick' => "startIntro();",
+//                        ]
+//                    ) ?>
+<!--                    --><?= "" // Html::submitButton(
+//                        '<i class="fas fa-comments"></i> Написать куратору',
+//                        [
+//                            'class' => 'btn bg-indigo',
+//                            'id' => 'btn-message',
+//                        ]
+//                    ) ?>
                     <?= Html::submitButton(
                         Icon::show('save') . 'Сохранить заявку',
                         [
