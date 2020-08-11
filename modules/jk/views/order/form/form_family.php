@@ -31,10 +31,6 @@ use yii\widgets\MaskedInput;
     </div>
     <div class="col-md-4">
         <?= $form->field($model, 'resident_own')->textInput(); ?>
-        <?= $form->field($model, 'file_rent_form', [
-            'template' => getFileInputTemplate($model->file_rent, $model->attributeLabels()['file_rent'] . '.pdf'),
-        ])->fileInput(['class' => 'custom-file-input']) ?>
-
         <?= $form->field($model, 'family_rent')->textarea(['rows'=>5]); ?>
 
     </div>
