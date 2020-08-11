@@ -232,6 +232,7 @@ class Spouse extends Model
     public static function getGenderList()
     {
         return [
+            null => '',
             1 => 'Мужской',
             0 => 'Женский',
         ];
