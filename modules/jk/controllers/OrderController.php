@@ -178,12 +178,12 @@ class OrderController extends Controller
                         break;
                     case 'work_transferred_file':
                         // Transferred file
-                        $user->work_transferred_file = UploadedFile::getInstance($user, 'work_transferred_file');
-                        if ($user->work_transferred_file){
+                        $work_transferred_file = UploadedFile::getInstance($user, 'work_transferred_file');
+                        if ($work_transferred_file){
                             $fileDir = Yii::$app->params['module']['user']['path'].$user->id;
-                            $fileName = $user->id .' | '.$user->fio.' | Заявление о переводе | '.date('d.m.Y H:i:s'). '.' . $user->work_transferred_file->extension;
+                            $fileName = $user->id .' | '.$user->fio.' | Заявление о переводе | '.date('d.m.Y H:i:s'). '.' . $work_transferred_file->extension;
                             FileHelper::createDirectory( $fileDir, $mode = 0777, $recursive = true);
-                            $user->work_transferred_file->saveAs($fileDir. '/'.$fileName);
+                            $work_transferred_file->saveAs($fileDir. '/'.$fileName);
                             $user->work_transferred_file = $fileName;
                         }
                         break;
@@ -191,21 +191,6 @@ class OrderController extends Controller
                         $user->$userKey = $userVal;
                         break;
                 }
-//                if ($userKey == 'passport_date') {
-//                    $user->$userKey = \Yii::$app->formatter->asTimestamp($userVal, 'php:d.m.Y');
-//                } elseif ($userKey == 'passport_file') {
-//                    // Passport
-//                    $passport_file = UploadedFile::getInstance($user, 'passport_file');
-//                    if ($passport_file){
-//                        $passportFileDir = Yii::$app->params['module']['user']['path'].$user->id;
-//                        $passportFileName = $user->id .'_passport_'.date('YmdHis'). '.' . $passport_file->extension;
-//                        FileHelper::createDirectory( $passportFileDir, $mode = 0777, $recursive = true);
-//                        $passport_file->saveAs($passportFileDir. '/'.$passportFileName);
-//                        $user->passport_file = $passportFileName;
-//                    }
-//                }  else {
-//                    $user->$userKey = $userVal;
-//                }
             }
 
             $user->save();
@@ -307,12 +292,12 @@ class OrderController extends Controller
                         break;
                     case 'work_transferred_file':
                         // Transferred file
-                        $user->work_transferred_file = UploadedFile::getInstance($user, 'work_transferred_file');
-                        if ($user->work_transferred_file){
+                        $work_transferred_file = UploadedFile::getInstance($user, 'work_transferred_file');
+                        if ($work_transferred_file){
                             $fileDir = Yii::$app->params['module']['user']['path'].$user->id;
-                            $fileName = $user->id .' | '.$user->fio.' | Заявление о переводе | '.date('d.m.Y H:i:s'). '.' . $user->work_transferred_file->extension;
+                            $fileName = $user->id .' | '.$user->fio.' | Заявление о переводе | '.date('d.m.Y H:i:s'). '.' . $work_transferred_file->extension;
                             FileHelper::createDirectory( $fileDir, $mode = 0777, $recursive = true);
-                            $user->work_transferred_file->saveAs($fileDir. '/'.$fileName);
+                            $work_transferred_file->saveAs($fileDir. '/'.$fileName);
                             $user->work_transferred_file = $fileName;
                         }
                         break;
@@ -320,21 +305,6 @@ class OrderController extends Controller
                         $user->$userKey = $userVal;
                         break;
                 }
-//                if ($userKey == 'passport_date') {
-//                    $user->$userKey = \Yii::$app->formatter->asTimestamp($userVal, 'php:d.m.Y');
-//                } elseif ($userKey == 'passport_file') {
-//                    // Passport
-//                    $passport_file = UploadedFile::getInstance($user, 'passport_file');
-//                    if ($passport_file){
-//                        $passportFileDir = Yii::$app->params['module']['user']['path'].$user->id;
-//                        $passportFileName = $user->id .'_passport_'.date('YmdHis'). '.' . $passport_file->extension;
-//                        FileHelper::createDirectory( $passportFileDir, $mode = 0777, $recursive = true);
-//                        $passport_file->saveAs($passportFileDir. '/'.$passportFileName);
-//                        $user->passport_file = $passportFileName;
-//                    }
-//                } else {
-//                    $user->$userKey = $userVal;
-//                }
             }
 
             $user->save();
