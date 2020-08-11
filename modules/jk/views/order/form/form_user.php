@@ -159,8 +159,8 @@ Pjax::end();
                         <span class="mailbox-attachment-size clearfix mt-1">
                           <span>1,245 KB</span>
                            <?= Html::a(Icon::show('cloud-download-alt'),
-                               Url::to('/user/user/' . Yii::$app->user->identity->id . '/pd', true),
-                               ['class' => 'btn btn-default btn-sm float-right','target'=>'_blank']) ?>
+                            Url::to("pd-agreement"), ['class' => 'btn btn-default btn-sm float-right '.
+                                   ($model->file_agree_personal_data ? "" : " hide") ]) ?>
                         </span>
                     </div>
                 </li>

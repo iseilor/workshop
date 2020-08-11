@@ -503,4 +503,17 @@ class OrderController extends Controller
         return $this->redirect(['/jk/order/view/','id'=>$id]);
 
     }
+
+    public function actionPdAgreement($id) {
+        $order=Order::findOne($id);
+        if (!$order) {
+            return;
+        }
+        $pathDir = Yii::$app->params['module']['jk']['order']['filePath'] . $id;
+        $file = $pathDir.DIRECTORY_SEPARATOR.$order->file_agree_personal_data;
+
+        if (file_exists($file)) {
+            Yii::$app->response->sendFile($file);
+        }
+    }
 }
