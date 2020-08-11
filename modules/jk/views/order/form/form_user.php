@@ -72,25 +72,25 @@ $user = User::findOne(Yii::$app->user->identity->id);
     <div class="card-body">
         <div class="row">
             <div class="col-4">
-                <?= $form->field($usermd, 'passport_series')->widget(MaskedInput::class, [
+                <?= $form->field($passport, 'passport_series')->widget(MaskedInput::class, [
                     'mask' => '9999',
                     'clientOptions' => [
                         'clearIncomplete' => true,
                     ],
                 ]) ?>
 
-                <?= $form->field($usermd, 'passport_number')->widget(MaskedInput::class, [
+                <?= $form->field($passport, 'passport_number')->widget(MaskedInput::class, [
                     'mask' => '999999',
                     'clientOptions' => [
                         'clearIncomplete' => true,
                     ],
                 ]) ?>
 
-                <?= $form->field($usermd, 'passport_registration')->textarea()->hint($usermd->attributeHints()['passport_registration']); ?>
+                <?= $form->field($passport, 'passport_registration')->textarea()->hint($passport->attributeHints()['passport_registration']); ?>
             </div>
 
             <div class="col-4">
-                <?= $form->field($usermd, 'passport_date')->widget(
+                <?= $form->field($passport, 'passport_date')->widget(
                     DatePicker::class,
                     [
                         'language' => 'ru',
@@ -103,18 +103,18 @@ $user = User::findOne(Yii::$app->user->identity->id);
                         ],
                     ]
                 ) ?>
-                <?= $form->field($usermd, 'passport_department')->textarea() ?>
+                <?= $form->field($passport, 'passport_department')->textarea() ?>
             </div>
 
             <div class="col-4">
-                <?= $form->field($usermd, 'passport_code')->widget(MaskedInput::class, [
+                <?= $form->field($passport, 'passport_code')->widget(MaskedInput::class, [
                     'mask' => '999-999',
                     'clientOptions' => [
                         'clearIncomplete' => true,
                     ],
                 ]) ?>
-                <?= $form->field($usermd, 'passport_file', [
-                    'template' => getFileInputTemplate($usermd->passport_file, $usermd->attributeLabels()['passport_file'] . '.pdf'),
+                <?= $form->field($passport, 'passport_file', [
+                    'template' => getFileInputTemplate($passport->passport_file, $passport->attributeLabels()['passport_file'] . '.pdf'),
                 ])->fileInput(['class' => 'custom-file-input']) ?>
             </div>
 

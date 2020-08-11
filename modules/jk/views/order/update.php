@@ -26,6 +26,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
         'model' => $model,
         'usermd' => $usermd,
         'spose' => $spose,
+        'passport' => $passport,
         //'userChildDataProvider' => $userChildDataProvider,
     ]
 ) ?>

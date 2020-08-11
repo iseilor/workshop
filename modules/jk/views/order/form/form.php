@@ -82,6 +82,7 @@ if (isset($model->is_mortgage)) {
                                                     'model' => $model,
                                                     'usermd' => $usermd,
                                                     'spose' => $spose,
+                                                    'passport' => $passport,
                                                     'form' => $form,
                                                     'field_percent' => $field_percent,
                                                     'field_zaim' => $field_zaim,

@@ -10,6 +10,7 @@ use app\modules\jk\models\OrderStageSearch;
 use app\modules\jk\models\OrderStop;
 use app\modules\jk\models\Status;
 use app\modules\jk\Module;
+use app\modules\user\models\Passport;
 use app\modules\user\models\Spouse;
 use app\modules\user\models\User;
 use app\modules\user\models\UserChildSearch;
@@ -134,11 +135,11 @@ class OrderController extends Controller
     {
         // Смотрим, заполнины ли все поля у пользователя в профиле
         $user = User::findOne(Yii::$app->user->identity->getId());
-        if (!$user->isPassport()) {
-            Yii::$app->session->setFlash('warning', "Чтобы приступить к оформлению заявки на участие в Жилищной Кампании, 
-            вам необходимо заполнить все данные по вашему паспорту ");
-            return $this->redirect(['/user/profile/update']);
-        }
+//        if (!$user->isPassport()) {
+//            Yii::$app->session->setFlash('warning', "Чтобы приступить к оформлению заявки на участие в Жилищной Кампании,
+//            вам необходимо заполнить все данные по вашему паспорту ");
+//            return $this->redirect(['/user/profile/update']);
+//        }
 
 
         $model = new Order();
@@ -146,9 +147,14 @@ class OrderController extends Controller
 
         if ($user) {
             $spose = Spouse::findOne(['user_id' => $user->id]);
+            $passport = $user->passport;
         }
         if (!$spose) {
             $spose = new Spouse();
+        }
+
+        if (!$passport) {
+            $passport = new Passport();
         }
 
 
@@ -159,15 +165,15 @@ class OrderController extends Controller
 
         // Обновлаяем паспортные данные
         // TODO Разобраться, почему не рабоате load() и убрать "педальный" метод
-        if ($user && isset(Yii::$app->request->post()['User']) && is_array(Yii::$app->request->post()['User'])) {
-            foreach (Yii::$app->request->post()['User'] as $userKey => $userVal) {
+        if ($user && isset(Yii::$app->request->post()['Passport']) && is_array(Yii::$app->request->post()['Passport'])) {
+            foreach (Yii::$app->request->post()['Passport'] as $userKey => $userVal) {
                 switch ($userKey) {
                     case 'passport_date':
                         $user->$userKey = \Yii::$app->formatter->asTimestamp($userVal, 'php:d.m.Y');
                         break;
                     case 'passport_file':
                         // Passport
-                        $passport_file = UploadedFile::getInstance($user, 'passport_file');
+                        $passport_file = UploadedFile::getInstance($passport, 'passport_file');
                         if ($passport_file){
                             $passportFileDir = Yii::$app->params['module']['user']['path'].$user->id;
                             $passportFileName = $user->id .'_passport_'.date('YmdHis'). '.' . $passport_file->extension;
@@ -176,6 +182,18 @@ class OrderController extends Controller
                             $user->passport_file = $passportFileName;
                         }
                         break;
+                    default:
+                        $user->$userKey = $userVal;
+                        break;
+                }
+            }
+
+            $user->save();
+        }
+
+        if ($user && isset(Yii::$app->request->post()['User']) && is_array(Yii::$app->request->post()['User'])) {
+            foreach (Yii::$app->request->post()['User'] as $userKey => $userVal) {
+                switch ($userKey) {
                     case 'work_transferred_file':
                         // Transferred file
                         $work_transferred_file = UploadedFile::getInstance($user, 'work_transferred_file');
@@ -240,6 +258,7 @@ class OrderController extends Controller
                 'model' => $model,
                 'usermd' => $user,
                 'spose' => $spose,
+                'passport' => $passport,
                 //'spose' => $model,
                 //'model' => $user,
             ]
@@ -262,26 +281,32 @@ class OrderController extends Controller
 
         if ($user) {
             $spose = Spouse::findOne(['user_id' => $user->id]);
+            $passport = $user->passport;
         }
+
         if (!$spose) {
             $spose = new Spouse();
         }
 
-//        var_dump(Yii::$app->request->post());
+        if (!$passport) {
+            $passport = new Passport();
+        }
+
+//       var_dump(Yii::$app->request->post());
 //        var_dump($spose);
 //        die();
 
         // Обновлаяем паспортные данные
         // TODO Разобраться, почему не рабоате load() и убрать "педальный" метод
-        if ($user && isset(Yii::$app->request->post()['User']) && is_array(Yii::$app->request->post()['User'])) {
-            foreach (Yii::$app->request->post()['User'] as $userKey => $userVal) {
+        if ($user && isset(Yii::$app->request->post()['Passport']) && is_array(Yii::$app->request->post()['Passport'])) {
+            foreach (Yii::$app->request->post()['Passport'] as $userKey => $userVal) {
                 switch ($userKey) {
                     case 'passport_date':
                         $user->$userKey = \Yii::$app->formatter->asTimestamp($userVal, 'php:d.m.Y');
                         break;
                     case 'passport_file':
                         // Passport
-                        $passport_file = UploadedFile::getInstance($user, 'passport_file');
+                        $passport_file = UploadedFile::getInstance($passport, 'passport_file');
                         if ($passport_file){
                             $passportFileDir = Yii::$app->params['module']['user']['path'].$user->id;
                             $passportFileName = $user->id .'_passport_'.date('YmdHis'). '.' . $passport_file->extension;
@@ -290,6 +315,18 @@ class OrderController extends Controller
                             $user->passport_file = $passportFileName;
                         }
                         break;
+                    default:
+                        $user->$userKey = $userVal;
+                        break;
+                }
+            }
+
+            $user->save();
+        }
+
+        if ($user && isset(Yii::$app->request->post()['User']) && is_array(Yii::$app->request->post()['User'])) {
+            foreach (Yii::$app->request->post()['User'] as $userKey => $userVal) {
+                switch ($userKey) {
                     case 'work_transferred_file':
                         // Transferred file
                         $work_transferred_file = UploadedFile::getInstance($user, 'work_transferred_file');
@@ -359,6 +396,7 @@ class OrderController extends Controller
                 'model' => $model,
                 'usermd' => $user,
                 'spose' => $spose,
+                'passport' => $passport,
                 //'spose' => $model,
                 //'userChildDataProvider'=>$userChildDataProvider
             ]
