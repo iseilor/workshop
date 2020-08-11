@@ -180,13 +180,13 @@ Pjax::end();
     </div>
 
 
-    <p>
-        <?= Html::a(Icon::show('edit') . 'Редактировать профиль',
-            ['/user/profile/update'],
-            ['class' => 'btn btn-warning', 'target' => '_blank']) ?>
-        <?= Html::button(Icon::show('sync-alt') . 'Обновить информацию',
-            ['class' => 'btn btn-primary', 'id' => 'btn-update']) ?>
-    </p>
+<!--    <p>-->
+<!--        --><?= ""//Html::a(Icon::show('edit') . 'Редактировать профиль',
+//            ['/user/profile/update'],
+//            ['class' => 'btn btn-warning', 'target' => '_blank']) ?>
+<!--        --><?= ""//Html::button(Icon::show('sync-alt') . 'Обновить информацию',
+//            ['class' => 'btn btn-primary', 'id' => 'btn-update']) ?>
+<!--    </p>-->
 
 <?php
 $script = <<< JS
