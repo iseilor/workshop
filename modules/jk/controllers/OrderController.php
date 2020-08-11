@@ -10,15 +10,19 @@ use app\modules\jk\models\OrderStageSearch;
 use app\modules\jk\models\OrderStop;
 use app\modules\jk\models\Status;
 use app\modules\jk\Module;
+use app\modules\user\models\Passport;
+use app\modules\user\models\Spouse;
 use app\modules\user\models\User;
 use app\modules\user\models\UserChildSearch;
 use PhpOffice\PhpWord\TemplateProcessor;
 use Yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
+use yii\helpers\FileHelper;
 use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\UploadedFile;
 
 /**
  * OrderController implements the CRUD actions for Order model.
@@ -131,15 +135,97 @@ class OrderController extends Controller
     {
         // Смотрим, заполнины ли все поля у пользователя в профиле
         $user = User::findOne(Yii::$app->user->identity->getId());
-        if (!$user->isPassport()) {
-            Yii::$app->session->setFlash('warning', "Чтобы приступить к оформлению заявки на участие в Жилищной Кампании, 
-            вам необходимо заполнить все данные по вашему паспорту ");
-            return $this->redirect(['/user/profile/update']);
-        }
+//        if (!$user->isPassport()) {
+//            Yii::$app->session->setFlash('warning', "Чтобы приступить к оформлению заявки на участие в Жилищной Кампании,
+//            вам необходимо заполнить все данные по вашему паспорту ");
+//            return $this->redirect(['/user/profile/update']);
+//        }
 
 
         $model = new Order();
         $model->status_id = 1;
+
+        if ($user) {
+            $spose = Spouse::findOne(['user_id' => $user->id]);
+            $passport = $user->passport;
+        }
+        if (!$spose) {
+            $spose = new Spouse();
+        }
+
+        if (!$passport) {
+            $passport = new Passport();
+        }
+
+
+//        var_dump(Yii::$app->request->post());
+//        var_dump($spose);
+//        die();
+
+
+        // Обновлаяем паспортные данные
+        // TODO Разобраться, почему не рабоате load() и убрать "педальный" метод
+        if ($user && isset(Yii::$app->request->post()['Passport']) && is_array(Yii::$app->request->post()['Passport'])) {
+            foreach (Yii::$app->request->post()['Passport'] as $userKey => $userVal) {
+                switch ($userKey) {
+                    case 'passport_date':
+                        $user->$userKey = \Yii::$app->formatter->asTimestamp($userVal, 'php:d.m.Y');
+                        break;
+                    case 'passport_file':
+                        // Passport
+                        $passport_file = UploadedFile::getInstance($passport, 'passport_file');
+                        if ($passport_file){
+                            $passportFileDir = Yii::$app->params['module']['user']['path'].$user->id;
+                            $passportFileName = $user->id .'_passport_'.date('YmdHis'). '.' . $passport_file->extension;
+                            FileHelper::createDirectory( $passportFileDir, $mode = 0777, $recursive = true);
+                            $passport_file->saveAs($passportFileDir. '/'.$passportFileName);
+                            $user->passport_file = $passportFileName;
+                        }
+                        break;
+                    default:
+                        $user->$userKey = $userVal;
+                        break;
+                }
+            }
+
+            $user->save();
+        }
+
+        if ($user && isset(Yii::$app->request->post()['User']) && is_array(Yii::$app->request->post()['User'])) {
+            foreach (Yii::$app->request->post()['User'] as $userKey => $userVal) {
+                switch ($userKey) {
+                    case 'work_transferred_file':
+                        // Transferred file
+                        $work_transferred_file = UploadedFile::getInstance($user, 'work_transferred_file');
+                        if ($work_transferred_file){
+                            $fileDir = Yii::$app->params['module']['user']['path'].$user->id;
+                            $fileName = $user->id .' | '.$user->fio.' | Заявление о переводе | '.date('d.m.Y H:i:s'). '.' . $work_transferred_file->extension;
+                            FileHelper::createDirectory( $fileDir, $mode = 0777, $recursive = true);
+                            $work_transferred_file->saveAs($fileDir. '/'.$fileName);
+                            $user->work_transferred_file = $fileName;
+                        }
+                        break;
+                    default:
+                        $user->$userKey = $userVal;
+                        break;
+                }
+            }
+
+            $user->save();
+        }
+
+        if (isset(Yii::$app->request->post()['Spouse']) && is_array(Yii::$app->request->post()['Spouse'])) {
+            if ($user) {
+                $spose->user_id = $user->id;
+            }
+
+            foreach (Yii::$app->request->post()['Spouse'] as $sposeKey => $sposeVal) {
+                $spose->$sposeKey = $sposeVal;
+            }
+
+            $spose->save();
+
+        }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
@@ -170,7 +256,11 @@ class OrderController extends Controller
             'create',
             [
                 'model' => $model,
-
+                'usermd' => $user,
+                'spose' => $spose,
+                'passport' => $passport,
+                //'spose' => $model,
+                //'model' => $user,
             ]
         );
     }
@@ -187,8 +277,93 @@ class OrderController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $user = User::findOne(Yii::$app->user->identity->getId());
+
+        if ($user) {
+            $spose = Spouse::findOne(['user_id' => $user->id]);
+            $passport = $user->passport;
+        }
+
+        if (!$spose) {
+            $spose = new Spouse();
+        }
+
+        if (!$passport) {
+            $passport = new Passport();
+        }
+
+//       var_dump(Yii::$app->request->post());
+//        var_dump($spose);
+//        die();
+
+        // Обновлаяем паспортные данные
+        // TODO Разобраться, почему не рабоате load() и убрать "педальный" метод
+        if ($user && isset(Yii::$app->request->post()['Passport']) && is_array(Yii::$app->request->post()['Passport'])) {
+            foreach (Yii::$app->request->post()['Passport'] as $userKey => $userVal) {
+                switch ($userKey) {
+                    case 'passport_date':
+                        $user->$userKey = \Yii::$app->formatter->asTimestamp($userVal, 'php:d.m.Y');
+                        break;
+                    case 'passport_file':
+                        // Passport
+                        $passport_file = UploadedFile::getInstance($passport, 'passport_file');
+                        if ($passport_file){
+                            $passportFileDir = Yii::$app->params['module']['user']['path'].$user->id;
+                            $passportFileName = $user->id .'_passport_'.date('YmdHis'). '.' . $passport_file->extension;
+                            FileHelper::createDirectory( $passportFileDir, $mode = 0777, $recursive = true);
+                            $passport_file->saveAs($passportFileDir. '/'.$passportFileName);
+                            $user->passport_file = $passportFileName;
+                        }
+                        break;
+                    default:
+                        $user->$userKey = $userVal;
+                        break;
+                }
+            }
+
+            $user->save();
+        }
+
+        if ($user && isset(Yii::$app->request->post()['User']) && is_array(Yii::$app->request->post()['User'])) {
+            foreach (Yii::$app->request->post()['User'] as $userKey => $userVal) {
+                switch ($userKey) {
+                    case 'work_transferred_file':
+                        // Transferred file
+                        $work_transferred_file = UploadedFile::getInstance($user, 'work_transferred_file');
+                        if ($work_transferred_file){
+                            $fileDir = Yii::$app->params['module']['user']['path'].$user->id;
+                            $fileName = $user->id .' | '.$user->fio.' | Заявление о переводе | '.date('d.m.Y H:i:s'). '.' . $work_transferred_file->extension;
+                            FileHelper::createDirectory( $fileDir, $mode = 0777, $recursive = true);
+                            $work_transferred_file->saveAs($fileDir. '/'.$fileName);
+                            $user->work_transferred_file = $fileName;
+                        }
+                        break;
+                    default:
+                        $user->$userKey = $userVal;
+                        break;
+                }
+            }
+
+            $user->save();
+        }
+
+        if (isset(Yii::$app->request->post()['Spouse']) && is_array(Yii::$app->request->post()['Spouse'])) {
+            if ($user) {
+                $spose->user_id = $user->id;
+            }
+
+            foreach (Yii::$app->request->post()['Spouse'] as $sposeKey => $sposeVal) {
+                $spose->$sposeKey = $sposeVal;
+            }
+
+            $spose->save();
+
+        }
 
 
+
+
+        // $user->load(Yii::$app->request->post()) && $user->save()
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             $model->upload();
 
@@ -219,6 +394,10 @@ class OrderController extends Controller
             'update',
             [
                 'model' => $model,
+                'usermd' => $user,
+                'spose' => $spose,
+                'passport' => $passport,
+                //'spose' => $model,
                 //'userChildDataProvider'=>$userChildDataProvider
             ]
         );
@@ -391,5 +570,18 @@ class OrderController extends Controller
         Вы будете получать email-уведомления, а также можете смотреть через личный кабинет, у кого из руководителей заявка в данный момент находится на согласовании");
         return $this->redirect(['/jk/order/view/','id'=>$id]);
 
+    }
+
+    public function actionPdAgreement($id) {
+        $order=Order::findOne($id);
+        if (!$order) {
+            return;
+        }
+        $pathDir = Yii::$app->params['module']['jk']['order']['filePath'] . $id;
+        $file = $pathDir.DIRECTORY_SEPARATOR.$order->file_agree_personal_data;
+
+        if (file_exists($file)) {
+            Yii::$app->response->sendFile($file);
+        }
     }
 }

@@ -46,7 +46,7 @@ if (isset($model->is_mortgage)) {
                                 <div class="card-header p-0 border-bottom-0">
                                     <?php
                                     $tabs = [
-                                        ['name' => Icon::show('user') . 'Кандидат', 'id' => 'user', 'tab-class' => 'active', 'selected' => true, 'tabs-class' => 'show active'],
+                                        ['name' => Icon::show('user') . 'Работник', 'id' => 'user', 'tab-class' => 'active', 'selected' => true, 'tabs-class' => 'show active'],
                                         ['name' => Icon::show('female') . 'Супруг(а)', 'id' => 'spouse', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
                                         ['name' => Icon::show('baby') . 'Дети', 'id' => 'child', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
                                         ['name' => Icon::show('users') . 'Семья', 'id' => 'family', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
@@ -80,6 +80,9 @@ if (isset($model->is_mortgage)) {
                                             <div class="tab-pane fade <?= $tab['tabs-class'] ?>" id="tabs-<?= $tab['id'] ?>" role="tabpanel" aria-labelledby="tab-<?= $tab['id'] ?>">
                                                 <?= $this->render('form_' . $tab['id'], [
                                                     'model' => $model,
+                                                    'usermd' => $usermd,
+                                                    'spose' => $spose,
+                                                    'passport' => $passport,
                                                     'form' => $form,
                                                     'field_percent' => $field_percent,
                                                     'field_zaim' => $field_zaim,
@@ -93,21 +96,21 @@ if (isset($model->is_mortgage)) {
                     </div>
                 </div>
                 <div class="card-footer">
-                    <?= Html::button(
-                        Icon::show('info') . 'Запустить помощника',
-                        [
-                            'class' => 'btn btn-primary',
-                            'id' => 'btn-helper',
-                            'onclick' => "startIntro();",
-                        ]
-                    ) ?>
-                    <?= Html::submitButton(
-                        '<i class="fas fa-comments"></i> Написать куратору',
-                        [
-                            'class' => 'btn bg-indigo',
-                            'id' => 'btn-message',
-                        ]
-                    ) ?>
+<!--                    --><?= "" // Html::button(
+//                        Icon::show('info') . 'Запустить помощника',
+//                        [
+//                            'class' => 'btn btn-primary',
+//                            'id' => 'btn-helper',
+//                            'onclick' => "startIntro();",
+//                        ]
+//                    ) ?>
+<!--                    --><?= "" // Html::submitButton(
+//                        '<i class="fas fa-comments"></i> Написать куратору',
+//                        [
+//                            'class' => 'btn bg-indigo',
+//                            'id' => 'btn-message',
+//                        ]
+//                    ) ?>
                     <?= Html::submitButton(
                         Icon::show('save') . 'Сохранить заявку',
                         [
