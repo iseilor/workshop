@@ -37,6 +37,9 @@ $this->registerJs($js,\yii\web\view::POS_READY);
         if ($rf) {
             $curator = User::findOne($rf->user_id);
             $curatorRf = $rf->title;
+        }else{
+            // TODO: Избавиться от жёсткого ID=13
+            $rf=\app\modules\jk\models\Rf::findOne(13);
         }
     }
 
@@ -62,13 +65,13 @@ $this->registerJs($js,\yii\web\view::POS_READY);
                 <p class="text-muted text-center">Ответственный по жилищной программе.<br/> <?= $curatorRf ?></p>
                 <ul class="list-group list-group-unbordered mb-3">
                     <li class="list-group-item">
-                        <b>Телефон</b> <span class="float-right col-md-9"> <?= $curator->work_phone ?></span>
+                        <b>Телефон</b> <span class="float-right col-md-9"> <?= $rf->phone ?></span>
                     </li>
                     <li class="list-group-item">
-                        <b>Email</b> <a  class="float-right col-md-9" href="mailto:<?= $curator->email ?>?subject=Жилищная%20программа"><?= $curator->email ?></a>
+                        <b>Email</b> <a  class="float-right col-md-9" href="mailto:<?= $rf->email ?>?subject=Жилищная%20кампания"><?= $rf->email ?></a>
                     </li>
                     <li class="list-group-item">
-                        <b>Адрес</b> <span class="float-right col-md-9"><?= $curator->work_address ?></span>
+                        <b>Адрес</b> <span class="float-right col-md-9"><?= $rf->address ?></span>
                     </li>
                 </ul>
             </div>
