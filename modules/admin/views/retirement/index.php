@@ -12,10 +12,10 @@ use yii\widgets\Pjax;
 $this->title = \app\modules\admin\Module::t('module', 'Retirement');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="mrf-index">
+<div class="retirement-index">
 
     <p>
-        <?= Html::a(\app\modules\admin\Module::t('module', 'Create Retirement'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(\app\modules\admin\Module::t('module', 'Добавить запись'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php Pjax::begin(); ?>

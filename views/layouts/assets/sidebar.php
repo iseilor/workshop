@@ -14,7 +14,7 @@ use yii\helpers\Url;
         <img src="<?= Yii::$app->homeUrl ?>logo/logo.png" alt='<?= Yii::$app->name; ?>' title='<?= Yii::$app->name; ?>'
              class="brand-image img-circle elevation-3"
              style="opacity: .8">
-        <span class="brand-text font-weight-light">ПАО Ростелеком</span>
+        <span class="brand-text font-weight-light">Ростелеком</span>
     </a>
 
     <div class="sidebar">
@@ -26,12 +26,12 @@ use yii\helpers\Url;
 
                     <?php
                     $userPhoto = Yii::$app->user->identity->photo;
-                    $userPhotoPath = Yii::$app->homeUrl.Yii::$app->params['module']['user']['photo']['path'].$userPhoto;
+                    $userPhotoPath = Yii::$app->homeUrl . Yii::$app->params['module']['user']['photo']['path'] . $userPhoto;
                     ?>
-                    <?= Html::img($userPhotoPath, ['title' => Yii::$app->user->identity->username,'class'=>'img-circle elevation-2']) ?>
+                    <?= Html::img($userPhotoPath, ['title' => Yii::$app->user->identity->username, 'class' => 'img-circle elevation-2']) ?>
                 </div>
                 <div class="info">
-                        <?=Html::a( 'Мой кабинет',Yii::$app->homeUrl.'user/profile',['title'=>Yii::$app->user->identity->username]);?>
+                    <?= Html::a(Yii::$app->user->identity->surname, Yii::$app->homeUrl . 'user/profile', ['title' => Yii::$app->user->identity->username]); ?>
                 </div>
             </div>
         <?php endif ?>
@@ -49,29 +49,38 @@ use yii\helpers\Url;
                     'activeCssClass' => 'active menu-open',
                     'items' => [
                         ['label' => '<i class="nav-icon fas fa-tachometer-alt"></i> <p>Главная</p>', 'url' => ['/main/default/index']],
-                        ['label' => Icon::show(Yii::$app->params['module']['news']['iconClass'],['class'=>'nav-icon']) .' <p>Новости</p>', 'url' => ['/news/default/index']],
+                        ['label' => Icon::show(Yii::$app->params['module']['news']['iconClass'], ['class' => 'nav-icon']) . ' <p>Новости</p>', 'url' => ['/news/default/index']],
                         [
-                            'label' => '<i class="nav-icon fas fa-home"></i> <p>ЖК  <i class="right fas fa-angle-left"></i></p>',
+                            'label' => Icon::show('home', ['class' => 'nav-icon'])
+                                . Html::tag('p', \app\modules\jk\Module::t('module', 'jk')
+                                    . Icon::show('angle-left', ['class' => 'right'])),
                             'url' => ['#'],
+                            'options' => ['class' => 'nav-item has-treeview sidebar-jk'],
                             'items' => [
-                                ['label' => '<i class="fas fa-calculator nav-icon"></i> <p>Проценты</p>', 'url' => ['/jk/percent/create']],
-                                ['label' => '<i class="fas fa-calculator nav-icon"></i> <p>Займ</p>', 'url' => ['/jk/zaim/create']],
-                                ['label' => '<i class="fas fa-ruble-sign nav-icon"></i> <p>Заявка</p>', 'url' => ['/jk/order/create']],
+                                [
+                                    'label' => Icon::show('calculator', ['class' => 'nav-icon'])
+                                        . Html::tag('p', \app\modules\jk\Module::t('calculator', 'Calculator')),
+                                    'url' => ['/jk/default/calc'],
+                                    'options' => ['class' => 'nav-item has-treeview sidebar-jk-calc'],
+
+                                ],
+                                ['label' => '<i class="fas fa-ruble-sign nav-icon"></i> <p>Подать заявку</p>', 'url' => ['/jk/order/create']],
                                 ['label' => '<i class="fas fa-file-word nav-icon"></i> <p>Документы</p>', 'url' => ['/jk/doc/index']],
-                                ['label' => '<i class="fas fa-question nav-icon"></i> <p>Вопросы</p>', 'url' => ['/jk/faq/index']],
-                                ['label' => '<i class="fas fa-user nav-icon"></i> <p>Куратор</p>', 'url' => ['/jk/curator/index']],
-                            ]
+                                ['label' => '<i class="fas fa-question nav-icon"></i> <p>Частые вопросы</p>', 'url' => ['/jk/faq/index']],
+                                ['label' => '<i class="fas fa-question nav-icon"></i> <p>Частые вопросы 2</p>', 'url' => ['/jk/faq2/index']],
+                                ['label' => '<i class="fas fa-user nav-icon"></i> <p>Написать куратору</p>', 'url' => ['/jk/curator/index']],
+                            ],
                         ],
-                        [
-                            'label' => Icon::show('heartbeat',['class'=>'nav-icon']).' <p>Пульсар  <i class="right fas fa-angle-left"></i></p>',
+                        /*[
+                            'label' => Icon::show('heartbeat', ['class' => 'nav-icon']) . ' <p>Пульсар  <i class="right fas fa-angle-left"></i></p>',
                             'url' => ['#'],
                             'items' => [
-                                ['label' => Icon::show('plus',['class'=>'nav-icon']).' <p>Добавить</p>', 'url' => ['/pulsar/pulsar/create']],
-                                ['label' => Icon::show('chart-bar',['class'=>'nav-icon']).' <p>Статистика</p>', 'url' => ['/pulsar/default/index']],
-                                ['label' => Icon::show('table',['class'=>'nav-icon']).' <p>Таблица</p>', 'url' => ['/pulsar/default/table']],
-                            ]
+                                ['label' => Icon::show('plus', ['class' => 'nav-icon']) . ' <p>Добавить</p>', 'url' => ['/pulsar/pulsar/create']],
+                                ['label' => Icon::show('chart-bar', ['class' => 'nav-icon']) . ' <p>Статистика</p>', 'url' => ['/pulsar/default/index']],
+                                ['label' => Icon::show('table', ['class' => 'nav-icon']) . ' <p>Таблица</p>', 'url' => ['/pulsar/default/table']],
+                            ],
                         ],
-                        /*['label' => Icon::show('heartbeat',['class'=>'nav-icon']) .' <p>Страхование</p>', 'url' => ['/404']],
+                        ['label' => Icon::show('heartbeat',['class'=>'nav-icon']) .' <p>Страхование</p>', 'url' => ['/404']],
                         ['label' => Icon::show('plane',['class'=>'nav-icon']) .' <p>Путёвки</p>', 'url' => ['/404']],
                         ['label' => Icon::show('hands-helping',['class'=>'nav-icon']) .' <p>Пенсия</p>', 'url' => ['/404']],
                         ['label' => Icon::show('file-alt',['class'=>'nav-icon']) .' <p>Отчёты</p>', 'url' => ['/404']],

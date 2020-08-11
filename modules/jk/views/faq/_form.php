@@ -1,5 +1,6 @@
 <?php
 
+use vova07\imperavi\Widget;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -24,7 +25,26 @@ use yii\widgets\ActiveForm;
 
                 <?= $form->field($model, 'question')->textInput(['maxlength' => true]) ?>
 
-                <?= $form->field($model, 'answer')->textarea(['rows' => 6]) ?>
+                <?= $form->field($model, 'answer')->widget(
+                    Widget::class,
+                    [
+                        'settings' => [
+                            'lang' => 'ru',
+                            'minHeight' => 200,
+                            'plugins' => [
+                                'clips',
+                                'fullscreen',
+                            ],
+                            'clips' => [
+                                ['Lorem ipsum...', 'Lorem...'],
+                                ['red', '<span class="label-red">red</span>'],
+                                ['green', '<span class="label-green">green</span>'],
+                                ['blue', '<span class="label-blue">blue</span>'],
+                            ],
+                        ],
+                    ]
+                ); ?>
+
 
 
 

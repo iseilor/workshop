@@ -220,8 +220,17 @@ class Zaim extends Model
         // Прожиточный минимум в регионе покупки жилья
         $min = Min::findOne($this->min_id);
 
-        // Максимальный срок займа
+        // Нормативы оказания помощи
+        $standards = AidStandards::find()->all();
         $this->compensation_years = 10;
+
+        foreach ($standards as $standard) {
+            if ($this->family_income >= $standard->income_bottom && $this->family_income <= $standard->income_top) {
+                $this->compensation_years = $standard->compensation_years_zaim;
+            }
+        }
+        // Максимальный срок займа
+        /*$this->compensation_years = 10;
         if ($this->family_income > 35000) {
             $this->compensation_years = 7;
         } else {
@@ -234,7 +243,7 @@ class Zaim extends Model
                     $this->compensation_years = 10;
                 }
             }
-        }
+        }*/
 
         // Если лет до пенсии меньше, чем максимальный срок займа, то срок займа сокращаем до срока пенсии
         $pensionYears = $user->getPensionYears();
@@ -250,15 +259,15 @@ class Zaim extends Model
         }
 
         // Вариант 2 -------------------------------------------------------------------------------------------------
-        // $KNP = Module::getKNP($this->family_count); // Корпоративная норма площади жилья KNP
+        $KNP = Module::getKNP($this->family_count); // Корпоративная норма площади жилья KNP
         // // Коэффициент
-        // // $koef = $KNP / ($this->area_buy - $this->cost_user * $this->area_buy / $this->cost_total);
-        // // $koef = min($koef, 1);
+        $koef = $KNP / ($this->area_buy - ($this->cost_total - 1000000) * $this->area_buy / $this->cost_total);
+        $koef = min($koef, 1);
         // // Максимальный размер займа (Вариант 2)
-        // // $maxMoney2 = $koef * ($this->cost_total - $this->cost_user - $this->bank_credit);
+        $maxMoney2 = $koef * 1000000;  //$koef * ($this->cost_total - $this->cost_user - $this->bank_credit);
         // // C учётом правок, получаем, что необходимость всегда 1 млн руб
         //
-        $maxMoney2 = 1000000;
+        //$maxMoney2 = 1000000;
 
         // Вариант 3 -------------------------------------------------------------------------------------------------
         // // Потребность
@@ -276,10 +285,11 @@ class Zaim extends Model
         // $mrz = $kukn*$this->cost_total;
         // $maxMoney3 = min($mrz, $need, 1000000);
         // $maxMoney3 = round($maxMoney3,-3);
-        $maxMoney3 = 1000000;
+        //$maxMoney3 = 1000000;
 
         // Выбираем минимальное значение или 1 млн рублей
-        $this->compensation_count = min($maxMoney1, $maxMoney2,$maxMoney3);
+        //$this->compensation_count = min($maxMoney1, $maxMoney2,$maxMoney3);
+        $this->compensation_count = min($maxMoney1, $maxMoney2);
     }
 
     public function getOrder()

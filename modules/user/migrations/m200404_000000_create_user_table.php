@@ -7,6 +7,7 @@ use yii\db\Migration;
  */
 class m200404_000000_create_user_table extends Migration
 {
+
     /**
      * {@inheritdoc}
      */
@@ -30,50 +31,53 @@ class m200404_000000_create_user_table extends Migration
             'email' => $this->string()->notNull(),
             'status' => $this->smallInteger()->notNull()->defaultValue(0),
             'birth_date' => $this->integer(),
-            'work_date'=> $this->integer(),
+            'work_date' => $this->integer(),
 
-            'phone_mobile'=>$this->string(20),
-            'phone_work'=>$this->string(20),
-            'work_is_young'=>$this->boolean(),          // Молодой сотрудник
-            'work_is_transferred'=>$this->boolean(),    // Переведённый сотрудник сотрудник
-            'work_transferred_file'=>$this->string(),   // Заявление о переводе
+            'phone_mobile' => $this->string(20),
+            'phone_work' => $this->string(20),
+            'work_is_young' => $this->boolean(),          // Молодой сотрудник
+            'work_is_transferred' => $this->boolean(),    // Переведённый сотрудник сотрудник
+            'work_transferred_file' => $this->string(),   // Заявление о переводе
 
-            'photo'=>$this->string(),
-            'fio'=> $this->string()->notNull(),
-            'gender'=>$this->boolean()->notNull(),
+            'photo' => $this->string(),
+            'gender' => $this->boolean()->notNull(),
 
-            'surname'=>$this->string()->notNull(),
-            'name'=>$this->string()->notNull(),
-            'patronymic'=>$this->string()->notNull(),
-            'auth_at'=>$this->integer(), // Авторизация последний раз
+            // ФИО
+            'fio' => $this->string()->notNull(),        // ФИО: Иванов Иван Иванович
+            'fio_shot' => $this->string()->notNull(),   // Фамилия И.О. Иванов И.И.
+            'initials'=>$this->string()->notNull(),     // Инициалы из AD
+            'surname' => $this->string()->notNull(),    // Фамилия
+            'name' => $this->string()->notNull(),       // Имя
+            'patronymic' => $this->string()->notNull(), // Отчетство
 
             // Работа
-            'position'=> $this->string(),
-            'work_department'=> $this->string(),        // Подразделение
-            'work_department_full'=> $this->string(),   // Полный путь подразделения
-            'work_phone'=> $this->string(),             // Рабочий телефон
-            'department_id'=>$this->integer(),          // ID подразделения
-            'manager_id'=>$this->integer(),             // Руководитель из AD
+            'position' => $this->string(),
+            'work_department' => $this->string(),        // Подразделение
+            'work_department_full' => $this->string(),   // Полный путь подразделения
+            'work_phone' => $this->string(),             // Рабочий телефон
+            'department_id' => $this->integer(),          // ID подразделения
+            'manager_id' => $this->integer(),             // Руководитель из AD
 
-            'tab_number'=> $this->string(),
-            'work_address'=>$this->string(),
+            'tab_number' => $this->string(),
+            'work_address' => $this->string(),
 
             // PASSPORT
-            'passport_series'=> $this->integer(),
-            'passport_number'=> $this->integer(),
-            'passport_date'=> $this->integer(),
-            'passport_code'=> $this->string(),
-            'passport_department'=>$this->string(),
-            'passport_registration'=>$this->string(),
-            'passport_file'=> $this->string(),
-            'address_fact'=> $this->string(),
+            'passport_series' => $this->integer(),
+            'passport_number' => $this->integer(),
+            'passport_date' => $this->integer(),
+            'passport_code' => $this->string(),
+            'passport_department' => $this->string(),
+            'passport_registration' => $this->string(),
+            'passport_file' => $this->string(),
+            'address_fact' => $this->string(),
 
             // SNILS
-            'snils_number'=>$this->string(),
-            'snils_date'=>$this->integer(),
-            'snils_file'=>$this->string(),
+            'snils_number' => $this->string(),
+            'snils_date' => $this->integer(),
+            'snils_file' => $this->string(),
 
-            'role_id'=>$this->integer()->notNull()
+            'role_id' => $this->integer()->notNull(),
+            'auth_at' => $this->integer(),              // Дата последней авторизации
 
         ], $tableOptions);
 

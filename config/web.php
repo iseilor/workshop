@@ -184,12 +184,18 @@ $config = [
                 '<_m:(news)>/<id:\d+>' => 'news/default/view',
                 '<_a:(login|login2|logout|signup|confirm-email|request-password-reset|password-reset|users)>' => 'user/default/<_a>',
 
+
+
                 '<_m:[\w\-]+>/<_c:[\w\-]+>/<id:\d+>' => '<_m>/<_c>/view',
                 '<_m:[\w\-]+>/<_c:[\w\-]+>/<id:\d+>/<_a:[\w\-]+>' => '<_m>/<_c>/<_a>',
                 '<_m:[\w\-]+>' => '<_m>/default/index',
 
+                '<_m:(jk)+>/<_a:(calc)>' => '<_m>/default/<_a>',
+
                 '<_m:[\w\-]+>/<_a:(admin|table)>' => '<_m>/default/<_a>',
                 '<_m:[\w\-]+>/<_c:[\w\-]+>' => '<_m>/<_c>/index',
+
+
 
             ],
 

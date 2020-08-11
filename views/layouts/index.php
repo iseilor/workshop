@@ -72,20 +72,39 @@ AppAssetAdminLTE::register($this);
                     <?= $content ?>
                 </div>
 
-                <a id="chat-bot" href="#" class="btn btn-primary" data-widget="control-sidebar" data-slide="true">
-                    <i class="fas fa-robot"></i>
-                    Чат-бот Ростик
-                </a>
+                <div class="right-bottom-side-bar">
+                    <a id="jk-curator-contacts" href="#" class="btn btn-primary">
+                        <i class="fas fa-id-card"></i>
+                        Связаться с ответственным
+                    </a>
 
-                <a id="back-to-top" href="#" class="btn btn-primary back-to-top" role="button" aria-label="Scroll to top">
-                    <i class="fas fa-chevron-up"></i>
-                </a>
+                    <a id="chat-bot" href="#" class="btn btn-primary" data-widget="control-sidebar" data-slide="true" style="display: none;">
+                        <i class="fas fa-robot"></i>
+                        Чат-бот Ростик
+                    </a>
+
+                   <!--  <a id="back-to-top" href="#" class="btn btn-primary back-to-top" role="button" aria-label="Scroll to top">
+                        <i class="fas fa-chevron-up"></i>
+                    </a> -->
+
+                    <a id="back-to-top" href="#" class="btn btn-primary" role="button" aria-label="Scroll to top">
+                        <i class="fas fa-chevron-up"></i>
+                    </a>
+                </div>
+
+
             </div>
         </div>
         <?= $this->render('assets/footer'); ?>
         <?= $this->render('assets/aside'); ?>
         <?php echo $this->render('@app/modules/bot/views/bot/modal');?>
     </div>
+
+
+    <div id="jk-curator-info" class="col-md-3 jk-curator-info-card" style="display: none;" >
+        <?php echo $this->render('@app/modules/jk/views/curator/info');?>
+    </div>
+
     <?php $this->endBody() ?>
     <script src="<?= Yii::$app->homeUrl ?>js/script.js"></script>
     </body>

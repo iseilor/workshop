@@ -12,6 +12,7 @@ class PercentAsset extends AssetBundle
     public $js
         = [
             'js/jk_percent.js',
+            'js/jk.js'
         ];
     public $css= [
         'css/jk.css',

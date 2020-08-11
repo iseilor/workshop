@@ -59,10 +59,10 @@ class Faq extends Model
 
     /**
      * {@inheritdoc}
-     * @return FaqQuery the active query used by this AR class.
+     * @return Faq2Query the active query used by this AR class.
      */
     public static function find()
     {
-        return new FaqQuery(get_called_class());
+        return new Faq2Query(get_called_class());
     }
 }

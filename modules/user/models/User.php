@@ -2,6 +2,7 @@
 
 namespace app\modules\user\models;
 
+use app\modules\admin\models\Retirement;
 use app\modules\pulsar\models\Pulsar;
 use app\modules\user\Module;
 use Yii;
@@ -36,6 +37,7 @@ use yii\web\IdentityInterface;
  * @property string      $work_transferred_file
  * @property boolean     $work_department
  * @property boolean     $work_department_full
+ * @property string      $rf
  *
  * @property boolean     $work_phone
  * @property string      $work_address
@@ -201,6 +203,15 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     public function getRoleName()
     {
         return ArrayHelper::getValue(self::getRolesArray(), $this->role_id);
+    }
+
+    public function getRf() {
+        $depList = explode('|', $this->work_department_full);
+        if (isset($depList[2])) {
+            return trim($depList[2]);
+        }
+
+        return "";
     }
 
     public static function getStatusesArray()
@@ -412,12 +423,15 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     // Дата выхода на пенсию
     public function getPensionDate()
     {
+        $pensionMale = Retirement::findOne(1);
+        $pensionFemale = Retirement::findOne(2);
+
         $date = '';
         if ($this->gender == 1) {
-            $date = date('d.m.Y', $this->birth_date + 65 * 31556926);
+            $date = date('d.m.Y', $this->birth_date + $pensionMale->age * 31556926);
         }
         if ($this->gender === 0) {
-            $date = date('d.m.Y', $this->birth_date + 60 * 31556926);
+            $date = date('d.m.Y', $this->birth_date + $pensionFemale->age * 31556926);
         }
         return $date;
     }

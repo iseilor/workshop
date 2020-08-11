@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\jui\DatePicker;
+use yii\widgets\MaskedInput;
 
 ?>
 <div class="row">
@@ -35,5 +36,11 @@ use yii\jui\DatePicker;
                 ],
             ]
         ) ?>
+        <?= $form->field($model, 'experience')->widget(MaskedInput::class, [
+            'mask' => '9[9]',
+            'clientOptions' => [
+                'clearIncomplete' => true
+            ]
+        ]) ?>
     </div>
 </div>

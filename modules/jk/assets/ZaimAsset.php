@@ -10,6 +10,7 @@ class ZaimAsset extends AssetBundle
     public $js
         = [
             'js/jk_zaim.js',
+            'js/jk.js'
         ];
     public $depends
         = [
