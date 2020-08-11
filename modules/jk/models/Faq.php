@@ -63,6 +63,6 @@ class Faq extends Model
      */
     public static function find()
     {
-        return new Faq2Query(get_called_class());
+        return new FaqQuery(get_called_class());
     }
 }

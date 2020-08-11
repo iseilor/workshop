@@ -4,7 +4,10 @@ $this->title = "<i class='fas fa-question'></i> Вопросы";
 $this->params['breadcrumbs'][] = ['label' => '<i class="nav-icon fas fa-home"></i> Жилищная компания', 'url' => ['/jk/']];
 $this->params['breadcrumbs'][] = $this->title;
 
-use yii\widgets\ListView; ?>
+use yii\widgets\ListView;
+\app\modules\jk\assets\JkFaqAsset::register($this);
+
+?>
 <div class="row">
     <div class="col-md-12">
         <div class="card card-primary">
