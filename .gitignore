@@ -38,6 +38,7 @@ tests/_support/_generated
 /log/
 /vendor/
 /web/assets/
+/web/files/*
 
 *-local.php
 *-local.sql
