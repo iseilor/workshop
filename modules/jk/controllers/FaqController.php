@@ -47,7 +47,7 @@ class FaqController extends Controller
      */
     public function actionIndex()
     {
-        $faqs = Faq::find()->where('faq_id is null')->all(); // Спиоок корневых вопросов
+        $faqs = Faq::find()->where('faq_id is null')->published()->all(); // Спиоок корневых вопросов
         return $this->render('index/index', [
             'faqs' => $faqs,
         ]);

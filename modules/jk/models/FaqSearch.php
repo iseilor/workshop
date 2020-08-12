@@ -39,7 +39,7 @@ class FaqSearch extends Faq
      */
     public function search($params)
     {
-        $query = Faq::find();
+        $query = Faq::find()->published();
 
         // add conditions that should always apply here
 
