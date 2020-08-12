@@ -44,11 +44,11 @@ class Module extends \yii\base\Module
                 if ($n == $item->number) {
                     return $item->area;
                 }
-                return 0;
             }
         } else {
             return $n*20;
         }
+        return 0;
 
         /*switch ($n) {
             case 1:
