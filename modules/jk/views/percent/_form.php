@@ -60,25 +60,50 @@ $img = $bundle->baseUrl . '/img/percent_form_family_income_black.png';
                         </div>-->
                         <div class="col-md-4">
                             <?= $form->field($model, 'family_count')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['family_count']]) ?>
-                            <?= $form->field($model, 'family_income')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription($img)['family_income']]) ?>
+                            <?= ""// $form->field($model, 'family_income')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription($img)['family_income']]) ?>
+
+                            <?=
+                            $form->field($model, 'family_income')->widget(
+                                \yii\widgets\MaskedInput::class,
+                                [
+                                    'options' => ['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['family_income']],
+                                    'clientOptions' => Yii::$app->params['widget']['MaskedInput']['clientOptionsMoney']
+                                ]
+                            )
+                            ?>
+
+
+
                             <?= $form->field($model, 'area_total')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['area_total']]) ?>
                             <?= $form->field($model, 'area_buy')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['area_buy']]) ?>
                         </div>
                         <div class="col-md-4">
 
-                            <?= $form->field($model, 'cost_total')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['cost_total']]) ?>
+                            <?= $form->field($model, 'cost_total')->textInput(
+                                    [
+                                        'data-toggle' => "tooltip",
+                                        'title' => $model->attributeDescription()['cost_total'],
+                                        'onblur' => "$(this).closest('form').yiiActiveForm('validateAttribute', 'percent-cost_user');
+                                                $(this).closest('form').yiiActiveForm('validateAttribute', 'percent-bank_credit');
+                                                $(this).closest('form').yiiActiveForm('validateAttribute', 'percent-loan');",
+                                    ]
+                            ) ?>
                             <?= $form->field($model, 'cost_user')->textInput(
                                 [
                                     'data-toggle' => "tooltip",
                                     'title' => $model->attributeDescription()['cost_user'],
-                                    'onblur' => "$(this).closest('form').yiiActiveForm('validateAttribute', 'percent-cost_total');",
+                                    'onblur' => "$(this).closest('form').yiiActiveForm('validateAttribute', 'percent-cost_total');
+                                                $(this).closest('form').yiiActiveForm('validateAttribute', 'percent-bank_credit');
+                                                $(this).closest('form').yiiActiveForm('validateAttribute', 'percent-loan');",
                                 ]
                             ) ?>
                             <?= $form->field($model, 'bank_credit')->textInput(
                                 [
                                     'data-toggle' => "tooltip",
                                     'title' => $model->attributeDescription()['bank_credit'],
-                                    'onblur' => "$(this).closest('form').yiiActiveForm('validateAttribute', 'percent-cost_total');",
+                                    'onblur' => "$(this).closest('form').yiiActiveForm('validateAttribute', 'percent-cost_total');
+                                    $(this).closest('form').yiiActiveForm('validateAttribute', 'percent-cost_user');
+                                    $(this).closest('form').yiiActiveForm('validateAttribute', 'percent-loan');",
                                 ]
                             ) ?>
 
@@ -88,7 +113,10 @@ $img = $bundle->baseUrl . '/img/percent_form_family_income_black.png';
                                 [
                                     'data-toggle' => "tooltip",
                                     'title' => $model->attributeDescription()['loan'],
-                                    'onblur' => "$(this).closest('form').yiiActiveForm('validateAttribute', 'percent-cost_total');",
+                                    'onblur' => "$(this).closest('form').yiiActiveForm('validateAttribute', 'percent-cost_total');
+                                    $(this).closest('form').yiiActiveForm('validateAttribute', 'percent-cost_user');
+                                    $(this).closest('form').yiiActiveForm('validateAttribute', 'percent-bank_credit');",
+                                    'placeholder' => 0,
                                 ]
                             ) ?>
                             <?= $form->field($model, 'percent_count')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['percent_count']]) ?>
@@ -103,7 +131,7 @@ $img = $bundle->baseUrl . '/img/percent_form_family_income_black.png';
                                         <li>Максимальный размер компенсации процентов, руб: <strong><?= Yii::$app->formatter->asInteger($model->compensation_count); ?></strong></li>
                                         <li>Максимальный срок компенсации процентов, лет: <strong><?= $model->compensation_years ?></strong></li>
                                     </ul>
-                                    <small>* Полученная сумма и срок возврата материальной помощи являются предварительными, и могут быть скорректированы по решению жилищной комиссии</small>
+                                    <!--<small>* Полученная сумма и срок возврата материальной помощи являются предварительными, и могут быть скорректированы по решению жилищной комиссии</small>-->
                                 </div>
                                 <?= Html::a(
                                     Yii::$app->params['module']['jk']['order']['icon'] . ' Оформить заявку на МП',

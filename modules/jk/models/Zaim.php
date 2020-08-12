@@ -290,6 +290,9 @@ class Zaim extends Model
         // Выбираем минимальное значение или 1 млн рублей
         //$this->compensation_count = min($maxMoney1, $maxMoney2,$maxMoney3);
         $this->compensation_count = min($maxMoney1, $maxMoney2);
+        if ($this->compensation_count == 0) {
+            $this->compensation_years = 0;
+        }
     }
 
     public function getOrder()

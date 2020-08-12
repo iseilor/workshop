@@ -61,7 +61,7 @@ class Percent extends Model
                     'gender',
                     'experience',
                     'family_count',
-                    'family_income',
+                    //'family_income',
                     'compensation_count',
                     'compensation_years',
                 ],
@@ -111,10 +111,16 @@ class Percent extends Model
                             $k = $this->cost_total - $this->cost_user - $this->bank_credit - $this->loan;
                             if (abs($this->cost_total - $this->cost_user - $this->bank_credit - $this->loan) > 0.00001) {
                                 $this->addError('cost_total', 'Полная стоимость жилья = Собственные средства работника + Размер кредита Банка + Размер займа (если предоставлялся)');
+                                $this->addError('cost_user', '');
+                                $this->addError('bank_credit', '');
+                                $this->addError('loan', '');
                             }
                         } else {
                             if (abs($this->cost_total - $this->cost_user - $this->bank_credit) > 0.00001) {
                                 $this->addError('cost_total', 'Полная стоимость жилья = Собственные средства работника + Размер кредита Банка + Размер займа (если предоставлялся)');
+                                $this->addError('cost_user', '');
+                                $this->addError('bank_credit', '');
+                                $this->addError('loan', '');
                             }
                         }
                     }
@@ -153,6 +159,12 @@ class Percent extends Model
             [['percent_rate'], 'match', 'pattern' => '/^\s*[-+]?[0-9]*[.,]?[0-9]+([eE][-+]?[0-9]+)?\s*$/'],
             ['percent_rate', 'compare', 'compareValue' => 0, 'operator' => '>', 'type' => 'number'],
             ['percent_rate', 'compare', 'compareValue' => 1000000, 'operator' => '<', 'type' => 'number'],
+
+            [['family_income'],'filter',
+                'filter' => function ($value) {
+                    return str_replace(" ", "", $value);
+                }
+            ],
         ];
     }
 
