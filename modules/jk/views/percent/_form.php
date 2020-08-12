@@ -79,19 +79,31 @@ $img = $bundle->baseUrl . '/img/percent_form_family_income_black.png';
                         </div>
                         <div class="col-md-4">
 
-                            <?= $form->field($model, 'cost_total')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['cost_total']]) ?>
+                            <?= $form->field($model, 'cost_total')->textInput(
+                                    [
+                                        'data-toggle' => "tooltip",
+                                        'title' => $model->attributeDescription()['cost_total'],
+                                        'onblur' => "$(this).closest('form').yiiActiveForm('validateAttribute', 'percent-cost_user');
+                                                $(this).closest('form').yiiActiveForm('validateAttribute', 'percent-bank_credit');
+                                                $(this).closest('form').yiiActiveForm('validateAttribute', 'percent-loan');",
+                                    ]
+                            ) ?>
                             <?= $form->field($model, 'cost_user')->textInput(
                                 [
                                     'data-toggle' => "tooltip",
                                     'title' => $model->attributeDescription()['cost_user'],
-                                    'onblur' => "$(this).closest('form').yiiActiveForm('validateAttribute', 'percent-cost_total');",
+                                    'onblur' => "$(this).closest('form').yiiActiveForm('validateAttribute', 'percent-cost_total');
+                                                $(this).closest('form').yiiActiveForm('validateAttribute', 'percent-bank_credit');
+                                                $(this).closest('form').yiiActiveForm('validateAttribute', 'percent-loan');",
                                 ]
                             ) ?>
                             <?= $form->field($model, 'bank_credit')->textInput(
                                 [
                                     'data-toggle' => "tooltip",
                                     'title' => $model->attributeDescription()['bank_credit'],
-                                    'onblur' => "$(this).closest('form').yiiActiveForm('validateAttribute', 'percent-cost_total');",
+                                    'onblur' => "$(this).closest('form').yiiActiveForm('validateAttribute', 'percent-cost_total');
+                                    $(this).closest('form').yiiActiveForm('validateAttribute', 'percent-cost_user');
+                                    $(this).closest('form').yiiActiveForm('validateAttribute', 'percent-loan');",
                                 ]
                             ) ?>
 
@@ -101,7 +113,9 @@ $img = $bundle->baseUrl . '/img/percent_form_family_income_black.png';
                                 [
                                     'data-toggle' => "tooltip",
                                     'title' => $model->attributeDescription()['loan'],
-                                    'onblur' => "$(this).closest('form').yiiActiveForm('validateAttribute', 'percent-cost_total');",
+                                    'onblur' => "$(this).closest('form').yiiActiveForm('validateAttribute', 'percent-cost_total');
+                                    $(this).closest('form').yiiActiveForm('validateAttribute', 'percent-cost_user');
+                                    $(this).closest('form').yiiActiveForm('validateAttribute', 'percent-bank_credit');",
                                     'placeholder' => 0,
                                 ]
                             ) ?>

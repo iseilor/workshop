@@ -111,10 +111,16 @@ class Percent extends Model
                             $k = $this->cost_total - $this->cost_user - $this->bank_credit - $this->loan;
                             if (abs($this->cost_total - $this->cost_user - $this->bank_credit - $this->loan) > 0.00001) {
                                 $this->addError('cost_total', 'Полная стоимость жилья = Собственные средства работника + Размер кредита Банка + Размер займа (если предоставлялся)');
+                                $this->addError('cost_user', '');
+                                $this->addError('bank_credit', '');
+                                $this->addError('loan', '');
                             }
                         } else {
                             if (abs($this->cost_total - $this->cost_user - $this->bank_credit) > 0.00001) {
                                 $this->addError('cost_total', 'Полная стоимость жилья = Собственные средства работника + Размер кредита Банка + Размер займа (если предоставлялся)');
+                                $this->addError('cost_user', '');
+                                $this->addError('bank_credit', '');
+                                $this->addError('loan', '');
                             }
                         }
                     }
