@@ -68,7 +68,7 @@ $this->registerJs($js,\yii\web\view::POS_READY);
                         <b>Телефон</b> <span class="float-right col-md-9"> <?= $rf->phone ?></span>
                     </li>
                     <li class="list-group-item">
-                        <b>Email</b> <a  class="float-right col-md-9" href="mailto:<?= $rf->email ?>?subject=Жилищная%20кампания"><?= $rf->email ?></a>
+                        <b>Email</b> <a  class="float-right col-md-9" href="mailto:<?= $rf->email ?>?subject=Жилищная%20программа"><?= $rf->email ?></a>
                     </li>
                     <li class="list-group-item">
                         <b>Адрес</b> <span class="float-right col-md-9"><?= $rf->address ?></span>
