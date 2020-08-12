@@ -44,6 +44,7 @@ use yii\web\IdentityInterface;
  * @property int         $manager_id
  *
  * PASSPORT -------------------------------------------------------
+ * @property Passport    $passport
  * @property int         $passport_series
  * @property int         $passport_number
  * @property int         $passport_date
@@ -542,5 +543,22 @@ retrun Html::img($userPhotoPath, ['title' => Yii::$app->user->identity->username
             $manager_id = $manager->manager_id;
         }
         return $list;
+    }
+
+    public  function getPassport()
+    {
+        $passport = new Passport();
+
+        $passport->passport_series = $this->passport_series;
+        $passport->passport_number = $this->passport_number;
+        $passport->passport_date = $this->passport_date;
+        $passport->passport_code = $this->passport_code;
+        $passport->passport_department = $this->passport_department;
+        $passport->passport_registration = $this->passport_registration;
+        $passport->address_fact = $this->address_fact;
+        $passport->passport_file = $this->passport_file;
+
+        return $passport;
+
     }
 }

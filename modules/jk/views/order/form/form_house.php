@@ -9,10 +9,8 @@ use yii\widgets\MaskedInput;
 
 <div class="row">
     <div class="col-md-4">
-        <?= $form->field($model, 'jp_type')->dropDownList($model->getJPTypeList(), ['prompt' => 'Выберите ...']); ?>
+
         <?= $form->field($model, 'jp_address')->textarea() ?>
-        <?= $form->field($model, 'jp_room_count')->textInput() ?>
-        <?= $form->field($model, 'jp_area')->textInput() ?>
         <?= $form->field($model, 'jp_cost')->widget(MaskedInput::class, ['clientOptions' => Yii::$app->params['widget']['MaskedInput']['clientOptionsMoney']]); ?>
         <?= $form->field($model, 'jp_dogovor_date')->widget(
             DatePicker::class,
@@ -58,7 +56,7 @@ use yii\widgets\MaskedInput;
             ) ?>
             <?= $form->field($model, 'jp_dist')->textInput() ?>
         </div>
-        <?= $form->field($model, 'jp_own')->dropDownList($model->getJPOwnList(), ['prompt' => 'Выберите ...']); ?>
+
         <?= $form->field($model, 'jp_part')->textarea(['rows' => 8]) ?>
     </div>
     <div class="col-md-4">
