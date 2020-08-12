@@ -102,6 +102,7 @@ $img = $bundle->baseUrl . '/img/percent_form_family_income_black.png';
                                     'data-toggle' => "tooltip",
                                     'title' => $model->attributeDescription()['loan'],
                                     'onblur' => "$(this).closest('form').yiiActiveForm('validateAttribute', 'percent-cost_total');",
+                                    'placeholder' => 0,
                                 ]
                             ) ?>
                             <?= $form->field($model, 'percent_count')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['percent_count']]) ?>
