@@ -4,21 +4,26 @@ namespace app\modules\jk\models;
 
 use app\models\Model;
 use app\modules\jk\Module;
+use app\modules\user\models\User;
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "jk_faq".
  *
- * @property int $id
- * @property string $created_at
- * @property int $created_by
+ * @property int         $id
+ * @property string      $created_at
+ * @property int         $created_by
  * @property string|null $updated_at
- * @property int|null $updated_by
- * @property string $question
- * @property string $answer
+ * @property int|null    $updated_by
+ * @property string      $question
+ * @property string      $answer
+ * @property int|null    $weight
+ * @property int|null    $faq_id
  */
 class Faq extends Model
 {
+
     /**
      * {@inheritdoc}
      */
@@ -33,11 +38,9 @@ class Faq extends Model
     public function rules()
     {
         return [
-            [['question', 'answer'], 'required'],
-            [['created_at', 'updated_at'], 'safe'],
-            [['created_by', 'updated_by'], 'integer'],
-            [['answer'], 'string'],
-            [['question'], 'string', 'max' => 255],
+            [['weight'], 'required'],
+            [['weight', 'faq_id'], 'integer'],
+            [['answer', 'question'], 'string'],
         ];
     }
 
@@ -46,15 +49,15 @@ class Faq extends Model
      */
     public function attributeLabels()
     {
-        return [
-            'id' => Yii::t('app', 'ID'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'created_by' => Yii::t('app', 'Created By'),
-            'updated_at' => Yii::t('app', 'Updated At'),
-            'updated_by' => Yii::t('app', 'Updated By'),
-            'question' => Module::t('module', 'Question'),
-            'answer' => Module::t('module', 'Answer'),
-        ];
+        return ArrayHelper::merge(
+            parent::attributeLabels(),
+            [
+                'question' => Module::t('faq', 'Question'),
+                'answer' => Module::t('faq', 'Answer'),
+                'faq_id' => Module::t('faq', 'Faq Id'),
+                'weight' => Module::t('faq', 'Weight'),
+            ]
+        );
     }
 
     /**
@@ -64,5 +67,11 @@ class Faq extends Model
     public static function find()
     {
         return new FaqQuery(get_called_class());
+    }
+
+    // Родительский вопрос
+    public function getParent()
+    {
+        return $this->hasOne(Faq::class, ['id' => 'faq_id']);
     }
 }

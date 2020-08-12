@@ -1,6 +1,8 @@
 <?php
 
+use app\modules\jk\models\Faq;
 use vova07\imperavi\Widget;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -10,13 +12,13 @@ use yii\widgets\ActiveForm;
 ?>
 
 
-
 <div class="row">
     <div class="col-md-12">
 
         <div class="card card-primary">
             <div class="card-header">
                 <h3 class="card-title"><i class="fas fa-question"></i> Вопрос</h3>
+                <?= Yii::$app->params['card']['header']['tools'] ?>
             </div>
 
             <?php $form = ActiveForm::begin(); ?>
@@ -25,12 +27,23 @@ use yii\widgets\ActiveForm;
 
                 <?= $form->field($model, 'question')->textInput(['maxlength' => true]) ?>
 
+                <?php
+                $faqs = ArrayHelper::map(Faq::find()->where('faq_id is null')->all(), 'id', 'question');
+                $params = [
+                    'prompt' => 'Укажите родительский вопрос',
+                    'class' => 'form-control select2',
+                ];
+                echo $form->field($model, 'faq_id')->dropDownList($faqs, $params);
+                ?>
+
+                <?= $form->field($model, 'weight')->textInput(['maxlength' => true]) ?>
+
                 <?= $form->field($model, 'answer')->widget(
                     Widget::class,
                     [
                         'settings' => [
                             'lang' => 'ru',
-                            'minHeight' => 200,
+                            'minHeight' => 100,
                             'plugins' => [
                                 'clips',
                                 'fullscreen',
@@ -44,9 +57,6 @@ use yii\widgets\ActiveForm;
                         ],
                     ]
                 ); ?>
-
-
-
 
 
             </div>
