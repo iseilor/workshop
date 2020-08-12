@@ -377,6 +377,9 @@ class Percent extends Model
 
         // Не больше 1 млн.руб
         $this->compensation_count = min($maxMoney, $this->percent_count, 1000000);
+        if ($this->compensation_count == 0) {
+            $this->compensation_years = 0;
+        }
     }
 
     public function getOrder()
