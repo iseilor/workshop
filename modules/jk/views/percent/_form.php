@@ -103,7 +103,7 @@ $img = $bundle->baseUrl . '/img/percent_form_family_income_black.png';
                                         <li>Максимальный размер компенсации процентов, руб: <strong><?= Yii::$app->formatter->asInteger($model->compensation_count); ?></strong></li>
                                         <li>Максимальный срок компенсации процентов, лет: <strong><?= $model->compensation_years ?></strong></li>
                                     </ul>
-                                    <small>* Полученная сумма и срок возврата материальной помощи являются предварительными, и могут быть скорректированы по решению жилищной комиссии</small>
+                                    <!--<small>* Полученная сумма и срок возврата материальной помощи являются предварительными, и могут быть скорректированы по решению жилищной комиссии</small>-->
                                 </div>
                                 <?= Html::a(
                                     Yii::$app->params['module']['jk']['order']['icon'] . ' Оформить заявку на МП',
