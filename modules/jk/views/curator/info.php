@@ -22,7 +22,7 @@ $this->registerJs($js,\yii\web\view::POS_READY);
         <div class="col-md-12">
             <div class="card card-primary card-outline">
                 <div class="card-body box-profile">
-                    <h3 class="profile-username text-center"> Для полчения информации по куратору жилишьной компании необходимо <a href="login">авторизоваться</a></h3>
+                    <h3 class="profile-username text-center"> Для получения информации по куратору "Жилищной Кампании" необходимо <a href="login">авторизоваться</a></h3>
                 </div>
             </div>
         </div>
