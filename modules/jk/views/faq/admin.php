@@ -11,8 +11,8 @@ use yii\widgets\Pjax;
 /* @var $searchModel app\modules\jk\models\FaqSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Icon::show('question').Module::t('faq', 'FAQ');
-$this->params['breadcrumbs'][] = ['label' => Icon::show('home').Module::t('module','JK'), 'url' => ['/jk/']];
+$this->title = Icon::show('question') . Module::t('faq', 'FAQ');
+$this->params['breadcrumbs'][] = ['label' => Icon::show('home') . Module::t('module', 'JK'), 'url' => ['/jk/']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="row">
@@ -26,25 +26,25 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="card-body">
 
                 <p>
-                    <?= Html::a(Icon::show('plus').Module::t('faq', 'Create Faq'), ['create'], ['class' => 'btn btn-success']) ?>
+                    <?= Html::a(Icon::show('plus') . Module::t('faq', 'Create Faq'), ['create'], ['class' => 'btn btn-success']) ?>
                 </p>
 
                 <?php Pjax::begin(); ?>
-                <?php //echo $this->render('_search', ['model' => $searchModel]); ?>
+
 
                 <?= GridView::widget([
-                                         'dataProvider' => $dataProvider,
-                                         'filterModel' => $searchModel,
-                                         'columns' => [
-                                             ['class' => 'yii\grid\SerialColumn'],
-                                             'id',
-                                             'parent.question',
-                                             'weight',
-                                             'question',
-                                             'answer:html',
-                                             ['class' => ActionColumn::class],
-                                         ],
-                                     ]); ?>
+                    'dataProvider' => $dataProvider,
+                    'filterModel' => $searchModel,
+                    'columns' => [
+                        ['class' => 'yii\grid\SerialColumn'],
+                        'id',
+                        'parent.question',
+                        'weight',
+                        'question',
+                        'answer:html',
+                        ['class' => ActionColumn::class],
+                    ],
+                ]); ?>
 
                 <?php Pjax::end(); ?>
 

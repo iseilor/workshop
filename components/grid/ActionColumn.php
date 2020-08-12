@@ -26,9 +26,9 @@ class ActionColumn extends \yii\grid\ActionColumn
             'delete',
             'trash',
             [
-                //'data-confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
-                //'data-method' => 'post',
-                //'data-pjax' => 0,
+                'data-confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
+                'data-method' => 'post',
+                'data-pjax' => 0,
             ]
         );
     }
@@ -48,7 +48,7 @@ class ActionColumn extends \yii\grid\ActionColumn
                         break;
                     case 'delete':
                         $title = Yii::t('yii', 'Delete');
-                        $class="btn-danger btn-delete";
+                        $class="btn-danger";
                         break;
                     default:
                         $title = ucfirst($name);
