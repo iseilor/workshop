@@ -14,6 +14,11 @@ class FaqQuery extends \yii\db\ActiveQuery
         return $this->andWhere('[[status]]=1');
     }*/
 
+    // Только опубликованные элементы
+    public function published(){
+        return $this->andWhere('deleted_at is null');
+    }
+
     /**
      * {@inheritdoc}
      * @return Faq[]|array
