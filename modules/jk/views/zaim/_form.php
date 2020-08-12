@@ -90,6 +90,7 @@ $img = $bundle->baseUrl . '/img/percent_form_family_income_black.png';
                                         'class' => 'btn btn-success',
                                         'id' => 'btn-save',
                                         'title' => 'Приступить к оформлению материальной помощи по жилищной программе',
+                                        'hidden' => 'true',
                                     ]
                                 ) ?>
                                 <?= Html::submitButton(
@@ -98,6 +99,7 @@ $img = $bundle->baseUrl . '/img/percent_form_family_income_black.png';
                                         'class' => 'btn btn-warning',
                                         'id' => 'btn-save',
                                         'title' => 'Отправить предварительные рассчёты вам на email',
+                                        'hidden' => 'true',
                                     ]
                                 ) ?>
                             </div>
