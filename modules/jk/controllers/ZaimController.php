@@ -106,10 +106,12 @@ class ZaimController extends Controller
 
         if ($user->getIsJKAccess()) {
             if ($model->experience < 1) {
-                Yii::$app->session->setFlash('warning', "К сожалению, вы не можете воспользоваться Жилищной Программой, т.к. ваш общий стаж работы в компании менее 1 года");
+                Yii::$app->session->setFlash('warning', "Для участия в Жилищной программе необходим стаж работы в Компании не менее 1-го года. 
+                                            К сожалению, Вы не можете воспользоваться Программой в связи с ограничением по стажу.");
                 return $this->redirect(['/main/default/index']);
             } elseif ($user->getYears() < 21 || $user->getPensionYears() < 0 ) {
-                Yii::$app->session->setFlash('warning', "К сожалению, вы не можете воспользоваться Жилищной Программой из-за ограничений по возрасту");
+                Yii::$app->session->setFlash('warning', "Принять участие в Жилищной программе могут работники, возраст которых составляет не менее 21 года и не более пенсионного возраста.
+                                            К сожалению, Вы не можете воспользоваться Жилищной программой в связи с ограничениями по возрасту.");
                 return $this->redirect(['/main/default/index']);
             } else {
 
