@@ -221,7 +221,7 @@ class Agreement extends Model
                 ]
             )
                 ->setTo($user->email) // TODO: Пока отправляем самому же сотруднику, просто в письме обращение к руководителю
-                ->setSubject('Workshop / Жилищная кампания / Заявка №'.$order_id.' / Согласование руководителем')
+                ->setSubject('Workshop / Жилищная программа / Заявка №'.$order_id.' / Согласование руководителем')
                 ->send();
 
         } else {
