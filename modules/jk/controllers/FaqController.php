@@ -42,20 +42,22 @@ class FaqController extends Controller
     }
 
     /**
-     * Lists all Faq models.
+     * Список вопросов для пользователя
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new FaqSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+        $faqs = Faq::find()->where('faq_id is null')->all(); // Спиоок корневых вопросов
+        return $this->render('index/index', [
+            'faqs' => $faqs,
         ]);
     }
 
+
+    /**
+     * Список вопросов для администратора
+     * @return mixed
+     */
     public function actionAdmin()
     {
         $searchModel = new FaqSearch();
@@ -90,7 +92,7 @@ class FaqController extends Controller
         $model = new Faq();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['admin']);
         }
 
         return $this->render('create', [
@@ -110,7 +112,7 @@ class FaqController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['admin']);
         }
 
         return $this->render('update', [
@@ -129,7 +131,7 @@ class FaqController extends Controller
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['admin']);
     }
 
     /**

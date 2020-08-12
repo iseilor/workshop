@@ -1,6 +1,7 @@
 <?php
 
 use app\modules\admin\Module;
+use kartik\icons\Icon;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
@@ -74,13 +75,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     </div>
                     <div class="col-md-4">
-                        <h1><i class="fas fa-home"></i> Жилищная кампания</h1>
+                        <h3><?=Icon::show('home').\app\modules\jk\Module::t('module','jk')?></h3>
                         <?= Html::ul(
                             [
                                 Html::a('Калькуляторы процентов', Url::to('jk/percent')),
                                 Html::a('Калькуляторы займов', Url::to('jk/zaim')),
                                 Html::a('Заявки', Url::to('jk/order/admin')),
-                                Html::a('Вопросы', Url::to('jk/faq/admin')),
+                                Html::a(Icon::show('question').\app\modules\jk\Module::t('faq','FAQ'), Url::to('jk/faq/admin')),
+
                                 Html::a('Документы', Url::to('jk/doc/admin')),
                                 Html::a('Типы займов', Url::to('jk/zaim-type/index')),
                                 Html::a('Корпоративная норма', Url::to('jk/corp-norm')),

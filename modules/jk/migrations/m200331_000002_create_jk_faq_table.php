@@ -27,8 +27,8 @@ class m200331_000002_create_jk_faq_table extends Migration
                 'deleted_at' => $this->integer(),
                 'deleted_by' => $this->integer(),
 
-                'question' => $this->string()->notNull(),
-                'answer' => $this->text()->notNull(),
+                'question' => $this->string(),
+                'answer' => $this->text(),
                 'faq_id' => $this->integer(),
                 'weight' => $this->integer()->notNull(),
             ]

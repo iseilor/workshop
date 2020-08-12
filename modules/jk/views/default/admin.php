@@ -7,6 +7,7 @@ use app\modules\jk\models\OrderStop;
 use app\modules\jk\models\Percent;
 use app\modules\jk\models\Status;
 use app\modules\jk\models\Zaim;
+use app\modules\jk\Module;
 use app\modules\nsi\models\Color;
 use kartik\icons\Icon;
 use yii\helpers\Html;
@@ -163,7 +164,7 @@ if ($messagesUser>0){
                                 Url::to(['/jk/message'])) ?>
                         </li>
                         <li><?= Html::a(Icon::show('file-word') . 'Документы', Url::to(['/jk/doc/admin'])) ?></li>
-                        <li><?= Html::a(Icon::show('question') . 'Вопросы', Url::to(['/jk/faq/admin'])) ?></li>
+
                     </ul>
                 </div>
                 <div class="col-md-6">
@@ -174,6 +175,7 @@ if ($messagesUser>0){
                         <li><?= Html::a(Icon::show('list') . 'Статусы заявок', Url::to(['/jk/status'])) ?></li>
                         <li><?= Html::a(Icon::show('users') . 'Социальные группы', Url::to(['/jk/social'])) ?></li>
                         <li><?= Html::a(Icon::show('undo') . 'Причины возвратов', Url::to(['/jk/stop'])) ?></li>
+                        <li><?= Html::a(Icon::show('question') . Module::t('faq','FAQ'), Url::to(['/jk/faq/admin'])) ?></li>
                     </ul>
                 </div>
             </div>

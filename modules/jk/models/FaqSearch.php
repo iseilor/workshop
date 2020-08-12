@@ -16,8 +16,8 @@ class FaqSearch extends Faq
     public function rules()
     {
         return [
-            [['id', 'created_by', 'updated_by'], 'integer'],
-            [['created_at', 'updated_at', 'question', 'answer'], 'safe'],
+            [['id', 'created_by', 'updated_by','faq_id'], 'integer'],
+            [['created_at', 'updated_at', 'question', 'answer','weight','faq_id'], 'safe'],
         ];
     }
 
@@ -62,6 +62,8 @@ class FaqSearch extends Faq
             'created_by' => $this->created_by,
             'updated_at' => $this->updated_at,
             'updated_by' => $this->updated_by,
+            'weight' => $this->weight,
+            'faq_id' => $this->faq_id,
         ]);
 
         $query->andFilterWhere(['like', 'question', $this->question])
