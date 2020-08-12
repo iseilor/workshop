@@ -61,7 +61,7 @@ class Percent extends Model
                     'gender',
                     'experience',
                     'family_count',
-                    'family_income',
+                    //'family_income',
                     'compensation_count',
                     'compensation_years',
                 ],
@@ -153,6 +153,12 @@ class Percent extends Model
             [['percent_rate'], 'match', 'pattern' => '/^\s*[-+]?[0-9]*[.,]?[0-9]+([eE][-+]?[0-9]+)?\s*$/'],
             ['percent_rate', 'compare', 'compareValue' => 0, 'operator' => '>', 'type' => 'number'],
             ['percent_rate', 'compare', 'compareValue' => 1000000, 'operator' => '<', 'type' => 'number'],
+
+            [['family_income'],'filter',
+                'filter' => function ($value) {
+                    return str_replace(" ", "", $value);
+                }
+            ],
         ];
     }
 

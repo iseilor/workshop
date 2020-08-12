@@ -60,7 +60,20 @@ $img = $bundle->baseUrl . '/img/percent_form_family_income_black.png';
                         </div>-->
                         <div class="col-md-4">
                             <?= $form->field($model, 'family_count')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['family_count']]) ?>
-                            <?= $form->field($model, 'family_income')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription($img)['family_income']]) ?>
+                            <?= ""// $form->field($model, 'family_income')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription($img)['family_income']]) ?>
+
+                            <?=
+                            $form->field($model, 'family_income')->widget(
+                                \yii\widgets\MaskedInput::class,
+                                [
+                                    'options' => ['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['family_income']],
+                                    'clientOptions' => Yii::$app->params['widget']['MaskedInput']['clientOptionsMoney']
+                                ]
+                            )
+                            ?>
+
+
+
                             <?= $form->field($model, 'area_total')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['area_total']]) ?>
                             <?= $form->field($model, 'area_buy')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['area_buy']]) ?>
                         </div>
