@@ -181,47 +181,38 @@ $user = User::findOne(Yii::$app->user->identity->id);
     <div class="card-body">
         <div class="row">
             <div class="col-4">
-                <?= $form->field($passport, 'address_fact')
-                    ->textarea([
-                        'readonly' => $passport->address_fact == $passport->passport_registration,
-                        'data-passport-address-fact' => $passport->passport_registration,
-                    ])
+                <?= $form->field($model, 'family_address')->textarea([
+                    'readonly' => $model->family_address == $passport->passport_registration,
+                    'data-passport-address-fact' => $passport->passport_registration,
+                ])
                     ->hint($user->attributeHints()['address_fact'] . '<br/>' .
                         Html::checkbox('passport_address_registration',
-                            $passport->address_fact == $passport->passport_registration,
-                            ['label' => 'Совпадает с адресом регистрации сотрудника', 'id' => 'passport_address_fact'])
-                    ) ?>
-
-            </div>
-            <div class="col-4">
-                <?= $form->field($model, 'family_address')->textarea(); ?>
-
+                            $model->family_address == $passport->passport_registration,
+                            ['label' => 'Совпадает с адресом регистрации сотрудника', 'id' => 'order_family_address'])
+                    ); ?>
             </div>
             <div class="col-4">
                 <?= $form->field($model, 'jp_type')->dropDownList($model->getJPTypeList(), ['prompt' => 'Выберите ...']); ?>
             </div>
-
+            <div class="col-4">
+                <?= $form->field($model, 'resident_own_type')->dropDownList($model->getResidentOwnTypeList(), ['prompt' => 'Выберите ...']); ?>
+            </div>
         </div>
         <div class="row">
             <div class="col-4">
-                <?= $form->field($model, 'resident_own_type')->dropDownList($model->getResidentOwnTypeList(), ['prompt' => 'Выберите ...']); ?>
-                <?= $form->field($model, 'resident_count')->textInput(); ?>
-                <?= $form->field($model, 'file_social_contract_form', [
-                    'template' => getFileInputTemplate($model->file_social_contract, $model->attributeLabels()['file_social_contract'] . '.pdf'),
-                ])->fileInput(['class' => 'custom-file-input']) ?>
-            </div>
-            <div class="col-4">
                 <?= $form->field($model, 'jp_room_count')->textInput() ?>
-                <?=$form->field($model, 'resident_type')->dropDownList(Order::getResidentTypeList(),  ['prompt' => 'Выберите']); ?>
-
-
-
-                <?= $form->field($model, 'jp_own')->dropDownList($model->getJPOwnList(), ['prompt' => 'Выберите ...']); ?>
+                <?= $form->field($model, 'resident_type')->dropDownList(Order::getResidentTypeList(),  ['prompt' => 'Выберите']); ?>
             </div>
             <div class="col-4">
                 <?= $form->field($model, 'jp_area')->textInput() ?>
                 <?= $form->field($model, 'file_rent_form', [
                     'template' => getFileInputTemplate($model->file_rent, $model->attributeLabels()['file_rent'] . '.pdf'),
+                ])->fileInput(['class' => 'custom-file-input']) ?>
+            </div>
+            <div class="col-4">
+                <?= $form->field($model, 'resident_count')->textInput(); ?>
+                <?= $form->field($model, 'file_social_contract_form', [
+                    'template' => getFileInputTemplate($model->file_social_contract, $model->attributeLabels()['file_social_contract'] . '.pdf'),
                 ])->fileInput(['class' => 'custom-file-input']) ?>
             </div>
         </div>
@@ -307,12 +298,12 @@ $(document).ready(function() {
     });
     
     // Адрес фактического проживание супруги совпадает с адресом фактичекого проживания сотрудника
-    $('#passport_address_fact').on('click', function() {
+    $('#order_family_address').on('click', function() {
         if($(this).prop("checked")) {
-            $('#passport-address_fact').prop( "readonly", true );
-            $('#passport-address_fact').val($('#passport-passport_registration').val());
+            $('#order-family_address').prop( "readonly", true );
+            $('#order-family_address').val($('#passport-passport_registration').val());
         }else{
-            $('#passport-address_fact').prop( "readonly", false );
+            $('#order-family_address').prop( "readonly", false );
        }
     });
     
