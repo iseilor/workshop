@@ -139,7 +139,7 @@ $user = User::findOne(Yii::$app->user->identity->id);
 
 <div class="card card-solid card-secondary">
     <div class="card-header with-border">
-        <h3 class="card-title">Жилое помещение</h3>
+        <h3 class="card-title"><?=  \app\modules\jk\Module::t('order', 'Accommodations') ?></h3>
     </div><!-- /.box-header -->
     <div class="card-body">
         <div class="row">
