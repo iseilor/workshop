@@ -583,7 +583,7 @@ class OrderController extends Controller
             )
                 ->setFrom('workshop@tr.ru')
                 ->setTo($curator->email)
-                ->setSubject('WORKSHOP / ЖК / Куратору')
+                ->setSubject('WORKSHOP / Жилищная Программа / Куратору')
                 ->send();
         }
         return true;

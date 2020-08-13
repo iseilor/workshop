@@ -96,7 +96,7 @@ class Message extends Model
             )
                 ->setFrom('workshop@tr.ru')
                 ->setTo($curator->email)
-                ->setSubject('WORKSHOP / ЖК / Сообщение куратору')
+                ->setSubject('WORKSHOP / Жилищная Программа / Сообщение куратору')
                 ->send();
         }
         return true;
@@ -117,7 +117,7 @@ class Message extends Model
         )
             ->setFrom('workshop@tr.ru')
             ->setTo($curator->email)
-            ->setSubject('WORKSHOP / ЖК / Ответ от куратора')
+            ->setSubject('WORKSHOP / Жилищная Программа / Ответ от куратора')
             ->send();
         return true;
     }
