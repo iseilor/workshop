@@ -136,7 +136,7 @@ class OrderController extends Controller
         // Смотрим, заполнины ли все поля у пользователя в профиле
         $user = User::findOne(Yii::$app->user->identity->getId());
 //        if (!$user->isPassport()) {
-//            Yii::$app->session->setFlash('warning', "Чтобы приступить к оформлению заявки на участие в Жилищной Кампании,
+//            Yii::$app->session->setFlash('warning', "Чтобы приступить к оформлению заявки на участие в Жилищной Программе,
 //            вам необходимо заполнить все данные по вашему паспорту ");
 //            return $this->redirect(['/user/profile/update']);
 //        }

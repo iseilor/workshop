@@ -12,8 +12,8 @@ use yii\widgets\Pjax;
 /* @var $model app\modules\jk\models\Percent */
 /* @var $mins app\modules\jk\models\Min */
 
-$this->title = "<i class='fas fa-user'></i> Куратор Жилищной Кампании";
-$this->params['breadcrumbs'][] = ['label' => '<i class="nav-icon fas fa-home"></i> Жилищная компания', 'url' => ['/jk']];
+$this->title = "<i class='fas fa-user'></i> Куратор Жилищной Программы";
+$this->params['breadcrumbs'][] = ['label' => '<i class="nav-icon fas fa-home"></i> Жилищная программа', 'url' => ['/jk']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     <h3 class="profile-username text-center">Горшкова Лада Александрова</h3>
 
-                    <p class="text-muted text-center">Куратор по жилищной кампании МРФ "Центр"</p>
+                    <p class="text-muted text-center">Куратор по жилищной программе МРФ "Центр"</p>
 
                     <ul class="list-group list-group-unbordered mb-3">
                         <li class="list-group-item">

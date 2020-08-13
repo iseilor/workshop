@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
     <div class="col-md-12">
         <div class="card card-primary">
             <div class="card-header">
-                <h3 class="card-title">Согласование заявки сотрудника на участие в жилищной кампании</h3>
+                <h3 class="card-title">Согласование заявки сотрудника на участие в жилищной программе</h3>
                 <?= Yii::$app->params['card']['header']['tools'] ?>
             </div>
             <?php $form = ActiveForm::begin(); ?>

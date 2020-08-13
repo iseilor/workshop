@@ -10,7 +10,7 @@ use yii\helpers\Url;
 <p>
     <strong>Уважаемый, <?= $curator->fio ?>!</strong><br>
     На портале <?=Html::a(Yii::$app->name,Url::home(true));?>
-    сотрудник <strong><?= $user->fio ?></strong> написал сообщение куратору жилищной кампании.
+    сотрудник <strong><?= $user->fio ?></strong> написал сообщение куратору жилищной программы.
     Вам необходимо ответь на вопрос сотрудника.
 </p>
 <ul>
