@@ -40,18 +40,18 @@ class DefaultController extends Controller
             [
                 'col' => 3,
                 'color' => 'bg-primary',
-                'title' => 'Вопросы',
-                'description' => 'Ответы на вопросы',
-                'icon' => Icon::show('question'),
-                'url' => Url::to(['/jk/faq/index']),
-            ],
-            [
-                'col' => 3,
-                'color' => 'bg-primary',
                 'title' => 'Документы',
                 'description' => 'Нормативная документация',
                 'icon' => Icon::show('file'),
                 'url' => Url::to(['/jk/doc/index']),
+            ],
+            [
+                'col' => 3,
+                'color' => 'bg-primary',
+                'title' => 'Вопросы',
+                'description' => 'Ответы на вопросы',
+                'icon' => Icon::show('question'),
+                'url' => Url::to(['/jk/faq/index']),
             ],
         ];
         return $this->render('index', ['items' => $items]);
