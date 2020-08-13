@@ -30,7 +30,7 @@ use yii\widgets\MaskedInput;
 
     </div>
     <div class="col-md-4">
-        <?= $form->field($model, 'resident_own')->textInput(); ?>
+        <?= "" //$form->field($model, 'resident_own')->textInput(); ?>
         <?= $form->field($model, 'family_rent')->textarea(['rows'=>5]); ?>
 
     </div>
