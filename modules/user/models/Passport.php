@@ -36,12 +36,12 @@ class Passport extends Model
     public function rules()
     {
         return [
-            [['passport_series', 'passport_number', 'passport_registration', 'passport_department', 'passport_code'],
+            [['passport_series', 'passport_number', 'passport_registration', 'passport_department', 'passport_code', 'address_fact'],
                 'string', 'max' => 255,],
 
             [['passport_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'passport_date'],
 
-            [['passport_series', 'passport_number', 'passport_registration', 'passport_department', 'passport_code', 'passport_date'], 'required'],
+            [['passport_series', 'passport_number', 'passport_registration', 'passport_department', 'passport_code', 'passport_date', 'address_fact'], 'required'],
 
             // Файлы
             [['passport_file',], 'file', 'skipOnEmpty' => true, 'extensions' => 'pdf', 'maxSize' => '5000000',],
@@ -63,6 +63,7 @@ class Passport extends Model
             'passport_registration' => Module::t('module', 'Passport Registration'),
             'address_fact' => Module::t('module', 'Address Fact'),
             'passport_file' => Module::t('module', 'Passport File'),
+            'address_fact' => Module::t('module', 'Address Fact'),
         ];
     }
 
@@ -71,6 +72,7 @@ class Passport extends Model
         return [
             'passport_department' => '<strong>Пример</strong>: МВД Тверского района, г.Москва',
             'passport_registration' => 'Адрес регистрации из паспорта, вида: 123456, г.Москва, ул.Ленина, д.1, кв.1',
+            'address_fact' => 'Пример заполнения: 123456, г.Москва, ул.Ленина, д.1, кв.1',
         ];
     }
 
