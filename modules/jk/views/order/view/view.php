@@ -9,7 +9,7 @@ use yii\helpers\Html;
 /* @var $model app\modules\jk\models\Order */
 
 $this->title = Icon::show('file', ['framework' => Icon::FAR]) . 'Заявка №' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => Icon::show('home') . 'ЖК', 'url' => ['/module/jk']];
+$this->params['breadcrumbs'][] = ['label' => Icon::show('home') . 'Жилищная Программа', 'url' => ['/module/jk']];
 $this->params['breadcrumbs'][] = ['label' => Icon::show('copy', ['framework' => Icon::FAR]) . Module::t('order', 'Orders'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 

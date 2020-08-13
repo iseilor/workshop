@@ -14,7 +14,7 @@ use yii\widgets\Pjax;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Icon::show('sitemap').Module::t('rf', 'RFs');
-$this->params['breadcrumbs'][] = ['label' => Icon::show('home').'ЖК', 'url' => ['/jk/']];
+$this->params['breadcrumbs'][] = ['label' => Icon::show('home').'Жилищная Программа', 'url' => ['/jk/']];
 $this->params['breadcrumbs'][] = ['label' => Icon::show('tools').'Админка', 'url' => ['/jk/admin/']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

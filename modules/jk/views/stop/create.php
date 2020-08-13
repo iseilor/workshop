@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $model app\modules\jk\models\Stop */
 
 $this->title = Module::t('stop', 'Create Stop');
-$this->params['breadcrumbs'][] = ['label' => 'ЖК', 'url' => ['/jk']];
+$this->params['breadcrumbs'][] = ['label' => 'Жилищная Программа', 'url' => ['/jk']];
 $this->params['breadcrumbs'][] = ['label' => 'Админка', 'url' => ['/jk/admin']];
 $this->params['breadcrumbs'][] = ['label' => Module::t('stop', 'Stops'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;

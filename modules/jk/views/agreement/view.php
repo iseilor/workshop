@@ -10,7 +10,7 @@ use yii\widgets\DetailView;
 
 
 $this->title = 'Согласование заявки №' . $model->order_id.' (ID: '.$model->id.')';
-$this->params['breadcrumbs'][] = ['label' => Icon::show('home') . 'ЖК', 'url' => Url::to(['/jk'], true)];
+$this->params['breadcrumbs'][] = ['label' => Icon::show('home') . 'Жилищная Программа', 'url' => Url::to(['/jk'], true)];
 $this->params['breadcrumbs'][] = ['label' => Icon::show('check') . 'Согласования', 'url' => Url::to(['/jk/agreement'], true)];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

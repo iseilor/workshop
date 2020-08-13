@@ -12,7 +12,7 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 
 $this->title = 'Возврат заявки';
-$this->params['breadcrumbs'][] = ['label' => 'ЖК', 'url' => ['/jk']];
+$this->params['breadcrumbs'][] = ['label' => 'Жилищная Программа', 'url' => ['/jk']];
 $this->params['breadcrumbs'][] = ['label' => Module::t('order', 'Orders'), 'url' => ['/jk/orders']];
 $this->params['breadcrumbs'][] = ['label' => $order->id, 'url' => ['/jk/order/view', 'id' => $order->id]];
 $this->params['breadcrumbs'][] = $this->title;

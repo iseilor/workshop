@@ -20,7 +20,7 @@ use yii\helpers\ArrayHelper;
  */
 
 $this->title = '<span class="badge bg-danger">'.Icon::show('tools').'Админка</span>';
-$this->params['breadcrumbs'][] = ['label' => 'ЖК', 'url' => ['/jk']];
+$this->params['breadcrumbs'][] = ['label' => 'Жилищная Программа', 'url' => ['/jk']];
 $this->params['breadcrumbs'][] = $this->title;
 
 JkAdminAsset::register($this);

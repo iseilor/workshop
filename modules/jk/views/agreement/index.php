@@ -12,7 +12,7 @@ use yii\widgets\Pjax;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Module::t('agreement', 'Agreements');
-$this->params['breadcrumbs'][] = ['label' => Icon::show('home').'ЖК', 'url' => Url::to(['/jk'],true)];
+$this->params['breadcrumbs'][] = ['label' => Icon::show('home').'Жилищная Программа', 'url' => Url::to(['/jk'],true)];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 

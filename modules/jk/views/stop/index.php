@@ -15,7 +15,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel app\modules\jk\models\StopSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->params['breadcrumbs'][] = ['label' => 'ЖК', 'url' => ['/jk']];
+$this->params['breadcrumbs'][] = ['label' => 'Жилищная Программа', 'url' => ['/jk']];
 $this->params['breadcrumbs'][] = ['label' => 'Админка', 'url' => ['/jk/admin']];
 $this->title = Module::t('stop', 'Stops');
 $this->params['breadcrumbs'][] = $this->title;

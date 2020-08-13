@@ -8,7 +8,7 @@ use yii\helpers\Html;
 /* @var $userChildDataProvider \yii\data\ActiveDataProvider */
 
 $this->title = Module::t('module', 'Create Order');
-$this->params['breadcrumbs'][] = ['label' => '<i class="nav-icon fas fa-home"></i> ЖК', 'url' => ['/jk']];
+$this->params['breadcrumbs'][] = ['label' => '<i class="nav-icon fas fa-home"></i> Жилищная Программа', 'url' => ['/jk']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="order-create">
