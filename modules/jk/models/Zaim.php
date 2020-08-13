@@ -259,12 +259,23 @@ class Zaim extends Model
         }
 
         // Вариант 2 -------------------------------------------------------------------------------------------------
+
+        $rf = \app\modules\jk\models\Rf::findOne(['title' => $user->rf]);
+        $need = 1000000;
+
+        if ($rf) {
+            $need = $rf->loan_max;
+        }
+
         $KNP = Module::getKNP($this->family_count); // Корпоративная норма площади жилья KNP
         // // Коэффициент
-        $koef = $KNP / ($this->area_buy - ($this->cost_total - 1000000) * $this->area_buy / $this->cost_total);
+        $koef = $KNP / ($this->area_buy - ($this->cost_total - $need) * $this->area_buy / $this->cost_total);
         $koef = min($koef, 1);
         // // Максимальный размер займа (Вариант 2)
-        $maxMoney2 = $koef * 1000000;  //$koef * ($this->cost_total - $this->cost_user - $this->bank_credit);
+        $maxMoney2 = $koef * $this->cost_total;  //$koef * ($this->cost_total - $this->cost_user - $this->bank_credit);
+        if ($maxMoney2 > $need) {
+            $maxMoney2 = $need;
+        }
         // // C учётом правок, получаем, что необходимость всегда 1 млн руб
         //
         //$maxMoney2 = 1000000;
@@ -289,7 +300,7 @@ class Zaim extends Model
 
         // Выбираем минимальное значение или 1 млн рублей
         //$this->compensation_count = min($maxMoney1, $maxMoney2,$maxMoney3);
-        $this->compensation_count = min($maxMoney1, $maxMoney2);
+        $this->compensation_count= round(min($maxMoney1, $maxMoney2), -3);
         if ($this->compensation_count == 0) {
             $this->compensation_years = 0;
         }
