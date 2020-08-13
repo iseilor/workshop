@@ -16,7 +16,12 @@ use yii\web\IdentityInterface;
  * @property int         $id
  * @property int         $created_at
  * @property int         $updated_at
+ *
  * @property string      $username
+ * @property string      $surname
+ * @property string      $name
+ * @property string      $patronymic
+ *
  * @property string|null $auth_key
  * @property string|null $email_confirm_token
  * @property string      $password_hash
@@ -164,8 +169,8 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             'passport_registration' => Module::t('module', 'Passport Registration'),
             'address_fact' => Module::t('module', 'Address Fact'),
             'passport_file' => Module::t('module', 'Passport File'),
-            'ejd_file' =>  Module::t('module', 'EJD File'),
-            'is_temporary_registered' =>  Module::t('module', 'Is Temporary Registered'),
+            'ejd_file' => Module::t('module', 'EJD File'),
+            'is_temporary_registered' => Module::t('module', 'Is Temporary Registered'),
             'temporary_registration_file' => Module::t('module', 'Temporary Registration File'),
 
             // SNILS
@@ -186,7 +191,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             'work_is_transferred' => '<strong>Переведенные работники</strong> - сотрудники, переведенные  не ранее чем за 5 лет до дня принятия 
                             ЖК решения об оказании помощи в интересах Общества из одного подразделения Общества в другое, находящиеся в 
                             разных населенных пунктах, расстояние между которыми не менее 50 км.',
-            'work_transferred_file'=>'PDF, не более 2MB',
+            'work_transferred_file' => 'PDF, не более 2MB',
             'passport_department' => '<strong>Пример</strong>: МВД Тверского района, г.Москва',
             'passport_registration' => 'Адрес регистрации из паспорта, вида: 123456, г.Москва, ул.Ленина, д.1, кв.1',
             'address_fact' => 'Пример заполнения: 123456, г.Москва, ул.Ленина, д.1, кв.1',
@@ -214,7 +219,8 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
         return ArrayHelper::getValue(self::getRolesArray(), $this->role_id);
     }
 
-    public function getRf() {
+    public function getRf()
+    {
         $depList = explode('|', $this->work_department_full);
         if (isset($depList[2])) {
             return trim($depList[2]);
@@ -554,7 +560,7 @@ retrun Html::img($userPhotoPath, ['title' => Yii::$app->user->identity->username
         return $list;
     }
 
-    public  function getPassport()
+    public function getPassport()
     {
         $passport = new Passport();
 
@@ -571,5 +577,12 @@ retrun Html::img($userPhotoPath, ['title' => Yii::$app->user->identity->username
         $passport->ejd_file = $this->ejd_file;
 
         return $passport;
+    }
+
+    // Получаем инициалы пользователя
+    // TODO: Временное решение, будем их получать из AD и хранить в DB
+    public function getInitials()
+    {
+        return mb_substr($this->name,0, 1).'.' . mb_substr($this->patronymic, 0,1).'.';
     }
 }
