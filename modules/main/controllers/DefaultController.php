@@ -62,7 +62,7 @@ class DefaultController extends Controller
 
         $list = [
             [
-                'col' => 3,
+                'col' => 4,
                 'bg' => 'primary',
                 'title' => 'Новости',
                 'description' => 'Всегда свежая информация',
@@ -71,7 +71,7 @@ class DefaultController extends Controller
                 'link' => 'Перейти <i class="fas fa-arrow-circle-right"></i>',
             ],
             [
-                'col' => 3,
+                'col' => 4,
                 'bg' => 'indigo',
                 'title' => Module::t('module', 'JK'),
                 'description' => Module::t('module', 'jk'),
@@ -79,7 +79,7 @@ class DefaultController extends Controller
                 'url' => Url::to(['/jk/']),
                 'link' => 'Перейти <i class="fas fa-arrow-circle-right"></i>',
             ],
-            [
+            /*[
                 'col' => 3,
                 'bg' => 'indigo',
                 'title' => 'Пульсар',
@@ -87,7 +87,7 @@ class DefaultController extends Controller
                 'icon' => Icon::show('heartbeat'),
                 'url' => Url::to(['/pulsar/']),
                 'link' => 'Перейти <i class="fas fa-arrow-circle-right"></i>',
-            ],
+            ],*/
             /* [
                  'col' => 3,
                  'bg' => 'primary',
@@ -108,7 +108,7 @@ class DefaultController extends Controller
                  'link' => 'Москва, Румянцево, БЦ Comcity',
              ],*/
             [
-                'col' => 3,
+                'col' => 4,
                 'bg' => 'success',
                 'title' => '<span class="clock">
                                 <span class="hou">00</span><span class="del">:</span><span class="min">00</span><span class="del">:</span><span class="sec">00</span>
