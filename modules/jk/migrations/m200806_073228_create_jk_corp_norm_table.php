@@ -33,6 +33,7 @@ class m200806_073228_create_jk_corp_norm_table extends Migration
             'area' => $this->integer()->notNull(),
 
         ], $tableOptions);
+        $this->execute($this->addData());
     }
 
     /**
@@ -41,5 +42,14 @@ class m200806_073228_create_jk_corp_norm_table extends Migration
     public function safeDown()
     {
         $this->dropTable('{{%jk_corp_norm}}');
+    }
+
+    public function addData()
+    {
+        return "INSERT INTO {{%jk_corp_norm}} (`created_at`, `created_by`, `updated_at`, `updated_by`, `deleted_at`, `deleted_by`, `number`, `area`)
+        VALUES 
+            (1596781853, 1, null, null, null, null, 1, 35),
+            (1596781863, 1, null, null, null, null, 2, 50)
+        ";
     }
 }
