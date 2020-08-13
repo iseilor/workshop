@@ -25,6 +25,7 @@ class m000000_000004_create_retirement_table extends Migration
         ],
         $tableOptions
         );
+        $this->execute($this->addData());
     }
 
     /**
@@ -33,5 +34,14 @@ class m000000_000004_create_retirement_table extends Migration
     public function safeDown()
     {
         $this->dropTable('{{%retirement}}');
+    }
+
+    public function addData()
+    {
+        return "INSERT INTO {{%retirement}} (`age`,`gender`)
+        VALUES 
+            (65, 'Мужчины'),
+            (60, 'Женщины')
+        ";
     }
 }
