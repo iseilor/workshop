@@ -56,6 +56,9 @@ return [
     'Passport Registration' => 'Адрес регистрации',
     'Address Fact' => 'Адрес фактического места проживания',
     'Passport File' => 'Паспорт, все страницы',
+    'Is Temporary Registered' => 'Наличие временной регистрации',
+    'EJD File' => 'Единый жилищный документ (вложение)',
+    'Temporary Registration File' => 'Документ о временной регистрации (вложение)',
 
     // СНИСЛ
     'Snils Number' => 'Номер',

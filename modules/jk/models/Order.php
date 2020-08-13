@@ -52,6 +52,9 @@ use yii\web\UploadedFile;
  * @property double   money_nalog_year
  * @property double   money_month_pay
  * @property double   money_user_pay
+ *
+ * @property integer $resident_own_type
+ * @property boolean $is_poor
  */
 class Order extends Model
 {
@@ -142,11 +145,13 @@ class Order extends Model
             [['percent_id', 'zaim_id'], 'safe'],
             [['file_agree_personal_data_form'], 'safe'],
             [['file_agree_personal_data_form'], 'file', 'extensions' => 'pdf, docx', 'maxSize' => '2048000'],
+            [['is_poor'], 'safe'],
 
             // Семья
-            [['social_id', 'resident_count', 'resident_type', 'family_deal', 'resident_own', 'family_own', 'family_address'], 'required'],
+            [['social_id', 'resident_count', 'resident_type', 'family_deal', /*'resident_own',*/ 'family_own', 'family_address', 'resident_own_type'], 'required'],
             [['family_rent'], 'safe'],
             [['file_family_big_form', 'file_social_protection_form', 'file_rent_form', 'file_social_contract_form'], 'file', 'skipOnEmpty' => true, 'extensions' => 'pdf', 'maxSize' => '2048000'],
+            [['resident_own_type'], 'integer'],
 
             // Супруга
             [['is_spouse', 'spouse_fio', 'spouse_is_dzo', 'spouse_is_do', 'spouse_is_work'], 'safe'],
@@ -237,11 +242,15 @@ class Order extends Model
             'typeName' => Module::t('order', 'Type'),
             'statusName' => Module::t('order', 'Status'),
 
+            // Работник
+            'is_poor' => Module::t('order', 'Is Poor'),
+
             // Семья
             'social_id' => Module::t('order', 'Social'),
             'resident_count' => Module::t('order', 'Resident Count'),
             'resident_type' => Module::t('order', 'Resident Type'),
             'resident_own' => Module::t('order', 'Resident Own'),
+            'resident_own_type' => Module::t('order', 'Resident Own Type'),
             'file_family_big' => Module::t('order', 'File Family Big'),
             'file_social_protection' => Module::t('order', 'File Social Protection'),
             'file_rent' => Module::t('order', 'File Rent'),
@@ -491,11 +500,29 @@ class Order extends Model
     // Тип жилого помещения
     public static function getJPTypeList()
     {
+        // Изменены ID значений справочника. Т7К. система не запущена в боевую эксплуатацию, обновлене старых значений не требоуется
+//        return [
+//            1 => 'Покупка квартиры (новостройка)',
+//            2 => 'Покупка квартиры (вторичка)',
+//            3 => 'Покупка дома',
+//            4 => 'Строительство дома',
+//        ];
+
         return [
-            1 => 'Покупка квартиры (новостройка)',
-            2 => 'Покупка квартиры (вторичка)',
-            3 => 'Покупка дома',
-            4 => 'Строительство дома',
+            1 => 'Дом',
+            2 => 'Квартира',
+            3 => 'Комната',
+        ];
+    }
+
+    // Тип жилого помещения
+    public static function getResidentOwnTypeList()
+    {
+        return [
+            1 => 'Моей семьи',
+            2 => 'Родственников',
+            3 => 'Аренда/Прочее',
+            4 => 'Социальный найм'
         ];
     }
 

@@ -182,6 +182,28 @@ class OrderController extends Controller
                             $user->passport_file = $passportFileName;
                         }
                         break;
+                    case 'ejd_file':
+                        // Passport
+                        $ejd_file = UploadedFile::getInstance($passport, 'ejd_file');
+                        if ($ejd_file){
+                            $ejdFileDir = Yii::$app->params['module']['user']['path'].$user->id;
+                            $ejdFileName = $user->id .'_ejd_'.date('YmdHis'). '.' . $ejd_file->extension;
+                            FileHelper::createDirectory( $ejdFileDir, $mode = 0777, $recursive = true);
+                            $ejd_file->saveAs($ejdFileDir. '/'.$ejdFileName);
+                            $user->ejd_file = $ejdFileName;
+                        }
+                        break;
+                    case 'temporary_registration_file':
+                        // Passport
+                        $temporary_registration_file = UploadedFile::getInstance($passport, 'temporary_registration_file');
+                        if ($temporary_registration_file){
+                            $temporaryRegistrationFileDir = Yii::$app->params['module']['user']['path'].$user->id;
+                            $temporaryRegistrationFileName = $user->id .'_temporary_registration_'.date('YmdHis'). '.' . $temporary_registration_file->extension;
+                            FileHelper::createDirectory( $temporaryRegistrationFileDir, $mode = 0777, $recursive = true);
+                            $temporary_registration_file->saveAs($temporaryRegistrationFileDir. '/'.$temporaryRegistrationFileName);
+                            $user->temporary_registration_file = $temporaryRegistrationFileName;
+                        }
+                        break;
                     default:
                         $user->$userKey = $userVal;
                         break;
@@ -313,6 +335,28 @@ class OrderController extends Controller
                             FileHelper::createDirectory( $passportFileDir, $mode = 0777, $recursive = true);
                             $passport_file->saveAs($passportFileDir. '/'.$passportFileName);
                             $user->passport_file = $passportFileName;
+                        }
+                        break;
+                    case 'ejd_file':
+                        // Passport
+                        $ejd_file = UploadedFile::getInstance($passport, 'ejd_file');
+                        if ($ejd_file){
+                            $ejdFileDir = Yii::$app->params['module']['user']['path'].$user->id;
+                            $ejdFileName = $user->id .'_ejd_'.date('YmdHis'). '.' . $ejd_file->extension;
+                            FileHelper::createDirectory( $ejdFileDir, $mode = 0777, $recursive = true);
+                            $ejd_file->saveAs($ejdFileDir. '/'.$ejdFileName);
+                            $user->ejd_file = $ejdFileName;
+                        }
+                        break;
+                    case 'temporary_registration_file':
+                        // Passport
+                        $temporary_registration_file = UploadedFile::getInstance($passport, 'temporary_registration_file');
+                        if ($temporary_registration_file){
+                            $temporaryRegistrationFileDir = Yii::$app->params['module']['user']['path'].$user->id;
+                            $temporaryRegistrationFileName = $user->id .'_temporary_registration_'.date('YmdHis'). '.' . $temporary_registration_file->extension;
+                            FileHelper::createDirectory( $temporaryRegistrationFileDir, $mode = 0777, $recursive = true);
+                            $temporary_registration_file->saveAs($temporaryRegistrationFileDir. '/'.$temporaryRegistrationFileName);
+                            $user->temporary_registration_file = $temporaryRegistrationFileName;
                         }
                         break;
                     default:

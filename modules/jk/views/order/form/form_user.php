@@ -49,16 +49,36 @@ $user = User::findOne(Yii::$app->user->identity->id);
                 <?= $form->field($usermd, 'work_is_young')->checkbox(
                     ["template" => "<div class='checkbox'>\n{beginLabel}\n{input}\n{labelTitle}\n{endLabel}\n{hint}\n{error}\n</div>"]
                 ) ?>
+
             </div>
             <div class="col-4">
                 <?= $form->field($usermd, 'work_is_transferred')->checkbox(
                     ["template" => "<div class='checkbox'>\n{beginLabel}\n{input}\n{labelTitle}\n{endLabel}\n{hint}\n{error}\n</div>"]
                 ) ?>
+
             </div>
             <div class="col-4">
                 <?= $form->field($usermd, 'work_transferred_file', [
                     'options' => ['class' => (!$usermd->work_is_transferred) ? 'd-none':''],
                     'template' => getFileInputTemplate($usermd->work_transferred_file, $usermd->attributeLabels()['work_transferred_file'] . '.pdf'),
+                ])->fileInput(['class' => 'custom-file-input']) ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <?= $form->field($model, 'is_participate')->dropDownList($model->getParticipateList(), ['prompt' => 'Выберите ...']); ?>
+            </div>
+            <div class="col-4">
+                <?=
+                $form->field($model, 'is_poor')->checkbox(
+                    ["template" => "<div class='checkbox'>\n{beginLabel}\n{input}\n{labelTitle}\n{endLabel}\n{hint}\n{error}\n</div>"]
+                )
+                ?>
+            </div>
+            <div class="col-4">
+                <?= $form->field($model, 'file_social_protection_form', [
+                    'options' => ['class' => (!$model->is_poor) ? 'd-none':''],
+                    'template' => getFileInputTemplate($model->file_social_protection, $model->attributeLabels()['file_social_protection'] . '.pdf'),
                 ])->fileInput(['class' => 'custom-file-input']) ?>
             </div>
         </div>
@@ -78,17 +98,7 @@ $user = User::findOne(Yii::$app->user->identity->id);
                         'clearIncomplete' => true,
                     ],
                 ]) ?>
-
-                <?= $form->field($passport, 'passport_number')->widget(MaskedInput::class, [
-                    'mask' => '999999',
-                    'clientOptions' => [
-                        'clearIncomplete' => true,
-                    ],
-                ]) ?>
-
-                <?= $form->field($passport, 'passport_registration')->textarea()->hint($passport->attributeHints()['passport_registration']); ?>
-            </div>
-
+           </div>
             <div class="col-4">
                 <?= $form->field($passport, 'passport_date')->widget(
                     DatePicker::class,
@@ -103,9 +113,7 @@ $user = User::findOne(Yii::$app->user->identity->id);
                         ],
                     ]
                 ) ?>
-                <?= $form->field($passport, 'passport_department')->textarea() ?>
             </div>
-
             <div class="col-4">
                 <?= $form->field($passport, 'passport_code')->widget(MaskedInput::class, [
                     'mask' => '999-999',
@@ -113,11 +121,54 @@ $user = User::findOne(Yii::$app->user->identity->id);
                         'clearIncomplete' => true,
                     ],
                 ]) ?>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-4">
+                <?= $form->field($passport, 'passport_number')->widget(MaskedInput::class, [
+                    'mask' => '999999',
+                    'clientOptions' => [
+                        'clearIncomplete' => true,
+                    ],
+                ]) ?>
+            </div>
+            <div class="col-4">
+                <?= $form->field($passport, 'passport_department')->textarea() ?>
+            </div>
+            <div class="col-4">
                 <?= $form->field($passport, 'passport_file', [
                     'template' => getFileInputTemplate($passport->passport_file, $passport->attributeLabels()['passport_file'] . '.pdf'),
                 ])->fileInput(['class' => 'custom-file-input']) ?>
             </div>
-
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <?= $form->field($passport, 'passport_registration')->textarea()->hint($passport->attributeHints()['passport_registration']); ?>
+            </div>
+            <div class="col-4">
+                <?= $form->field($passport, 'is_temporary_registered')->checkbox(
+                    ["template" => "<div class='checkbox'>\n{beginLabel}\n{input}\n{labelTitle}\n{endLabel}\n{hint}\n{error}\n</div>"]
+                ) ?>
+            </div>
+            <div class="col-4">
+                <?= $form->field($passport, 'temporary_registration_file', [
+                    'options' => ['class' => (!$passport->is_temporary_registered) ? 'd-none':''],
+                    'template' => getFileInputTemplate($passport->temporary_registration_file, $passport->attributeLabels()['temporary_registration_file'] . '.pdf'),
+                ])->fileInput(['class' => 'custom-file-input']) ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <?= $form->field($passport, 'ejd_file', [
+                    'template' => getFileInputTemplate($passport->ejd_file, $passport->attributeLabels()['ejd_file'] . '.pdf'),
+                ])->fileInput(['class' => 'custom-file-input']) ?>
+            </div>
+            <div class="col-4">
+            </div>
+            <div class="col-4">
+            </div>
         </div>
     </div>
 </div>
@@ -125,31 +176,54 @@ $user = User::findOne(Yii::$app->user->identity->id);
 
 <div class="card card-solid card-secondary">
     <div class="card-header with-border">
-        <h3 class="card-title">Жилое помещение</h3>
+        <h3 class="card-title"><?=  \app\modules\jk\Module::t('order', 'Accommodations') ?></h3>
     </div><!-- /.box-header -->
     <div class="card-body">
         <div class="row">
             <div class="col-4">
-                <?= $form->field($model, 'jp_type')->dropDownList($model->getJPTypeList(), ['prompt' => 'Выберите ...']); ?>
-                <?= $form->field($model, 'jp_own')->dropDownList($model->getJPOwnList(), ['prompt' => 'Выберите ...']); ?>
-                <?= $form->field($model, 'file_rent_form', [
-                    'template' => getFileInputTemplate($model->file_rent, $model->attributeLabels()['file_rent'] . '.pdf'),
-                ])->fileInput(['class' => 'custom-file-input']) ?>
+                <?= $form->field($passport, 'address_fact')
+                    ->textarea([
+                        'readonly' => $passport->address_fact == $passport->passport_registration,
+                        'data-passport-address-fact' => $passport->passport_registration,
+                    ])
+                    ->hint($user->attributeHints()['address_fact'] . '<br/>' .
+                        Html::checkbox('passport_address_registration',
+                            $passport->address_fact == $passport->passport_registration,
+                            ['label' => 'Совпадает с адресом регистрации сотрудника', 'id' => 'passport_address_fact'])
+                    ) ?>
+
             </div>
             <div class="col-4">
-                <?= $form->field($model, 'jp_area')->textInput() ?>
-                <?= $form->field($model, 'jp_room_count')->textInput() ?>
                 <?= $form->field($model, 'family_address')->textarea(); ?>
 
             </div>
             <div class="col-4">
+                <?= $form->field($model, 'jp_type')->dropDownList($model->getJPTypeList(), ['prompt' => 'Выберите ...']); ?>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <?= $form->field($model, 'resident_own_type')->dropDownList($model->getResidentOwnTypeList(), ['prompt' => 'Выберите ...']); ?>
                 <?= $form->field($model, 'resident_count')->textInput(); ?>
-                <?=$form->field($model, 'resident_type')->dropDownList(Order::getResidentTypeList(),  ['prompt' => 'Выберите']); ?>
                 <?= $form->field($model, 'file_social_contract_form', [
                     'template' => getFileInputTemplate($model->file_social_contract, $model->attributeLabels()['file_social_contract'] . '.pdf'),
                 ])->fileInput(['class' => 'custom-file-input']) ?>
             </div>
+            <div class="col-4">
+                <?= $form->field($model, 'jp_room_count')->textInput() ?>
+                <?=$form->field($model, 'resident_type')->dropDownList(Order::getResidentTypeList(),  ['prompt' => 'Выберите']); ?>
 
+
+
+                <?= $form->field($model, 'jp_own')->dropDownList($model->getJPOwnList(), ['prompt' => 'Выберите ...']); ?>
+            </div>
+            <div class="col-4">
+                <?= $form->field($model, 'jp_area')->textInput() ?>
+                <?= $form->field($model, 'file_rent_form', [
+                    'template' => getFileInputTemplate($model->file_rent, $model->attributeLabels()['file_rent'] . '.pdf'),
+                ])->fileInput(['class' => 'custom-file-input']) ?>
+            </div>
         </div>
     </div>
 </div>
@@ -221,6 +295,27 @@ $(document).ready(function() {
     $('#user-work_is_transferred').on('click', function() {
         $('.field-user-work_transferred_file').toggleClass('d-none');
     });
+    
+    // Поле с Справка из соц.защите показываем, когда включена галочка
+    $('#order-is_poor').on('click', function() {
+        $('.field-order-file_social_protection_form').toggleClass('d-none');
+    });
+    
+    // Поле с Документ о временной регистрации, когда включена галочка
+    $('#passport-is_temporary_registered').on('click', function() {
+        $('.field-passport-temporary_registration_file').toggleClass('d-none');
+    });
+    
+    // Адрес фактического проживание супруги совпадает с адресом фактичекого проживания сотрудника
+    $('#passport_address_fact').on('click', function() {
+        if($(this).prop("checked")) {
+            $('#passport-address_fact').prop( "readonly", true );
+            $('#passport-address_fact').val($('#passport-passport_registration').val());
+        }else{
+            $('#passport-address_fact').prop( "readonly", false );
+       }
+    });
+    
 });
 JS;
 $this->registerJs($script, yii\web\View::POS_READY);
