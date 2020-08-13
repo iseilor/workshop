@@ -98,24 +98,7 @@ $user = User::findOne(Yii::$app->user->identity->id);
                         'clearIncomplete' => true,
                     ],
                 ]) ?>
-
-                <?= $form->field($passport, 'passport_number')->widget(MaskedInput::class, [
-                    'mask' => '999999',
-                    'clientOptions' => [
-                        'clearIncomplete' => true,
-                    ],
-                ]) ?>
-
-                <?= $form->field($passport, 'passport_registration')->textarea()->hint($passport->attributeHints()['passport_registration']); ?>
-
-                <?= $form->field($passport, 'ejd_file', [
-                    'template' => getFileInputTemplate($passport->ejd_file, $passport->attributeLabels()['ejd_file'] . '.pdf'),
-                ])->fileInput(['class' => 'custom-file-input']) ?>
-
-
-
-            </div>
-
+           </div>
             <div class="col-4">
                 <?= $form->field($passport, 'passport_date')->widget(
                     DatePicker::class,
@@ -130,17 +113,7 @@ $user = User::findOne(Yii::$app->user->identity->id);
                         ],
                     ]
                 ) ?>
-                <?= $form->field($passport, 'passport_department')->textarea() ?>
-
-                <?= $form->field($passport, 'is_temporary_registered')->checkbox(
-                    ["template" => "<div class='checkbox'>\n{beginLabel}\n{input}\n{labelTitle}\n{endLabel}\n{hint}\n{error}\n</div>"]
-                ) ?>
-
-
-
-
             </div>
-
             <div class="col-4">
                 <?= $form->field($passport, 'passport_code')->widget(MaskedInput::class, [
                     'mask' => '999-999',
@@ -148,16 +121,54 @@ $user = User::findOne(Yii::$app->user->identity->id);
                         'clearIncomplete' => true,
                     ],
                 ]) ?>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-4">
+                <?= $form->field($passport, 'passport_number')->widget(MaskedInput::class, [
+                    'mask' => '999999',
+                    'clientOptions' => [
+                        'clearIncomplete' => true,
+                    ],
+                ]) ?>
+            </div>
+            <div class="col-4">
+                <?= $form->field($passport, 'passport_department')->textarea() ?>
+            </div>
+            <div class="col-4">
                 <?= $form->field($passport, 'passport_file', [
                     'template' => getFileInputTemplate($passport->passport_file, $passport->attributeLabels()['passport_file'] . '.pdf'),
                 ])->fileInput(['class' => 'custom-file-input']) ?>
-
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <?= $form->field($passport, 'passport_registration')->textarea()->hint($passport->attributeHints()['passport_registration']); ?>
+            </div>
+            <div class="col-4">
+                <?= $form->field($passport, 'is_temporary_registered')->checkbox(
+                    ["template" => "<div class='checkbox'>\n{beginLabel}\n{input}\n{labelTitle}\n{endLabel}\n{hint}\n{error}\n</div>"]
+                ) ?>
+            </div>
+            <div class="col-4">
                 <?= $form->field($passport, 'temporary_registration_file', [
                     'options' => ['class' => (!$passport->is_temporary_registered) ? 'd-none':''],
                     'template' => getFileInputTemplate($passport->temporary_registration_file, $passport->attributeLabels()['temporary_registration_file'] . '.pdf'),
                 ])->fileInput(['class' => 'custom-file-input']) ?>
             </div>
-
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <?= $form->field($passport, 'ejd_file', [
+                    'template' => getFileInputTemplate($passport->ejd_file, $passport->attributeLabels()['ejd_file'] . '.pdf'),
+                ])->fileInput(['class' => 'custom-file-input']) ?>
+            </div>
+            <div class="col-4">
+            </div>
+            <div class="col-4">
+            </div>
         </div>
     </div>
 </div>
