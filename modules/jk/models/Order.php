@@ -54,6 +54,7 @@ use yii\web\UploadedFile;
  * @property double   money_user_pay
  *
  * @property integer $resident_own_type
+ * @property boolean $is_poor
  */
 class Order extends Model
 {
@@ -144,6 +145,7 @@ class Order extends Model
             [['percent_id', 'zaim_id'], 'safe'],
             [['file_agree_personal_data_form'], 'safe'],
             [['file_agree_personal_data_form'], 'file', 'extensions' => 'pdf, docx', 'maxSize' => '2048000'],
+            [['is_poor'], 'safe'],
 
             // Семья
             [['social_id', 'resident_count', 'resident_type', 'family_deal', 'resident_own', 'family_own', 'family_address'], 'required'],
@@ -239,6 +241,9 @@ class Order extends Model
             'type' => Module::t('order', 'Type'),
             'typeName' => Module::t('order', 'Type'),
             'statusName' => Module::t('order', 'Status'),
+
+            // Работник
+            'is_poor' => Module::t('order', 'Is Poor'),
 
             // Семья
             'social_id' => Module::t('order', 'Social'),

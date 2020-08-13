@@ -19,6 +19,9 @@ class m200813_114339_update_jk_order_table extends Migration
         }
 
         $this->addColumn('{{%jk_order}}', 'resident_own_type', $this->integer());
+        $this->addColumn('{{%jk_order}}', 'is_poor', $this->boolean());
+
+
     }
 
     /**
@@ -27,5 +30,6 @@ class m200813_114339_update_jk_order_table extends Migration
     public function safeDown()
     {
         $this->dropColumn('{{%jk_order}}', 'resident_own_type');
+        $this->dropColumn('{{%jk_order}}', 'is_poor');
     }
 }
