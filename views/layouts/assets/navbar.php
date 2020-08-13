@@ -176,7 +176,7 @@ use yii\widgets\Menu;
         </li>-->
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
-                <i class="far fa-user"></i>
+                <?=Icon::show('user'). Yii::$app->user->identity->surname.' '.Yii::$app->user->identity->initials?>
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <div class="dropdown-divider"></div>

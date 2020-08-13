@@ -58,6 +58,7 @@ use yii\widgets\MaskedInput;
         </div>
 
         <?= $form->field($model, 'jp_part')->textarea(['rows' => 8]) ?>
+        <?= $form->field($model, 'jp_own')->dropDownList($model->getJPOwnList(), ['prompt' => 'Выберите ...']); ?>
     </div>
     <div class="col-md-4">
 
