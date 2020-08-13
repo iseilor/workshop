@@ -18,7 +18,7 @@ use yii\helpers\Html;
 
             <?php
             // Получаем дочерние вопросы
-            $faqs = Faq::find()->where('faq_id=' . $faq->id)->all();
+            $faqs = Faq::find()->where('faq_id=' . $faq->id)->published()->all();
             foreach ($faqs as $faq) {
                 echo $this->render('subitem', ['faq' => $faq]);
             }

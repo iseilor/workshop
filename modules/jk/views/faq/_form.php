@@ -28,7 +28,7 @@ use yii\widgets\ActiveForm;
                 <?= $form->field($model, 'question')->textInput(['maxlength' => true]) ?>
 
                 <?php
-                $faqs = ArrayHelper::map(Faq::find()->where('faq_id is null')->all(), 'id', 'question');
+                $faqs = ArrayHelper::map(Faq::find()->where('faq_id is null')->published()->all(), 'id', 'question');
                 $params = [
                     'prompt' => 'Укажите родительский вопрос',
                     'class' => 'form-control select2',
