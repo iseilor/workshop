@@ -104,6 +104,20 @@ $user = User::findOne(Yii::$app->user->identity->id);
                     ]
                 ) ?>
                 <?= $form->field($passport, 'passport_department')->textarea() ?>
+
+
+
+                <?= ""/*$form->field($passport, 'address_fact')
+                    ->textarea([
+                        'readonly' => $passport->address_fact == $passport->passport_registration,
+                        'data-passport-address-fact' => $passport->passport_registration,
+                    ])
+                    ->hint($user->attributeHints()['address_fact'] . '<br/>' .
+                        Html::checkbox('passport_address_registration',
+                            $passport->address_fact == $passport->passport_registration,
+                            ['label' => 'Совпадает с адресом регистрации сотрудника', 'id' => 'passport_address_fact'])
+                    ) */?>
+
             </div>
 
             <div class="col-4">
@@ -221,6 +235,17 @@ $(document).ready(function() {
     $('#user-work_is_transferred').on('click', function() {
         $('.field-user-work_transferred_file').toggleClass('d-none');
     });
+    
+    // // Адрес фактического проживание супруги совпадает с адресом фактичекого проживания сотрудника
+    // $('#passport_address_fact').on('click', function() {
+    //     if($(this).prop("checked")) {
+    //         $('#passport-address_fact').prop( "readonly", true );
+    //         $('#passport-address_fact').val($('#passport-passport_registration').val());
+    //     }else{
+    //         $('#passport-address_fact').prop( "readonly", false );
+    //    }
+    // });
+    
 });
 JS;
 $this->registerJs($script, yii\web\View::POS_READY);
