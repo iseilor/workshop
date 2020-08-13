@@ -49,16 +49,36 @@ $user = User::findOne(Yii::$app->user->identity->id);
                 <?= $form->field($usermd, 'work_is_young')->checkbox(
                     ["template" => "<div class='checkbox'>\n{beginLabel}\n{input}\n{labelTitle}\n{endLabel}\n{hint}\n{error}\n</div>"]
                 ) ?>
+
             </div>
             <div class="col-4">
                 <?= $form->field($usermd, 'work_is_transferred')->checkbox(
                     ["template" => "<div class='checkbox'>\n{beginLabel}\n{input}\n{labelTitle}\n{endLabel}\n{hint}\n{error}\n</div>"]
                 ) ?>
+
             </div>
             <div class="col-4">
                 <?= $form->field($usermd, 'work_transferred_file', [
                     'options' => ['class' => (!$usermd->work_is_transferred) ? 'd-none':''],
                     'template' => getFileInputTemplate($usermd->work_transferred_file, $usermd->attributeLabels()['work_transferred_file'] . '.pdf'),
+                ])->fileInput(['class' => 'custom-file-input']) ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <?= $form->field($model, 'is_participate')->dropDownList($model->getParticipateList(), ['prompt' => 'Выберите ...']); ?>
+            </div>
+            <div class="col-4">
+                <?=
+                $form->field($model, 'is_poor')->checkbox(
+                    ["template" => "<div class='checkbox'>\n{beginLabel}\n{input}\n{labelTitle}\n{endLabel}\n{hint}\n{error}\n</div>"]
+                )
+                ?>
+            </div>
+            <div class="col-4">
+                <?= $form->field($model, 'file_social_protection_form', [
+                    'options' => ['class' => (!$model->is_poor) ? 'd-none':''],
+                    'template' => getFileInputTemplate($model->file_social_protection, $model->attributeLabels()['file_social_protection'] . '.pdf'),
                 ])->fileInput(['class' => 'custom-file-input']) ?>
             </div>
         </div>
@@ -244,6 +264,11 @@ $(document).ready(function() {
     // Поле с заявлением о переводе показываем, когда включена галочка
     $('#user-work_is_transferred').on('click', function() {
         $('.field-user-work_transferred_file').toggleClass('d-none');
+    });
+    
+    // Поле с Справка из соц.защите показываем, когда включена галочка
+    $('#order-is_poor').on('click', function() {
+        $('.field-order-file_social_protection_form').toggleClass('d-none');
     });
     
     // Адрес фактического проживание супруги совпадает с адресом фактичекого проживания сотрудника
