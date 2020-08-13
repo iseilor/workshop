@@ -175,26 +175,19 @@ use yii\widgets\Menu;
             </div>
         </li>-->
         <li class="nav-item dropdown">
-            <a class="nav-link" data-toggle="dropdown" href="#">
-                <?=Icon::show('user'). Yii::$app->user->identity->surname.' '.Yii::$app->user->identity->initials?>
-            </a>
-            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                <div class="dropdown-divider"></div>
-                <?php
-
-                if (Yii::$app->user->isGuest) {
-                    echo Html::a(
-                        '<i class="fas fa-sign-in-alt"></i> Войти',
-                        Url::home() . 'login',
-                        ['class' => 'dropdown-item']
-                    );
-                    echo '<div class="dropdown-divider"></div>';
-                    echo Html::a(
-                        '<i class="fas fa-user-plus"></i> Регистрация',
-                        Url::home() . 'signup',
-                        ['class' => 'dropdown-item']
-                    );
-                } else {
+            <?php if (Yii::$app->user->isGuest): ?>
+                <?php echo Html::a(
+                    Icon::show('sign-in-alt') . \app\modules\user\Module::t('module', 'Login'),
+                    Url::home() . 'login',
+                    ['class' => 'dropdown-item']
+                ); ?>
+            <?php else: ?>
+                <a class="nav-link" data-toggle="dropdown" href="#">
+                    <?= Icon::show('user') . Yii::$app->user->identity->surname . ' ' . Yii::$app->user->identity->initials ?>
+                </a>
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                    <div class="dropdown-divider"></div>
+                    <?php
                     echo Html::a(
                         '<i class="fas fa-briefcase"></i> Мой кабинет',
                         Url::home() . 'user/cabinet',
@@ -212,16 +205,16 @@ use yii\widgets\Menu;
                         Url::home() . 'user/' . Yii::$app->user->identity->getId(),
                         ['class' => 'dropdown-item', 'title' => 'Публичные данные вашего профиля']
                     );
-
                     echo '<div class="dropdown-divider"></div>';
                     echo Html::a(
                         '<i class="fas fa-sign-out-alt"></i> Выйти',
                         Url::home() . 'logout',
                         ['class' => 'dropdown-item', 'data-method' => 'post']
                     );
-                } ?>
+                    ?>
 
-            </div>
+                </div>
+            <?php endif; ?>
         </li>
     </ul>
 </nav>
