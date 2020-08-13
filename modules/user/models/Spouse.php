@@ -104,7 +104,7 @@ class Spouse extends Model
             [['date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'date'],
             [['passport_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'passport_date'],
 
-            [['fio'], 'match', 'pattern' => '/^[а-яА-Я ]+$/u', 'message' => 'Неверный формат ФИО'],
+            [['fio'], 'match', 'pattern' => '/^[а-яА-Я ]+$/', 'message' => 'Неверный формат ФИО'],
 
             // Обязательные при наличии супруге
             [
