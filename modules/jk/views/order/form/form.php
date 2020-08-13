@@ -28,7 +28,7 @@ if (isset($model->is_mortgage)) {
         <div class="col-md-12">
             <div class="card card-primary">
                 <div class="card-header" data-intro="This is a tooltip!">
-                    <h3 class="card-title"><i class="fas fa-ruble-sign"></i> Оформление заявки на участие в Жилищной Кампании</h3>
+                    <h3 class="card-title"><i class="fas fa-ruble-sign"></i> Оформление заявки на участие в Жилищной Программе</h3>
                 </div>
                 <?php $form = ActiveForm::begin(
                         ['options' =>

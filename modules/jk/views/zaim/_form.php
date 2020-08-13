@@ -134,7 +134,7 @@ $img = $bundle->baseUrl . '/img/percent_form_family_income_black.png';
                         [
                             'class' => 'btn btn-primary',
                             'id' => 'btn-save',
-                            'title' => 'Связаться с куратором Жилищной Кампании',
+                            'title' => 'Связаться с ответственным по Жилищной Программе',
                             'hidden' => 'true',
                         ]
                     ) ?>

@@ -12,7 +12,7 @@ use yii\helpers\Url;
 <p>
 <p>
     Ваша <?= Html::a('Заявка №' . $agreement->order_id, Url::base(true) . Url::to('/jk/order/' . $agreement->order_id)) ?>
-    для участия в жилищной кампании была успешно согласована вашим руководителем
+    для участия в жилищной программе была успешно согласована вашим руководителем
     <?= Html::a($manager->fio,Url::base(true).Url::to('/user/'.$manager->id)) ?>
 </p>
 <p>

@@ -10,7 +10,7 @@ use yii\helpers\Url;
 <p>
     <strong>Уважаемый, <?= $manager->fio ?>!</strong><br>
     На портале <?=Html::a(Yii::$app->name,Url::home(true));?>
-    сотрудник <strong><?= $user->fio ?></strong> подал заявку для участия в жилищной кампании.<br/>
+    сотрудник <strong><?= $user->fio ?></strong> подал заявку для участия в жилищной программе.<br/>
     Вам необходимо согласовать заявку данного сотрудника
 </p>
 <ul>

@@ -145,7 +145,7 @@ if ($messagesUser>0){
 <section class="content">
     <div class="card card-danger">
         <div class="card-header">
-            <h3 class="card-title"><?= Icon::show('tools') ?>Панель администратора жилищной кампании</h3>
+            <h3 class="card-title"><?= Icon::show('tools') ?>Панель администратора жилищной программы</h3>
             <?= Yii::$app->params['card']['header']['tools'] ?>
         </div>
         <div class="card-body">

@@ -86,7 +86,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-md-9 h-100">
             <div class="card card-primary h-100">
                 <div class="card-header">
-                    <h3 class="card-title"><?= Icon::show('comments') ?>Сообщения куратору жилищной кампании в вашем филиале</h3>
+                    <h3 class="card-title"><?= Icon::show('comments') ?>Сообщения ответственному жилищной программе в вашем филиале</h3>
                     <?= Yii::$app->params['card']['header']['tools'] ?>
                 </div>
                 <div class="card-body card-primary cardutline direct-chat direct-chat-primary">
