@@ -80,7 +80,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <ul class="nav nav-pills flex-column">
                         <li class="nav-item active">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-home"></i> Куратор Жилищной Кампании
+                                <i class="nav-icon fas fa-home"></i> Куратор Жилищной программы
                                 <span class="badge bg-primary float-right">1</span>
                             </a>
                         </li>
