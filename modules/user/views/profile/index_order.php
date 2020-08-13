@@ -11,7 +11,7 @@ use yii\helpers\Url;
 
 ?>
 
-    <h3>Мои заявки по жилищной кампании</h3>
+    <h3>Мои заявки по жилищной программе</h3>
 <?= GridView::widget(
     [
         'dataProvider' => $orderDataProvider,
