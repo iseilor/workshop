@@ -52,6 +52,8 @@ use yii\web\UploadedFile;
  * @property double   money_nalog_year
  * @property double   money_month_pay
  * @property double   money_user_pay
+ *
+ * @property integer $resident_own_type
  */
 class Order extends Model
 {
@@ -147,6 +149,7 @@ class Order extends Model
             [['social_id', 'resident_count', 'resident_type', 'family_deal', 'resident_own', 'family_own', 'family_address'], 'required'],
             [['family_rent'], 'safe'],
             [['file_family_big_form', 'file_social_protection_form', 'file_rent_form', 'file_social_contract_form'], 'file', 'skipOnEmpty' => true, 'extensions' => 'pdf', 'maxSize' => '2048000'],
+            [['resident_own_type'], 'integer'],
 
             // Супруга
             [['is_spouse', 'spouse_fio', 'spouse_is_dzo', 'spouse_is_do', 'spouse_is_work'], 'safe'],
@@ -242,6 +245,7 @@ class Order extends Model
             'resident_count' => Module::t('order', 'Resident Count'),
             'resident_type' => Module::t('order', 'Resident Type'),
             'resident_own' => Module::t('order', 'Resident Own'),
+            'resident_own_type' => Module::t('order', 'Resident Own Type'),
             'file_family_big' => Module::t('order', 'File Family Big'),
             'file_social_protection' => Module::t('order', 'File Social Protection'),
             'file_rent' => Module::t('order', 'File Rent'),
@@ -503,6 +507,17 @@ class Order extends Model
             1 => 'Дом',
             2 => 'Квартира',
             3 => 'Комната',
+        ];
+    }
+
+    // Тип жилого помещения
+    public static function getResidentOwnTypeList()
+    {
+        return [
+            1 => 'Моей семьи',
+            2 => 'Родственников',
+            3 => 'Аренда/Прочее',
+            4 => 'Социальный найм'
         ];
     }
 
