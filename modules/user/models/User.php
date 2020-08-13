@@ -53,6 +53,10 @@ use yii\web\IdentityInterface;
  * @property string      $passport_registration
  * @property string      $address_fact
  * @property string      $passport_file
+ * @property string      $ejd_file
+ * @property boolean     $is_temporary_registered
+ * @property string      $temporary_registration_file
+ *
  *
  * SNILS ----------------------------------------------------------
  * @property string      $snils_number
@@ -143,7 +147,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             'work_address' => Module::t('module', 'Work Address'),
             'work_is_young' => Module::t('module', 'Work Is Young'),
             'work_is_transferred' => Module::t('module', 'Work Is Transferred'),
-            'work_transferred_file'=> Module::t('module', 'Work Transferred File'),
+            'work_transferred_file' => Module::t('module', 'Work Transferred File'),
 
 
             'birth_date' => Module::t('module', 'Birth Date'),
@@ -160,6 +164,9 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             'passport_registration' => Module::t('module', 'Passport Registration'),
             'address_fact' => Module::t('module', 'Address Fact'),
             'passport_file' => Module::t('module', 'Passport File'),
+            'ejd_file' =>  Module::t('module', 'EJD File'),
+            'is_temporary_registered' =>  Module::t('module', 'Is Temporary Registered'),
+            'temporary_registration_file' => Module::t('module', 'Temporary Registration File'),
 
             // SNILS
             'snils_number' => Module::t('module', 'Snils Number'),
@@ -183,6 +190,8 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             'passport_department' => '<strong>Пример</strong>: МВД Тверского района, г.Москва',
             'passport_registration' => 'Адрес регистрации из паспорта, вида: 123456, г.Москва, ул.Ленина, д.1, кв.1',
             'address_fact' => 'Пример заполнения: 123456, г.Москва, ул.Ленина, д.1, кв.1',
+            'ejd_file' => ' Единый жилищный документ (действителен в течение 1 месяца со дня выдачи); 
+            (если в населенном пункте не выдается ЕЖД, могут быть предоставлены выписки из домовой книги и справки о составе семьи)',
         ];
     }
 
@@ -557,8 +566,10 @@ retrun Html::img($userPhotoPath, ['title' => Yii::$app->user->identity->username
         $passport->passport_registration = $this->passport_registration;
         $passport->address_fact = $this->address_fact;
         $passport->passport_file = $this->passport_file;
+        $passport->is_temporary_registered = $this->is_temporary_registered;
+        $passport->temporary_registration_file = $this->temporary_registration_file;
+        $passport->ejd_file = $this->ejd_file;
 
         return $passport;
-
     }
 }
