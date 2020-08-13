@@ -107,6 +107,13 @@ $user = User::findOne(Yii::$app->user->identity->id);
                 ]) ?>
 
                 <?= $form->field($passport, 'passport_registration')->textarea()->hint($passport->attributeHints()['passport_registration']); ?>
+
+                <?= $form->field($passport, 'ejd_file', [
+                    'template' => getFileInputTemplate($passport->ejd_file, $passport->attributeLabels()['ejd_file'] . '.pdf'),
+                ])->fileInput(['class' => 'custom-file-input']) ?>
+
+
+
             </div>
 
             <div class="col-4">
@@ -125,6 +132,13 @@ $user = User::findOne(Yii::$app->user->identity->id);
                 ) ?>
                 <?= $form->field($passport, 'passport_department')->textarea() ?>
 
+                <?= $form->field($passport, 'is_temporary_registered')->checkbox(
+                    ["template" => "<div class='checkbox'>\n{beginLabel}\n{input}\n{labelTitle}\n{endLabel}\n{hint}\n{error}\n</div>"]
+                ) ?>
+
+
+
+
             </div>
 
             <div class="col-4">
@@ -136,6 +150,11 @@ $user = User::findOne(Yii::$app->user->identity->id);
                 ]) ?>
                 <?= $form->field($passport, 'passport_file', [
                     'template' => getFileInputTemplate($passport->passport_file, $passport->attributeLabels()['passport_file'] . '.pdf'),
+                ])->fileInput(['class' => 'custom-file-input']) ?>
+
+                <?= $form->field($passport, 'temporary_registration_file', [
+                    'options' => ['class' => (!$passport->is_temporary_registered) ? 'd-none':''],
+                    'template' => getFileInputTemplate($passport->temporary_registration_file, $passport->attributeLabels()['temporary_registration_file'] . '.pdf'),
                 ])->fileInput(['class' => 'custom-file-input']) ?>
             </div>
 
@@ -269,6 +288,11 @@ $(document).ready(function() {
     // Поле с Справка из соц.защите показываем, когда включена галочка
     $('#order-is_poor').on('click', function() {
         $('.field-order-file_social_protection_form').toggleClass('d-none');
+    });
+    
+    // Поле с Документ о временной регистрации, когда включена галочка
+    $('#passport-is_temporary_registered').on('click', function() {
+        $('.field-passport-temporary_registration_file').toggleClass('d-none');
     });
     
     // Адрес фактического проживание супруги совпадает с адресом фактичекого проживания сотрудника
