@@ -82,6 +82,16 @@ $user = User::findOne(Yii::$app->user->identity->id);
                 ])->fileInput(['class' => 'custom-file-input']) ?>
             </div>
         </div>
+        <div class="row">
+            <div class="col-4">
+            <?= $form->field($usermd, 'tab_number')->widget(MaskedInput::class, [
+                'mask' => '999999[9]',
+                'clientOptions' => [
+                    'clearIncomplete' => true
+                ]
+            ]) ?>
+            </div>
+        </div>
     </div>
 </div>
 
