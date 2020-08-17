@@ -198,7 +198,7 @@ $user = User::findOne(Yii::$app->user->identity->id);
                     ->hint($user->attributeHints()['address_fact'] . '<br/>' .
                         Html::checkbox('passport_address_registration',
                             $model->family_address == $passport->passport_registration,
-                            ['label' => 'Совпадает с адресом регистрации сотрудника', 'id' => 'order_family_address'])
+                            ['label' => 'Совпадает с адресом регистрации', 'id' => 'order_family_address'])
                     ); ?>
             </div>
             <div class="col-4">
@@ -232,7 +232,7 @@ $user = User::findOne(Yii::$app->user->identity->id);
 
     <div class="card card-solid card-secondary  ">
     <div class="card-header with-border">
-        <h3 class="card-title">Обработка персональных данных сотрудника</h3>
+        <h3 class="card-title">Обработка персональных данных</h3>
     </div><!-- /.box-header -->
     <div class="card-body">
         <div class="row">
