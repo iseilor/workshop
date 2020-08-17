@@ -149,6 +149,7 @@ class Order extends Model
 
             // Семья
             [['social_id', 'resident_count', 'resident_type', 'family_deal', /*'resident_own',*/ 'family_own', 'family_address', 'resident_own_type'], 'required'],
+            [['resident_count', 'jp_room_count'], 'integer'],
             [['family_rent'], 'safe'],
             [['file_family_big_form', 'file_social_protection_form', 'file_rent_form', 'file_social_contract_form'], 'file', 'skipOnEmpty' => true, 'extensions' => 'pdf', 'maxSize' => '2048000'],
             [['resident_own_type'], 'integer'],
