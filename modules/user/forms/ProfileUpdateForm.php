@@ -94,7 +94,7 @@ class ProfileUpdateForm extends Model
     public function rules()
     {
         return [
-            [['gender','birth_date','experience','tab_number'], 'required'],
+            [['gender','birth_date','experience'/*,'tab_number'*/], 'required'],
             [
                 'email',
                 'unique',
