@@ -45,7 +45,7 @@ return [
     'Work Address' => 'Адрес рабочего места',
     'Work Is Young' => 'Молодой работник',
     'Work Is Transferred' => 'Переведённый работник',
-    'Work Transferred File' => 'Заявление о переводе',
+    'Work Transferred File' => 'Заявление о переводе (вложение)',
 
     // PASSPORT
     'Passport Series' => 'Серия',
@@ -55,7 +55,7 @@ return [
     'Passport Code' => 'Код подразделения',
     'Passport Registration' => 'Адрес регистрации',
     'Address Fact' => 'Адрес фактического места проживания',
-    'Passport File' => 'Паспорт, все страницы',
+    'Passport File' => 'Паспорт работника (вложение)',
     'Is Temporary Registered' => 'Наличие временной регистрации',
     'EJD File' => 'Единый жилищный документ (вложение)',
     'Temporary Registration File' => 'Документ о временной регистрации (вложение)',
