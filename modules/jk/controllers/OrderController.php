@@ -242,7 +242,20 @@ class OrderController extends Controller
             }
 
             foreach (Yii::$app->request->post()['Spouse'] as $sposeKey => $sposeVal) {
-                $spose->$sposeKey = $sposeVal;
+                switch ($sposeKey) {
+                    case 'marriage_file_form':
+                        $marriage_file = UploadedFile::getInstance($spose, 'marriage_file_form');
+                        if ($marriage_file){
+                            $fileDir =Yii::$app->params['module']['spouse']['filePath'] . $spose->id;
+                            $fileName = 'spouse_' . $spose->id . '_' . 'marriage_file' . '_' . date('YmdHis') . '.' . $marriage_file->extension;
+                            FileHelper::createDirectory( $fileDir, $mode = 0777, $recursive = true);
+                            $marriage_file->saveAs($fileDir. '/'.$fileName   );
+                            $spose->marriage_file= $fileName;
+                        }
+                        break;
+                    default:
+                        $spose->$sposeKey = $sposeVal;
+                }
             }
 
             $spose->save();
@@ -397,7 +410,20 @@ class OrderController extends Controller
             }
 
             foreach (Yii::$app->request->post()['Spouse'] as $sposeKey => $sposeVal) {
-                $spose->$sposeKey = $sposeVal;
+                switch ($sposeKey) {
+                    case 'marriage_file_form':
+                        $marriage_file = UploadedFile::getInstance($spose, 'marriage_file_form');
+                        if ($marriage_file){
+                            $fileDir =Yii::$app->params['module']['spouse']['filePath'] . $spose->id;
+                            $fileName = 'spouse_' . $spose->id . '_' . 'marriage_file' . '_' . date('YmdHis') . '.' . $marriage_file->extension;
+                            FileHelper::createDirectory( $fileDir, $mode = 0777, $recursive = true);
+                            $marriage_file->saveAs($fileDir. '/'.$fileName   );
+                            $spose->marriage_file= $fileName;
+                        }
+                        break;
+                    default:
+                        $spose->$sposeKey = $sposeVal;
+                }
             }
 
             $spose->save();
