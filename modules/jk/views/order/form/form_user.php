@@ -202,7 +202,12 @@ $user = User::findOne(Yii::$app->user->identity->id);
                     ); ?>
             </div>
             <div class="col-4">
-                <?= $form->field($model, 'jp_type')->dropDownList($model->getJPTypeList(), ['prompt' => 'Выберите ...']); ?>
+                <?= $form->field($model, 'jp_type')->dropDownList($model->getJPTypeList(), ['prompt' => 'Выберите ...',
+                    'onChange' => 'JS: var value = (this.value);
+                                if(value == 1){$(".field-order-jp_room_count").addClass("d-none");}
+                                if(value == 2){$(".field-order-jp_room_count").removeClass("d-none");}
+                                if(value == 3){$(".field-order-jp_room_count").removeClass("d-none");}'
+                ]); ?>
             </div>
             <div class="col-4">
                 <?= $form->field($model, 'resident_own_type')->dropDownList($model->getResidentOwnTypeList(), ['prompt' => 'Выберите ...']); ?>
@@ -210,8 +215,12 @@ $user = User::findOne(Yii::$app->user->identity->id);
         </div>
         <div class="row">
             <div class="col-4">
-                <?= $form->field($model, 'jp_room_count')->textInput() ?>
-                <?= $form->field($model, 'resident_type')->dropDownList(Order::getResidentTypeList(),  ['prompt' => 'Выберите']); ?>
+                <?= $form->field($model, 'jp_room_count',['options' => [
+                        'class' => $model->jp_type == 1 ? 'form-group d-none' : 'form-group'
+                ]])->textInput(); ?>
+
+                <?= $form->field($model, 'resident_type')->dropDownList(Order::getResidentTypeList(),  ['prompt' => 'Выберите',]
+                ); ?>
             </div>
             <div class="col-4">
                 <?= $form->field($model, 'jp_area')->textInput() ?>
