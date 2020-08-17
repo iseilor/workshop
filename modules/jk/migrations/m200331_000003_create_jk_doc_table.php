@@ -30,6 +30,7 @@ class m200331_000003_create_jk_doc_table extends Migration
                 'updated_by' => Schema::TYPE_INTEGER,
                 'deleted_at' => Schema::TYPE_INTEGER,
                 'deleted_by' => Schema::TYPE_INTEGER,
+
                 'title' => Schema::TYPE_STRING . ' NOT NULL',
                 'description' => Schema::TYPE_STRING . ' NOT NULL',
                 'src' => Schema::TYPE_STRING

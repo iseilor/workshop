@@ -192,7 +192,7 @@ $config = [
 
                 '<_m:(jk)+>/<_a:(calc)>' => '<_m>/default/<_a>',
 
-                '<_m:[\w\-]+>/<_a:(admin|table)>' => '<_m>/default/<_a>',
+                '<_m:[\w\-]+>/<_a:(table)>' => '<_m>/default/<_a>',
                 '<_m:[\w\-]+>/<_c:[\w\-]+>' => '<_m>/<_c>/index',
 
 

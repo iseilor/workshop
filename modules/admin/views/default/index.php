@@ -25,10 +25,10 @@ $this->params['breadcrumbs'][] = $this->title;
                         <h1><i class="fas fa-users"></i> Пользователи</h1>
                         <?= Html::ul(
                             [
-                                Html::a('Список пользователей', Url::to('admin/user/')),
-                                Html::a('Дети сотрудников', Url::to('/user/user-child')),
-                                Html::a('Active Directory', Url::to('admin/ad/')),
-                                Html::a('Социальные категории', Url::to('admin/user-social/')),
+                                Html::a(Icon::show('users').'Список пользователей', Url::to('admin/user/')),
+                                Html::a(Icon::show('baby').'Дети сотрудников', Url::to('/user/user-child')),
+                                Html::a(Icon::show('lock').'Active Directory', Url::to('admin/ad/')),
+                                Html::a(Icon::show('users').'Социальные категории', Url::to('admin/user-social/')),
                             ],
                             [
                                 'item' => function ($item, $index) {
@@ -42,7 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <h1><i class="fas fa-bullhorn"></i> Новости</h1>
                         <?= Html::ul(
                             [
-                                Html::a('Новости', Url::to('news/news/'))
+                                Html::a(Icon::show('bullhorn').'Новости', Url::to('news/news/'))
                             ],
                             [
                                 'item' => function ($item, $index) {
@@ -58,10 +58,9 @@ $this->params['breadcrumbs'][] = $this->title;
                         <h1><i class="fas fa-table"></i> Справочники</h1>
                         <?= Html::ul(
                             [
-                                Html::a('МРФы', Url::to('admin/mrf')),
-                                Html::a('Пенсионный возраст', Url::to('admin/retirement')),
-                                Html::a('Прожиточные минимумы', Url::to('jk/min/admin')),
-                                Html::a('Статусы заявок', Url::to('jk/order-status')),
+                                Html::a(Icon::show('sitemap').'МРФы', Url::to('admin/mrf')),
+                                Html::a(Icon::show('restroom').'Пенсионный возраст', Url::to('admin/retirement')),
+                                Html::a(Icon::show('list').'Прожиточные минимумы', Url::to('jk/min/admin')),
                             ],
                             [
                                 'item' => function ($item, $index) {
@@ -76,27 +75,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
                     <div class="col-md-4">
                         <h3><?=Icon::show('home').\app\modules\jk\Module::t('module','jk')?></h3>
-                        <?= Html::ul(
-                            [
-                                Html::a('Калькуляторы процентов', Url::to('jk/percent')),
-                                Html::a('Калькуляторы займов', Url::to('jk/zaim')),
-                                Html::a('Заявки', Url::to('jk/order/admin')),
-                                Html::a(Icon::show('question').\app\modules\jk\Module::t('faq','FAQ'), Url::to('jk/faq/admin')),
-
-                                Html::a('Документы', Url::to('jk/doc/admin')),
-                                Html::a('Типы займов', Url::to('jk/zaim-type/index')),
-                                Html::a('Корпоративная норма', Url::to('jk/corp-norm')),
-                                Html::a('Нормативы оказания помощи', Url::to('jk/aid-standards')),
-                            ],
-                            [
-                                'item' => function ($item, $index) {
-                                    return Html::tag(
-                                        'li',
-                                        $item
-                                    );
-                                }
-                            ]
-                        ) ?>
+                        <?=$this->render('@app/modules/jk/views/admin/index_data')?>
+                        <hr/>
+                        <?=$this->render('@app/modules/jk/views/admin/index_dir')?>
                     </div>
                 </div>
             </div>
