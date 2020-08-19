@@ -2,6 +2,7 @@
 
 return [
     'Save' => 'Сохранить',
+    'Cancel'=>'Отмена',
 
     'Title' => 'Название',
     'Description' => 'Описание',

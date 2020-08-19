@@ -1,5 +1,6 @@
 <?php
 
+use kartik\icons\Icon;
 use yii\helpers\Html;
 
 ?>
@@ -9,10 +10,10 @@ use yii\helpers\Html;
 
     // Иконка для имени файла
     $fileIcon = 'file';
-    if (isset($model->src)){
+    if (isset($model->src)) {
         $file = explode('.', $model->src);
         $file = end($file);
-        if ($file!=''){
+        if ($file != '') {
             switch ($file) {
                 case 'docx':
                 case 'doc':
@@ -34,17 +35,18 @@ use yii\helpers\Html;
     ?>
 
     <?= Html::a(
-        '<i class="fas fa-'.$fileIcon.'"></i>',
+        '<i class="fas fa-' . $fileIcon . '"></i>',
         [Yii::$app->homeUrl . Yii::$app->params['module']['jk']['doc']['filePath'] . $model->src],
         [
             'class' => 'info-box-icon bg-info elevation-1',
-            'target' => '_blank'
+            'target' => '_blank',
         ]
     ) ?>
+
     <div class="info-box-content">
         <span class="info-box-text" style="white-space: normal;"><?= $model->title ?></span>
         <span class="info-box-number">
-            <?= Html::a('Скачать', ['/'.Yii::$app->params['module']['jk']['doc']['filePath'] . $model->src], ['target' => '_blank']) ?>
+            <?= Html::a(Icon::show('download') . 'Скачать', '/' . Yii::$app->params['module']['jk']['doc']['filePath'] . $model->src, ['target' => '_blank']) ?>
         </span>
     </div>
 </div>

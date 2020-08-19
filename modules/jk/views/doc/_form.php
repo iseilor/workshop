@@ -1,5 +1,6 @@
 <?php
 
+use kartik\icons\Icon;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -19,18 +20,19 @@ use yii\widgets\ActiveForm;
             <div class="card-body">
                 <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
                 <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
+                <?= $form->field($model, 'weight')->textInput(['maxlength' => true]) ?>
                 <?= $form->field($model, 'file')->fileInput() ?>
             </div>
             <div class="card-footer">
                 <?= Html::submitButton(
-                    '<i class="fas fa-save nav-icon"></i> Сохранить',
+                    Icon::show('save').Yii::t('app','Save'),
                     [
                         'class' => 'btn btn-success',
                         'id' => 'btn-save',
                     ]
                 ) ?>
                 <?= Html::a(
-                    Yii::t('app', 'Отмена'),
+                    Yii::t('app', 'Cancel'),
                     ['create'],
                     ['class' => 'btn btn-default float-right']
                 ) ?>

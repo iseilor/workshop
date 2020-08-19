@@ -9,6 +9,7 @@ use yii\db\mysql\Schema;
  */
 class m200331_000003_create_jk_doc_table extends Migration
 {
+
     /**
      * {@inheritdoc}
      */
@@ -24,42 +25,23 @@ class m200331_000003_create_jk_doc_table extends Migration
             '{{%jk_doc}}',
             [
                 'id' => $this->primaryKey(),
-                'created_at' => Schema::TYPE_INTEGER . ' NOT NULL',
-                'created_by' => Schema::TYPE_INTEGER . ' NOT NULL',
-                'updated_at' => Schema::TYPE_INTEGER,
-                'updated_by' => Schema::TYPE_INTEGER,
-                'deleted_at' => Schema::TYPE_INTEGER,
-                'deleted_by' => Schema::TYPE_INTEGER,
+                'created_at' => $this->integer()->notNull(),
+                'created_by' => $this->integer()->notNull(),
+                'updated_at' => $this->integer(),
+                'updated_by' => $this->integer(),
+                'deleted_at' => $this->integer(),
+                'deleted_by' => $this->integer(),
 
-                'title' => Schema::TYPE_STRING . ' NOT NULL',
-                'description' => Schema::TYPE_STRING . ' NOT NULL',
-                'src' => Schema::TYPE_STRING
+                'title' => $this->string()->notNull(),                          // Название
+                'description' => $this->text()->notNull(),                      // Описание
+                'src' => $this->string()->notNull()->defaultValue(''),   // Путь к файлу
+                'weight' => $this->integer()->notNull()                         // Вес для сортировки
             ],
             $tableOptions
         );
-        $this->execute($this->addData());
+        $this->execute(file_get_contents(__DIR__ . '/../sql/jk_doc.sql'));
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function addData()
-    {
-        $now = strtotime(date('d.m.Y H:i:s'));
-        return "INSERT INTO {{%jk_doc}} (`created_at`,`created_by`,`title`,`description`,`src`)
-        VALUES 
-        ($now,1,'Согласие на обработку ПД','Согласие на обработку ПД','1.docx'),
-        ($now,1,'Начало заявочной компании 2019 года','Начало заявочной компании 2019','2.docx'),
-        ($now,1,'Шаблон письменного отчета (стройка дома)','Шаблон письменного отчета (стройка дома)','3.xlsx'),
-        ($now,1,'Согласие на обработку ПД (дети)','Согласие на обработку ПД (дети)','4.docx'),
-        ($now,1,'Заявление на оказание помощи (пример по займу)','Заявление на оказание помощи (пример по займу)','5.docx'),
-        ($now,1,'Важная информация о Заявочной компании','Важная информация о Заявочной компании','6.docx'),
-        ($now,1,'Заявление на оказание помощи (пример по стройке дома)','Заявление на оказание помощи (пример по стройке дома)','7.docx'),
-        ($now,1,'Заявление на оказание помощи (пример по компенсации %)','Заявление на оказание помощи (пример по компенсации %)','8.docx'),
-        ($now,1,'Положение РТ помощь пост жилье (Редакция 1 с сущ изм 4)','Положение РТ помощь пост жилье (Редакция 1 с сущ изм 4)','9.docx'),
-        ($now,1,'Начало Заявочной кампании 2020','Начало Заявочной кампании 2020','10.docx')
-        ";
-    }
 
     /**
      * {@inheritdoc}

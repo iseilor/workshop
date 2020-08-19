@@ -66,7 +66,15 @@ use yii\helpers\Url;
 
                                 ],
                                 ['label' => '<i class="fas fa-ruble-sign nav-icon"></i> <p>Подать заявку</p>', 'url' => ['/jk/order/create']],
-                                ['label' => '<i class="fas fa-file-word nav-icon"></i> <p>Документы</p>', 'url' => ['/jk/doc/index']],
+
+                                [
+                                    'label' => Icon::show('file-word', ['class' => 'nav-icon'])
+                                        . Html::tag('p', \app\modules\jk\Module::t('doc', 'Docs')),
+                                    'url' => ['/jk/doc/index'],
+                                    'options' => ['class' => 'nav-item has-treeview sidebar-jk-doc'],
+
+                                ],
+
                                 [
                                     'label' => Icon::show('question', ['class' => 'nav-icon'])
                                         . Html::tag('p', \app\modules\jk\Module::t('faq', 'FAQ')),

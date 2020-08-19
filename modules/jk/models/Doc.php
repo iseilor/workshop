@@ -3,25 +3,33 @@
 namespace app\modules\jk\models;
 
 use app\models\Model;
+use app\modules\jk\Module;
+use kartik\icons\Icon;
 use Yii;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "jk_doc".
  *
- * @property int $id
- * @property string $created_at
- * @property int $created_by
+ * @property int         $id
+ * @property string      $created_at
+ * @property int         $created_by
  * @property string|null $updated_at
- * @property int|null $updated_by
+ * @property int|null    $updated_by
  * @property string|null $deleted_at
- * @property int|null $deleted_by
- * @property string $title
- * @property string $description
- * @property string $src
+ * @property int|null    $deleted_by
+ * @property string      $title
+ * @property string      $description
+ * @property string      $src
+ * @property int         $weight
  */
 class Doc extends Model
 {
+
     public $file;
+
     /**
      * {@inheritdoc}
      */
@@ -36,15 +44,12 @@ class Doc extends Model
     public function rules()
     {
         return [
-            [['title', 'description'], 'required'],
-            [['created_at', 'updated_at', 'deleted_at'], 'safe'],
-            [['created_by', 'updated_by', 'deleted_by'], 'integer'],
+            [['title', 'description', 'weight'], 'required'],
+            [['weight'], 'integer'],
             [['description'], 'string'],
             [['title'], 'string', 'max' => 255],
-
-
-            [['file'], 'file', 'extensions'=>'doc,docx,pdf,xls,xlsx,txt','checkExtensionByMimeType'=>false],
-            [['file'], 'file', 'maxSize'=>'2048000'],
+            [['file'], 'file', 'extensions' => 'doc,docx,pdf,xls,xlsx', 'checkExtensionByMimeType' => false],
+            [['file'], 'file', 'maxSize' => '2048000'],
         ];
     }
 
@@ -53,19 +58,17 @@ class Doc extends Model
      */
     public function attributeLabels()
     {
-        return [
-            'id' => Yii::t('app', 'ID'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'created_by' => Yii::t('app', 'Created By'),
-            'updated_at' => Yii::t('app', 'Updated At'),
-            'updated_by' => Yii::t('app', 'Updated By'),
-            'deleted_at' => Yii::t('app', 'Deleted At'),
-            'deleted_by' => Yii::t('app', 'Deleted By'),
-            'title' => Yii::t('app', 'Title'),
-            'description' => Yii::t('app', 'Description'),
-            'src' => Yii::t('app', 'Src'),
-            'file' => Yii::t('app', 'File'),
-        ];
+        return ArrayHelper::merge(
+            parent::attributeLabels(),
+            [
+                'title' => Module::t('doc', 'Title'),
+                'description' => Module::t('doc', 'Description'),
+                'src' => Module::t('doc', 'Src'),
+                'file' => Module::t('doc', 'File'),
+                'filePathLink'=>Module::t('doc', 'File'),
+                'weight' => Module::t('doc', 'Weight'),
+            ]
+        );
     }
 
     /**
@@ -77,13 +80,55 @@ class Doc extends Model
         return new DocQuery(get_called_class());
     }
 
+
+    /**
+     * Загрузка файлов
+     *
+     * @return bool
+     */
     public function upload()
     {
-        if ($this->validate()) {
-            $this->file->saveAs(Yii::$app->params['module']['jk']['doc']['filePath'].$this->id . '.' . $this->file->extension);
+        $this->file = UploadedFile::getInstance($this, 'file');
+        if ($this->validate() && $this->file) {
+            $this->file->saveAs(Yii::$app->params['module']['jk']['doc']['filePath'] . $this->id . '.' . $this->file->extension);
+            $this->src = $this->id . '.' . $this->file->extension;
+            $this->save();
             return true;
         } else {
             return false;
         }
+    }
+
+
+    /**
+     * Максимальный вес элемента
+     *
+     * @return mixed
+     */
+    public static function getMaxWeight()
+    {
+        return self::find()->max('weight');
+    }
+
+
+    /**
+     * Полный путь до файла для скачивани
+     *
+     * @return string
+     */
+    public function getFilePath()
+    {
+        return '/'.Yii::$app->params['module']['jk']['doc']['filePath'] . $this->src;
+    }
+
+    /**
+     * Ссылка для скачивания файла
+     * @return string
+     * @throws \yii\base\InvalidConfigException
+     */
+    public function getFilePathLink()
+    {
+        return Html::a(Icon::show('download') . Module::t('doc','Download'), [$this->getFilePath()], ['data-pjax' => 0,'id'=>'doc-'.$this->id]);
+
     }
 }

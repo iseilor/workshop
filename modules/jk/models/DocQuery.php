@@ -2,17 +2,22 @@
 
 namespace app\modules\jk\models;
 
+
+
+
+
+
+
+use app\models\Query;
+
 /**
  * This is the ActiveQuery class for [[Doc]].
  *
  * @see Doc
  */
-class DocQuery extends \yii\db\ActiveQuery
+class DocQuery extends Query
 {
-    /*public function active()
-    {
-        return $this->andWhere('[[status]]=1');
-    }*/
+
 
     /**
      * {@inheritdoc}

@@ -1,12 +1,11 @@
 <?php
 
-$this->title = "Документы";
-$this->params['breadcrumbs'][] = ['label' => 'Жилищная компания', 'url' => ['/jk/']];
+use app\modules\jk\Module;
+use yii\widgets\ListView;
+
+$this->title = $this->context->icon . ' ' . Module::t('module', 'Docs');
+$this->params['breadcrumbs'][] = $this->context->parent;
 $this->params['breadcrumbs'][] = $this->title;
-
-use yii\widgets\ListView; ?>
-
-<?php
 
 echo ListView::widget(
     [
@@ -23,6 +22,3 @@ echo ListView::widget(
         ],
     ]
 );
-?>
-
-

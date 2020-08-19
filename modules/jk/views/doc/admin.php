@@ -3,6 +3,7 @@
 use app\components\grid\ActionColumn;
 use app\components\grid\LinkColumn;
 use app\modules\jk\Module;
+use kartik\icons\Icon;
 use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\widgets\Pjax;
@@ -18,11 +19,15 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="row">
     <div class="col-md-12">
-        <div class="card">
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title"><?= $this->title; ?></h3>
+                <?= Yii::$app->params['card']['header']['tools'] ?>
+            </div>
             <div class="card-body">
                 <p>
                     <?= Html::a(
-                        '<i class="fas fa-plus"></i> ' . Module::t('module', 'Create Doc'),
+                        Icon::show('plus') . Module::t('module', 'Create Doc'),
                         ['create'],
                         ['class' => 'btn btn-success']
                     ) ?>
@@ -34,19 +39,16 @@ $this->params['breadcrumbs'][] = $this->title;
                         'columns' => [
                             ['class' => 'yii\grid\SerialColumn'],
                             [
-                                'class' => LinkColumn::className(),
+                                'class' => LinkColumn::class,
                                 'attribute' => 'id'
                             ],
                             'created_at:datetime',
-                            [
-                                'label' => Yii::t('app','Created By'),
-                                'attribute' => 'created_by',
-                                'value' => 'createdUser.fio',
-                            ],
+                            'weight',
+                            'createdUserLink:html',
                             'title',
-                            'src',
+                            'filePathLink:raw',
                             [
-                                'class' => ActionColumn::className(),
+                                'class' => ActionColumn::class,
                             ]
                         ]
                     ]

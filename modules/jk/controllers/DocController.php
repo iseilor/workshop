@@ -19,6 +19,7 @@ class DocController extends Controller
 {
 
     public $icon = '';
+
     public $parent = '';
 
     public function __construct($id, $module, $config = [])
@@ -27,7 +28,7 @@ class DocController extends Controller
         $this->icon = Yii::$app->params['module']['jk']['doc']['icon'];
         $this->parent = [
             'label' => Yii::$app->params['module']['jk']['icon'] . ' ' . Module::t('module', 'JK'),
-            'url' => ['/jk']
+            'url' => ['/jk'],
         ];
     }
 
@@ -38,13 +39,13 @@ class DocController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],
             ],
             'access' => [
-                'class' => AccessControl::className(),
+                'class' => AccessControl::class,
                 'rules' => [
                     [
                         'allow' => true,
@@ -57,12 +58,14 @@ class DocController extends Controller
 
     /**
      * Lists all Doc models.
+     *
      * @return mixed
      */
     public function actionIndex()
     {
         $searchModel = new DocSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->setSort(['defaultOrder' => ['weight' => SORT_ASC]]);
 
         return $this->render(
             'index',
@@ -75,6 +78,7 @@ class DocController extends Controller
 
     /**
      * Lists all Doc models.
+     *
      * @return mixed
      */
     public function actionAdmin()
@@ -93,7 +97,9 @@ class DocController extends Controller
 
     /**
      * Displays a single Doc model.
+     *
      * @param integer $id
+     *
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -110,6 +116,7 @@ class DocController extends Controller
     /**
      * Creates a new Doc model.
      * If creation is successful, the browser will be redirected to the 'view' page.
+     *
      * @return mixed
      */
     public function actionCreate()
@@ -117,12 +124,8 @@ class DocController extends Controller
         $model = new Doc();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            $model->file = UploadedFile::getInstance($model, 'file');
-            if ($model->upload()) {
-                $model->src=$model->id.'.'.$model->file->extension;
-                $model->save();
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
+            $model->upload();
+            return $this->redirect(['admin']);
         }
         return $this->render(
             'create',
@@ -135,7 +138,9 @@ class DocController extends Controller
     /**
      * Updates an existing Doc model.
      * If update is successful, the browser will be redirected to the 'view' page.
+     *
      * @param integer $id
+     *
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -144,7 +149,8 @@ class DocController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            $model->upload();
+            return $this->redirect(['admin']);
         }
 
         return $this->render(
@@ -158,7 +164,9 @@ class DocController extends Controller
     /**
      * Deletes an existing Doc model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
+     *
      * @param integer $id
+     *
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -166,13 +174,15 @@ class DocController extends Controller
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['admin']);
     }
 
     /**
      * Finds the Doc model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
+     *
      * @param integer $id
+     *
      * @return Doc the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */

@@ -39,7 +39,7 @@ class DocSearch extends Doc
      */
     public function search($params)
     {
-        $query = Doc::find();
+        $query = Doc::find()->published();
 
         // add conditions that should always apply here
 
