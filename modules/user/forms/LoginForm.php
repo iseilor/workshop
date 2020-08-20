@@ -72,10 +72,10 @@ class LoginForm extends Model
         }
 
         // Проверяем пароль через AD
-        if (!$this->validatePasswordAd()) {
+        /*if (!$this->validatePasswordAd()) {
             $this->addError('password', 'Вы указали неверный пароль');
             return false;
-        }
+        }*/
 
         // Рекурсия через AD
         $ad = new Ad();
