@@ -52,11 +52,11 @@ class m200404_000000_create_user_table extends Migration
 
             // Работа
             'position' => $this->string(),
-            'work_department' => $this->string(),        // Подразделение
-            'work_department_full' => $this->string(),   // Полный путь подразделения
-            'work_phone' => $this->string(),             // Рабочий телефон
-            'department_id' => $this->integer(),          // ID подразделения
-            'manager_id' => $this->integer(),             // Руководитель из AD
+            'work_department' => $this->text(),         // Подразделение
+            'work_department_full' => $this->text(),    // Полный путь подразделения
+            'work_phone' => $this->string(),            // Рабочий телефон
+            'department_id' => $this->integer(),        // ID подразделения
+            'manager_id' => $this->integer(),           // Руководитель из AD
 
             'tab_number' => $this->string(),
             'work_address' => $this->string(),
