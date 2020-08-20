@@ -28,12 +28,7 @@ use yii\widgets\MaskedInput;
             <h5><i class="icon fas fa-info"></i> Информация</h5>
             Данные поля заполняются сотрудником самостоятельно и обязательны для заполнения при работе с порталом
         </div>
-        <?= $form->field($model, 'tab_number')->widget(MaskedInput::class, [
-            'mask' => '999999[9]',
-            'clientOptions' => [
-                'clearIncomplete' => true
-            ]
-        ]) ?>
+        <?= $form->field($model, 'tab_number')->textInput() ?>
         <?= $form->field($model, 'work_is_young')->checkbox(
             ["template" => "<div class='checkbox'>\n{beginLabel}\n{input}\n{labelTitle}\n{endLabel}\n{hint}\n{error}\n</div>"]
         ) ?>
