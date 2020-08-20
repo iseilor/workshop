@@ -59,7 +59,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 }
                             },
                         ],
-                        //'email:email',
+                        'email:email',
                         //'phone',
                         //'address',
                         'coefficient:decimal',
