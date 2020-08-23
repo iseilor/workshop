@@ -67,7 +67,7 @@ use yii\web\IdentityInterface;
  * @property string      $snils_number
  * @property int         $snils_date
  * @property string      $snils_file
- *
+ * @property int         $filial_id
  */
 class User extends \yii\db\ActiveRecord implements IdentityInterface
 {
@@ -225,8 +225,25 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
         if (isset($depList[2])) {
             return trim($depList[2]);
         }
-
         return "";
+    }
+
+
+    // Проставляем филиал уже загруженным пользователям
+    public static function setFilialId()
+    {
+        $users = \app\modules\user\models\User::find()->all();
+        $rfs = \app\modules\jk\models\Rf::find()->all();
+        $items = ArrayHelper::map($rfs, 'title', 'id');
+        foreach ($users as $user) {
+            if (isset($items[$user->rf])) {
+                $user->filial_id = $items[$user->rf];
+            } else {
+                $user->filial_id = 0;
+            }
+            $user->save();
+        }
+        return true;
     }
 
     public static function getStatusesArray()
@@ -583,6 +600,6 @@ retrun Html::img($userPhotoPath, ['title' => Yii::$app->user->identity->username
     // TODO: Временное решение, будем их получать из AD и хранить в DB
     public function getInitials()
     {
-        return mb_substr($this->name,0, 1).'.' . mb_substr($this->patronymic, 0,1).'.';
+        return mb_substr($this->name, 0, 1) . '.' . mb_substr($this->patronymic, 0, 1) . '.';
     }
 }

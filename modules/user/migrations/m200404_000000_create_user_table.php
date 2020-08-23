@@ -45,8 +45,8 @@ class m200404_000000_create_user_table extends Migration
 
             // ФИО
             'fio' => $this->string(),                   // ФИО: Иванов Иван Иванович
-            'fio_shot' => $this->string(),              // Фамилия И.О. Иванов И.И.
-            'initials' => $this->string(),              // Инициалы из AD
+            //'fio_shot' => $this->string(),              // Фамилия И.О. Иванов И.И.
+            //'initials' => $this->string(),              // Инициалы из AD
             'surname' => $this->string()->notNull(),    // Фамилия
             'name' => $this->string()->notNull(),       // Имя
             'patronymic' => $this->string()->notNull(), // Отчетство
