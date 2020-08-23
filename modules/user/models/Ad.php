@@ -4,7 +4,9 @@
 namespace app\modules\user\models;
 
 
+use app\modules\jk\models\Rf;
 use Yii;
+use yii\helpers\ArrayHelper;
 
 class Ad
 {
@@ -63,6 +65,16 @@ class Ad
             $user->surname = $fio[0];
             $user->name = $fio[1];
             $user->patronymic = $fio[2];
+
+            // Филиал
+            $rfs = Rf::find()->all();
+            $rfs = ArrayHelper::map($rfs, 'title', 'id');
+            $filialName = trim(explode('|', $user->work_department_full)[2]);
+            if (isset($rfs[$filialName])) {
+                $user->filial_id = $rfs[$filialName];
+            } else {
+                $user->filial_id = 0;
+            }
 
             if ($user->save()) {
                 $this->createManager($email);
