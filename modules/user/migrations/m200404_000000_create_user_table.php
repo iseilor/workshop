@@ -21,10 +21,11 @@ class m200404_000000_create_user_table extends Migration
 
         $this->createTable('{{%user}}', [
             'id' => $this->primaryKey(),
+
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
             'username' => $this->string()->notNull(),
-            'auth_key' => $this->string(32),
+            'auth_key' => $this->string(),
             'email_confirm_token' => $this->string(),
             'password_hash' => $this->string(),
             'password_reset_token' => $this->string(),
@@ -43,9 +44,9 @@ class m200404_000000_create_user_table extends Migration
             'gender' => $this->boolean()->notNull(),
 
             // ФИО
-            'fio' => $this->string()->notNull(),        // ФИО: Иванов Иван Иванович
-            'fio_shot' => $this->string()->notNull(),   // Фамилия И.О. Иванов И.И.
-            'initials'=>$this->string()->notNull(),     // Инициалы из AD
+            'fio' => $this->string(),                   // ФИО: Иванов Иван Иванович
+            'fio_shot' => $this->string(),              // Фамилия И.О. Иванов И.И.
+            'initials' => $this->string(),              // Инициалы из AD
             'surname' => $this->string()->notNull(),    // Фамилия
             'name' => $this->string()->notNull(),       // Имя
             'patronymic' => $this->string()->notNull(), // Отчетство
@@ -71,19 +72,20 @@ class m200404_000000_create_user_table extends Migration
             'passport_file' => $this->string(),
             'address_fact' => $this->string(),
 
+            'ejd_file' => $this->string(),                       // ЕЖД файл
+            'is_temporary_registered' => $this->boolean(),       // Временная регистрация
+            'temporary_registration_file' => $this->string(),    // Файл временной регистрации
+
             // SNILS
             'snils_number' => $this->string(),
             'snils_date' => $this->integer(),
             'snils_file' => $this->string(),
 
             'role_id' => $this->integer()->notNull(),
-            'auth_at' => $this->integer(),              // Дата последней авторизации
+            'auth_at' => $this->integer(), // Дата последней авторизации
+            'filial_id'=>$this->integer() // Филиал
 
         ], $tableOptions);
-
-        $this->createIndex('idx-user-username', '{{%user}}', 'username');
-        $this->createIndex('idx-user-email', '{{%user}}', 'email');
-        $this->createIndex('idx-user-status', '{{%user}}', 'status');
 
         $this->execute(file_get_contents(__DIR__ . '/../sql/user-local.sql'));
     }
