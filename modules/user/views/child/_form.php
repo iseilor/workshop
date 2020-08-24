@@ -25,12 +25,12 @@ use yii\widgets\ActiveForm;
                         <?= $this->render('form/general', ['model' => $model, 'form' => $form]) ?>
                         <div class="passport-block <?= (isset($model->date) && $model->age >= 14) ? '' : 'd-none'; ?>">
                             <hr/>
-                            <h3><?= Icon::show('address-card') ?>Паспорт</h3>
+                            <h3><?= Icon::show('address-card') ?>Паспортные данные</h3>
                             <?= $this->render('form/passport', ['model' => $model, 'form' => $form]) ?>
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <h3><?= Icon::show('address-book') ?>Св-во о рождении</h3>
+                        <h3><?= Icon::show('address-book') ?>Свидетельство о рождении</h3>
                         <?= $this->render('form/birth', ['model' => $model, 'form' => $form]) ?>
                         <div class="study-block <?= (isset($model->date) && $model->age >= 18) ? '' : 'd-none'; ?>">
                             <hr/>
@@ -50,6 +50,7 @@ use yii\widgets\ActiveForm;
                                 'model' => $model,
                                 'form' => $form,
                                 'user' => $user,
+                                'spouse' => $spouse,
                             ]) ?>
                     </div>
                     <div class="col-md-12">

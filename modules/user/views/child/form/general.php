@@ -3,8 +3,8 @@
 use yii\jui\DatePicker;
 
 ?>
-<?= $form->field($model, 'fio')->textInput(['maxlength' => true]) ?>
-<?= $form->field($model, 'gender')->dropDownList($model->getGenderList(), ['prompt' => 'Выберите ...']); ?>
+<?= $form->field($model, 'fio')->textInput(['maxlength' => true, 'placeholder' => 'Иванов Иван Иванович']) ?>
+<!--$form->field($model, 'gender')->dropDownList($model->getGenderList(), ['prompt' => 'Выберите ...']);-->
 <?= $form->field($model, 'date')->widget(
     DatePicker::class,
     [
@@ -22,6 +22,7 @@ use yii\jui\DatePicker;
 <?php
 $script = <<< JS
 $(document).ready(function() {
+    $('#child-fio').inputmask({regex: "[А-Яа-я \-]{1,255}"});
     $('#child-date').on('change', function() {
         
         // Разница между датами
@@ -33,6 +34,7 @@ $(document).ready(function() {
         // Паспорт
         if (dateDiffYear>=14){
             $('.passport-block').removeClass('d-none');
+            $('#child-passport_series').attr('aria-required', true);
         }else{
             $('.passport-block').addClass('d-none');
         }

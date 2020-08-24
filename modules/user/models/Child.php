@@ -98,7 +98,7 @@ class Child extends Model
     public function rules()
     {
         return [
-            [['fio', 'gender', 'date', 'address_registration', 'address_fact'], 'required'],
+            [['fio', 'date', 'address_registration', 'registration_file_form'], 'required'],
             [['created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by', 'user_id', 'gender', 'is_invalid', 'is_study'], 'integer'],
             [['fio'], 'string', 'max' => 255],
             // TODO: с этим не работает в FireFox
@@ -111,7 +111,7 @@ class Child extends Model
                 'date',
                 function () {
                     if ($this->date > 0 && time() - $this->date > 14 * 356 * 24 * 60 * 60) {
-                        $passport_attrs = ['passport_series', 'passport_number', 'passport_date', 'passport_department', 'passport_code', 'passport_address'];
+                        $passport_attrs = ['passport_series', 'passport_number', 'passport_date', 'passport_department', 'passport_code'];
                         foreach ($passport_attrs as $passport_attr) {
                             if ($this->{$passport_attr} == '') {
                                 $this->addError($passport_attr, "Данное поле обязательно для заполнения для детей старше 14 лет");
@@ -123,7 +123,7 @@ class Child extends Model
             [['passport_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'passport_date'],
 
             // Св-во о рождении
-            [['birth_series', 'birth_number', 'birth_date', 'birth_department', 'birth_code'], 'required'],
+            [['birth_series', 'birth_number', 'birth_date', 'birth_department'/*, 'birth_code'*/], 'required'],
             [['birth_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'birth_date'],
             [
                 ['birth_date', 'date'],
@@ -213,7 +213,7 @@ class Child extends Model
             'address_mother_file_form' => Module::t('child', 'Address Mother'),
             'address_father_file_form' => Module::t('child', 'Address Father'),
             'ejd_file' => Module::t('child', 'Ejd'),
-            'ejd_file_form' => Module::t('child', 'Ejd'),
+            'ejd_file_form' => Module::t('child', 'Ejd_file'),
 
             'file_address' => Module::t('child', 'File Address'),
 
@@ -227,7 +227,7 @@ class Child extends Model
             'is_invalid' => Module::t('child', 'Is Invalid'),
             'file_invalid' => Module::t('child', 'File Invalid'),
             'file_posobie' => Module::t('child', 'File Posobie'),
-            'file_invalid_form' => Module::t('child', 'File Invalid'),
+            'file_invalid_form' => Module::t('child', 'File Invalid form'),
             'file_posobie_form' => Module::t('child', 'File Posobie'),
 
             // Школьник/студент

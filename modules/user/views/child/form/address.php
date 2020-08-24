@@ -4,24 +4,40 @@ use kartik\icons\Icon;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-?>
+
+$items = [
+    0 => 'Не совпадает',
+    1 => 'Работника',
+    2 => 'Супруги(а)'
+];
+$params = [
+    'class' => 'form-control',
+    'prompt' => 'Выберите вариант...',
+    'id' => 'address-matched'
+]; ?>
+
+<?= '<div class="form-group", style="margin-bottom: 1rem;">'?>
+<?= Html::label('Адрес регистрации ребёнка совпадает с адресом регистрации:', 'address-matched') ?>
+<?= Html::dropDownList('matches',null, $items, $params) ?>
+<?= '</div>'?>
 
 <?= $form->field($model, 'address_registration')
     ->textarea([
-        'readonly' => $model->address_registration == $user->passport_registration,
-        'data-user-address-registration'=>$user->passport_registration
+        /*'readonly' => $model->address_registration == $user->passport_registration,*/
+        'data-user-address-registration'=>$user->passport_registration,
+        'data-spouse-address-registration'=>$spouse->passport_registration
     ])
-    ->hint($model->attributeHints()['address_registration'] . '<br/>' .
+    ->hint($model->attributeHints()['address_registration'] . '<br/>'/* .
         Html::checkbox('user_address_registration',
             $model->address_registration == $user->passport_registration,
-            ['label' => 'Совпадает с адресом регистрации сотрудника', 'id' => 'user_address_registration'])
+            ['label' => 'Совпадает с адресом регистрации сотрудника', 'id' => 'user_address_registration'])*/
     ) ?>
 <?= $form->field($model, 'registration_file_form', [
     'template' => getFileInputTemplate($model->registration_file,  'Свидетельство о регистрации.pdf'),
 ])->fileInput(['class' => 'custom-file-input']) ?>
 
 
-<?= $form->field($model, 'address_fact')
+<!--$form->field($model, 'address_fact')
     ->textarea([
         'readonly' => $model->address_fact == $user->address_fact,
         'data-user-address-fact'=>$user->address_fact
@@ -31,7 +47,7 @@ use yii\helpers\Url;
         Html::checkbox('user_address_fact',
             $model->address_fact == $user->address_fact,
             ['label' => 'Совпадает с адресом фактического проживания сотрудника', 'id' => 'user_address_fact'])
-    ) ?>
+    )-->
 
 
 <?= $form->field($model, 'address_mother_file_form', [
@@ -54,26 +70,41 @@ use yii\helpers\Url;
 <?php
 $script = <<< JS
 $(document).ready(function() {
-   
-    // Адрес регистрации ребёнка совпадает с адресом регистарции сотрудника
-    $('#user_address_registration').on('click', function() {
-        if($(this).prop("checked")) {
+    $('#child-address_registration').val('');
+    // Адрес регистрации ребёнка совпадает с адресом регистарции сотрудника или супруги(а)
+    $('#address-matched').on('change', function() {
+        if($('#address-matched').val() == 1) {
+            if (!$('div.field-child-ejd_file_form').hasClass('d-none')) {
+                $('div.field-child-ejd_file_form').addClass('d-none');
+                $('#child-ejd_file_form').attr('required', false)
+            }
             $('#child-address_registration').prop( "readonly", true );
             $('#child-address_registration').val($('#child-address_registration').data('user-address-registration'));
-        }else{
+        } else if ($('#address-matched').val() == 2){
+            if (!$('div.field-child-ejd_file_form').hasClass('d-none')) {
+                $('div.field-child-ejd_file_form').addClass('d-none');
+                $('#child-ejd_file_form').attr('required', false)
+            }
+            $('#child-address_registration').prop( "readonly", true );
+            $('#child-address_registration').val($('#child-address_registration').data('spouse-address-registration'));
+       } else {
+            $('div.field-child-ejd_file_form').removeClass('d-none');
+            $('#child-ejd_file_form').attr('required', true)
+            
+            $('#child-address_registration').val('');
             $('#child-address_registration').prop( "readonly", false );
        }
     });
     
      // Адрес фактического проживание ребёнка совпадает с адресом фактичекого проживания сотрудника
-    $('#user_address_fact').on('click', function() {
+    /*$('#user_address_fact').on('click', function() {
         if($(this).prop("checked")) {
             $('#child-address_fact').prop( "readonly", true );
             $('#child-address_fact').val($('#child-address_fact').data('user-address-fact'));
         }else{
             $('#child-address_fact').prop( "readonly", false );
        }
-    });
+    });*/
     
 });
 JS;

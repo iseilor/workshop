@@ -15,7 +15,7 @@ use yii\widgets\Pjax;
         <?= Html::a(Icon::show('plus') . Module::t('child', 'Create Child'),
             ['/user/child/create'],
             ['class' => 'btn btn-success', 'target' => '_blank']) ?>
-        <?= Html::button(Icon::show('sync-alt') . 'Обновить таблицу',
+        <?= Html::button(Icon::show('sync-alt') . 'Обновить информацию',
             ['class' => 'btn btn-primary', 'id' => 'btn-child-grid-view-update']) ?>
     </p>
 <?php

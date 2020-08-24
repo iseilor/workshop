@@ -4,6 +4,7 @@ namespace app\modules\user\controllers;
 
 use app\modules\user\models\Child;
 use app\modules\user\models\ChildSearch;
+use app\modules\user\models\Spouse;
 use app\modules\user\models\User;
 use PhpOffice\PhpWord\TemplateProcessor;
 use Yii;
@@ -84,12 +85,14 @@ class ChildController extends Controller
 
         // Данные по адресу берём из родителя
         $user = User::findOne(Yii::$app->user->identity->id);
+        $spouse = Spouse::findOne(['user_id' => $user->id]);
         $model->address_registration = $user->passport_registration;
         $model->address_fact = $user->address_fact;
 
         return $this->render('create', [
             'model' => $model,
             'user' => $user,
+            'spouse' => $spouse,
         ]);
     }
 
