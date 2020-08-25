@@ -38,6 +38,7 @@ class Passport extends Model
     public function rules()
     {
         return [
+            [['passport_file', 'ejd_file'], 'required'],
             [['passport_series', 'passport_number', 'passport_registration', 'passport_department', 'passport_code', 'address_fact'],
                 'string', 'max' => 255,],
             [['ejd_file', 'temporary_registration_file',], 'string', 'max' => 256,],
