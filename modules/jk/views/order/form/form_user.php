@@ -100,6 +100,9 @@ $user = User::findOne(Yii::$app->user->identity->id);
         <h3 class="card-title">Паспортные данные</h3>
     </div><!-- /.box-header -->
     <div class="card-body">
+        <div class="form-group">
+            <?= Html::checkbox('foreigner-passport', 0, ['label' => 'Иностранец', 'id' => 'foreigner-passport', 'style' => 'margin-top: 1rem;']) ?>
+        </div>
         <div class="row">
             <div class="col-4">
                 <?= $form->field($passport, 'passport_series')->widget(MaskedInput::class, [
@@ -110,6 +113,10 @@ $user = User::findOne(Yii::$app->user->identity->id);
                 ]) ?>
            </div>
             <div class="col-4">
+                <?php
+                $from = date("Y", $user->birth_date + 14 * 31556926);
+                $to =  date("Y");
+                ?>
                 <?= $form->field($passport, 'passport_date')->widget(
                     DatePicker::class,
                     [
@@ -118,7 +125,7 @@ $user = User::findOne(Yii::$app->user->identity->id);
                         'options' => ['class' => 'form-control inputmask-date'],
                         'clientOptions' => [
                             'changeMonth' => true,
-                            'yearRange' => '1950:2020',
+                            'yearRange' => "$from:$to",
                             'changeYear' => true,
                         ],
                     ]
@@ -145,7 +152,7 @@ $user = User::findOne(Yii::$app->user->identity->id);
                 ]) ?>
             </div>
             <div class="col-4">
-                <?= $form->field($passport, 'passport_department')->textarea() ?>
+                <?= $form->field($passport, 'passport_department')->textarea(['placeholder'=>'МВД Тверского района, г.Москва'])->hint('') ?>
             </div>
             <div class="col-4">
                 <?= $form->field($passport, 'passport_file', [
@@ -195,18 +202,15 @@ $user = User::findOne(Yii::$app->user->identity->id);
                     'readonly' => $model->family_address == $passport->passport_registration,
                     'data-passport-address-fact' => $passport->passport_registration,
                 ])
-                    ->hint($user->attributeHints()['address_fact'] . '<br/>' .
-                        Html::checkbox('passport_address_registration',
-                            $model->family_address == $passport->passport_registration,
-                            ['label' => 'Совпадает с адресом регистрации', 'id' => 'order_family_address'])
-                    ); ?>
+                    ->hint($user->attributeHints()['address_fact']); ?>
             </div>
             <div class="col-4">
                 <?= $form->field($model, 'jp_type')->dropDownList($model->getJPTypeList(), ['prompt' => 'Выберите ...',
                     'onChange' => 'JS: var value = (this.value);
-                                if(value == 1){$(".field-order-jp_room_count").addClass("d-none");}
-                                if(value == 2){$(".field-order-jp_room_count").removeClass("d-none");}
-                                if(value == 3){$(".field-order-jp_room_count").removeClass("d-none");}'
+                                if(value == 1){$(".field-order-jp_room_count").addClass("d-none"); $("#order-jp_room_count").attr("required", false);}
+                                else if(value == 2){$(".field-order-jp_room_count").removeClass("d-none"); $("#order-jp_room_count").attr("required", true);}
+                                else if(value == 3){$(".field-order-jp_room_count").addClass("d-none"); $("#order-jp_room_count").attr("required", false);}
+                                else {$(".field-order-jp_room_count").addClass("d-none"); $("#order-jp_room_count").attr("required", false);}'
                 ]); ?>
             </div>
             <div class="col-4">
@@ -289,6 +293,52 @@ $user = User::findOne(Yii::$app->user->identity->id);
 <?php
 $script = <<< JS
 $(document).ready(function() {
+    $('div.field-order-jp_room_count').addClass('required');
+    $('div.field-order-file_rent_form').addClass('d-none');
+    $('div.field-order-file_social_contract_form').addClass('d-none');
+    $("div.field-order-resident_type").addClass('d-none');
+    $('div.field-order-jp_room_count').addClass('d-none');
+    
+    $("#order-jp_room_count").inputmask({regex: "[0-9]+", rightAlign: false,});
+    $("#order-resident_count").inputmask({regex: "[0-9]+", rightAlign: false,});
+    $("#order-jp_area").inputmask('decimal', {rightAlign: false,});
+    
+    $('#order-resident_count').on('change', function() {
+        if ($("#order-resident_count").val() > 1) {
+            $("div.field-order-resident_type").removeClass('d-none');
+        } else {
+            $("div.field-order-resident_type").addClass('d-none');
+        }
+    });
+    
+    $('#order-resident_own_type').on('change', function() {
+        if ($("#order-resident_own_type").val() == 3) {
+            $('div.field-order-file_rent_form').removeClass('d-none');
+        } else {
+            $('div.field-order-file_rent_form').addClass('d-none');
+        }
+        
+        if ($("#order-resident_own_type").val() == 4) {
+            $('div.field-order-file_social_contract_form').removeClass('d-none');
+        } else {
+            $('div.field-order-file_social_contract_form').addClass('d-none');
+        }
+    });
+    
+    $('label[for=order-family_address]').after('<input type="checkbox" id="order_family_address" name="passport_address_registration" value="1"> Совпадает с адресом регистрации');
+    
+    $('#foreigner-passport').on('change', function() {
+        if ($('#foreigner-passport').prop('checked') == true) {
+            $('#passport-passport_series').inputmask({ mask: ""});
+            $('#passport-passport_number').inputmask({ mask: ""});
+            $('#passport-passport_code').inputmask({ mask: ""});
+        } else {
+            $('#passport-passport_series').inputmask({ mask: "9999"});
+            $('#passport-passport_number').inputmask({ mask: "999999"});
+            $('#passport-passport_code').inputmask({ mask: "999-999"});
+        }
+    });
+    
     $('#btn-update').click(function(){
          $('#btn-update').find('i').addClass('fa-spin');
         $.pjax.reload({
@@ -323,6 +373,7 @@ $(document).ready(function() {
             $('#order-family_address').val($('#passport-passport_registration').val());
         }else{
             $('#order-family_address').prop( "readonly", false );
+            $('#order-family_address').val('');
        }
     });
     
