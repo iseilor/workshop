@@ -99,8 +99,17 @@ class Percent extends Model
             ['area_buy', 'compare', 'compareValue' => 1, 'operator' => '>=', 'type' => 'number'],
             ['area_buy', 'compare', 'compareValue' => 1000, 'operator' => '<=', 'type' => 'number'],
 
+
+            // Убираем разделительные нули
+            [['family_income','cost_total','cost_user','bank_credit','loan','percent_count'],'filter',
+                'filter' => function ($value) {
+                    return str_replace(" ", "", $value);
+                }
+            ],
+
+
             // Полная стоимость жилья
-            [['cost_total'], 'match', 'pattern' => '/^\s*[-+]?[0-9]*[.,]?[0-9]+([eE][-+]?[0-9]+)?\s*$/'],
+            //[['cost_total'], 'match', 'pattern' => '/^\s*[-+]?[0-9]*[.,]?[0-9]+([eE][-+]?[0-9]+)?\s*$/'],
             ['cost_total', 'compare', 'compareValue' => 1, 'operator' => '>=', 'type' => 'number'],
             ['cost_total', 'compare', 'compareValue' => 10000000, 'operator' => '<=', 'type' => 'number'],
             [
@@ -161,11 +170,7 @@ class Percent extends Model
             ['percent_rate', 'compare', 'compareValue' => 0, 'operator' => '>', 'type' => 'number'],
             ['percent_rate', 'compare', 'compareValue' => 1000000, 'operator' => '<', 'type' => 'number'],
 
-            [['family_income'],'filter',
-                'filter' => function ($value) {
-                    return str_replace(" ", "", $value);
-                }
-            ],
+
         ];
     }
 
@@ -277,7 +282,7 @@ class Percent extends Model
     {
         return [
             'timestamp' => [
-                'class' => TimestampBehavior::className(),
+                'class' => TimestampBehavior::class,
                 'attributes' => [
                     BaseActiveRecord::EVENT_BEFORE_INSERT => ['created_at'],
                     BaseActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
@@ -287,7 +292,7 @@ class Percent extends Model
                 },
             ],
             [
-                'class' => BlameableBehavior::className(),
+                'class' => BlameableBehavior::class,
                 'createdByAttribute' => 'created_by',
                 'updatedByAttribute' => 'updated_by',
             ],
@@ -315,7 +320,6 @@ class Percent extends Model
     // Рассчитываем все ставки перед сохранением
     public function beforeSave($insert)
     {
-        $i = 10;
         if (parent::beforeSave($insert)) {
             $this->calc();
             return true;

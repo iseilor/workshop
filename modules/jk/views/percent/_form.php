@@ -28,7 +28,7 @@ $img = $bundle->baseUrl . '/img/percent_form_family_income_black.png';
 
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title"><?=Icon::show('calculator').Module::t('percent','Calculator Percent')?></h3>
+                    <h3 class="card-title"><?= Icon::show('calculator') . Module::t('percent', 'Calculator Percent') ?></h3>
                 </div>
                 <?php $form = ActiveForm::begin(
                     [
@@ -60,14 +60,14 @@ $img = $bundle->baseUrl . '/img/percent_form_family_income_black.png';
                         </div>-->
                         <div class="col-md-4">
                             <?= $form->field($model, 'family_count')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['family_count']]) ?>
-                            <?= ""// $form->field($model, 'family_income')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription($img)['family_income']]) ?>
+                            <?= ""// $form->field($model, 'family_income')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription($img)['family_income']])      ?>
 
                             <?=
                             $form->field($model, 'family_income')->widget(
                                 \yii\widgets\MaskedInput::class,
                                 [
                                     'options' => ['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['family_income']],
-                                    'clientOptions' => Yii::$app->params['widget']['MaskedInput']['clientOptionsMoney']
+                                    'clientOptions' => Yii::$app->params['widget']['MaskedInput']['clientOptionsMoney'],
                                 ]
                             )
                             ?>
@@ -79,58 +79,104 @@ $img = $bundle->baseUrl . '/img/percent_form_family_income_black.png';
                         </div>
                         <div class="col-md-4">
 
-                            <?= $form->field($model, 'cost_total')->textInput(
-                                    [
+                            <!--Полная стоимость жилья-->
+                            <?=
+                            $form->field($model, 'cost_total')->widget(
+                                \yii\widgets\MaskedInput::class,
+                                [
+                                    'options' => [
                                         'data-toggle' => "tooltip",
                                         'title' => $model->attributeDescription()['cost_total'],
                                         'onblur' => "$(this).closest('form').yiiActiveForm('validateAttribute', 'percent-cost_user');
                                                 $(this).closest('form').yiiActiveForm('validateAttribute', 'percent-bank_credit');
                                                 $(this).closest('form').yiiActiveForm('validateAttribute', 'percent-loan');",
-                                    ]
-                            ) ?>
-                            <?= $form->field($model, 'cost_user')->textInput(
+                                    ],
+
+                                    'clientOptions' => Yii::$app->params['widget']['MaskedInput']['clientOptionsMoney'],
+                                ]
+                            )
+                            ?>
+
+                            <!--Собственные средства работника-->
+                            <?=
+                            $form->field($model, 'cost_user')->widget(
+                                \yii\widgets\MaskedInput::class,
                                 [
-                                    'data-toggle' => "tooltip",
-                                    'title' => $model->attributeDescription()['cost_user'],
-                                    'onblur' => "$(this).closest('form').yiiActiveForm('validateAttribute', 'percent-cost_total');
+                                    'options' => [
+                                        'data-toggle' => "tooltip",
+                                        'title' => $model->attributeDescription()['cost_user'],
+                                        'onblur' => "$(this).closest('form').yiiActiveForm('validateAttribute', 'percent-cost_total');
                                                 $(this).closest('form').yiiActiveForm('validateAttribute', 'percent-bank_credit');
                                                 $(this).closest('form').yiiActiveForm('validateAttribute', 'percent-loan');",
+                                    ],
+
+                                    'clientOptions' => Yii::$app->params['widget']['MaskedInput']['clientOptionsMoney'],
                                 ]
-                            ) ?>
-                            <?= $form->field($model, 'bank_credit')->textInput(
+                            )
+                            ?>
+                            <!--Размер кредита в банке-->
+                            <?=
+                            $form->field($model, 'bank_credit')->widget(
+                                \yii\widgets\MaskedInput::class,
                                 [
-                                    'data-toggle' => "tooltip",
-                                    'title' => $model->attributeDescription()['bank_credit'],
-                                    'onblur' => "$(this).closest('form').yiiActiveForm('validateAttribute', 'percent-cost_total');
+                                    'options' => [
+                                        'data-toggle' => "tooltip",
+                                        'title' => $model->attributeDescription()['bank_credit'],
+                                        'onblur' => "$(this).closest('form').yiiActiveForm('validateAttribute', 'percent-cost_total');
                                     $(this).closest('form').yiiActiveForm('validateAttribute', 'percent-cost_user');
                                     $(this).closest('form').yiiActiveForm('validateAttribute', 'percent-loan');",
+                                    ],
+                                    'clientOptions' => Yii::$app->params['widget']['MaskedInput']['clientOptionsMoney'],
                                 ]
-                            ) ?>
+                            )
+                            ?>
+
 
                         </div>
                         <div class="col-md-4">
-                            <?= $form->field($model, 'loan')->textInput(
+                            <!--Займ-->
+                            <?=
+                            $form->field($model, 'loan')->widget(
+                                \yii\widgets\MaskedInput::class,
                                 [
-                                    'data-toggle' => "tooltip",
-                                    'title' => $model->attributeDescription()['loan'],
-                                    'onblur' => "$(this).closest('form').yiiActiveForm('validateAttribute', 'percent-cost_total');
+                                    'options' => [
+                                        'data-toggle' => "tooltip",
+                                        'title' => $model->attributeDescription()['loan'],
+                                        'onblur' => "$(this).closest('form').yiiActiveForm('validateAttribute', 'percent-cost_total');
                                     $(this).closest('form').yiiActiveForm('validateAttribute', 'percent-cost_user');
                                     $(this).closest('form').yiiActiveForm('validateAttribute', 'percent-bank_credit');",
-                                    'placeholder' => 0,
+                                        'placeholder' => 0,
+                                    ],
+                                    'clientOptions' => Yii::$app->params['widget']['MaskedInput']['clientOptionsMoney'],
                                 ]
-                            ) ?>
-                            <?= $form->field($model, 'percent_count')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['percent_count']]) ?>
+                            )
+                            ?>
+
+                            <!--Сумма процентов -->
+                            <?=
+                            $form->field($model, 'percent_count')->widget(
+                                \yii\widgets\MaskedInput::class,
+                                [
+                                    'options' => [
+                                        'data-toggle' => "tooltip",
+                                        'title' => $model->attributeDescription()['percent_count'],
+                                    ],
+                                    'clientOptions' => Yii::$app->params['widget']['MaskedInput']['clientOptionsMoney'],
+                                ]
+                            )
+                            ?>
+
                             <?= $form->field($model, 'percent_rate')->textInput(['data-toggle' => "tooltip", 'title' => $model->attributeDescription()['percent_rate']]) ?>
                         </div>
 
                         <?php if ($model->id): ?>
                             <div class="col-md-12">
                                 <div class="callout callout-success bg-success color-palette">
-                                    <h3><?=Icon::show('calculator')?>Результат расчёта</h3>
+                                    <h3><?= Icon::show('calculator') ?>Результат расчёта</h3>
                                     <ul>
                                         <li>Максимальный размер компенсации процентов: <strong><?= Yii::$app->formatter->asInteger($model->compensation_count); ?></strong> руб</li>
                                         <li>Максимальный срок компенсации процентов: <strong><?= $model->compensation_years ?></strong> лет</li>
-                                        <li>Ставка компенсации процентов: <strong><?=$model->SKP?></strong> %</li>
+                                        <li>Ставка компенсации процентов: <strong><?= $model->SKP ?></strong> %</li>
                                     </ul>
                                     <hr/>
                                     <small>
@@ -141,7 +187,7 @@ $img = $bundle->baseUrl . '/img/percent_form_family_income_black.png';
                                 </div>
                                 <?= Html::a(
                                     Yii::$app->params['module']['jk']['order']['icon'] . ' Оформить заявку на МП',
-                                    Url::to(['/jk/order/create','percent_id'=>$model->id],true),
+                                    Url::to(['/jk/order/create', 'percent_id' => $model->id], true),
                                     [
                                         'class' => 'btn btn-success',
                                         'id' => 'btn-save',
