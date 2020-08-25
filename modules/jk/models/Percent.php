@@ -34,6 +34,7 @@ use yii\db\Expression;
  * @property float|null $percent_rate
  * @property int|null $compensation_count
  * @property int|null $compensation_years
+ * @property int|null $SKP
  */
 class Percent extends Model
 {
@@ -337,6 +338,7 @@ class Percent extends Model
         // Нормативы оказания помощи
         $standards = AidStandards::find()->all();
 
+        // TODO: Это нужно вынести в отдельную функцию, а ещё лучше, наверное хранить в БД и в результатах расчёта, чтобы не пересчитывать каждый раз
         foreach ($standards as $standard) {
             if ($this->family_income >= $standard->income_bottom && $this->family_income <= $standard->income_top) {
 
@@ -392,6 +394,38 @@ class Percent extends Model
         if ($this->compensation_count == 0) {
             $this->compensation_years = 0;
         }
+    }
+
+    // Получить ставку компенсации процентов
+    public function getSKP(){
+
+        $user = User::findOne(Yii::$app->user->identity->getId());
+        $this->compensation_years = $user->getPensionYears();
+        $SKP = 12;
+
+        // Нормативы оказания помощи
+        $standards = AidStandards::find()->all();
+
+        foreach ($standards as $standard) {
+            if ($this->family_income >= $standard->income_bottom && $this->family_income <= $standard->income_top) {
+
+                if ($this->compensation_years > $standard->compensation_years_percent) {
+                    $this->compensation_years = $standard->compensation_years_percent;
+                }
+                if ($this->compensation_years < 0) {
+                    $this->compensation_years = 0;
+                }
+
+                // До 35 лет и после 35
+                if ($user->getYears() <= 35) {
+                    $SKP = $standard->skp_young;
+                } else {
+                    $SKP = $standard->skp;
+                }
+            }
+        }
+        return $SKP;
+
     }
 
     public function getOrder()
