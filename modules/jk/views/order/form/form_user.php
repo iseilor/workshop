@@ -325,7 +325,7 @@ $(document).ready(function() {
         }
     });
     
-    $('label[for=order-family_address]').after('<input type="checkbox" id="order_family_address" name="passport_address_registration" value="1"> Совпадает с адресом регистрации');
+    $('label[for=order-family_address]').after('<br><input type="checkbox" id="order_family_address" name="passport_address_registration" value="1"> Совпадает с адресом регистрации');
     
     $('#foreigner-passport').on('change', function() {
         if ($('#foreigner-passport').prop('checked') == true) {
