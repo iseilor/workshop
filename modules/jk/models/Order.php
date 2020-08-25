@@ -148,7 +148,8 @@ class Order extends Model
             [['is_poor'], 'safe'],
 
             // Семья
-            [['social_id', 'resident_count', 'resident_type', 'family_deal', /*'resident_own',*/ 'family_own', 'family_address', 'resident_own_type'], 'required'],
+            [['social_id', 'resident_count', /*'resident_type',*/ 'family_deal', /*'resident_own',*/ 'family_own', 'family_address', 'resident_own_type'], 'required'],
+            [['resident_count', 'jp_room_count'], 'integer'],
             [['family_rent'], 'safe'],
             [['file_family_big_form', 'file_social_protection_form', 'file_rent_form', 'file_social_contract_form'], 'file', 'skipOnEmpty' => true, 'extensions' => 'pdf', 'maxSize' => '2048000'],
             [['resident_own_type'], 'integer'],
@@ -158,6 +159,7 @@ class Order extends Model
 
 
             // Жилое помещение
+            [['jp_type', 'jp_area'], 'required'],
             [
                 [
                     'jp_type',
