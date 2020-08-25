@@ -126,12 +126,14 @@ $img = $bundle->baseUrl . '/img/percent_form_family_income_black.png';
                         <?php if ($model->id): ?>
                             <div class="col-md-12">
                                 <div class="callout callout-success bg-success color-palette">
-                                    <h3>Результат расчёта</h3>
+                                    <h3><?=Icon::show('calculator')?>Результат расчёта</h3>
                                     <ul>
-                                        <li>Максимальный размер компенсации процентов, руб: <strong><?= Yii::$app->formatter->asInteger($model->compensation_count); ?></strong></li>
-                                        <li>Максимальный срок компенсации процентов, лет: <strong><?= $model->compensation_years ?></strong></li>
+                                        <li>Максимальный размер компенсации процентов: <strong><?= Yii::$app->formatter->asInteger($model->compensation_count); ?></strong> руб</li>
+                                        <li>Максимальный срок компенсации процентов: <strong><?= $model->compensation_years ?></strong> лет</li>
+                                        <li>Ежемесячный платёж, руб: <strong><?= Yii::$app->formatter->asInteger($model->compensation_count/(12*$model->compensation_years));?></strong> руб</li>
                                     </ul>
-                                    <!--<small>* Полученная сумма и срок возврата материальной помощи являются предварительными, и могут быть скорректированы по решению жилищной комиссии</small>-->
+                                    <hr/>
+                                    <small>* Полученная сумма и срок возврата материальной помощи являются предварительными, и могут быть скорректированы по решению жилищной комиссии</small>
                                 </div>
                                 <?= Html::a(
                                     Yii::$app->params['module']['jk']['order']['icon'] . ' Оформить заявку на МП',
