@@ -319,22 +319,34 @@ $(document).ready(function() {
     $('#order-resident_count').on('change', function() {
         if ($("#order-resident_count").val() > 1) {
             $("div.field-order-resident_type").removeClass('d-none');
+            $('div.field-order-resident_type').addClass('required');
+            $('#order-resident_type').attr('required', true);
         } else {
             $("div.field-order-resident_type").addClass('d-none');
+            $('div.field-order-resident_type').removeClass('required');
+            $('#order-resident_type').attr('required', false);
         }
     });
     
     $('#order-resident_own_type').on('change', function() {
         if ($("#order-resident_own_type").val() == 3) {
             $('div.field-order-file_rent_form').removeClass('d-none');
+            $('div.field-order-file_rent_form').addClass('required');
+            $('#order-file_rent_form').attr('required', true);
         } else {
             $('div.field-order-file_rent_form').addClass('d-none');
+            $('div.field-order-file_rent_form').removeClass('required');
+            $('#order-file_rent_form').attr('required', false);
         }
         
         if ($("#order-resident_own_type").val() == 4) {
             $('div.field-order-file_social_contract_form').removeClass('d-none');
+            $('div.field-order-file_social_contract_form').addClass('required');
+            $('#order-file_social_contract_form').attr('required', true);
         } else {
             $('div.field-order-file_social_contract_form').addClass('d-none');
+            $('div.field-order-file_social_contract_form').removeClass('required');
+            $('#order-file_social_contract_form').attr('required', false);
         }
     });
     
@@ -365,18 +377,59 @@ $(document).ready(function() {
     });
     
     // Поле с заявлением о переводе показываем, когда включена галочка
+    if (!$('.field-user-work_transferred_file').hasClass('d-none')) {
+        $('div.field-user-work_transferred_file').addClass('required');
+        $('#user-work_transferred_file').attr('required', true);
+    }
     $('#user-work_is_transferred').on('click', function() {
         $('.field-user-work_transferred_file').toggleClass('d-none');
+        if ($('.field-user-work_transferred_file').hasClass('d-none')) {
+            $('div.field-user-work_transferred_file').addClass('d-none');
+            $('div.field-user-work_transferred_file').removeClass('required');
+            $('#user-work_transferred_file').attr('required', false);
+        } else {
+            $('div.field-user-work_transferred_file').removeClass('d-none');
+            $('div.field-user-work_transferred_file').addClass('required');
+            $('#user-work_transferred_file').attr('required', true);
+        }
     });
+    
     
     // Поле с Справка из соц.защите показываем, когда включена галочка
+    if (!$('.field-order-file_social_protection_form').hasClass('d-none')) {
+        $('div.field-order-file_social_protection_form').addClass('required');
+        $('#order-file_social_protection_form').attr('required', true);
+    }
     $('#order-is_poor').on('click', function() {
         $('.field-order-file_social_protection_form').toggleClass('d-none');
+        if ($('.field-order-file_social_protection_form').hasClass('d-none')) {
+            $('div.field-order-file_social_protection_form').addClass('d-none');
+            $('div.field-order-file_social_protection_form').removeClass('required');
+            $('#order-file_social_protection_form').attr('required', false);
+        } else {
+            $('div.field-order-file_social_protection_form').removeClass('d-none');
+            $('div.field-order-file_social_protection_form').addClass('required');
+            $('#order-file_social_protection_form').attr('required', true);
+        }
     });
     
+    
     // Поле с Документ о временной регистрации, когда включена галочка
+    if (!$('.field-passport-temporary_registration_file').hasClass('d-none')) {
+        $('div.field-passport-temporary_registration_file').addClass('required');
+        $('#passport-temporary_registration_file').attr('required', true);
+    }
     $('#passport-is_temporary_registered').on('click', function() {
         $('.field-passport-temporary_registration_file').toggleClass('d-none');
+        if ($('.field-passport-temporary_registration_file').hasClass('d-none')) {
+            $('div.field-passport-temporary_registration_file').addClass('d-none');
+            $('div.field-passport-temporary_registration_file').removeClass('required');
+            $('#passport-temporary_registration_file').attr('required', false);
+        } else {
+            $('div.field-passport-temporary_registration_file').removeClass('d-none');
+            $('div.field-passport-temporary_registration_file').addClass('required');
+            $('#passport-temporary_registration_file').attr('required', true);
+        }
     });
     
     // Адрес фактического проживание супруги совпадает с адресом фактичекого проживания сотрудника

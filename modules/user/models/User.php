@@ -541,7 +541,7 @@ retrun Html::img($userPhotoPath, ['title' => Yii::$app->user->identity->username
 
     public static function getGenderName($value)
     {
-        if ($value) {
+        if ($value == 0 || $value == 1) {
             return (self::getGenderList()[$value]) ? self::getGenderList()[$value] : 'Неверно указан пол';
         } else {
             return false;
