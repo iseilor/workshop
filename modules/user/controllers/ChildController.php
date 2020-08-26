@@ -86,6 +86,9 @@ class ChildController extends Controller
         // Данные по адресу берём из родителя
         $user = User::findOne(Yii::$app->user->identity->id);
         $spouse = Spouse::findOne(['user_id' => $user->id]);
+        if (!$spouse) {
+            $spouse = new Spouse();
+        }
         $model->address_registration = $user->passport_registration;
         $model->address_fact = $user->address_fact;
 

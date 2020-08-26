@@ -12,6 +12,27 @@ use yii\jui\DatePicker;
         'dateFormat' => 'dd.MM.yyyy',
         'options' => ['class' => 'form-control inputmask-date'],
         'clientOptions' => [
+            'onClose' => new \yii\web\JsExpression("
+                                function(dateText, inst) {
+                                    now = new Date();
+                                    birth = $('#child-date').val();
+                                    
+                                    if (birth != '') {
+                                        arr = birth.split('.');
+                                        birthYear = arr[2];
+                                        passportYear = +arr[2] + 14;
+                                        selected = new Date(arr[2],arr[1] - 1, arr[0]);
+                                    } else {
+                                        birthYear = 1970;
+                                    }
+                                    
+                                    $('#child-birth_date').datepicker('option', 'yearRange', `\${birthYear}:\${now.getFullYear()}`);
+                                    $('#child-passport_date').datepicker('option', 'yearRange', `\${passportYear}:\${now.getFullYear()}`);
+                                        
+                                    if (selected.getTime() > now) {
+                                        $('#child-date' ).datepicker( 'setDate', now );
+                                    }
+                                }"),
             'changeMonth' => true,
             'yearRange' => '1997:2020', // Не старше 23 лет
             'changeYear' => true,

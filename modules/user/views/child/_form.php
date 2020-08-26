@@ -53,22 +53,22 @@ use yii\widgets\ActiveForm;
                                 'spouse' => $spouse,
                             ]) ?>
                     </div>
-                    <div class="col-md-12">
+                    <!--<div class="col-md-12">
                         <hr/>
-                        <h3><?= Icon::show('lock') ?>Обработка персональных данных</h3>
+                        <h3><?/*= Icon::show('lock') */?>Обработка персональных данных</h3>
                         <blockquote>
                             <p>
                                 Заполните все поля формы по вашему ребёнку выше. Проверьте введённые данные и сохраните их.
                                 После этого повторно откройте форму регистрации данных по ребёнку и скачайте автоматически
                                 сформированный блан, который нужно будет распечатать, подписать и прикрепить в поле ниже<br/>
-                                <?= Html::a(Icon::show('file-pdf') . 'Согласие на обработку персональных данных по ребёнку',
-                                    Url::to(['/user/child/' . $model->id . '/pd'])) ?><br/>
+                                <?/*= Html::a(Icon::show('file-pdf') . 'Согласие на обработку персональных данных по ребёнку',
+                                    Url::to(['/user/child/' . $model->id . '/pd'])) */?><br/>
                             </p>
                         </blockquote>
-                        <?= $form->field($model, 'file_personal_form', [
+                        <?/*= $form->field($model, 'file_personal_form', [
                             'template' => getFileInputTemplate($model->file_personal, $model->attributeLabels()['file_personal'] . '.pdf'),
-                        ])->fileInput(['class' => 'custom-file-input']) ?>
-                    </div>
+                        ])->fileInput(['class' => 'custom-file-input']) */?>
+                    </div>-->
                 </div>
             </div>
             <div class="card-footer">

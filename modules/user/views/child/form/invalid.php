@@ -16,8 +16,10 @@ $(document).ready(function() {
         $('.field-child-file_invalid_form,.field-child-file_posobie_form').toggleClass('d-none');
         if (!$('.field-child-file_invalid_form').hasClass('d-none')) {
             $('#child-file_invalid_form').attr('required', true);
+            $('.field-child-file_invalid_form').addClass('required');
         } else {
             $('#child-file_invalid_form').attr('required', false);
+            $('.field-child-file_invalid_form').removeClass('required');
         }
     });
 });

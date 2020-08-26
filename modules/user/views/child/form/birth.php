@@ -9,7 +9,7 @@ use yii\helpers\Html;
     <?= Html::checkbox('foreigner', 0, ['label' => 'Иностранец', 'id' => 'foreigner-address', 'style' => 'margin-top: 1rem;']) ?>
 </div>
 <?= $form->field($model, 'birth_series')->widget(MaskedInput::class, [
-    'mask' => 'A-AA',
+    'mask' => 'a{1,3}-aa',
     'clientOptions' => [
         'clearIncomplete' => true,
     ],
@@ -20,6 +20,10 @@ use yii\helpers\Html;
         'clearIncomplete' => true,
     ],
 ]) ?>
+<?php
+$fromInYears = date("Y", 1);
+$toInYears = date("Y");
+?>
 <?= $form->field($model, 'birth_date')->widget(
     DatePicker::class,
     [
@@ -27,13 +31,38 @@ use yii\helpers\Html;
         'dateFormat' => 'dd.MM.yyyy',
         'options' => ['class' => 'form-control inputmask-date'],
         'clientOptions' => [
+            'onClose' => new \yii\web\JsExpression("
+                                function(dateText, inst) {
+                                    birth = $('#child-date').val();
+                                    now = new Date();
+                                    
+                                    if (birth != '') {
+                                        arr = birth.split('.');
+                                        birth = new Date(arr[2],arr[1] - 1, arr[0]);
+                                    } else {
+                                        birth = new Date('1970-01-01');
+                                    }
+                                    
+                                    if (dateText != '') {
+                                        arr = dateText.split('.');
+                                        selected = new Date(arr[2],arr[1] - 1, arr[0]);
+                                    } else {
+                                        selected = new Date();
+                                    }
+                                    
+                                    if (selected.getTime() > now) {
+                                        $('#child-birth_date' ).datepicker( 'setDate', now );
+                                    } else if (selected.getTime() < birth) {
+                                        $('#child-birth_date' ).datepicker( 'setDate', birth );
+                                    }
+                                 }"),
             'changeMonth' => true,
-            'yearRange' => '1997:2020', // Не старше 23 лет
+            'yearRange' => "$fromInYears:$toInYears", // Не старше 23 лет
             'changeYear' => true,
         ],
     ]
 ) ?>
-<?= $form->field($model, 'birth_department')->textarea(['maxlength' => true]) ?>
+<?= $form->field($model, 'birth_department')->textarea(['maxlength' => true, 'placeholder' => 'Измайловский отдел ЗАГС Управления ЗАГС Москвы']) ?>
 <!--$form->field($model, 'birth_code')->widget(MaskedInput::class, [
     'mask' => '99999999',
     'clientOptions' => [
@@ -58,7 +87,7 @@ $(document).ready(function() {
             $('#child-passport_number').inputmask({ mask: ""});
             $('#child-passport_code').inputmask({ mask: ""});
         } else {
-            $('#child-birth_series').inputmask({ mask: "A-AA"});
+            $('#child-birth_series').inputmask({ mask: "a{1,3}-aa"});
             $('#child-birth_number').inputmask({ mask: "999999"});
             $('#child-birth_code').inputmask({ mask: "99999999"});
             

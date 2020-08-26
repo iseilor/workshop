@@ -98,7 +98,7 @@ class Child extends Model
     public function rules()
     {
         return [
-            [['fio', 'date', 'address_registration', 'registration_file_form'], 'required'],
+            [['fio', 'date', 'address_registration', 'registration_file_form', 'birth_file_form'], 'required'],
             [['created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by', 'user_id', 'gender', 'is_invalid', 'is_study'], 'integer'],
             [['fio'], 'string', 'max' => 255],
             // TODO: с этим не работает в FireFox
@@ -248,9 +248,9 @@ class Child extends Model
         return [
             'is_study' => 'Дети в возрасте до 23 лет, обучающиеся в образовательном учреждении по очной форме обучения',
             'is_invalid' => 'Дети старше 18 лет, ставшие инвалидами до достижения ими возраста 18 лет',
-            'address_registration' => 'Пример: 123456, г.Москва, ул.Ленина, д.1, кв.1',
+            'address_registration' => 'Пример: Московская обл., г.Москва, п.Московский, Киевское ш. 22км., д. 6, стр. 1, кв. 5',
             'address_fact' => 'Пример: 123456, г.Москва, ул.Ленина, д.1, кв.1',
-            'ejd_file_form' => 'Единый жилищный документ (действителен в течение 1 месяца со дня выдачи); (если в населенном пункте не выдается ЕЖД, могут быть предоставлены выписки из домовой книги и справки о составе семьи)',
+            'ejd_file_form' => 'ЕЖД действителен в течение 1 месяца со дня выдачи. Если в населенном пункте не выдается ЕЖД, могут быть предоставлены выписки из домовой книги и справки о составе семьи)',
         ];
     }
 
