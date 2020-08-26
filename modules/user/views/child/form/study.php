@@ -15,8 +15,10 @@ $(document).ready(function() {
         $('.field-child-file_study_form,.field-child-file_scholarship_form').toggleClass('d-none');
         if (!$('.field-child-file_study_form').hasClass('d-none')) {
             $('#child-file_study_form').attr('required', true);
+            $('.field-child-file_study_form').addClass('required');
         } else {
             $('#child-file_study_form').attr('required', false);
+            $('.field-child-file_study_form').removeClass('required');
         }
     });
 });

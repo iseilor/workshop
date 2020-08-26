@@ -4,19 +4,29 @@ use kartik\icons\Icon;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
+if ($spouse->id == null) {
+    $items = [
+        0 => 'Не совпадает',
+        1 => 'Работника',
+    ];
+    $spouse_ar = '';
+} else {
+    $items = [
+        0 => 'Не совпадает',
+        1 => 'Работника',
+        2 => 'Супруги(а)'
+    ];
+    $spouse_ar = $spouse->passport_registration;
+}
 
-$items = [
-    0 => 'Не совпадает',
-    1 => 'Работника',
-    2 => 'Супруги(а)'
-];
 $params = [
+    'required' => true,
     'class' => 'form-control',
     'prompt' => 'Выберите вариант...',
     'id' => 'address-matched'
 ]; ?>
 
-<?= '<div class="form-group", style="margin-bottom: 1rem;">'?>
+<?= '<div class="form-group required", style="margin-bottom: 1rem;">'?>
 <?= Html::label('Адрес регистрации ребёнка совпадает с адресом регистрации:', 'address-matched') ?>
 <?= Html::dropDownList('matches',null, $items, $params) ?>
 <?= '</div>'?>
@@ -25,7 +35,7 @@ $params = [
     ->textarea([
         /*'readonly' => $model->address_registration == $user->passport_registration,*/
         'data-user-address-registration'=>$user->passport_registration,
-        'data-spouse-address-registration'=>$spouse->passport_registration
+        'data-spouse-address-registration'=>$spouse_ar
     ])
     ->hint($model->attributeHints()['address_registration'] . '<br/>'/* .
         Html::checkbox('user_address_registration',
@@ -34,7 +44,7 @@ $params = [
     ) ?>
 <?= $form->field($model, 'registration_file_form', [
     'template' => getFileInputTemplate($model->registration_file,  'Свидетельство о регистрации.pdf'),
-])->fileInput(['class' => 'custom-file-input']) ?>
+])->fileInput(['class' => 'custom-file-input'])->hint('Вкладывается свидетельство о регистрации по месту жительства, при временной прописке - документ о временной регистрации.') ?>
 
 
 <!--$form->field($model, 'address_fact')
@@ -54,13 +64,13 @@ $params = [
     'template' => getFileInputTemplate($model->address_mother_file,  'Заявление от матери.pdf'),
 ])->fileInput(['class' => 'custom-file-input'])->hint('Заявление составляются полностью от руки. '
     . Html::a(Icon::show('file-pdf', ['framework' => Icon::FAR])
-        . 'Образец заявления', Url::base().Url::to('/files/child/0-examples/example_child_address_mother.pdf'), ['target' => '_blank'])) ?>
+        . 'Образец заявления', Url::base().Url::to('/files/child/0-examples/example_address_child.docx'), ['target' => '_blank'])) ?>
 
 <?= $form->field($model, 'address_father_file_form', [
     'template' => getFileInputTemplate($model->address_father_file, 'Заявление от отца.pdf'),
 ])->fileInput(['class' => 'custom-file-input'])->hint('Заявление составляются полностью от руки. 
     Если в свидетельстве у ребёнка не указан отец, то заявление от папы не нужно. '
-    . Html::a(Icon::show('file-pdf', ['framework' => Icon::FAR]) . 'Образец заявления', Url::base().Url::to('/files/child/0-examples/example_child_address_father.pdf'), ['target' => '_blank'])) ?>
+    . Html::a(Icon::show('file-pdf', ['framework' => Icon::FAR]) . 'Образец заявления', Url::base().Url::to('/files/child/0-examples/example_address_child.docx'), ['target' => '_blank'])) ?>
 
 <?= $form->field($model, 'ejd_file_form', [
     'template' => getFileInputTemplate($model->ejd_file, $model->attributeLabels()['ejd_file'] . '.pdf'),
@@ -71,12 +81,14 @@ $params = [
 $script = <<< JS
 $(document).ready(function() {
     $('#child-address_registration').val('');
+    $('div.field-child-ejd_file_form').addClass('required');
     // Адрес регистрации ребёнка совпадает с адресом регистарции сотрудника или супруги(а)
     $('#address-matched').on('change', function() {
         if($('#address-matched').val() == 1) {
             if (!$('div.field-child-ejd_file_form').hasClass('d-none')) {
                 $('div.field-child-ejd_file_form').addClass('d-none');
                 $('#child-ejd_file_form').attr('required', false)
+                $('div.field-child-ejd_file_form').removeClass('required');
             }
             $('#child-address_registration').prop( "readonly", true );
             $('#child-address_registration').val($('#child-address_registration').data('user-address-registration'));
@@ -84,12 +96,14 @@ $(document).ready(function() {
             if (!$('div.field-child-ejd_file_form').hasClass('d-none')) {
                 $('div.field-child-ejd_file_form').addClass('d-none');
                 $('#child-ejd_file_form').attr('required', false)
+                $('div.field-child-ejd_file_form').removeClass('required');
             }
             $('#child-address_registration').prop( "readonly", true );
             $('#child-address_registration').val($('#child-address_registration').data('spouse-address-registration'));
        } else {
             $('div.field-child-ejd_file_form').removeClass('d-none');
             $('#child-ejd_file_form').attr('required', true)
+            $('div.field-child-ejd_file_form').addClass('required');
             
             $('#child-address_registration').val('');
             $('#child-address_registration').prop( "readonly", false );

@@ -25,7 +25,6 @@ $user = User::findOne(Yii::$app->user->identity->id);
             echo DetailView::widget([
                 'model' => $user,
                 'attributes' => [
-                    'tab_number',
                     'fio',
                     [
                         'label' => $user->attributeLabels()['gender'],
@@ -85,7 +84,7 @@ $user = User::findOne(Yii::$app->user->identity->id);
         <div class="row">
             <div class="col-4">
             <?= $form->field($usermd, 'tab_number')->widget(MaskedInput::class, [
-                'mask' => '999999[9]',
+                'mask' => '9[999999]',
                 'clientOptions' => [
                     'clearIncomplete' => true
                 ]
@@ -114,8 +113,9 @@ $user = User::findOne(Yii::$app->user->identity->id);
            </div>
             <div class="col-4">
                 <?php
-                $from = date("Y", $user->birth_date + 14 * 31556926);
-                $to =  date("Y");
+                $fromInYears = date("Y", $user->birth_date + 14 * 31556926);
+                $toInYears = date("Y");
+                $from = date("Y-m-d", $user->birth_date + 14 * 31556926);
                 ?>
                 <?= $form->field($passport, 'passport_date')->widget(
                     DatePicker::class,
@@ -124,8 +124,20 @@ $user = User::findOne(Yii::$app->user->identity->id);
                         'dateFormat' => 'dd.MM.yyyy',
                         'options' => ['class' => 'form-control inputmask-date'],
                         'clientOptions' => [
+                            'onClose' => new \yii\web\JsExpression("
+                                function(dateText, inst) {
+                                    fourteen = new Date('$from');
+                                    now = new Date();
+                                    arr = dateText.split('.');
+                                    selected = new Date(arr[2],arr[1] - 1, arr[0]);
+                                    if (selected.getTime() > now) {
+                                        $('#passport-passport_date' ).datepicker( 'setDate', now );
+                                    } else if (selected.getTime() < fourteen) {
+                                        $('#passport-passport_date' ).datepicker( 'setDate', fourteen );
+                                    }
+                                 }"),
                             'changeMonth' => true,
-                            'yearRange' => "$from:$to",
+                            'yearRange' => "$fromInYears:$toInYears",
                             'changeYear' => true,
                         ],
                     ]
@@ -243,10 +255,10 @@ $user = User::findOne(Yii::$app->user->identity->id);
 </div>
 
 
-    <div class="card card-solid card-secondary  ">
+    <!--<div class="card card-solid card-secondary  ">
     <div class="card-header with-border">
         <h3 class="card-title">Обработка персональных данных</h3>
-    </div><!-- /.box-header -->
+    </div>
     <div class="card-body">
         <div class="row">
             <div class="col-3">
@@ -254,14 +266,14 @@ $user = User::findOne(Yii::$app->user->identity->id);
                     <li style="width: 100%;">
                         <span class="mailbox-attachment-icon"><i class="far fa-file-pdf"></i></span>
                         <div class="mailbox-attachment-info">
-                            <?= Html::a(Icon::show('paperclip') . 'ПД. ' . Yii::$app->user->identity->fio . '.pdf',
+                            <?/*= Html::a(Icon::show('paperclip') . 'ПД. ' . Yii::$app->user->identity->fio . '.pdf',
                                 Url::to(['/user/user/' . Yii::$app->user->identity->id . '/pd'], true),
-                                ['class' => 'mailbox-attachment-name']) ?>
+                                ['class' => 'mailbox-attachment-name']) */?>
                             <span class="mailbox-attachment-size clearfix mt-1">
                               <span>1,245 KB</span>
-                               <?= Html::a(Icon::show('cloud-download-alt'),
+                               <?/*= Html::a(Icon::show('cloud-download-alt'),
                                 Url::to("pd-agreement"), ['class' => 'btn btn-default btn-sm float-right '.
-                                       ($model->file_agree_personal_data ? "" : " hide") ]) ?>
+                                       ($model->file_agree_personal_data ? "" : " hide") ]) */?>
                             </span>
                         </div>
                     </li>
@@ -273,14 +285,14 @@ $user = User::findOne(Yii::$app->user->identity->id);
                     Если вы видите какие-то неверные данные, то вам необходимо
                     обновить их в личном кабинете, затем повторно вернуться к созданию заявки.
                 </p>
-                <?= $form->field($model, 'file_agree_personal_data_form', [
+                <?/*= $form->field($model, 'file_agree_personal_data_form', [
                     'template' => getFileInputTemplate($model->file_agree_personal_data, $model->attributeLabels()['file_agree_personal_data_form'] . '.pdf'),
-                ])->fileInput(['class' => 'custom-file-input']) ?>
+                ])->fileInput(['class' => 'custom-file-input']) */?>
 
             </div>
         </div>
     </div>
-</div>
+</div>-->
 
 <!--    <p>-->
 <!--        --><?= ""//Html::a(Icon::show('edit') . 'Редактировать профиль',
@@ -298,6 +310,7 @@ $(document).ready(function() {
     $('div.field-order-file_social_contract_form').addClass('d-none');
     $("div.field-order-resident_type").addClass('d-none');
     $('div.field-order-jp_room_count').addClass('d-none');
+    $('div.field-user-tab_number').addClass('required');
     
     $("#order-jp_room_count").inputmask({regex: "[0-9]+", rightAlign: false,});
     $("#order-resident_count").inputmask({regex: "[0-9]+", rightAlign: false,});
