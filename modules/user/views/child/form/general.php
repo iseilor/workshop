@@ -24,6 +24,8 @@ use yii\jui\DatePicker;
                                         selected = new Date(arr[2],arr[1] - 1, arr[0]);
                                     } else {
                                         birthYear = 1970;
+                                        passportYear = 1984;
+                                        selected = new Date('1984-01-01');
                                     }
                                     
                                     $('#child-birth_date').datepicker('option', 'yearRange', `\${birthYear}:\${now.getFullYear()}`);
