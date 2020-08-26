@@ -310,6 +310,7 @@ $(document).ready(function() {
     $('div.field-order-file_social_contract_form').addClass('d-none');
     $("div.field-order-resident_type").addClass('d-none');
     $('div.field-order-jp_room_count').addClass('d-none');
+    $('div.field-user-tab_number').addClass('required');
     
     $("#order-jp_room_count").inputmask({regex: "[0-9]+", rightAlign: false,});
     $("#order-resident_count").inputmask({regex: "[0-9]+", rightAlign: false,});
