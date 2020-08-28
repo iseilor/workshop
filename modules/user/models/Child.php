@@ -98,7 +98,8 @@ class Child extends Model
     public function rules()
     {
         return [
-            [['fio', 'date', 'address_registration', 'registration_file_form', 'birth_file_form'], 'required'],
+            [['fio', 'date', 'address_registration', 'registration_file_form', 'birth_file_form', 'address_mother_file_form',
+                'address_father_file_form'], 'required'],
             [['created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by', 'user_id', 'gender', 'is_invalid', 'is_study'], 'integer'],
             [['fio'], 'string', 'max' => 255],
             // TODO: с этим не работает в FireFox
@@ -155,7 +156,7 @@ class Child extends Model
                 'file',
                 'skipOnEmpty' => true,
                 'extensions' => 'pdf',
-                'maxSize' => '1024000',
+                'maxSize' => '10000000',
             ],
         ];
     }

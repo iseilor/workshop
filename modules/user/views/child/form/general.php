@@ -57,7 +57,19 @@ $(document).ready(function() {
         // Паспорт
         if (dateDiffYear>=14){
             $('.passport-block').removeClass('d-none');
-            $('#child-passport_series').attr('aria-required', true);
+            $('.passport-block').addClass('required');
+            $('.field-child-passport_series').addClass('required');
+            $('#child-passport_series').attr('required', true);
+            $('.field-child-passport_number').addClass('required');
+            $('#child-passport_number').attr('required', true);
+            $('.field-child-passport_date').addClass('required');
+            $('#child-passport_date').attr('required', true);
+            $('.field-child-passport_department').addClass('required');
+            $('#child-passport_department').attr('required', true);
+            $('.field-child-passport_code').addClass('required');
+            $('#child-passport_code').attr('required', true);
+            $('.field-child-passport_file_form').addClass('required');
+            $('#child-passport_file_form').attr('required', true);
         }else{
             $('.passport-block').addClass('d-none');
         }

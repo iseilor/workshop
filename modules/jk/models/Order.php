@@ -144,14 +144,14 @@ class Order extends Model
             [['is_participate', 'is_mortgage'], 'required'],
             [['percent_id', 'zaim_id'], 'safe'],
             [['file_agree_personal_data_form'], 'safe'],
-            [['file_agree_personal_data_form'], 'file', 'extensions' => 'pdf, docx', 'maxSize' => '2048000'],
+            [['file_agree_personal_data_form'], 'file', 'extensions' => 'pdf, docx', 'maxSize' => '10000000'],
             [['is_poor'], 'safe'],
 
             // Семья
             [['social_id', 'resident_count', /*'resident_type',*/ 'family_deal', /*'resident_own',*/ 'family_own', 'family_address', 'resident_own_type'], 'required'],
             [['resident_count', 'jp_room_count'], 'integer'],
             [['family_rent'], 'safe'],
-            [['file_family_big_form', 'file_social_protection_form', 'file_rent_form', 'file_social_contract_form'], 'file', 'skipOnEmpty' => true, 'extensions' => 'pdf', 'maxSize' => '2048000'],
+            [['file_family_big_form', 'file_social_protection_form', 'file_rent_form', 'file_social_contract_form'], 'file', 'skipOnEmpty' => true, 'extensions' => 'pdf', 'maxSize' => '10000000'],
             [['resident_own_type'], 'integer'],
 
             // Супруга
