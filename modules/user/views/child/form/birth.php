@@ -76,6 +76,9 @@ $toInYears = date("Y");
 <?php
 $script = <<< JS
 $(document).ready(function() {
+    $('.field-child-birth_file_form').addClass('required');
+    $('#child-birth_file_form').attr('required', true);
+    
     $('#foreigner-address').on('change', function() {
         console.log($('#foreigner-address').prop('checked'));
         if ($('#foreigner-address').prop('checked') == true) {

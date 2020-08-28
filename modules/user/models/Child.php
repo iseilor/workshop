@@ -98,8 +98,7 @@ class Child extends Model
     public function rules()
     {
         return [
-            [['fio', 'date', 'address_registration', 'registration_file_form', 'birth_file_form', 'address_mother_file_form',
-                'address_father_file_form'], 'required'],
+            [['fio', 'date', 'address_registration',], 'required'],
             [['created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by', 'user_id', 'gender', 'is_invalid', 'is_study'], 'integer'],
             [['fio'], 'string', 'max' => 255],
             // TODO: с этим не работает в FireFox
@@ -250,7 +249,6 @@ class Child extends Model
             'passport_series' => '<strong>Пример:</strong> 7788',
             'passport_number' => '<strong>Пример:</strong> 123456',
             'passport_code' => '<strong>Пример:</strong> 778-887',
-            'passport_department' => '<strong>Пример:</strong> МВД Тверского района, г.Москва',
             'is_study' => 'Дети в возрасте до 23 лет, обучающиеся в образовательном учреждении по очной форме обучения',
             'is_invalid' => 'Дети старше 18 лет, ставшие инвалидами до достижения ими возраста 18 лет',
             'address_registration' => 'Пример: Московская обл., г.Москва, п.Московский, Киевское ш. 22км., д. 6, стр. 1, кв. 5',

@@ -46,6 +46,13 @@ use yii\jui\DatePicker;
 $script = <<< JS
 $(document).ready(function() {
     $('#child-fio').inputmask({regex: "[А-Яа-я \-]{1,255}"});
+    
+    arr = $('#child-date').val().split(".");
+    var dateChild = new Date(arr[2],arr[1] - 1, arr[0]);
+    var dateNow = new Date();
+    var dateDiffYear = (dateNow-dateChild)/(1000 * 3600 * 24*365);
+    requireShowedFields(dateDiffYear);
+    
     $('#child-date').on('change', function() {
         
         // Разница между датами
@@ -54,22 +61,11 @@ $(document).ready(function() {
         var dateNow = new Date();
         var dateDiffYear = (dateNow-dateChild)/(1000 * 3600 * 24*365)
         
+        requireShowedFields(dateDiffYear);
         // Паспорт
         if (dateDiffYear>=14){
             $('.passport-block').removeClass('d-none');
             $('.passport-block').addClass('required');
-            $('.field-child-passport_series').addClass('required');
-            $('#child-passport_series').attr('required', true);
-            $('.field-child-passport_number').addClass('required');
-            $('#child-passport_number').attr('required', true);
-            $('.field-child-passport_date').addClass('required');
-            $('#child-passport_date').attr('required', true);
-            $('.field-child-passport_department').addClass('required');
-            $('#child-passport_department').attr('required', true);
-            $('.field-child-passport_code').addClass('required');
-            $('#child-passport_code').attr('required', true);
-            $('.field-child-passport_file_form').addClass('required');
-            $('#child-passport_file_form').attr('required', true);
         }else{
             $('.passport-block').addClass('d-none');
         }
@@ -82,6 +78,28 @@ $(document).ready(function() {
         }
        
     });
+    function requireShowedFields(dateDiffYear) {
+        var arr = new Map([
+                      ['#child-passport_series', '.field-child-passport_series'],
+                      ['#child-passport_number', '.field-child-passport_number'],
+                      ['#child-passport_date', '.field-child-passport_date'],
+                      ['#child-passport_department', '.field-child-passport_department'],
+                      ['#child-passport_code', '.field-child-passport_code'],
+                      ['#child-passport_file_form', '.field-child-passport_file_form'],
+                    ]);
+        
+        if (dateDiffYear>=14){
+            for (let pair of arr.entries()) {
+              $(`\${pair[1]}`).addClass('required');
+              $(`\${pair[0]}`).attr('required', true);
+            }
+        } else {
+            for (let pair of arr.entries()) {
+              $(`\${pair[1]}`).removeClass('required');
+              $(`\${pair[0]}`).attr('required', false);
+            }
+        }
+    }
 });
 JS;
 $this->registerJs($script, yii\web\View::POS_READY);

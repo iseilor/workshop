@@ -57,7 +57,7 @@ use yii\widgets\MaskedInput;
     ]
 ) ?>
 <!-- $form->field($model, 'passport_address')->textarea() -->
-<?= $form->field($model, 'passport_department')->textarea() ?>
+<?= $form->field($model, 'passport_department')->textarea(['placeholder' => 'МВД Тверского района, г.Москва']) ?>
 <?= $form->field($model, 'passport_code')->widget(MaskedInput::class, [
     'mask' => '999-999',
     'clientOptions' => [

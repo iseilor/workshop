@@ -80,6 +80,15 @@ $params = [
 <?php
 $script = <<< JS
 $(document).ready(function() {
+    $('.field-child-registration_file_form').addClass('required');
+    $('#child-registration_file_form').attr('required', true);
+    $('.field-child-registration_file_form').addClass('required');
+    $('#child-registration_file_form').attr('required', true);
+    $('.field-child-address_mother_file_form').addClass('required');
+    $('#child-address_mother_file_form').attr('required', true);
+    $('.field-child-address_father_file_form').addClass('required');
+    $('#child-address_father_file_form').attr('required', true);
+    
     $('#child-address_registration').val('');
     $('div.field-child-ejd_file_form').addClass('required');
     // Адрес регистрации ребёнка совпадает с адресом регистарции сотрудника или супруги(а)
