@@ -57,7 +57,7 @@ use yii\widgets\MaskedInput;
     ]
 ) ?>
 <!-- $form->field($model, 'passport_address')->textarea() -->
-<?= $form->field($model, 'passport_department')->textarea(['placeholder' => 'МВД Тверского района, г.Москва']) ?>
+<?= $form->field($model, 'passport_department')->textarea() ?>
 <?= $form->field($model, 'passport_code')->widget(MaskedInput::class, [
     'mask' => '999-999',
     'clientOptions' => [
@@ -67,15 +67,3 @@ use yii\widgets\MaskedInput;
 <?= $form->field($model, 'passport_file_form', [
     'template' => getFileInputTemplate($model->passport_file, $model->attributeLabels()['passport_file'] . '.pdf'),
 ])->fileInput(['class' => 'custom-file-input'])->hint('Необходимо отсканировать все страницы паспорта (включая пустые)')?>
-
-
-<?php
-$script = <<< JS
-$(document).ready(function() {
-    $('#child-passport_series').attr('placeholder', '7788');
-    $('#child-passport_number').attr('placeholder', '123456');
-    $('#child-passport_code').attr('placeholder', '778-887');
-});
-JS;
-$this->registerJs($script, yii\web\View::POS_READY);
-?>

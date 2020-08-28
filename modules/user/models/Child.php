@@ -247,6 +247,10 @@ class Child extends Model
     public function attributeHints()
     {
         return [
+            'passport_series' => '<strong>Пример:</strong> 7788',
+            'passport_number' => '<strong>Пример:</strong> 123456',
+            'passport_code' => '<strong>Пример:</strong> 778-887',
+            'passport_department' => '<strong>Пример:</strong> МВД Тверского района, г.Москва',
             'is_study' => 'Дети в возрасте до 23 лет, обучающиеся в образовательном учреждении по очной форме обучения',
             'is_invalid' => 'Дети старше 18 лет, ставшие инвалидами до достижения ими возраста 18 лет',
             'address_registration' => 'Пример: Московская обл., г.Москва, п.Московский, Киевское ш. 22км., д. 6, стр. 1, кв. 5',
