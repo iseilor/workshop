@@ -174,7 +174,7 @@ $img = $bundle->baseUrl . '/img/percent_form_family_income_black.png';
                                 <div class="callout callout-success bg-success color-palette">
                                     <h3><?= Icon::show('calculator') ?>Результат расчёта</h3>
                                     <ul>
-                                        <li>Максимальный размер компенсации процентов: <strong><?= Yii::$app->formatter->asInteger($model->compensation_count); ?></strong> руб</li>
+                                        <li>Максимальный размер компенсации процентов в год, руб: <strong><?= Yii::$app->formatter->asInteger($model->compensation_count); ?></strong></li>
                                         <li>Максимальный срок компенсации процентов: <strong><?= $model->compensation_years ?></strong> лет</li>
                                         <li>Ставка компенсации процентов: <strong><?= $model->SKP ?></strong> %</li>
                                     </ul>
