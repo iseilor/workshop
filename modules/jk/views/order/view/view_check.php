@@ -14,7 +14,7 @@ $countAll = $dataProvider->count;
 $countApporoval = count($approvals);
 
 // Если TOP-менеджер то у него согласующих нет
-if ($countApporoval>0){
+if ($countAll>0){
     $percent = number_format( $countApporoval/$countAll * 100, 0);
 }else{
     $percent = 100;
