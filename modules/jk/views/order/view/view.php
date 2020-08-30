@@ -1,5 +1,6 @@
 <?php
 
+use app\modules\jk\models\Status;
 use app\modules\jk\Module;
 use kartik\icons\Icon;
 use yii\bootstrap4\Modal;
@@ -64,14 +65,16 @@ $this->title .= ' ' . $model->status->label;
                     </div>
                 </div>
                 <div class="card-footer">
-                    <!--<?= $this->render('btn_curator', ['model' => $model]) ?>-->
-                    <?php if ($model->status_id == \app\modules\jk\models\Status::findOne(['code' => 'NEW'])->id): ?>
-                        <!--<?= Html::a(Icon::show('check') . 'Отправить куратору на проверку', ['', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
--->
 
+                    <!-- Если заявка в статусе НОВАЯ или после дорабоки, то можно отправить на проверку куратору -->
+                    <?php if (in_array($model->status_id,
+                        [Status::findOne(['code' => 'NEW'])->id,
+                            Status::findOne(['code' => 'CURATOR_RETURN'])->id])): ?>
+                        <?= $this->render('btn_curator', ['model' => $model]) ?>
+                    <?php endif; ?>
 
-                          <?php endif; ?>
-                    <?= Html::a(Icon::show('tasks') . 'Отправить руководителю на согласование', ['manager', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+                    <!-- Отправить на соглаосвание руководителю -->
+                    <?= Html::a(Icon::show('tasks') . 'Отправить руководителю на согласование', ['manager', 'id' => $model->id], ['class' => 'btn btn-primary d-none']) ?>
 
                     <div class="float-right">
                         <?= Html::a(Icon::show('edit') . 'Изменить заявку', ['update', 'id' => $model->id], ['class' => 'btn btn-warning']) ?>

@@ -5,7 +5,9 @@ use app\components\grid\LinkColumn;
 use app\modules\jk\models\Status;
 use app\modules\jk\Module;
 use kartik\export\ExportMenu;
+use kartik\icons\Icon;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
 use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
@@ -34,7 +36,9 @@ $this->params['breadcrumbs'][] = $this->title;
                         'class' => LinkColumn::class,
                         'attribute' => 'id',
                         'contentOptions' => ['style' => 'max-width: 10px;'],
+                        'headerOptions' => ['style' => 'width: 10px;!important'],
                     ],
+                    'created_at:datetime',
                     'createdUserLabel:html',
                     [
                         'filter' => \app\modules\jk\models\Order::getTypesArray(),
@@ -47,6 +51,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'value' => 'status.label',
                         'format' => 'html',
                     ],
+
                     [
                         'label' => 'Прогресс',
                         'format' => 'raw',
@@ -55,9 +60,25 @@ $this->params['breadcrumbs'][] = $this->title;
                             return $status->getProgressBar();
                         },
                     ],
-                    'created_at:datetime',
                     [
+                            // Кнопка только если в статусе ПРОВЕРКА КУРАТОРОМ
                         'class' => ActionColumn::class,
+                        'controller' => '/jk/order',
+                        'template' => '{check} {view} {update} {delete}',
+                        'headerOptions' => ['style' => 'min-width: 170px;'],
+                        'buttons' => [
+                            'check' => function ($url, $model, $key) {
+                                if ($model->status->code == 'CURATOR_CHECK') {
+                                    return Html::a(Icon::show('check'), $url, [
+                                        'class' => 'btn btn-sm btn-success',
+                                        'title' => 'Проверить заявку',
+                                        'data-pjax' => '0',
+                                    ]);
+                                } else {
+                                    return '';
+                                }
+                            },
+                        ],
                     ],
                 ];
                 echo ExportMenu::widget([

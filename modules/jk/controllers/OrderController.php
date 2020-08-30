@@ -8,6 +8,7 @@ use app\modules\jk\models\OrderSearch;
 use app\modules\jk\models\OrderStage;
 use app\modules\jk\models\OrderStageSearch;
 use app\modules\jk\models\OrderStop;
+use app\modules\jk\models\Rf;
 use app\modules\jk\models\Status;
 use app\modules\jk\Module;
 use app\modules\user\models\Passport;
@@ -135,11 +136,11 @@ class OrderController extends Controller
     {
         // Смотрим, заполнины ли все поля у пользователя в профиле
         $user = User::findOne(Yii::$app->user->identity->getId());
-//        if (!$user->isPassport()) {
-//            Yii::$app->session->setFlash('warning', "Чтобы приступить к оформлению заявки на участие в Жилищной Кампании,
-//            вам необходимо заполнить все данные по вашему паспорту ");
-//            return $this->redirect(['/user/profile/update']);
-//        }
+        //        if (!$user->isPassport()) {
+        //            Yii::$app->session->setFlash('warning', "Чтобы приступить к оформлению заявки на участие в Жилищной Кампании,
+        //            вам необходимо заполнить все данные по вашему паспорту ");
+        //            return $this->redirect(['/user/profile/update']);
+        //        }
 
 
         $model = new Order();
@@ -158,9 +159,9 @@ class OrderController extends Controller
         }
 
 
-//        var_dump(Yii::$app->request->post());
-//        var_dump($spose);
-//        die();
+        //        var_dump(Yii::$app->request->post());
+        //        var_dump($spose);
+        //        die();
 
 
         // Обновлаяем паспортные данные
@@ -174,33 +175,34 @@ class OrderController extends Controller
                     case 'passport_file':
                         // Passport
                         $passport_file = UploadedFile::getInstance($passport, 'passport_file');
-                        if ($passport_file){
-                            $passportFileDir = Yii::$app->params['module']['user']['path'].$user->id;
-                            $passportFileName = $user->id .'_passport_'.date('YmdHis'). '.' . $passport_file->extension;
-                            FileHelper::createDirectory( $passportFileDir, $mode = 0777, $recursive = true);
-                            $passport_file->saveAs($passportFileDir. '/'.$passportFileName);
+                        if ($passport_file) {
+                            $passportFileDir = Yii::$app->params['module']['user']['path'] . $user->id;
+                            $passportFileName = $user->id . '_passport_' . date('YmdHis') . '.' . $passport_file->extension;
+                            FileHelper::createDirectory($passportFileDir, $mode = 0777, $recursive = true);
+                            $passport_file->saveAs($passportFileDir . '/' . $passportFileName);
                             $user->passport_file = $passportFileName;
                         }
                         break;
                     case 'ejd_file':
                         // Passport
                         $ejd_file = UploadedFile::getInstance($passport, 'ejd_file');
-                        if ($ejd_file){
-                            $ejdFileDir = Yii::$app->params['module']['user']['path'].$user->id;
-                            $ejdFileName = $user->id .'_ejd_'.date('YmdHis'). '.' . $ejd_file->extension;
-                            FileHelper::createDirectory( $ejdFileDir, $mode = 0777, $recursive = true);
-                            $ejd_file->saveAs($ejdFileDir. '/'.$ejdFileName);
+                        if ($ejd_file) {
+                            $ejdFileDir = Yii::$app->params['module']['user']['path'] . $user->id;
+                            $ejdFileName = $user->id . '_ejd_' . date('YmdHis') . '.' . $ejd_file->extension;
+                            FileHelper::createDirectory($ejdFileDir, $mode = 0777, $recursive = true);
+                            $ejd_file->saveAs($ejdFileDir . '/' . $ejdFileName);
                             $user->ejd_file = $ejdFileName;
                         }
                         break;
                     case 'temporary_registration_file':
                         // Passport
                         $temporary_registration_file = UploadedFile::getInstance($passport, 'temporary_registration_file');
-                        if ($temporary_registration_file){
-                            $temporaryRegistrationFileDir = Yii::$app->params['module']['user']['path'].$user->id;
-                            $temporaryRegistrationFileName = $user->id .'_temporary_registration_'.date('YmdHis'). '.' . $temporary_registration_file->extension;
-                            FileHelper::createDirectory( $temporaryRegistrationFileDir, $mode = 0777, $recursive = true);
-                            $temporary_registration_file->saveAs($temporaryRegistrationFileDir. '/'.$temporaryRegistrationFileName);
+                        if ($temporary_registration_file) {
+                            $temporaryRegistrationFileDir = Yii::$app->params['module']['user']['path'] . $user->id;
+                            $temporaryRegistrationFileName = $user->id . '_temporary_registration_' . date('YmdHis') . '.'
+                                . $temporary_registration_file->extension;
+                            FileHelper::createDirectory($temporaryRegistrationFileDir, $mode = 0777, $recursive = true);
+                            $temporary_registration_file->saveAs($temporaryRegistrationFileDir . '/' . $temporaryRegistrationFileName);
                             $user->temporary_registration_file = $temporaryRegistrationFileName;
                         }
                         break;
@@ -219,11 +221,12 @@ class OrderController extends Controller
                     case 'work_transferred_file':
                         // Transferred file
                         $work_transferred_file = UploadedFile::getInstance($user, 'work_transferred_file');
-                        if ($work_transferred_file){
-                            $fileDir = Yii::$app->params['module']['user']['path'].$user->id;
-                            $fileName = $user->id .' | '.$user->fio.' | Заявление о переводе | '.date('d.m.Y H:i:s'). '.' . $work_transferred_file->extension;
-                            FileHelper::createDirectory( $fileDir, $mode = 0777, $recursive = true);
-                            $work_transferred_file->saveAs($fileDir. '/'.$fileName);
+                        if ($work_transferred_file) {
+                            $fileDir = Yii::$app->params['module']['user']['path'] . $user->id;
+                            $fileName = $user->id . ' | ' . $user->fio . ' | Заявление о переводе | ' . date('d.m.Y H:i:s') . '.'
+                                . $work_transferred_file->extension;
+                            FileHelper::createDirectory($fileDir, $mode = 0777, $recursive = true);
+                            $work_transferred_file->saveAs($fileDir . '/' . $fileName);
                             $user->work_transferred_file = $fileName;
                         }
                         break;
@@ -267,10 +270,10 @@ class OrderController extends Controller
         }
 
         // Если заявка создана на основании калькулятора процентов или займа
-        if (isset($_GET['percent_id'])){
+        if (isset($_GET['percent_id'])) {
             $model->loadDataPercent($_GET['percent_id']);
         }
-        if (isset($_GET['zaim_id'])){
+        if (isset($_GET['zaim_id'])) {
             $model->loadDataZaim($_GET['zaim_id']);
         }
 
@@ -314,9 +317,9 @@ class OrderController extends Controller
             $passport = new Passport();
         }
 
-//       var_dump(Yii::$app->request->post());
-//        var_dump($spose);
-//        die();
+        //       var_dump(Yii::$app->request->post());
+        //        var_dump($spose);
+        //        die();
 
         // Обновлаяем паспортные данные
         // TODO Разобраться, почему не рабоате load() и убрать "педальный" метод
@@ -329,33 +332,34 @@ class OrderController extends Controller
                     case 'passport_file':
                         // Passport
                         $passport_file = UploadedFile::getInstance($passport, 'passport_file');
-                        if ($passport_file){
-                            $passportFileDir = Yii::$app->params['module']['user']['path'].$user->id;
-                            $passportFileName = $user->id .'_passport_'.date('YmdHis'). '.' . $passport_file->extension;
-                            FileHelper::createDirectory( $passportFileDir, $mode = 0777, $recursive = true);
-                            $passport_file->saveAs($passportFileDir. '/'.$passportFileName);
+                        if ($passport_file) {
+                            $passportFileDir = Yii::$app->params['module']['user']['path'] . $user->id;
+                            $passportFileName = $user->id . '_passport_' . date('YmdHis') . '.' . $passport_file->extension;
+                            FileHelper::createDirectory($passportFileDir, $mode = 0777, $recursive = true);
+                            $passport_file->saveAs($passportFileDir . '/' . $passportFileName);
                             $user->passport_file = $passportFileName;
                         }
                         break;
                     case 'ejd_file':
                         // Passport
                         $ejd_file = UploadedFile::getInstance($passport, 'ejd_file');
-                        if ($ejd_file){
-                            $ejdFileDir = Yii::$app->params['module']['user']['path'].$user->id;
-                            $ejdFileName = $user->id .'_ejd_'.date('YmdHis'). '.' . $ejd_file->extension;
-                            FileHelper::createDirectory( $ejdFileDir, $mode = 0777, $recursive = true);
-                            $ejd_file->saveAs($ejdFileDir. '/'.$ejdFileName);
+                        if ($ejd_file) {
+                            $ejdFileDir = Yii::$app->params['module']['user']['path'] . $user->id;
+                            $ejdFileName = $user->id . '_ejd_' . date('YmdHis') . '.' . $ejd_file->extension;
+                            FileHelper::createDirectory($ejdFileDir, $mode = 0777, $recursive = true);
+                            $ejd_file->saveAs($ejdFileDir . '/' . $ejdFileName);
                             $user->ejd_file = $ejdFileName;
                         }
                         break;
                     case 'temporary_registration_file':
                         // Passport
                         $temporary_registration_file = UploadedFile::getInstance($passport, 'temporary_registration_file');
-                        if ($temporary_registration_file){
-                            $temporaryRegistrationFileDir = Yii::$app->params['module']['user']['path'].$user->id;
-                            $temporaryRegistrationFileName = $user->id .'_temporary_registration_'.date('YmdHis'). '.' . $temporary_registration_file->extension;
-                            FileHelper::createDirectory( $temporaryRegistrationFileDir, $mode = 0777, $recursive = true);
-                            $temporary_registration_file->saveAs($temporaryRegistrationFileDir. '/'.$temporaryRegistrationFileName);
+                        if ($temporary_registration_file) {
+                            $temporaryRegistrationFileDir = Yii::$app->params['module']['user']['path'] . $user->id;
+                            $temporaryRegistrationFileName = $user->id . '_temporary_registration_' . date('YmdHis') . '.'
+                                . $temporary_registration_file->extension;
+                            FileHelper::createDirectory($temporaryRegistrationFileDir, $mode = 0777, $recursive = true);
+                            $temporary_registration_file->saveAs($temporaryRegistrationFileDir . '/' . $temporaryRegistrationFileName);
                             $user->temporary_registration_file = $temporaryRegistrationFileName;
                         }
                         break;
@@ -374,11 +378,12 @@ class OrderController extends Controller
                     case 'work_transferred_file':
                         // Transferred file
                         $work_transferred_file = UploadedFile::getInstance($user, 'work_transferred_file');
-                        if ($work_transferred_file){
-                            $fileDir = Yii::$app->params['module']['user']['path'].$user->id;
-                            $fileName = $user->id .' | '.$user->fio.' | Заявление о переводе | '.date('d.m.Y H:i:s'). '.' . $work_transferred_file->extension;
-                            FileHelper::createDirectory( $fileDir, $mode = 0777, $recursive = true);
-                            $work_transferred_file->saveAs($fileDir. '/'.$fileName);
+                        if ($work_transferred_file) {
+                            $fileDir = Yii::$app->params['module']['user']['path'] . $user->id;
+                            $fileName = $user->id . ' | ' . $user->fio . ' | Заявление о переводе | ' . date('d.m.Y H:i:s') . '.'
+                                . $work_transferred_file->extension;
+                            FileHelper::createDirectory($fileDir, $mode = 0777, $recursive = true);
+                            $work_transferred_file->saveAs($fileDir . '/' . $fileName);
                             $user->work_transferred_file = $fileName;
                         }
                         break;
@@ -403,8 +408,6 @@ class OrderController extends Controller
             $spose->save();
 
         }
-
-
 
 
         // $user->load(Yii::$app->request->post()) && $user->save()
@@ -469,7 +472,17 @@ class OrderController extends Controller
         ]);
     }
 
-    public function actionCheck($id)
+
+    /**
+     * Наработки для проверки по полям
+     * //TODO: пока заглушка
+     *
+     * @param $id
+     *
+     * @return string
+     * @throws \yii\web\NotFoundHttpException
+     */
+    public function actionCheck0($id)
     {
         return $this->render(
             'check/check',
@@ -479,15 +492,22 @@ class OrderController extends Controller
         );
     }
 
-    // Проверка куратором
-    public function actionCheck0($id)
+
+    /** Проверка заявки куратором
+     *
+     * @param $id Номер заявки
+     *
+     * @return string|\yii\web\Response
+     * @throws \yii\web\NotFoundHttpException
+     */
+    public function actionCheck($id)
     {
         $orderStage = new OrderStage();
-
         $orderStage->order_id = $id;
 
-        if (isset(Yii::$app->request->post()['status_id'])) {
-            $orderStage->status_id = Yii::$app->request->post()['status_id'];
+        if (isset(Yii::$app->request->post()['status_code'])) {
+            $statusCode = Yii::$app->request->post()['status_code'];
+            $orderStage->status_id = Status::findOne(['code' => $statusCode])->id;
         }
 
         if ($orderStage->load(Yii::$app->request->post()) && $orderStage->save()) {
@@ -495,28 +515,62 @@ class OrderController extends Controller
             $order->status_id = $orderStage->status_id;
             $order->save();
 
+            // В зависимости от нового статуса шлём разные письма сотруднику
+            $user = User::findOne($order->created_by);
+            $emailTemplate = '';
+            $emailTitle = '';
+
+            switch ($statusCode) {
+                case 'CURATOR_RETURN':
+                    $emailTemplate = 'userReturn';
+                    $emailTitle = 'Возвращено куратором на доработку';
+                    break;
+                case 'CURATOR_YES':
+                    $emailTemplate = 'userYes';
+                    $emailTitle = 'Проверено и согласовано куратором';
+                    break;
+                case 'CURATOR_NO':
+                    $emailTemplate = 'userNo';
+                    $emailTitle = 'Отклонено куратором';
+                    break;
+            }
+            Yii::$app->mailer->compose(
+                '@app/modules/jk/mails/check/' . $emailTemplate,
+                [
+                    'user' => $user,
+                    'order' => $order,
+                    'stage' => $orderStage,
+                ]
+            )
+                ->setFrom('workshop@rt.ru')
+                ->setTo($user->email)
+                ->setBcc('obedkinav@ya.ru')
+                ->setSubject("HR-портал / ЖП / Заявка №" . $order->id . " / " . $emailTitle . '.')
+                ->send();
+
             return $this->redirect(['index']);
         }
 
+        // История движения заявки
+        $orderStageSearchModel = new OrderStageSearch();
+        $stages = $orderStageSearchModel->search(['OrderStageSearch' => ['order_id' => $id]]);
+
         return $this->render(
-            'check0',
+            'check',
             [
                 'order' => $this->findModel($id),
                 'stage' => $orderStage,
                 'user' => User::findOne($this->findModel($id)->created_by),
+                'stages' => $stages,
             ]
         );
     }
 
-
     public function actionHistory($id)
     {
-
         // Займы текущего пользователя
         $orderStageSearchModel = new OrderStageSearch();
         $stages = $orderStageSearchModel->search(['OrderStageSearch' => ['order_id' => $id]]);
-
-
         return $this->render(
             'history',
             [
@@ -592,13 +646,13 @@ class OrderController extends Controller
     // Передаём заявку куратору на проверку
     public function action2curator($id)
     {
-        $order=Order::findOne($id);
-        $order->status_id=Status::findOne(['code'=>'MANAGER_WAIT'])->id;
+        $order = Order::findOne($id);
+        $order->status_id = Status::findOne(['code' => 'MANAGER_WAIT'])->id;
         $order->save();
 
         Yii::$app->session->setFlash('success', "Начат процесс согласования вашей заявки на оказание материальной помощи<br/>
         Вы будете получать email-уведомления, а также можете смотреть через личный кабинет, у кого из руководителей заявка в данный момент находится на согласовании");
-        return $this->redirect(['/jk/order/view/','id'=>$id]);
+        return $this->redirect(['/jk/order/view/', 'id' => $id]);
 
     }
 
@@ -606,26 +660,92 @@ class OrderController extends Controller
     public function actionManager($id)
     {
         Agreement::sendEmailManager($id);
-        $order=Order::findOne($id);
-        $order->status_id=Status::findOne(['code'=>'MANAGER_WAIT'])->id;
+        $order = Order::findOne($id);
+        $order->status_id = Status::findOne(['code' => 'MANAGER_WAIT'])->id;
         $order->save();
 
         Yii::$app->session->setFlash('success', "Начат процесс согласования вашей заявки на оказание материальной помощи<br/>
         Вы будете получать email-уведомления, а также можете смотреть через личный кабинет, у кого из руководителей заявка в данный момент находится на согласовании");
-        return $this->redirect(['/jk/order/view/','id'=>$id]);
+        return $this->redirect(['/jk/order/view/', 'id' => $id]);
 
     }
 
-    public function actionPdAgreement($id) {
-        $order=Order::findOne($id);
+    public function actionPdAgreement($id)
+    {
+        $order = Order::findOne($id);
         if (!$order) {
             return;
         }
         $pathDir = Yii::$app->params['module']['jk']['order']['filePath'] . $id;
-        $file = $pathDir.DIRECTORY_SEPARATOR.$order->file_agree_personal_data;
+        $file = $pathDir . DIRECTORY_SEPARATOR . $order->file_agree_personal_data;
 
         if (file_exists($file)) {
             Yii::$app->response->sendFile($file);
         }
+    }
+
+
+    /**
+     * Присвоить заявке новый статуc
+     *
+     * @param $id номер заявки
+     *            new-status-code - Код нового статуса из справочника
+     *
+     * @return \yii\web\Response
+     */
+    public function actionSetNewStatus($id)
+    {
+        // Присваиваем новый статус заявки
+        $newStatusCode = $_GET['new-status-code'];
+        $order = Order::findOne($id);
+        $status_id = Status::findOne(['code' => $newStatusCode])->id;
+        $order->status_id = $status_id;
+        $order->save();
+        Yii::$app->session->setFlash('success', "Ваша заявка передана на проверку куратору по Жилищной Программе в вашем филиала");
+
+        // Сохраняем в историю движения заявки
+        $orderStage = new OrderStage();
+        $orderStage->order_id = $id;
+        $orderStage->status_id = $status_id;
+        $orderStage->comment = 'Заявка переведена на проверку куратору';
+        $orderStage->save();
+
+        // Сотрудник и куратор
+        $user = User::findOne($order->created_by);
+        $rf = Rf::findOne($user->filial_id);
+        User::findOne($order->created_by);
+        $curator = User::findOne($rf->user_id);
+
+        // Отправляем письмо куратору
+        Yii::$app->mailer->compose(
+            '@app/modules/jk/mails/check/curator',
+            [
+                'user' => $user,
+                'curator' => $curator,
+                'order' => $order,
+            ]
+        )
+            ->setFrom('workshop@tr.ru')
+            ->setTo($curator->email)
+            ->setBcc('obedkinav@ya.ru')
+            ->setSubject("HR-портал / ЖП / Заявка №" . $order->id . " / На проверку куратору.")
+            ->send();
+
+        // Отправляем письмо сотруднику
+        Yii::$app->mailer->compose(
+            '@app/modules/jk/mails/check/user',
+            [
+                'user' => $user,
+                'curator' => $curator,
+                'order' => $order,
+            ]
+        )
+            ->setFrom('workshop@tr.ru')
+            ->setTo($user->email)
+            ->setBcc('obedkinav@ya.ru')
+            ->setSubject("HR-портал / ЖП / Заявка №" . $order->id . " / На проверку куратору.")
+            ->send();
+
+        return $this->redirect(['/jk/order/view/', 'id' => $id]);
     }
 }
