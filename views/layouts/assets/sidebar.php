@@ -2,6 +2,7 @@
 
 
 use app\components\menu\MenuActive;
+use app\modules\main\Module;
 use kartik\icons\Icon;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -40,7 +41,11 @@ use yii\helpers\Url;
         <nav class="mt-2">
             <?php echo MenuActive::widget(
                 [
-                    'options' => ['class' => 'nav nav-pills nav-sidebar flex-column nav-child-indent', 'role' => 'menu', 'data' => ['widget' => 'treeview', 'accordion' => 'false']],
+                    'options' => [
+                        'class' => 'nav nav-pills nav-sidebar flex-column nav-child-indent',
+                        'role' => 'menu',
+                        'data' => ['widget' => 'treeview', 'accordion' => 'false'],
+                    ],
                     'itemOptions' => ['class' => 'nav-item has-treeview'],
                     'linkTemplate' => '<a href="{url}" class="nav-link {activeClass}">{label}</a>',
                     'encodeLabels' => false,
@@ -50,7 +55,10 @@ use yii\helpers\Url;
                     'activeCssClass' => 'active menu-open',
                     'items' => [
                         ['label' => '<i class="nav-icon fas fa-tachometer-alt"></i> <p>Главная</p>', 'url' => ['/main/default/index']],
-                        ['label' => Icon::show(Yii::$app->params['module']['news']['iconClass'], ['class' => 'nav-icon']) . ' <p>Новости</p>', 'url' => ['/news/default/index']],
+                        [
+                            'label' => Icon::show(Yii::$app->params['module']['news']['iconClass'], ['class' => 'nav-icon']) . ' <p>Новости</p>',
+                            'url' => ['/news/default/index'],
+                        ],
                         [
                             'label' => Icon::show('home', ['class' => 'nav-icon'])
                                 . Html::tag('p', \app\modules\jk\Module::t('module', 'jk')
@@ -82,6 +90,29 @@ use yii\helpers\Url;
                                 ]
 
                                 /*['label' => '<i class="fas fa-user nav-icon"></i> <p>Написать куратору</p>', 'url' => ['/jk/curator/index']],*/
+                            ],
+                        ],
+                        [
+                            'label' => Icon::show('sitemap', ['class' => 'nav-icon'])
+                                . Html::tag('p',  Module::t('module', 'About project')
+                                    . Icon::show('angle-left', ['class' => 'right'])),
+                            'url' => ['#'],
+                            'options' => ['class' => 'nav-item has-treeview'],
+                            'items' => [
+                                [
+                                    'label' => Icon::show('info', ['class' => 'nav-icon']) . Module::t('module', 'Information'),
+                                    'url' => ['/main/default/about'],
+                                ],
+                                [
+                                    'label' => Icon::show('users', ['class' => 'nav-icon']) . Module::t('module', 'Teams'),
+                                    'url' => ['/main/team/index'],
+                                ],
+                                [
+                                    'label' => Icon::show('confluence', ['framework' => Icon::FAB,'class' => 'nav-icon']) . 'Confluence',
+                                    'url' => Url::to('https://confluence.rt.ru/display/WSHOP'),
+                                    'template' => '<a href="{url}" class="nav-link" target="_blank" title="Проект в Confluence">{label}</a>',
+                                ],
+                                ['label' => Icon::show('envelope',['class' => 'nav-icon']) . Module::t('module', 'Feedback'), 'url' => ['/main/default/feedback']],
                             ],
                         ],
                         /*[

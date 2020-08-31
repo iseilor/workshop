@@ -18,20 +18,16 @@ use yii\widgets\Menu;
         'items' => [
             ['label' => '<i class="fas fa-bars"></i>', 'url' => '#', 'options' => ['class' => 'nav-item'], 'template' => '<a href="{url}" class="nav-link" data-widget="pushmenu">{label}</a>'],
             ['label' => Icon::show('tachometer-alt') . Module::t('module', 'Home'), 'url' => ['/main/default/index']],
-            ['label' => Icon::show('users') . Module::t('module', 'Teams'), 'url' => ['/main/team/index']],
-            ['label' => Icon::show('info') . Module::t('module', 'About project'), 'url' => ['/main/default/about']],
-            [
-                'label' => Icon::show('confluence', ['framework' => Icon::FAB]) . 'Confluence',
-                'url' => Url::to('https://confluence.rt.ru/display/WSHOP'),
-                'template' => '<a href="{url}" class="nav-link" target="_blank" title="Проект в Confluence">{label}</a>',
-            ],
+            ['label' => Icon::show('bullhorn') . Module::t('module', 'News'),'url' => ['/news/default/index']],
+            ['label' => Icon::show('home').\app\modules\jk\Module::t('module', 'jk'),'url' => ['/jk/default/index']],
+            ['label' => Icon::show('info'). Module::t('module', 'Information'),'url'=>['/main/default/about']],
             ['label' => Icon::show('envelope') . Module::t('module', 'Feedback'), 'url' => ['/main/default/feedback']],
         ],
     ]);
     ?>
 
     <!-- SEARCH FORM -->
-    <form class="form-inline ml-3">
+    <!--<form class="form-inline ml-3">
         <div class="input-group input-group-sm">
             <input class="form-control form-control-navbar" type="search"
                    placeholder="Поиск" aria-label="Search">
@@ -41,7 +37,7 @@ use yii\widgets\Menu;
                 </button>
             </div>
         </div>
-    </form>
+    </form>-->
 
     <ul class="navbar-nav ml-auto">
         <!--// TODO: Потом это обязательно тоже сделаем-->

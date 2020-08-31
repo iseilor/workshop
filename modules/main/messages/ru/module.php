@@ -7,6 +7,8 @@ return [
     'Feedback' => 'Обратная связь',
     'Teams' => 'Команда',
     'Create Team' => 'Добавить участника',
+    'Information'=>'Информация',
+    'News'=>'Новости',
 
     'Name' => 'Имя',
     'Full name' => 'ФИО',

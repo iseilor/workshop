@@ -178,6 +178,7 @@ $config = [
                 'team' => 'main/team/index',
                 'about' => 'main/default/about',
                 'contacts' => 'main/default/contacts',
+                'feedback' => 'main/default/feedback',
                 '<_a:error>' => 'main/default/<_a>',
 
                 '<_m:(user)>/<id:\d+>' => 'user/default/view',
