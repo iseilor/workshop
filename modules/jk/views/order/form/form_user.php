@@ -303,6 +303,10 @@ $user = User::findOne(Yii::$app->user->identity->id);
 <!--    </p>-->
 
 <?php
+// Динамическое управление "обязательностью" полей с файлами
+$workTransferredFileIsRequired = empty($usermd->work_transferred_file) ? 'true' : 'false';
+$temporaryRegistrationFileIsRequired = empty($passport->temporary_registration_file) ? 'true' : 'false';
+
 $script = <<< JS
 $(document).ready(function() {
     $('div.field-order-jp_room_count').addClass('required');
@@ -377,7 +381,7 @@ $(document).ready(function() {
     });
     
     // Поле с заявлением о переводе показываем, когда включена галочка
-    if (!$('.field-user-work_transferred_file').hasClass('d-none')) {
+    if ((!$('.field-user-work_transferred_file').hasClass('d-none')) && $workTransferredFileIsRequired) {
         $('div.field-user-work_transferred_file').addClass('required');
         $('#user-work_transferred_file').attr('required', true);
     }
@@ -389,8 +393,10 @@ $(document).ready(function() {
             $('#user-work_transferred_file').attr('required', false);
         } else {
             $('div.field-user-work_transferred_file').removeClass('d-none');
-            $('div.field-user-work_transferred_file').addClass('required');
-            $('#user-work_transferred_file').attr('required', true);
+            if ($workTransferredFileIsRequired) {
+                $('div.field-user-work_transferred_file').addClass('required');
+                $('#user-work_transferred_file').attr('required', true);
+            }
         }
     });
     
@@ -415,7 +421,7 @@ $(document).ready(function() {
     
     
     // Поле с Документ о временной регистрации, когда включена галочка
-    if (!$('.field-passport-temporary_registration_file').hasClass('d-none')) {
+    if ((!$('.field-passport-temporary_registration_file').hasClass('d-none')) && $temporaryRegistrationFileIsRequired){
         $('div.field-passport-temporary_registration_file').addClass('required');
         $('#passport-temporary_registration_file').attr('required', true);
     }
@@ -427,8 +433,10 @@ $(document).ready(function() {
             $('#passport-temporary_registration_file').attr('required', false);
         } else {
             $('div.field-passport-temporary_registration_file').removeClass('d-none');
-            $('div.field-passport-temporary_registration_file').addClass('required');
-            $('#passport-temporary_registration_file').attr('required', true);
+            if ($temporaryRegistrationFileIsRequired) {
+                $('div.field-passport-temporary_registration_file').addClass('required');
+                $('#passport-temporary_registration_file').attr('required', true);
+            }
         }
     });
     
