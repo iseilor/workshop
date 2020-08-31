@@ -37,8 +37,7 @@ class Passport extends Model
      */
     public function rules()
     {
-        return [
-            [['passport_file', 'ejd_file'], 'required'],
+        $rules =  [
             [['passport_series', 'passport_number', 'passport_registration', 'passport_department', 'passport_code', 'address_fact'],
                 'string', 'max' => 255,],
             [['ejd_file', 'temporary_registration_file',], 'string', 'max' => 256,],
@@ -52,6 +51,16 @@ class Passport extends Model
             [['ejd_file',], 'file', 'skipOnEmpty' => true, 'extensions' => 'pdf', 'maxSize' => '10000000',],
             [['temporary_registration_file',], 'file', 'skipOnEmpty' => true, 'extensions' => 'pdf', 'maxSize' => '10000000',],
         ];
+
+        if (!$this->passport_file) {
+            $rules[] = [['passport_file'], 'required'];
+        }
+
+        if (!$this->ejd_file) {
+            $rules[] =  [['ejd_file'], 'required'];
+        }
+
+        return $rules;
     }
 
     /**
