@@ -544,7 +544,7 @@ class OrderController extends Controller
             )
                 ->setFrom('workshop@rt.ru')
                 ->setTo($user->email)
-                ->setBcc('obedkinav@ya.ru')
+                ->setBcc('aleksey.obedkin@rt.ru')
                 ->setSubject("HR-портал / ЖП / Заявка №" . $order->id . " / " . $emailTitle . '.')
                 ->send();
 
@@ -727,7 +727,7 @@ class OrderController extends Controller
         )
             ->setFrom('workshop@tr.ru')
             ->setTo($curator->email)
-            ->setBcc('obedkinav@ya.ru')
+            ->setBcc('aleksey.obedkin@rt.ru')
             ->setSubject("HR-портал / ЖП / Заявка №" . $order->id . " / На проверку куратору.")
             ->send();
 
@@ -742,7 +742,7 @@ class OrderController extends Controller
         )
             ->setFrom('workshop@tr.ru')
             ->setTo($user->email)
-            ->setBcc('obedkinav@ya.ru')
+            ->setBcc('aleksey.obedkin@rt.ru')
             ->setSubject("HR-портал / ЖП / Заявка №" . $order->id . " / На проверку куратору.")
             ->send();
 
