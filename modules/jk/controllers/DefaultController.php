@@ -32,9 +32,9 @@ class DefaultController extends Controller
             [
                 'col' => 3,
                 'color' => 'bg-primary',
-                'title' => 'Заявка',
+                'title' => 'Заявки',
                 'description' => 'Подать заявку',
-                'icon' => Icon::show('file'),
+                'icon' => Icon::show('ruble-sign'),
                 'url' => Url::to(['/jk/order/create']),
             ],
             [
