@@ -81,7 +81,7 @@ class Spouse extends Model
     public function rules()
     {
         return [
-            [['type', 'passport_series', 'passport_number', 'passport_date', 'passport_department', 'passport_code','passport_registration', 'passport_file_form'], 'required'],
+            [['type'], 'required'],
             [['created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by', 'user_id', 'gender', 'is_work', 'is_rtk', 'is_do'], 'integer'],
             [
                 [
@@ -108,7 +108,7 @@ class Spouse extends Model
 
             // Обязательные при наличии супруге
             [
-                ['fio','gender','date'],
+                ['fio', 'passport_series', 'passport_number', 'passport_date', 'passport_department', 'passport_code','passport_registration'],
                 'required',
                 'when' => function ($model) {
                     return $model->type == 1;

@@ -22,3 +22,22 @@ use yii\jui\DatePicker;
 <?= $form->field($model, 'marriage_file_form', [
     'template' => getFileInputTemplate($model->marriage_file,  'Копия.pdf'),
 ])->fileInput(['class' => 'custom-file-input']) ?>
+
+<?php
+$script = <<< JS
+$(document).ready(function() {
+    if($('#spouse-type').val() == 2) {
+        $('.field-spouse-fio').addClass('d-none');
+    }
+    $('#spouse-type').on('change', function() {
+        if($('#spouse-type').val() == 2) {
+            $('.field-spouse-fio').addClass('d-none');
+        } else {
+            $('.field-spouse-fio').removeClass('d-none');
+        }
+    });
+});
+JS;
+$this->registerJs($script, yii\web\View::POS_READY);
+?>
+

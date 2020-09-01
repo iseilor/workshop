@@ -40,7 +40,7 @@ use yii\widgets\MaskedInput;
     ]
 ) ?>
 
-<?= $form->field($model, 'passport_department')->textarea(['maxlength' => true]) ?>
+<?= $form->field($model, 'passport_department')->textarea(['maxlength' => true, 'placeholder' => 'МВД Тверского района, г.Москва']) ?>
 
 <?= $form->field($model, 'passport_code')->widget(MaskedInput::class, [
     'mask' => '999-999',
@@ -63,6 +63,19 @@ use yii\widgets\MaskedInput;
 <?php
 $script = <<< JS
 $(document).ready(function() {
+    var arr = [
+                  '.field-spouse-passport_series',
+                  '.field-spouse-passport_number',
+                  '.field-spouse-passport_date',
+                  '.field-spouse-passport_department',
+                  '.field-spouse-passport_registration',
+                  '.field-spouse-passport_code',
+                  '.field-spouse-passport_file_form',
+                ];
+    arr.forEach(function(item, i, arr) {
+      $(item).addClass('required');
+    });
+    
     $('#foreigner-passport').on('change', function() {
         if ($('#foreigner-passport').prop('checked') == true) {
             $('#spouse-passport_series').inputmask({ mask: ""});
@@ -87,7 +100,7 @@ $(document).ready(function() {
         $('.field-spouse-edj_file_form').toggleClass('d-none');
         if($(this).prop("checked")) {
             $('#spouse-passport_registration').prop( "readonly", true );
-            $('#spouse-address_fact').val($('#spouse-passport_registration').data('user-address-registration'));
+            $('#spouse-passport_registration').val($('#spouse-passport_registration').data('user-address-registration'));
         }else{
             $('#spouse-passport_registration').prop( "readonly", false );
         }

@@ -50,11 +50,11 @@ $d_none2 = (isset($model->type) && $model->type == 2) ? '' : 'd-none';
                         <h3><?= Icon::show('briefcase') ?>Трудоустройство</h3>
                         <?= $this->render('form/work', ['model' => $model, 'form' => $form]) ?>
                     </div>
-                    <div class="col-md-12 type-1 <?= $d_none1 ?>">
+                    <!--<div class="col-md-12 type-1 <?/*= $d_none1 */?>">
                         <hr/>
-                        <h3><?= Icon::show('lock') ?>Персональные данные</h3>
-                        <?= $this->render('form/personal', ['model' => $model, 'form' => $form]) ?>
-                    </div>
+                        <h3><?/*= Icon::show('lock') */?>Персональные данные</h3>
+                        <?/*= $this->render('form/personal', ['model' => $model, 'form' => $form]) */?>
+                    </div>-->
                 </div>
             </div>
             <div class="card-footer type-1 type-2 <?= $d_none0 ?>">
