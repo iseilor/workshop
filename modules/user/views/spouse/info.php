@@ -38,11 +38,11 @@ if ($spouse) {
                 'format' => 'raw',
                 'value' => Html::a($spouse->fio, ['/user/spouse/' . $spouse->id], ['target' => '_blank']),
             ],
-            [
+            /*[
                 'attribute' => 'gender',
                 'value' => Spouse::getGenderList()[$spouse->gender],
             ],
-            'date:date',
+            'date:date',*/
             viewFieldFile($spouse, 'marriage_file', Yii::$app->params['module']['spouse']['filePath'] . $spouse->id . '/' . $spouse->marriage_file),
         ],
     ]);

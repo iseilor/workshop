@@ -4,8 +4,8 @@ use yii\jui\DatePicker;
 
 ?>
 <?= $form->field($model, 'fio')->textInput(['maxlength' => true]) ?>
-<?= $form->field($model, 'gender')->dropDownList($model->getGenderList(), ['prompt' => 'Выберите ...']); ?>
-<?= $form->field($model, 'date')->widget(
+<!-- $form->field($model, 'gender')->dropDownList($model->getGenderList(), ['prompt' => 'Выберите ...']);
+ $form->field($model, 'date')->widget(
     DatePicker::class,
     [
         'language' => 'ru',
@@ -17,7 +17,7 @@ use yii\jui\DatePicker;
             'changeYear' => true,
         ],
     ]
-) ?>
+)-->
 
 <?= $form->field($model, 'marriage_file_form', [
     'template' => getFileInputTemplate($model->marriage_file,  'Копия.pdf'),

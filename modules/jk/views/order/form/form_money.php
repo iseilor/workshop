@@ -6,6 +6,9 @@ use yii\widgets\MaskedInput;
 ?>
 <div class="row">
     <div class="col-md-4">
+        <!--$form->field($spose, 'salary_file_form', [
+            'template' => getFileInputTemplate($spose->salary_file, 'Справка.pdf'),
+        ])->fileInput(['class' => 'custom-file-input'])-->
         <?= $form->field($model, 'money_oklad')->widget(MaskedInput::class, ['clientOptions' => Yii::$app->params['widget']['MaskedInput']['clientOptionsMoney']]) ?>
         <?= $form->field($model, 'money_summa_year')->widget(MaskedInput::class, ['clientOptions' => Yii::$app->params['widget']['MaskedInput']['clientOptionsMoney']]) ?>
         <?= $form->field($model, 'money_nalog_year')->widget(MaskedInput::class, ['clientOptions' => Yii::$app->params['widget']['MaskedInput']['clientOptionsMoney']]) ?>

@@ -81,7 +81,7 @@ class Spouse extends Model
     public function rules()
     {
         return [
-            [['type'], 'required'],
+            [['type', 'passport_series', 'passport_number', 'passport_date', 'passport_department', 'passport_code','passport_registration', 'passport_file_form'], 'required'],
             [['created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by', 'user_id', 'gender', 'is_work', 'is_rtk', 'is_do'], 'integer'],
             [
                 [
@@ -204,8 +204,11 @@ class Spouse extends Model
     public function attributeHints()
     {
         return [
-            'fio'=>'Пример: Иванова Анастасия Ивановна',
-            'passport_registration' => 'Пример: 123456, г.Москва, ул.Ленина, д.1, кв.1',
+            'passport_series' => '<strong>Пример:</strong> 7788',
+            'passport_number' => '<strong>Пример:</strong> 123456',
+            'passport_code' => '<strong>Пример:</strong> 778-887',
+            'passport_file_form' => 'Необходимо отсканировать все страницы паспорта (включая пустые)',
+            'passport_registration' => 'Пример: Московская обл., г.Москва, п.Московский, Киевское ш. 22 км., д. 6, стр. 1, кв. 5',
             'address_fact' => 'Пример: 123456, г.Москва, ул.Ленина, д.1, кв.1',
 
         ];

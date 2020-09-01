@@ -25,7 +25,7 @@ echo $this->render('@app/modules/user/views/spouse/info');
     <div class="row">
         <div class="col-lg-4">
             <div class="type-1 type-2">
-                <?= $form->field($spose, 'fio')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($spose, 'fio')->textInput(['maxlength' => true, 'placeholder' => 'Иванова Анастасия Ивановна']) ?>
             </div>
         </div>
 
@@ -36,7 +36,7 @@ echo $this->render('@app/modules/user/views/spouse/info');
         </div>
 
         <div class="col-lg-4">
-            <div class="type-1 type-2">
+            <div class="type-3">
                 <?= $form->field($spose, 'marriage_file_form', [
                 'template' => getFileInputTemplate($spose->marriage_file,  'Копия.pdf'),
                 ])->fileInput(['class' => 'custom-file-input']) ?>
@@ -52,14 +52,14 @@ $(document).ready(function() {
     $('#spouse-type').on('change', function() {
         switch ($(this).val()) {
           case '0':
-                $('.type-1,.type-2').addClass('d-none');
+                $('.type-1,.type-3').addClass('d-none');
                 break;
           case '1':
                 $('.type-1').removeClass('d-none');
                 break;
           case '2':
               $('.type-1').addClass('d-none');
-              $('.type-2').removeClass('d-none');
+              $('.type-3').removeClass('d-none');
             break;
         }
     });
