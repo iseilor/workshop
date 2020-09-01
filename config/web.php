@@ -111,16 +111,8 @@ $config = [
             'useFileTransport' => false,
             'messageConfig' => [
                 'charset' => 'UTF-8',
-                'from' => ['workshop@rt.ru' => 'WORKSHOP'],
+                'from' => [$params['senderEmail'] => $params['senderName']],
             ],
-            /*'transport' => [
-                'class' => 'Swift_SmtpTransport',
-                'host' => 'smtp.gmail.com',
-                'username' => 'xxx@gmail.com',
-                'password' => 'xxx',
-                'port' => '587',
-                'encryption' => 'tls'
-            ]*/
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
