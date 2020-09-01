@@ -29,6 +29,7 @@ $config = [
         'app\modules\pulsar\Bootstrap',
         'app\modules\nsi\Bootstrap',
         'app\modules\project\Bootstrap',
+        'app\modules\video\Bootstrap',
     ],
     'layout' => 'index',
     'language' => 'ru',
@@ -41,32 +42,19 @@ $config = [
         '@files' => 'files',
     ],
     'modules' => [
-        'main' => [
-            'class' => 'app\modules\main\Module',
-        ],
-        'admin' => [
-            'class' => 'app\modules\admin\Module',
-        ],
-        'user' => [
-            'class' => 'app\modules\user\Module',
-        ],
-        'jk' => [
-            'class' => 'app\modules\jk\Module',
-        ],
-        'chat' => [
-            'class' => 'app\modules\chat\Module',
-        ],
-        'news' => [
-            'class' => 'app\modules\news\Module',
-        ],
+        'main' => ['class' => 'app\modules\main\Module'],
+        'admin' => ['class' => 'app\modules\admin\Module'],
+        'user' => ['class' => 'app\modules\user\Module'],
+        'jk' => ['class' => 'app\modules\jk\Module'],
+        'chat' => ['class' => 'app\modules\chat\Module'],
+        'news' => ['class' => 'app\modules\news\Module'],
         'task' => ['class' => 'app\modules\task\Module'],
         'pulsar' => ['class' => 'app\modules\pulsar\Module'],
         'nsi' => ['class' => 'app\modules\nsi\Module'],
         'gridview' => ['class' => 'kartik\grid\Module'],
         'project' => ['class' => 'app\modules\project\Module'],
-        'bot' => [
-            'class' => 'app\modules\bot\Module',
-        ],
+        'bot' => ['class' => 'app\modules\bot\Module'],
+        'video' => ['class' => 'app\modules\video\Module'],
     ],
     'components' => [
         'ad' => [
@@ -86,12 +74,10 @@ $config = [
             ],
         ],
 
-
-
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'm71YjtB7X51bk2lS2s7sHiedVrgUg2SN',
-            'enableCsrfValidation'=>false,
+            'enableCsrfValidation' => false,
         ],
 
         'formatter' => [
@@ -104,7 +90,6 @@ $config = [
             'timeZone' => 'Europe/Moscow',
             'locale' => 'ru-RU',
             'nullDisplay' => '',
-
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -185,8 +170,6 @@ $config = [
                 '<_m:(news)>/<id:\d+>' => 'news/default/view',
                 '<_a:(login|login2|logout|signup|confirm-email|request-password-reset|password-reset|users)>' => 'user/default/<_a>',
 
-
-
                 '<_m:[\w\-]+>/<_c:[\w\-]+>/<id:\d+>' => '<_m>/<_c>/view',
                 '<_m:[\w\-]+>/<_c:[\w\-]+>/<id:\d+>/<_a:[\w\-]+>' => '<_m>/<_c>/<_a>',
                 '<_m:[\w\-]+>' => '<_m>/default/index',
@@ -195,13 +178,8 @@ $config = [
 
                 '<_m:[\w\-]+>/<_a:(table)>' => '<_m>/default/<_a>',
                 '<_m:[\w\-]+>/<_c:[\w\-]+>' => '<_m>/<_c>/index',
-
-
-
             ],
-
         ],
-
     ],
     'params' => $params,
 ];

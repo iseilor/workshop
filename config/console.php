@@ -43,6 +43,11 @@ $config = [
             'class' => 'app\modules\pulsar\Module',
             'controllerNamespace' => 'app\modules\pulsar\commands',
         ],
+        'video' => [
+            'class' => 'app\modules\video\Module',
+            'controllerNamespace' => 'app\modules\video\commands',
+        ],
+
     ],
     'components' => [
         'ad' => [
@@ -126,6 +131,11 @@ $config = [
             'class' => 'yii\console\controllers\MigrateController',
             'migrationPath' => '@app/modules/bot/migrations',
             'migrationTable' => 'migration_bot',
+        ],
+        'migrate-video' => [
+            'class' => 'yii\console\controllers\MigrateController',
+            'migrationPath' => '@app/modules/video/migrations',
+            'migrationTable' => 'migration_video',
         ],
     ],
 
