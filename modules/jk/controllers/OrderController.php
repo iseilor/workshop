@@ -542,9 +542,9 @@ class OrderController extends Controller
                     'stage' => $orderStage,
                 ]
             )
-                ->setFrom('workshop@rt.ru')
+                ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
                 ->setTo($user->email)
-                ->setBcc('aleksey.obedkin@rt.ru')
+                ->setBcc(Yii::$app->params['supportEmail'])
                 ->setSubject("HR-портал / ЖП / Заявка №" . $order->id . " / " . $emailTitle . '.')
                 ->send();
 
@@ -635,7 +635,8 @@ class OrderController extends Controller
                     'order' => $order,
                 ]
             )
-                ->setFrom('workshop@tr.ru')
+                ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
+                ->setBcc(Yii::$app->params['supportEmail'])
                 ->setTo($curator->email)
                 ->setSubject('WORKSHOP / ЖК / Куратору')
                 ->send();
@@ -725,9 +726,9 @@ class OrderController extends Controller
                 'order' => $order,
             ]
         )
-            ->setFrom('workshop@tr.ru')
+            ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
             ->setTo($curator->email)
-            ->setBcc('aleksey.obedkin@rt.ru')
+            ->setBcc(Yii::$app->params['supportEmail'])
             ->setSubject("HR-портал / ЖП / Заявка №" . $order->id . " / На проверку куратору.")
             ->send();
 
@@ -740,9 +741,9 @@ class OrderController extends Controller
                 'order' => $order,
             ]
         )
-            ->setFrom('workshop@tr.ru')
+            ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
             ->setTo($user->email)
-            ->setBcc('aleksey.obedkin@rt.ru')
+            ->setBcc(Yii::$app->params['supportEmail'])
             ->setSubject("HR-портал / ЖП / Заявка №" . $order->id . " / На проверку куратору.")
             ->send();
 

@@ -5,10 +5,11 @@ use kartik\icons\Icon;
 return [
     'icon-framework' => Icon::FAS,
     'adminEmail' => '',
-    'supportEmail' => ['obedkinav@ya.ru'],
-    'senderEmail' => 'workshop@rt.ru',
-    'senderName' => 'WORKSHOP',
+    'supportEmail' => ['aleksey.obedkin@rt.ru'],
+    'senderEmail' => 'hr.center@rt.ru',
+    'senderName' => 'HR.CENTER.RT.RU',
     'user.passwordResetTokenExpire' => 3600,
+
     //'bsDependencyEnabled' => false, // Для Kartic не грузим Bootstrap
     'bsVersion' => '4.x',
 
