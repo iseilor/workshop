@@ -1,2 +1,4 @@
 <?php
-return [];
+return [
+    'Video Instruction'=>'Видео-инструкции'
+];

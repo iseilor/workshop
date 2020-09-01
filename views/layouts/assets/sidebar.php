@@ -80,13 +80,16 @@ use yii\helpers\Url;
                                         . Html::tag('p', \app\modules\jk\Module::t('doc', 'Docs')),
                                     'url' => ['/jk/doc/index'],
                                     'options' => ['class' => 'nav-item has-treeview sidebar-jk-doc'],
-
                                 ],
-
                                 [
                                     'label' => Icon::show('question', ['class' => 'nav-icon'])
                                         . Html::tag('p', \app\modules\jk\Module::t('faq', 'FAQ')),
                                     'url' => ['/jk/faq/index'],
+                                ],
+                                [
+                                    'label' => Icon::show('youtube', ['framework' => Icon::FAB, 'class' => 'nav-icon'])
+                                        . Html::tag('p', \app\modules\video\Module::t('module', 'Video Instruction')),
+                                    'url' => ['/jk/video/index'],
                                 ]
 
                                 /*['label' => '<i class="fas fa-user nav-icon"></i> <p>Написать куратору</p>', 'url' => ['/jk/curator/index']],*/
@@ -94,7 +97,7 @@ use yii\helpers\Url;
                         ],
                         [
                             'label' => Icon::show('sitemap', ['class' => 'nav-icon'])
-                                . Html::tag('p',  Module::t('module', 'About project')
+                                . Html::tag('p', Module::t('module', 'About project')
                                     . Icon::show('angle-left', ['class' => 'right'])),
                             'url' => ['#'],
                             'options' => ['class' => 'nav-item has-treeview'],
@@ -108,11 +111,14 @@ use yii\helpers\Url;
                                     'url' => ['/main/team/index'],
                                 ],
                                 [
-                                    'label' => Icon::show('confluence', ['framework' => Icon::FAB,'class' => 'nav-icon']) . 'Confluence',
+                                    'label' => Icon::show('confluence', ['framework' => Icon::FAB, 'class' => 'nav-icon']) . 'Confluence',
                                     'url' => Url::to('https://confluence.rt.ru/display/WSHOP'),
                                     'template' => '<a href="{url}" class="nav-link" target="_blank" title="Проект в Confluence">{label}</a>',
                                 ],
-                                ['label' => Icon::show('envelope',['class' => 'nav-icon']) . Module::t('module', 'Feedback'), 'url' => ['/main/default/feedback']],
+                                [
+                                    'label' => Icon::show('envelope', ['class' => 'nav-icon']) . Module::t('module', 'Feedback'),
+                                    'url' => ['/main/default/feedback'],
+                                ],
                             ],
                         ],
                         /*[

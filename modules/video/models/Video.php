@@ -2,6 +2,7 @@
 
 namespace app\modules\video\models;
 
+use app\models\Model;
 use Yii;
 
 /**
@@ -23,7 +24,7 @@ use Yii;
  * @property int|null $view
  * @property int|null $like
  */
-class Video extends \yii\db\ActiveRecord
+class Video extends Model
 {
     /**
      * {@inheritdoc}
@@ -39,7 +40,7 @@ class Video extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['created_at', 'created_by', 'title', 'description', 'img', 'video', 'module_id', 'category_id'], 'required'],
+            [['title', 'description', 'img', 'video', 'module_id', 'category_id'], 'required'],
             [['created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by', 'view', 'like'], 'integer'],
             [['description'], 'string'],
             [['title', 'img', 'video', 'module_id', 'category_id'], 'string', 'max' => 255],
