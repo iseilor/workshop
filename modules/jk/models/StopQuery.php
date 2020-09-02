@@ -2,6 +2,8 @@
 
 namespace app\modules\jk\models;
 
+use Yii;
+
 /**
  * This is the ActiveQuery class for [[Stop]].
  *
@@ -13,6 +15,11 @@ class StopQuery extends \yii\db\ActiveQuery
     {
         return $this->andWhere('[[status]]=1');
     }*/
+    public function access()
+    {
+        $this->leftJoin('user', 'user.id = jk_order_stop.created_by');
+        return $this->andWhere('user.filial_id=' . Yii::$app->user->identity->filial_id);
+    }
 
     /**
      * {@inheritdoc}

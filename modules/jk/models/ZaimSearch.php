@@ -74,6 +74,11 @@ class ZaimSearch extends Zaim
             'compensation_years' => $this->compensation_years,
         ]);
 
+        // Только заявки филиала куратора
+        // TODO: При переходе на RBAC избавиться от данного условия
+        $query->leftJoin('user', 'user.id = jk_zaim.created_by');
+        $query->andWhere('user.filial_id=' . Yii::$app->user->identity->filial_id);
+
         return $dataProvider;
     }
 }

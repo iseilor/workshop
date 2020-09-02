@@ -26,17 +26,17 @@ $this->params['breadcrumbs'][] = $this->title;
 JkAdminAsset::register($this);
 
 // Калькуляторы на компенсации процентов
-$percentsCount =  Percent::find()->count();                                         // Всего
-$percentY =  Percent::find()->where('compensation_count>0')->count();     // Положительных
-$percentN =  Percent::find()->where('compensation_count=0')->count();     // Отрицательных
+$percentsCount =  Percent::find()->access()->count();                                         // Всего
+$percentY =  Percent::find()->access()->andWhere('compensation_count>0')->count();     // Положительных
+$percentN =  Percent::find()->access()->andWhere('compensation_count=0')->count();     // Отрицательных
 
 // Калькулятор займа
-$zaimsCount =  Zaim::find()->count();                                         // Всего
-$zaimY =  Zaim::find()->where('compensation_count>0')->count();     // Положительных
-$zaimN =  Zaim::find()->where('compensation_count=0')->count();     // Отрицательных
+$zaimsCount =  Zaim::find()->access()->count();                                         // Всего
+$zaimY =  Zaim::find()->access()->andWhere('compensation_count>0')->count();     // Положительных
+$zaimN =  Zaim::find()->access()->andWhere('compensation_count=0')->count();     // Отрицательных
 
 // Заявки, сгрупированные по статусам
-$ordersGroupStatus = Order::find()
+$ordersGroupStatus = Order::find()->access()
     ->select(['COUNT(*) AS cnt','status_id'])
     ->groupBy(['status_id'])
     ->all();
@@ -48,8 +48,8 @@ foreach ($statusColors as $key=>&$value) {
 }
 
 // Отказы
-$orderCount = Order::find()->count();
-$orderStopCount = OrderStop::find()->count();
+$orderCount = Order::find()->access()->count();
+$orderStopCount = OrderStop::find()->access()->count();
 
 
 // Сообщения, ожидающие ответа от куратора
@@ -142,7 +142,7 @@ if ($messagesUser>0){
         </div>
     </div>
 
-    <section class="content">
+    <section class="content d-none">
         <div class="card card-primary">
             <div class="card-header">
                 <h3 class="card-title"><?= Icon::show('tools') ?>Панель администратора</h3>

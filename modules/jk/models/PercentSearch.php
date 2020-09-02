@@ -2,6 +2,7 @@
 
 namespace app\modules\jk\models;
 
+use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
@@ -78,6 +79,11 @@ class PercentSearch extends Percent
             'compensation_count' => $this->compensation_count,
             'compensation_years' => $this->compensation_years,
         ]);
+
+        // Только заявки филиала куратора
+        // TODO: При переходе на RBAC избавиться от данного условия
+        $query->leftJoin('user', 'user.id = jk_percent.created_by');
+        $query->andWhere('user.filial_id=' . Yii::$app->user->identity->filial_id);
 
         return $dataProvider;
     }
