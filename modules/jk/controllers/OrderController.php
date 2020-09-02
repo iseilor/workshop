@@ -317,10 +317,6 @@ class OrderController extends Controller
             $passport = new Passport();
         }
 
-        //       var_dump(Yii::$app->request->post());
-        //        var_dump($spose);
-        //        die();
-
         // Обновлаяем паспортные данные
         // TODO Разобраться, почему не рабоате load() и убрать "педальный" метод
         if ($user && isset(Yii::$app->request->post()['Passport']) && is_array(Yii::$app->request->post()['Passport'])) {
@@ -400,42 +396,11 @@ class OrderController extends Controller
             if ($user) {
                 $spose->user_id = $user->id;
             }
-
             foreach (Yii::$app->request->post()['Spouse'] as $sposeKey => $sposeVal) {
                 $spose->$sposeKey = $sposeVal;
             }
-
             $spose->save();
-
         }
-
-
-        // $user->load(Yii::$app->request->post()) && $user->save()
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            $model->upload();
-
-            // Отправлено на проверку куратору
-            if (isset(Yii::$app->request->post()['check'])) {
-                $model->status_id = 2;
-
-                $orderStage = new OrderStage();
-                $orderStage->order_id = $id;
-                $orderStage->status_id = 2;
-                $orderStage->comment = 'Заявка переведена для проверки куратором';
-                $orderStage->save();
-
-            }
-            $model->save();
-
-            if ($model->status_id == 1) {
-                return $this->redirect(['view', 'id' => $model->id]);
-            } else {
-                // Отправляем письмо кураторам
-                $this->actionSendEmailCurator($model);
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
-        }
-
 
         return $this->render(
             'update',
