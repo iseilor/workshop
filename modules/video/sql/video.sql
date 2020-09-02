@@ -1,0 +1,4 @@
+INSERT INTO workshop.video (id, created_at, created_by, updated_at, updated_by, deleted_at, deleted_by, title, description, img, video, module_id, category_id, weight, view, `like`) VALUES
+(1, 1599076483, 1, null, null, null, null, 'Портал для участия в Жилищной Программе ПАО Ростелеком', 'Портал для участия в Жилищной Программе ПАО Ростелеком', '1.png', '1.mp4', 'jk', '1', 1, 1, 1);
+INSERT INTO workshop.video (id, created_at, created_by, updated_at, updated_by, deleted_at, deleted_by, title, description, img, video, module_id, category_id, weight, view, `like`) VALUES
+(2, 1599076483, 1, null, null, null, null, 'Портал для участия в Жилищной Программе ПАО Ростелеком', 'Портал для участия в Жилищной Программе ПАО Ростелеком', '2.png', '2.mp4', 'jk', '1', 2, 1, 1);

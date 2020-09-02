@@ -21,7 +21,7 @@ class VideoController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -45,23 +45,20 @@ class VideoController extends Controller
     }
 
     /**
-     * Displays a single Video model.
-     * @param integer $id
+     * Lists all Video models.
      * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionAdmin()
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
+        $searchModel = new VideoSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('admin', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
     }
 
-    /**
-     * Creates a new Video model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
     public function actionCreate()
     {
         $model = new Video();
@@ -72,6 +69,19 @@ class VideoController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+        ]);
+    }
+
+    /**
+     * Displays a single Video model.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionView($id)
+    {
+        return $this->render('view', [
+            'model' => $this->findModel($id),
         ]);
     }
 
