@@ -113,42 +113,39 @@ class Percent extends Model
             ['cost_total', 'compare', 'compareValue' => 1, 'operator' => '>=', 'type' => 'number'],
             ['cost_total', 'compare', 'compareValue' => 10000000, 'operator' => '<=', 'type' => 'number'],
             [
-                ['cost_total', 'cost_user', 'bank_credit'],
+                ['cost_total', 'cost_user', 'bank_credit', 'loan'],
                 function () {
-                    if (is_numeric($this->cost_total) && is_numeric($this->cost_user) && is_numeric($this->bank_credit)) {
-                        $i =10;
-                        if ($this->loan > 0) {
-                            $k = $this->cost_total - $this->cost_user - $this->bank_credit - $this->loan;
-                            if (abs($this->cost_total - $this->cost_user - $this->bank_credit - $this->loan) > 0.00001) {
-                                $this->addError('cost_total', 'Полная стоимость жилья = Собственные средства работника + Размер кредита Банка + Размер займа (если предоставлялся)');
-                                $this->addError('cost_user', '');
-                                $this->addError('bank_credit', '');
-                                $this->addError('loan', '');
-                            }
-                        } else {
-                            if (abs($this->cost_total - $this->cost_user - $this->bank_credit) > 0.00001) {
-                                $this->addError('cost_total', 'Полная стоимость жилья = Собственные средства работника + Размер кредита Банка + Размер займа (если предоставлялся)');
-                                $this->addError('cost_user', '');
-                                $this->addError('bank_credit', '');
-                                $this->addError('loan', '');
-                            }
+                    if ($this->loan > 0) {
+                        $k = $this->cost_total - $this->cost_user - $this->bank_credit - $this->loan;
+                        if (abs($this->cost_total - $this->cost_user - $this->bank_credit - $this->loan) > 0.00001) {
+                            $this->addError('cost_total', 'Полная стоимость жилья = Собственные средства работника + Размер кредита Банка + Размер займа (если предоставлялся)');
+                            $this->addError('cost_user', '');
+                            $this->addError('bank_credit', '');
+                            $this->addError('loan', '');
+                        }
+                    } else {
+                        if (abs($this->cost_total - $this->cost_user - $this->bank_credit) > 0.00001) {
+                            $this->addError('cost_total', 'Полная стоимость жилья = Собственные средства работника + Размер кредита Банка + Размер займа (если предоставлялся)');
+                            $this->addError('cost_user', '');
+                            $this->addError('bank_credit', '');
+                            $this->addError('loan', '');
                         }
                     }
                 },
             ],
 
             // Собственные средства работника
-            [['cost_user'], 'match', 'pattern' => '/^\s*[-+]?[0-9]*[.,]?[0-9]+([eE][-+]?[0-9]+)?\s*$/'],
+            //[['cost_user'], 'match', 'pattern' => '/^\s*[-+]?[0-9]*[.,]?[0-9]+([eE][-+]?[0-9]+)?\s*$/'],
             ['cost_user', 'compare', 'compareValue' => 0, 'operator' => '>=', 'type' => 'number'],
             ['cost_user', 'compare', 'compareValue' => 10000000, 'operator' => '<=', 'type' => 'number'],
 
             // Размер кредита в банке
-            [['bank_credit'], 'match', 'pattern' => '/^\s*[-+]?[0-9]*[.,]?[0-9]+([eE][-+]?[0-9]+)?\s*$/'],
+            //[['bank_credit'], 'match', 'pattern' => '/^\s*[-+]?[0-9]*[.,]?[0-9]+([eE][-+]?[0-9]+)?\s*$/'],
             ['bank_credit', 'compare', 'compareValue' => 1, 'operator' => '>=', 'type' => 'number'],
             ['bank_credit', 'compare', 'compareValue' => 10000000, 'operator' => '<=', 'type' => 'number'],
 
             // Займ
-            [['loan'], 'match', 'pattern' => '/^\s*[-+]?[0-9]*[.,]?[0-9]+([eE][-+]?[0-9]+)?\s*$/'],
+            //[['loan'], 'match', 'pattern' => '/^\s*[-+]?[0-9]*[.,]?[0-9]+([eE][-+]?[0-9]+)?\s*$/'],
             ['loan', 'compare', 'compareValue' => 0, 'operator' => '>=', 'type' => 'number'],
             ['loan', 'compare', 'compareValue' => 1000000, 'operator' => '<=', 'type' => 'number'],
 
