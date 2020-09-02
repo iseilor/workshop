@@ -11,6 +11,7 @@ use app\modules\jk\models\OrderStop;
 use app\modules\jk\models\Rf;
 use app\modules\jk\models\Status;
 use app\modules\jk\Module;
+use app\modules\user\models\Child;
 use app\modules\user\models\Passport;
 use app\modules\user\models\Spouse;
 use app\modules\user\models\User;
@@ -254,6 +255,12 @@ class OrderController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
+            // Если не заполнены согласия ("0" этап) открываем редактирование модели
+            // для заполнения согласий на обработку перс данных
+            if (!$model->file_agree_personal_data) {
+                return $this->redirect(['order/'.$model->id.'/update#tabs-agreement', 'id' => $model->id]);
+            }
+
             // Строчим цепочку согласования
             Agreement::createAgreementList($model->id);
 
@@ -397,10 +404,68 @@ class OrderController extends Controller
                 $spose->user_id = $user->id;
             }
             foreach (Yii::$app->request->post()['Spouse'] as $sposeKey => $sposeVal) {
-                $spose->$sposeKey = $sposeVal;
+                switch ($sposeKey) {
+                    case 'personal_data_file_form':
+                        $sposePdFile = UploadedFile::getInstance($spose, 'personal_data_file_form');
+                        if ($sposePdFile) {
+                            $sposeFileDir = Yii::$app->params['module']['spouse']['filePath'] . $spose->id;
+                            $sposeFileName = 'spouse_' . $spose->id . '_personal_data_file_' . date('YmdHis') . '.' . $sposePdFile->extension;
+                            FileHelper::createDirectory($sposeFileDir, $mode = 0777, $recursive = true);
+                            $sposePdFile->saveAs($sposeFileDir . '/' . $sposeFileName);
+                            $spose->personal_data_file = $sposeFileName;
+                        }
+                        break;
+                    default:
+                        $spose->$sposeKey = $sposeVal;
+                }
+
+
+
             }
+
             $spose->save();
         }
+
+        if ($user && isset(Yii::$app->request->post()['Child']) && is_array(Yii::$app->request->post()['Child'])) {
+            foreach (Yii::$app->request->post()['Child'] as $childKey => $childVal) {
+                switch ($childKey) {
+                    case 'file_personal_form':
+                        if (is_array($childVal)) {
+                            foreach ($childVal as $childId => $childFieldVal) {
+                                $child = Child::findOne($childId);
+                                //var_dump($child);
+                                if ($child) {
+                                    // child personal file
+                                    $childPdFile = UploadedFile::getInstance($child, 'file_personal_form['.$childId.']');
+                                    if ($childPdFile) {
+                                        $childFileDir = Yii::$app->params['module']['child']['filePath'] . $child->id;
+                                        $childFileName = 'child_' . $child->id . '_file_personal_' . date('YmdHis') . '.' . $childPdFile->extension;
+                                        FileHelper::createDirectory($childFileDir, $mode = 0777, $recursive = true);
+                                        $childPdFile->saveAs($childFileDir . '/' . $childFileName);
+                                        $child->file_personal = $childFileName;
+                                        $child->save();
+                                    }
+                                }
+                            }
+                        }
+                        break;
+                }
+            }
+        }
+
+        // $user->load(Yii::$app->request->post()) && $user->save()
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $model->upload();
+            $model->save();
+            // Если не заполнены согласия ("0" этап) открываем редактирование модели
+            // для заполнения согласий на обработку перс данных
+            if (!$model->file_agree_personal_data) {
+                return $this->redirect(['order/'.$model->id.'/update#tabs-agreement', 'id' => $model->id]);
+            }
+
+            return $this->redirect(['view', 'id' => $model->id]);
+        }
+
 
         return $this->render(
             'update',

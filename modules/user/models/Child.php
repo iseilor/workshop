@@ -97,7 +97,7 @@ class Child extends Model
      */
     public function rules()
     {
-        return [
+        $rules = [
             [['fio', 'date', 'address_registration',], 'required'],
             [['created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by', 'user_id', 'gender', 'is_invalid', 'is_study'], 'integer'],
             [['fio'], 'string', 'max' => 255],
@@ -158,6 +158,12 @@ class Child extends Model
                 'maxSize' => '10000000',
             ],
         ];
+
+        if (!$this->file_personal) {
+            $rules[] = [['file_personal_form'], 'required','skipOnEmpty' => true,];
+        }
+
+        return $rules;
     }
 
     /**

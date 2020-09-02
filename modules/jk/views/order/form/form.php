@@ -54,6 +54,9 @@ if (isset($model->is_mortgage)) {
                                         ['name' => Icon::show('home') . 'ЖП', 'id' => 'house', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
                                         ['name' => Icon::show('ruble-sign') . 'Финансы', 'id' => 'money', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
                                     ];
+                                    if ($model->id) {
+                                        $tabs[] = ['name' => Icon::show('file-alt') . 'Согласия на обработку ПД', 'id' => 'agreement', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''];
+                                    }
                                     echo Html::ul($tabs, [
                                         'item' => function ($item, $index) {
                                             return Html::tag(
@@ -111,15 +114,17 @@ if (isset($model->is_mortgage)) {
 //                            'id' => 'btn-message',
 //                        ]
 //                    ) ?>
-                    <?= Html::submitButton(
-                        Icon::show('save') . 'Сохранить заявку',
-                        [
-                            'class' => 'btn btn-success float-right',
-                            'id' => 'btn-save',
-                            'value' => 1,
-                            'name' => 'save',
-                        ]
-                    ) ?>
+                    <?= ''
+//                    Html::submitButton(
+//                        Icon::show('save') . 'Сохранить заявку',
+//                        [
+//                            'class' => 'btn btn-success float-right',
+//                            'id' => 'btn-save',
+//                            'value' => 1,
+//                            'name' => 'save',
+//                        ]
+//                    )
+                    ?>
                 </div>
                 <?php ActiveForm::end(); ?>
             </div>
@@ -127,9 +132,13 @@ if (isset($model->is_mortgage)) {
     </div>
 
 <?php
+$goToLastTab = ($model->id) ? 'true' : 'false';
+
 $script = <<< JS
 $(document).ready(function() {
-    
+    if ($goToLastTab) {
+        localStorage.setItem('lastTab', 'tab-agreement');
+    }
     // Показываем прикрепление кредитного договора, если выбрано, что оформлена ипотека
     $('#order-is_mortgage').on('change', function() {
         if (this.value==1){

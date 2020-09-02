@@ -2,6 +2,8 @@
 
 use yii\jui\DatePicker;
 use yii\widgets\MaskedInput;
+use kartik\icons\Icon;
+use yii\helpers\Html;
 
 ?>
 <div class="row">
@@ -32,6 +34,29 @@ use yii\widgets\MaskedInput;
         <?= $form->field($model, 'money_user_pay')->widget(MaskedInput::class, ['clientOptions' => Yii::$app->params['widget']['MaskedInput']['clientOptionsMoney']]) ?>
     </div>
 </div>
+
+    <div class="card card-solid card-secondary  ">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-10"></div>
+                <div class="col-2">
+                    <?php
+                    if (!$model->id) {
+                        echo Html::submitButton(
+                            Icon::show('check') . 'Проверить заявку',
+                            [
+                                'class' => 'btn btn-success float-right',
+                                'id' => 'btn-save',
+                                'value' => 1,
+                                'name' => 'save',
+                            ]
+                        );
+                    }
+                    ?>
+                </div>
+            </div>
+        </div>
+    </div>
 
 <?php
 $script = <<< JS
