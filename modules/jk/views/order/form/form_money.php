@@ -2,10 +2,15 @@
 
 use yii\jui\DatePicker;
 use yii\widgets\MaskedInput;
+use kartik\icons\Icon;
+use yii\helpers\Html;
 
 ?>
 <div class="row">
     <div class="col-md-4">
+        <?= $form->field($spose, 'salary_file_form', [
+            'template' => getFileInputTemplate($spose->salary_file, 'Справка.pdf'),
+        ])->fileInput(['class' => 'custom-file-input']) ?>
         <?= $form->field($model, 'money_oklad')->widget(MaskedInput::class, ['clientOptions' => Yii::$app->params['widget']['MaskedInput']['clientOptionsMoney']]) ?>
         <?= $form->field($model, 'money_summa_year')->widget(MaskedInput::class, ['clientOptions' => Yii::$app->params['widget']['MaskedInput']['clientOptionsMoney']]) ?>
         <?= $form->field($model, 'money_nalog_year')->widget(MaskedInput::class, ['clientOptions' => Yii::$app->params['widget']['MaskedInput']['clientOptionsMoney']]) ?>
@@ -29,6 +34,29 @@ use yii\widgets\MaskedInput;
         <?= $form->field($model, 'money_user_pay')->widget(MaskedInput::class, ['clientOptions' => Yii::$app->params['widget']['MaskedInput']['clientOptionsMoney']]) ?>
     </div>
 </div>
+
+    <div class="card card-solid card-secondary  ">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-10"></div>
+                <div class="col-2">
+                    <?php
+                    if (!$model->id) {
+                        echo Html::submitButton(
+                            Icon::show('check') . 'Проверить заявку',
+                            [
+                                'class' => 'btn btn-success float-right',
+                                'id' => 'btn-save',
+                                'value' => 1,
+                                'name' => 'save',
+                            ]
+                        );
+                    }
+                    ?>
+                </div>
+            </div>
+        </div>
+    </div>
 
 <?php
 $script = <<< JS
