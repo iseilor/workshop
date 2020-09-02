@@ -402,6 +402,17 @@ class OrderController extends Controller
             $spose->save();
         }
 
+        // Общее сохранение модели
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $model->upload();
+            $model->save();
+            if ($model->status_id == 1) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            } else {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+        }
+
         return $this->render(
             'update',
             [
@@ -409,8 +420,6 @@ class OrderController extends Controller
                 'usermd' => $user,
                 'spose' => $spose,
                 'passport' => $passport,
-                //'spose' => $model,
-                //'userChildDataProvider'=>$userChildDataProvider
             ]
         );
     }
