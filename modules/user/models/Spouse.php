@@ -80,7 +80,7 @@ class Spouse extends Model
      */
     public function rules()
     {
-        return [
+        $rules = [
             [['type'], 'required'],
             [['created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by', 'user_id', 'gender', 'is_work', 'is_rtk', 'is_do'], 'integer'],
             [
@@ -108,7 +108,7 @@ class Spouse extends Model
 
             // Обязательные при наличии супруге
             [
-                ['fio','gender','date'],
+                ['fio'],
                 'required',
                 'when' => function ($model) {
                     return $model->type == 1;
@@ -137,6 +137,12 @@ class Spouse extends Model
                 'maxSize' => '5000000',
             ],
         ];
+
+        if (!$this->personal_data_file) {
+            $rules[] = [['personal_data_file_form'], 'required','skipOnEmpty' => true,];
+        }
+
+        return $rules;
     }
 
     /**
