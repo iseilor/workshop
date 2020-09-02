@@ -138,7 +138,7 @@ class Order extends Model
      */
     public function rules()
     {
-        return [
+        $rules = [
 
             // Общие параметры заявки
             [['is_participate', 'is_mortgage'], 'required'],
@@ -215,6 +215,12 @@ class Order extends Model
             ],
 
         ];
+
+        if (!$this->file_agree_personal_data) {
+            $rules[] = [['file_agree_personal_data_form'], 'required','skipOnEmpty' => true,];
+        }
+
+        return $rules;
     }
 
     /**
