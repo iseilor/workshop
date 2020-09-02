@@ -68,6 +68,8 @@ use yii\web\IdentityInterface;
  * @property int         $snils_date
  * @property string      $snils_file
  * @property int         $filial_id
+ *
+ * @property Child[]    $children
  */
 class User extends \yii\db\ActiveRecord implements IdentityInterface
 {
@@ -601,5 +603,9 @@ retrun Html::img($userPhotoPath, ['title' => Yii::$app->user->identity->username
     public function getInitials()
     {
         return mb_substr($this->name, 0, 1) . '.' . mb_substr($this->patronymic, 0, 1) . '.';
+    }
+
+    public function getChildren() {
+        return Child::find()->where(['user_id' => $this->id])->all();
     }
 }
