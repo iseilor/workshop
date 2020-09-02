@@ -4,9 +4,12 @@ namespace app\modules\user\models;
 
 use app\models\Model;
 use app\modules\user\Module;
+use kartik\icons\Icon;
 use Yii;
 use yii\db\ActiveRecord;
 use yii\helpers\FileHelper;
+use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\web\UploadedFile;
 
 /**
@@ -216,6 +219,7 @@ class Spouse extends Model
             'passport_file_form' => 'Необходимо отсканировать все страницы паспорта (включая пустые)',
             'passport_registration' => 'Пример: Московская обл., г.Москва, п.Московский, Киевское ш. 22 км., д. 6, стр. 1, кв. 5',
             'address_fact' => 'Пример: 123456, г.Москва, ул.Ленина, д.1, кв.1',
+            'personal_data_file_form' => 'Скачайте автоматически сформированный '.Html::a(Icon::show('file-pdf') .'бланк', Url::to(['/user/spouse/' . $this->id . '/pd'])).', который нужно будет распечатать, подписать и прикрепить в поле',
 
         ];
     }
