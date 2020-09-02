@@ -4,10 +4,12 @@ namespace app\modules\jk\models;
 
 use app\models\Model;
 use app\modules\jk\Module;
+use kartik\icons\Icon;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\helpers\FileHelper;
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\web\UploadedFile;
 
 /**
@@ -407,6 +409,8 @@ class Order extends Model
 
             'money_month_pay' => 'После оказания помощи совокупные среднемесячные платежи моей семьи по всем обязательствам, руб',
             'money_user_pay' => 'После оказания помощи совокупные мои платежи, руб',
+
+            'file_agree_personal_data_form' => 'Скачайте автоматически сформированный '.Html::a(Icon::show('file-pdf') .'бланк', Url::to(['/user/user/' . Yii::$app->user->identity->id . '/pd'])).', который нужно будет распечатать, подписать и прикрепить в поле',
         ];
     }
 
