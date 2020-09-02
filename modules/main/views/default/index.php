@@ -6,11 +6,7 @@
 /* @var $news \app\modules\news\models\News */
 
 $this->title = Yii::$app->name;
-
-use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\widgets\ListView;
-
 ?>
     <div class="row">
         <div class="col-12">
@@ -21,23 +17,19 @@ use yii\widgets\ListView;
                             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                             <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
                             <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                            <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
                         </ol>
                         <!--Пути сделаны так специально, т.к. Сергей смотрит через подсеть 192-->
                         <div class="carousel-inner">
-                            <div class="carousel-item active">
+                            <div class="carousel-item active" data-interval="10000">
                                 <img class="d-block w-100" src="<?=Yii::$app->homeUrl?>img/main/slider/1.png">
                             </div>
-                            <div class="carousel-item">
+                            <div class="carousel-item" data-interval="10000">
                                 <img class="d-block w-100" src="<?=Yii::$app->homeUrl?>img/main/slider/2.png">
                             </div>
-                            <div class="carousel-item">
-                                <img class="d-block w-100" src="<?=Yii::$app->homeUrl?>img/main/slider/3.png">
-                            </div>
-                            <div class="carousel-item">
+                            <div class="carousel-item" data-interval="10000">
                                 <a href="<?=Url::to(['/jk/default/calc'],true);?>" title="Перейти в калькулятор Жилищной Программы"
                                    style="position: absolute; left: 47.8%; top: 74.6%; width: 9.6%; height: 9.68%; z-index: 100;"></a>
-                                <img class="d-block w-100" src="<?=Yii::$app->homeUrl;?>img/main/slider/4.png" usemap="#map">
+                                <img class="d-block w-100" src="<?=Yii::$app->homeUrl;?>img/main/slider/3.svg" usemap="#map">
                             </div>
                         </div>
                         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
