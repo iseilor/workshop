@@ -474,8 +474,6 @@ class OrderController extends Controller
                 'usermd' => $user,
                 'spose' => $spose,
                 'passport' => $passport,
-                //'spose' => $model,
-                //'userChildDataProvider'=>$userChildDataProvider
             ]
         );
     }
