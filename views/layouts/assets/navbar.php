@@ -196,11 +196,11 @@ use yii\widgets\Menu;
                         ['class' => 'dropdown-item', 'title' => 'Личные данные вашего профиля']
                     );
                     echo '<div class="dropdown-divider"></div>';
-                    echo Html::a(
-                        Icon::show('id-card') . 'Моя карточка',
-                        Url::home() . 'user/' . Yii::$app->user->identity->getId(),
-                        ['class' => 'dropdown-item', 'title' => 'Публичные данные вашего профиля']
-                    );
+//                    echo Html::a(
+//                        Icon::show('id-card') . 'Моя карточка',
+//                        Url::home() . 'user/' . Yii::$app->user->identity->getId(),
+//                        ['class' => 'dropdown-item', 'title' => 'Публичные данные вашего профиля']
+//                    );
                     echo '<div class="dropdown-divider"></div>';
                     echo Html::a(
                         '<i class="fas fa-sign-out-alt"></i> Выйти',
