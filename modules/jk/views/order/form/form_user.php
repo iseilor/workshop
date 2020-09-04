@@ -259,16 +259,17 @@ $user = User::findOne(Yii::$app->user->identity->id);
     </div>
 </div>
 
-<?=  $form->field($model, 'filling_step')->hiddenInput(['value' => 1])->label(false) ?>
 
 <?php if (!$model->filling_step >= 1): ?>
     <div class="card card-solid card-secondary  ">
         <div class="card-body">
             <div class="row">
-                <div class="col-10"></div>
+                <div class="col-10">
+                    <?=  $form->field($model, 'filling_step')->hiddenInput(['value' => 1])->label(false) ?>
+                </div>
                 <div class="col-2">
                         <?= Html::submitButton(
-                            Icon::show('check') . 'Далее',
+                            Icon::show('play') . 'Далее',
                             [
                                 'class' => 'btn btn-success float-right',
                                 'id' => 'btn-save',

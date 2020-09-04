@@ -148,7 +148,7 @@ class Order extends Model
 
 
             // Общие параметры заявки
-            [['is_participate', 'is_mortgage'], 'required'],
+            [['is_participate'], 'required'],
 //            [['percent_id', 'zaim_id'], 'safe'],
 //            [['file_agree_personal_data_form'], 'safe'],
 //            [['file_agree_personal_data_form'], 'file', 'extensions' => 'pdf, docx', 'maxSize' => '10000000'],
@@ -172,66 +172,95 @@ class Order extends Model
             [
                 [
                     'jp_type',
-//                    'jp_address',
+                    'jp_address',
                     'jp_room_count',
                     'jp_area',
-//                    'jp_cost',
-//                    'jp_dogovor_date',
-//                    'jp_registration_date',
-//                    'jp_date',
-//                    'jp_dist',
-//                    'jp_own',
-//                    'jp_part',
+                    'jp_cost',
+                    'jp_dogovor_date',
+                    'jp_registration_date',
+                    'jp_date',
+                    'jp_dist',
+                    'jp_own',
+                    'jp_part',
                 ],
                 'safe',
             ],
-//            [['jp_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'jp_date'],
-//            [['jp_dogovor_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'jp_dogovor_date'],
-//            [['jp_registration_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'jp_registration_date'],
+            [['jp_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'jp_date', 'skipOnEmpty' => true,],
+            [['jp_dogovor_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'jp_dogovor_date', 'skipOnEmpty' => true,],
+            [['jp_registration_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'jp_registration_date', 'skipOnEmpty' => true,],
 //
 //
 //            // Ипотека
-//            [['is_mortgage', 'ipoteka_target', 'ipoteka_size', 'ipoteka_user'], 'required'],
-//            [['ipoteka_last_date', 'ipoteka_percent'], 'safe'],
-//            [['ipoteka_last_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'ipoteka_last_date'],
-//            [
-//                [
-//                    'ipoteka_file_dogovor_form',
-//                    'ipoteka_file_grafic_first_form',
-//                    'ipoteka_file_grafic_now_form',
-//                    'ipoteka_file_refenance_form',
-//                    'ipoteka_file_spravka_form',
-//                    'ipoteka_file_bank_approval_form',
-//                ],
-//                'file',
-//                'skipOnEmpty' => true,
-//                'extensions' => 'pdf, docx',
-//                'maxSize' => '20048000',
-//            ],
-//
-//            // Финансы
-//            [['money_oklad', 'money_summa_year', 'money_nalog_year', 'money_month_pay', 'money_user_pay'], 'required'],
-//            [['is_do'], 'safe'],
-//            [
-//                [
-//                    'ndfl2_file_form',
-//                    'spravka_zp_file_form',
-//                ],
-//                'file',
-//                'skipOnEmpty' => true,
-//                'extensions' => 'pdf, docx',
-//                'maxSize' => '20048000',
-//            ],
+//            [['is_mortgage',   ], 'required'],
 
-        // Вкладка "Семья"
+
+
+            // Вкладка "Семья"
             [['social_id', 'family_own', 'family_deal'],  'required',
                 'when' => function ($model) {
                     return $model->filling_step >= 3;
                 },
                 'whenClient' => "function (attribute, value) {
                     return $('#filling_step').val() >= 3;
-                }",],
+                }",
+            ],
+
+
+            // Вкладка "Ипотека"
+            [['ipoteka_last_date', 'ipoteka_percent'], 'safe'],
+            [['ipoteka_last_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'ipoteka_last_date', 'skipOnEmpty' => true,],
+            [
+                [
+                    'ipoteka_file_dogovor_form',
+                    'ipoteka_file_grafic_first_form',
+                    'ipoteka_file_grafic_now_form',
+                    'ipoteka_file_refenance_form',
+                    'ipoteka_file_spravka_form',
+                    'ipoteka_file_bank_approval_form',
+                ],
+                'file',
+                'skipOnEmpty' => true,
+//                'extensions' => 'pdf, docx',
+                'maxSize' => '20048000',
+            ],
+
+            [['is_mortgage', 'ipoteka_target', 'ipoteka_size', 'ipoteka_user'],  'required',
+                'when' => function ($model) {
+                    return $model->filling_step >= 4;
+                },
+                'whenClient' => "function (attribute, value) {
+                    return $('#filling_step').val() >= 4;
+                }",
+            ],
+
+
+            // Вкладка "Финансы"
+            [['money_oklad', 'money_summa_year', 'money_nalog_year', 'money_month_pay', 'money_user_pay',],  'required',
+                'when' => function ($model) {
+                    return $model->filling_step >= 6;
+                },
+                'whenClient' => "function (attribute, value) {
+                    return $('#filling_step').val() >= 6;
+                }",
+            ],
+
+            [
+                [
+                    'ndfl2_file_form',
+                    'spravka_zp_file_form',
+                ],
+                'file',
+                'skipOnEmpty' => true,
+//                'extensions' => 'pdf, docx',
+                'maxSize' => '20048000',
+            ],
+
+            [['is_do'], 'safe'],
+
+
         ];
+
+
 
 //        if (!$this->file_agree_personal_data) {
 //            $rules[] = [['file_agree_personal_data_form'], 'required','skipOnEmpty' => true,];
