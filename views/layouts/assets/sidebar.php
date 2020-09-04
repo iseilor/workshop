@@ -9,6 +9,7 @@ use yii\helpers\Url;
 
 
 $jkInstructionURL = '/jk/doc';
+$jkInstructionTemplate = '<a href="{url}" class="nav-link" >{label}</a>';
 
 $jkInstructionDoc = \app\modules\jk\models\Doc::find()
     ->where(['like', 'title', 'Инструкция пользователя%', false])
@@ -16,6 +17,7 @@ $jkInstructionDoc = \app\modules\jk\models\Doc::find()
     ->one();
 if ($jkInstructionDoc) {
     $jkInstructionURL = $jkInstructionDoc->getFilePath();
+    $jkInstructionTemplate = '<a href="{url}" target="_blank" class="nav-link" >{label}</a>';
 }
 
 ?>
@@ -80,8 +82,8 @@ if ($jkInstructionDoc) {
                                     'label' => Icon::show('file', ['class' => 'nav-icon'])
                                         . Html::tag('p', \app\modules\jk\Module::t('doc', 'Instruction')),
                                     'url' => [$jkInstructionURL],
-                                    'options' => ['class' => 'nav-item has-treeview sidebar-jk-instruction'],
-
+                                    'options' => ['class' => 'nav-item has-treeview sidebar-jk-instruction',],
+                                    'template'=> $jkInstructionTemplate,
                                 ],
                                 [
                                     'label' => Icon::show('calculator', ['class' => 'nav-icon'])
