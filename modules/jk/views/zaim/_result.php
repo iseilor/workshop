@@ -9,7 +9,14 @@ use kartik\icons\Icon; ?>
     <ul>
         <li>Максимальный размер займа, руб: <strong><?= Yii::$app->formatter->asInteger($model->compensation_count); ?></strong> руб</li>
         <li>Максимальный срок займа: <strong><?= $model->compensation_years ?></strong> лет</li>
-        <li>Ежемесячный платёж: <strong><?= Yii::$app->formatter->asInteger($model->compensation_count/(12*$model->compensation_years));?></strong> руб</li>
+        <?php
+            if ($model->compensation_years) {
+                $str = Yii::$app->formatter->asInteger($model->compensation_count/(12*$model->compensation_years));
+            } else {
+                $str = 0;
+            }
+            echo "<li>Ежемесячный платёж: <strong>$str</strong> руб</li>";
+        ?>
     </ul>
     <hr/>
     <small>
