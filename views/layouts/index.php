@@ -87,9 +87,9 @@ AppAssetAdminLTE::register($this);
                         <i class="fas fa-chevron-up"></i>
                     </a> -->
 
-                    <a id="back-to-top" href="#" class="btn btn-primary" role="button" aria-label="Scroll to top">
+                 <!-- <a id="back-to-top" href="#" class="btn btn-primary" role="button" aria-label="Scroll to top">
                         <i class="fas fa-chevron-up"></i>
-                    </a>
+                    </a> -->
                 </div>
 
 
