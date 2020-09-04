@@ -11,6 +11,11 @@ use yii\jui\DatePicker;
 use yii\widgets\MaskedInput;
 use app\modules\jk\models\Order;
 
+/**
+ * @var Order $model
+ */
+
+
 $user = User::findOne(Yii::$app->user->identity->id);
 ?>
 
@@ -254,7 +259,29 @@ $user = User::findOne(Yii::$app->user->identity->id);
     </div>
 </div>
 
+<?=  $form->field($model, 'filling_step')->hiddenInput(['value' => 1])->label(false) ?>
 
+<?php if (!$model->filling_step >= 1): ?>
+    <div class="card card-solid card-secondary  ">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-10"></div>
+                <div class="col-2">
+                        <?= Html::submitButton(
+                            Icon::show('check') . 'Далее',
+                            [
+                                'class' => 'btn btn-success float-right',
+                                'id' => 'btn-save',
+                                'value' => 1,
+                                'name' => 'save',
+                            ]
+                        );
+                    ?>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>
     <!--<div class="card card-solid card-secondary  ">
     <div class="card-header with-border">
         <h3 class="card-title">Обработка персональных данных</h3>

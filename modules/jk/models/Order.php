@@ -57,6 +57,8 @@ use yii\web\UploadedFile;
  *
  * @property integer $resident_own_type
  * @property boolean $is_poor
+ *
+ * @property integer $filling_step
  */
 class Order extends Model
 {
@@ -141,86 +143,99 @@ class Order extends Model
     public function rules()
     {
         $rules = [
+            [['filling_step'], 'safe'],
+
+
 
             // Общие параметры заявки
             [['is_participate', 'is_mortgage'], 'required'],
-            [['percent_id', 'zaim_id'], 'safe'],
-            [['file_agree_personal_data_form'], 'safe'],
-            [['file_agree_personal_data_form'], 'file', 'extensions' => 'pdf, docx', 'maxSize' => '10000000'],
+//            [['percent_id', 'zaim_id'], 'safe'],
+//            [['file_agree_personal_data_form'], 'safe'],
+//            [['file_agree_personal_data_form'], 'file', 'extensions' => 'pdf, docx', 'maxSize' => '10000000'],
             [['is_poor'], 'safe'],
-
+//
             // Семья
-            [['social_id', 'resident_count', /*'resident_type',*/ 'family_deal', /*'resident_own',*/ 'family_own', 'family_address', 'resident_own_type'], 'required'],
+            [['resident_count', 'family_address', 'resident_own_type'], 'required'],
+
+
             [['resident_count', 'jp_room_count'], 'integer'],
             [['family_rent'], 'safe'],
-            [['file_family_big_form', 'file_social_protection_form', 'file_rent_form', 'file_social_contract_form'], 'file', 'skipOnEmpty' => true, 'extensions' => 'pdf', 'maxSize' => '10000000'],
+            [['file_family_big_form', 'file_social_protection_form', 'file_rent_form', 'file_social_contract_form'], 'file', 'skipOnEmpty' => true, /*'extensions' => 'pdf',*/ 'maxSize' => '10000000'],
             [['resident_own_type'], 'integer'],
-
-            // Супруга
-            [['is_spouse', 'spouse_fio', 'spouse_is_dzo', 'spouse_is_do', 'spouse_is_work'], 'safe'],
-
-
-            // Жилое помещение
+//
+//            // Супруга
+//            [['is_spouse', 'spouse_fio', 'spouse_is_dzo', 'spouse_is_do', 'spouse_is_work'], 'safe'],
+//
+//
+//            // Жилое помещение
             [['jp_type', 'jp_area'], 'required'],
             [
                 [
                     'jp_type',
-                    'jp_address',
+//                    'jp_address',
                     'jp_room_count',
                     'jp_area',
-                    'jp_cost',
-                    'jp_dogovor_date',
-                    'jp_registration_date',
-                    'jp_date',
-                    'jp_dist',
-                    'jp_own',
-                    'jp_part',
+//                    'jp_cost',
+//                    'jp_dogovor_date',
+//                    'jp_registration_date',
+//                    'jp_date',
+//                    'jp_dist',
+//                    'jp_own',
+//                    'jp_part',
                 ],
                 'safe',
             ],
-            [['jp_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'jp_date'],
-            [['jp_dogovor_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'jp_dogovor_date'],
-            [['jp_registration_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'jp_registration_date'],
+//            [['jp_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'jp_date'],
+//            [['jp_dogovor_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'jp_dogovor_date'],
+//            [['jp_registration_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'jp_registration_date'],
+//
+//
+//            // Ипотека
+//            [['is_mortgage', 'ipoteka_target', 'ipoteka_size', 'ipoteka_user'], 'required'],
+//            [['ipoteka_last_date', 'ipoteka_percent'], 'safe'],
+//            [['ipoteka_last_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'ipoteka_last_date'],
+//            [
+//                [
+//                    'ipoteka_file_dogovor_form',
+//                    'ipoteka_file_grafic_first_form',
+//                    'ipoteka_file_grafic_now_form',
+//                    'ipoteka_file_refenance_form',
+//                    'ipoteka_file_spravka_form',
+//                    'ipoteka_file_bank_approval_form',
+//                ],
+//                'file',
+//                'skipOnEmpty' => true,
+//                'extensions' => 'pdf, docx',
+//                'maxSize' => '20048000',
+//            ],
+//
+//            // Финансы
+//            [['money_oklad', 'money_summa_year', 'money_nalog_year', 'money_month_pay', 'money_user_pay'], 'required'],
+//            [['is_do'], 'safe'],
+//            [
+//                [
+//                    'ndfl2_file_form',
+//                    'spravka_zp_file_form',
+//                ],
+//                'file',
+//                'skipOnEmpty' => true,
+//                'extensions' => 'pdf, docx',
+//                'maxSize' => '20048000',
+//            ],
 
-
-            // Ипотека
-            [['is_mortgage', 'ipoteka_target', 'ipoteka_size', 'ipoteka_user'], 'required'],
-            [['ipoteka_last_date', 'ipoteka_percent'], 'safe'],
-            [['ipoteka_last_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'ipoteka_last_date'],
-            [
-                [
-                    'ipoteka_file_dogovor_form',
-                    'ipoteka_file_grafic_first_form',
-                    'ipoteka_file_grafic_now_form',
-                    'ipoteka_file_refenance_form',
-                    'ipoteka_file_spravka_form',
-                    'ipoteka_file_bank_approval_form',
-                ],
-                'file',
-                'skipOnEmpty' => true,
-                'extensions' => 'pdf, docx',
-                'maxSize' => '20048000',
-            ],
-
-            // Финансы
-            [['money_oklad', 'money_summa_year', 'money_nalog_year', 'money_month_pay', 'money_user_pay'], 'required'],
-            [['is_do'], 'safe'],
-            [
-                [
-                    'ndfl2_file_form',
-                    'spravka_zp_file_form',
-                ],
-                'file',
-                'skipOnEmpty' => true,
-                'extensions' => 'pdf, docx',
-                'maxSize' => '20048000',
-            ],
-
+        // Вкладка "Семья"
+            [['social_id', 'family_own', 'family_deal'],  'required',
+                'when' => function ($model) {
+                    return $model->filling_step >= 3;
+                },
+                'whenClient' => "function (attribute, value) {
+                    return $('#filling_step').val() >= 3;
+                }",],
         ];
 
-        if (!$this->file_agree_personal_data) {
-            $rules[] = [['file_agree_personal_data_form'], 'required','skipOnEmpty' => true,];
-        }
+//        if (!$this->file_agree_personal_data) {
+//            $rules[] = [['file_agree_personal_data_form'], 'required','skipOnEmpty' => true,];
+//        }
 
         return $rules;
     }
