@@ -2,6 +2,8 @@
 
 namespace app\modules\jk\models;
 
+use Yii;
+
 /**
  * This is the ActiveQuery class for [[Percent]].
  *
@@ -9,10 +11,18 @@ namespace app\modules\jk\models;
  */
 class PercentQuery extends \yii\db\ActiveQuery
 {
+
     /*public function active()
     {
         return $this->andWhere('[[status]]=1');
     }*/
+
+    // Есть доступ к которым
+    public function access()
+    {
+        $this->leftJoin('user', 'user.id = jk_percent.created_by');
+        return $this->andWhere('user.filial_id=' . Yii::$app->user->identity->filial_id);
+    }
 
     /**
      * {@inheritdoc}

@@ -28,6 +28,7 @@ class m200901_222008_create_video_table extends Migration
             'video'=>$this->string()->notNull(),
             'module_id'=>$this->string()->notNull(),
             'category_id'=>$this->string()->notNull(),
+            'weight'=>$this->integer()->notNull(),
 
             'view'=>$this->integer(),
             'like'=>$this->integer(),

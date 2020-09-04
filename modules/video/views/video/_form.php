@@ -12,18 +12,6 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'created_at')->textInput() ?>
-
-    <?= $form->field($model, 'created_by')->textInput() ?>
-
-    <?= $form->field($model, 'updated_at')->textInput() ?>
-
-    <?= $form->field($model, 'updated_by')->textInput() ?>
-
-    <?= $form->field($model, 'deleted_at')->textInput() ?>
-
-    <?= $form->field($model, 'deleted_by')->textInput() ?>
-
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
@@ -35,6 +23,8 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'module_id')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'category_id')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'weight')->textInput() ?>
 
     <?= $form->field($model, 'view')->textInput() ?>
 

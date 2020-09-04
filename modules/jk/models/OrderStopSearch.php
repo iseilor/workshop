@@ -2,6 +2,7 @@
 
 namespace app\modules\jk\models;
 
+use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
@@ -69,6 +70,11 @@ class OrderStopSearch extends OrderStop
         ]);
 
         $query->andFilterWhere(['like', 'comment', $this->comment]);
+
+        // Только заявки филиала куратора
+        // TODO: При переходе на RBAC избавиться от данного условия
+        $query->leftJoin('user', 'user.id = jk_order_stop.created_by');
+        $query->andWhere('user.filial_id=' . Yii::$app->user->identity->filial_id);
 
         return $dataProvider;
     }

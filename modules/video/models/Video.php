@@ -8,24 +8,26 @@ use Yii;
 /**
  * This is the model class for table "video".
  *
- * @property int $id
- * @property int $created_at
- * @property int $created_by
+ * @property int      $id
+ * @property int      $created_at
+ * @property int      $created_by
  * @property int|null $updated_at
  * @property int|null $updated_by
  * @property int|null $deleted_at
  * @property int|null $deleted_by
- * @property string $title
- * @property string $description
- * @property string $img
- * @property string $video
- * @property string $module_id
- * @property string $category_id
+ * @property string   $title
+ * @property string   $description
+ * @property string   $img
+ * @property string   $video
+ * @property string   $module_id
+ * @property string   $category_id
  * @property int|null $view
  * @property int|null $like
+ * @property int      $weight
  */
 class Video extends Model
 {
+
     /**
      * {@inheritdoc}
      */
@@ -40,8 +42,8 @@ class Video extends Model
     public function rules()
     {
         return [
-            [['title', 'description', 'img', 'video', 'module_id', 'category_id'], 'required'],
-            [['created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by', 'view', 'like'], 'integer'],
+            [['title', 'description', 'img', 'video', 'module_id', 'category_id','weight'], 'required'],
+            [['created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by', 'view', 'like','weight'], 'integer'],
             [['description'], 'string'],
             [['title', 'img', 'video', 'module_id', 'category_id'], 'string', 'max' => 255],
         ];
