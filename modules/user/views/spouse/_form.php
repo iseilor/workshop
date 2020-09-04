@@ -34,11 +34,11 @@ $d_none2 = (isset($model->type) && $model->type == 2) ? '' : 'd-none';
                         <div class="type-1 <?= $d_none1 ?>">
                             <hr/>
                             <h3><?= Icon::show('map-marker-alt') ?>Адрес</h3>
-                            <?= $this->render('form/address', ['model' => $model, 'form' => $form]) ?>
+                            <?= $this->render('form/address', ['model' => $model, 'form' => $form, 'user' => $user,]) ?>
                         </div>
                     </div>
                     <div class="col-md-4 type-1 <?= $d_none1 ?>">
-                        <h3><?= Icon::show('address-card') ?>Паспорт</h3>
+                        <h3><?= Icon::show('address-card') ?>Паспортные данные</h3>
                         <?= $this->render('form/passport',
                             [
                                 'model' => $model,

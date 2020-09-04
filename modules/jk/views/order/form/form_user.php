@@ -16,7 +16,7 @@ $user = User::findOne(Yii::$app->user->identity->id);
 
 <div class="card card-solid card-secondary">
     <div class="card-header with-border">
-        <h3 class="card-title">Данные работника</h3>
+        <h3 class="card-title">Общие данные</h3>
     </div><!-- /.box-header -->
     <div class="card-body">
 

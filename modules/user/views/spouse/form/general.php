@@ -3,7 +3,7 @@
 use yii\jui\DatePicker;
 
 ?>
-<?= $form->field($model, 'fio')->textInput(['maxlength' => true]) ?>
+<?= $form->field($model, 'fio')->textInput(['maxlength' => true, 'placeholder' => 'Иванова Анастасия Ивановна']) ?>
 <!-- $form->field($model, 'gender')->dropDownList($model->getGenderList(), ['prompt' => 'Выберите ...']);
  $form->field($model, 'date')->widget(
     DatePicker::class,

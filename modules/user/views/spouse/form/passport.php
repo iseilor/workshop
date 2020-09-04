@@ -49,13 +49,6 @@ use yii\widgets\MaskedInput;
     ],
 ]) ?>
 
-<?= $form->field($model, 'passport_registration')
-    ->textarea([
-        'readonly' => $model->passport_registration == $user->passport_registration,
-        'data-user-address-registration' => $user->passport_registration,
-    ])
-    ->hint($model->attributeHints()['passport_registration']) ?>
-
 <?= $form->field($model, 'passport_file_form', [
     'template' => getFileInputTemplate($model->passport_file, $model->attributeLabels()['passport_file'] . '.pdf'),
 ])->fileInput(['class' => 'custom-file-input']) ?>
