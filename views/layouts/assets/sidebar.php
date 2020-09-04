@@ -8,6 +8,16 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 
 
+$jkInstructionURL = '/jk/doc';
+
+$jkInstructionDoc = \app\modules\jk\models\Doc::find()
+    ->where(['like', 'title', 'Инструкция пользователя%', false])
+    ->orderBy(['updated_at' => SORT_DESC])
+    ->one();
+if ($jkInstructionDoc) {
+    $jkInstructionURL = $jkInstructionDoc->getFilePath();
+}
+
 ?>
 
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
@@ -66,6 +76,13 @@ use yii\helpers\Url;
                             'url' => ['#'],
                             'options' => ['class' => 'nav-item has-treeview sidebar-jk'],
                             'items' => [
+                                [
+                                    'label' => Icon::show('file', ['class' => 'nav-icon'])
+                                        . Html::tag('p', \app\modules\jk\Module::t('doc', 'Instruction')),
+                                    'url' => [$jkInstructionURL],
+                                    'options' => ['class' => 'nav-item has-treeview sidebar-jk-instruction'],
+
+                                ],
                                 [
                                     'label' => Icon::show('calculator', ['class' => 'nav-icon'])
                                         . Html::tag('p', \app\modules\jk\Module::t('calculator', 'Calculator')),
