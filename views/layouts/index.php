@@ -74,8 +74,8 @@ AppAssetAdminLTE::register($this);
 
                 <div class="right-bottom-side-bar">
                     <a id="jk-curator-contacts" href="#" class="btn btn-primary">
-                        <i class="fas fa-id-card"></i>
-                        Связаться с ответственным
+                        <i class="fas fa-id-card" ></i>
+                        <span id="jk-curator-contacts-text">Открыть информацию по куратору</span>
                     </a>
 
                     <a id="chat-bot" href="#" class="btn btn-primary" data-widget="control-sidebar" data-slide="true" style="display: none;">
@@ -87,9 +87,9 @@ AppAssetAdminLTE::register($this);
                         <i class="fas fa-chevron-up"></i>
                     </a> -->
 
-                    <a id="back-to-top" href="#" class="btn btn-primary" role="button" aria-label="Scroll to top">
+                 <!-- <a id="back-to-top" href="#" class="btn btn-primary" role="button" aria-label="Scroll to top">
                         <i class="fas fa-chevron-up"></i>
-                    </a>
+                    </a> -->
                 </div>
 
 

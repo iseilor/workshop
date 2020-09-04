@@ -7,5 +7,6 @@ return [
     'File' => 'Файл',
     'Weight' => 'Вес',
     'Download'=>'Скачать',
-    'Update Doc: {name}'=>'Изменить документ: {name}'
+    'Instruction' => 'Инструкция',
+    'Update Doc: {name}'=>'Изменить документ: {name}',
 ];
