@@ -1,52 +1,32 @@
 <?php
 
+use app\modules\kr\Module;
+use kartik\icons\Icon;
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\widgets\ListView;
 use yii\widgets\Pjax;
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\kr\models\CuratorSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Curators');
+$this->title = Icon::show('user-graduate').Module::t('curator','Curators');
+$this->params['breadcrumbs'][] = ['label' => Icon::show('users').Module::t('module','kr'), 'url' => ['/kr/default/index']];
 $this->params['breadcrumbs'][] = $this->title;
-?>
-<div class="curator-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a(Yii::t('app', 'Create Curator'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
-    <?php Pjax::begin(); ?>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <?= GridView::widget([
+echo ListView::widget(
+    [
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'created_at',
-            'created_by',
-            'updated_at',
-            'updated_by',
-            //'deleted_at',
-            //'deleted_by',
-            //'fio',
-            //'position',
-            //'description:ntext',
-            //'phone',
-            //'email:ntext',
-            //'img',
-            //'weight',
-            //'block_id',
-
-            ['class' => 'yii\grid\ActionColumn'],
+        'itemView' => '_item',
+        'layout' => "{items}",
+        'options' => [
+            'tag' => 'div',
+            'class' => 'row d-flex align-items-stretch'
         ],
-    ]); ?>
+        'itemOptions' => [
+            'tag' => 'div',
+            'class' => 'col-12 col-sm-6 col-md-4 d-flex align-items-stretch',
+        ],
+    ]
+);
 
-    <?php Pjax::end(); ?>
-
-</div>

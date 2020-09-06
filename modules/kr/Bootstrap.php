@@ -14,7 +14,8 @@ class Bootstrap implements BootstrapInterface
             'forceTranslation' => true,
             'basePath' => '@app/modules/kr/messages',
             'fileMap' => [
-                'modules/kr/module' => 'module.php'
+                'modules/kr/module' => 'module.php',
+                'modules/kr/curator'=>'curator.php'
             ],
         ];
     }
