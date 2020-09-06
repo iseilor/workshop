@@ -64,7 +64,7 @@ class DefaultController extends Controller
 
         $list = [
             [
-                'col' => 4,
+                'col' => 3,
                 'bg' => 'primary',
                 'title' => 'Новости',
                 'description' => 'Всегда свежая информация',
@@ -73,13 +73,21 @@ class DefaultController extends Controller
                 'link' => 'Перейти <i class="fas fa-arrow-circle-right"></i>',
             ],
             [
-                'col' => 4,
+                'col' => 3,
                 'bg' => 'indigo',
                 'title' => Module::t('module', 'JK'),
                 'description' => Module::t('module', 'jk'),
                 'icon' => Yii::$app->params['module']['jk']['icon'],
                 'url' => Url::to(['/jk/']),
                 'link' => 'Перейти <i class="fas fa-arrow-circle-right"></i>',
+            ],
+            [
+                'col' => 3,
+                'bg' => 'indigo',
+                'title' => \app\modules\kr\Module::t('module', 'KR'),
+                'description' => \app\modules\kr\Module::t('module', 'kr'),
+                'icon' => Icon::show('users'),
+                'url' => Url::to(['/kr/']),
             ],
             /*[
                 'col' => 3,
@@ -110,7 +118,7 @@ class DefaultController extends Controller
                  'link' => 'Москва, Румянцево, БЦ Comcity',
              ],*/
             [
-                'col' => 4,
+                'col' => 3,
                 'bg' => 'success',
                 'title' => '<span class="clock">
                                 <span class="hou">00</span><span class="del">:</span><span class="min">00</span><span class="del">:</span><span class="sec">00</span>

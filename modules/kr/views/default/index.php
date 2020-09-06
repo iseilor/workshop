@@ -1,12 +1,34 @@
-<div class="kr-default-index">
-    <h1><?= $this->context->action->uniqueId ?></h1>
-    <p>
-        This is the view content for action "<?= $this->context->action->id ?>".
-        The action belongs to the controller "<?= get_class($this->context) ?>"
-        in the "<?= $this->context->module->id ?>" module.
-    </p>
-    <p>
-        You may customize this page by editing the following file:<br>
-        <code><?= __FILE__ ?></code>
-    </p>
+<?php
+/* @var $items Array */
+/* @var $imgs Array */
+
+use app\modules\kr\Module;
+use kartik\icons\Icon;
+
+$this->title = Icon::show('users').Module::t('module', 'kr');
+$this->params['breadcrumbs'][] = $this->title;
+?>
+<div class="row">
+    <?php
+    foreach ($imgs as $img) {
+        echo $this->render(
+            'index_item_img',
+            [
+                'item' => $img,
+            ]
+        );
+    }
+    ?>
+</div>
+<div class="row">
+    <?php
+    foreach ($items as $item) {
+        echo $this->render(
+            'index_item',
+            [
+                'item' => $item,
+            ]
+        );
+    }
+    ?>
 </div>

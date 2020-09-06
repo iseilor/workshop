@@ -1,12 +1,10 @@
 <?php
 
-
 use app\components\menu\MenuActive;
 use app\modules\main\Module;
 use kartik\icons\Icon;
 use yii\helpers\Html;
 use yii\helpers\Url;
-
 
 $jkInstructionURL = '/jk/doc';
 $jkInstructionTemplate = '<a href="{url}" class="nav-link" >{label}</a>';
@@ -83,7 +81,7 @@ if ($jkInstructionDoc) {
                                         . Html::tag('p', \app\modules\jk\Module::t('doc', 'Instruction')),
                                     'url' => [$jkInstructionURL],
                                     'options' => ['class' => 'nav-item has-treeview sidebar-jk-instruction',],
-                                    'template'=> $jkInstructionTemplate,
+                                    'template' => $jkInstructionTemplate,
                                 ],
                                 [
                                     'label' => Icon::show('calculator', ['class' => 'nav-icon'])
@@ -114,6 +112,29 @@ if ($jkInstructionDoc) {
                                 /*['label' => '<i class="fas fa-user nav-icon"></i> <p>Написать куратору</p>', 'url' => ['/jk/curator/index']],*/
                             ],
                         ],
+
+                        // Кадровый резерв
+                        [
+                            'label' => Icon::show('users', ['class' => 'nav-icon'])
+                                . Html::tag('p', \app\modules\kr\Module::t('module', 'kr')
+                                    . Icon::show('angle-left', ['class' => 'right'])),
+                            'url' => ['#'],
+                            'options' => ['class' => 'nav-item has-treeview'],
+                            'items' => [
+                                ['label' => Icon::show('info', ['class' => 'nav-icon']) . '<p>Программа КР</p>', 'url' => ['/kr/default/index']],
+                                ['label' => Icon::show('info', ['class' => 'nav-icon']) . '<p>О программе</p>', 'url' => ['/kr/']],
+                                ['label' => Icon::show('list', ['class' => 'nav-icon']) . '<p>Расписание</p>', 'url' => ['/kr/']],
+                                ['label' => Icon::show('user-graduate', ['class' => 'nav-icon']) . '<p>Кураторы</p>', 'url' => ['/kr/']],
+                                ['label' => Icon::show('tasks', ['class' => 'nav-icon']) . '<p>Условия</p>', 'url' => ['/kr/']],
+
+                                ['label' => Icon::show('microchip', ['class' => 'nav-icon']) . '<p>БТИ</p>', 'url' => ['/kr/']],
+                                ['label' => Icon::show('laptop', ['class' => 'nav-icon']) . '<p>IT</p>', 'url' => ['/kr/']],
+                                ['label' => Icon::show('briefcase', ['class' => 'nav-icon']) . '<p>BTB</p>', 'url' => ['/kr/']],
+                                ['label' => Icon::show('building', ['class' => 'nav-icon']) . '<p>B2C</p>', 'url' => ['/kr/']]
+                            ],
+                        ],
+
+                        // О проекте
                         [
                             'label' => Icon::show('sitemap', ['class' => 'nav-icon'])
                                 . Html::tag('p', Module::t('module', 'About project')
