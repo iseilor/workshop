@@ -1,16 +1,19 @@
+<?php
+use kartik\icons\Icon;
+use yii\helpers\Html;use yii\helpers\Url;
+?>
+
 <footer class="main-footer">
     <div class="float-right d-none d-sm-inline">
-        От IT для людей с любовью
+        От IT для людей с  <span style="color:red;"><?=Icon::show('heart')?></span>
     </div>
-    <!-- Default to the left -->
-    <strong>Москва, ПАО Ростелеком &copy; 2K20</strong>
-    <a href="https://workshop.center.rt.ru">Workshop</a>.
-    МРФ Центр. Все права защищены.
+    Москва &copy; 2019-2020 | ПАО Ростелеком | МРФ Центр |
+    <?=Html::a(Icon::show('info'). \app\modules\main\Module::t('module', 'Information'),['/main/default/about'])?> |
+    <?=Html::a(Icon::show('envelope'). \app\modules\main\Module::t('module', 'Feedback'),['/main/default/feedback'])?>
 </footer>
 
 <?php
 // Сообщения чата
-use yii\helpers\Url;
 
 $url = Url::to('/chat/chat/messages',true);
 $script = <<< JS

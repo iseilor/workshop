@@ -16,12 +16,32 @@ use yii\widgets\Menu;
         'itemOptions' => ['class' => 'nav-item d-none d-sm-inline-block'],
         'linkTemplate' => '<a href="{url}" class="nav-link">{label}</a>',
         'items' => [
-            ['label' => '<i class="fas fa-bars"></i>', 'url' => '#', 'options' => ['class' => 'nav-item'], 'template' => '<a href="{url}" class="nav-link" data-widget="pushmenu">{label}</a>'],
-            ['label' => Icon::show('tachometer-alt') . Module::t('module', 'Home'), 'url' => ['/main/default/index']],
-            ['label' => Icon::show('bullhorn') . Module::t('module', 'News'),'url' => ['/news/default/index']],
-            ['label' => Icon::show('home').\app\modules\jk\Module::t('module', 'jk'),'url' => ['/jk/default/index']],
-            ['label' => Icon::show('info'). Module::t('module', 'Information'),'url'=>['/main/default/about']],
-            ['label' => Icon::show('envelope') . Module::t('module', 'Feedback'), 'url' => ['/main/default/feedback']],
+            [
+                'label' => '<i class="fas fa-bars"></i>',
+                'url' => '#',
+                'options' => ['class' => 'nav-item'],
+                'template' => '<a href="{url}" class="nav-link" data-widget="pushmenu">{label}</a>',
+            ],
+            [
+                'label' => Icon::show('tachometer-alt')
+                    . '<span class="d-none d-lg-inline-block">' . Module::t('module', 'Home') . '</span>',
+                'url' => ['/main/default/index'],
+            ],
+            [
+                'label' => Icon::show('bullhorn')
+                    . '<span class="d-none d-lg-inline-block">' . Module::t('module', 'News') . '</span>',
+                'url' => ['/news/default/index'],
+            ],
+            [
+                'label' => Icon::show('home')
+                    . '<span class="d-none d-lg-inline-block">' . \app\modules\jk\Module::t('module', 'jk') . '</span>',
+                'url' => ['/jk/default/index'],
+            ],
+            [
+                'label' => Icon::show('users')
+                    . '<span class="d-none d-lg-inline-block">' . \app\modules\kr\Module::t('module', 'kr') . '</span>',
+                'url' => ['/kr/default/index'],
+            ],
         ],
     ]);
     ?>
@@ -179,7 +199,8 @@ use yii\widgets\Menu;
                 ); ?>
             <?php else: ?>
                 <a class="nav-link" data-toggle="dropdown" href="#">
-                    <?= Icon::show('user') . Yii::$app->user->identity->surname . ' ' . Yii::$app->user->identity->initials ?>
+                    <?= Icon::show('user')
+                    . '<span class="d-none d-lg-inline-block">'. Yii::$app->user->identity->surname . ' ' . Yii::$app->user->identity->initials ?></span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                     <div class="dropdown-divider"></div>
@@ -196,11 +217,11 @@ use yii\widgets\Menu;
                         ['class' => 'dropdown-item', 'title' => 'Личные данные вашего профиля']
                     );
                     echo '<div class="dropdown-divider"></div>';
-//                    echo Html::a(
-//                        Icon::show('id-card') . 'Моя карточка',
-//                        Url::home() . 'user/' . Yii::$app->user->identity->getId(),
-//                        ['class' => 'dropdown-item', 'title' => 'Публичные данные вашего профиля']
-//                    );
+                    //                    echo Html::a(
+                    //                        Icon::show('id-card') . 'Моя карточка',
+                    //                        Url::home() . 'user/' . Yii::$app->user->identity->getId(),
+                    //                        ['class' => 'dropdown-item', 'title' => 'Публичные данные вашего профиля']
+                    //                    );
                     echo '<div class="dropdown-divider"></div>';
                     echo Html::a(
                         '<i class="fas fa-sign-out-alt"></i> Выйти',

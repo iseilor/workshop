@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title; ?>
                 <div class="col-12">
                     <h4>
                         <i class="fas fa-globe"></i> ПАО Ростелеком, Макрорегиональный филиал "ЦЕНТР"
-                        <small class="float-right"><?= date('d.m.Y') ?></small>
+                        <small class="float-right"><?=Icon::show('calendar-alt'). date('d.m.Y') ?></small>
                     </h4>
                 </div>
             </div>
