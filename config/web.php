@@ -30,6 +30,7 @@ $config = [
         'app\modules\nsi\Bootstrap',
         'app\modules\project\Bootstrap',
         'app\modules\video\Bootstrap',
+        'app\modules\kr\Bootstrap',
     ],
     'layout' => 'index',
     'language' => 'ru',
@@ -55,6 +56,7 @@ $config = [
         'project' => ['class' => 'app\modules\project\Module'],
         'bot' => ['class' => 'app\modules\bot\Module'],
         'video' => ['class' => 'app\modules\video\Module'],
+        'kr' => ['class' => 'app\modules\kr\Module'],
     ],
     'components' => [
         'ad' => [
@@ -167,7 +169,6 @@ $config = [
                 '<_m:[\w\-]+>' => '<_m>/default/index',
 
                 '<_m:(jk)+>/<_a:(calc)>' => '<_m>/default/<_a>',
-
                 '<_m:[\w\-]+>/<_a:(table)>' => '<_m>/default/<_a>',
                 '<_m:[\w\-]+>/<_c:[\w\-]+>' => '<_m>/<_c>/index',
             ],
