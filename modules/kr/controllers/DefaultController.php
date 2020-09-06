@@ -27,24 +27,28 @@ class DefaultController extends Controller
                 'src' => 'kr-1.jpg',
                 'title' => 'О программе',
                 'icon'=>  Icon::show('info'),
+                'url'=>Url::to('kr/about/index')
             ],
             [
                 'id' => 2,
                 'src' => 'kr-2.jpg',
                 'title' => 'Расписание программы',
                 'icon'=>  Icon::show('list'),
+                'url'=>Url::to('kr/timetable/index')
             ],
             [
                 'id' => 3,
                 'src' => 'kr-3.jpg',
                 'title' => 'Тренеры и кураторы',
                 'icon'=>  Icon::show('user-graduate'),
+                'url'=>Url::to('kr/curator')
             ],
             [
                 'id' => 4,
                 'src' => 'kr-4.jpg',
                 'title' => 'Условия программы',
                 'icon'=>  Icon::show('tasks'),
+                'url'=>Url::to('kr/terms')
             ],
         ];
 
@@ -56,7 +60,7 @@ class DefaultController extends Controller
                 'title' => 'О программе',
                 'description' => 'Кадровый резерв ПАО Ростелеком',
                 'icon' => Icon::show('info'),
-                'url' => Url::to('news'),
+                'url' => Url::to('kr/about/index'),
             ],
             [
                 'col' => 3,
@@ -64,7 +68,7 @@ class DefaultController extends Controller
                 'title' => 'Расписание',
                 'description' => 'Основные этапы и расписание',
                 'icon' => Icon::show('list'),
-                'url' => Url::to('news'),
+                'url' => Url::to('kr/timetable'),
             ],
             [
                 'col' => 3,
@@ -72,7 +76,7 @@ class DefaultController extends Controller
                 'title' => 'Кураторы',
                 'description' => 'Тренеры и кураторы',
                 'icon' => Icon::show('user-graduate'),
-                'url' => Url::to('news'),
+                'url' => Url::to('kr/curator'),
             ],
             [
                 'col' => 3,
@@ -80,7 +84,7 @@ class DefaultController extends Controller
                 'title' => 'Условия',
                 'description' => 'Условия участия',
                 'icon' => Icon::show('tasks'),
-                'url' => Url::to('news'),
+                'url' => Url::to('kr/terms'),
             ],
             [
                 'col' => 4,
@@ -88,7 +92,7 @@ class DefaultController extends Controller
                 'title' => 'Участники',
                 'description' => 'Участники программы',
                 'icon' => Icon::show('users'),
-                'url' => Url::to('news'),
+                'url' => Url::to('kr/user'),
             ],
             [
                 'col' => 2,

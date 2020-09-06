@@ -53,8 +53,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                 }
                             ]
                         ) ?>
-                    </div>
-                    <div class="col-md-4">
                         <h1><i class="fas fa-table"></i> Справочники</h1>
                         <?= Html::ul(
                             [
@@ -71,13 +69,17 @@ $this->params['breadcrumbs'][] = $this->title;
                                 }
                             ]
                         ) ?>
-
                     </div>
+
                     <div class="col-md-4">
                         <h3><?=Icon::show('home').\app\modules\jk\Module::t('module','jk')?></h3>
                         <?=$this->render('@app/modules/jk/views/admin/index_data')?>
                         <hr/>
                         <?=$this->render('@app/modules/jk/views/admin/index_dir')?>
+                    </div>
+                    <div class="col-md-4">
+                        <h3><?=Icon::show('users').\app\modules\kr\Module::t('module','kr')?></h3>
+                        <?=$this->render('@app/modules/kr/views/admin/block')?>
                     </div>
                 </div>
             </div>

@@ -105,10 +105,9 @@ if ($jkInstructionDoc) {
                                 ],
                                 [
                                     'label' => Icon::show('youtube', ['framework' => Icon::FAB, 'class' => 'nav-icon'])
-                                        . Html::tag('p', \app\modules\video\Module::t('module', 'Video Instruction')),
+                                        . '<p>Видео <span class="right badge badge-danger">New</span></p>',
                                     'url' => ['/jk/video/index'],
                                 ]
-
                                 /*['label' => '<i class="fas fa-user nav-icon"></i> <p>Написать куратору</p>', 'url' => ['/jk/curator/index']],*/
                             ],
                         ],
@@ -122,15 +121,22 @@ if ($jkInstructionDoc) {
                             'options' => ['class' => 'nav-item has-treeview'],
                             'items' => [
                                 ['label' => Icon::show('star', ['class' => 'nav-icon']) . '<p>Программа</p>', 'url' => ['/kr/default/index']],
-                                ['label' => Icon::show('info', ['class' => 'nav-icon']) . '<p>О программе</p>', 'url' => ['/kr/']],
-                                ['label' => Icon::show('list', ['class' => 'nav-icon']) . '<p>Расписание</p>', 'url' => ['/kr/']],
-                                ['label' => Icon::show('user-graduate', ['class' => 'nav-icon']) . '<p>Кураторы</p>', 'url' => ['/kr/']],
-                                ['label' => Icon::show('tasks', ['class' => 'nav-icon']) . '<p>Условия</p>', 'url' => ['/kr/']],
+                                ['label' => Icon::show('info', ['class' => 'nav-icon']) . '<p>О программе</p>', 'url' => ['/kr/about/index']],
+                                ['label' => Icon::show('list', ['class' => 'nav-icon']) . '<p>Расписание</p>', 'url' => ['/kr/timetable']],
+                                ['label' => Icon::show('user-graduate', ['class' => 'nav-icon']) . '<p>Кураторы</p>', 'url' => ['/kr/curator']],
+                                ['label' => Icon::show('tasks', ['class' => 'nav-icon']) . '<p>Условия</p>', 'url' => ['/kr/terms']],
+                                ['label' => Icon::show('users', ['class' => 'nav-icon']) . '<p>Участники</p>', 'url' => ['/kr/user']],
 
                                 ['label' => Icon::show('microchip', ['class' => 'nav-icon']) . '<p>БТИ</p>', 'url' => ['/kr/']],
                                 ['label' => Icon::show('laptop', ['class' => 'nav-icon']) . '<p>IT</p>', 'url' => ['/kr/']],
                                 ['label' => Icon::show('briefcase', ['class' => 'nav-icon']) . '<p>BTB</p>', 'url' => ['/kr/']],
-                                ['label' => Icon::show('building', ['class' => 'nav-icon']) . '<p>B2C</p>', 'url' => ['/kr/']]
+                                ['label' => Icon::show('building', ['class' => 'nav-icon']) . '<p>B2C</p>', 'url' => ['/kr/']],
+                                [
+                                    'label' => Icon::show('youtube', ['class' => 'nav-icon', 'framework' => Icon::FAB])
+                                        . '<p>Видео <span class="right badge badge-danger">New</span></p>',
+                                    'url' => ['/kr/video/index'],
+                                ],
+
                             ],
                         ],
 

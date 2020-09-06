@@ -47,6 +47,10 @@ $config = [
             'class' => 'app\modules\video\Module',
             'controllerNamespace' => 'app\modules\video\commands',
         ],
+        'kr' => [
+            'class' => 'app\modules\kr\Module',
+            'controllerNamespace' => 'app\modules\kr\commands',
+        ],
 
     ],
     'components' => [
@@ -136,6 +140,11 @@ $config = [
             'class' => 'yii\console\controllers\MigrateController',
             'migrationPath' => '@app/modules/video/migrations',
             'migrationTable' => 'migration_video',
+        ],
+        'migrate-kr' => [
+            'class' => 'yii\console\controllers\MigrateController',
+            'migrationPath' => '@app/modules/kr/migrations',
+            'migrationTable' => 'migration_kr',
         ],
     ],
 
