@@ -121,7 +121,7 @@ if ($jkInstructionDoc) {
                             'url' => ['#'],
                             'options' => ['class' => 'nav-item has-treeview'],
                             'items' => [
-                                ['label' => Icon::show('info', ['class' => 'nav-icon']) . '<p>Программа КР</p>', 'url' => ['/kr/default/index']],
+                                ['label' => Icon::show('star', ['class' => 'nav-icon']) . '<p>Программа</p>', 'url' => ['/kr/default/index']],
                                 ['label' => Icon::show('info', ['class' => 'nav-icon']) . '<p>О программе</p>', 'url' => ['/kr/']],
                                 ['label' => Icon::show('list', ['class' => 'nav-icon']) . '<p>Расписание</p>', 'url' => ['/kr/']],
                                 ['label' => Icon::show('user-graduate', ['class' => 'nav-icon']) . '<p>Кураторы</p>', 'url' => ['/kr/']],
