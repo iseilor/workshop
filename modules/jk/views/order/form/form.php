@@ -23,6 +23,9 @@ if (isset($model->is_mortgage)) {
         $field_zaim = '';
     }
 }
+
+$model->filling_step++;
+
 ?>
     <div class="row">
         <div class="col-md-12">
@@ -56,26 +59,26 @@ if (isset($model->is_mortgage)) {
                                     ];
 
 
-                                    if ($model->filling_step >= 1) {
+                                    if ($model->filling_step >= 2) {
                                         $tabs[] = ['name' => Icon::show('female') . 'Супруг(а)', 'id' => 'spouse', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''];
                                     }
-                                    if ($model->filling_step >= 2) {
+                                    if ($model->filling_step >= 3) {
                                         $tabs[] = ['name' => Icon::show('baby') . 'Дети', 'id' => 'child', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''];
                                     }
 
-                                    if ($model->filling_step >= 3) {
+                                    if ($model->filling_step >= 4) {
                                         $tabs[] = ['name' => Icon::show('users') . 'Семья', 'id' => 'family', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''];
                                     }
-                                    if ($model->filling_step >= 4) {
+                                    if ($model->filling_step >= 5) {
                                         $tabs[] = ['name' => Icon::show('file-invoice-dollar') . 'Ипотека', 'id' => 'ipoteka', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''];
                                     }
-                                    if ($model->filling_step >= 5) {
+                                    if ($model->filling_step >= 6) {
                                         $tabs[] = ['name' => Icon::show('home') . 'ЖП', 'id' => 'house', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''];
                                     }
-                                    if ($model->filling_step >= 6) {
+                                    if ($model->filling_step >= 7) {
                                         $tabs[] = ['name' => Icon::show('ruble-sign') . 'Финансы', 'id' => 'money', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''];
                                     }
-                                    if ($model->filling_step >= 7) {
+                                    if ($model->filling_step >= 8) {
                                         $tabs[] = ['name' => Icon::show('file-alt') . 'Согласия на обработку ПД', 'id' => 'agreement', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''];
                                     }
 
@@ -140,17 +143,20 @@ if (isset($model->is_mortgage)) {
 //                            'id' => 'btn-message',
 //                        ]
 //                    ) ?>
-                    <?= ''
-//                    Html::submitButton(
-//                        Icon::show('save') . 'Сохранить заявку',
-//                        [
-//                            'class' => 'btn btn-success float-right',
-//                            'id' => 'btn-save',
-//                            'value' => 1,
-//                            'name' => 'save',
-//                        ]
-//                    )
-                    ?>
+                    <?php if ($model->filling_step > 8): ?>
+                        <?=  $form->field($model, 'filling_step')->hiddenInput(['value' => 8])->label(false) ?>
+                        <?=
+                        Html::submitButton(
+                            Icon::show('save') . 'Сохранить заявку',
+                            [
+                                'class' => 'btn btn-success float-right',
+                                'id' => 'btn-save',
+                                'value' => 1,
+                                'name' => 'save',
+                            ]
+                        )
+                        ?>
+                    <?php endif; ?>
                 </div>
                 <?php ActiveForm::end(); ?>
             </div>
@@ -162,25 +168,25 @@ $goToLastTab = ($model->id) ? 'true' : 'false';
 
 $currentTab = 'tab-user';
 switch ($model->filling_step) {
-    case 1:
+    case 2:
         $currentTab = 'tab-spouse';
         break;
-    case 2:
+    case 3:
         $currentTab = 'tab-child';
         break;
-    case 3:
+    case 4:
         $currentTab = 'tab-family';
         break;
-    case 4:
+    case 5:
         $currentTab = 'tab-ipoteka';
         break;
-    case 5:
+    case 6:
         $currentTab = 'tab-house';
         break;
-    case 6:
+    case 7:
         $currentTab = 'tab-money';
         break;
-    case 7:
+    case 8:
         $currentTab = 'tab-agreement';
         break;
 }

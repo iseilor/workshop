@@ -124,7 +124,7 @@ use yii\widgets\MaskedInput;
     </div>
 </div>
 
-<?php if ($model->filling_step == 5): ?>
+<?php if ($model->filling_step == 6): ?>
     <div class="card card-solid card-secondary  ">
         <div class="card-body">
             <div class="row">

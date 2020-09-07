@@ -65,7 +65,7 @@ use yii\widgets\MaskedInput;
 
     </div>
 
-<?php if ($model->filling_step == 4): ?>
+<?php if ($model->filling_step == 5): ?>
     <div class="card card-solid card-secondary  ">
         <div class="card-body">
             <div class="row">
@@ -88,3 +88,16 @@ use yii\widgets\MaskedInput;
         </div>
     </div>
 <?php endif; ?>
+
+
+<?php
+$script = <<< JS
+$(document).ready(function() {
+    $('div.field-order-is_mortgage').addClass('required');
+    $('div.field-order-ipoteka_target').addClass('required');
+    $('div.field-order-ipoteka_size').addClass('required');
+    $('div.field-order-ipoteka_user').addClass('required');
+});
+JS;
+$this->registerJs($script, yii\web\View::POS_READY);
+?>

@@ -198,10 +198,10 @@ class Order extends Model
             // Вкладка "Семья"
             [['social_id', 'family_own', 'family_deal'],  'required',
                 'when' => function ($model) {
-                    return $model->filling_step >= 3;
+                    return $model->filling_step >= 4;
                 },
                 'whenClient' => "function (attribute, value) {
-                    return $('#filling_step').val() >= 3;
+                    return $('#order-filling_step').val() >= 4;
                 }",
             ],
 
@@ -226,10 +226,10 @@ class Order extends Model
 
             [['is_mortgage', 'ipoteka_target', 'ipoteka_size', 'ipoteka_user'],  'required',
                 'when' => function ($model) {
-                    return $model->filling_step >= 4;
+                    return $model->filling_step >= 5;
                 },
                 'whenClient' => "function (attribute, value) {
-                    return $('#filling_step').val() >= 4;
+                    return $('#order-filling_step').val() >= 5;
                 }",
             ],
 
@@ -237,10 +237,10 @@ class Order extends Model
             // Вкладка "Финансы"
             [['money_oklad', 'money_summa_year', 'money_nalog_year', 'money_month_pay', 'money_user_pay',],  'required',
                 'when' => function ($model) {
-                    return $model->filling_step >= 6;
+                    return $model->filling_step >= 7;
                 },
                 'whenClient' => "function (attribute, value) {
-                    return $('#filling_step').val() >= 6;
+                    return $('#order-filling_step').val() >= 7;
                 }",
             ],
 
@@ -258,10 +258,22 @@ class Order extends Model
             [['is_do'], 'safe'],
 
 
+            // Вкладка "Финансы"
+            [['file_agree_personal_data_form',],  'required',
+                'when' => function ($model) {
+                    return $model->filling_step >= 8 && !$model->file_agree_personal_data;
+                },
+                'whenClient' => "function (attribute, value) {
+                    return ($('#order-filling_step').val() >= 8) && (($('#order-file_agree_personal_data').val() === null) || ($('#order-file_agree_personal_data').val() === ''));
+                    
+                }",
+                'skipOnEmpty' => true,
+            ],
+
         ];
 
 
-
+//
 //        if (!$this->file_agree_personal_data) {
 //            $rules[] = [['file_agree_personal_data_form'], 'required','skipOnEmpty' => true,];
 //        }

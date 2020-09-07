@@ -160,9 +160,9 @@ class OrderController extends Controller
         }
 
 
-        //        var_dump(Yii::$app->request->post());
-        //        var_dump($spose);
-        //        die();
+//                var_dump(Yii::$app->request->post());
+//                var_dump($spose);
+//                die();
 
 
         // Обновлаяем паспортные данные
@@ -274,6 +274,9 @@ class OrderController extends Controller
             $orderStage->save();
 
             return $this->redirect(['view', 'id' => $model->id]);
+        } elseif ($model->filling_step > 0 && $model->getOldAttribute('filling_step') != $model->filling_step) {
+            // Если не смогли сохранить заявку, откатываемся на 1 шаг
+            $model->filling_step--;
         }
 
         // Если заявка создана на основании калькулятора процентов или займа
@@ -464,6 +467,9 @@ class OrderController extends Controller
             }
 
             return $this->redirect(['view', 'id' => $model->id]);
+        } elseif ($model->filling_step > 0 && $model->getOldAttribute('filling_step') != $model->filling_step) {
+            // Если не смогли сохранить заявку, откатываемся на 1 шаг
+            $model->filling_step--;
         }
 
 

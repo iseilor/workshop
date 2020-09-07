@@ -49,7 +49,7 @@ echo $this->render('@app/modules/user/views/spouse/info');
     </div>-->
 
 
-<?php if ($model->filling_step == 1): ?>
+<?php if ($model->filling_step == 2): ?>
     <div class="card card-solid card-secondary  ">
         <div class="card-body">
             <div class="row">

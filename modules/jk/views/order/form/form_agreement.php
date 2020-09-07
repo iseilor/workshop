@@ -29,7 +29,7 @@ $user = User::findOne(Yii::$app->user->identity->id);
                 <?= $form->field($model, 'file_agree_personal_data_form', [
                     'template' => getFileInputTemplate($model->file_agree_personal_data, $model->attributeLabels()['file_agree_personal_data_form'] . '.pdf'),
                 ])->fileInput(['class' => 'custom-file-input']) ?>
-
+                <?=  $form->field($model, 'file_agree_personal_data')->hiddenInput()->label(false) ?>
             </div>
         </div>
 
@@ -61,25 +61,37 @@ $user = User::findOne(Yii::$app->user->identity->id);
     </div>
 </div>
 
-<div class="card card-solid card-secondary  ">
-    <div class="card-body">
-        <div class="row">
-            <div class="col-10"></div>
-            <div class="col-2">
-                <?php
-                    if ($model->id) {
-                        echo Html::submitButton(
-                            Icon::show('save') . 'Сохранить заявку',
-                            [
-                                'class' => 'btn btn-success float-right',
-                                'id' => 'btn-save',
-                                'value' => 1,
-                                'name' => 'save',
-                            ]
-                        );
-                    }
-                ?>
+<?php if ($model->filling_step == 8): ?>
+    <div class="card card-solid card-secondary  ">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-10">
+                    <?=  $form->field($model, 'filling_step')->hiddenInput(['value' => 8])->label(false) ?>
+                </div>
+                <div class="col-2">
+                    <?= \yii\helpers\Html::submitButton(
+                        \kartik\icons\Icon::show('save') . 'Сохранить заявку',
+                        [
+                            'class' => 'btn btn-success float-right',
+                            'id' => 'btn-save',
+                            'value' => 1,
+                            'name' => 'save',
+                        ]
+                    );
+                    ?>
+                </div>
             </div>
         </div>
     </div>
-</div>
+<?php endif; ?>
+
+<?php
+$script = <<< JS
+$(document).ready(function() {
+    
+    $('div.field-order-file_agree_personal_data_form').addClass('required');
+   
+});
+JS;
+$this->registerJs($script, yii\web\View::POS_READY);
+?>

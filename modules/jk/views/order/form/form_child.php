@@ -14,7 +14,7 @@ echo $this->render('@app/modules/user/views/child/grid-view', [
 
 
 
-<?php if ($model->filling_step == 2): ?>
+<?php if ($model->filling_step == 3): ?>
     <div class="card card-solid card-secondary  ">
         <div class="card-body">
             <div class="row">

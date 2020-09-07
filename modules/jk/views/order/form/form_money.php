@@ -36,7 +36,7 @@ use yii\helpers\Html;
 </div>
 
 
-<?php if ($model->filling_step == 6): ?>
+<?php if ($model->filling_step == 7): ?>
     <div class="card card-solid card-secondary  ">
         <div class="card-body">
             <div class="row">
@@ -64,6 +64,12 @@ use yii\helpers\Html;
 <?php
 $script = <<< JS
 $(document).ready(function() {
+    
+    $('div.field-order-money_oklad').addClass('required');
+    $('div.field-order-money_summa_year').addClass('required');
+    $('div.field-order-money_nalog_year').addClass('required');
+    $('div.field-order-money_month_pay').addClass('required');
+    $('div.field-order-money_user_pay').addClass('required');
     
     // Показываем поля загрузки справки, если сотрудник в ДО
     $('#order-is_do').on('click', function() {

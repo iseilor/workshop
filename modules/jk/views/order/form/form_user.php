@@ -260,7 +260,7 @@ $user = User::findOne(Yii::$app->user->identity->id);
 </div>
 
 
-<?php if (!$model->filling_step >= 1): ?>
+<?php if ($model->filling_step == 1): ?>
     <div class="card card-solid card-secondary  ">
         <div class="card-body">
             <div class="row">
