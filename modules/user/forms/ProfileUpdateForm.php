@@ -114,16 +114,16 @@ class ProfileUpdateForm extends Model
             [['photo'], 'file', 'maxSize'=>'2048000'],
 
             [['work_is_young','work_is_transferred','work_transferred_file'], 'safe'],
-            [['work_transferred_file'], 'file', 'extensions'=>'pdf'],
+            [['work_transferred_file'], 'file', /*'extensions'=>'pdf'*/],
             [['work_transferred_file'], 'file', 'maxSize'=>'2048000'],
 
             [['passport_series','passport_number','passport_date','passport_code','passport_department','passport_file','passport_registration','address_fact'], 'safe'],
             [['passport_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'passport_date'],
-            [['passport_file'], 'file', 'extensions'=>'pdf'],
+            [['passport_file'], 'file', /*'extensions'=>'pdf'*/],
             [['passport_file'], 'file', 'maxSize'=>'10240000'],
 
             [['snils_number','snils_date','snils_file'], 'safe'],
-            [['snils_file'], 'file', 'extensions'=>'pdf'],
+            [['snils_file'], 'file', /*'extensions'=>'pdf'*/],
             [['snils_file'], 'file', 'maxSize'=>'2048000'],
         ];
     }

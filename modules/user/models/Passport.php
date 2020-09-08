@@ -47,9 +47,9 @@ class Passport extends Model
             [['passport_series', 'passport_number', 'passport_registration', 'passport_department', 'passport_code', 'passport_date', 'address_fact'], 'required'],
 
             // Файлы
-            [['passport_file',], 'file', 'skipOnEmpty' => true, 'extensions' => 'pdf', 'maxSize' => '10000000',],
-            [['ejd_file',], 'file', 'skipOnEmpty' => true, 'extensions' => 'pdf', 'maxSize' => '10000000',],
-            [['temporary_registration_file',], 'file', 'skipOnEmpty' => true, 'extensions' => 'pdf', 'maxSize' => '10000000',],
+            [['passport_file',], 'file', 'skipOnEmpty' => true, /*'extensions' => 'pdf',*/ 'maxSize' => '10000000',],
+            [['ejd_file',], 'file', 'skipOnEmpty' => true, /*'extensions' => 'pdf',*/ 'maxSize' => '10000000',],
+            [['temporary_registration_file',], 'file', 'skipOnEmpty' => true, /*'extensions' => 'pdf',*/ 'maxSize' => '10000000',],
         ];
 
         if (!$this->passport_file) {
