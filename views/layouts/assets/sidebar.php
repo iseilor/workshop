@@ -7,8 +7,6 @@ use kartik\icons\Icon;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-/*
-$user = \app\modules\admin\models\User::findOne(Yii::$app->user->identity->id);
 
 $jkInstructionURL = '/jk/doc';
 $jkInstructionTemplate = '<a href="{url}" class="nav-link" >{label}</a>';
@@ -22,17 +20,6 @@ if ($jkInstructionDoc) {
     $jkInstructionTemplate = '<a href="{url}" target="_blank" class="nav-link" >{label}</a>';
 }
 
-$jkOrderURL = '/jk/order/create';
-if ($user) {
-    $jkUnfilledOrder = \app\modules\jk\models\Order::find()
-        ->where(['created_by' => $user->id])
-        ->andWhere(['<', 'filling_step', 8])
-        ->orderBy(['updated_at' => SORT_DESC])
-        ->one();
-    if ($jkUnfilledOrder) {
-        $jkOrderURL = '/jk/order/' . $jkUnfilledOrder->id . '/update';
-    }
-}*/
 ?>
 
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
@@ -92,11 +79,11 @@ if ($user) {
                             'options' => ['class' => 'nav-item has-treeview sidebar-jk'],
                             'items' => [
                                 [
-                                   /* 'label' => Icon::show('file', ['class' => 'nav-icon'])
+                                    'label' => Icon::show('file', ['class' => 'nav-icon'])
                                         . Html::tag('p', \app\modules\jk\Module::t('doc', 'Instruction')),
                                     'url' => [$jkInstructionURL],
                                     'options' => ['class' => 'nav-item has-treeview sidebar-jk-instruction',],
-                                    'template' => $jkInstructionTemplate,*/
+                                    'template' => $jkInstructionTemplate,
                                 ],
                                 [
                                     'label' => Icon::show('calculator', ['class' => 'nav-icon'])
