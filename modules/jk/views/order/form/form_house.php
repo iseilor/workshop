@@ -123,3 +123,27 @@ use yii\widgets\MaskedInput;
         </div>
     </div>
 </div>
+
+<?php if ($model->filling_step == 6): ?>
+    <div class="card card-solid card-secondary  ">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-10">
+                    <?=  $form->field($model, 'filling_step')->hiddenInput(['value' => 6])->label(false) ?>
+                </div>
+                <div class="col-2">
+                    <?= \yii\helpers\Html::submitButton(
+                        \kartik\icons\Icon::show('play') . 'Далее',
+                        [
+                            'class' => 'btn btn-success float-right',
+                            'id' => 'btn-save',
+                            'value' => 1,
+                            'name' => 'save',
+                        ]
+                    );
+                    ?>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>

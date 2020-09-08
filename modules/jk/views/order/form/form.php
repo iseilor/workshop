@@ -7,7 +7,7 @@ use yii\jui\Tabs;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\jk\models\Faq */
+/* @var $model app\modules\jk\models\Order */
 /* @var $form yii\widgets\ActiveForm */
 /* @var $userChildDataProvider \yii\data\ActiveDataProvider */
 
@@ -23,6 +23,9 @@ if (isset($model->is_mortgage)) {
         $field_zaim = '';
     }
 }
+
+$model->filling_step++;
+
 ?>
     <div class="row">
         <div class="col-md-12">
@@ -47,16 +50,42 @@ if (isset($model->is_mortgage)) {
                                     <?php
                                     $tabs = [
                                         ['name' => Icon::show('user') . 'Работник', 'id' => 'user', 'tab-class' => 'active', 'selected' => true, 'tabs-class' => 'show active'],
-                                        ['name' => Icon::show('female') . 'Супруг(а)', 'id' => 'spouse', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
-                                        ['name' => Icon::show('baby') . 'Дети', 'id' => 'child', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
-                                        ['name' => Icon::show('users') . 'Семья', 'id' => 'family', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
-                                        ['name' => Icon::show('file-invoice-dollar') . 'Ипотека', 'id' => 'ipoteka', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
-                                        ['name' => Icon::show('home') . 'ЖП', 'id' => 'house', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
-                                        ['name' => Icon::show('ruble-sign') . 'Финансы', 'id' => 'money', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
+//                                        ['name' => Icon::show('female') . 'Супруг(а)', 'id' => 'spouse', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
+//                                        ['name' => Icon::show('baby') . 'Дети', 'id' => 'child', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
+//                                        ['name' => Icon::show('users') . 'Семья', 'id' => 'family', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
+//                                        ['name' => Icon::show('file-invoice-dollar') . 'Ипотека', 'id' => 'ipoteka', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
+//                                        ['name' => Icon::show('home') . 'ЖП', 'id' => 'house', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
+//                                        ['name' => Icon::show('ruble-sign') . 'Финансы', 'id' => 'money', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
                                     ];
-                                    if ($model->id) {
+
+
+                                    if ($model->filling_step >= 2) {
+                                        $tabs[] = ['name' => Icon::show('female') . 'Супруг(а)', 'id' => 'spouse', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''];
+                                    }
+                                    if ($model->filling_step >= 3) {
+                                        $tabs[] = ['name' => Icon::show('baby') . 'Дети', 'id' => 'child', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''];
+                                    }
+
+                                    if ($model->filling_step >= 4) {
+                                        $tabs[] = ['name' => Icon::show('users') . 'Семья', 'id' => 'family', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''];
+                                    }
+                                    if ($model->filling_step >= 5) {
+                                        $tabs[] = ['name' => Icon::show('file-invoice-dollar') . 'Ипотека', 'id' => 'ipoteka', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''];
+                                    }
+                                    if ($model->filling_step >= 6) {
+                                        $tabs[] = ['name' => Icon::show('home') . 'ЖП', 'id' => 'house', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''];
+                                    }
+                                    if ($model->filling_step >= 7) {
+                                        $tabs[] = ['name' => Icon::show('ruble-sign') . 'Финансы', 'id' => 'money', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''];
+                                    }
+                                    if ($model->filling_step >= 8) {
                                         $tabs[] = ['name' => Icon::show('file-alt') . 'Согласия на обработку ПД', 'id' => 'agreement', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''];
                                     }
+
+
+                                    //                                    if ($model->id) {
+//                                        $tabs[] = ['name' => Icon::show('file-alt') . 'Согласия на обработку ПД', 'id' => 'agreement', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''];
+//                                    }
                                     echo Html::ul($tabs, [
                                         'item' => function ($item, $index) {
                                             return Html::tag(
@@ -114,17 +143,20 @@ if (isset($model->is_mortgage)) {
 //                            'id' => 'btn-message',
 //                        ]
 //                    ) ?>
-                    <?= ''
-//                    Html::submitButton(
-//                        Icon::show('save') . 'Сохранить заявку',
-//                        [
-//                            'class' => 'btn btn-success float-right',
-//                            'id' => 'btn-save',
-//                            'value' => 1,
-//                            'name' => 'save',
-//                        ]
-//                    )
-                    ?>
+                    <?php if ($model->filling_step > 8): ?>
+                        <?=  $form->field($model, 'filling_step')->hiddenInput(['value' => 8])->label(false) ?>
+                        <?=
+                        Html::submitButton(
+                            Icon::show('save') . 'Сохранить заявку',
+                            [
+                                'class' => 'btn btn-success float-right',
+                                'id' => 'btn-save',
+                                'value' => 1,
+                                'name' => 'save',
+                            ]
+                        )
+                        ?>
+                    <?php endif; ?>
                 </div>
                 <?php ActiveForm::end(); ?>
             </div>
@@ -134,11 +166,43 @@ if (isset($model->is_mortgage)) {
 <?php
 $goToLastTab = ($model->id) ? 'true' : 'false';
 
+$currentTab = 'tab-user';
+switch ($model->filling_step) {
+    case 2:
+        $currentTab = 'tab-spouse';
+        break;
+    case 3:
+        $currentTab = 'tab-child';
+        break;
+    case 4:
+        $currentTab = 'tab-family';
+        break;
+    case 5:
+        $currentTab = 'tab-ipoteka';
+        break;
+    case 6:
+        $currentTab = 'tab-house';
+        break;
+    case 7:
+        $currentTab = 'tab-money';
+        break;
+    case 8:
+        $currentTab = 'tab-agreement';
+        break;
+}
+
+$currentFillingStep = $model->filling_step;
+
+
+
 $script = <<< JS
 $(document).ready(function() {
-    if ($goToLastTab) {
-        localStorage.setItem('lastTab', 'tab-agreement');
-    }
+    
+    localStorage.setItem('lastTab', '$currentTab');
+    //alert($currentTab);
+    //if ($goToLastTab) {
+    //    localStorage.setItem('lastTab', 'tab-agreement');
+    //}
     // Показываем прикрепление кредитного договора, если выбрано, что оформлена ипотека
     $('#order-is_mortgage').on('change', function() {
         if (this.value==1){

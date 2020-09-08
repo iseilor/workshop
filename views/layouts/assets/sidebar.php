@@ -1,10 +1,13 @@
 <?php
 
+
 use app\components\menu\MenuActive;
 use app\modules\main\Module;
 use kartik\icons\Icon;
 use yii\helpers\Html;
 use yii\helpers\Url;
+
+$user = \app\modules\admin\models\User::findOne(Yii::$app->user->identity->id);
 
 $jkInstructionURL = '/jk/doc';
 $jkInstructionTemplate = '<a href="{url}" class="nav-link" >{label}</a>';
@@ -18,6 +21,17 @@ if ($jkInstructionDoc) {
     $jkInstructionTemplate = '<a href="{url}" target="_blank" class="nav-link" >{label}</a>';
 }
 
+$jkOrderURL = '/jk/order/create';
+if ($user) {
+    $jkUnfilledOrder = \app\modules\jk\models\Order::find()
+        ->where(['created_by' => $user->id])
+        ->andWhere(['<', 'filling_step', 8])
+        ->orderBy(['updated_at' => SORT_DESC])
+        ->one();
+    if ($jkUnfilledOrder) {
+        $jkOrderURL = '/jk/order/' . $jkUnfilledOrder->id . '/update';
+    }
+}
 ?>
 
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
@@ -90,7 +104,7 @@ if ($jkInstructionDoc) {
                                     'options' => ['class' => 'nav-item has-treeview sidebar-jk-calc'],
 
                                 ],
-                                ['label' => '<i class="fas fa-ruble-sign nav-icon"></i> <p>Подать заявку</p>', 'url' => ['/jk/order/create']],
+                                ['label' => '<i class="fas fa-ruble-sign nav-icon"></i> <p>Подать заявку</p>', 'url' => [$jkOrderURL]],
 
                                 [
                                     'label' => Icon::show('file-word', ['class' => 'nav-icon'])
