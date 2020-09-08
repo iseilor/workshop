@@ -36,12 +36,21 @@ $this->params['breadcrumbs'][] = $this->title;
                     'filterModel' => $searchModel,
                     'columns' => [
                         ['class' => 'yii\grid\SerialColumn'],
-
                         'id',
-                        'title',
+                        [
+                            'attribute' => 'title',
+                            'value' => 'label',
+                            'format' => 'html',
+                        ],
                         'code',
-                        'progress',
-                        'color',
+                        [
+                            'label' => 'Прогресс',
+                            'format' => 'raw',
+                            'value' => function ($data) {
+                                return $data->getProgressBar();
+                            },
+                        ],
+                        'weight',
                         [
                             'class' => ActionColumn::class,
                         ],
