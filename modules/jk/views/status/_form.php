@@ -22,7 +22,6 @@ use yii\widgets\ActiveForm;
                 <?= $form->field($model, 'title_short')->textInput(['maxlength' => true]) ?>
                 <?= $form->field($model, 'code')->textInput(['maxlength' => true]) ?>
                 <?= $form->field($model, 'progress')->textInput() ?>
-                <?= $form->field($model, 'color')->textInput(['maxlength' => true]) ?>
                 <?= $form->field($model, 'color')->dropDownList([
                     'success' => 'Зелёный',
                     'danger' => 'Красный',
