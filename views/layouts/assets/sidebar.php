@@ -7,6 +7,7 @@ use kartik\icons\Icon;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
+/*
 $user = \app\modules\admin\models\User::findOne(Yii::$app->user->identity->id);
 
 $jkInstructionURL = '/jk/doc';
@@ -31,7 +32,7 @@ if ($user) {
     if ($jkUnfilledOrder) {
         $jkOrderURL = '/jk/order/' . $jkUnfilledOrder->id . '/update';
     }
-}
+}*/
 ?>
 
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
@@ -91,11 +92,11 @@ if ($user) {
                             'options' => ['class' => 'nav-item has-treeview sidebar-jk'],
                             'items' => [
                                 [
-                                    'label' => Icon::show('file', ['class' => 'nav-icon'])
+                                   /* 'label' => Icon::show('file', ['class' => 'nav-icon'])
                                         . Html::tag('p', \app\modules\jk\Module::t('doc', 'Instruction')),
                                     'url' => [$jkInstructionURL],
                                     'options' => ['class' => 'nav-item has-treeview sidebar-jk-instruction',],
-                                    'template' => $jkInstructionTemplate,
+                                    'template' => $jkInstructionTemplate,*/
                                 ],
                                 [
                                     'label' => Icon::show('calculator', ['class' => 'nav-icon'])
@@ -104,7 +105,7 @@ if ($user) {
                                     'options' => ['class' => 'nav-item has-treeview sidebar-jk-calc'],
 
                                 ],
-                                ['label' => '<i class="fas fa-ruble-sign nav-icon"></i> <p>Подать заявку</p>', 'url' => [$jkOrderURL]],
+                                ['label' => '<i class="fas fa-ruble-sign nav-icon"></i> <p>Подать заявку</p>', 'url' => ['/jk/order/create']],
 
                                 [
                                     'label' => Icon::show('file-word', ['class' => 'nav-icon'])
