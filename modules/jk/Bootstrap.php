@@ -29,6 +29,7 @@ class Bootstrap implements BootstrapInterface
                 'modules/jk/rf'=>'rf.php',
                 'modules/jk/faq' => 'faq.php',
                 'modules/jk/doc' => 'doc.php',
+                'modules/jk/status' => 'status.php',
             ],
         ];
     }

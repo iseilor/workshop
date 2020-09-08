@@ -39,6 +39,7 @@ class m200331_000006_create_jk_status_table extends Migration
                 'color' => $this->string()->notNull(),
                 'icon' => $this->string()->notNull(),
                 'description' => $this->text()->notNull(),
+                'weight'=>$this->integer()
             ],
             $tableOptions
         );

@@ -39,7 +39,7 @@ class StatusSearch extends Status
      */
     public function search($params)
     {
-        $query = Status::find();
+        $query = Status::find()->published();
 
         // add conditions that should always apply here
 

@@ -1,13 +1,14 @@
 <?php
 
 namespace app\modules\jk\models;
+use app\models\Query;
 
 /**
  * This is the ActiveQuery class for [[OrderStatus]].
  *
  * @see Status
  */
-class OrderStatusQuery extends \yii\db\ActiveQuery
+class StatusQuery extends Query
 {
     /*public function active()
     {
