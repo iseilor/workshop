@@ -144,6 +144,18 @@ class OrderController extends Controller
         //        }
 
 
+        // Ищем незавершенные заявки и перенаправляем на их редактирование
+        if ($user) {
+            $unfilledOrder = \app\modules\jk\models\Order::find()
+                ->where(['created_by' => $user->id])
+                ->andWhere(['<', 'filling_step', 8])
+                ->orderBy(['updated_at' => SORT_DESC])
+                ->one();
+            if ($unfilledOrder) {
+                return $this->redirect(['order/'.$unfilledOrder->id.'/update']);
+            }
+        }
+
         $model = new Order();
         $model->status_id = 1;
 
