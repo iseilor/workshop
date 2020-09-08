@@ -37,6 +37,7 @@ class StatusController extends Controller
     {
         $searchModel = new StatusSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->setSort(['defaultOrder' => ['weight' => SORT_ASC]]);
 
         return $this->render('index', [
             'searchModel' => $searchModel,

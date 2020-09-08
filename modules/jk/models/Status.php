@@ -109,4 +109,9 @@ class Status extends Model
                 </div>
                 <small>' . $this->progress . '% выполнено</small>';
     }
+
+    public static function getMaxWeight()
+    {
+        return self::find()->max('weight');
+    }
 }
