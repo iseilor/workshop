@@ -25,7 +25,7 @@ class DefaultController extends Controller
             [
                 'id' => 1,
                 'src' => 'kr-1.jpg',
-                'title' => 'О программе',
+                'title' => 'Программа и её условия',
                 'icon'=>  Icon::show('info'),
                 'url'=>Url::to('kr/about/index')
             ],
@@ -46,7 +46,7 @@ class DefaultController extends Controller
             [
                 'id' => 4,
                 'src' => 'kr-4.jpg',
-                'title' => 'Условия программы',
+                'title' => 'Участники программы',
                 'icon'=>  Icon::show('tasks'),
                 'url'=>Url::to('kr/terms')
             ],
@@ -58,7 +58,7 @@ class DefaultController extends Controller
                 'col' => 3,
                 'bg' => 'primary',
                 'title' => 'О программе',
-                'description' => 'Кадровый резерв ПАО Ростелеком',
+                'description' => 'Условия программы',
                 'icon' => Icon::show('info'),
                 'url' => Url::to('kr/about/index'),
             ],
@@ -81,21 +81,14 @@ class DefaultController extends Controller
             [
                 'col' => 3,
                 'bg' => 'primary',
-                'title' => 'Условия',
-                'description' => 'Условия участия',
-                'icon' => Icon::show('tasks'),
-                'url' => Url::to('kr/terms'),
-            ],
-            [
-                'col' => 4,
-                'bg' => 'success',
                 'title' => 'Участники',
                 'description' => 'Участники программы',
                 'icon' => Icon::show('users'),
-                'url' => Url::to('kr/user'),
+                'url' => Url::to('kr/users'),
             ],
+
             [
-                'col' => 2,
+                'col' => 3,
                 'bg' => 'purple',
                 'title' => 'БТИ',
                 'description' => 'Для сотрудников БТИ',
@@ -103,7 +96,7 @@ class DefaultController extends Controller
                 'url' => Url::to('news'),
             ],
             [
-                'col' => 2,
+                'col' => 3,
                 'bg' => 'purple',
                 'title' => 'IT',
                 'description' => 'Для сотрудников IT',
@@ -111,7 +104,7 @@ class DefaultController extends Controller
                 'url' => Url::to('news'),
             ],
             [
-                'col' => 2,
+                'col' => 3,
                 'bg' => 'purple',
                 'title' => 'B2B',
                 'description' => 'Для сотрудников B2B',
@@ -119,7 +112,7 @@ class DefaultController extends Controller
                 'url' => Url::to('news'),
             ],
             [
-                'col' => 2,
+                'col' => 3,
                 'bg' => 'purple',
                 'title' => 'B2C',
                 'description' => 'Для сотрудников B2C',

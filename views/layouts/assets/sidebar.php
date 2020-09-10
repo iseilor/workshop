@@ -135,7 +135,6 @@ if ($jkInstructionDoc) {
                                 ['label' => Icon::show('info', ['class' => 'nav-icon']) . '<p>О программе</p>', 'url' => ['/kr/about/index']],
                                 ['label' => Icon::show('list', ['class' => 'nav-icon']) . '<p>Расписание</p>', 'url' => ['/kr/timetable']],
                                 ['label' => Icon::show('user-graduate', ['class' => 'nav-icon']) . '<p>Кураторы</p>', 'url' => ['/kr/curator/index']],
-                                ['label' => Icon::show('tasks', ['class' => 'nav-icon']) . '<p>Условия</p>', 'url' => ['/kr/terms']],
                                 ['label' => Icon::show('users', ['class' => 'nav-icon']) . '<p>Участники</p>', 'url' => ['/kr/user']],
 
                                 ['label' => Icon::show('microchip', ['class' => 'nav-icon']) . '<p>БТИ</p>', 'url' => ['/kr/']],
