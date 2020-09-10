@@ -74,7 +74,7 @@ $this->title .= ' ' . $model->status->label;
                     <?php endif; ?>
 
                     <!-- Отправить на соглаосвание руководителю -->
-                    <?= Html::a(Icon::show('tasks') . 'Отправить руководителю на согласование', ['manager', 'id' => $model->id], ['class' => 'btn btn-primary d-none']) ?>
+                    <?= Html::a(Icon::show('tasks') . 'Отправить руководителю на согласование', ['manager', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
 
                     <div class="float-right">
                         <?= Html::a(Icon::show('edit') . 'Изменить заявку', ['update', 'id' => $model->id], ['class' => 'btn btn-warning']) ?>
