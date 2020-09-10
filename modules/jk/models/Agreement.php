@@ -165,6 +165,8 @@ class Agreement extends Model
     {
         $manager = User::findOne($this->user_id);
         $user = User::findOne($this->created_by);
+        $order  = Order::findOne($this->order_id);
+
         Yii::$app->mailer->compose(
             '@app/modules/jk/mails/manager/success',
             [
@@ -176,7 +178,7 @@ class Agreement extends Model
             ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
             ->setBcc(Yii::$app->params['supportEmail'])
             ->setTo($user->email)
-            ->setSubject('WORKSHOP / Жилищная программа / Заявка №' . $this->order_id . ' / Согласована ' . $manager->fio)
+            ->setSubject($order->getEmailSubject('Согласована ' . $manager->fio))
             ->send();
     }
 
@@ -185,6 +187,7 @@ class Agreement extends Model
     {
         $manager = User::findOne($this->user_id);
         $user = User::findOne($this->created_by);
+        $order  = Order::findOne($this->order_id);
         Yii::$app->mailer->compose(
             '@app/modules/jk/mails/manager/danger',
             [
@@ -196,7 +199,7 @@ class Agreement extends Model
             ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
             ->setBcc(Yii::$app->params['supportEmail'])
             ->setTo($user->email)
-            ->setSubject('WORKSHOP / Жилищная программа / Заявка №' . $this->order_id . ' / НЕ Согласована ' . $manager->fio)
+            ->setSubject($order->getEmailSubject('НЕ Согласована ' . $manager->fio))
             ->send();
     }
 
@@ -225,12 +228,13 @@ class Agreement extends Model
                 ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
                 ->setBcc(Yii::$app->params['supportEmail'])
                 ->setTo($user->email) // TODO: Пока отправляем самому же сотруднику, просто в письме обращение к руководителю
-                ->setSubject("HR.CENTER.RT.RU / ЖП / Заявка №".$order_id." / Согласование руководителями")
+                ->setSubject($order->getEmailSubject("Согласование руководителями"))
                 ->send();
         } else {
             // Ставим статус, что согласование руководителями завершено
             $order = Order::findOne($order_id);
-            $order->status_id = Status::findOne(['code' => 'MANAGER_YES'])->id;
+            $newStatus = Status::findOne(['code' => 'MANAGER_YES']);
+            $order->status_id = $newStatus->id;
             $order->save();
 
             Yii::$app->mailer->compose(
@@ -243,8 +247,18 @@ class Agreement extends Model
                 ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
                 ->setBcc(Yii::$app->params['supportEmail'])
                 ->setTo($user->email)
-                ->setSubject('HR.CENTER.RT.RU / ЖП / Заявка №' . $order_id . ' / Согласование руководителями завершено')
+                ->setSubject($order->getEmailSubject("Согласование руководителями завершено"))
                 ->send();
+
+            // Сохраняем в историю движения заявки
+            $orderStage = new OrderStage();
+            $orderStage->order_id = $order->id;
+            $orderStage->status_id = $order->status_id;
+            $orderStage->comment = $newStatus->title;
+            $orderStage->save();
+
+            // Отправляем куратору
+            $order->sendCurator();
         }
     }
 

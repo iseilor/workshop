@@ -52,6 +52,7 @@ if ($countAll>0){
         'user.email:email',
         'receipt_at:datetime',
         'approval_at:datetime',
-        'approvalBadge:html'
+        'approvalBadge:html',
+        'comment',
     ],
 ]); ?>

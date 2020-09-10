@@ -757,10 +757,20 @@ class Order extends Model
     // Отравить куратору
     public function sendCurator(){
         // Сотрудник и куратор
-        $user = User::findOne($order->created_by);
+        $user = User::findOne($this->created_by);
         $rf = Rf::findOne($user->filial_id);
-        User::findOne($order->created_by);
         $curator = User::findOne($rf->user_id);
+
+        $newStatus = Status::findOne(['code' => 'CURATOR_CHECK']);
+        $this->status_id = $newStatus->id;
+        $this->save();
+
+        // Сохраняем в историю движения заявки
+        $orderStage = new OrderStage();
+        $orderStage->order_id = $this->id;
+        $orderStage->status_id = $newStatus->id;
+        $orderStage->comment = $newStatus->title;
+        $orderStage->save();
 
         // Отправляем письмо куратору
         Yii::$app->mailer->compose(
@@ -768,13 +778,13 @@ class Order extends Model
             [
                 'user' => $user,
                 'curator' => $curator,
-                'order' => $order,
+                'order' => $this,
             ]
         )
             ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
             ->setTo($curator->email)
             ->setBcc(Yii::$app->params['supportEmail'])
-            ->setSubject("HR-портал / ЖП / Заявка №" . $order->id . " / На проверку куратору.")
+            ->setSubject($this->getEmailSubject('На проверку куратору'))
             ->send();
 
         // Отправляем письмо сотруднику
@@ -783,18 +793,23 @@ class Order extends Model
             [
                 'user' => $user,
                 'curator' => $curator,
-                'order' => $order,
+                'order' => $this,
             ]
         )
             ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
             ->setTo($user->email)
             ->setBcc(Yii::$app->params['supportEmail'])
-            ->setSubject("HR-портал / ЖП / Заявка №" . $order->id . " / На проверку куратору.")
+            ->setSubject($this->getEmailSubject('На проверку куратору'))
             ->send();
     }
 
     // Отравить на комиссию
     public function sendCommission(){
 
+    }
+
+    // Однотипный заголовок по всем письмам при работе с заявкой+
+    public function getEmailSubject($title){
+        return Yii::$app->params['senderName']." / ЖП / Заявка №" . $this->id . " / ".$title;
     }
 }

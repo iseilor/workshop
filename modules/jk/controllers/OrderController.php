@@ -707,10 +707,6 @@ class OrderController extends Controller
                $order->sendManager();
                 break;
             case 'CURATOR_CHECK':
-                echo "i равно 1";
-                break;
-            case 2:
-                echo "i равно 2";
                 break;
         }
 
