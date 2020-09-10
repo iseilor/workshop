@@ -764,7 +764,7 @@ class Order extends Model
     }
 
     public function getMonthlyPerMemberIncome() {
-        return $this->money_summa_year/$this->user->familyMembersCount/12;
+        return ($this->money_summa_year - $this->money_nalog_year)/$this->user->familyMembersCount/12;
     }
 
 
@@ -772,11 +772,20 @@ class Order extends Model
 
     // Период оказания МП
     public function getPcPeriod() {
-
+        $year = $this->companyYear;
+        return "01.01.$year - 31.12.$year";
     }
 
     // Срок оказания МП
     public function getPcTerm() {
+        $ipotekaLastDateYear = (integer) Yii::$app->formatter->asDate($this->ipoteka_last_date, 'php:Y');
+        $ipotekaRes = $ipotekaLastDateYear - $this->companyYear;
+        if ($ipotekaRes < 0) $ipotekaRes = 0;
+
+        $userRetirementYear = (integer) Yii::$app->formatter->asDate($this->user->retirementDate, 'php:Y');
+        $retRes = $userRetirementYear - $this->companyYear;
+
+        return min(10, $ipotekaRes, $retRes);
 
     }
 
