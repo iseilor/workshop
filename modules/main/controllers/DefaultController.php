@@ -75,8 +75,8 @@ class DefaultController extends Controller
             [
                 'col' => 3,
                 'bg' => 'indigo',
-                'title' => Module::t('module', 'JK'),
-                'description' => Module::t('module', 'jk'),
+                'title' => Module::t('module', 'jk'),
+                'description' =>'Калькуляторы и заявки',
                 'icon' => Yii::$app->params['module']['jk']['icon'],
                 'url' => Url::to(['/jk/']),
                 'link' => 'Перейти <i class="fas fa-arrow-circle-right"></i>',
@@ -84,8 +84,8 @@ class DefaultController extends Controller
             [
                 'col' => 3,
                 'bg' => 'indigo',
-                'title' => \app\modules\kr\Module::t('module', 'KR'),
-                'description' => \app\modules\kr\Module::t('module', 'kr'),
+                'title' => \app\modules\kr\Module::t('module', 'kr'),
+                'description' => 'Руководители и специалисты',
                 'icon' => Icon::show('users'),
                 'url' => Url::to(['/kr/']),
             ],
