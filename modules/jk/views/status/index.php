@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <?= GridView::widget([
                     'dataProvider' => $dataProvider,
-                    'filterModel' => $searchModel,
+                    //'filterModel' => $searchModel,
                     'columns' => [
                         ['class' => 'yii\grid\SerialColumn'],
                         'id',
@@ -51,6 +51,11 @@ $this->params['breadcrumbs'][] = $this->title;
                             },
                         ],
                         'weight',
+                        'created_at:datetime',
+                        'createdUserLink:raw',
+                        'updated_at:datetime',
+                        'updatedUserLink:raw',
+
                         [
                             'class' => ActionColumn::class,
                         ],

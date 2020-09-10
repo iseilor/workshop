@@ -605,6 +605,11 @@ retrun Html::img($userPhotoPath, ['title' => Yii::$app->user->identity->username
         return mb_substr($this->name, 0, 1) . '.' . mb_substr($this->patronymic, 0, 1) . '.';
     }
 
+    // Получаем Иванов И.И.
+    public function getFioShort(){
+        return $this->surname."&nbsp;".$this->getInitials();
+    }
+
     public function getChildren() {
         return Child::find()->where(['user_id' => $this->id])->all();
     }

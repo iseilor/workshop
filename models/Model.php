@@ -49,7 +49,7 @@ class Model extends ActiveRecord
     public function getCreatedUserLink()
     {
         $model = $this->hasOne(User::class, ['id' => 'created_by'])->one();
-        return Html::a($model->fio, Url::to(['/user/' . $model->id], true));
+        return Html::a($model->fioShort, Url::to(['/user/' . $model->id], true));
     }
 
     // Ссылка на пользователя, который изменил документ
@@ -57,7 +57,7 @@ class Model extends ActiveRecord
     {
         $model = $this->hasOne(User::class, ['id' => 'updated_by'])->one();
         if ($model) {
-            return Html::a($model->fio, Url::to(['/user/' . $model->id]));
+            return Html::a($model->fioShort, Url::to(['/user/' . $model->id]));
         } else {
             false;
         }
