@@ -173,7 +173,8 @@ class Agreement extends Model
                 'agreement' => $this,
             ]
         )
-            ->setFrom('workshop@tr.ru')
+            ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
+            ->setBcc(Yii::$app->params['supportEmail'])
             ->setTo($user->email)
             ->setSubject('WORKSHOP / Жилищная программа / Заявка №' . $this->order_id . ' / Согласована ' . $manager->fio)
             ->send();
@@ -192,7 +193,8 @@ class Agreement extends Model
                 'agreement' => $this,
             ]
         )
-            ->setFrom('workshop@tr.ru')
+            ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
+            ->setBcc(Yii::$app->params['supportEmail'])
             ->setTo($user->email)
             ->setSubject('WORKSHOP / Жилищная программа / Заявка №' . $this->order_id . ' / НЕ Согласована ' . $manager->fio)
             ->send();
@@ -220,10 +222,11 @@ class Agreement extends Model
                     'agreement' => $agreement,
                 ]
             )
+                ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
+                ->setBcc(Yii::$app->params['supportEmail'])
                 ->setTo($user->email) // TODO: Пока отправляем самому же сотруднику, просто в письме обращение к руководителю
-                ->setSubject('Workshop / Жилищная программа / Заявка №'.$order_id.' / Согласование руководителем')
+                ->setSubject("HR.CENTER.RT.RU / ЖП / Заявка №".$order_id." / Согласование руководителями")
                 ->send();
-
         } else {
             // Ставим статус, что согласование руководителями завершено
             $order = Order::findOne($order_id);
@@ -237,9 +240,10 @@ class Agreement extends Model
                     'order' => $order,
                 ]
             )
-                ->setFrom('workshop@tr.ru')
+                ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
+                ->setBcc(Yii::$app->params['supportEmail'])
                 ->setTo($user->email)
-                ->setSubject('WORKSHOP / Жилищная программа / Заявка №' . $order_id . ' / Согласование руководителями завершено')
+                ->setSubject('HR.CENTER.RT.RU / ЖП / Заявка №' . $order_id . ' / Согласование руководителями завершено')
                 ->send();
         }
     }

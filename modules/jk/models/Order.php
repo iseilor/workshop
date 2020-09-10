@@ -4,6 +4,7 @@ namespace app\modules\jk\models;
 
 use app\models\Model;
 use app\modules\jk\Module;
+use app\modules\user\models\User;
 use kartik\icons\Icon;
 use Yii;
 use yii\helpers\ArrayHelper;
@@ -746,5 +747,54 @@ class Order extends Model
         $this->resident_count = $zaim->family_count;
         $this->jp_area = $zaim->area_buy;
         $this->jp_cost = $zaim->cost_total;
+    }
+
+    // Отправить заявку на согласование руководителям
+    public function sendManager(){
+        Agreement::sendEmailManager($this->id);
+    }
+
+    // Отравить куратору
+    public function sendCurator(){
+        // Сотрудник и куратор
+        $user = User::findOne($order->created_by);
+        $rf = Rf::findOne($user->filial_id);
+        User::findOne($order->created_by);
+        $curator = User::findOne($rf->user_id);
+
+        // Отправляем письмо куратору
+        Yii::$app->mailer->compose(
+            '@app/modules/jk/mails/check/curator',
+            [
+                'user' => $user,
+                'curator' => $curator,
+                'order' => $order,
+            ]
+        )
+            ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
+            ->setTo($curator->email)
+            ->setBcc(Yii::$app->params['supportEmail'])
+            ->setSubject("HR-портал / ЖП / Заявка №" . $order->id . " / На проверку куратору.")
+            ->send();
+
+        // Отправляем письмо сотруднику
+        Yii::$app->mailer->compose(
+            '@app/modules/jk/mails/check/user',
+            [
+                'user' => $user,
+                'curator' => $curator,
+                'order' => $order,
+            ]
+        )
+            ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
+            ->setTo($user->email)
+            ->setBcc(Yii::$app->params['supportEmail'])
+            ->setSubject("HR-портал / ЖП / Заявка №" . $order->id . " / На проверку куратору.")
+            ->send();
+    }
+
+    // Отравить на комиссию
+    public function sendCommission(){
+
     }
 }

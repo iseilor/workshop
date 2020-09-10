@@ -66,15 +66,10 @@ $this->title .= ' ' . $model->status->label;
                 </div>
                 <div class="card-footer">
 
-                    <!-- Если заявка в статусе НОВАЯ или после дорабоки, то можно отправить на проверку куратору -->
-                    <?php if (in_array($model->status_id,
-                        [Status::findOne(['code' => 'NEW'])->id,
-                            Status::findOne(['code' => 'CURATOR_RETURN'])->id])): ?>
-                        <?= $this->render('btn_curator', ['model' => $model]) ?>
+                    <!--Отправить заявку-->
+                    <?php if (in_array($model->status_id,[Status::findOne(['code' => 'NEW'])->id])): ?>
+                        <?= $this->render('btn/start', ['model' => $model]) ?>
                     <?php endif; ?>
-
-                    <!-- Отправить на соглаосвание руководителю -->
-                    <?= Html::a(Icon::show('tasks') . 'Отправить руководителю на согласование', ['manager', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
 
                     <div class="float-right">
                         <?= Html::a(Icon::show('edit') . 'Изменить заявку', ['update', 'id' => $model->id], ['class' => 'btn btn-warning']) ?>

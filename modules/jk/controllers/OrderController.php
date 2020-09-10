@@ -152,12 +152,12 @@ class OrderController extends Controller
                 ->orderBy(['updated_at' => SORT_DESC])
                 ->one();
             if ($unfilledOrder) {
-                return $this->redirect(['order/'.$unfilledOrder->id.'/update']);
+                return $this->redirect(['order/' . $unfilledOrder->id . '/update']);
             }
         }
 
         $model = new Order();
-        $model->status_id = 1;
+        $model->status_id = Status::findOne(['code' => 'NEW'])->id;
 
         if ($user) {
             $spose = Spouse::findOne(['user_id' => $user->id]);
@@ -170,12 +170,6 @@ class OrderController extends Controller
         if (!$passport) {
             $passport = new Passport();
         }
-
-
-//                var_dump(Yii::$app->request->post());
-//                var_dump($spose);
-//                die();
-
 
         // Обновлаяем паспортные данные
         // TODO Разобраться, почему не рабоате load() и убрать "педальный" метод
@@ -267,23 +261,23 @@ class OrderController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
-            // Если не заполнены согласия ("0" этап) открываем редактирование модели
-            // для заполнения согласий на обработку перс данных
-            if (!$model->file_agree_personal_data) {
-                return $this->redirect(['order/'.$model->id.'/update#tabs-agreement', 'id' => $model->id]);
-            }
-
             // Строчим цепочку согласования
             Agreement::createAgreementList($model->id);
-
-            $model->upload();
 
             // Сразу делаем первый этап, когда была создана заявка
             $orderStage = new OrderStage();
             $orderStage->order_id = $model->id;
-            $orderStage->status_id = 1;
-            $orderStage->comment = 'Автоматический комментарий: заявка создана сотрудником на портале';
+            $orderStage->status_id = Status::findOne(['code' => 'NEW'])->id;
+            $orderStage->comment = 'Новая заявка';
             $orderStage->save();
+
+            // Если не заполнены согласия ("0" этап) открываем редактирование модели
+            // для заполнения согласий на обработку перс данных
+            if (!$model->file_agree_personal_data) {
+                return $this->redirect(['order/' . $model->id . '/update#tabs-agreement', 'id' => $model->id]);
+            }
+
+            $model->upload();
 
             return $this->redirect(['view', 'id' => $model->id]);
         } elseif ($model->filling_step > 0 && $model->getOldAttribute('filling_step') != $model->filling_step) {
@@ -435,7 +429,6 @@ class OrderController extends Controller
                 }
 
 
-
             }
 
             $spose->save();
@@ -451,7 +444,7 @@ class OrderController extends Controller
                                 //var_dump($child);
                                 if ($child) {
                                     // child personal file
-                                    $childPdFile = UploadedFile::getInstance($child, 'file_personal_form['.$childId.']');
+                                    $childPdFile = UploadedFile::getInstance($child, 'file_personal_form[' . $childId . ']');
                                     if ($childPdFile) {
                                         $childFileDir = Yii::$app->params['module']['child']['filePath'] . $child->id;
                                         $childFileName = 'child_' . $child->id . '_file_personal_' . date('YmdHis') . '.' . $childPdFile->extension;
@@ -475,7 +468,7 @@ class OrderController extends Controller
             // Если не заполнены согласия ("0" этап) открываем редактирование модели
             // для заполнения согласий на обработку перс данных
             if (!$model->file_agree_personal_data) {
-                return $this->redirect(['order/'.$model->id.'/update#tabs-agreement', 'id' => $model->id]);
+                return $this->redirect(['order/' . $model->id . '/update#tabs-agreement', 'id' => $model->id]);
             }
 
             return $this->redirect(['view', 'id' => $model->id]);
@@ -661,52 +654,9 @@ class OrderController extends Controller
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
     }
 
-    // Отправляем письма кураторам
-    public function actionSendEmailCurator($order)
-    {
-
-        // Ищем всех кураторов
-        $curators = User::findAll(['role_id' => 1]);
-
-        // Автор заявки
-        $user = User::findOne(Yii::$app->user->identity->getId());
-
-        // Отправляем письма всем кураторам
-        foreach ($curators as $curator) {
-            Yii::$app->mailer->compose(
-                '@app/modules/jk/mails/order_curator',
-                [
-                    'user' => $user,
-                    'curator' => $curator,
-                    'order' => $order,
-                ]
-            )
-                ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
-                ->setBcc(Yii::$app->params['supportEmail'])
-                ->setTo($curator->email)
-                ->setSubject('WORKSHOP / ЖК / Куратору')
-                ->send();
-        }
-        return true;
-    }
-
     // Передаём заявку куратору на проверку
     public function action2curator($id)
     {
-        $order = Order::findOne($id);
-        $order->status_id = Status::findOne(['code' => 'MANAGER_WAIT'])->id;
-        $order->save();
-
-        Yii::$app->session->setFlash('success', "Начат процесс согласования вашей заявки на оказание материальной помощи<br/>
-        Вы будете получать email-уведомления, а также можете смотреть через личный кабинет, у кого из руководителей заявка в данный момент находится на согласовании");
-        return $this->redirect(['/jk/order/view/', 'id' => $id]);
-
-    }
-
-    // Запускаем процесс согласования заявки
-    public function actionManager($id)
-    {
-        Agreement::sendEmailManager($id);
         $order = Order::findOne($id);
         $order->status_id = Status::findOne(['code' => 'MANAGER_WAIT'])->id;
         $order->save();
@@ -733,7 +683,7 @@ class OrderController extends Controller
 
 
     /**
-     * Присвоить заявке новый статуc
+     * Присвоить заявке новый статус
      *
      * @param $id номер заявки
      *            new-status-code - Код нового статуса из справочника
@@ -742,56 +692,34 @@ class OrderController extends Controller
      */
     public function actionSetNewStatus($id)
     {
-        // Присваиваем новый статус заявки
+        Yii::$app->session->setFlash('success', "Ваша заявка успешно отправлена");
+
+        // Сохраняем новый статус заявки
         $newStatusCode = $_GET['new-status-code'];
+        $newStatus = Status::findOne(['code' => $newStatusCode]);
         $order = Order::findOne($id);
-        $status_id = Status::findOne(['code' => $newStatusCode])->id;
-        $order->status_id = $status_id;
+        $order->status_id = $newStatus->id;
         $order->save();
-        Yii::$app->session->setFlash('success', "Ваша заявка передана на проверку куратору по Жилищной Программе в вашем филиала");
+
+        // В зависимости от нового статуса
+        switch ($newStatus->code) {
+            case 'MANAGER_WAIT':
+               $order->sendManager();
+                break;
+            case 'CURATOR_CHECK':
+                echo "i равно 1";
+                break;
+            case 2:
+                echo "i равно 2";
+                break;
+        }
 
         // Сохраняем в историю движения заявки
         $orderStage = new OrderStage();
         $orderStage->order_id = $id;
-        $orderStage->status_id = $status_id;
-        $orderStage->comment = 'Заявка переведена на проверку куратору';
+        $orderStage->status_id = $newStatus->id;
+        $orderStage->comment = $newStatus->title;
         $orderStage->save();
-
-        // Сотрудник и куратор
-        $user = User::findOne($order->created_by);
-        $rf = Rf::findOne($user->filial_id);
-        User::findOne($order->created_by);
-        $curator = User::findOne($rf->user_id);
-
-        // Отправляем письмо куратору
-        Yii::$app->mailer->compose(
-            '@app/modules/jk/mails/check/curator',
-            [
-                'user' => $user,
-                'curator' => $curator,
-                'order' => $order,
-            ]
-        )
-            ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
-            ->setTo($curator->email)
-            ->setBcc(Yii::$app->params['supportEmail'])
-            ->setSubject("HR-портал / ЖП / Заявка №" . $order->id . " / На проверку куратору.")
-            ->send();
-
-        // Отправляем письмо сотруднику
-        Yii::$app->mailer->compose(
-            '@app/modules/jk/mails/check/user',
-            [
-                'user' => $user,
-                'curator' => $curator,
-                'order' => $order,
-            ]
-        )
-            ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
-            ->setTo($user->email)
-            ->setBcc(Yii::$app->params['supportEmail'])
-            ->setSubject("HR-портал / ЖП / Заявка №" . $order->id . " / На проверку куратору.")
-            ->send();
 
         return $this->redirect(['/jk/order/view/', 'id' => $id]);
     }

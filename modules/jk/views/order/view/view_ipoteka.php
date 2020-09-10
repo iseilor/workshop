@@ -9,10 +9,11 @@ use yii\widgets\DetailView;
 <?= DetailView::widget([
     'model' => $model,
     'attributes' => [
-        [
+        // Убрал пока ребята не поправят, т.к. если открыть на просмотр после 1-ого шага, то это поле ещё не определено
+        /*[
             'attribute'=>'is_mortgage',
             'value'=>$model::getMortgageList()[$model->is_mortgage]
-        ],
+        ],*/
         [
             'label' => $model->attributeLabels()['ipoteka_target'],
             'value' => $model::getIpotekaTargetName($model->ipoteka_target),
