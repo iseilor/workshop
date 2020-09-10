@@ -23,10 +23,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= $model->text ?>
             </div>
             <div class="card-footer">
-                <?= Html::a('<i class="far fa-calendar-alt"></i> ' . Yii::$app->formatter->format($model->created_at, 'datetime'), '#', ['title' => 'Дата публикации']); ?> |
-                <?= Html::a('<i class="fas fa-eye"></i> ' . rand(0, 10), '#', ['title' => 'Кол-во просмотров']); ?> |
+                <?= Html::tag('small','<i class="far fa-calendar-alt"></i> Дата публикации: ' . Yii::$app->formatter->format($model->created_at, 'datetime'),  ['title' => 'Дата публикации']); ?>
+                <!--<?= Html::a('<i class="fas fa-eye"></i> ' . rand(0, 10), '#', ['title' => 'Кол-во просмотров']); ?> |
                 <?= Html::a('<i class="fas fa-comments"></i> ' . rand(0, 10), '#', ['title' => 'Кол-во комментариев']); ?> |
-                <?= Html::a('<i class="fas fa-heart"></i> ' . rand(0, 10), '#', ['title' => 'Кол-во лайков']); ?>
+                <?= Html::a('<i class="fas fa-heart"></i> ' . rand(0, 10), '#', ['title' => 'Кол-во лайков']); ?>-->
             </div>
         </div>
     </div>
