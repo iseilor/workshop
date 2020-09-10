@@ -2,8 +2,10 @@
 
 
 use app\components\menu\MenuActive;
+use app\modules\jk\models\Rf;
 use app\modules\main\Module;
 use kartik\icons\Icon;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
@@ -36,7 +38,6 @@ if ($jkInstructionDoc) {
         <?php if (!Yii::$app->user->isGuest): ?>
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-
                     <?php
                     $userPhoto = Yii::$app->user->identity->photo;
                     $userPhotoPath = Yii::$app->homeUrl . Yii::$app->params['module']['user']['photo']['path'] . $userPhoto;
@@ -44,8 +45,16 @@ if ($jkInstructionDoc) {
                     <?= Html::img($userPhotoPath, ['title' => Yii::$app->user->identity->username, 'class' => 'img-circle elevation-2']) ?>
                 </div>
                 <div class="info">
-
-                    <?= Html::a('Мой кабинет', Yii::$app->homeUrl . 'user/cabinet', ['title' => Yii::$app->user->identity->username]); ?>
+                    <?php
+                    // Если это куратора, то кабинет куратора, иначе просто кабинет сотрудника
+                    $curatorsAll=Rf::find()->all();
+                    $curators = ArrayHelper::map($curatorsAll,'id','user_id');
+                    if (in_array( Yii::$app->user->identity->id, $curators)) {
+                        echo Html::a('Кабинет куратора', Yii::$app->homeUrl . 'jk/admin');
+                    }else{
+                        echo Html::a('Мой кабинет', Yii::$app->homeUrl . 'user/cabinet');
+                    }
+                    ?>
                 </div>
             </div>
         <?php endif ?>
