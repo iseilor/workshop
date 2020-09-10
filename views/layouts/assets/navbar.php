@@ -42,6 +42,11 @@ use yii\widgets\Menu;
                     . '<span class="d-none d-lg-inline-block">' . \app\modules\kr\Module::t('module', 'kr') . '</span>',
                 'url' => ['/kr/default/index'],
             ],
+            [
+                'label' => Icon::show('star')
+                    . '<span class="d-none d-lg-inline-block">Star Talk</span>',
+                'url' => ['/st/default/index'],
+            ],
         ],
     ]);
     ?>

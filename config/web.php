@@ -57,6 +57,7 @@ $config = [
         'bot' => ['class' => 'app\modules\bot\Module'],
         'video' => ['class' => 'app\modules\video\Module'],
         'kr' => ['class' => 'app\modules\kr\Module'],
+        'st' => ['class' => 'app\modules\st\Module'],
     ],
     'components' => [
         'ad' => [

@@ -60,8 +60,6 @@ class DefaultController extends Controller
     public function actionIndex()
     {
 
-
-
         $list = [
             [
                 'col' => 3,
@@ -88,6 +86,14 @@ class DefaultController extends Controller
                 'description' => 'Руководители и специалисты',
                 'icon' => Icon::show('users'),
                 'url' => Url::to(['/kr/']),
+            ],
+            [
+                'col' => 3,
+                'bg' => 'fuchsia',
+                'title' => 'Star Talk',
+                'description' => 'Встречи с интересными людьми',
+                'icon' => Icon::show('star'),
+                'url' => Url::to(['/st/default/index']),
             ],
             /*[
                 'col' => 3,

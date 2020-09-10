@@ -150,6 +150,9 @@ if ($jkInstructionDoc) {
                             ],
                         ],
 
+                        // Star Talk
+                        ['label' =>  Icon::show('star', ['class' => 'nav-icon']).Html::tag('p','Star Talk'), 'url' => ['/st/default/index']],
+
                         // О проекте
                         [
                             'label' => Icon::show('sitemap', ['class' => 'nav-icon'])
