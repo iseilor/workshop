@@ -68,16 +68,22 @@ class DefaultController extends Controller
                 'description' => 'Всегда свежая информация',
                 'icon' => Yii::$app->params['module']['news']['icon'],
                 'url' => Url::to('news'),
-                'link' => 'Перейти <i class="fas fa-arrow-circle-right"></i>',
             ],
             [
                 'col' => 3,
                 'bg' => 'indigo',
                 'title' => Module::t('module', 'jk'),
-                'description' =>'Калькуляторы и заявки',
+                'description' => 'Калькуляторы и заявки',
                 'icon' => Yii::$app->params['module']['jk']['icon'],
                 'url' => Url::to(['/jk/']),
-                'link' => 'Перейти <i class="fas fa-arrow-circle-right"></i>',
+            ],
+            [
+                'col' => 3,
+                'bg' => 'indigo',
+                'title' => \app\modules\pp\Module::t('module', 'pp'),
+                'description' => 'Ваш вклад в своё будущее',
+                'icon' => Icon::show('coins'),
+                'url' => Url::to(['/pp/']),
             ],
             [
                 'col' => 3,
@@ -102,9 +108,9 @@ class DefaultController extends Controller
                 'description' => 'Мониторинг подразделения',
                 'icon' => Icon::show('heartbeat'),
                 'url' => Url::to(['/pulsar/']),
-                'link' => 'Перейти <i class="fas fa-arrow-circle-right"></i>',
-            ],*/
-            /* [
+
+            ],
+            [
                  'col' => 3,
                  'bg' => 'primary',
                  'title' => '<span class="curs">&nbsp;<span class="curs-1"><i class="fas fa-dollar-sign"></i> 66.90</span><span class="curs-2"><i class="fas fa-euro-sign"></i> 73.91</span><span class="curs-3"><i class="fas fa-gas-pump"></i> 49.91</span></span>',
@@ -190,15 +196,7 @@ class DefaultController extends Controller
             'url' => Url::to(['/admin/']),
             'link' => 'Перейти <i class="fas fa-arrow-circle-right"></i>',
         ],
-        [
-            'col' => 3,
-            'bg' => 'secondary',
-            'title' => 'ПП',
-            'description' => 'Пенсионные программы',
-            'icon' => '<i class="fas fa-hands-helping"></i>',
-            'url' => '#',
-            'link' => 'Перейти <i class="fas fa-arrow-circle-right"></i>',
-        ],
+
         [
             'col' => 3,
             'bg' => 'secondary',

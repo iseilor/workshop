@@ -20,32 +20,47 @@ use yii\widgets\Menu;
                 'label' => '<i class="fas fa-bars"></i>',
                 'url' => '#',
                 'options' => ['class' => 'nav-item'],
-                'template' => '<a href="{url}" class="nav-link" data-widget="pushmenu">{label}</a>',
+                'template' => '<a href="{url}" class="nav-link" data-widget="pushmenu" title="Свернуть левый sidebar">{label}</a>',
             ],
             [
-                'label' => Icon::show('tachometer-alt')
-                    . '<span class="d-none d-lg-inline-block">' . Module::t('module', 'Home') . '</span>',
+                'label' => Icon::show('tachometer-alt'),
                 'url' => ['/main/default/index'],
+                'template' => '<a href="{url}" class="nav-link" title="Главная">{label}</a>',
             ],
             [
-                'label' => Icon::show('bullhorn')
-                    . '<span class="d-none d-lg-inline-block">' . Module::t('module', 'News') . '</span>',
+                'label' => Icon::show('bullhorn'),
                 'url' => ['/news/default/index'],
+                'template' => '<a href="{url}" class="nav-link" title="Новости">{label}</a>',
             ],
             [
-                'label' => Icon::show('home')
-                    . '<span class="d-none d-lg-inline-block">' . \app\modules\jk\Module::t('module', 'jk') . '</span>',
+                'label' => Icon::show('home'),
                 'url' => ['/jk/default/index'],
+                'template' => '<a href="{url}" class="nav-link" title="Жилищная программа">{label}</a>',
             ],
             [
-                'label' => Icon::show('users')
-                    . '<span class="d-none d-lg-inline-block">' . \app\modules\kr\Module::t('module', 'kr') . '</span>',
+                'label' => Icon::show('coins'),
+                'url' => ['/pp/default/index'],
+                'template' => '<a href="{url}" class="nav-link" title="Пенсионная программа">{label}</a>',
+            ],
+            [
+                'label' => Icon::show('users'),
                 'url' => ['/kr/default/index'],
+                'template' => '<a href="{url}" class="nav-link" title="Кадровый резерв">{label}</a>',
             ],
             [
-                'label' => Icon::show('star')
-                    . '<span class="d-none d-lg-inline-block">Star Talk</span>',
+                'label' => Icon::show('star'),
                 'url' => ['/st/default/index'],
+                'template' => '<a href="{url}" class="nav-link" title="Star Talk">{label}</a>',
+            ],
+            [
+                'label' => Icon::show('info'),
+                'url' => ['/main/default/about'],
+                'template' => '<a href="{url}" class="nav-link" title="Информация о проекте">{label}</a>',
+            ],
+            [
+                'label' => Icon::show('envelope'),
+                'url' => ['/main/default/feedback'],
+                'template' => '<a href="{url}" class="nav-link" title="Обратная связь">{label}</a>',
             ],
         ],
     ]);
@@ -205,7 +220,8 @@ use yii\widgets\Menu;
             <?php else: ?>
                 <a class="nav-link" data-toggle="dropdown" href="#">
                     <?= Icon::show('user')
-                    . '<span class="d-none d-lg-inline-block">'. Yii::$app->user->identity->surname . ' ' . Yii::$app->user->identity->initials ?></span>
+                    . '<span class="d-none d-lg-inline-block">' . Yii::$app->user->identity->surname . ' '
+                    . Yii::$app->user->identity->initials ?></span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                     <div class="dropdown-divider"></div>

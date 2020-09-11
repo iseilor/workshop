@@ -31,6 +31,7 @@ $config = [
         'app\modules\project\Bootstrap',
         'app\modules\video\Bootstrap',
         'app\modules\kr\Bootstrap',
+        'app\modules\pp\Bootstrap',
     ],
     'layout' => 'index',
     'language' => 'ru',
@@ -58,6 +59,7 @@ $config = [
         'video' => ['class' => 'app\modules\video\Module'],
         'kr' => ['class' => 'app\modules\kr\Module'],
         'st' => ['class' => 'app\modules\st\Module'],
+        'pp' => ['class' => 'app\modules\pp\Module'],
     ],
     'components' => [
         'ad' => [

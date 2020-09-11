@@ -7,9 +7,8 @@ use yii\helpers\Html;use yii\helpers\Url;
     <div class="float-right d-none d-sm-inline">
         От IT для людей с  <span style="color:red;"><?=Icon::show('heart')?></span>
     </div>
-    Москва &copy; 2019-2020 | ПАО Ростелеком | МРФ Центр |
-    <?=Html::a(Icon::show('info'). \app\modules\main\Module::t('module', 'Information'),['/main/default/about'])?> |
-    <?=Html::a(Icon::show('envelope'). \app\modules\main\Module::t('module', 'Feedback'),['/main/default/feedback'])?>
+    Москва &copy; 2019-2020 | ПАО Ростелеком | МРФ Центр
+
 </footer>
 
 <?php
