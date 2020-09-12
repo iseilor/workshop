@@ -126,9 +126,9 @@ if ($jkInstructionDoc) {
                         // Пенсионная программа
                         ['label' =>  Icon::show('coins', ['class' => 'nav-icon']).Html::tag('p','Пенсионная программа'), 'url' => ['/pp/default/index']],
 
-                        // Кадровый резерв
+                        // Высшая лига (Кадровый резерв)
                         [
-                            'label' => Icon::show('users', ['class' => 'nav-icon'])
+                            'label' => Icon::show('crown', ['class' => 'nav-icon'])
                                 . Html::tag('p', \app\modules\kr\Module::t('module', 'kr')
                                     . Icon::show('angle-left', ['class' => 'right'])),
                             'url' => ['#'],

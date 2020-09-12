@@ -5,7 +5,7 @@
 use app\modules\kr\Module;
 use kartik\icons\Icon;
 
-$this->title = Icon::show('users').Module::t('module', 'kr');
+$this->title = Icon::show(Module::getIcon()).Module::t('module', 'kr');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="row">

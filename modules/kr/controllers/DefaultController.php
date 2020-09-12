@@ -27,7 +27,7 @@ class DefaultController extends Controller
                 'src' => 'kr-1.jpg',
                 'title' => 'Программа и её условия',
                 'icon'=>  Icon::show('info'),
-                'url'=>Url::to('kr/about/index')
+                'url'=>Url::to('kr/about')
             ],
             [
                 'id' => 2,
@@ -60,7 +60,7 @@ class DefaultController extends Controller
                 'title' => 'О программе',
                 'description' => 'Условия программы',
                 'icon' => Icon::show('info'),
-                'url' => Url::to('kr/about/index'),
+                'url' => Url::to('kr/about'),
             ],
             [
                 'col' => 3,

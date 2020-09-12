@@ -89,8 +89,8 @@ class DefaultController extends Controller
                 'col' => 3,
                 'bg' => 'indigo',
                 'title' => \app\modules\kr\Module::t('module', 'kr'),
-                'description' => 'Руководители и специалисты',
-                'icon' => Icon::show('users'),
+                'description' => 'Кадровый резерв',
+                'icon' => Icon::show('crown'),
                 'url' => Url::to(['/kr/']),
             ],
             [

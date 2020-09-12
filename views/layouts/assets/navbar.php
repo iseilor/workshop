@@ -43,9 +43,9 @@ use yii\widgets\Menu;
                 'template' => '<a href="{url}" class="nav-link" title="Пенсионная программа">{label}</a>',
             ],
             [
-                'label' => Icon::show('users'),
+                'label' => Icon::show('crown'),
                 'url' => ['/kr/default/index'],
-                'template' => '<a href="{url}" class="nav-link" title="Кадровый резерв">{label}</a>',
+                'template' => '<a href="{url}" class="nav-link" title="Высшая лига">{label}</a>',
             ],
             [
                 'label' => Icon::show('star'),
