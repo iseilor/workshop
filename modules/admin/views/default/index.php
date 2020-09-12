@@ -78,8 +78,39 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?=$this->render('@app/modules/jk/views/admin/index_dir')?>
                     </div>
                     <div class="col-md-4">
-                        <h3><?=Icon::show('users').\app\modules\kr\Module::t('module','kr')?></h3>
+                        <h3><?=Icon::show(\app\modules\pp\Module::getIcon()).\app\modules\pp\Module::t('module','pp')?></h3>
+                        <?= Html::ul(
+                            [
+                                Html::a(Icon::show(\app\modules\pp\Module::getIcon()).\app\modules\pp\Module::t('module','pp'), Url::to('pp')),
+                            ],
+                            [
+                                'item' => function ($item, $index) {
+                                    return Html::tag(
+                                        'li',
+                                        $item
+                                    );
+                                }
+                            ]
+                        ) ?>
+
+                        <h3><?=Icon::show(\app\modules\kr\Module::getIcon()).\app\modules\kr\Module::t('module','kr')?></h3>
                         <?=$this->render('@app/modules/kr/views/admin/block')?>
+
+                        <h3><?=Icon::show(\app\modules\st\Module::getIcon()).\app\modules\st\Module::t('module','st')?></h3>
+                        <?= Html::ul(
+                            [
+                                Html::a(Icon::show('users').\app\modules\st\Module::t('module','guests'), Url::to('st')),
+                                Html::a(Icon::show('list').\app\modules\st\Module::t('module','categories'), Url::to('st')),
+                            ],
+                            [
+                                'item' => function ($item, $index) {
+                                    return Html::tag(
+                                        'li',
+                                        $item
+                                    );
+                                }
+                            ]
+                        ) ?>
                     </div>
                 </div>
             </div>

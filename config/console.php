@@ -51,7 +51,10 @@ $config = [
             'class' => 'app\modules\kr\Module',
             'controllerNamespace' => 'app\modules\kr\commands',
         ],
-
+        'st' => [
+            'class' => 'app\modules\st\Module',
+            'controllerNamespace' => 'app\modules\st\commands',
+        ],
     ],
     'components' => [
         'ad' => [
@@ -145,6 +148,11 @@ $config = [
             'class' => 'yii\console\controllers\MigrateController',
             'migrationPath' => '@app/modules/kr/migrations',
             'migrationTable' => 'migration_kr',
+        ],
+        'migrate-st'=> [
+            'class' => 'yii\console\controllers\MigrateController',
+            'migrationPath' => '@app/modules/st/migrations',
+            'migrationTable' => 'migration_st',
         ],
     ],
 

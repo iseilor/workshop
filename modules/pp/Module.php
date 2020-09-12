@@ -29,4 +29,9 @@ class Module extends \yii\base\Module
     {
         return Yii::t('modules/pp/' . $category, $message, $params, $language);
     }
+
+    // Иконка
+    public static function getIcon(){
+        return 'coins';
+    }
 }

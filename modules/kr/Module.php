@@ -28,6 +28,7 @@ class Module extends \yii\base\Module
         return Yii::t('modules/kr/' . $category, $message, $params, $language);
     }
 
+    // Иконка
     public static function getIcon(){
         return 'crown';
     }

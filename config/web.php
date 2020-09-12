@@ -32,6 +32,7 @@ $config = [
         'app\modules\video\Bootstrap',
         'app\modules\kr\Bootstrap',
         'app\modules\pp\Bootstrap',
+        'app\modules\st\Bootstrap',
     ],
     'layout' => 'index',
     'language' => 'ru',
