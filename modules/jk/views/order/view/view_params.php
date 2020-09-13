@@ -55,5 +55,13 @@ use yii\widgets\DetailView;
             'attribute' => 'is_mortgage',
             'value'=>($model->is_mortgage)?'Да':'Нет'
         ],
+        [
+            'label' => $model->attributeLabels()['order_file'],
+            'format' => 'raw',
+            'value' => ($model->order_file) ? Html::a(
+                Icon::show('file-pdf') . $model->attributeLabels()['order_file'],
+                Url::to(['/' . Yii::$app->params['module']['jk']['order']['filePath'] . $model->id . '/' . $model->order_file]),
+                ['target' => '_blank']) : '',
+        ],
     ],
 ]) ?>

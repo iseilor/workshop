@@ -546,6 +546,7 @@ class Order extends Model
 
             'ndfl2_file',
             'spravka_zp_file',
+            'order_file'
         ];
 
         // Сохраняем данные
@@ -871,4 +872,13 @@ class Order extends Model
         return $list;
 
     }
+
+    // Среднемесячный доход на 1 члена семьи
+    public function getMoneyMonthFamily(){
+        $cnt = 1; // Сам сотрудник
+        $spouseCnt = Spouse::find()->where(['user_id' => $this->created_by])->count();
+        $childCnt = Child::find()->where(['user_id' => $this->created_by])->count();
+        return $this->money_summa_year/($cnt+$spouseCnt+$childCnt)/12;
+    }
+
 }

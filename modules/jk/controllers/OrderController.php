@@ -762,6 +762,7 @@ class OrderController extends Controller
 
                 'MONEY_MONTH_PAY',
                 'MONEY_USER_PAY',
+                'MONEY_MONTH_FAMILY',
 
                 'DATE',
             ],
@@ -790,6 +791,7 @@ class OrderController extends Controller
 
                 number_format($order->money_month_pay, 2, ',', ' '),
                 number_format($order->money_user_pay, 2, ',', ' '),
+                number_format($order-> getMoneyMonthFamily(), 2, ',', ' '),
 
                 date('d.m.Y'),
             ]
