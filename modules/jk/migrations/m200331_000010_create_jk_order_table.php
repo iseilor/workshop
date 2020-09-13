@@ -44,9 +44,10 @@ class m200331_000010_create_jk_order_table extends Migration
                 'sum' => $this->integer(),
 
                 // Параметры
-                'file_agree_personal_data' => $this->string(),                           // Файл оброботки персональных данных
-                'is_participate' => $this->boolean(),                                    // Ранее участвовали
-                'type' => $this->integer()->notNull(),                                   // Тип заявки
+                'file_agree_personal_data' => $this->string(),  // Файл оброботки персональных данных
+                'is_participate' => $this->boolean(),           // Ранее участвовали
+                'type' => $this->integer()->notNull(),          // Тип заявки
+                'order_file'=>$this->string(),                  // Сформированное заявление
 
                 // Семья
                 'social_id' => $this->integer(),                // Социальная категория
@@ -130,8 +131,7 @@ class m200331_000010_create_jk_order_table extends Migration
             $tableOptions
         );
 
-        // Комменатрии к полям либо везде добавлять,либо нигде
-        // $this->addCommentOnColumn('{{%jk_order}}', 'filling_step', 'Шаг заполнения формы');
+        $this->execute(file_get_contents(__DIR__ . '/../sql/jk_order.sql'));
     }
 
 

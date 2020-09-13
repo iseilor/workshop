@@ -4,6 +4,8 @@ namespace app\modules\jk\models;
 
 use app\models\Model;
 use app\modules\jk\Module;
+use app\modules\user\models\Child;
+use app\modules\user\models\Spouse;
 use app\modules\user\models\User;
 use kartik\icons\Icon;
 use Yii;
@@ -28,6 +30,7 @@ use yii\web\UploadedFile;
  * @property boolean  $is_participate
  * @property boolean  $is_mortgage
  * @property int      $type
+ * @property string   $order_file
  *
  * @property int      $salary
  * @property int      $jp_type
@@ -56,10 +59,10 @@ use yii\web\UploadedFile;
  * @property double   money_month_pay
  * @property double   money_user_pay
  *
- * @property integer $resident_own_type
- * @property boolean $is_poor
+ * @property integer  $resident_own_type
+ * @property boolean  $is_poor
  *
- * @property integer $filling_step
+ * @property integer  $filling_step
  */
 class Order extends Model
 {
@@ -126,6 +129,8 @@ class Order extends Model
 
     public $cnt; // Нужно для группировки
 
+    public $order_file_form;
+
     /**
      * @var mixed|null
      */
@@ -147,28 +152,33 @@ class Order extends Model
             [['filling_step'], 'safe'],
 
 
-
             // Общие параметры заявки
             [['is_participate'], 'required'],
-//            [['percent_id', 'zaim_id'], 'safe'],
-//            [['file_agree_personal_data_form'], 'safe'],
-//            [['file_agree_personal_data_form'], 'file', 'extensions' => 'pdf, docx', 'maxSize' => '10000000'],
+            //            [['percent_id', 'zaim_id'], 'safe'],
+            //            [['file_agree_personal_data_form'], 'safe'],
+            //            [['file_agree_personal_data_form'], 'file', 'extensions' => 'pdf, docx', 'maxSize' => '10000000'],
             [['is_poor'], 'safe'],
-//
+            //
             // Семья
             [['resident_count', 'family_address', 'resident_own_type'], 'required'],
 
 
             [['resident_count', 'jp_room_count'], 'integer'],
             [['family_rent'], 'safe'],
-            [['file_family_big_form', 'file_social_protection_form', 'file_rent_form', 'file_social_contract_form'], 'file', 'skipOnEmpty' => true, /*'extensions' => 'pdf',*/ 'maxSize' => '10000000'],
+            [
+                ['file_family_big_form', 'file_social_protection_form', 'file_rent_form', 'file_social_contract_form'],
+                'file',
+                'skipOnEmpty' => true,
+                /*'extensions' => 'pdf',*/
+                'maxSize' => '10000000',
+            ],
             [['resident_own_type'], 'integer'],
-//
-//            // Супруга
-//            [['is_spouse', 'spouse_fio', 'spouse_is_dzo', 'spouse_is_do', 'spouse_is_work'], 'safe'],
-//
-//
-//            // Жилое помещение
+            //
+            //            // Супруга
+            //            [['is_spouse', 'spouse_fio', 'spouse_is_dzo', 'spouse_is_do', 'spouse_is_work'], 'safe'],
+            //
+            //
+            //            // Жилое помещение
             [['jp_type', 'jp_area'], 'required'],
             [
                 [
@@ -189,15 +199,16 @@ class Order extends Model
             [['jp_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'jp_date', 'skipOnEmpty' => true,],
             [['jp_dogovor_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'jp_dogovor_date', 'skipOnEmpty' => true,],
             [['jp_registration_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'jp_registration_date', 'skipOnEmpty' => true,],
-//
-//
-//            // Ипотека
-//            [['is_mortgage',   ], 'required'],
-
+            //
+            //
+            //            // Ипотека
+            //            [['is_mortgage',   ], 'required'],
 
 
             // Вкладка "Семья"
-            [['social_id', 'family_own', 'family_deal'],  'required',
+            [
+                ['social_id', 'family_own', 'family_deal'],
+                'required',
                 'when' => function ($model) {
                     return $model->filling_step >= 4;
                 },
@@ -221,11 +232,13 @@ class Order extends Model
                 ],
                 'file',
                 'skipOnEmpty' => true,
-//                'extensions' => 'pdf, docx',
+                //                'extensions' => 'pdf, docx',
                 'maxSize' => '20048000',
             ],
 
-            [['is_mortgage', 'ipoteka_target', 'ipoteka_size', 'ipoteka_user'],  'required',
+            [
+                ['is_mortgage', 'ipoteka_target', 'ipoteka_size', 'ipoteka_user'],
+                'required',
                 'when' => function ($model) {
                     return $model->filling_step >= 5;
                 },
@@ -236,7 +249,9 @@ class Order extends Model
 
 
             // Вкладка "Финансы"
-            [['money_oklad', 'money_summa_year', 'money_nalog_year', 'money_month_pay', 'money_user_pay',],  'required',
+            [
+                ['money_oklad', 'money_summa_year', 'money_nalog_year', 'money_month_pay', 'money_user_pay',],
+                'required',
                 'when' => function ($model) {
                     return $model->filling_step >= 7;
                 },
@@ -252,7 +267,7 @@ class Order extends Model
                 ],
                 'file',
                 'skipOnEmpty' => true,
-//                'extensions' => 'pdf, docx',
+                //                'extensions' => 'pdf, docx',
                 'maxSize' => '20048000',
             ],
 
@@ -260,7 +275,9 @@ class Order extends Model
 
 
             // Вкладка "Финансы"
-            [['file_agree_personal_data_form',],  'required',
+            [
+                ['file_agree_personal_data_form',],
+                'required',
                 'when' => function ($model) {
                     return $model->filling_step >= 8 && !$model->file_agree_personal_data;
                 },
@@ -274,10 +291,10 @@ class Order extends Model
         ];
 
 
-//
-//        if (!$this->file_agree_personal_data) {
-//            $rules[] = [['file_agree_personal_data_form'], 'required','skipOnEmpty' => true,];
-//        }
+        //
+        //        if (!$this->file_agree_personal_data) {
+        //            $rules[] = [['file_agree_personal_data_form'], 'required','skipOnEmpty' => true,];
+        //        }
 
         return $rules;
     }
@@ -298,7 +315,7 @@ class Order extends Model
 
             'createdUserLabel' => Module::t('order', 'User'),
             'createdUserLink' => Module::t('order', 'User'),
-            'status.label'=> Module::t('order', 'Status'),
+            'status.label' => Module::t('order', 'Status'),
 
             // Параметры
             'file_agree_personal_data' => Module::t('order', 'Agree Personal Data'),
@@ -310,6 +327,8 @@ class Order extends Model
             'type' => Module::t('order', 'Type'),
             'typeName' => Module::t('order', 'Type'),
             'statusName' => Module::t('order', 'Status'),
+            'order_file' => Module::t('order', 'Order File'),
+            'order_file_form' => Module::t('order', 'Order File'),
 
             // Работник
             'is_poor' => Module::t('order', 'Is Poor'),
@@ -467,7 +486,12 @@ class Order extends Model
             'money_month_pay' => 'После оказания помощи совокупные среднемесячные платежи моей семьи по всем обязательствам, руб',
             'money_user_pay' => 'После оказания помощи совокупные мои платежи, руб',
 
-            'file_agree_personal_data_form' => 'Скачайте автоматически сформированный '.Html::a(Icon::show('file-pdf') .'бланк', Url::to(['/user/user/' . Yii::$app->user->identity->id . '/pd'])).', который нужно будет распечатать, подписать и прикрепить в поле',
+            'file_agree_personal_data_form' => 'Скачайте автоматически сформированный ' . Html::a(Icon::show('file-pdf') . 'бланк',
+                    Url::to(['/user/user/' . Yii::$app->user->identity->id . '/pd']))
+                . ', который нужно будет распечатать, подписать и прикрепить в поле',
+
+            'order_file_form' => 'Вам необходимо скачать автоматически сформированное ' . Html::a(Icon::show('file-pdf') . 'Заявление',
+                    Url::to(['/jk/order/' . $this->id . '/order'])) . ', которое нужно распечатать, подписать и прикрепить в данное поле',
         ];
     }
 
@@ -572,12 +596,12 @@ class Order extends Model
     public static function getJPTypeList()
     {
         // Изменены ID значений справочника. Т7К. система не запущена в боевую эксплуатацию, обновлене старых значений не требоуется
-//        return [
-//            1 => 'Покупка квартиры (новостройка)',
-//            2 => 'Покупка квартиры (вторичка)',
-//            3 => 'Покупка дома',
-//            4 => 'Строительство дома',
-//        ];
+        //        return [
+        //            1 => 'Покупка квартиры (новостройка)',
+        //            2 => 'Покупка квартиры (вторичка)',
+        //            3 => 'Покупка дома',
+        //            4 => 'Строительство дома',
+        //        ];
 
         return [
             1 => 'Дом',
@@ -593,7 +617,7 @@ class Order extends Model
             1 => 'Моей семьи',
             2 => 'Родственников',
             3 => 'Аренда/Прочее',
-            4 => 'Социальный найм'
+            4 => 'Социальный найм',
         ];
     }
 
@@ -715,8 +739,13 @@ class Order extends Model
     public function beforeValidate()
     {
         // Заменяем запятые на точки
-        $fields = ['ipoteka_percent','money_oklad','money_summa_year','money_nalog_year',
-                    'money_month_pay', 'money_user_pay'
+        $fields = [
+            'ipoteka_percent',
+            'money_oklad',
+            'money_summa_year',
+            'money_nalog_year',
+            'money_month_pay',
+            'money_user_pay',
         ];
         foreach ($fields as $field) {
             $this->{$field} = str_replace(",", ".", $this->{$field});
@@ -750,12 +779,14 @@ class Order extends Model
     }
 
     // Отправить заявку на согласование руководителям
-    public function sendManager(){
+    public function sendManager()
+    {
         Agreement::sendEmailManager($this->id);
     }
 
     // Отравить куратору
-    public function sendCurator(){
+    public function sendCurator()
+    {
         // Сотрудник и куратор
         $user = User::findOne($this->created_by);
         $rf = Rf::findOne($user->filial_id);
@@ -803,13 +834,41 @@ class Order extends Model
             ->send();
     }
 
-    // Отравить на комиссию
-    public function sendCommission(){
-
-    }
 
     // Однотипный заголовок по всем письмам при работе с заявкой+
-    public function getEmailSubject($title){
-        return Yii::$app->params['senderName']." / ЖП / Заявка №" . $this->id . " / ".$title;
+    public function getEmailSubject($title)
+    {
+        return Yii::$app->params['senderName'] . " / ЖП / Заявка №" . $this->id . " / " . $title;
+    }
+
+    // Получаем читабельный список семьи. Нужен при формировании заявления
+    public function getFamilyList(){
+
+        $list = '';
+        $user = User::findOne( $this->created_by);
+
+        // Супруг(а)
+        $spouse = Spouse::find()->where(['user_id' => $user->id])->one();
+        if ($spouse){
+            if ($user->gender){
+                $list .='Супруга: ';
+            }else{
+                $list .='Супруг: ';
+            }
+            $list .= $spouse->fio."</w:t><w:br/><w:t>";
+        }
+
+        // Дети
+        $childs = Child::find()->where(['user_id' => $user->id])->all();
+        foreach ($childs as $child) {
+            if ($child->gender){
+                $list.= 'Сын: ';
+            }else{
+                $list.= 'Сын: ';
+            }
+            $list .=$child->fio.' дата рождения '.Yii::$app->formatter->asDate($child->date)."</w:t><w:br/><w:t>";
+        }
+        return $list;
+
     }
 }

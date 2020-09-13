@@ -23,41 +23,56 @@ $user = User::findOne(Yii::$app->user->identity->id);
 
         <div class="row">
             <div class="col-md-12">
-                <hr/>
-                <h3><?=  Yii::$app->user->identity->fio ?></h3>
+                <h3><?= Yii::$app->user->identity->fio ?></h3>
 
                 <?= $form->field($model, 'file_agree_personal_data_form', [
-                    'template' => getFileInputTemplate($model->file_agree_personal_data, $model->attributeLabels()['file_agree_personal_data_form'] . '.pdf'),
+                    'template' => getFileInputTemplate($model->file_agree_personal_data,
+                        $model->attributeLabels()['file_agree_personal_data_form'] . '.pdf'),
                 ])->fileInput(['class' => 'custom-file-input']) ?>
-                <?=  $form->field($model, 'file_agree_personal_data')->hiddenInput()->label(false) ?>
+                <?= $form->field($model, 'file_agree_personal_data')->hiddenInput()->label(false) ?>
             </div>
         </div>
 
-        <?php if($spose->type == 1): ?>
+        <?php if ($spose->type == 1): ?>
             <div class="row">
                 <div class="col-md-12">
                     <hr/>
                     <h3><?= $spose->fio ?></h3>
-                <?= $form->field($spose, 'personal_data_file_form', [
-                    'template' => getFileInputTemplate($spose->personal_data_file,  $spose->attributeLabels()['personal_data_file'].'.pdf'),
-                ])->fileInput(['class' => 'custom-file-input']) ?>
+                    <?= $form->field($spose, 'personal_data_file_form', [
+                        'template' => getFileInputTemplate($spose->personal_data_file, $spose->attributeLabels()['personal_data_file'] . '.pdf'),
+                    ])->fileInput(['class' => 'custom-file-input']) ?>
                 </div>
             </div>
         <?php endif; ?>
 
-        <?php if (is_array($usermd->children) && count($usermd->children) > 0):?>
-            <?php foreach($usermd->children as $child): ?>
-                <div  class="row">
+        <?php if (is_array($usermd->children) && count($usermd->children) > 0): ?>
+            <?php foreach ($usermd->children as $child): ?>
+                <div class="row">
                     <div class="col-md-12">
                         <hr/>
                         <h3><?= $child->fio ?></h3>
-                            <?= $form->field($child, 'file_personal_form['.$child->id.']', [
-                                'template' => getFileInputTemplate($child->file_personal, $child->attributeLabels()['file_personal']. '.pdf'),
-                            ])->fileInput(['class' => 'custom-file-input']) ?>
+                        <?= $form->field($child, 'file_personal_form[' . $child->id . ']', [
+                            'template' => getFileInputTemplate($child->file_personal, $child->attributeLabels()['file_personal'] . '.pdf'),
+                        ])->fileInput(['class' => 'custom-file-input']) ?>
                     </div>
                 </div>
             <?php endforeach; ?>
         <?php endif; ?>
+
+        <!-- Заявление-->
+        <div class="row">
+            <div class="col-md-12">
+                <hr>
+                <h3><?= Icon::show('file-pdf') ?>Заявление о предоставлении помощи в улучшении жилищных условий</h3>
+                <?= $form->field($model, 'order_file_form', [
+                    'template' => getFileInputTemplate(
+                        $model->order_file,
+                        $model->attributeLabels()['order_file_form'] . '.pdf'),
+                ])->fileInput(['class' => 'custom-file-input'])?>
+                <?= $form->field($model, 'order_file')->hiddenInput()->label(false) ?>
+            </div>
+        </div>
+
     </div>
 </div>
 
@@ -66,7 +81,7 @@ $user = User::findOne(Yii::$app->user->identity->id);
         <div class="card-body">
             <div class="row">
                 <div class="col-10">
-                    <?=  $form->field($model, 'filling_step')->hiddenInput(['value' => 8])->label(false) ?>
+                    <?= $form->field($model, 'filling_step')->hiddenInput(['value' => 8])->label(false) ?>
                 </div>
                 <div class="col-2">
                     <?= \yii\helpers\Html::submitButton(

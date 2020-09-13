@@ -610,7 +610,14 @@ retrun Html::img($userPhotoPath, ['title' => Yii::$app->user->identity->username
         return $this->surname."&nbsp;".$this->getInitials();
     }
 
+
+    // Получаем Иванов И.И. DOCX не воспринимает неразрывный пробел
+    public function getFioShortDocx(){
+        return $this->surname." ".$this->getInitials();
+    }
+
     public function getChildren() {
         return Child::find()->where(['user_id' => $this->id])->all();
     }
+
 }

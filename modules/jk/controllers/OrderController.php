@@ -704,7 +704,7 @@ class OrderController extends Controller
         // В зависимости от нового статуса
         switch ($newStatus->code) {
             case 'MANAGER_WAIT':
-               $order->sendManager();
+                $order->sendManager();
                 break;
             case 'CURATOR_CHECK':
                 break;
@@ -718,5 +718,86 @@ class OrderController extends Controller
         $orderStage->save();
 
         return $this->redirect(['/jk/order/view/', 'id' => $id]);
+    }
+
+    // Формирование заявления
+    public function actionOrder($id)
+    {
+        // Заявка
+        $order = Order::findOne($id);
+        $user = User::find($order->created_by)->one();
+
+        // В зависимости от типа заявки выбираем шаблон заявления (займ или проценты)
+        $file = 'percent.docx';
+        if ($order->type == 2) {
+            $file = 'zaim.docx';
+        }
+        $filePath = Yii::getAlias('@app') . '/modules/jk/files/' . $file;
+        $templateProcessor = new TemplateProcessor($filePath);
+
+        // Переменные в шаблоне
+        $templateProcessor->setValue(
+            [
+                'FIO',
+                'FIO_SHORT',
+
+                'POSITION',
+                'WORK_DEPARTMENT',
+                'TAB_NUMBER',
+                'WORK_PHONE',
+                'EMAIL',
+
+                'IPOTEKA_SIZE',
+                'IPOTEKA_PERCENT',
+                'IPOTEKA_USER',
+
+                'JP_ADDRESS',
+                'JP_COST',
+
+                'FAMILY_OWN',
+                'FAMILY_RENT',
+                'FAMILY_ADDRESS',
+                'FAMILY_DEAL',
+                'FAMILY_LIST',
+
+                'MONEY_MONTH_PAY',
+                'MONEY_USER_PAY',
+
+                'DATE',
+            ],
+            [
+                $user->fio,
+                $user->getFioShortDocx(),
+
+                $user->position,
+                $user->work_department,
+                $user->tab_number,
+                $user->work_phone,
+                $user->email,
+
+                number_format($order->ipoteka_size, 2, ',', ' '),
+                $order->ipoteka_percent,
+                number_format($order->ipoteka_user, 2, ',', ' '),
+
+                $order->jp_address,
+                number_format($order->jp_cost, 2, ',', ' '),
+
+                $order->family_own,
+                $order->family_rent,
+                $order->family_address,
+                $order->family_deal,
+                $order->getFamilyList(),
+
+                number_format($order->money_month_pay, 2, ',', ' '),
+                number_format($order->money_user_pay, 2, ',', ' '),
+
+                date('d.m.Y'),
+            ]
+        );
+
+        // Ссылка для скачивания
+        $fileUrl = '/files/jk/order/' . $id . '/JK_ORDER_' . $id . '_' . $user->surname . '_' . date('Y-m-d H-i-s') . '.docx';
+        $templateProcessor->saveAs(Yii::getAlias('@app') . '/web' . $fileUrl);
+        return Yii::$app->response->sendFile(Yii::getAlias('@webroot') . $fileUrl);
     }
 }
