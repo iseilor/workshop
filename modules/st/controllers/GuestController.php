@@ -45,6 +45,21 @@ class GuestController extends Controller
     }
 
     /**
+     * Lists all Guest models.
+     * @return mixed
+     */
+    public function actionAdmin()
+    {
+        $searchModel = new GuestSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('admin', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    /**
      * Displays a single Guest model.
      * @param integer $id
      * @return mixed

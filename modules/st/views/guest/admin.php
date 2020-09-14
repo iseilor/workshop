@@ -12,6 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="guest-index">
 
+
     <p>
         <?= Html::a(Yii::t('app', 'Create Guest'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>

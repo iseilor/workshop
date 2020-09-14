@@ -2,6 +2,8 @@
 
 namespace app\modules\st\controllers;
 
+use app\modules\st\models\GuestSearch;
+use Yii;
 use yii\web\Controller;
 
 /**
@@ -15,6 +17,13 @@ class DefaultController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $searchModel = new GuestSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+
     }
 }

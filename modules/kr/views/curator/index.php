@@ -29,4 +29,3 @@ echo ListView::widget(
         ],
     ]
 );
-

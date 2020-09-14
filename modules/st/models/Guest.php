@@ -2,6 +2,7 @@
 
 namespace app\modules\st\models;
 
+use app\models\Model;
 use Yii;
 
 /**
@@ -32,7 +33,7 @@ use Yii;
  * @property string $icon
  * @property string $color
  */
-class Guest extends \yii\db\ActiveRecord
+class Guest extends Model
 {
     /**
      * {@inheritdoc}
@@ -48,8 +49,8 @@ class Guest extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['created_at', 'created_by', 'curator_id', 'guest_fio', 'guest_category', 'guest_photo', 'date', 'title', 'annotation', 'text', 'registration_link', 'weight', 'icon', 'color'], 'required'],
-            [['created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by', 'curator_id', 'guest_category', 'date', 'weight'], 'integer'],
+            [['curator_id', 'guest_fio', 'guest_category', 'guest_photo', 'date', 'title', 'annotation', 'text', 'registration_link', 'weight', 'icon', 'color'], 'required'],
+            [['curator_id', 'guest_category', 'date', 'weight'], 'integer'],
             [['annotation', 'text'], 'string'],
             [['guest_fio', 'guest_photo', 'title', 'registration_link', 'webinar_link', 'youtube_link', 'vk_link', 'telegram_link', 'video', 'icon', 'color'], 'string', 'max' => 255],
         ];
