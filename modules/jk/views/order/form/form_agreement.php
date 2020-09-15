@@ -76,12 +76,12 @@ $user = User::findOne(Yii::$app->user->identity->id);
     </div>
 </div>
 
-<?php if ($model->filling_step == 8): ?>
+<?php if ($model->filling_step == 7): ?>
     <div class="card card-solid card-secondary  ">
         <div class="card-body">
             <div class="row">
                 <div class="col-10">
-                    <?= $form->field($model, 'filling_step')->hiddenInput(['value' => 8])->label(false) ?>
+                    <?= $form->field($model, 'filling_step')->hiddenInput(['value' => 7])->label(false) ?>
                 </div>
                 <div class="col-2">
                     <?= \yii\helpers\Html::submitButton(

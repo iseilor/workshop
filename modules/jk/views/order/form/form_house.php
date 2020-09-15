@@ -165,12 +165,12 @@ $u_construction = (!$mortgage && $model->jp_new_type == 1) ? 'true' : 'false';
     </div>
 </div>
 
-<?php if ($model->filling_step == 6): ?>
+<?php if ($model->filling_step == 4): ?>
     <div class="card card-solid card-secondary  ">
         <div class="card-body">
             <div class="row">
                 <div class="col-10">
-                    <?=  $form->field($model, 'filling_step')->hiddenInput(['value' => 6])->label(false) ?>
+                    <?=  $form->field($model, 'filling_step')->hiddenInput(['value' => 4])->label(false) ?>
                 </div>
                 <div class="col-2">
                     <?= \yii\helpers\Html::submitButton(

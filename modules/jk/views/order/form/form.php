@@ -66,19 +66,19 @@ $model->filling_step++;
                                         $tabs[] = ['name' => Icon::show('baby') . 'Дети', 'id' => 'child', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''];
                                     }
 
-                                    if ($model->filling_step >= 4) {
+                                    /*if ($model->filling_step >= 4) {
                                         $tabs[] = ['name' => Icon::show('users') . 'Семья', 'id' => 'family', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''];
+                                    }*/
+                                    if ($model->filling_step >= 4) {
+                                        $tabs[] = ['name' => Icon::show('home') . 'Жильё', 'id' => 'house', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''];
                                     }
                                     if ($model->filling_step >= 5) {
                                         $tabs[] = ['name' => Icon::show('file-invoice-dollar') . 'Ипотека', 'id' => 'ipoteka', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''];
                                     }
                                     if ($model->filling_step >= 6) {
-                                        $tabs[] = ['name' => Icon::show('home') . 'Жильё', 'id' => 'house', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''];
-                                    }
-                                    if ($model->filling_step >= 7) {
                                         $tabs[] = ['name' => Icon::show('ruble-sign') . 'Финансы', 'id' => 'money', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''];
                                     }
-                                    if ($model->filling_step >= 8) {
+                                    if ($model->filling_step >= 7) {
                                         $tabs[] = ['name' => Icon::show('file-alt') . 'Согласия на обработку ПД', 'id' => 'agreement', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''];
                                     }
 
@@ -144,8 +144,8 @@ $model->filling_step++;
 //                            'id' => 'btn-message',
 //                        ]
 //                    ) ?>
-                    <?php if ($model->filling_step > 8): ?>
-                        <?=  $form->field($model, 'filling_step')->hiddenInput(['value' => 8])->label(false) ?>
+                    <?php if ($model->filling_step > 7): ?>
+                        <?=  $form->field($model, 'filling_step')->hiddenInput(['value' => 7])->label(false) ?>
                         <?=
                         Html::submitButton(
                             Icon::show('save') . 'Сохранить заявку',
@@ -175,19 +175,19 @@ switch ($model->filling_step) {
     case 3:
         $currentTab = 'tab-child';
         break;
-    case 4:
+    /*case 4:
         $currentTab = 'tab-family';
+        break;*/
+    case 4:
+        $currentTab = 'tab-house';
         break;
     case 5:
         $currentTab = 'tab-ipoteka';
         break;
     case 6:
-        $currentTab = 'tab-house';
-        break;
-    case 7:
         $currentTab = 'tab-money';
         break;
-    case 8:
+    case 7:
         $currentTab = 'tab-agreement';
         break;
 }

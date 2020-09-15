@@ -149,7 +149,7 @@ class OrderController extends Controller
         if ($user) {
             $unfilledOrder = \app\modules\jk\models\Order::find()
                 ->where(['created_by' => $user->id])
-                ->andWhere(['<', 'filling_step', 8])
+                ->andWhere(['<', 'filling_step', 7])
                 ->orderBy(['updated_at' => SORT_DESC])
                 ->one();
             if ($unfilledOrder) {

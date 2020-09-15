@@ -207,15 +207,8 @@ class Order extends Model
             [['jp_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'jp_date', 'skipOnEmpty' => true,],
             [['jp_dogovor_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'jp_dogovor_date', 'skipOnEmpty' => true,],
             [['jp_registration_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'jp_registration_date', 'skipOnEmpty' => true,],
-            //
-            //
-            //            // Ипотека
-            //            [['is_mortgage',   ], 'required'],
-
-
-            // Вкладка "Семья"
             [
-                ['social_id', 'family_own', 'family_deal'],
+                ['family_own', 'family_deal', 'jp_total_area', 'district_id', 'is_mortgage'],
                 'required',
                 'when' => function ($model) {
                     return $model->filling_step >= 4;
@@ -224,6 +217,23 @@ class Order extends Model
                     return $('#order-filling_step').val() >= 4;
                 }",
             ],
+            //
+            //
+            //            // Ипотека
+            //            [['is_mortgage',   ], 'required'],
+
+
+            // Вкладка "Семья"
+            /*[
+                ['social_id', 'family_own', 'family_deal'],
+                'required',
+                'when' => function ($model) {
+                    return $model->filling_step >= 4;
+                },
+                'whenClient' => "function (attribute, value) {
+                    return $('#order-filling_step').val() >= 4;
+                }",
+            ],*/
 
 
             // Вкладка "Ипотека"
@@ -245,7 +255,7 @@ class Order extends Model
             ],
 
             [
-                ['is_mortgage', 'ipoteka_target', 'ipoteka_size', 'ipoteka_user'],
+                ['ipoteka_target', 'ipoteka_size', 'ipoteka_user'],
                 'required',
                 'when' => function ($model) {
                     return $model->filling_step >= 5;
@@ -261,10 +271,10 @@ class Order extends Model
                 ['money_oklad', 'money_summa_year', 'money_nalog_year', 'money_month_pay', 'money_user_pay',],
                 'required',
                 'when' => function ($model) {
-                    return $model->filling_step >= 7;
+                    return $model->filling_step >= 6;
                 },
                 'whenClient' => "function (attribute, value) {
-                    return $('#order-filling_step').val() >= 7;
+                    return $('#order-filling_step').val() >= 6;
                 }",
             ],
 
@@ -287,10 +297,10 @@ class Order extends Model
                 ['file_agree_personal_data_form',],
                 'required',
                 'when' => function ($model) {
-                    return $model->filling_step >= 8 && !$model->file_agree_personal_data;
+                    return $model->filling_step >= 7 && !$model->file_agree_personal_data;
                 },
                 'whenClient' => "function (attribute, value) {
-                    return ($('#order-filling_step').val() >= 8) && (($('#order-file_agree_personal_data').val() === null) || ($('#order-file_agree_personal_data').val() === ''));
+                    return ($('#order-filling_step').val() >= 7) && (($('#order-file_agree_personal_data').val() === null) || ($('#order-file_agree_personal_data').val() === ''));
                     
                 }",
                 'skipOnEmpty' => true,
