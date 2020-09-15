@@ -77,6 +77,14 @@ class m200331_000010_create_jk_order_table extends Migration
                 'jp_dist' => $this->integer(),              // Расстояние до рабочего места
                 'jp_own' => $this->integer(),               // Тип собственности жилого помещения
                 'jp_part' => $this->text(),                 // Доли в жилом помещении
+                'under_construction' => $this->boolean(),
+                'district_id' => $this->integer(),
+                'is_parts' => $this->boolean(),
+                'jp_total_area' => $this->double(),
+                'jp_new_type' => $this->integer(),
+                'jp_new_room_count' => $this->integer(),
+                'jp_new_area' => $this->double(),
+                'is_new_building' => $this->boolean(),
 
                 // Жильё. Файлы. Ипотека
                 'jp_dogovor_buy_file' => $this->text(),        // 1) Договор приобретения ЖП (ДДУ, ДС, ДКП и пр.)  (+файлы регистрации если регистрация электронная
