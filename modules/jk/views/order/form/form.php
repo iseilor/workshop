@@ -73,7 +73,7 @@ $model->filling_step++;
                                         $tabs[] = ['name' => Icon::show('file-invoice-dollar') . 'Ипотека', 'id' => 'ipoteka', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''];
                                     }
                                     if ($model->filling_step >= 6) {
-                                        $tabs[] = ['name' => Icon::show('home') . 'ЖП', 'id' => 'house', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''];
+                                        $tabs[] = ['name' => Icon::show('home') . 'Жильё', 'id' => 'house', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''];
                                     }
                                     if ($model->filling_step >= 7) {
                                         $tabs[] = ['name' => Icon::show('ruble-sign') . 'Финансы', 'id' => 'money', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''];
@@ -118,6 +118,7 @@ $model->filling_step++;
                                                     'form' => $form,
                                                     'field_percent' => $field_percent,
                                                     'field_zaim' => $field_zaim,
+                                                    'mins' => $mins,
                                                 ]) ?>
                                             </div>
                                         <?php endforeach; ?>

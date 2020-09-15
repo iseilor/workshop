@@ -10,7 +10,20 @@ use yii\widgets\MaskedInput;
 
     <div class="row">
         <div class="col-md-4">
-            <?= $form->field($model, 'is_mortgage')->dropDownList($model->getMortgageList(), ['prompt' => 'Выберите ...']); ?>
+            <?= $form->field($model, 'jp_cost')->widget(MaskedInput::class, ['clientOptions' => Yii::$app->params['widget']['MaskedInput']['clientOptionsMoney']]); ?>
+            <?= $form->field($model, 'jp_dogovor_date')->widget(
+                DatePicker::class,
+                [
+                    'language' => 'ru',
+                    'dateFormat' => 'dd.MM.yyyy',
+                    'options' => ['class' => 'form-control inputmask-date'],
+                    'clientOptions' => [
+                        'changeMonth' => true,
+                        'yearRange' => '2000:2050',
+                        'changeYear' => true,
+                    ],
+                ]
+            ) ?>
             <?= $form->field($model, 'ipoteka_target')->dropDownList($model->getIpotekaTargetList(), ['prompt' => 'Выберите ...']); ?>
             <?= $form->field($model, 'ipoteka_size')->widget(MaskedInput::class, ['clientOptions' => Yii::$app->params['widget']['MaskedInput']['clientOptionsMoney']]); ?>
             <?= $form->field($model, 'ipoteka_user')->widget(MaskedInput::class, ['clientOptions' => Yii::$app->params['widget']['MaskedInput']['clientOptionsMoney']]); ?>

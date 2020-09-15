@@ -182,6 +182,14 @@ class Order extends Model
             [['jp_type', 'jp_area'], 'required'],
             [
                 [
+                    'under_construction',
+                    'district_id',
+                    'is_parts',
+                    'jp_total_area',
+                    'jp_new_type',
+                    'jp_new_room_count',
+                    'jp_new_area',
+                    'is_new_building',
                     'jp_type',
                     'jp_address',
                     'jp_room_count',
@@ -365,7 +373,9 @@ class Order extends Model
             'jp_type' => Module::t('order', 'Jp Type'),
             'jp_address' => Module::t('order', 'JP Address'),
             'jp_room_count' => Module::t('order', 'JP Room Count'),
+            'jp_new_room_count' => Module::t('order', 'JP Room Count'),
             'jp_area' => Module::t('order', 'JP Area'),
+            'jp_new_area' => Module::t('order', 'JP Area'),
             'jp_cost' => Module::t('order', 'JP Cost'),
             'jp_dogovor_date' => Module::t('order', 'JP Dogovor Date'),
             'jp_registration_date' => Module::t('order', 'JP Registration Date'),
@@ -373,6 +383,12 @@ class Order extends Model
             'jp_dist' => Module::t('order', 'Jp Dist'),
             'jp_own' => Module::t('order', 'Jp Own'),
             'jp_part' => Module::t('order', 'Jp Part'),
+            'is_parts' => Module::t('order', 'Is Parts'),
+            'jp_new_type' => Module::t('order', 'Jp Type'),
+            'is_new_building' => Module::t('order', 'Jp New Building'),
+            'jp_total_area' => Module::t('order', 'Jp Total Area'),
+            'district_id' => Module::t('order', 'District'),
+            'under_construction' => Module::t('order', 'Under Construction'),
 
             // Жилое помещение. Файлы
             'jp_dogovor_buy_file_form' => Module::t('order', 'JP Dogovor Buy'),
@@ -457,6 +473,7 @@ class Order extends Model
         return [
 
             // Семья
+            'jp_part' => '<strong>Пример:</strong> 0,5',
             'social_id' => '<strong>Малоимущие</strong> - Пользователи со среднедушевым доходом в семье ниже прожиточного минимума, установленного в соответствующем субъекте РФ.<br>
                             <strong>Родители-одиночки</strong> - Пользователи, в одиночку воспитывающие одного и более ребенка в возрасте до 18 лет (в случае обучения ребенка в высшем учебном заведении - до 23 лет).<br/>
                             <strong>Многодетные</strong> - Пользователи, имеющие 3 и более детей в возрасте до 18 лет (в случае обучения ребенка в высшем учебном заведении - до 23 лет) в одной семье.<br/>
@@ -492,6 +509,14 @@ class Order extends Model
 
             'order_file_form' => 'Вам необходимо скачать автоматически сформированное ' . Html::a(Icon::show('file-pdf') . 'Заявление',
                     Url::to(['/jk/order/' . $this->id . '/order'])) . ', которое нужно распечатать, подписать и прикрепить в данное поле',
+            'file_agree_personal_data_form' => 'Скачайте автоматически сформированный '.Html::a(Icon::show('file-pdf') .'бланк', Url::to(['/user/user/' . Yii::$app->user->identity->id . '/pd'])).', который нужно будет распечатать, подписать и прикрепить в поле',
+
+            'jp_own_land_file_form' => 'Собственниками (арендаторами) земельного участка, на котором будет осуществляться строительство дома, и в последующем собственниками дома могут выступать работники/или члены его семьи.',
+            'jp_project_house_file_form' => 'Разрабатывает кандидат или специализированная организация',
+            'jp_construction_estimate_file_form' => 'Разрабатывает кандидат или специализированная организация',
+            'jp_time_grafic_build_file_form' => 'Разрабатывает кандидат или специализированная организация',
+            'jp_dogovor_buy_file_form' => 'Если договор зарегестрирован с ЭЦП, необходимо дополнительно приложить само ЭЦП',
+            'jp_egrp_file_form' => 'Если ЕГРН зарегестрирован с ЭЦП, необходимо дополнительно приложить само ЭЦП. При приобретении дома необходимо вложить ЕГРН и на дом и на земельный участок',
         ];
     }
 

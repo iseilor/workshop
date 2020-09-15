@@ -32,11 +32,6 @@ use yii\widgets\MaskedInput;
         <?= $form->field($model, 'family_rent')->textarea(['rows'=>5]); ?>
 
     </div>
-    <div class="col-md-4">
-        <?= $form->field($model, 'family_own')->textarea(['rows'=>10]); ?>
-
-        <?= $form->field($model, 'family_deal')->textarea(['rows'=>10]); ?>
-    </div>
 </div>
 
 

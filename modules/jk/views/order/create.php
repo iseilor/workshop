@@ -18,6 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'usermd' => $usermd,
         'spose' => $spose,
         'passport' => $passport,
+        'mins' => $mins,
         //'userChildDataProvider'=>$userChildDataProvider
     ]) ?>
 

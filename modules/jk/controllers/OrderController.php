@@ -3,6 +3,7 @@
 namespace app\modules\jk\controllers;
 
 use app\modules\jk\models\Agreement;
+use app\modules\jk\models\Min;
 use app\modules\jk\models\Order;
 use app\modules\jk\models\OrderSearch;
 use app\modules\jk\models\OrderStage;
@@ -156,6 +157,7 @@ class OrderController extends Controller
             }
         }
 
+        $min = Min::find()->orderBy('title')->all();
         $model = new Order();
         $model->status_id = Status::findOne(['code' => 'NEW'])->id;
 
@@ -300,6 +302,7 @@ class OrderController extends Controller
                 'usermd' => $user,
                 'spose' => $spose,
                 'passport' => $passport,
+                'mins' => $min,
                 //'spose' => $model,
                 //'model' => $user,
             ]
@@ -318,6 +321,7 @@ class OrderController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $min = Min::find()->orderBy('title')->all();
         $user = User::findOne(Yii::$app->user->identity->getId());
 
         if ($user) {
@@ -485,6 +489,7 @@ class OrderController extends Controller
                 'usermd' => $user,
                 'spose' => $spose,
                 'passport' => $passport,
+                'mins' => $min,
             ]
         );
     }
