@@ -56,6 +56,7 @@ class m200414_194555_create_user_spouse_table extends Migration
             'work_file'=>$this->string(),                       // Трудовая книжка
             'unemployment_file'=>$this->string(),               // Справка о безработице
             'salary_file'=>$this->string(),                     // Справка о заработной плате (о сумме получаемых пособий)
+            'ndfl2_file'=>$this->string(),                      //Справка 2 НДФЛ
 
             // Персональные данные
             'personal_data_file' => $this->string(),

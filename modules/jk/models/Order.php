@@ -58,6 +58,7 @@ use yii\web\UploadedFile;
  * @property double   money_nalog_year
  * @property double   money_month_pay
  * @property double   money_user_pay
+ * @property string   other_income_file
  *
  * @property integer  $resident_own_type
  * @property boolean  $is_poor
@@ -130,6 +131,8 @@ class Order extends Model
     public $cnt; // Нужно для группировки
 
     public $order_file_form;
+
+    public $other_income_file_form;
 
     /**
      * @var mixed|null
@@ -282,6 +285,7 @@ class Order extends Model
                 [
                     'ndfl2_file_form',
                     'spravka_zp_file_form',
+                    'other_income_file_form',
                 ],
                 'file',
                 'skipOnEmpty' => true,
@@ -475,6 +479,7 @@ class Order extends Model
             'spravka_zp_file' => Module::t('order', 'Spravka ZP'),
             'spravka_zp_file_form' => Module::t('order', 'Spravka ZP'),
             'is_do' => Module::t('order', 'Is DO'),
+            'other_income_file_form' => Module::t('order', 'Other Income'),
         ];
     }
 
@@ -527,6 +532,8 @@ class Order extends Model
             'jp_time_grafic_build_file_form' => 'Разрабатывает кандидат или специализированная организация',
             'jp_dogovor_buy_file_form' => 'Если договор зарегестрирован с ЭЦП, необходимо дополнительно приложить само ЭЦП',
             'jp_egrp_file_form' => 'Если ЕГРН зарегестрирован с ЭЦП, необходимо дополнительно приложить само ЭЦП. При приобретении дома необходимо вложить ЕГРН и на дом и на земельный участок',
+            'other_income_file_form' => 'Прикрепляются документы о получаемых семьёй пособиях (инвалидность, безработица), стипендия и прочих доходах',
+            'money_month_pay' => 'Сумма расходов по кредитам (ипотека/на личные цели, аренду квартиры)',
         ];
     }
 
@@ -581,7 +588,8 @@ class Order extends Model
 
             'ndfl2_file',
             'spravka_zp_file',
-            'order_file'
+            'order_file',
+            'other_income_file'
         ];
 
         // Сохраняем данные

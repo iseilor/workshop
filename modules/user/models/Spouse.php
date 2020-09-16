@@ -47,6 +47,7 @@ use yii\web\UploadedFile;
  * @property string|null $work_file
  * @property string|null $unemployment_file
  * @property string|null $salary_file
+ * @property string|null $ndfl2_file
  */
 class Spouse extends Model
 {
@@ -68,6 +69,8 @@ class Spouse extends Model
     public $salary_file_form;
 
     public $personal_data_file_form;
+
+    public $ndfl2_file_form;
 
 
     /**
@@ -133,6 +136,7 @@ class Spouse extends Model
                     'unemployment_file_form',
                     'salary_file_form',
                     'personal_data_file_form',
+                    'ndfl2_file_form',
                 ],
                 'file',
                 'skipOnEmpty' => true,
@@ -206,6 +210,7 @@ class Spouse extends Model
             // Персонаьные данные
             'personal_data_file_form' => Module::t('spouse', 'Personal Data'),
             'personal_data_file' => Module::t('spouse', 'Personal Data'),
+            'ndfl2_file_form' => Module::t('spouse', '2 NDFL'),
 
         ];
     }
@@ -280,6 +285,7 @@ class Spouse extends Model
             'work_file',
             'unemployment_file',
             'salary_file',
+            'ndfl2_file',
 
             'personal_data_file',
         ];

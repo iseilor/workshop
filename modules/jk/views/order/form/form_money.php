@@ -5,29 +5,24 @@ use yii\widgets\MaskedInput;
 use kartik\icons\Icon;
 use yii\helpers\Html;
 
+$spouse_is_work = 'd-none';
+if ($spose->type == 1 && $spose->is_work) {
+    $spouse_is_work = '';
+}
+
+$spouse_is_do = 'd-none';
+if ($spose->is_do) {
+    $spouse_is_do = '';
+}
 ?>
 <div class="row">
     <div class="col-md-4">
         <!--$form->field($spose, 'salary_file_form', [
             'template' => getFileInputTemplate($spose->salary_file, 'Справка.pdf'),
         ])->fileInput(['class' => 'custom-file-input'])-->
-        <?= $form->field($model, 'money_oklad')->widget(MaskedInput::class, ['clientOptions' => Yii::$app->params['widget']['MaskedInput']['clientOptionsMoney']]) ?>
+        <!--$form->field($model, 'money_oklad')->widget(MaskedInput::class, ['clientOptions' => Yii::$app->params['widget']['MaskedInput']['clientOptionsMoney']])-->
         <?= $form->field($model, 'money_summa_year')->widget(MaskedInput::class, ['clientOptions' => Yii::$app->params['widget']['MaskedInput']['clientOptionsMoney']]) ?>
         <?= $form->field($model, 'money_nalog_year')->widget(MaskedInput::class, ['clientOptions' => Yii::$app->params['widget']['MaskedInput']['clientOptionsMoney']]) ?>
-    </div>
-    <div class="col-md-4">
-        <?= $form->field($model, 'ndfl2_file_form', [
-            'template' => getFileInputTemplate($model->ndfl2_file, $model->attributeLabels()['ndfl2_file'] . '.pdf'),
-        ])->fileInput(['class' => 'custom-file-input'])->hint($model->getAttributeHint('ndfl2_file')) ?>
-        <?= $form->field($model, 'is_do')->checkbox()->hint($model->getAttributeHint('is_do')) ?>
-
-        <?= $form->field($model, 'spravka_zp_file_form', [
-            'options' => ['class' => (!$model->is_do) ? 'd-none':''],
-            'template' => getFileInputTemplate($model->spravka_zp_file, $model->attributeLabels()['spravka_zp_file'] . '.pdf'),
-        ])->fileInput(['class' => 'custom-file-input'])->hint($model->getAttributeHint('spravka_zp_file')) ?>
-
-
-
     </div>
     <div class="col-md-4">
         <?= $form->field($model, 'money_month_pay')->widget(MaskedInput::class, ['clientOptions' => Yii::$app->params['widget']['MaskedInput']['clientOptionsMoney']]) ?>
@@ -35,6 +30,48 @@ use yii\helpers\Html;
     </div>
 </div>
 
+<div class="card card-solid card-secondary">
+    <div class="card-header with-border">
+        <h3 class="card-title">Документы</h3>
+    </div>
+
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-4">
+                <h4 class="card-title">Работник:</h4><br>
+                <?= $form->field($model, 'is_do', ['options' => ['style' => 'margin-top:5%']])->checkbox()->hint($model->getAttributeHint('is_do')) ?>
+                <?= $form->field($model, 'ndfl2_file_form', [
+                    'template' => getFileInputTemplate($model->ndfl2_file, $model->attributeLabels()['ndfl2_file'] . '.pdf')
+                ])->fileInput(['class' => 'custom-file-input'])->hint($model->getAttributeHint('ndfl2_file')) ?>
+                <?= $form->field($model, 'spravka_zp_file_form', [
+                    'options' => ['class' => (!$model->is_do) ? 'd-none':''],
+                    'template' => getFileInputTemplate($model->spravka_zp_file, $model->attributeLabels()['spravka_zp_file'] . '.pdf'),
+                ])->fileInput(['class' => 'custom-file-input'])->hint($model->getAttributeHint('spravka_zp_file')) ?>
+            </div>
+
+            <div class="col-md-4">
+                <h4 class="card-title">Супруг(а):</h4>
+                <div class="spouse-is-work <?= $spouse_is_work ?>">
+                    <?= $form->field($spose, 'ndfl2_file_form', [
+                        'template' => getFileInputTemplate($model->ndfl2_file, $model->attributeLabels()['ndfl2_file'] . '.pdf'),
+                        'options' => ['style' => 'margin-top:10%'],
+                    ])->fileInput(['class' => 'custom-file-input'])->hint($model->getAttributeHint('ndfl2_file')) ?>
+                </div>
+                <div class="spouse-is-do <?= $spouse_is_do ?>">
+                    <?= $form->field($spose, 'salary_file_form', [
+                        'template' => getFileInputTemplate($spose->salary_file, 'Справка.pdf'),
+                        ])->fileInput(['class' => 'custom-file-input']) ?>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <?= $form->field($model, 'other_income_file_form', [
+                    'template' => getFileInputTemplate($model->other_income_file, 'Документы о доходах.pdf'),
+                    'options' => ['style' => 'margin-top:10%'],
+                ])->fileInput(['class' => 'custom-file-input']) ?>
+            </div>
+        </div>
+    </div>
+</div>
 
 <?php if ($model->filling_step == 6): ?>
     <div class="card card-solid card-secondary  ">
@@ -64,6 +101,14 @@ use yii\helpers\Html;
 <?php
 $script = <<< JS
 $(document).ready(function() {
+    if ($('#order-money_month_pay').val() && !$('#order-money_user_pay').val()) {
+        $('#order-money_user_pay').val($('#order-money_month_pay').val());
+    }
+    $('#order-money_month_pay').on('change', function() {
+        if (!$('#order-money_user_pay').val()){
+            $('#order-money_user_pay').val($('#order-money_month_pay').val());
+        }
+    });
     
     $('div.field-order-money_oklad').addClass('required');
     $('div.field-order-money_summa_year').addClass('required');

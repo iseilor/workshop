@@ -131,6 +131,7 @@ class m200331_000010_create_jk_order_table extends Migration
                 'money_nalog_year' => $this->double(),      // Общая сумма удержаннаго налога за 1 год
                 'money_month_pay' => $this->double(),       // Среднемесячные платежи
                 'money_user_pay' => $this->double(),        // Мои среднемесячные платежи
+                'other_income_file' => $this->string(),     // Прочие документы о доходах
 
                 'filling_step' => $this->integer(),         // Шаг заполнения формы
                 'resident_own_type'=> $this->integer(),
