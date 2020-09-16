@@ -2,17 +2,24 @@
 
 namespace app\modules\kr\models;
 
+
+
+use app\models\Query;
+
 /**
  * This is the ActiveQuery class for [[Curator]].
  *
  * @see Curator
  */
-class CuratorQuery extends \yii\db\ActiveQuery
+class CuratorQuery extends Query
 {
     /*public function active()
     {
         return $this->andWhere('[[status]]=1');
     }*/
+
+
+
 
     /**
      * {@inheritdoc}

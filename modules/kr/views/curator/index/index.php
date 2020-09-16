@@ -10,14 +10,14 @@ use yii\widgets\Pjax;
 /* @var $searchModel app\modules\kr\models\CuratorSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Icon::show('user-graduate').Module::t('curator','Curators');
+$this->title = Icon::show('user-graduate').'Кураторы и тренеры проекта';
 $this->params['breadcrumbs'][] = ['label' => Icon::show('users').Module::t('module','kr'), 'url' => ['/kr/default/index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 echo ListView::widget(
     [
         'dataProvider' => $dataProvider,
-        'itemView' => '_item',
+        'itemView' => 'item',
         'layout' => "{items}",
         'options' => [
             'tag' => 'div',

@@ -8,11 +8,7 @@ use yii\helpers\Html;
 $this->title = Yii::t('app', 'Create Curator');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Curators'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
-?>
-<div class="curator-create">
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
-
-</div>
+echo $this->render('_form', [
+    'model' => $model,
+]);

@@ -8,7 +8,7 @@ use kartik\icons\Icon;
 $this->title = Icon::show(Module::getIcon()).Module::t('module', 'kr');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="row">
+<div class="row d-flex align-items-stretch">
     <?php
     foreach ($imgs as $img) {
         echo $this->render(

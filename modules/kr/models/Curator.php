@@ -3,29 +3,35 @@
 namespace app\modules\kr\models;
 
 use app\models\Model;
+use app\modules\kr\Module;
 use Yii;
+use yii\helpers\ArrayHelper;
+use yii\helpers\FileHelper;
+use yii\imagine\Image;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "kr_curator".
  *
- * @property int $id
- * @property int $created_at
- * @property int $created_by
+ * @property int      $id
+ * @property int      $created_at
+ * @property int      $created_by
  * @property int|null $updated_at
  * @property int|null $updated_by
  * @property int|null $deleted_at
  * @property int|null $deleted_by
- * @property string $fio
- * @property string $position
- * @property string $description
- * @property string $phone
- * @property string $email
- * @property string $img
- * @property int $weight
- * @property int $block_id
+ * @property string   $fio
+ * @property string   $position
+ * @property string   $description
+ * @property string   $phone
+ * @property string   $email
+ * @property string   $img
+ * @property int      $weight
+ * @property int      $block_id
  */
 class Curator extends Model
 {
+
     /**
      * {@inheritdoc}
      */
@@ -34,16 +40,21 @@ class Curator extends Model
         return 'kr_curator';
     }
 
+    public $img_form;
+
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['fio', 'position', 'description', 'phone', 'email', 'img', 'weight', 'block_id'], 'required'],
+            [['fio', 'position', 'description', 'phone', 'email', 'weight', 'block_id','img'], 'required'],
             [['weight', 'block_id'], 'integer'],
+            ['email', 'email'],
             [['description', 'email'], 'string'],
             [['fio', 'position', 'phone', 'img'], 'string', 'max' => 255],
+            [['img_form'], 'file', 'extensions' => 'jpg,png', 'checkExtensionByMimeType' => false],
+            [['img_form'], 'file', 'maxSize' => '2097152'],
         ];
     }
 
@@ -52,23 +63,21 @@ class Curator extends Model
      */
     public function attributeLabels()
     {
-        return [
-            'id' => Yii::t('app', 'ID'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'created_by' => Yii::t('app', 'Created By'),
-            'updated_at' => Yii::t('app', 'Updated At'),
-            'updated_by' => Yii::t('app', 'Updated By'),
-            'deleted_at' => Yii::t('app', 'Deleted At'),
-            'deleted_by' => Yii::t('app', 'Deleted By'),
-            'fio' => Yii::t('app', 'Fio'),
-            'position' => Yii::t('app', 'Position'),
-            'description' => Yii::t('app', 'Description'),
-            'phone' => Yii::t('app', 'Phone'),
-            'email' => Yii::t('app', 'Email'),
-            'img' => Yii::t('app', 'Img'),
-            'weight' => Yii::t('app', 'Weight'),
-            'block_id' => Yii::t('app', 'Block ID'),
-        ];
+        return ArrayHelper::merge(
+            parent::attributeLabels(),
+            [
+                'fio' => Module::t('curator', 'Fio'),
+                'position' => Module::t('curator', 'Position'),
+                'description' => Module::t('curator', 'Description'),
+                'phone' => Module::t('curator', 'Phone'),
+                'email' => Module::t('curator', 'Email'),
+                'img' => Module::t('curator', 'Img'),
+                'img_form' => Module::t('curator', 'Img'),
+                'weight' => Module::t('curator', 'Weight'),
+                'block_id' => Module::t('curator', 'Block ID'),
+            ]
+        );
+
     }
 
     /**
@@ -78,5 +87,26 @@ class Curator extends Model
     public static function find()
     {
         return new CuratorQuery(get_called_class());
+    }
+
+
+    // Загрузка фотографии
+    public function upload()
+    {
+        $this->img_form = UploadedFile::getInstance($this, 'img_form');
+        if ($this->validate() && $this->img_form) {
+            $this->img_form->saveAs(Yii::$app->params['module']['kr']['curator']['path'] . $this->id . '.' . $this->img_form->extension);
+            $this->img = $this->id . '.' . $this->img_form->extension;
+            $this->save();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // Максимальный вес для сотрировки
+    public static function getMaxWeight()
+    {
+        return self::find()->max('weight');
     }
 }
