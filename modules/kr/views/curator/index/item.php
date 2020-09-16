@@ -21,7 +21,7 @@ use yii\helpers\Url;
                 <ul class="ml-4 mb-1 fa-ul text-muted">
                     <li class="small"><span class="fa-li"><i class="fas fa-lg fa-envelope"></i></span> Email: <?= Html::mailto($model->email,
                             $model->email, ['target' => '_blank']) ?></li>
-                    <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Телефон: <?php echo $this->render('phone',['model'=>$model]); ?></li>
+                    <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Телефон: <?=$model->phone ?></li>
                 </ul>
                 <?php echo $this->render('description',['model'=>$model]); ?>
             </div>
