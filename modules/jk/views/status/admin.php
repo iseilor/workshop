@@ -11,8 +11,8 @@ use yii\widgets\Pjax;
 /* @var $searchModel app\modules\jk\models\StatusSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Icon::show('list').Module::t('module', 'Order Statuses');
-$this->params['breadcrumbs'][] = ['label' => Icon::show('home').Module::t('module','JK'), 'url' => ['/jk/']];
+$this->title = Icon::show('list') . Module::t('module', 'Order Statuses');
+$this->params['breadcrumbs'][] = ['label' => Icon::show('home') . Module::t('module', 'JK'), 'url' => ['/jk/']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="row">
@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="card-body">
 
                 <p>
-                    <?= Html::a(Icon::show('plus').Module::t('module', 'Create Order Status'), ['create'], ['class' => 'btn btn-success']) ?>
+                    <?= Html::a(Icon::show('plus') . Module::t('module', 'Create Order Status'), ['create'], ['class' => 'btn btn-success']) ?>
                 </p>
 
                 <?php Pjax::begin(); ?>
@@ -50,15 +50,30 @@ $this->params['breadcrumbs'][] = $this->title;
                                 return $data->getProgressBar();
                             },
                         ],
+                        [
+                            'label' => 'Изменить',
+                            'format' => 'raw',
+                            'value' => function ($data) {
+                                return ($data->is_edit) ? Html::tag('span', 'ДА', ['class' => 'badge badge-success'])
+                                    : Html::tag('span', 'НЕТ', ['class' => 'badge badge-danger']);
+                            },
+                        ],
+                        [
+                            'label' => 'Отменить',
+                            'format' => 'raw',
+                            'value' => function ($data) {
+                                return ($data->is_cancel) ? Html::tag('span', 'ДА', ['class' => 'badge badge-success'])
+                                    : Html::tag('span', 'НЕТ', ['class' => 'badge badge-danger']);
+                            },
+                        ],
                         'weight',
-                        'created_at:datetime',
-                        'createdUserLink:raw',
-                        'updated_at:datetime',
-                        'updatedUserLink:raw',
-
-                        /*[
+                        //'created_at:datetime',
+                        //'createdUserLink:raw',
+                        //'updated_at:datetime',
+                        //'updatedUserLink:raw',
+                        [
                             'class' => ActionColumn::class,
-                        ],*/
+                        ],
                     ],
                 ]); ?>
                 <?php Pjax::end(); ?>

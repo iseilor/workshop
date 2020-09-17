@@ -21,7 +21,7 @@ class StatusController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -40,6 +40,22 @@ class StatusController extends Controller
         $dataProvider->setSort(['defaultOrder' => ['weight' => SORT_ASC]]);
 
         return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    /**
+     * Lists all OrderStatus models.
+     * @return mixed
+     */
+    public function actionAdmin()
+    {
+        $searchModel = new StatusSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->setSort(['defaultOrder' => ['weight' => SORT_ASC]]);
+
+        return $this->render('admin', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
@@ -68,7 +84,7 @@ class StatusController extends Controller
         $model = new Status();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
+            return $this->redirect(['admin']);
         }
 
         return $this->render('create', [
@@ -88,7 +104,7 @@ class StatusController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
+            return $this->redirect(['admin']);
         }
 
         return $this->render('update', [

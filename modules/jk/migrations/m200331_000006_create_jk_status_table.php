@@ -39,13 +39,15 @@ class m200331_000006_create_jk_status_table extends Migration
                 'color' => $this->string()->notNull(),
                 'icon' => $this->string()->notNull(),
                 'description' => $this->text()->notNull(),
-                'weight'=>$this->integer()
+                'weight'=>$this->integer(),
+
+                'is_edit'=>$this->boolean()->notNull(),     // Возможность изменить
+                'is_cancel'=>$this->boolean()->notNull(),   // Возможность удалить
             ],
             $tableOptions
         );
 
         $this->execute(file_get_contents(__DIR__ . '/../sql/jk_status.sql'));
-
     }
 
 

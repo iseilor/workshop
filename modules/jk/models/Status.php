@@ -4,6 +4,7 @@ namespace app\modules\jk\models;
 
 use app\models\Model;
 use app\modules\jk\Module;
+use kartik\icons\Icon;
 use Yii;
 use yii\helpers\ArrayHelper;
 
@@ -23,7 +24,8 @@ use yii\helpers\ArrayHelper;
  * @property string|null $color
  * @property string|null $description
  * @property int         $weight
- *
+ * @property boolean     $is_edit
+ * @property boolean     $is_cancel
  */
 class Status extends Model
 {
@@ -42,10 +44,11 @@ class Status extends Model
     public function rules()
     {
         return [
-            [['title', 'icon', 'title_short', 'icon', 'code', 'color', 'description', 'progress','weight'], 'required'],
-            [['progress','weight'], 'integer'],
+            [['title', 'icon', 'title_short', 'icon', 'code', 'color', 'description', 'progress', 'weight','is_edit','is_cancel'], 'required'],
+            [['progress', 'weight','is_edit','is_cancel'], 'integer'],
             [['description', 'color', 'code', 'color', 'icon', 'title', 'title_short'], 'string'],
             [['description', 'color', 'code', 'color', 'icon', 'title', 'title_short'], 'string', 'max' => 255],
+            [['progress'], 'number', 'min' => 0, 'max' => 100],
         ];
     }
 
@@ -65,6 +68,8 @@ class Status extends Model
                 'icon' => Module::t('status', 'Icon'),
                 'description' => Module::t('status', 'Description'),
                 'weight' => Module::t('status', 'Weight'),
+                'is_edit'=> Module::t('status', 'Is Edit'),
+                'is_cancel'=> Module::t('status', 'Is Cancel'),
             ]
         );
     }
@@ -92,7 +97,7 @@ class Status extends Model
     // TODO: Все перенести из функции выше в эту функцию
     public function getLabel()
     {
-        return '<span class="badge bg-' . $this->color . '" title="' . $this->description . '">' . $this->title . '</span>';
+        return '<span class="badge bg-' . $this->color . '" title="' . $this->description . '">'.Icon::show($this->icon) . $this->title . '</span>';
     }
 
 

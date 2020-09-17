@@ -72,8 +72,12 @@ $this->title .= ' ' . $model->status->label;
                     <?php endif; ?>
 
                     <div class="float-right">
-                        <?= Html::a(Icon::show('edit') . 'Изменить заявку', ['update', 'id' => $model->id], ['class' => 'btn btn-warning']) ?>
-                        <?= Html::a(Icon::show('stop') . 'Отозвать заявку', ['stop', 'id' => $model->id], ['class' => 'btn btn-danger']) ?>
+                        <?php if ($model->status->is_edit): ?>
+                            <?= Html::a(Icon::show('edit') . 'Изменить заявку', ['update', 'id' => $model->id], ['class' => 'btn btn-warning']) ?>
+                        <?php endif; ?>
+                        <?php if ($model->status->is_cancel): ?>
+                            <?= Html::a(Icon::show('stop') . 'Отозвать заявку', ['stop', 'id' => $model->id], ['class' => 'btn btn-danger']) ?>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>

@@ -18,20 +18,39 @@ use yii\widgets\ActiveForm;
             </div>
             <?php $form = ActiveForm::begin(); ?>
             <div class="card-body">
-                <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
-                <?= $form->field($model, 'title_short')->textInput(['maxlength' => true]) ?>
-                <?= $form->field($model, 'code')->textInput(['maxlength' => true]) ?>
-                <?= $form->field($model, 'progress')->textInput() ?>
-                <?= $form->field($model, 'color')->dropDownList([
-                    'success' => 'Зелёный',
-                    'danger' => 'Красный',
-                    'warning' => 'Жёлтый',
-                    'info' => 'Синий',
-                ]); ?>
-                <?= $form->field($model, 'icon')->textInput(['maxlength' => true])->hint('<p>Иконки на сайте: ' . HTMl::a('fontawesome.com',
-                        'https://fontawesome.com') . '</p>') ?>
-                <?= $form->field($model, 'weight')->textInput(['maxlength' => true]) ?>
-                <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
+                <div class="row">
+                    <div class="col-4">
+                        <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+                        <?= $form->field($model, 'title_short')->textInput(['maxlength' => true]) ?>
+                        <?= $form->field($model, 'code')->textInput(['maxlength' => true]) ?>
+                    </div>
+                    <div class="col-4">
+                        <?= $form->field($model, 'progress')->input('number',['min' => 0, 'max' => 100, 'step' => 1]) ?>
+                        <?= $form->field($model, 'color')->dropDownList([
+                            'success' => 'Зелёный',
+                            'danger' => 'Красный',
+                            'warning' => 'Жёлтый',
+                            'info' => 'Синий',
+                        ]); ?>
+                        <?= $form->field($model, 'icon')->textInput(['maxlength' => true])->hint('<p>Иконки на сайте: ' . HTMl::a('fontawesome.com',
+                                'https://fontawesome.com',['target'=>'_blank']) . ' <strong>Пример</strong>: user</p>') ?>
+
+                    </div>
+                    <div class="col-4">
+                        <?= $form->field($model, 'is_edit')->dropDownList([
+                            '1' => 'Да',
+                            '0' => 'Нет',
+                        ]); ?>
+                        <?= $form->field($model, 'is_cancel')->dropDownList([
+                            '1' => 'Да',
+                            '0' => 'Нет',
+                        ]); ?>
+                        <?= $form->field($model, 'weight')->textInput(['maxlength' => true]) ?>
+                    </div>
+                    <div class="col-12">
+                        <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
+                    </div>
+                </div>
             </div>
             <div class="card-footer">
                 <div class="form-group">
