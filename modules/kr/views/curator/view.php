@@ -1,5 +1,6 @@
 <?php
 
+use Da\QrCode\Format\PhoneFormat;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -46,3 +47,4 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
 
 </div>
+

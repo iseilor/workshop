@@ -25,7 +25,7 @@ class DefaultController extends Controller
             [
                 'id' => 1,
                 'src' => 'kr-1.jpg',
-                'title' => 'Программа и её условия',
+                'title' => 'Программа и условия участия',
                 'icon'=>  Icon::show('info'),
                 'url'=>Url::to('kr/about')
             ],
@@ -39,7 +39,7 @@ class DefaultController extends Controller
             [
                 'id' => 3,
                 'src' => 'kr-3.jpg',
-                'title' => 'Тренеры и кураторы',
+                'title' => 'Кураторы и тренеры проекта',
                 'icon'=>  Icon::show('user-graduate'),
                 'url'=>Url::to('kr/curator')
             ],
@@ -54,7 +54,7 @@ class DefaultController extends Controller
 
         // Блоки
         $items = [
-            [
+            /*[
                 'col' => 3,
                 'bg' => 'primary',
                 'title' => 'О программе',
@@ -85,11 +85,10 @@ class DefaultController extends Controller
                 'description' => 'Участники программы',
                 'icon' => Icon::show('users'),
                 'url' => Url::to('kr/users'),
-            ],
-
+            ],*/
             [
                 'col' => 3,
-                'bg' => 'purple',
+                'bg' => 'primary',
                 'title' => 'БТИ',
                 'description' => 'Для сотрудников БТИ',
                 'icon' => Icon::show('microchip'),
@@ -97,7 +96,7 @@ class DefaultController extends Controller
             ],
             [
                 'col' => 3,
-                'bg' => 'purple',
+                'bg' => 'primary',
                 'title' => 'IT',
                 'description' => 'Для сотрудников IT',
                 'icon' => Icon::show('laptop'),
@@ -105,7 +104,7 @@ class DefaultController extends Controller
             ],
             [
                 'col' => 3,
-                'bg' => 'purple',
+                'bg' => 'primary',
                 'title' => 'B2B',
                 'description' => 'Для сотрудников B2B',
                 'icon' => Icon::show('briefcase'),
@@ -113,7 +112,7 @@ class DefaultController extends Controller
             ],
             [
                 'col' => 3,
-                'bg' => 'purple',
+                'bg' => 'primary',
                 'title' => 'B2C',
                 'description' => 'Для сотрудников B2C',
                 'icon' => Icon::show('building'),

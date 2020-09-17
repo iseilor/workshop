@@ -40,7 +40,7 @@ class CuratorSearch extends Curator
      */
     public function search($params)
     {
-        $query = Curator::find();
+        $query = Curator::find()->published();
 
         // add conditions that should always apply here
 

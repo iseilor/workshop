@@ -110,6 +110,15 @@ return [
             'path' => 'files/news/',
         ],
 
+        //  Высшая лига (Кадровый резерв)
+        'kr' => [
+            //'iconClass' => 'newspaper',
+            //'icon' => '<i class="fas fa-newspaper"></i>',
+            'curator'=>[
+                'path' => 'files/kr/curator/',
+            ]
+        ],
+
         // Нештатные ситуации
         'ns' => [
             'iconClass' => 'bell',

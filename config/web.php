@@ -79,6 +79,10 @@ $config = [
                 ],
             ],
         ],
+        'qr' => [
+            'class' => '\Da\QrCode\Component\QrCodeComponent',
+            // ... you can configure more properties of the component here
+        ],
 
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation

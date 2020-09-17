@@ -17,7 +17,7 @@ use yii\helpers\Url;
                 ]
             );
             echo Html::a($img, $item['url'], ['title' => $item['title']]); ?>
-            <h6><?= Html::a($item['icon'] . ' ' . $item['title'], Url::to($item['url'])); ?></h6>
+            <h3><?= Html::a($item['icon'] . ' ' . $item['title'], Url::to($item['url'])); ?></h3>
         </div>
     </div>
 </div>
