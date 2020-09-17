@@ -212,12 +212,32 @@ $(document).ready(function() {
     $('#order-is_mortgage').on('change load', function() {
         if ($('#order-is_mortgage').val()) {
             $('#contract').removeClass('d-none');
+            
+            if ($('#order-under_construction').prop('checked')==true && $('#order-is_mortgage').val() == 0){
+                for (let pair of constr_fields_map.entries()) {
+                  $(`\${pair[1]}`).removeClass('d-none');
+                  if (!$(`\${pair[1]}` + ' label[for=exampleInputFile]').html()) {
+                      $(`\${pair[1]}`).addClass('required');
+                      $(`\${pair[0]}`).attr('required', true);
+                  }
+                }
+            } else {
+                for (let pair of constr_fields_map.entries()) {
+                  $(`\${pair[1]}`).removeClass('required').addClass('d-none');
+                  $(`\${pair[0]}`).attr('required', false);
+                }
+            }
+            
             if ($('#order-is_mortgage').val() == 1) {
-                $('.field-order-jp_dogovor_buy_file_form').addClass('required');
-                $('#order-jp_dogovor_buy_file_form').attr('required', true);
+                if (!$('.field-order-jp_dogovor_buy_file_form label[for=exampleInputFile]').html()) {
+                    $('.field-order-jp_dogovor_buy_file_form').addClass('required');
+                    $('#order-jp_dogovor_buy_file_form').attr('required', true);
+                }
                 
-                $('.field-order-jp_egrp_file_form').addClass('required');
-                $('#order-jp_egrp_file_form').attr('required', true);
+                if (!$('.field-order-jp_egrp_file_form label[for=exampleInputFile]').html()) {
+                    $('.field-order-jp_egrp_file_form').addClass('required');
+                    $('#order-jp_egrp_file_form').attr('required', true);
+                }
             } else {
                 $('#order-jp_dogovor_buy_file_form').attr('required', false);
                 $('#order-jp_egrp_file_form').attr('required', false);
@@ -235,10 +255,17 @@ $(document).ready(function() {
             $('.new_building').removeClass('d-none');
             $('.field-order-jp_act_file_form').addClass('d-none');
             $('.field-order-jp_egrp_file_form').addClass('d-none');
+            
+            $('.field-order-jp_egrp_file_form').removeClass('required');
+            $('#order-jp_egrp_file_form').attr('required', false);
         } else {
             $('.field-order-jp_act_file_form').removeClass('d-none');
             $('.field-order-jp_egrp_file_form').removeClass('d-none');
             $('.new_building').addClass('d-none');
+            if (!$('.field-order-jp_egrp_file_form label[for=exampleInputFile]').html()) {
+                $('.field-order-jp_egrp_file_form').addClass('required');
+                $('#order-jp_egrp_file_form').attr('required', true);
+            }
         }
     });
     
@@ -260,16 +287,21 @@ $(document).ready(function() {
         }
     } else {
         for (let pair of constr_fields_map.entries()) {
-          $(`\${pair[1]}`).addClass('required');
-          $(`\${pair[0]}`).attr('required', true);
+            if (!$(`\${pair[1]}` + ' label[for=exampleInputFile]').html()) {
+                $(`\${pair[1]}`).addClass('required');
+                $(`\${pair[0]}`).attr('required', true);
+            }
         }
     }
     
     $('#order-under_construction').on('change', function() {
         if ($(this).prop('checked')==true){
             for (let pair of constr_fields_map.entries()) {
-              $(`\${pair[1]}`).removeClass('d-none').addClass('required');
-              $(`\${pair[0]}`).attr('required', true);
+              $(`\${pair[1]}`).removeClass('d-none');
+              if (!$(`\${pair[1]}` + ' label[for=exampleInputFile]').html()) {
+                  $(`\${pair[1]}`).addClass('required');
+                  $(`\${pair[0]}`).attr('required', true);
+              }
             }
         } else {
             for (let pair of constr_fields_map.entries()) {

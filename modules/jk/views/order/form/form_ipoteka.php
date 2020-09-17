@@ -101,7 +101,7 @@ if ($field_percent == '') {
                 <div class="early_payments <?= $model->ipoteka_file_grafic_now ? '' : 'd-none' ?>">
                     <?= $form->field($model, 'ipoteka_file_grafic_now_form', [
                         'template' => getFileInputTemplate($model->ipoteka_file_grafic_now, $model->attributeLabels()['ipoteka_file_grafic_now'] . '.pdf'),
-                    ])->fileInput(['class' => 'custom-file-input', 'required' => ($percent_required && !isset($model->ipoteka_file_grafic_now))]) ?>
+                    ])->fileInput(['class' => 'custom-file-input']) ?>
 
                     <?= $form->field($model, 'ipoteka_file_spravka_form', [
                         'template' => getFileInputTemplate($model->ipoteka_file_spravka, $model->attributeLabels()['ipoteka_file_spravka'] . '.pdf'),
@@ -118,11 +118,11 @@ if ($field_percent == '') {
                 <div class="refinancing <?= $model->ipoteka_file_refenance ? '' : 'd-none' ?>">
                     <?= $form->field($model, 'ipoteka_file_grafic_first_form', [
                         'template' => getFileInputTemplate($model->ipoteka_file_grafic_first, $model->attributeLabels()['ipoteka_file_grafic_first'] . '.pdf'),
-                    ])->fileInput(['class' => 'custom-file-input', 'required' => ($percent_required && !isset($model->ipoteka_file_grafic_first))]) ?>
+                    ])->fileInput(['class' => 'custom-file-input']) ?>
 
                     <?= $form->field($model, 'ipoteka_file_refenance_form', [
                         'template' => getFileInputTemplate($model->ipoteka_file_refenance, $model->attributeLabels()['ipoteka_file_refenance'] . '.pdf'),
-                    ])->fileInput(['class' => 'custom-file-input', 'required' => ($percent_required && !isset($model->ipoteka_file_refenance))]) ?>
+                    ])->fileInput(['class' => 'custom-file-input']) ?>
                 </div>
             </div>
 
