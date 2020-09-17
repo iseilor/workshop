@@ -113,6 +113,8 @@ class m200331_000010_create_jk_order_table extends Migration
                 'ipoteka_percent' => $this->float(),    // Процент по ипотеке
                 'ipoteka_last_date' => $this->integer(), // Дата последнего платежа
                 'ipoteka_grafic' => $this->text(),       // График платежей
+                'zaim_sum' => $this->double(),           // Займ на ипотеку
+                'ipoteka_start_date' => $this->integer(), // Дата оформления ипотеки
 
                 // Ипотека.Файлы
                 'ipoteka_file_dogovor' => $this->string(),          // Договор ипотеки

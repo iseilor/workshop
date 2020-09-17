@@ -240,8 +240,9 @@ class Order extends Model
 
 
             // Вкладка "Ипотека"
-            [['ipoteka_last_date', 'ipoteka_percent'], 'safe'],
+            [['ipoteka_last_date', 'ipoteka_percent', 'zaim_sum', 'ipoteka_start_date'], 'safe'],
             [['ipoteka_last_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'ipoteka_last_date', 'skipOnEmpty' => true,],
+            [['ipoteka_start_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'ipoteka_start_date', 'skipOnEmpty' => true,],
             [
                 [
                     'ipoteka_file_dogovor_form',
@@ -258,7 +259,7 @@ class Order extends Model
             ],
 
             [
-                ['ipoteka_target', 'ipoteka_size', 'ipoteka_user'],
+                ['jp_cost', 'ipoteka_size', 'ipoteka_user'],
                 'required',
                 'when' => function ($model) {
                     return $model->filling_step >= 5;
@@ -467,6 +468,8 @@ class Order extends Model
             'percent_sum' => Module::t('module', 'Percent Sum'),
             'target_mortgage' => Module::t('module', 'Target Mortgage'),
             'property_type' => Module::t('module', 'Property Type'),
+            'zaim_sum' => Module::t('order', 'Zaim Sum'),
+            'ipoteka_start_date' => Module::t('order', 'Ipoteka Start'),
 
             // Финансы
             'money_oklad' => Module::t('order', 'Money Oklad'),
@@ -534,6 +537,7 @@ class Order extends Model
             'jp_egrp_file_form' => 'Если ЕГРН зарегестрирован с ЭЦП, необходимо дополнительно приложить само ЭЦП. При приобретении дома необходимо вложить ЕГРН и на дом и на земельный участок',
             'other_income_file_form' => 'Прикрепляются документы о получаемых семьёй пособиях (инвалидность, безработица), стипендия и прочих доходах',
             'money_month_pay' => 'Сумма расходов по кредитам (ипотека/на личные цели, аренду квартиры)',
+            'ipoteka_file_dogovor' => 'Если регистрация ипотеки электронная  необходимо её вложить доп. файлом - ЭЦП регистрации.',
         ];
     }
 
@@ -790,6 +794,10 @@ class Order extends Model
             'money_nalog_year',
             'money_month_pay',
             'money_user_pay',
+            'jp_cost',
+            'ipoteka_user',
+            'ipoteka_size',
+            'zaim_sum',
         ];
         foreach ($fields as $field) {
             $this->{$field} = str_replace(",", ".", $this->{$field});

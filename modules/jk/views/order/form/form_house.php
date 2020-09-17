@@ -195,6 +195,7 @@ $(document).ready(function() {
     $('#order-jp_total_area').attr('required', true);
     $('.field-order-district_id').addClass('required');
     $('#order-district_id').attr('required', true);
+    $('div.field-order-is_mortgage').addClass('required');
     
     var constr_fields_map = new Map([
                       ['#order-jp_own_land_file_form', '.field-order-jp_own_land_file_form'],

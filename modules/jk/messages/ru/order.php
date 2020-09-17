@@ -83,15 +83,17 @@ return [
     'Ipoteka User' => 'Собственные средства работника, руб',
     'Ipoteka Params' => 'Параметры ипотеки',
     'Ipoteka Summa' => 'Сумма процентов',
-    'Ipoteka File Dogovor' => 'Договор ипотеки',
-    'Ipoteka File Grafic First' => 'Первоначальный график платежей',
-    'Ipoteka File Grafic Now' => 'Актуальный график платежей',
-    'Ipoteka File Refenance' => 'Договор рефенансирование ипотеки',
-    'Ipoteka File Spravka' => 'Справка из банка об актуальной ставке договора рефинансирования',
+    'Ipoteka File Dogovor' => 'Договор ипотеки (вложение)',
+    'Ipoteka File Grafic First' => 'Первоначальный график платежей (вложение)',
+    'Ipoteka File Grafic Now' => 'Актуальный график платежей (вложение)',
+    'Ipoteka File Refenance' => 'Договор рефенансирование ипотеки (вложение)',
+    'Ipoteka File Spravka' => 'Справка из банка об актуальной ставке договора рефинансирования (вложение)',
     'Ipoteka File Bank Approval' => 'Одобрение из банка',
     'Ipoteka Percent' => 'Процентная ставка по ипотеке',
-    'Ipoteka Last Date' => 'Последняя дата платежа',
+    'Ipoteka Last Date' => 'Дата последнего платежа',
     'Ipoteka Grafic' => 'График платежей',
+    'Zaim Sum' => 'Займ, руб',
+    'Ipoteka Start' => 'Дата оформления ипотеки',
 
 
     // Финансы
