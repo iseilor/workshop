@@ -274,7 +274,7 @@ class Order extends Model
 
             // Вкладка "Финансы"
             [
-                ['money_oklad', 'money_summa_year', 'money_nalog_year', 'money_month_pay', 'money_user_pay',],
+                ['money_summa_year', 'money_nalog_year', 'money_month_pay', 'money_user_pay',],
                 'required',
                 'when' => function ($model) {
                     return $model->filling_step >= 6;
