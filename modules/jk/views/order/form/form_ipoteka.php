@@ -178,7 +178,7 @@ $(document).ready(function() {
     $('div.field-order-ipoteka_file_refenance_form').addClass('required');
     $('div.field-order-ipoteka_percent').addClass('required');
     $('div.field-order-ipoteka_file_bank_approval_form').addClass('required');
-    if ($zaim_required) {
+    if ($('#order-is_mortgage').val()==0) {
         $('.field-order-zaim_sum').addClass('required');
     }
     
