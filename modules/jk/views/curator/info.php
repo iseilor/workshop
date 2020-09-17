@@ -44,7 +44,7 @@ $this->registerJs($js,\yii\web\view::POS_READY);
 
     $curatorRf = '';
     if ($user) {
-        $rf = \app\modules\jk\models\Rf::findOne(['title' => $user->rf]);
+        $rf = \app\modules\jk\models\Rf::findOne(['title' => $user->rfName]);
         if ($rf) {
             $curator = User::findOne($rf->user_id);
             $curatorRf = $rf->title;

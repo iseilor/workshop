@@ -260,7 +260,7 @@ class Zaim extends Model
 
         // Вариант 2 -------------------------------------------------------------------------------------------------
 
-        $rf = \app\modules\jk\models\Rf::findOne(['title' => $user->rf]);
+        $rf = \app\modules\jk\models\Rf::findOne(['title' => $user->rfName]);
         $need = 1000000;
 
         if ($rf) {

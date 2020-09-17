@@ -3,6 +3,7 @@
 namespace app\modules\user\models;
 
 use app\modules\admin\models\Retirement;
+use app\modules\jk\models\Rf;
 use app\modules\pulsar\models\Pulsar;
 use app\modules\user\Module;
 use Yii;
@@ -42,7 +43,7 @@ use yii\web\IdentityInterface;
  * @property string      $work_transferred_file
  * @property boolean     $work_department
  * @property boolean     $work_department_full
- * @property string      $rf
+ * @property string      $rfName
  *
  * @property boolean     $work_phone
  * @property string      $work_address
@@ -69,7 +70,13 @@ use yii\web\IdentityInterface;
  * @property string      $snils_file
  * @property int         $filial_id
  *
- * @property Child[]    $children
+ * @property Rf         $rf         // Объект РФ из справочника
+ * @property Spouse     $spouse     // Супруг(а)
+ * @property Child[]    $children   // Дети
+ *
+ * CALCULATED ----------------------------------------------------
+ * @property integer    $retirementDate     // Дата выхода на пенсию
+ * @property integer    $familyMembersCount  // Количество членов семьи
  */
 class User extends \yii\db\ActiveRecord implements IdentityInterface
 {
@@ -222,6 +229,11 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     }
 
     public function getRf()
+    {
+        return Rf::findOne(['title' => $this->rfName]);
+    }
+
+    public function getRfName()
     {
         $depList = explode('|', $this->work_department_full);
         if (isset($depList[2])) {
@@ -616,8 +628,43 @@ retrun Html::img($userPhotoPath, ['title' => Yii::$app->user->identity->username
         return $this->surname." ".$this->getInitials();
     }
 
+    public function getSpouse() {
+        return $this->hasOne(Spouse::class, ['user_id' => 'id']);
+    }
+
     public function getChildren() {
         return Child::find()->where(['user_id' => $this->id])->all();
     }
+
+    public function getRetirementDate() {
+        $rt = null;
+        switch ($this->gender) {
+            case 0: // Женщина
+                $rt = Retirement::find()->where(['like', 'gender', 'енщин'])->one();
+                break;
+            case 1: // Мужчина
+                $rt = Retirement::find()->where(['like', 'gender', 'ужчин'])->one();
+                break;
+        }
+        if ($rt) {
+            $rtDate = new \DateTime("@$this->birth_date");
+            $rtDate->modify("+$rt->age years");
+            return $rtDate->getTimestamp();
+        }
+
+        return false;
+    }
+
+    public function getFamilyMembersCount() {
+        $members = 1;
+        if ($this->spouse && $this->spouse->type === 1) {
+            $members++;
+        }
+
+        $members += count($this->children);
+
+        return $members;
+    }
+
 
 }

@@ -63,7 +63,9 @@ use yii\web\UploadedFile;
  * @property integer  $resident_own_type
  * @property boolean  $is_poor
  *
- * @property integer  $filling_step
+ * @property integer $filling_step
+ *
+ * @property User $user
  */
 class Order extends Model
 {
@@ -931,5 +933,161 @@ class Order extends Model
         $childCnt = Child::find()->where(['user_id' => $this->created_by])->count();
         return $this->money_summa_year/($cnt+$spouseCnt+$childCnt)/12;
     }
+
+
+
+    public function getCompanyYear() {
+        return (integer) Yii::$app->formatter->asDate($this->created_at, 'php:Y');
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUser() {
+        return $this->hasOne(User::class, ['id' => 'created_by']);
+    }
+
+    public function getMonthlyPerMemberIncome() {
+        return ($this->money_summa_year - $this->money_nalog_year)/$this->user->familyMembersCount/12;
+    }
+
+    public function getCorpNorm() {
+        $familyMembersCount = $this->user->familyMembersCount;
+        $corpNorm = CorpNorm::findOne(['number' => $familyMembersCount]);
+        if ($corpNorm) {
+            $corpNormArea = $corpNorm->area;
+        } else {
+            $corpNormArea = $familyMembersCount * 20;
+        }
+        return $corpNormArea;
+    }
+
+
+    // *** Компенсация процентов ***
+
+    // Период оказания МП
+    public function getPcPeriod() {
+        $year = $this->companyYear;
+        return "01.01.$year - 31.12.$year";
+    }
+
+    // Срок оказания МП
+    public function getPcTerm() {
+        $ipotekaLastDateYear = (integer) Yii::$app->formatter->asDate($this->ipoteka_last_date, 'php:Y');
+        $ipotekaRes = $ipotekaLastDateYear - $this->companyYear;
+        if ($ipotekaRes < 0) $ipotekaRes = 0;
+
+        $userRetirementYear = (integer) Yii::$app->formatter->asDate($this->user->retirementDate, 'php:Y');
+        $retRes = $userRetirementYear - $this->companyYear;
+
+        return min(10, $ipotekaRes, $retRes);
+
+    }
+
+    // Ставка компенсации %%
+    public function getPcRate() {
+        // Ежемесячный доход на члета семьи
+        $monthlyPerMemberIncome = $this->getMonthlyPerMemberIncome();
+        $aidStandart = AidStandards::find()
+            ->where(['<=', 'income_bottom',  $monthlyPerMemberIncome])
+            ->andWhere(['>=', 'income_top',  $monthlyPerMemberIncome])
+            ->one();
+
+        $lastCompanyDate = mktime(0,0,0,12,31,$this->companyYear-1);
+        // Считаем исходя из 365 дней в году
+        $age = ($lastCompanyDate - $this->user->birth_date) / 60 / 60 / 24 / 365;
+
+        if ($age < 36) {
+            return $aidStandart->skp_young;
+        } else {
+            return $aidStandart->skp;
+        }
+    }
+
+    //  Максимальная сумма компенсации %% в целом по ДС
+    public function getPcMaxVal() {
+        return 1000000;
+    }
+
+    // Максимальная сумма компенсации %% в год
+    public function getPcMaxPerYear() {
+        // Сумма уплаченных процентов (с января по ноябрь включительно)
+        // Поле не нашел, необходимо уточнить у Лады
+        $paidPersents = 50000;
+
+        // Вынести расчет коэффициента в отдельную функцию
+        $percentCoefficient = $this->corpNorm/($this->jp_new_area - ($this->ipoteka_user/$this->jp_cost * $this->jp_new_area));
+        if ($percentCoefficient > 1) {
+            $percentCoefficient = 1;
+        }
+
+        if ($this->ipoteka_percent > 0) {
+            $res = $paidPersents * ($this->pcRate / $this->ipoteka_percent) * $percentCoefficient;
+        } else {
+            $res = 0;
+        }
+
+        return round($res, -3) ;
+
+    }
+    // *** *** *** *** *** ***
+
+
+
+    // *** Займ ***
+
+    // Срок оказания МП
+    public function getLoanPeriod() {
+        $userRetirementYear = (integer) Yii::$app->formatter->asDate($this->user->retirementDate, 'php:Y');
+        $retRes = $userRetirementYear - $this->companyYear;
+
+        // Ежемесячный доход на члета семьи
+        $monthlyPerMemberIncome = $this->getMonthlyPerMemberIncome();
+        $aidStandart = AidStandards::find()
+            ->where(['<=', 'income_bottom',  $monthlyPerMemberIncome])
+            ->andWhere(['>=', 'income_top',  $monthlyPerMemberIncome])
+            ->one();
+
+        return min($retRes, $aidStandart->compensation_years_zaim);
+    }
+
+    // Максимальный размер займа
+    public function getLoanMaxVal() {
+        $familyMembersCount = $this->user->familyMembersCount;
+        // А
+        $rf = $this->user->rf;
+
+        // Б
+        $monthlyPerMemberIncome = $this->getMonthlyPerMemberIncome();
+        $jkMin = Min::findOne(['id' => $this->district_id]);
+        if (!$jkMin) {
+            return null;
+        }
+
+        $maxLoanByIncome = ($monthlyPerMemberIncome - $jkMin->min) * $familyMembersCount * $this->loanPeriod * 12;
+
+        // В
+//        $corpNorm = CorpNorm::findOne(['number' => $familyMembersCount]);
+//        if ($corpNorm) {
+//            $corpNormArea = $corpNorm->area;
+//        } else {
+//            $corpNormArea = $familyMembersCount * 20;
+//        }
+
+//        $loanCoefficient = $corpNormArea / ($this->jp_new_area - $this->ipoteka_user * $this->jp_new_area / $this->jp_cost);
+        $loanCoefficient = $this->corpNorm / ($this->jp_new_area - $this->ipoteka_user * $this->jp_new_area / $this->jp_cost);
+        if ($loanCoefficient > 1) {
+            $loanCoefficient = 1;
+        }
+        $maxLoanBySize = min($this->ipoteka_size, $this->jp_cost * $loanCoefficient);
+
+        return round(min($rf->loan_max, $maxLoanByIncome, $maxLoanBySize), -3);
+    }
+
+
+
+
+
+
 
 }
