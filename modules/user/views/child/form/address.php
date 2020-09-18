@@ -47,7 +47,7 @@ $params = [
 ])->fileInput(['class' => 'custom-file-input'])->hint('Вкладывается свидетельство о регистрации по месту жительства, при временной прописке - документ о временной регистрации.') ?>
 
 
-<!--$form->field($model, 'address_fact')
+<?=$form->field($model, 'address_fact')
     ->textarea([
         'readonly' => $model->address_fact == $user->address_fact,
         'data-user-address-fact'=>$user->address_fact
@@ -57,8 +57,8 @@ $params = [
         Html::checkbox('user_address_fact',
             $model->address_fact == $user->address_fact,
             ['label' => 'Совпадает с адресом фактического проживания сотрудника', 'id' => 'user_address_fact'])
-    )-->
-
+    )
+?>
 
 <?= $form->field($model, 'address_mother_file_form', [
     'template' => getFileInputTemplate($model->address_mother_file,  'Заявление от матери.pdf'),
