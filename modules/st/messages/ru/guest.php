@@ -1,0 +1,26 @@
+<?php
+return [
+    'Guest' => 'Гость',
+    'Guests' => 'Гости',
+    'Update Guest: {name}'=>'Изменить: {name}',
+
+    'Curator ID' => 'Ведущий',
+    'Guest Fio' => 'ФИО Гостя',
+    'Guest Category' => 'Категория',
+    'Guest Photo' => 'Фото',
+    'Date' => 'Дата эфира',
+    'Birth Date' => 'Дата рождения',
+    'Birth Place' => 'Место рождения',
+    'Title' => 'Звание',
+    'Annotation' => 'Справка',
+    'Text' => 'Текст',
+    'Registration Link' => 'Ссылка для регистрации',
+    'Webinar Link' => 'Ссылка на webinar.ru',
+    'Youtube Link' => 'Ссылка на youtube.com',
+    'Vk Link' => 'Ссылка на ВКонтакте',
+    'Telegram Link' => 'Телеграм',
+    'Video' => 'Видео',
+    'Weight' => 'Вес',
+    'Icon' => 'Иконка',
+    'Color' => 'Цвет',
+];

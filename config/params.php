@@ -119,6 +119,15 @@ return [
             ]
         ],
 
+
+        //  Star Talk
+        'st' => [
+            'guest'=>[
+                'path' => 'files/st/guest/',
+            ]
+        ],
+
+
         // Нештатные ситуации
         'ns' => [
             'iconClass' => 'bell',

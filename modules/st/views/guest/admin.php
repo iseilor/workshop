@@ -25,19 +25,18 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'created_at',
-            'created_by',
-            'updated_at',
-            'updated_by',
+            'date:datetime',
+            'guest_photo',
+            //'created_at',
+            //'created_by',
+            //'updated_at',
+            //'updated_by',
             //'deleted_at',
             //'deleted_by',
             //'curator_id',
-            //'guest_fio',
-            //'guest_category',
-            //'guest_photo',
-            //'date',
+            'guest_fio',
+            'guest_category',
+
             //'title',
             //'annotation:ntext',
             //'text:ntext',
@@ -51,7 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'icon',
             //'color',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => \app\components\grid\ActionColumn::class],
         ],
     ]); ?>
 

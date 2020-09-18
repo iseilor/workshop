@@ -2,6 +2,7 @@
 
 namespace app\modules\st\controllers;
 
+use app\modules\kr\models\Curator;
 use Yii;
 use app\modules\st\models\Guest;
 use app\modules\st\models\GuestSearch;
@@ -21,7 +22,7 @@ class GuestController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -80,9 +81,14 @@ class GuestController extends Controller
     public function actionCreate()
     {
         $model = new Guest();
+        $model->curator_id = 0;
+        $model->icon = 'user';
+        $model->color='success';
+        $model->weight =Guest::getMaxWeight()+10;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            $model->createQR();
+            return $this->redirect(['admin']);
         }
 
         return $this->render('create', [
@@ -102,7 +108,8 @@ class GuestController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            $model->createQR();
+            return $this->redirect(['admin']);
         }
 
         return $this->render('update', [

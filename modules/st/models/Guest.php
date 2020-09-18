@@ -3,38 +3,46 @@
 namespace app\modules\st\models;
 
 use app\models\Model;
+use app\modules\st\Module;
+use Da\QrCode\Contracts\ErrorCorrectionLevelInterface;
+use Da\QrCode\QrCode;
 use Yii;
+use yii\helpers\ArrayHelper;
+use yii\helpers\FileHelper;
 
 /**
  * This is the model class for table "st_guest".
  *
- * @property int $id
- * @property int $created_at
- * @property int $created_by
- * @property int|null $updated_at
- * @property int|null $updated_by
- * @property int|null $deleted_at
- * @property int|null $deleted_by
- * @property int $curator_id
- * @property string $guest_fio
- * @property int $guest_category
- * @property string $guest_photo
- * @property int $date
- * @property string $title
- * @property string $annotation
- * @property string $text
- * @property string $registration_link
+ * @property int         $id
+ * @property int         $created_at
+ * @property int         $created_by
+ * @property int|null    $updated_at
+ * @property int|null    $updated_by
+ * @property int|null    $deleted_at
+ * @property int|null    $deleted_by
+ * @property int         $curator_id
+ * @property string      $guest_fio
+ * @property int         $guest_category
+ * @property string      $guest_photo
+ * @property ing         $birth_date
+ * @property string      $birth_place
+ * @property int         $date
+ * @property string      $title
+ * @property string      $annotation
+ * @property string      $text
+ * @property string      $registration_link
  * @property string|null $webinar_link
  * @property string|null $youtube_link
  * @property string|null $vk_link
  * @property string|null $telegram_link
  * @property string|null $video
- * @property int $weight
- * @property string $icon
- * @property string $color
+ * @property int         $weight
+ * @property string      $icon
+ * @property string      $color
  */
 class Guest extends Model
 {
+
     /**
      * {@inheritdoc}
      */
@@ -43,50 +51,88 @@ class Guest extends Model
         return 'st_guest';
     }
 
+    public $guest_photo_form;
+
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['curator_id', 'guest_fio', 'guest_category', 'guest_photo', 'date', 'title', 'annotation', 'text', 'registration_link', 'weight', 'icon', 'color'], 'required'],
-            [['curator_id', 'guest_category', 'date', 'weight'], 'integer'],
+            [
+                [
+                    'curator_id',
+                    'guest_fio',
+                    'guest_category',
+                    'guest_photo',
+                    'date',
+                    'title',
+                    'annotation',
+                    'text',
+                    'weight',
+                    'icon',
+                    'color',
+                    'birth_date',
+                    'birth_place',
+                ],
+                'required',
+            ],
+            [['curator_id', 'guest_category', 'weight'], 'integer'],
+            [['date'], 'date', 'format' => 'php:d.m.Y H:i', 'timestampAttribute' => 'date'],
+            [['birth_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'birth_date'],
             [['annotation', 'text'], 'string'],
-            [['guest_fio', 'guest_photo', 'title', 'registration_link', 'webinar_link', 'youtube_link', 'vk_link', 'telegram_link', 'video', 'icon', 'color'], 'string', 'max' => 255],
+            [
+                [
+                    'guest_fio',
+                    'guest_photo',
+                    'title',
+                    'registration_link',
+                    'webinar_link',
+                    'youtube_link',
+                    'vk_link',
+                    'telegram_link',
+                    'video',
+                    'icon',
+                    'color',
+                ],
+                'string',
+                'max' => 255,
+            ],
         ];
     }
 
     /**
      * {@inheritdoc}
      */
+
+
     public function attributeLabels()
     {
-        return [
-            'id' => Yii::t('app', 'ID'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'created_by' => Yii::t('app', 'Created By'),
-            'updated_at' => Yii::t('app', 'Updated At'),
-            'updated_by' => Yii::t('app', 'Updated By'),
-            'deleted_at' => Yii::t('app', 'Deleted At'),
-            'deleted_by' => Yii::t('app', 'Deleted By'),
-            'curator_id' => Yii::t('app', 'Curator ID'),
-            'guest_fio' => Yii::t('app', 'Guest Fio'),
-            'guest_category' => Yii::t('app', 'Guest Category'),
-            'guest_photo' => Yii::t('app', 'Guest Photo'),
-            'date' => Yii::t('app', 'Date'),
-            'title' => Yii::t('app', 'Title'),
-            'annotation' => Yii::t('app', 'Annotation'),
-            'text' => Yii::t('app', 'Text'),
-            'registration_link' => Yii::t('app', 'Registration Link'),
-            'webinar_link' => Yii::t('app', 'Webinar Link'),
-            'youtube_link' => Yii::t('app', 'Youtube Link'),
-            'vk_link' => Yii::t('app', 'Vk Link'),
-            'telegram_link' => Yii::t('app', 'Telegram Link'),
-            'video' => Yii::t('app', 'Video'),
-            'weight' => Yii::t('app', 'Weight'),
-            'icon' => Yii::t('app', 'Icon'),
-            'color' => Yii::t('app', 'Color'),
-        ];
+        return ArrayHelper::merge(
+            parent::attributeLabels(),
+            [
+                'curator_id' => Module::t('guest', 'Curator ID'),
+                'guest_fio' => Module::t('guest', 'Guest Fio'),
+                'guest_category' => Module::t('guest', 'Guest Category'),
+                'guest_photo' => Module::t('guest', 'Guest Photo'),
+                'guest_photo_form' => Module::t('guest', 'Guest Photo'),
+                'date' => Module::t('guest', 'Date'),
+                'birth_date' => Module::t('guest', 'Birth Date'),
+                'birth_place' => Module::t('guest', 'Birth Place'),
+                'title' => Module::t('guest', 'Title'),
+                'annotation' => Module::t('guest', 'Annotation'),
+                'text' => Module::t('guest', 'Text'),
+                'registration_link' => Module::t('guest', 'Registration Link'),
+                'webinar_link' => Module::t('guest', 'Webinar Link'),
+                'youtube_link' => Module::t('guest', 'Youtube Link'),
+                'vk_link' => Module::t('guest', 'Vk Link'),
+                'telegram_link' => Module::t('guest', 'Telegram Link'),
+                'video' => Module::t('guest', 'Video'),
+                'weight' => Module::t('guest', 'Weight'),
+                'icon' => Module::t('guest', 'Icon'),
+                'color' => Module::t('guest', 'Color'),
+            ]
+        );
     }
 
     /**
@@ -96,5 +142,42 @@ class Guest extends Model
     public static function find()
     {
         return new GuestQuery(get_called_class());
+    }
+
+    // Максимальный вес для сотрировки
+    public static function getMaxWeight()
+    {
+        return self::find()->max('weight');
+    }
+
+    // Предварительное сохранение
+    public function createQR()
+    {
+        // Создаём директорию
+        $dir = Yii::$app->params['module']['st']['guest']['path']  . $this->id . '/';
+        FileHelper::createDirectory($dir, $mode = 0777, $recursive = true);
+
+        // Поля, которым нужны QR-коды
+        $fields = [
+            'registration_link',
+            'webinar_link',
+            'youtube_link',
+            'vk_link',
+            'telegram_link',
+        ];
+
+        // Создаём QR-коды
+        foreach ($fields as $field) {
+            if (isset($this->{$field}) && $this->{$field}!=''){
+                $qrCode = (new QrCode($this->{$field}))
+                    ->setSize(300)
+                    ->setMargin(5)
+                    ->useForegroundColor(84, 73, 158)
+                    ->useLogo(Yii::getAlias('@webroot') . "/logo/rt_logo_350.jpg")
+                    ->setErrorCorrectionLevel(ErrorCorrectionLevelInterface::HIGH)
+                    ->setLogoWidth(100);
+                $qrCode->writeFile($dir . $field.'.png'); // writer defaults to PNG when none is specified
+            }
+        }
     }
 }

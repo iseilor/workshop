@@ -23,16 +23,19 @@ class m200912_211052_create_st_guest_table extends Migration
             'deleted_by' => $this->integer(),
 
             'curator_id' =>  $this->integer()->notNull(),
+
             'guest_fio'=>$this->string()->notNull(),
             'guest_category'=>$this->integer()->notNull(),
             'guest_photo' => $this->string()->notNull(),
             'date'=>$this->integer()->notNull(),
+            'birth_date'=>$this->integer()->notNull(),
+            'birth_place'=>$this->string()->notNull(),
 
             'title'=> $this->string()->notNull(),
             'annotation'=> $this->text()->notNull(),
             'text'=>$this->text()->notNull(),
 
-            'registration_link'=>$this->string()->notNull(),
+            'registration_link'=>$this->string(),
             'webinar_link'=>$this->string(),
             'youtube_link'=>$this->string(),
             'vk_link'=>$this->string(),
