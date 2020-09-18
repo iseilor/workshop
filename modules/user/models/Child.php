@@ -98,7 +98,7 @@ class Child extends Model
     public function rules()
     {
         $rules = [
-            [['fio', 'date', 'address_registration',], 'required'],
+            [['fio', 'date', 'address_registration','address_fact'], 'required'],
             [['created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by', 'user_id', 'gender', 'is_invalid', 'is_study'], 'integer'],
             [['fio'], 'string', 'max' => 255],
             // TODO: с этим не работает в FireFox
