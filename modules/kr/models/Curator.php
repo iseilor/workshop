@@ -77,7 +77,6 @@ class Curator extends Model
                 'block_id' => Module::t('curator', 'Block ID'),
             ]
         );
-
     }
 
     /**

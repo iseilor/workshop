@@ -32,7 +32,7 @@ use yii\web\UploadedFile;
  * @property int      $type
  * @property string   $order_file
  *
- * @property int      $salary
+ * @property int      $salarys
  * @property int      $jp_type
  * @property int      $jp_own
  *

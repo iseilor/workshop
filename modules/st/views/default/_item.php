@@ -8,7 +8,7 @@ use yii\helpers\Url;
 
 <div class="card bg-light">
     <div class="card-header text-muted border-bottom-0">
-        <span class="badge bg-purple"> <?= Icon::show('running') ?> Спортсмены</span>
+        <?=$model->category->badge?>
         <span class="float-right"><?= Icon::show('calendar-alt') .date('d.m.Y H:i',$model->date)?></span>
     </div>
     <div class="card-body pt-0">

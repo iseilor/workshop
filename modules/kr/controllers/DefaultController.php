@@ -48,7 +48,7 @@ class DefaultController extends Controller
                 'src' => 'kr-4.jpg',
                 'title' => 'Участники программы',
                 'icon'=>  Icon::show('tasks'),
-                'url'=>Url::to('kr/terms')
+                'url'=>Url::to('kr/student')
             ],
         ];
 

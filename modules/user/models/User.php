@@ -9,6 +9,7 @@ use app\modules\user\Module;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
 use yii\web\IdentityInterface;
 
 /**
@@ -70,13 +71,13 @@ use yii\web\IdentityInterface;
  * @property string      $snils_file
  * @property int         $filial_id
  *
- * @property Rf         $rf         // Объект РФ из справочника
- * @property Spouse     $spouse     // Супруг(а)
- * @property Child[]    $children   // Дети
+ * @property Rf          $rf                  // Объект РФ из справочника
+ * @property Spouse      $spouse              // Супруг(а)
+ * @property Child[]     $children            // Дети
  *
  * CALCULATED ----------------------------------------------------
- * @property integer    $retirementDate     // Дата выхода на пенсию
- * @property integer    $familyMembersCount  // Количество членов семьи
+ * @property integer     $retirementDate      // Дата выхода на пенсию
+ * @property integer     $familyMembersCount  // Количество членов семьи
  */
 class User extends \yii\db\ActiveRecord implements IdentityInterface
 {
@@ -504,7 +505,8 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     // Получаем путь до фотографии пользователя
     public function getPhotoPath()
     {
-        $photoPath = Yii::$app->homeUrl . Yii::$app->params['module']['user']['photo']['path'] . Yii::$app->params['module']['user']['photo']['default'];
+        $photoPath = Yii::$app->homeUrl . Yii::$app->params['module']['user']['photo']['path']
+            . Yii::$app->params['module']['user']['photo']['default'];
         if (isset($this->photo) && $this->photo) {
             $photoPath = Yii::$app->homeUrl . Yii::$app->params['module']['user']['photo']['path'] . $this->photo;
         }
@@ -542,7 +544,8 @@ retrun Html::img($userPhotoPath, ['title' => Yii::$app->user->identity->username
     // Связь с Пульсаром
     public function getPulsar()
     {
-        return $this->hasOne(Pulsar::className(), ['created_by' => 'id'])->where('created_at>=' . strtotime(date('d.m.Y')))->orderBy('created_at DESC');
+        return $this->hasOne(Pulsar::className(), ['created_by' => 'id'])->where('created_at>=' . strtotime(date('d.m.Y')))
+            ->orderBy('created_at DESC');
     }
 
     public static function getGenderList()
@@ -618,25 +621,30 @@ retrun Html::img($userPhotoPath, ['title' => Yii::$app->user->identity->username
     }
 
     // Получаем Иванов И.И.
-    public function getFioShort(){
-        return $this->surname."&nbsp;".$this->getInitials();
+    public function getFioShort()
+    {
+        return $this->surname . "&nbsp;" . $this->getInitials();
     }
 
 
     // Получаем Иванов И.И. DOCX не воспринимает неразрывный пробел
-    public function getFioShortDocx(){
-        return $this->surname." ".$this->getInitials();
+    public function getFioShortDocx()
+    {
+        return $this->surname . " " . $this->getInitials();
     }
 
-    public function getSpouse() {
+    public function getSpouse()
+    {
         return $this->hasOne(Spouse::class, ['user_id' => 'id']);
     }
 
-    public function getChildren() {
+    public function getChildren()
+    {
         return Child::find()->where(['user_id' => $this->id])->all();
     }
 
-    public function getRetirementDate() {
+    public function getRetirementDate()
+    {
         $rt = null;
         switch ($this->gender) {
             case 0: // Женщина
@@ -655,7 +663,8 @@ retrun Html::img($userPhotoPath, ['title' => Yii::$app->user->identity->username
         return false;
     }
 
-    public function getFamilyMembersCount() {
+    public function getFamilyMembersCount()
+    {
         $members = 1;
         if ($this->spouse && $this->spouse->type === 1) {
             $members++;
@@ -664,6 +673,13 @@ retrun Html::img($userPhotoPath, ['title' => Yii::$app->user->identity->username
         $members += count($this->children);
 
         return $members;
+    }
+
+    public function getPhotoFioLabel()
+    {
+        $img = Html::img($this->photoPath, ['class' => 'table-avatar']);
+        return '<span style="float: left; margin-right: 0.5rem;">' . Html::a($img, ['/user/' . $this->id]) . '</span>' . Html::a($this->fio,
+                ['/user/' . $this->id]);
     }
 
 

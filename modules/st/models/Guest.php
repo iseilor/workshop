@@ -150,6 +150,12 @@ class Guest extends Model
         return self::find()->max('weight');
     }
 
+    // Категория гостя
+    public function getCategory()
+    {
+        return $this->hasOne(Category::class, ['id' => 'guest_category']);
+    }
+
     // Предварительное сохранение
     public function createQR()
     {

@@ -3,7 +3,9 @@
 namespace app\modules\st\models;
 
 use app\models\Model;
+use kartik\icons\Icon;
 use Yii;
+use yii\helpers\Html;
 
 /**
  * This is the model class for table "st_category".
@@ -73,5 +75,10 @@ class Category extends Model
     public static function find()
     {
         return new CategoryQuery(get_called_class());
+    }
+
+    // Цветная плашка с иконкой
+    public function getBadge(){
+        return Html::tag('span',Icon::show($this->icon).$this->title,['class'=>'badge bg-'.$this->color]);
     }
 }

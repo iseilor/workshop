@@ -15,7 +15,8 @@ class Bootstrap implements BootstrapInterface
             'basePath' => '@app/modules/kr/messages',
             'fileMap' => [
                 'modules/kr/module' => 'module.php',
-                'modules/kr/curator'=>'curator.php'
+                'modules/kr/curator'=>'curator.php',
+                'modules/kr/student'=>'student.php'
             ],
         ];
     }

@@ -4,21 +4,23 @@ namespace app\modules\kr\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\modules\kr\models\Curator;
+use app\modules\kr\models\Student;
 
 /**
- * CuratorSearch represents the model behind the search form of `app\modules\kr\models\Curator`.
+ * StudentSearch represents the model behind the search form of `app\modules\kr\models\Student`.
  */
-class CuratorSearch extends Curator
+class StudentSearch extends Student
 {
+
+    public $blockTitle;
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['id', 'created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by', 'weight', 'block_id'], 'integer'],
-            [['fio', 'position', 'description', 'phone', 'email', 'img'], 'safe'],
+            [['id',  'block_id', 'weight'], 'integer'],
+            [['user_id', 'description','blockTitle'], 'safe'],
         ];
     }
 
@@ -40,7 +42,7 @@ class CuratorSearch extends Curator
      */
     public function search($params)
     {
-        $query = Curator::find()->published();
+        $query = Student::find();
 
         // add conditions that should always apply here
 
@@ -65,16 +67,13 @@ class CuratorSearch extends Curator
             'updated_by' => $this->updated_by,
             'deleted_at' => $this->deleted_at,
             'deleted_by' => $this->deleted_by,
+            'block_id' => $this->blockTitle,
             'weight' => $this->weight,
-            'block_id' => $this->block_id
         ]);
 
-        $query->andFilterWhere(['like', 'fio', $this->fio])
-            ->andFilterWhere(['like', 'position', $this->position])
-            ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'phone', $this->phone])
-            ->andFilterWhere(['like', 'email', $this->email])
-            ->andFilterWhere(['like', 'img', $this->img]);
+        $query->andFilterWhere(['like', 'user_id', $this->user_id])
+            ->andFilterWhere(['like', 'total', $this->total])
+            ->andFilterWhere(['like', 'description', $this->description]);
 
         return $dataProvider;
     }

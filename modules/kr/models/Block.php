@@ -4,7 +4,9 @@ namespace app\modules\kr\models;
 
 use app\models\Model;
 use app\modules\kr\Module;
+use kartik\icons\Icon;
 use Yii;
+use yii\helpers\Html;
 
 /**
  * This is the model class for table "kr_block".
@@ -77,5 +79,10 @@ class Block extends Model
     public static function find()
     {
         return new BlockQuery(get_called_class());
+    }
+
+    // Цветная плашка с иконкой
+    public function getBadge(){
+        return Html::tag('span',Icon::show($this->icon).$this->title,['class'=>'badge bg-'.$this->color]);
     }
 }
