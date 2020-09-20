@@ -46,7 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 //'deleted_by',
                 'user.photoFioLabel:html',
                 [
-                    'filter' => ArrayHelper::map(Block::find()->all(), 'id', 'title'),
+                    'filter' => ArrayHelper::map(Block::find()->published()->all(), 'id', 'title'),
                     'attribute' => 'blockTitle',
                     'value' => 'block.badge',
                     'format' => 'html',

@@ -23,6 +23,7 @@ class m200906_134935_create_kr_block_table extends Migration
             'deleted_by' => $this->integer(),
 
             'title'=>$this->string()->notNull(),
+            'subtitle'=>$this->string()->notNull(),
             'code'=>$this->string()->notNull(),
             'description'=>$this->text()->notNull(),
             'img'=>$this->string()->notNull(),

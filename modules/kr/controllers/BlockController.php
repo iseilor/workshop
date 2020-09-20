@@ -21,7 +21,7 @@ class BlockController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -80,9 +80,11 @@ class BlockController extends Controller
     public function actionCreate()
     {
         $model = new Block();
+        $model->weight =Block::getMaxWeight()+10;
+        $model->img = 'img';
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['admin']);
         }
 
         return $this->render('create', [
@@ -102,7 +104,7 @@ class BlockController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['admin']);
         }
 
         return $this->render('update', [
@@ -121,7 +123,7 @@ class BlockController extends Controller
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['admin']);
     }
 
     /**

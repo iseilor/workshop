@@ -10,10 +10,19 @@ use yii\helpers\Html;
 $this->title = Icon::show('edit').Module::t('student', 'Update Student: {name}', [
     'name' => $model->user->fio,
 ]);
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Students'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = Yii::t('app', 'Update');
+$this->params['breadcrumbs'][] = ['label' => Icon::show('users').Module::t('module','kr'), 'url' => ['/kr/default/index']];
+$this->params['breadcrumbs'][] = ['label' => Icon::show('tools').Module::t('module','admin'), 'url' => ['/kr/admin/index']];
+
+$this->params['breadcrumbs'][] = ['label' => Icon::show('users').Module::t('student', 'Students'), 'url' => ['admin']];
+
+
+
+$this->params['breadcrumbs'][] = $this->title;
 ?>
+
+
+
+
 
 <?= $this->render('_form', [
     'model' => $model,

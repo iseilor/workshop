@@ -6,6 +6,7 @@ use app\models\Model;
 use app\modules\kr\Module;
 use kartik\icons\Icon;
 use Yii;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 
 /**
@@ -19,6 +20,7 @@ use yii\helpers\Html;
  * @property int|null $deleted_at
  * @property int|null $deleted_by
  * @property string $title
+ * @property string $subtitle
  * @property string $code
  * @property string $description
  * @property string $img
@@ -42,7 +44,7 @@ class Block extends Model
     public function rules()
     {
         return [
-            [['title', 'code', 'description', 'img', 'icon', 'color', 'weight'], 'required'],
+            [['title','subtitle', 'code', 'description', 'img', 'icon', 'color', 'weight'], 'required'],
             [['weight'], 'integer'],
             [['description'], 'string'],
             [['title', 'code', 'img', 'icon', 'color'], 'string', 'max' => 255],
@@ -54,22 +56,20 @@ class Block extends Model
      */
     public function attributeLabels()
     {
-        return [
-            'id' => Yii::t('app', 'ID'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'created_by' => Yii::t('app', 'Created By'),
-            'updated_at' => Yii::t('app', 'Updated At'),
-            'updated_by' => Yii::t('app', 'Updated By'),
-            'deleted_at' => Yii::t('app', 'Deleted At'),
-            'deleted_by' => Yii::t('app', 'Deleted By'),
-            'title' => Yii::t('app', 'Title'),
-            'code' => Yii::t('app', 'Code'),
-            'description' => Yii::t('app', 'Description'),
-            'img' => Yii::t('app', 'Img'),
-            'icon' => Yii::t('app', 'Icon'),
-            'color' => Yii::t('app', 'Color'),
-            'weight' => Yii::t('app', 'Weight'),
-        ];
+        return ArrayHelper::merge(
+            parent::attributeLabels(),
+            [
+                'title' => Module::t('block', 'Title'),
+                'subtitle' => Module::t('block', 'Subtitle'),
+                'badge' => Module::t('block', 'Title'),
+                'code' => Module::t('block', 'Code'),
+                'description' => Module::t('block', 'Description'),
+                'img' => Module::t('block', 'Img'),
+                'icon' => Module::t('block', 'Icon'),
+                'color' => Module::t('block', 'Color'),
+                'weight' => Module::t('block', 'Weight'),
+            ]
+        );
     }
 
     /**
@@ -84,5 +84,11 @@ class Block extends Model
     // Цветная плашка с иконкой
     public function getBadge(){
         return Html::tag('span',Icon::show($this->icon).$this->title,['class'=>'badge bg-'.$this->color]);
+    }
+
+    // Максимальный вес для сотрировки
+    public static function getMaxWeight()
+    {
+        return self::find()->max('weight');
     }
 }

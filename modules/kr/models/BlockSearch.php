@@ -40,7 +40,7 @@ class BlockSearch extends Block
      */
     public function search($params)
     {
-        $query = Block::find();
+        $query = Block::find()->published();
 
         // add conditions that should always apply here
 

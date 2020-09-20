@@ -1,13 +1,14 @@
 <?php
 
 namespace app\modules\kr\models;
+use app\models\Query;
 
 /**
  * This is the ActiveQuery class for [[Block]].
  *
  * @see Block
  */
-class BlockQuery extends \yii\db\ActiveQuery
+class BlockQuery extends Query
 {
     /*public function active()
     {

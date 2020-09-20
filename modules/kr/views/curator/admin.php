@@ -15,7 +15,6 @@ use yii\widgets\Pjax;
 $this->title = Icon::show('user-graduate').Module::t('curator', 'Curators');
 $this->params['breadcrumbs'][] = ['label' => Icon::show('users').Module::t('module','kr'), 'url' => ['/kr/default/index']];
 $this->params['breadcrumbs'][] = ['label' => Icon::show('tools').Module::t('module','admin'), 'url' => ['/kr/admin/index']];
-
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="curator-index">

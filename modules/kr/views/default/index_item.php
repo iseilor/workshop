@@ -8,7 +8,7 @@ use yii\helpers\Html; ?>
         <div class="small-box bg-gradient-<?= $item['bg'] ?>">
             <div class="inner">
                 <h3><?= $item['title'] ?></h3>
-                <p><?= $item['description'] ?></p>
+                <p><?= $item['title'] ?></p>
             </div>
             <div class="icon"><?= $item['icon'] ?></div>
         </div>

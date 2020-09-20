@@ -9,29 +9,36 @@ use yii\widgets\ActiveForm;
 /* @var $model app\modules\kr\models\Student */
 /* @var $form yii\widgets\ActiveForm */
 ?>
+<div class="card card-primary">
 
-<div class="student-form">
-
-    <?php $form = ActiveForm::begin(); ?>
-    <?= $form->field($model, 'total')->textInput(['maxlength' => true]) ?>
-    <?= $form->field($model, 'description')->widget(
-        Widget::class,
-        [
-            'settings' => [
-                'lang' => 'ru',
-                'minHeight' => 400,
-                'plugins' => [
-                    'clips',
-                    'fullscreen',
-                ],
-            ],
-        ]
-    ); ?>
-
-    <div class="form-group">
-        <?= Html::submitButton(Icon::show('save').Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
+    <div class="card-header">
+        <h3 class="card-title"><?= $this->title ?></h3>
+        <?= Yii::$app->params['card']['header']['tools'] ?>
     </div>
 
-    <?php ActiveForm::end(); ?>
+    <?php $form = ActiveForm::begin(); ?>
+    <div class="card-body">
 
-</div>
+
+        <?= $form->field($model, 'total')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'description')->widget(
+            Widget::class,
+            [
+                'settings' => [
+                    'lang' => 'ru',
+                    'minHeight' => 200,
+                    'plugins' => [
+                        'clips',
+                        'fullscreen',
+                    ],
+                ],
+            ]
+        ); ?>
+
+        <div class="card-footer">
+            <?= Html::submitButton(Icon::show('save') . Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
+        </div>
+
+        <?php ActiveForm::end(); ?>
+
+    </div>

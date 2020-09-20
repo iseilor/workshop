@@ -7,6 +7,7 @@ use yii\base\BootstrapInterface;
 
 class Bootstrap implements BootstrapInterface
 {
+
     public function bootstrap($app)
     {
         $app->i18n->translations['modules/kr/*'] = [
@@ -15,8 +16,9 @@ class Bootstrap implements BootstrapInterface
             'basePath' => '@app/modules/kr/messages',
             'fileMap' => [
                 'modules/kr/module' => 'module.php',
-                'modules/kr/curator'=>'curator.php',
-                'modules/kr/student'=>'student.php'
+                'modules/kr/curator' => 'curator.php',
+                'modules/kr/student' => 'student.php',
+                'modules/kr/block' => 'block.php',
             ],
         ];
     }

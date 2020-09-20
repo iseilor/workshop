@@ -2,6 +2,7 @@
 
 namespace app\modules\kr\controllers;
 
+use app\modules\kr\models\BlockSearch;
 use kartik\icons\Icon;
 use Yii;
 use yii\helpers\Url;
@@ -52,77 +53,16 @@ class DefaultController extends Controller
             ],
         ];
 
-        // Блоки
-        $items = [
-            /*[
-                'col' => 3,
-                'bg' => 'primary',
-                'title' => 'О программе',
-                'description' => 'Условия программы',
-                'icon' => Icon::show('info'),
-                'url' => Url::to('kr/about'),
-            ],
-            [
-                'col' => 3,
-                'bg' => 'primary',
-                'title' => 'Расписание',
-                'description' => 'Основные этапы и расписание',
-                'icon' => Icon::show('list'),
-                'url' => Url::to('kr/timetable'),
-            ],
-            [
-                'col' => 3,
-                'bg' => 'primary',
-                'title' => 'Кураторы',
-                'description' => 'Тренеры и кураторы',
-                'icon' => Icon::show('user-graduate'),
-                'url' => Url::to('kr/curator'),
-            ],
-            [
-                'col' => 3,
-                'bg' => 'primary',
-                'title' => 'Участники',
-                'description' => 'Участники программы',
-                'icon' => Icon::show('users'),
-                'url' => Url::to('kr/users'),
-            ],*/
-            [
-                'col' => 3,
-                'bg' => 'primary',
-                'title' => 'БТИ',
-                'description' => 'Для сотрудников БТИ',
-                'icon' => Icon::show('microchip'),
-                'url' => Url::to('news'),
-            ],
-            [
-                'col' => 3,
-                'bg' => 'primary',
-                'title' => 'IT',
-                'description' => 'Для сотрудников IT',
-                'icon' => Icon::show('laptop'),
-                'url' => Url::to('news'),
-            ],
-            [
-                'col' => 3,
-                'bg' => 'primary',
-                'title' => 'B2B',
-                'description' => 'Для сотрудников B2B',
-                'icon' => Icon::show('briefcase'),
-                'url' => Url::to('news'),
-            ],
-            [
-                'col' => 3,
-                'bg' => 'primary',
-                'title' => 'B2C',
-                'description' => 'Для сотрудников B2C',
-                'icon' => Icon::show('building'),
-                'url' => Url::to('news'),
-            ],
-        ];
-        return $this->render('index',
-            [
-                'items' => $items,
-                'imgs' => $imgs,
-            ]);
+
+        $searchModel = new BlockSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->setSort(['defaultOrder' => ['weight' => SORT_ASC]]);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'imgs' => $imgs,
+        ]);
+
     }
 }

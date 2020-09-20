@@ -1,20 +1,20 @@
 <?php
 
+use app\modules\kr\Module;
+use kartik\icons\Icon;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\kr\models\Block */
 
-$this->title = Yii::t('app', 'Create Block');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Blocks'), 'url' => ['index']];
+$this->title = Icon::show('plus').Module::t('block', 'Create Block');
+$this->params['breadcrumbs'][] = ['label' => Icon::show('users').Module::t('module','kr'), 'url' => ['/kr/default/index']];
+$this->params['breadcrumbs'][] = ['label' => Icon::show('tools').Module::t('module','admin'), 'url' => ['/kr/admin/index']];
+$this->params['breadcrumbs'][] = ['label' => Icon::show('cubes').Module::t('block','Blocks'), 'url' => ['/kr/block/admin']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="block-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
-
-</div>
