@@ -752,12 +752,22 @@ class OrderController extends Controller
                 'WORK_PHONE',
                 'EMAIL',
 
+                'PERCENT_PERCENT',
+                'PERCENT_YEAR',
+
+                'ZAIM_COUNT',
+                'ZAIM_YEAR',
+
                 'IPOTEKA_SIZE',
                 'IPOTEKA_PERCENT',
                 'IPOTEKA_USER',
+                'IPOTEKA_YEAR',
 
                 'JP_ADDRESS',
                 'JP_COST',
+                'JP_AREA',
+                'JP_ROOM_COUNT',
+                'NEW',
 
                 'FAMILY_OWN',
                 'FAMILY_RENT',
@@ -781,12 +791,22 @@ class OrderController extends Controller
                 $user->work_phone,
                 $user->email,
 
+                $order->getPcRate(),
+                $order->getPcTerm(),
+
+                $order->getLoanMaxVal(),
+                $order->getLoanPeriod(),
+
                 number_format($order->ipoteka_size, 2, ',', ' '),
                 $order->ipoteka_percent,
                 number_format($order->ipoteka_user, 2, ',', ' '),
+                $order->getIpotekaYearCount(),
 
                 $order->jp_address,
                 number_format($order->jp_cost, 2, ',', ' '),
+                $order->jp_new_area,
+                $order->jp_new_room_count,
+                (isset($order->is_new_building) && $order->is_new_building)?'новостройка':'вторичка',
 
                 $order->family_own,
                 $order->family_rent,

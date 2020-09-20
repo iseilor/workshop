@@ -935,6 +935,15 @@ class Order extends Model
     }
 
 
+    // Ипотека на ск-ко лет
+    public function getIpotekaYearCount(){
+     if (isset($this->ipoteka_start_date) && isset($this->ipoteka_last_date)){
+         return intval(($this->ipoteka_last_date - $this->ipoteka_start_date) / (60*60*24*365));
+
+     }else{
+         return false;
+     }
+    }
 
     public function getCompanyYear() {
         return (integer) Yii::$app->formatter->asDate($this->created_at, 'php:Y');
@@ -1081,7 +1090,10 @@ class Order extends Model
         }
         $maxLoanBySize = min($this->ipoteka_size, $this->jp_cost * $loanCoefficient);
 
-        return round(min($rf->loan_max, $maxLoanByIncome, $maxLoanBySize), -3);
+
+        // TODO: @aleskey@mail.ru Проверить RF меня выдаёт ошибку
+        //return round(min($rf->loan_max, $maxLoanByIncome, $maxLoanBySize), -3);
+        return round(min($maxLoanByIncome, $maxLoanBySize), -3);
     }
 
 
