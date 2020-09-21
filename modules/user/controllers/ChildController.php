@@ -209,7 +209,7 @@ class ChildController extends Controller
                     date('d.m.Y', $child->passport_date),
                     $child->passport_department,
                     $child->passport_code,
-                    $child->address_fact,
+                    $child->address_registration,
                     date('d.m.Y'),
                 ]
             );
@@ -253,7 +253,7 @@ class ChildController extends Controller
                     $child->birth_department,
                     $child->birth_code,
                     date('d.m.Y', $child->birth_date),
-                    $child->address_fact,
+                    $child->address_registration,
                     date('d.m.Y', $child->date),
 
                     date('d.m.Y'),

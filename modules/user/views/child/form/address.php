@@ -47,10 +47,10 @@ $params = [
 ])->fileInput(['class' => 'custom-file-input'])->hint('Вкладывается свидетельство о регистрации по месту жительства, при временной прописке - документ о временной регистрации.') ?>
 
 
-<?=$form->field($model, 'address_fact')
+<?=$form->field($model, 'address_fact', ['options' =>['class'=>'d-none']])
     ->textarea([
         'readonly' => $model->address_fact == $user->address_fact,
-        'data-user-address-fact'=>$user->address_fact
+        'data-user-address-fact'=>$user->address_fact,
 
     ])
     ->hint($model->attributeHints()['address_fact'] . '<br/>' .
