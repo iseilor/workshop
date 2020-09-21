@@ -569,7 +569,9 @@ class OrderController extends Controller
                     $emailTemplate = 'userReturn';
                     $emailTitle = 'Возвращено куратором на доработку';
                     break;
+
                 case 'CURATOR_YES':
+                case 'COMMISSION_WAIT':
                     $emailTemplate = 'userYes';
                     $emailTitle = 'Проверено и согласовано куратором';
                     break;
@@ -606,6 +608,70 @@ class OrderController extends Controller
                 'stage' => $orderStage,
                 'user' => User::findOne($this->findModel($id)->created_by),
                 'stages' => $stages,
+            ]
+        );
+    }
+
+    // Проверка комиссией
+    public function actionCommission($id)
+    {
+        $orderStage = new OrderStage();
+        $orderStage->order_id = $id;
+
+        if (isset(Yii::$app->request->post()['status_code'])) {
+            $statusCode = Yii::$app->request->post()['status_code'];
+            $orderStage->status_id = Status::findOne(['code' => $statusCode])->id;
+        }
+
+        if ($orderStage->load(Yii::$app->request->post()) && $orderStage->save()) {
+            $order = $this->findModel($id);
+            $order->status_id = $orderStage->status_id;
+            $order->save();
+
+            // В зависимости от нового статуса шлём разные письма сотруднику
+            $user = User::findOne($order->created_by);
+            $emailTemplate = '';
+            $emailTitle = '';
+
+            switch ($statusCode) {
+                case 'COMMISSION_YES':
+                    $emailTemplate = 'commission_yes';
+                    $emailTitle = 'Согласовано комиссией';
+                    break;
+                case 'COMMISSION_NO':
+                    $emailTemplate = 'commission_no';
+                    $emailTitle = 'Не согласовано комиссией';
+                    break;
+                case 'CURATOR_NO':
+                    $emailTemplate = 'reserve';
+                    $emailTitle = 'Заявка переведена в резерв';
+                    break;
+            }
+            Yii::$app->mailer->compose(
+                '@app/modules/jk/mails/commission/' . $emailTemplate,
+                [
+                    'user' => $user,
+                    'order' => $order,
+                    'stage' => $orderStage,
+                ]
+            )
+                ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
+                ->setTo($user->email)
+                ->setBcc(Yii::$app->params['supportEmail'])
+                ->setSubject("HR-портал / ЖП / Заявка №" . $order->id . " / " . $emailTitle . '.')
+                ->send();
+
+            return $this->redirect(['index']);
+        }
+
+
+        return $this->render(
+            'commission',
+            [
+                'model' => $this->findModel($id),
+                'stage' => $orderStage,
+                'user' => User::findOne($this->findModel($id)->created_by),
+                //'stages' => $stages,
             ]
         );
     }
@@ -806,7 +872,7 @@ class OrderController extends Controller
                 number_format($order->jp_cost, 2, ',', ' '),
                 $order->jp_new_area,
                 $order->jp_new_room_count,
-                (isset($order->is_new_building) && $order->is_new_building)?'новостройка':'вторичка',
+                (isset($order->is_new_building) && $order->is_new_building) ? 'новостройка' : 'вторичка',
 
                 $order->family_own,
                 $order->family_rent,
@@ -816,7 +882,7 @@ class OrderController extends Controller
 
                 number_format($order->money_month_pay, 2, ',', ' '),
                 number_format($order->money_user_pay, 2, ',', ' '),
-                number_format($order-> getMoneyMonthFamily(), 2, ',', ' '),
+                number_format($order->getMoneyMonthFamily(), 2, ',', ' '),
 
                 date('d.m.Y'),
             ]

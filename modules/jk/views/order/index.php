@@ -64,7 +64,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             // Кнопка только если в статусе ПРОВЕРКА КУРАТОРОМ
                         'class' => ActionColumn::class,
                         'controller' => '/jk/order',
-                        'template' => '{check} {view} {update} {delete}',
+                        'template' => '{check} {commission} {view} {update} {delete}',
                         'headerOptions' => ['style' => 'min-width: 170px;'],
                         'buttons' => [
                             'check' => function ($url, $model, $key) {
@@ -72,6 +72,17 @@ $this->params['breadcrumbs'][] = $this->title;
                                     return Html::a(Icon::show('check'), $url, [
                                         'class' => 'btn btn-sm btn-success',
                                         'title' => 'Проверить заявку',
+                                        'data-pjax' => '0',
+                                    ]);
+                                } else {
+                                    return '';
+                                }
+                            },
+                            'commission' => function ($url, $model, $key) {
+                                if ($model->status->code == 'COMMISSION_WAIT') {
+                                    return Html::a(Icon::show('check-double'), $url, [
+                                        'class' => 'btn btn-sm btn-success',
+                                        'title' => 'Жилищная комиссия',
                                         'data-pjax' => '0',
                                     ]);
                                 } else {

@@ -101,7 +101,7 @@ $snilsPath = Yii::$app->homeUrl . Yii::$app->params['module']['user']['snils']['
         ); ?>
 
         <?= Html::submitButton(Yii::t('app', Icon::show('check') . 'Проверено и согласовно'),
-            ['class' => 'btn btn-success', 'name' => 'status_code', 'value' => 'CURATOR_YES']) ?>
+            ['class' => 'btn btn-success', 'name' => 'status_code', 'value' => 'COMMISSION_WAIT']) ?>
         <?= Html::submitButton(Yii::t('app', Icon::show('undo') . 'Вернуть для исправления'),
             ['class' => 'btn btn-warning', 'name' => 'status_code', 'value' => 'CURATOR_RETURN']) ?>
         <?= Html::submitButton(Yii::t('app', Icon::show('stop') . 'Отказать в помощи'),
