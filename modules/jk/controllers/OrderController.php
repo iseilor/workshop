@@ -862,7 +862,7 @@ class OrderController extends Controller
                 $order->getPcTerm(),
 
                 // Займ
-                number_format( $order->getLoanMaxVal(), 0, ',', ' '),
+                number_format($order->getLoanMaxVal(), 0, ',', ' '),
                 $order->getLoanPeriod(),
 
                 number_format($order->ipoteka_size, 2, ',', ' '),
@@ -877,6 +877,9 @@ class OrderController extends Controller
                 (isset($order->is_new_building) && $order->is_new_building) ? 'новостройка' : 'вторичка',
 
                 $order->family_own,
+                (isset($order->family_rent) && $order->family_rent)
+                    ? 'Я и члены моей семьи имеем следующие действующие договоры найма в жилых помещениях, относящихся к государственному или муниципальному жилищным фондам: '
+                    . $order->family_rent : '',
                 $order->family_rent,
                 $order->family_address,
                 $order->family_deal,
@@ -891,7 +894,7 @@ class OrderController extends Controller
         );
 
         // Ссылка для скачивания
-        FileHelper::createDirectory('files/jk/order/' . $id.'/', $mode = 0777, $recursive = true);
+        FileHelper::createDirectory('files/jk/order/' . $id . '/', $mode = 0777, $recursive = true);
         $fileUrl = '/files/jk/order/' . $id . '/JK_ORDER_' . $id . '_' . $user->surname . '_' . date('Y-m-d_ H-i-s') . '.docx';
         $templateProcessor->saveAs(Yii::getAlias('@app') . '/web' . $fileUrl);
         return Yii::$app->response->sendFile(Yii::getAlias('@webroot') . $fileUrl);
