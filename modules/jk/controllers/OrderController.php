@@ -796,7 +796,7 @@ class OrderController extends Controller
     {
         // Заявка
         $order = Order::findOne($id);
-        $user = User::find($order->created_by)->one();
+        $user = User::findOne($order->created_by);
 
         // В зависимости от типа заявки выбираем шаблон заявления (займ или проценты)
         $file = 'percent.docx';
@@ -889,7 +889,8 @@ class OrderController extends Controller
         );
 
         // Ссылка для скачивания
-        $fileUrl = '/files/jk/order/' . $id . '/JK_ORDER_' . $id . '_' . $user->surname . '_' . date('Y-m-d H-i-s') . '.docx';
+        FileHelper::createDirectory('files/jk/order/' . $id.'/', $mode = 0777, $recursive = true);
+        $fileUrl = '/files/jk/order/' . $id . '/JK_ORDER_' . $id . '_' . $user->surname . '_' . date('Y-m-d_ H-i-s') . '.docx';
         $templateProcessor->saveAs(Yii::getAlias('@app') . '/web' . $fileUrl);
         return Yii::$app->response->sendFile(Yii::getAlias('@webroot') . $fileUrl);
     }
