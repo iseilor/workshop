@@ -817,6 +817,7 @@ class OrderController extends Controller
                 'TAB_NUMBER',
                 'WORK_PHONE',
                 'EMAIL',
+                'IS_PARTICIPATE',
 
                 'PERCENT_PERCENT',
                 'PERCENT_YEAR',
@@ -856,6 +857,7 @@ class OrderController extends Controller
                 $user->tab_number,
                 $user->work_phone,
                 $user->email,
+                ($order->is_participate>0)?'участвовали':'не участвовали',
 
                 // Проценты
                 $order->getPcRate(),
@@ -880,7 +882,6 @@ class OrderController extends Controller
                 (isset($order->family_rent) && $order->family_rent)
                     ? 'Я и члены моей семьи имеем следующие действующие договоры найма в жилых помещениях, относящихся к государственному или муниципальному жилищным фондам: '
                     . $order->family_rent : '',
-                $order->family_rent,
                 $order->family_address,
                 $order->family_deal,
                 $order->getFamilyList(),

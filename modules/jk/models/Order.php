@@ -932,7 +932,7 @@ class Order extends Model
         $cnt = 1; // Сам сотрудник
         $spouseCnt = Spouse::find()->where(['user_id' => $this->created_by])->count();
         $childCnt = Child::find()->where(['user_id' => $this->created_by])->count();
-        return $this->money_summa_year/($cnt+$spouseCnt+$childCnt)/12;
+        return ($this->money_summa_year-$this->money_nalog_year)/($cnt+$spouseCnt+$childCnt)/12;
     }
 
 
