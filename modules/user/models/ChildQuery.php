@@ -1,13 +1,14 @@
 <?php
 
 namespace app\modules\user\models;
+use app\models\Query;
 
 /**
  * This is the ActiveQuery class for [[Child]].
  *
  * @see Child
  */
-class ChildQuery extends \yii\db\ActiveQuery
+class ChildQuery extends Query
 {
     /*public function active()
     {

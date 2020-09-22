@@ -857,10 +857,12 @@ class OrderController extends Controller
                 $user->work_phone,
                 $user->email,
 
+                // Проценты
                 $order->getPcRate(),
                 $order->getPcTerm(),
 
-                $order->getLoanMaxVal(),
+                // Займ
+                number_format( $order->getLoanMaxVal(), 0, ',', ' '),
                 $order->getLoanPeriod(),
 
                 number_format($order->ipoteka_size, 2, ',', ' '),

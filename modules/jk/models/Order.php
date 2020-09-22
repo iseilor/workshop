@@ -913,12 +913,13 @@ class Order extends Model
         }
 
         // Дети
-        $childs = Child::find()->where(['user_id' => $user->id])->all();
+        $childs = Child::find()->published()->where(['user_id' => $user->id])->all();
         foreach ($childs as $child) {
+            // Пока сделали РЕБЕНОК но можно быстро поправить на сын/дочь
             if ($child->gender){
-                $list.= 'Сын: ';
+                $list.= 'Ребёнок: ';
             }else{
-                $list.= 'Сын: ';
+                $list.= 'Ребёнок: ';
             }
             $list .=$child->fio.' дата рождения '.Yii::$app->formatter->asDate($child->date)."</w:t><w:br/><w:t>";
         }
