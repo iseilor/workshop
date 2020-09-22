@@ -835,6 +835,7 @@ class OrderController extends Controller
                 'JP_AREA',
                 'JP_ROOM_COUNT',
                 'NEW',
+                'JP_TYPE',
 
                 'FAMILY_OWN',
                 'FAMILY_RENT',
@@ -877,6 +878,7 @@ class OrderController extends Controller
                 $order->jp_new_area,
                 $order->jp_new_room_count,
                 (isset($order->is_new_building) && $order->is_new_building) ? 'новостройка' : 'вторичка',
+                (isset($order->jp_new_type))?Order::getJPTypeList()[$order->jp_new_type]:'квартира',
 
                 $order->family_own,
                 (isset($order->family_rent) && $order->family_rent)
