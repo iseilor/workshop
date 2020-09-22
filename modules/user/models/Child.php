@@ -99,7 +99,7 @@ class Child extends Model
     {
         $rules = [
             [['fio', 'date', 'address_registration'], 'required'],
-            [['created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by', 'user_id', 'gender', 'is_invalid', 'is_study'], 'integer'],
+            [['created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by', 'user_id', 'is_invalid', 'is_study'], 'integer'],
             [['fio'], 'string', 'max' => 255],
             // TODO: с этим не работает в FireFox
             //['fio', 'match', 'pattern' => '~^(\p{L}|\p{Zs})+$~u'],

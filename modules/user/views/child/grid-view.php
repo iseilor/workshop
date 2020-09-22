@@ -34,12 +34,12 @@ echo GridView::widget([
             'attribute' => 'fio',
             'controller' => '/user/child/view',
         ],
-        [
+        /*[
             'attribute' => 'gender',
             'content' => function ($data) {
                 return Child::getGenderList()[$data->gender];
             },
-        ],
+        ],*/
         'date:date',
         'age',
         [

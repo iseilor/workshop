@@ -913,7 +913,7 @@ class Order extends Model
         }
 
         // Дети
-        $childs = Child::find()->published()->where(['user_id' => $user->id])->all();
+        $childs = Child::find()->where(['user_id' => $user->id,'deleted_at'=>null])->all();
         foreach ($childs as $child) {
             // Пока сделали РЕБЕНОК но можно быстро поправить на сын/дочь
             if ($child->gender){

@@ -77,6 +77,7 @@ class ChildController extends Controller
     public function actionCreate()
     {
         $model = new Child();
+        $model->gender = 0; // Пока по запросу Лады не собираем данные по полу. Но вообще это нужно будет потом
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             $model->upload();
