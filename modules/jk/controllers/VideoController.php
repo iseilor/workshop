@@ -37,6 +37,7 @@ class VideoController extends Controller
     {
         $searchModel = new VideoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->query->andWhere(['module_id'=>'jk']);
 
         return $this->render('@app/modules/video/views/video/index.php', [
             'searchModel' => $searchModel,
