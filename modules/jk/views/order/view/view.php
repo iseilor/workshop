@@ -71,6 +71,12 @@ $this->title .= ' ' . $model->status->label;
                         <?= $this->render('btn/start', ['model' => $model]) ?>
                     <?php endif; ?>
 
+                    <!-- Повторная отправку куратору-->
+                    <?php if (in_array($model->status_id,[Status::findOne(['code' => 'CURATOR_RETURN'])->id])): ?>
+                        <?= $this->render('btn/restart', ['model' => $model]) ?>
+                    <?php endif; ?>
+
+
                     <div class="float-right">
                         <?php if ($model->status->is_edit): ?>
                             <?= Html::a(Icon::show('edit') . 'Изменить заявку', ['update', 'id' => $model->id], ['class' => 'btn btn-warning']) ?>

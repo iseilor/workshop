@@ -778,6 +778,7 @@ class OrderController extends Controller
                 $order->sendManager();
                 break;
             case 'CURATOR_CHECK':
+                $order->sendCurator();
                 break;
         }
 
