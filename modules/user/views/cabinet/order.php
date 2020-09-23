@@ -11,7 +11,7 @@ use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
 
 $dataProvider = new ActiveDataProvider([
-    'query' => Order::find()->where(['created_by' => Yii::$app->user->identity->id]),
+    'query' => Order::find()->where(['created_by' => Yii::$app->user->identity->id,'deleted_at'=>null]),
     'pagination' => [
         'pageSize' => 20,
     ],
