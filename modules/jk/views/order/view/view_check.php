@@ -50,6 +50,7 @@ if ($countAll>0){
         'user.position',
         'user.work_phone',
         'user.email:email',
+        'created_at:datetime',
         'receipt_at:datetime',
         'approval_at:datetime',
         'approvalBadge:html',
