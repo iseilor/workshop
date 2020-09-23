@@ -47,15 +47,17 @@ $user = User::findOne(Yii::$app->user->identity->id);
 
         <?php if (is_array($usermd->children) && count($usermd->children) > 0): ?>
             <?php foreach ($usermd->children as $child): ?>
-                <div class="row">
-                    <div class="col-md-12">
-                        <hr/>
-                        <h3><?= $child->fio ?></h3>
-                        <?= $form->field($child, 'file_personal_form[' . $child->id . ']', [
-                            'template' => getFileInputTemplate($child->file_personal, $child->attributeLabels()['file_personal'] . '.pdf'),
-                        ])->fileInput(['class' => 'custom-file-input']) ?>
+                <?php if (!isset($child->deleted_at)): ?>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <hr/>
+                            <h3><?= $child->fio ?></h3>
+                            <?= $form->field($child, 'file_personal_form[' . $child->id . ']', [
+                                'template' => getFileInputTemplate($child->file_personal, $child->attributeLabels()['file_personal'] . '.pdf'),
+                            ])->fileInput(['class' => 'custom-file-input']) ?>
+                        </div>
                     </div>
-                </div>
+                <?php endif; ?>
             <?php endforeach; ?>
         <?php endif; ?>
 
