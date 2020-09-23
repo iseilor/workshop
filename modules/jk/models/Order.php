@@ -213,7 +213,7 @@ class Order extends Model
             [['jp_dogovor_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'jp_dogovor_date', 'skipOnEmpty' => true,],
             [['jp_registration_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'jp_registration_date', 'skipOnEmpty' => true,],
             [
-                ['family_own', 'family_deal', 'jp_total_area', 'district_id', 'is_mortgage'],
+                ['family_own', 'family_deal', 'jp_total_area', 'is_mortgage', 'jp_new_type', 'jp_new_area'],
                 'required',
                 'when' => function ($model) {
                     return $model->filling_step >= 4;
@@ -503,7 +503,7 @@ class Order extends Model
                             Иванов М.И. не владеет жилыми помещениями.<br>
                             Иванова О.И. не владеет жилыми помещениями.<br>',
             'family_deal' => 'При наличии сделки указывается: дата, тип сделки, адрес, кол-во комнат, общая площадь, доля в собственности<br><strong>Пример:</strong><br/>
-                            Иванов И.И. получила 21.12.2018 в наследство 1/7 в 2-комнатной квартире по адресу: 222222 г. Москва, ул. Нагатинская, д.3, стр.5, кв. 10, общей площадью 36,2 кв.м.<br>
+                            Иванов И.И. получил 21.12.2018 в наследство 1/7 в 2-комнатной квартире по адресу: 222222 г. Москва, ул. Нагатинская, д.3, стр.5, кв. 10, общей площадью 36,2 кв.м.<br>
                             Иванова И.И. - сделок не было',
             'family_address' => '<strong>Пример:</strong> 111111 г. Москва, ул. Нагатинская, д.1, стр.26, кв. 200, собственность моей матери, 2-х комнатная квартира, общей площадью 43 кв.м., фактически проживает 10 человек (с соседями/ родственниками).',
             'resident_own' => 'Если фактический адрес проживания отличается от адреса регистрации, то по фактическому адресу уточняется чья это собственность',
@@ -540,6 +540,9 @@ class Order extends Model
             'other_income_file_form' => 'Прикрепляются документы о получаемых семьёй пособиях (инвалидность, безработица), стипендия и прочих доходах',
             'money_month_pay' => 'Сумма расходов по кредитам (ипотека/на личные цели, аренду квартиры)',
             'ipoteka_file_dogovor' => 'Если регистрация ипотеки электронная  необходимо её вложить доп. файлом - ЭЦП регистрации.',
+            'jp_total_area' => 'В сумме также учитываются сделки по отчуждению жилых помещений, прошедшие в течение 5 лет от даты подачи заявления на Жилищную комиссию. Общая площадь считается по всем членам семьи с учетом доли собственности.',
+            'jp_address' => '<strong>Пример:</strong><br/>
+                111112 г. Москва, ул. Нагатинская, д.2, стр.2, кв.2, 1 комната.',
         ];
     }
 
@@ -616,8 +619,8 @@ class Order extends Model
     public static function getMortgageList()
     {
         return [
-            1 => 'Да',
-            0 => 'Нет',
+            1 => 'Да, жилье приобрел(а) и выплачиваю ипотеку',
+            0 => 'Нет, только планирую приобрести жилье',
         ];
     }
 
@@ -1066,6 +1069,13 @@ class Order extends Model
         $familyMembersCount = $this->user->familyMembersCount;
         // А
         $rf = $this->user->rf;
+        // Если по какой-то причине не нашли запись из справичника филиалов, то используем "дефолтные" 1000000
+        // TODO: доработать логику сопоставления пользователей и филиалов для 100% сопоставления  пользователь-филиал
+        if ($rf) {
+            $loanLimit = $rf->loan_max;
+        } else {
+            $loanLimit = 1000000;
+        }
 
         // Б
         $monthlyPerMemberIncome = $this->getMonthlyPerMemberIncome();
@@ -1089,12 +1099,12 @@ class Order extends Model
         if ($loanCoefficient > 1) {
             $loanCoefficient = 1;
         }
-        $maxLoanBySize = min($this->ipoteka_size, $this->jp_cost * $loanCoefficient);
+        //$maxLoanBySize = min($this->ipoteka_size, $this->jp_cost * $loanCoefficient);
+        // В займе под "ПОТРЕБНОСТЬЮ" подразумечается не "Размер ипотеки, руб", а "Займ, руб"
+        $maxLoanBySize = min($this->zaim_sum, $this->jp_cost * $loanCoefficient);
 
-
-        // TODO: @aleskey@mail.ru Проверить RF меня выдаёт ошибку
-        //return round(min($rf->loan_max, $maxLoanByIncome, $maxLoanBySize), -3);
-        return round(min($maxLoanByIncome, $maxLoanBySize), -3);
+        return round(min($loanLimit, $maxLoanByIncome, $maxLoanBySize), -3);
+        //return round(min($maxLoanByIncome, $maxLoanBySize), -3);
     }
 
 

@@ -39,7 +39,6 @@ if ($spose->is_do) {
         <div class="row">
             <div class="col-md-4">
                 <h4 class="card-title">Работник:</h4><br>
-                <?= $form->field($model, 'is_do', ['options' => ['style' => 'margin-top:5%']])->checkbox()->hint($model->getAttributeHint('is_do')) ?>
                 <?= $form->field($model, 'ndfl2_file_form', [
                     'template' => getFileInputTemplate($model->ndfl2_file, $model->attributeLabels()['ndfl2_file'] . '.pdf')
                 ])->fileInput(['class' => 'custom-file-input'])->hint($model->getAttributeHint('ndfl2_file')) ?>
