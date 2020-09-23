@@ -301,8 +301,10 @@ $(document).ready(function() {
             $('.field-order-jp_egrp_file_form').removeClass('d-none');
             $('.new_building').addClass('d-none');
             if (!$('.field-order-jp_egrp_file_form label[for=exampleInputFile]').html()) {
-                $('.field-order-jp_egrp_file_form').addClass('required');
-                $('#order-jp_egrp_file_form').attr('required', true);
+                if ($('#order-is_mortgage').val() == 1) {
+                    $('.field-order-jp_egrp_file_form').addClass('required');
+                    $('#order-jp_egrp_file_form').attr('required', true);
+                }
             }
         }
     });

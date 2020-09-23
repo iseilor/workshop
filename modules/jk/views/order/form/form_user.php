@@ -95,6 +95,9 @@ $user = User::findOne(Yii::$app->user->identity->id);
                 ]
             ]) ?>
             </div>
+            <div class="col-4">
+                <?= $form->field($model, 'is_do', ['options' => ['style' => 'margin-top:5%']])->checkbox()->hint($model->getAttributeHint('is_do')) ?>
+            </div>
         </div>
     </div>
 </div>
