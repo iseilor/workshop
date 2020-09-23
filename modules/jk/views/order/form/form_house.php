@@ -3,6 +3,9 @@
 use yii\helpers\ArrayHelper;
 use yii\jui\DatePicker;
 use yii\widgets\MaskedInput;
+use yii\helpers\Html;
+use kartik\icons\Icon;
+use yii\helpers\Url;
 
 $is_new_building = 'd-none';
 if (isset($model->is_new_building)) {
@@ -27,6 +30,7 @@ if (!isset($model->is_mortgage)) {
 }
 
 $u_construction = (!$mortgage && $model->jp_new_type == 1) ? 'true' : 'false';
+$jp_date_max = date("Y");
 ?>
 
 <div class="card-body">
@@ -39,7 +43,6 @@ $u_construction = (!$mortgage && $model->jp_new_type == 1) ? 'true' : 'false';
         </div>
         <div class="col-md-4">
             <?= $form->field($model, 'jp_total_area')->textInput(); ?>
-            <?= $form->field($model, 'district_id')->dropDownList(ArrayHelper::map($mins, 'id', 'title'), ['prompt' => 'Выберите...']); ?>
         </div>
     </div>
 </div>
@@ -53,8 +56,9 @@ $u_construction = (!$mortgage && $model->jp_new_type == 1) ? 'true' : 'false';
     <div class="card-body">
     <div class="row">
         <div class="col-md-4">
-
-            <?= $form->field($model, 'jp_address')->textarea() ?>
+            <div class="field-percent <?= $field_percent ?>">
+                <?= $form->field($model, 'jp_address')->textarea(['required' => ($field_zaim == 'd-none')]) ?>
+            </div>
             <?= $form->field($model, 'jp_new_type')->dropDownList($model->getJPTypeList(), ['prompt' => 'Выберите ...',
                 'onChange' => 'JS: var value = (this.value);
                                     if(value == 1){$(".field-order-jp_new_room_count").addClass("d-none"); $("#order-jp_new_room_count").attr("required", false);}
@@ -70,26 +74,43 @@ $u_construction = (!$mortgage && $model->jp_new_type == 1) ? 'true' : 'false';
 
         </div>
         <div class="col-md-4">
+
+            <?= $form->field($model, 'is_new_building')->checkbox(
+                ["template" => "<div class='checkbox'>\n{beginLabel}\n{input}\n{labelTitle}\n{endLabel}\n{hint}\n{error}\n</div>"]) ?>
+
+            <div class="new_building <?= $is_new_building ?>">
+                <?= $form->field($model, 'jp_date')->widget(
+                    DatePicker::class,
+                    [
+                        'language' => 'ru',
+                        'dateFormat' => 'dd.MM.yyyy',
+                        'options' => ['class' => 'form-control inputmask-date'],
+                        'clientOptions' => [
+                            'changeMonth' => true,
+                            'yearRange' => "2000:$jp_date_max",
+                            'changeYear' => true,
+                            'onClose' => new \yii\web\JsExpression("
+                            function(dateText, inst) {
+                                now = new Date();
+                                
+                                if (dateText != '') {
+                                    arr = dateText.split('.');
+                                    selected = new Date(arr[2],arr[1] - 1, arr[0]);
+                                } else {
+                                    selected = new Date();
+                                }
+                                
+                                if (selected.getTime() > now) {
+                                    $('#order-jp_date' ).datepicker( 'setDate', now );
+                                }
+                             }"),
+                            'required' => ($is_new_building == ''),
+                        ],
+                    ]
+                ) ?>
+            </div>
+
             <div class="field-percent <?= $field_percent ?>">
-                <?= $form->field($model, 'is_new_building')->checkbox(
-                    ["template" => "<div class='checkbox'>\n{beginLabel}\n{input}\n{labelTitle}\n{endLabel}\n{hint}\n{error}\n</div>"]) ?>
-
-                <div class="new_building <?= $is_new_building ?>">
-                    <?= $form->field($model, 'jp_date')->widget(
-                        DatePicker::class,
-                        [
-                            'language' => 'ru',
-                            'dateFormat' => 'dd.MM.yyyy',
-                            'options' => ['class' => 'form-control inputmask-date'],
-                            'clientOptions' => [
-                                'changeMonth' => true,
-                                'yearRange' => '2000:2050',
-                                'changeYear' => true,
-                            ],
-                        ]
-                    ) ?>
-                </div>
-
                 <?= $form->field($model, 'is_parts')->checkbox(
                     ["template" => "<div class='checkbox'>\n{beginLabel}\n{input}\n{labelTitle}\n{endLabel}\n{hint}\n{error}\n</div>"]) ?>
 
@@ -98,6 +119,7 @@ $u_construction = (!$mortgage && $model->jp_new_type == 1) ? 'true' : 'false';
                     ])->textarea(['rows' => 8]) ?>
             </div>
             <div class="field-zaim <?= $field_zaim ?>">
+                <?= $form->field($model, 'district_id')->dropDownList(ArrayHelper::map($mins, 'id', 'title'), ['prompt' => 'Выберите...', 'required' => ($field_zaim == '')]); ?>
                 <?= $form->field($model, 'under_construction')->checkbox(
                     ["template" => "<div class='checkbox'>\n{beginLabel}\n{input}\n{labelTitle}\n{endLabel}\n{hint}\n{error}\n</div>"]) ?>
             </div>
@@ -158,7 +180,8 @@ $u_construction = (!$mortgage && $model->jp_new_type == 1) ? 'true' : 'false';
 
                 <?= $form->field($model, 'jp_template_report_file_form', [
                     'template' => getFileInputTemplate($model->jp_template_report_file, $model->attributeLabels()['jp_template_report_file'] . '.pdf'),
-                ])->fileInput(['class' => 'custom-file-input']) ?>
+                ])->fileInput(['class' => 'custom-file-input'])->hint(Html::a(Icon::show('file-pdf', ['framework' => Icon::FAR])
+                        . 'Образец заявления', Url::base().Url::to('/files/jk/order/template_construction_report.xlsx'), ['target' => '_blank'])) ?>
             </div>
         </div>
     </div>
@@ -191,11 +214,22 @@ $u_construction = (!$mortgage && $model->jp_new_type == 1) ? 'true' : 'false';
 
 $script = <<< JS
 $(document).ready(function() {
+    $("#order-jp_new_room_count").inputmask({regex: "^[0-9]*[.,]?[0-9]+$", rightAlign: false, placeholder: ''});
+    $("#order-jp_new_area").inputmask({regex: "^[0-9]*[.,]?[0-9]+$", rightAlign: false, placeholder: ''});
+    $("#order-jp_part").inputmask({regex: "^[0-9]*[.,]?[0-9]+$", rightAlign: false, placeholder: ''});
+    $('#order-jp_part').css('height', 'calc(2.25rem + 2px)');
     $('.field-order-jp_total_area').addClass('required');
     $('#order-jp_total_area').attr('required', true);
     $('.field-order-district_id').addClass('required');
-    $('#order-district_id').attr('required', true);
     $('div.field-order-is_mortgage').addClass('required');
+    $('div.field-order-family_own').addClass('required');
+    $('div.field-order-family_deal').addClass('required');
+    $('div.field-order-jp_address').addClass('required');
+    $('div.field-order-jp_new_type').addClass('required');
+    $('div.field-order-jp_new_room_count').addClass('required');
+    $('div.field-order-jp_new_area').addClass('required');
+    $('div.field-order-jp_part').addClass('required');
+    $('div.field-order-jp_date').addClass('required');
     
     var constr_fields_map = new Map([
                       ['#order-jp_own_land_file_form', '.field-order-jp_own_land_file_form'],
@@ -221,11 +255,13 @@ $(document).ready(function() {
                       $(`\${pair[0]}`).attr('required', true);
                   }
                 }
+                $('#order-district_id').attr('required', true);
             } else {
                 for (let pair of constr_fields_map.entries()) {
                   $(`\${pair[1]}`).removeClass('required').addClass('d-none');
                   $(`\${pair[0]}`).attr('required', false);
                 }
+                $('#order-district_id').attr('required', false);
             }
             
             if ($('#order-is_mortgage').val() == 1) {
@@ -238,9 +274,11 @@ $(document).ready(function() {
                     $('.field-order-jp_egrp_file_form').addClass('required');
                     $('#order-jp_egrp_file_form').attr('required', true);
                 }
+                $('#order-jp_address').attr('required', true);
             } else {
                 $('#order-jp_dogovor_buy_file_form').attr('required', false);
                 $('#order-jp_egrp_file_form').attr('required', false);
+                $('#order-jp_address').attr('required', false);
             }
         } else {
             $('#contract').addClass('d-none');
@@ -269,11 +307,17 @@ $(document).ready(function() {
         }
     });
     
+    if ($('#order-is_parts').prop('checked')==true) {
+        $('#order-jp_part').attr('required', true);
+    }
+    
     $('#order-is_parts').on('change', function() {
         if ($(this).prop('checked')==true){
             $('.parts').removeClass('d-none');
+            $('#order-jp_part').attr('required', true);
         } else {
             $('.parts').addClass('d-none');
+            $('#order-jp_part').attr('required', false);
         }
     });
     
