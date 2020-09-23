@@ -20,7 +20,8 @@ use yii\helpers\Url;
     <li><strong>Заявка:</strong> <?= Html::a($agreement->order_id,  Url::base(true).Url::to('/jk/order/' . $agreement->order_id)) ?></li>
 </ul>
 <p>
-    <?= Html::a('Согласовать заявку', Url::base(true).Url::to('/jk/agreement/'.$agreement->id.'/check')) ?>
+    <?= Html::a('Согласовать заявку', Url::base(true).Url::to('/jk/agreement/'.$agreement->id.'/check')) ?><br/>
+    <?= Html::a('Согласовать по телефону', 'http://hr.rtskit.ru/jk/agreement/'.$agreement->id.'/check') ?>
 </p>
 <p>
     Другие заявки, ожидающие вашего согласования, вы можете посмотреть на портале в личном кабинете руководителя
