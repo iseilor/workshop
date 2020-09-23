@@ -1069,6 +1069,13 @@ class Order extends Model
         $familyMembersCount = $this->user->familyMembersCount;
         // А
         $rf = $this->user->rf;
+        // Если по какой-то причине не нашли запись из справичника филиалов, то используем "дефолтные" 1000000
+        // TODO: доработать логику сопоставления пользователей и филиалов для 100% сопоставления  пользователь-филиал
+        if ($rf) {
+            $loanLimit = $rf->loan_max;
+        } else {
+            $loanLimit = 1000000;
+        }
 
         // Б
         $monthlyPerMemberIncome = $this->getMonthlyPerMemberIncome();
@@ -1092,12 +1099,12 @@ class Order extends Model
         if ($loanCoefficient > 1) {
             $loanCoefficient = 1;
         }
-        $maxLoanBySize = min($this->ipoteka_size, $this->jp_cost * $loanCoefficient);
+        //$maxLoanBySize = min($this->ipoteka_size, $this->jp_cost * $loanCoefficient);
+        // В займе под "ПОТРЕБНОСТЬЮ" подразумечается не "Размер ипотеки, руб", а "Займ, руб"
+        $maxLoanBySize = min($this->zaim_sum, $this->jp_cost * $loanCoefficient);
 
-
-        // TODO: @aleskey@mail.ru Проверить RF меня выдаёт ошибку
-        //return round(min($rf->loan_max, $maxLoanByIncome, $maxLoanBySize), -3);
-        return round(min($maxLoanByIncome, $maxLoanBySize), -3);
+        return round(min($loanLimit, $maxLoanByIncome, $maxLoanBySize), -3);
+        //return round(min($maxLoanByIncome, $maxLoanBySize), -3);
     }
 
 
