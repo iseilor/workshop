@@ -26,28 +26,28 @@ class DefaultController extends Controller
             [
                 'id' => 1,
                 'src' => 'kr-1.jpg',
-                'title' => 'Программа и условия участия',
+                'title' => 'О программе',
                 'icon'=>  Icon::show('info'),
                 'url'=>Url::to('kr/about')
             ],
             [
                 'id' => 2,
                 'src' => 'kr-2.jpg',
-                'title' => 'Расписание программы',
+                'title' => 'Расписание',
                 'icon'=>  Icon::show('list'),
                 'url'=>Url::to('kr/timetable/index')
             ],
             [
                 'id' => 3,
                 'src' => 'kr-3.jpg',
-                'title' => 'Кураторы и тренеры проекта',
+                'title' => 'Кураторы и тренеры',
                 'icon'=>  Icon::show('user-graduate'),
                 'url'=>Url::to('kr/curator')
             ],
             [
                 'id' => 4,
                 'src' => 'kr-4.jpg',
-                'title' => 'Участники программы',
+                'title' => 'Участники',
                 'icon'=>  Icon::show('tasks'),
                 'url'=>Url::to('kr/student')
             ],

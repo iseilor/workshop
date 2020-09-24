@@ -2,6 +2,7 @@
 
 namespace app\modules\kr;
 
+use app\modules\kr\assets\KRAsset;
 use Yii;
 
 /**
@@ -9,6 +10,7 @@ use Yii;
  */
 class Module extends \yii\base\Module
 {
+
     /**
      * {@inheritdoc}
      */
@@ -18,18 +20,20 @@ class Module extends \yii\base\Module
      * {@inheritdoc}
      */
     public function init()
-    {
-        parent::init();
 
-        // custom initialization code goes here
+    {
+        KRAsset::register(Yii::$app->view);
+        parent::init();
     }
+
     public static function t($category, $message, $params = [], $language = null)
     {
         return Yii::t('modules/kr/' . $category, $message, $params, $language);
     }
 
     // Иконка
-    public static function getIcon(){
+    public static function getIcon()
+    {
         return 'crown';
     }
 }
