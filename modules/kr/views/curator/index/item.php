@@ -21,23 +21,15 @@ use yii\helpers\Url;
                 <ul class="ml-4 mb-1 fa-ul text-muted">
                     <li class="small"><span class="fa-li"><i class="fas fa-lg fa-envelope"></i></span> Email: <?= Html::mailto($model->email,
                             $model->email, ['target' => '_blank']) ?></li>
-                    <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Телефон: <?=$model->phone ?></li>
+                    <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Телефон: <?= $model->phone ?></li>
                 </ul>
-                <?php echo $this->render('description',['model'=>$model]); ?>
             </div>
             <div class="col-5 text-center">
                 <img src="<?= Url::home() . Yii::$app->params['module']['kr']['curator']['path'] . $model->img ?>" class="img-circle img-fluid">
             </div>
         </div>
     </div>
-    <div class="card-footer d-none">
-        <div class="text-right">
-            <a href="#" class="btn btn-sm bg-teal">
-                <i class="fas fa-comments"></i>
-            </a>
-            <a href="#" class="btn btn-sm btn-primary">
-                <i class="fas fa-user"></i> Профиль
-            </a>
-        </div>
+    <div class="card-footer">
+        <?php echo $this->render('description', ['model' => $model]); ?>
     </div>
 </div>

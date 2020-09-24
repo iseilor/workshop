@@ -24,9 +24,9 @@ use yii\widgets\MaskedInput;
         <div class="row">
             <div class="col-4">
                <img src="<?= Url::home().Yii::$app->params['module']['kr']['curator']['path'].$model->img?>" class="img-circle img-fluid" style="max-width: 250px;">
-                <?= $form->field($model, 'img_form')->fileInput() ?>
+                <?= $form->field($model, 'img_form')->fileInput()->hint('Фотографию обязательно грузите с одинаковыми размерами по ширине и высоте
+                (квадратная), в противном случае область лица может неккоректно определиться системой, либо будет построена кривая окружность') ?>
             </div>
-
             <div class="col-4">
                 <?= $form->field($model, 'fio')->textInput(['maxlength' => true]) ?>
                 <?= $form->field($model, 'position')->textInput(['maxlength' => true]) ?>

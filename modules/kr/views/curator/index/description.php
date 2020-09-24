@@ -7,7 +7,7 @@ use yii\helpers\Url;
 
 Modal::begin([
     'title' => '<h4>' . Icon::show('user-graduate') . $model->fio . '</h4>',
-    'toggleButton' => ['label' => Icon::show('info') . 'Подробнее', 'class' => 'btn btn-primary btn-xs'],
+    'toggleButton' => ['label' => Icon::show('info') . 'Подробнее', 'class' => 'btn btn-primary'],
     'footer' => Html::a(Icon::show('times').'Закрыть', '#', ['class' => 'btn btn-primary', 'data-dismiss' => 'modal']),
     'size' => Modal::SIZE_LARGE,
 ]);
