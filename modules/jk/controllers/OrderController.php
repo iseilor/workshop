@@ -591,7 +591,7 @@ class OrderController extends Controller
                 ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
                 ->setTo($user->email)
                 ->setBcc(Yii::$app->params['supportEmail'])
-                ->setSubject("HR-портал / ЖП / Заявка №" . $order->id . " / " . $emailTitle . '.')
+                ->setSubject("HR-портал / Жилищная Программа / Заявка №" . $order->id . " / " . $emailTitle . '.')
                 ->send();
 
             return $this->redirect(['index']);
@@ -658,7 +658,7 @@ class OrderController extends Controller
                 ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
                 ->setTo($user->email)
                 ->setBcc(Yii::$app->params['supportEmail'])
-                ->setSubject("HR-портал / ЖП / Заявка №" . $order->id . " / " . $emailTitle . '.')
+                ->setSubject("HR-портал / Жилищная Программа / Заявка №" . $order->id . " / " . $emailTitle . '.')
                 ->send();
 
             return $this->redirect(['index']);

@@ -895,7 +895,7 @@ class Order extends Model
     // Однотипный заголовок по всем письмам при работе с заявкой+
     public function getEmailSubject($title)
     {
-        return Yii::$app->params['senderName'] . " / ЖП / Заявка №" . $this->id . " / " . $title;
+        return Yii::$app->params['senderName'] . " / Жилищная Программа / Заявка №" . $this->id . " / " . $title;
     }
 
     // Получаем читабельный список семьи. Нужен при формировании заявления

@@ -19,7 +19,7 @@ use yii\helpers\ArrayHelper;
  * @var $this yii\web\View
  */
 
-$this->title = Icon::show('tools').'Админка '.Module::t('module','JK');
+$this->title = Icon::show('tools').'Админка';
 $this->params['breadcrumbs'][] = ['label' => Icon::show('home').Module::t('module','JK'), 'url' => ['/jk']];
 $this->params['breadcrumbs'][] = $this->title;
 
