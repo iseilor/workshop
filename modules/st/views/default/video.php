@@ -13,7 +13,7 @@ Modal::begin([
 ]);
 echo '<div class="row">
     <div class="col-12">
-        <video controls="controls" src="' . Yii::$app->homeUrl . Yii::$app->params['module']['st']['guest']['path'] . $model->id . '/' . $model->video
+        <video preload="none" controls="controls" src="' . Yii::$app->homeUrl . Yii::$app->params['module']['st']['guest']['path'] . $model->id . '/' . $model->video
     . '" width="100%">
     </div>
 </div>';
