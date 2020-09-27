@@ -36,7 +36,6 @@ function getFileInputTemplate($file, $fileName)
 // Отображение полей с файлами во View
 function viewFieldFile($model, $field, $url)
 {
-    $i = 10;
     return [
         'label' => $model->attributeLabels()[$field],
         'format' => 'raw',

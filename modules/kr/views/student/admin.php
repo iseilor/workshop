@@ -34,6 +34,9 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
             'filterModel' => $searchModel,
+            'pager' => [
+                'class' => 'app\widgets\LinkPager',
+            ],
             'tableOptions' => [
                 'class' => 'table table-striped projects',
                 'style' => 'margin-bottom: 0'

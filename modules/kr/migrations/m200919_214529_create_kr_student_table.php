@@ -24,9 +24,9 @@ class m200919_214529_create_kr_student_table extends Migration
             'deleted_at' => $this->integer(),
             'deleted_by' => $this->integer(),
 
-            'user_id' => $this->string()->notNull(),
+            'user_id' => $this->integer()->notNull(),
             'block_id' => $this->integer()->notNull(),
-            'total'=>$this->string()->notNull(),
+            'total'=>$this->integer()->notNull(),
             'description' => $this->text()->notNull(),
             'weight' => $this->integer()->notNull(),
         ]);

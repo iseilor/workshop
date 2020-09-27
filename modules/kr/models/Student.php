@@ -41,9 +41,8 @@ class Student extends Model
     {
         return [
             [['user_id', 'block_id', 'total', 'description', 'weight'], 'required'],
-            [['block_id', 'weight'], 'integer'],
-            [['description'], 'string'],
-            [['user_id', 'total'], 'string', 'max' => 255],
+            [['block_id', 'weight','user_id', 'total'], 'integer'],
+            [['description'], 'string']
         ];
     }
 

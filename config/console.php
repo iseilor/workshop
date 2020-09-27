@@ -14,13 +14,17 @@ $db = ArrayHelper::merge(
 $config = [
     'id' => 'WORKSHOP',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
+    'bootstrap' => [
+        'log',
+        'app\modules\kr\Bootstrap',
+    ],
     'controllerNamespace' => 'app\commands',
     'timeZone' => 'Europe/Moscow',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
-        '@npm'   => '@vendor/npm-asset',
+        '@npm' => '@vendor/npm-asset',
         '@tests' => '@app/tests',
+        '@webroot' => dirname(dirname(__FILE__)) . '/web',
     ],
     'modules' => [
         'admin' => [
@@ -88,8 +92,8 @@ $config = [
         'db' => $db,
 
         'urlManager' => [
-            'baseUrl' => 'http://workshop/'
-        ]
+            'baseUrl' => 'http://workshop/',
+        ],
     ],
     'params' => $params,
 
@@ -149,7 +153,7 @@ $config = [
             'migrationPath' => '@app/modules/kr/migrations',
             'migrationTable' => 'migration_kr',
         ],
-        'migrate-st'=> [
+        'migrate-st' => [
             'class' => 'yii\console\controllers\MigrateController',
             'migrationPath' => '@app/modules/st/migrations',
             'migrationTable' => 'migration_st',

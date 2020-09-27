@@ -20,7 +20,6 @@ class Module extends \yii\base\Module
      * {@inheritdoc}
      */
     public function init()
-
     {
         KRAsset::register(Yii::$app->view);
         parent::init();
