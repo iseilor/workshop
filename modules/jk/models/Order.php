@@ -981,7 +981,7 @@ class Order extends Model
     // Период оказания МП
     public function getPcPeriod() {
         $year = $this->companyYear;
-        return "01.01.$year - 31.12.$year";
+        return "c 01.01.$year по 31.12.$year";
     }
 
     // Срок оказания МП
