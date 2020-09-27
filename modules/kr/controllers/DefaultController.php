@@ -35,7 +35,7 @@ class DefaultController extends Controller
                 'src' => 'kr-2.jpg',
                 'title' => 'Расписание',
                 'icon'=>  Icon::show('list'),
-                'url'=>Url::to('kr/timetable/index')
+                'url'=>Url::to('kr/timetable')
             ],
             [
                 'id' => 3,

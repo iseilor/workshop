@@ -19,6 +19,7 @@ class Bootstrap implements BootstrapInterface
                 'modules/kr/curator' => 'curator.php',
                 'modules/kr/student' => 'student.php',
                 'modules/kr/block' => 'block.php',
+                'modules/kr/timetable'=>'timetable.php'
             ],
         ];
     }

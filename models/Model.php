@@ -79,6 +79,8 @@ class Model extends ActiveRecord
             'updatedUserLink' => Yii::t('app', 'Updated By'),
             'deletedUserLink' => Yii::t('app', 'Deleted By'),
 
+            'weight'=> Yii::t('app', 'Weight')
+
         ];
     }
 
