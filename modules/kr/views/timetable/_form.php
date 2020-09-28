@@ -22,13 +22,15 @@ use yii\widgets\ActiveForm;
                 <?= $form->field($model, 'date')->textInput(['maxlength' => true]) ?>
                 <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
                 <?= $form->field($model, 'link')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'img')->textInput(['maxlength' => true]) ?>
 
 
             </div>
 
             <div class="col-4">
-                <?= $form->field($model, 'img')->textInput(['maxlength' => true]) ?>
-                <?= $form->field($model, 'curator')->textarea(['rows' => 6]) ?>
+
+                <?= $form->field($model, 'groups')->textarea(['rows' => 3]) ?>
+                <?= $form->field($model, 'curator')->textarea(['rows' => 3]) ?>
             </div>
 
             <div class="col-4">

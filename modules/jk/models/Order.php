@@ -63,9 +63,9 @@ use yii\web\UploadedFile;
  * @property integer  $resident_own_type
  * @property boolean  $is_poor
  *
- * @property integer $filling_step
+ * @property integer  $filling_step
  *
- * @property User $user
+ * @property User     $user
  */
 class Order extends Model
 {
@@ -529,7 +529,9 @@ class Order extends Model
 
             'order_file_form' => 'Вам необходимо скачать автоматически сформированное ' . Html::a(Icon::show('file-pdf') . 'Заявление',
                     Url::to(['/jk/order/' . $this->id . '/order'])) . ', которое нужно распечатать, подписать и прикрепить в данное поле',
-            'file_agree_personal_data_form' => 'Скачайте автоматически сформированный '.Html::a(Icon::show('file-pdf') .'бланк', Url::to(['/user/user/' . Yii::$app->user->identity->id . '/pd'])).', который нужно будет распечатать, подписать и прикрепить в поле',
+            'file_agree_personal_data_form' => 'Скачайте автоматически сформированный ' . Html::a(Icon::show('file-pdf') . 'бланк',
+                    Url::to(['/user/user/' . Yii::$app->user->identity->id . '/pd']))
+                . ', который нужно будет распечатать, подписать и прикрепить в поле',
 
             'jp_own_land_file_form' => 'Собственниками (арендаторами) земельного участка, на котором будет осуществляться строительство дома, и в последующем собственниками дома могут выступать работники/или члены его семьи.',
             'jp_project_house_file_form' => 'Разрабатывает кандидат или специализированная организация',
@@ -598,7 +600,7 @@ class Order extends Model
             'ndfl2_file',
             'spravka_zp_file',
             'order_file',
-            'other_income_file'
+            'other_income_file',
         ];
 
         // Сохраняем данные
@@ -899,72 +901,102 @@ class Order extends Model
     }
 
     // Получаем читабельный список семьи. Нужен при формировании заявления
-    public function getFamilyList(){
+    public function getFamilyList()
+    {
 
         $list = '';
-        $user = User::findOne( $this->created_by);
+        $user = User::findOne($this->created_by);
 
         // Супруг(а)
         $spouse = Spouse::find()->where(['user_id' => $user->id])->one();
-        if ($spouse){
-            if ($user->gender){
-                $list .='Супруга: ';
-            }else{
-                $list .='Супруг: ';
+        if ($spouse) {
+            if ($user->gender) {
+                $list .= 'Супруга: ';
+            } else {
+                $list .= 'Супруг: ';
             }
-            $list .= $spouse->fio."</w:t><w:br/><w:t>";
+            $list .= $spouse->fio . "</w:t><w:br/><w:t>";
         }
 
         // Дети
-        $childs = Child::find()->where(['user_id' => $user->id,'deleted_at'=>null])->all();
+        $childs = Child::find()->where(['user_id' => $user->id, 'deleted_at' => null])->all();
         foreach ($childs as $child) {
             // Пока сделали РЕБЕНОК но можно быстро поправить на сын/дочь
-            if ($child->gender){
-                $list.= 'Ребёнок: ';
-            }else{
-                $list.= 'Ребёнок: ';
+            if ($child->gender) {
+                $list .= 'Ребёнок: ';
+            } else {
+                $list .= 'Ребёнок: ';
             }
-            $list .=$child->fio.' дата рождения '.Yii::$app->formatter->asDate($child->date)."</w:t><w:br/><w:t>";
+            $list .= $child->fio . ' дата рождения ' . Yii::$app->formatter->asDate($child->date) . "</w:t><w:br/><w:t>";
         }
         return $list;
+    }
 
+    // Фраза для ДЗО, явлеяется или нет работником
+    public function isDZO()
+    {
+        $user = User::findOne($this->created_by);
+        $text = '';
+
+        // Супруг(а)
+        $spouse = Spouse::find()->where(['user_id' => $user->id])->one();
+        if ($spouse) {
+            if ($user->gender) {
+                $text = 'Супруга ';
+            } else {
+                $text = 'Супруг ';
+            }
+            if ($spouse->is_rtk) {
+                $text .= 'является ';
+            } else {
+                $text .= 'не является ';
+            }
+            $text .= 'работником Общества или ДЗО';
+        }
+        return $text;
     }
 
     // Среднемесячный доход на 1 члена семьи
-    public function getMoneyMonthFamily(){
+    public function getMoneyMonthFamily()
+    {
         $cnt = 1; // Сам сотрудник
         $spouseCnt = Spouse::find()->where(['user_id' => $this->created_by])->count();
-        $childCnt = Child::find()->where(['user_id' => $this->created_by,'deleted_at'=>null])->count();
-        return ($this->money_summa_year-$this->money_nalog_year)/($cnt+$spouseCnt+$childCnt)/12;
+        $childCnt = Child::find()->where(['user_id' => $this->created_by, 'deleted_at' => null])->count();
+        return ($this->money_summa_year - $this->money_nalog_year) / ($cnt + $spouseCnt + $childCnt) / 12;
     }
 
 
     // Ипотека на ск-ко лет
-    public function getIpotekaYearCount(){
-     if (isset($this->ipoteka_start_date) && isset($this->ipoteka_last_date)){
-         return intval(($this->ipoteka_last_date - $this->ipoteka_start_date) / (60*60*24*365));
+    public function getIpotekaYearCount()
+    {
+        if (isset($this->ipoteka_start_date) && isset($this->ipoteka_last_date)) {
+            return intval(($this->ipoteka_last_date - $this->ipoteka_start_date) / (60 * 60 * 24 * 365));
 
-     }else{
-         return false;
-     }
+        } else {
+            return false;
+        }
     }
 
-    public function getCompanyYear() {
-        return (integer) Yii::$app->formatter->asDate($this->created_at, 'php:Y');
+    public function getCompanyYear()
+    {
+        return (integer)Yii::$app->formatter->asDate($this->created_at, 'php:Y');
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUser() {
+    public function getUser()
+    {
         return $this->hasOne(User::class, ['id' => 'created_by']);
     }
 
-    public function getMonthlyPerMemberIncome() {
-        return ($this->money_summa_year - $this->money_nalog_year)/$this->user->familyMembersCount/12;
+    public function getMonthlyPerMemberIncome()
+    {
+        return ($this->money_summa_year - $this->money_nalog_year) / $this->user->familyMembersCount / 12;
     }
 
-    public function getCorpNorm() {
+    public function getCorpNorm()
+    {
         $familyMembersCount = $this->user->familyMembersCount;
         $corpNorm = CorpNorm::findOne(['number' => $familyMembersCount]);
         if ($corpNorm) {
@@ -979,18 +1011,22 @@ class Order extends Model
     // *** Компенсация процентов ***
 
     // Период оказания МП
-    public function getPcPeriod() {
+    public function getPcPeriod()
+    {
         $year = $this->companyYear;
         return "c 01.01.$year по 31.12.$year";
     }
 
     // Срок оказания МП
-    public function getPcTerm() {
-        $ipotekaLastDateYear = (integer) Yii::$app->formatter->asDate($this->ipoteka_last_date, 'php:Y');
+    public function getPcTerm()
+    {
+        $ipotekaLastDateYear = (integer)Yii::$app->formatter->asDate($this->ipoteka_last_date, 'php:Y');
         $ipotekaRes = $ipotekaLastDateYear - $this->companyYear;
-        if ($ipotekaRes < 0) $ipotekaRes = 0;
+        if ($ipotekaRes < 0) {
+            $ipotekaRes = 0;
+        }
 
-        $userRetirementYear = (integer) Yii::$app->formatter->asDate($this->user->retirementDate, 'php:Y');
+        $userRetirementYear = (integer)Yii::$app->formatter->asDate($this->user->retirementDate, 'php:Y');
         $retRes = $userRetirementYear - $this->companyYear;
 
         return min(10, $ipotekaRes, $retRes);
@@ -998,15 +1034,16 @@ class Order extends Model
     }
 
     // Ставка компенсации %%
-    public function getPcRate() {
+    public function getPcRate()
+    {
         // Ежемесячный доход на члета семьи
         $monthlyPerMemberIncome = $this->getMonthlyPerMemberIncome();
         $aidStandart = AidStandards::find()
-            ->where(['<=', 'income_bottom',  $monthlyPerMemberIncome])
-            ->andWhere(['>=', 'income_top',  $monthlyPerMemberIncome])
+            ->where(['<=', 'income_bottom', $monthlyPerMemberIncome])
+            ->andWhere(['>=', 'income_top', $monthlyPerMemberIncome])
             ->one();
 
-        $lastCompanyDate = mktime(0,0,0,12,31,$this->companyYear-1);
+        $lastCompanyDate = mktime(0, 0, 0, 12, 31, $this->companyYear - 1);
         // Считаем исходя из 365 дней в году
         $age = ($lastCompanyDate - $this->user->birth_date) / 60 / 60 / 24 / 365;
 
@@ -1018,18 +1055,20 @@ class Order extends Model
     }
 
     //  Максимальная сумма компенсации %% в целом по ДС
-    public function getPcMaxVal() {
+    public function getPcMaxVal()
+    {
         return 1000000;
     }
 
     // Максимальная сумма компенсации %% в год
-    public function getPcMaxPerYear() {
+    public function getPcMaxPerYear()
+    {
         // Сумма уплаченных процентов (с января по ноябрь включительно)
         // Поле не нашел, необходимо уточнить у Лады
         $paidPersents = 50000;
 
         // Вынести расчет коэффициента в отдельную функцию
-        $percentCoefficient = $this->corpNorm/($this->jp_new_area - ($this->ipoteka_user/$this->jp_cost * $this->jp_new_area));
+        $percentCoefficient = $this->corpNorm / ($this->jp_new_area - ($this->ipoteka_user / $this->jp_cost * $this->jp_new_area));
         if ($percentCoefficient > 1) {
             $percentCoefficient = 1;
         }
@@ -1040,32 +1079,33 @@ class Order extends Model
             $res = 0;
         }
 
-        return round($res, -3) ;
+        return round($res, -3);
 
     }
     // *** *** *** *** *** ***
 
 
-
     // *** Займ ***
 
     // Срок оказания МП
-    public function getLoanPeriod() {
-        $userRetirementYear = (integer) Yii::$app->formatter->asDate($this->user->retirementDate, 'php:Y');
+    public function getLoanPeriod()
+    {
+        $userRetirementYear = (integer)Yii::$app->formatter->asDate($this->user->retirementDate, 'php:Y');
         $retRes = $userRetirementYear - $this->companyYear;
 
         // Ежемесячный доход на члета семьи
         $monthlyPerMemberIncome = $this->getMonthlyPerMemberIncome();
         $aidStandart = AidStandards::find()
-            ->where(['<=', 'income_bottom',  $monthlyPerMemberIncome])
-            ->andWhere(['>=', 'income_top',  $monthlyPerMemberIncome])
+            ->where(['<=', 'income_bottom', $monthlyPerMemberIncome])
+            ->andWhere(['>=', 'income_top', $monthlyPerMemberIncome])
             ->one();
 
         return min($retRes, $aidStandart->compensation_years_zaim);
     }
 
     // Максимальный размер займа
-    public function getLoanMaxVal() {
+    public function getLoanMaxVal()
+    {
         $familyMembersCount = $this->user->familyMembersCount;
         // А
         $rf = $this->user->rf;
@@ -1087,14 +1127,14 @@ class Order extends Model
         $maxLoanByIncome = ($monthlyPerMemberIncome - $jkMin->min) * $familyMembersCount * $this->loanPeriod * 12;
 
         // В
-//        $corpNorm = CorpNorm::findOne(['number' => $familyMembersCount]);
-//        if ($corpNorm) {
-//            $corpNormArea = $corpNorm->area;
-//        } else {
-//            $corpNormArea = $familyMembersCount * 20;
-//        }
+        //        $corpNorm = CorpNorm::findOne(['number' => $familyMembersCount]);
+        //        if ($corpNorm) {
+        //            $corpNormArea = $corpNorm->area;
+        //        } else {
+        //            $corpNormArea = $familyMembersCount * 20;
+        //        }
 
-//        $loanCoefficient = $corpNormArea / ($this->jp_new_area - $this->ipoteka_user * $this->jp_new_area / $this->jp_cost);
+        //        $loanCoefficient = $corpNormArea / ($this->jp_new_area - $this->ipoteka_user * $this->jp_new_area / $this->jp_cost);
         $loanCoefficient = $this->corpNorm / ($this->jp_new_area - $this->ipoteka_user * $this->jp_new_area / $this->jp_cost);
         if ($loanCoefficient > 1) {
             $loanCoefficient = 1;
@@ -1106,11 +1146,6 @@ class Order extends Model
         return round(min($loanLimit, $maxLoanByIncome, $maxLoanBySize), -3);
         //return round(min($maxLoanByIncome, $maxLoanBySize), -3);
     }
-
-
-
-
-
 
 
 }
