@@ -1125,6 +1125,9 @@ class Order extends Model
         }
 
         $maxLoanByIncome = ($monthlyPerMemberIncome - $jkMin->min) * $familyMembersCount * $this->loanPeriod * 12;
+        if ($maxLoanByIncome < 0) {
+            $maxLoanByIncome = 0;
+        }
 
         // В
         //        $corpNorm = CorpNorm::findOne(['number' => $familyMembersCount]);
