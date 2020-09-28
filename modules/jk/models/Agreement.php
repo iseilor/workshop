@@ -218,11 +218,12 @@ class Agreement extends Model
             $agreement->approval = Agreement::APPROVAL_WAIT;
             $agreement->save();
             Yii::$app->mailer->compose(
-                '@app/modules/jk/mails/manager/manager',
+                '@app/modules/jk/mails/manager/manager_wait_manager',
                 [
                     'user' => $user,
                     'manager' => $manager,
                     'agreement' => $agreement,
+                    'order'=>$order
                 ]
             )
                 ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
