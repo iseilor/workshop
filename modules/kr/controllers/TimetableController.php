@@ -5,6 +5,7 @@ namespace app\modules\kr\controllers;
 use Yii;
 use app\modules\kr\models\Timetable;
 use app\modules\kr\models\TimetableSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -25,6 +26,19 @@ class TimetableController extends Controller
                 'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::class,
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['index','bti','it','b2b','b2c'],
+                    ],
                 ],
             ],
         ];
