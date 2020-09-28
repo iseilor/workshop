@@ -1,6 +1,7 @@
 <?php
 
 use kartik\icons\Icon;
+use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 $this->title = Icon::show('user').$model->fio;
@@ -9,7 +10,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 ?>
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-4 d-none">
             <!-- Widget: user widget style 1 -->
             <div class="card card-widget widget-user">
                 <!-- Add the bg color to the header using any of the bg-* classes -->
@@ -52,7 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
             <!-- /.widget-user -->
         </div>
-        <div class="col-md-8">
+        <div class="col-md-12">
             <?= DetailView::widget([
                 'model' => $model,
                 'attributes' => [
@@ -60,6 +61,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     'fio',
                     'position',
                     'email:email',
+                    'work_phone',
+                    'work_department_full',
+                    'work_address'
                 ],
             ]) ?>
 
