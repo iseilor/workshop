@@ -31,6 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'date',
                 'title',
                 'curator:ntext',
+                'groups',
                 [
                     'attribute' => 'link',
                     'content'=>function($data){
@@ -66,7 +67,5 @@ $this->params['breadcrumbs'][] = $this->title;
             ]
         );
         ?>
-
-
     </div>
 </div>

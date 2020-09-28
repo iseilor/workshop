@@ -3,10 +3,11 @@
 /* @var $model app\modules\kr\models\Block */
 
 use kartik\icons\Icon;
-use yii\helpers\Html; ?>
+use yii\helpers\Html;
+use yii\helpers\Url; ?>
 
 
-<a href="#" class='small-box-footer'>
+<a href="<?=Url::to(['/kr/timetable/'.strtolower($model->code)])?>" class='small-box-footer'>
     <div class="small-box bg-gradient-<?= $model->color ?>">
         <div class="inner">
             <h3><?= $model->title ?></h3>

@@ -14,6 +14,7 @@ use yii\filters\VerbFilter;
  */
 class TimetableController extends Controller
 {
+
     /**
      * {@inheritdoc}
      */
@@ -31,6 +32,7 @@ class TimetableController extends Controller
 
     /**
      * Lists all Timetable models.
+     *
      * @return mixed
      */
     public function actionIndex()
@@ -38,6 +40,7 @@ class TimetableController extends Controller
         $searchModel = new TimetableSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $dataProvider->setSort(['defaultOrder' => ['weight' => SORT_ASC]]);
+        $dataProvider->query->andWhere(['block_id'=>0]);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -58,7 +61,9 @@ class TimetableController extends Controller
 
     /**
      * Displays a single Timetable model.
+     *
      * @param integer $id
+     *
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -72,12 +77,13 @@ class TimetableController extends Controller
     /**
      * Creates a new Timetable model.
      * If creation is successful, the browser will be redirected to the 'view' page.
+     *
      * @return mixed
      */
     public function actionCreate()
     {
         $model = new Timetable();
-        $model->weight =Timetable::getMaxWeight()+10;
+        $model->weight = Timetable::getMaxWeight() + 10;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['admin']);
@@ -91,7 +97,9 @@ class TimetableController extends Controller
     /**
      * Updates an existing Timetable model.
      * If update is successful, the browser will be redirected to the 'view' page.
+     *
      * @param integer $id
+     *
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -111,7 +119,9 @@ class TimetableController extends Controller
     /**
      * Deletes an existing Timetable model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
+     *
      * @param integer $id
+     *
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -125,7 +135,9 @@ class TimetableController extends Controller
     /**
      * Finds the Timetable model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
+     *
      * @param integer $id
+     *
      * @return Timetable the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -136,5 +148,62 @@ class TimetableController extends Controller
         }
 
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
+    }
+
+    /**
+     * Lists all Timetable models.
+     *
+     * @return mixed
+     */
+    public function actionBti()
+    {
+        $searchModel = new TimetableSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->setSort(['defaultOrder' => ['weight' => SORT_ASC]]);
+        $dataProvider->query->andWhere(['block_id'=>1]);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionIt()
+    {
+        $searchModel = new TimetableSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->setSort(['defaultOrder' => ['weight' => SORT_ASC]]);
+        $dataProvider->query->andWhere(['block_id'=>2]);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionB2b()
+    {
+        $searchModel = new TimetableSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->setSort(['defaultOrder' => ['weight' => SORT_ASC]]);
+        $dataProvider->query->andWhere(['block_id'=>3]);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionB2c()
+    {
+        $searchModel = new TimetableSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->setSort(['defaultOrder' => ['weight' => SORT_ASC]]);
+        $dataProvider->query->andWhere(['block_id'=>4]);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
     }
 }
