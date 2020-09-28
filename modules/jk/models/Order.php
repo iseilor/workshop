@@ -1151,4 +1151,38 @@ class Order extends Model
     }
 
 
+    /**
+     * Устанавливаем новый статус для заявки
+     * @param $newStatusCode код нового статуса
+     */
+    public function setNewStatus($newStatusCode){
+
+        // Сотрудник, создавший заявку
+        $user = User::findOne($this->created_by);
+
+        // Текущий согласующий руководитель
+        $agreement = Agreement::find()->where(['order_id' => $this->id, 'approval_at' => null])->one();
+        $manager = User::findOne($agreement->user_id);
+
+        switch ($newStatusCode) {
+             // Согласование руководителями
+            case 'MANAGER_WAIT':
+                // Письмо сотруднику
+                Yii::$app->mailer->compose(
+                    '@app/modules/jk/mails/manager/manager_wait_user',
+                    [
+                        'user' => $user,
+                        'order' => $this,
+                        'manager'=>$manager
+                    ]
+                )
+                    ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
+                    ->setBcc(Yii::$app->params['supportEmail'])
+                    ->setTo($user->email)
+                    ->setSubject($this->getEmailSubject("Согласование руководителями"))
+                    ->send();
+                break;
+
+        }
+    }
 }

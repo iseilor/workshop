@@ -776,6 +776,7 @@ class OrderController extends Controller
         switch ($newStatus->code) {
             case 'MANAGER_WAIT':
                 $order->sendManager();
+                $order->setNewStatus($newStatusCode);
                 break;
             case 'CURATOR_CHECK':
                 $order->sendCurator();
