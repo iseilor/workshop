@@ -104,7 +104,7 @@ $jp_date_max = date("Y");
                                     $('#order-jp_date' ).datepicker( 'setDate', now );
                                 }
                              }"),
-                            'required' => ($is_new_building == ''),
+                            'required' => ($is_new_building == '' && $model->is_mortgage == 1),
                         ],
                     ]
                 ) ?>
@@ -247,6 +247,10 @@ $(document).ready(function() {
         if ($('#order-is_mortgage').val()) {
             $('#contract').removeClass('d-none');
             
+            if ($('#order-is_new_building').prop('checked')==true && $('#order-is_mortgage').val() == 0) {
+                $('.new_building').addClass('d-none');
+            }
+            
             if ($('#order-under_construction').prop('checked')==true && $('#order-is_mortgage').val() == 0){
                 for (let pair of constr_fields_map.entries()) {
                   $(`\${pair[1]}`).removeClass('d-none');
@@ -265,6 +269,9 @@ $(document).ready(function() {
             }
             
             if ($('#order-is_mortgage').val() == 1) {
+                if ($('#order-is_new_building').prop('checked')==true){
+                    $('.new_building').removeClass('d-none');
+                }
                 if (!$('.field-order-jp_dogovor_buy_file_form label[for=exampleInputFile]').html()) {
                     $('.field-order-jp_dogovor_buy_file_form').addClass('required');
                     $('#order-jp_dogovor_buy_file_form').attr('required', true);
@@ -290,7 +297,9 @@ $(document).ready(function() {
     
     $('#order-is_new_building').on('change', function() {
         if ($(this).prop('checked')==true){
-            $('.new_building').removeClass('d-none');
+            if ($('#order-is_mortgage').val() == 1) {
+                $('.new_building').removeClass('d-none');
+            }
             $('.field-order-jp_act_file_form').addClass('d-none');
             $('.field-order-jp_egrp_file_form').addClass('d-none');
             
