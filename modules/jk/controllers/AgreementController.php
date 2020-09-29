@@ -124,7 +124,7 @@ class AgreementController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
             // Если успешно согласовано
-            if ($model->approval==Agreement::APPROVAL_YES) {
+            if ($model->approval == Agreement::APPROVAL_YES) {
                 $model->sendEmailUserManagerSuccess();              // Письмо сотруднику, что заявка согласована
                 Agreement::sendEmailManager($model->order_id);      // Письмо следующем руководителю
             } else {
@@ -132,22 +132,23 @@ class AgreementController extends Controller
 
                 // Ставим статус, что заявка не согласована
                 $order = Order::findOne($model->order_id);
-                $order->status_id=Status::findOne(['code'=>'MANAGER_NO'])->id;
+                $order->status_id = Status::findOne(['code' => 'MANAGER_NO'])->id;
                 $order->save();
             }
 
-            return $this->redirect(['view', 'id' => $model->id]);
+            // Перебрасываем в ЛК руководителя, там он может видеть другие ожидающие его соглаования заявки
+            return $this->redirect(['/user/cabinet']);
         }
 
         $order = Order::findOne($model->order_id);
         $user = User::findOne($model->created_by);
         $agreementSearchModel = new AgreementSearch();
-        $agreementDataProvider = $agreementSearchModel->search(['AgreementSearch'=>['order_id' => $order->id]]);
+        $agreementDataProvider = $agreementSearchModel->search(['AgreementSearch' => ['order_id' => $order->id]]);
         return $this->render('check', [
             'model' => $model,
             'order' => $order,
-            'user'  => $user,
-            'agreementDataProvider'=>$agreementDataProvider
+            'user' => $user,
+            'agreementDataProvider' => $agreementDataProvider,
         ]);
     }
 
