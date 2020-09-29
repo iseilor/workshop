@@ -91,7 +91,7 @@ return [
     'Ipoteka File Bank Approval' => 'Одобрение из банка',
     'Ipoteka Percent' => 'Процентная ставка по ипотеке',
     'Ipoteka Last Date' => 'Дата последнего платежа',
-    'Ipoteka Grafic' => 'График платежей',
+    'Ipoteka Grafic' => 'Сумма процентов по Ипотеке',
     'Zaim Sum' => 'Займ, руб',
     'Ipoteka Start' => 'Дата оформления ипотеки',
 

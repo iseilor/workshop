@@ -44,7 +44,7 @@ if ($field_percent == '') {
         </div>
     </div>
 </div>
-    <div class="row">
+    <div class="row second">
         <div class="col-md-4">
             <div class="field-percent <?= $field_percent ?>">
                 <?= $form->field($model, 'ipoteka_start_date')->widget(
@@ -79,9 +79,10 @@ if ($field_percent == '') {
             </div>
 
             <div class="field-zaim <?= $field_zaim ?>">
-                <?= $form->field($model, 'ipoteka_percent', ['options' => ['class' => 'form-group', 'required' => ($zaim_required && $model->ipoteka_percent)]])
+                <?= $form->field($model, 'ipoteka_percent', ['options' => ['class' => 'form-group']])
                     ->widget(MaskedInput::class, [
                     'clientOptions' => Yii::$app->params['widget']['MaskedInput']['clientOptionsPercent'],
+                    'options' => ['required' => ($zaim_required && $model->ipoteka_percent && $model->ipoteka_size != 0)],
                 ]);?>
             </div>
         </div>
@@ -129,11 +130,11 @@ if ($field_percent == '') {
             <div class="field-zaim <?= $field_zaim ?>">
                 <?= $form->field($model, 'ipoteka_file_bank_approval_form', [
                     'template' => getFileInputTemplate($model->ipoteka_file_bank_approval, $model->attributeLabels()['ipoteka_file_bank_approval'] . '.pdf'),
-                ])->fileInput(['class' => 'custom-file-input', 'required' => ($zaim_required && !isset($model->ipoteka_file_bank_approval))]) ?>
+                ])->fileInput(['class' => 'custom-file-input', 'required' => ($zaim_required && !isset($model->ipoteka_file_bank_approval) && $model->ipoteka_size != 0)]) ?>
             </div>
         </div>
         <div class="col-md-4">
-            <?= $form->field($model, 'ipoteka_grafic')->textarea(['rows' => '15']); ?>
+            <?= $form->field($model, 'ipoteka_grafic', ['options' => ['class' => 'form-group ' . ($zaim_required ? 'd-none' : '')]])->textarea(['rows' => '15']); ?>
         </div>
 
     </div>
@@ -195,6 +196,26 @@ $(document).ready(function() {
         $('.field-order-zaim_sum').addClass('required');
     }
     
+    if ($('#order-ipoteka_size').val()==0 && $('#order-is_mortgage').val()==0) {
+        $('.second').addClass('d-none');
+    }
+    
+    $('#order-ipoteka_size').on('change', function() {
+        if ($('#order-is_mortgage').val()==0) {
+            if ($('#order-ipoteka_size').val()==0) {
+                $('.second').addClass('d-none');
+                $('#order-ipoteka_percent').attr('required', false);
+                $('#order-ipoteka_file_bank_approval_form').attr('required', false);
+            } else {
+                $('.second').removeClass('d-none');
+                $('#order-ipoteka_percent').attr('required', true);
+                if (!$('.field-order-ipoteka_file_bank_approval_form label[for=exampleInputFile]').html()) {
+                    $('#order-ipoteka_file_bank_approval_form').attr('required', true);
+                }
+            }
+        }
+    });
+    
     $('#early_payments').on('change', function() {
         $('.early_payments').toggleClass('d-none');
         if (!$('.field-order-ipoteka_file_grafic_now_form label[for=exampleInputFile]').html()) {
@@ -218,16 +239,34 @@ $(document).ready(function() {
         if ($('#order-is_mortgage').val()==1) {
             $('#order-zaim_sum').attr('required', false);
             $('.field-order-zaim_sum').removeClass('required');
+            
+            $('.field-order-ipoteka_grafic').removeClass('d-none');
+            
+            $('.second').removeClass('d-none');
+            $('#order-ipoteka_file_bank_approval_form').attr('required', false);
+            $('#order-ipoteka_percent').attr('required', false);
         } else if ($('#order-is_mortgage').val()==0) {
             $('#order-zaim_sum').attr('required', true);
             $('.field-order-zaim_sum').addClass('required');
+            
+            $('.field-order-ipoteka_grafic').addClass('d-none');
+            
+            if ($('#order-ipoteka_size').val() == 0) {
+                $('.second').addClass('d-none');
+                $('#order-ipoteka_percent').attr('required', false);
+                $('#order-ipoteka_file_bank_approval_form').attr('required', false);
+            } else {
+                $('.second').removeClass('d-none');
+                if (!$('.field-order-ipoteka_file_bank_approval_form label[for=exampleInputFile]').html()) {
+                    $('#order-ipoteka_file_bank_approval_form').attr('required', true);
+                }
+                $('#order-ipoteka_percent').attr('required', true);
+            }
+            
         }
         
-        $('#order-ipoteka_percent, #order-ipoteka_last_date').attr('required', function(_, attr){ return !attr; });
+        $('#order-ipoteka_last_date').attr('required', function(_, attr){ return !attr; });
         
-        if (!$('.field-order-ipoteka_file_bank_approval_form label[for=exampleInputFile]').html()) {
-            $('#order-ipoteka_file_bank_approval_form').attr('required', function(_, attr){ return !attr; });
-        }
         if (!$('.field-order-ipoteka_file_dogovor_form label[for=exampleInputFile]').html()) {
             $('#order-ipoteka_file_dogovor_form').attr('required', function(_, attr){ return !attr; });
         }
