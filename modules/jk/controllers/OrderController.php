@@ -781,6 +781,9 @@ class OrderController extends Controller
             case 'CURATOR_CHECK':
                 $order->sendCurator();
                 break;
+            case 'DOC':
+                $order->sendCuratorDoc();
+                break;
         }
 
         // Сохраняем в историю движения заявки

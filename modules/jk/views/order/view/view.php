@@ -76,6 +76,12 @@ $this->title .= ' ' . $model->status->label;
                         <?= $this->render('btn/restart', ['model' => $model]) ?>
                     <?php endif; ?>
 
+                    <!-- Приложить документы и отправить заяку уже после решения коммиссии-->
+                    <?php if (in_array($model->status_id,[Status::findOne(['code' => 'COMMISSION_YES'])->id])): ?>
+                        <?= $this->render('btn/doc', ['model' => $model]) ?>
+                    <?php endif; ?>
+
+
 
                     <div class="float-right">
                         <?php if ($model->status->is_edit): ?>
