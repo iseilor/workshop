@@ -12,6 +12,7 @@ use app\modules\kr\models\Student;
 class StudentSearch extends Student
 {
 
+    public $userFIO;
     public $blockTitle;
     /**
      * {@inheritdoc}
@@ -20,7 +21,7 @@ class StudentSearch extends Student
     {
         return [
             [['id',  'block_id', 'weight'], 'integer'],
-            [['user_id', 'description','blockTitle'], 'safe'],
+            [['user_id', 'description','blockTitle','userFIO'], 'safe'],
         ];
     }
 
@@ -43,6 +44,7 @@ class StudentSearch extends Student
     public function search($params)
     {
         $query = Student::find();
+        //$query->joinWith(['user']);
 
         // add conditions that should always apply here
 
@@ -50,7 +52,18 @@ class StudentSearch extends Student
             'query' => $query,
         ]);
 
+        $dataProvider->setSort([
+            'attributes' => [
+                'userFIO' => [
+                    'asc' => ['user.fio' => SORT_ASC],
+                    'desc' => ['user.fio' => SORT_DESC],
+                ]
+            ]
+        ]);
+
         $this->load($params);
+
+        $query->joinWith(['user']);
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
