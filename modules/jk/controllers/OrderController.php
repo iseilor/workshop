@@ -763,37 +763,44 @@ class OrderController extends Controller
      */
     public function actionSetNewStatus($id)
     {
-        Yii::$app->session->setFlash('success', "Ваша заявка успешно отправлена");
+
 
         // Сохраняем новый статус заявки
         $newStatusCode = $_GET['new-status-code'];
         $newStatus = Status::findOne(['code' => $newStatusCode]);
         $order = Order::findOne($id);
         $order->status_id = $newStatus->id;
-        $order->save();
 
-        // В зависимости от нового статуса
-        switch ($newStatus->code) {
-            case 'MANAGER_WAIT':
-                $order->sendManager();
-                $order->setNewStatus($newStatusCode);
-                break;
-            case 'CURATOR_CHECK':
-                $order->sendCurator();
-                break;
-            case 'DOC':
-                $order->sendCuratorDoc();
-                break;
+        if ($order->save()){
+            Yii::$app->session->setFlash('success', "Ваша заявка успешно отправлена");
+
+            // В зависимости от нового статуса
+            switch ($newStatus->code) {
+                case 'MANAGER_WAIT':
+                    $order->sendManager();
+                    $order->setNewStatus($newStatusCode);
+                    break;
+                case 'CURATOR_CHECK':
+                    $order->sendCurator();
+                    break;
+                case 'DOC':
+                    $order->sendCuratorDoc();
+                    break;
+            }
+
+            // Сохраняем в историю движения заявки
+            $orderStage = new OrderStage();
+            $orderStage->order_id = $id;
+            $orderStage->status_id = $newStatus->id;
+            $orderStage->comment = $newStatus->title;
+            $orderStage->save();
+
+            return $this->redirect(['/jk/order/view/', 'id' => $id]);
+        }else{
+            Yii::$app->session->setFlash('danger', $order->errors);
+            return $this->redirect(['/jk/order/view/', 'id' => $id]);
         }
 
-        // Сохраняем в историю движения заявки
-        $orderStage = new OrderStage();
-        $orderStage->order_id = $id;
-        $orderStage->status_id = $newStatus->id;
-        $orderStage->comment = $newStatus->title;
-        $orderStage->save();
-
-        return $this->redirect(['/jk/order/view/', 'id' => $id]);
     }
 
     // Формирование заявления
