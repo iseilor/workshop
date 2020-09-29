@@ -29,7 +29,7 @@ $this->title .= ' ' . $model->status->label;
                         ['name' => Icon::show('female') . 'Супруг(а)', 'id' => 'spouse', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
                         ['name' => Icon::show('baby') . 'Дети', 'id' => 'child', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
                         ['name' => Icon::show('users') . 'Семья', 'id' => 'family', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
-                        ['name' => Icon::show('home') . 'Жилищная Программа', 'id' => 'house', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
+                        ['name' => Icon::show('home') . 'Жильё', 'id' => 'house', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
                         ['name' => Icon::show('file-invoice-dollar') . 'Ипотека', 'id' => 'ipoteka', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
                         ['name' => Icon::show('ruble-sign') . 'Финансы', 'id' => 'money', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
                         ['name' => Icon::show('tasks') . 'Согласования', 'id' => 'check', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],

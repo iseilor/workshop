@@ -904,17 +904,6 @@ class Order extends Model
         $rf = Rf::findOne($user->filial_id);
         $curator = User::findOne($rf->user_id);
 
-        $newStatus = Status::findOne(['code' => 'DOC']);
-        $this->status_id = $newStatus->id;
-        $this->save();
-
-        // Сохраняем в историю движения заявки
-        $orderStage = new OrderStage();
-        $orderStage->order_id = $this->id;
-        $orderStage->status_id = $newStatus->id;
-        $orderStage->comment = $newStatus->title;
-        $orderStage->save();
-
         // Отправляем письмо куратору
         Yii::$app->mailer->compose(
             '@app/modules/jk/mails/doc/curator',
