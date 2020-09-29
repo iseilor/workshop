@@ -130,7 +130,7 @@ if ($field_percent == '') {
             <div class="field-zaim <?= $field_zaim ?>">
                 <?= $form->field($model, 'ipoteka_file_bank_approval_form', [
                     'template' => getFileInputTemplate($model->ipoteka_file_bank_approval, $model->attributeLabels()['ipoteka_file_bank_approval'] . '.pdf'),
-                ])->fileInput(['class' => 'custom-file-input', 'required' => ($zaim_required && !isset($model->ipoteka_file_bank_approval))]) ?>
+                ])->fileInput(['class' => 'custom-file-input', 'required' => ($zaim_required && !isset($model->ipoteka_file_bank_approval) && $model->ipoteka_size != 0)]) ?>
             </div>
         </div>
         <div class="col-md-4">
