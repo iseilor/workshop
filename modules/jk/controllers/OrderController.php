@@ -797,7 +797,11 @@ class OrderController extends Controller
 
             return $this->redirect(['/jk/order/view/', 'id' => $id]);
         }else{
-            Yii::$app->session->setFlash('danger', implode(' ',$order->errors));
+            $errors = '';
+            foreach ($order->errors as $error) {
+                $errors .=$error[0].'<br/>';
+            }
+            Yii::$app->session->setFlash('danger', $errors);
             return $this->redirect(['/jk/order/view/', 'id' => $id]);
         }
 
