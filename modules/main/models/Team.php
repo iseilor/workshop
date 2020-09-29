@@ -44,7 +44,7 @@ class Team extends \yii\db\ActiveRecord
     {
         return [
             [['created_at', 'created_by', 'name', 'full_name', 'filial', 'position', 'department', 'email', 'phone', 'birth', 'adress', 'photo', 'about'], 'required'],
-            [['created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by', 'birth'], 'integer'],
+            [['created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by', 'birth','weight'], 'integer'],
             [['about'], 'string'],
             [['name', 'full_name', 'filial', 'position', 'department', 'email', 'phone', 'adress', 'photo'], 'string', 'max' => 255],
         ];
@@ -74,6 +74,7 @@ class Team extends \yii\db\ActiveRecord
             'address' => Module::t('module', 'Address'),
             'photo' => Module::t('module', 'Photo'),
             'about' => Module::t('module', 'About'),
+            'weight'=> Module::t('module', 'Weight'),
         ];
     }
 

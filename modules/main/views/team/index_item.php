@@ -1,5 +1,6 @@
 <?php
 
+use yii\helpers\Html;
 use yii\helpers\Url;
 
 ?>
@@ -12,11 +13,14 @@ use yii\helpers\Url;
             <div class="row">
                 <div class="col-7">
                     <h2 class="lead"><b><?=$model->name;?></b></h2>
-                    <p class="text-muted text-sm"><b><?=$model->position;?></b> / <?=$model->department;?></p>
+                    <p class="text-muted text-sm"><?=$model->position;?> / <?=$model->department;?></p>
                     <ul class="ml-4 mb-0 fa-ul text-muted">
-                        <!--<li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Адрес: <?=$model->address;?></li>-->
-                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-envelope"></i></span> Email: <?=$model->email;?></li>
-                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Телефон: <?=$model->phone;?></li>
+                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-envelope"></i></span>
+                            <!-- Email: --><?= Html::mailto($model->email, $model->email);?></li>
+                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span>
+                            <!-- Телефон: --><?=$model->phone;?></li>
+                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-map-marker-alt"></i></span>
+                            <!-- Email: --><?= $model->filial;?></li>
                     </ul>
                 </div>
                 <div class="col-5 text-center">
@@ -24,7 +28,7 @@ use yii\helpers\Url;
                 </div>
             </div>
         </div>
-        <div class="card-footer">
+        <div class="card-footer d-none">
             <div class="text-right">
                 <a href="#" class="btn btn-sm bg-teal">
                     <i class="fas fa-comments"></i>
