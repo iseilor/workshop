@@ -635,12 +635,12 @@ retrun Html::img($userPhotoPath, ['title' => Yii::$app->user->identity->username
 
     public function getSpouse()
     {
-        return $this->hasOne(Spouse::class, ['user_id' => 'id']);
+        return $this->hasOne(Spouse::class, ['user_id' => 'id'])->andWhere(['deleted_at' => null]);
     }
 
     public function getChildren()
     {
-        return Child::find()->where(['user_id' => $this->id])->all();
+        return Child::find()->where(['user_id' => $this->id])->andWhere(['deleted_at' => null])->all();
     }
 
     public function getRetirementDate()

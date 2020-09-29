@@ -42,9 +42,9 @@ class Timetable extends Model
     public function rules()
     {
         return [
-            [['title', 'date', 'curator', 'weight'], 'required'],
-            [['weight'], 'integer'],
-            [['description'], 'string'],
+            [['title', 'date', 'curator', 'weight','block_id'], 'required'],
+            [['weight','block_id'], 'integer'],
+            [['description','groups'], 'string'],
             [['title', 'date', 'curator', 'img', 'link'], 'string', 'max' => 255],
         ];
     }
@@ -54,7 +54,6 @@ class Timetable extends Model
      */
     public function attributeLabels()
     {
-
         return ArrayHelper::merge(
             parent::attributeLabels(),
             [
@@ -64,6 +63,8 @@ class Timetable extends Model
                 'description' => Module::t('timetable', 'Description'),
                 'img' => Module::t('timetable', 'Img'),
                 'link' => Module::t('timetable', 'Link'),
+                'block_id'=>Module::t('timetable', 'Block'),
+               'groups' =>Module::t('timetable', 'Groups'),
             ]
         );
     }

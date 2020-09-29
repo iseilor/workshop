@@ -1,6 +1,8 @@
 <?php
 
+use app\modules\kr\models\Block;
 use kartik\icons\Icon;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -22,15 +24,13 @@ use yii\widgets\ActiveForm;
                 <?= $form->field($model, 'date')->textInput(['maxlength' => true]) ?>
                 <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
                 <?= $form->field($model, 'link')->textInput(['maxlength' => true]) ?>
-
-
             </div>
-
             <div class="col-4">
-                <?= $form->field($model, 'img')->textInput(['maxlength' => true]) ?>
-                <?= $form->field($model, 'curator')->textarea(['rows' => 6]) ?>
+                <?= $form->field($model, 'block_id')->dropDownList(ArrayHelper::merge(['0' => 'Все'],
+                    ArrayHelper::map(Block::find()->all(), 'id', 'title'))); ?>
+                <?= $form->field($model, 'groups')->textarea(['rows' => 3]) ?>
+                <?= $form->field($model, 'curator')->textarea(['rows' => 3]) ?>
             </div>
-
             <div class="col-4">
                 <?= $form->field($model, 'weight')->textInput() ?>
                 <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>

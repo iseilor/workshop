@@ -1,52 +1,56 @@
 <?php
 
 use app\modules\kr\Module;
+use kartik\icons\Icon;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\kr\models\TimetableSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Module::t('timetable', 'Timetables');
+$this->title = Icon::show('list').Module::t('timetable', 'Timetables');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="timetable-index">
+<div class="card">
+    <div class="card-body">
 
 
+        <p>
+            <?= Html::a(Icon::show('plus') . Module::t('timetable', 'Create Timetable'), ['create'], ['class' => 'btn btn-success']) ?>
+        </p>
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Create Timetable'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+        <?php Pjax::begin(); ?>
+        <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <?php Pjax::begin(); ?>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+        <?= GridView::widget([
+            'dataProvider' => $dataProvider,
+            'filterModel' => $searchModel,
+            'columns' => [
+                ['class' => 'yii\grid\SerialColumn'],
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+                'id',
+                //'created_at',
+                //'created_by',
+                //'updated_at',
+                //'updated_by',
+                //'deleted_at',
+                //'deleted_by',
+                'date',
+                'title',
+                'curator:ntext',
+                'block_id',
+                'groups',
+                //'description:ntext',
+                //'img',
+                'link',
+                'weight',
+                ['class' => \app\components\grid\ActionColumn::class],
+            ],
+        ]); ?>
 
-            'id',
-            //'created_at',
-            //'created_by',
-            //'updated_at',
-            //'updated_by',
-            //'deleted_at',
-            //'deleted_by',
-            'date',
-            'title',
-            'curator:ntext',
-            //'description:ntext',
-            //'img',
-            'link',
-            'weight',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
-
-    <?php Pjax::end(); ?>
+        <?php Pjax::end(); ?>
+    </div>
 
 </div>

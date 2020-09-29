@@ -15,7 +15,11 @@ var donutData = {
 var donutOptions = {
     maintainAspectRatio: false,
     responsive: true,
+    legend: {
+        display: false
+    }
 };
+
 var donutChart = new Chart(donutChartCanvas, {
     type: 'doughnut',
     data: donutData,
@@ -39,6 +43,9 @@ var donutData = {
 var donutOptions = {
     maintainAspectRatio: false,
     responsive: true,
+    legend: {
+        display: false
+    }
 };
 var donutChart = new Chart(donutChartCanvas, {
     type: 'doughnut',
@@ -62,7 +69,7 @@ var donutOptions = {
     maintainAspectRatio: false,
     responsive: true,
     legend: {
-        display: true,
+        display: false,
     }
 };
 var donutChart = new Chart(donutChartCanvas, {
@@ -88,6 +95,9 @@ var donutData = {
 var donutOptions = {
     maintainAspectRatio: false,
     responsive: true,
+    legend: {
+        display: false
+    }
 };
 var donutChart = new Chart(donutChartCanvas, {
     type: 'doughnut',

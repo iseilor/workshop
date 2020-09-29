@@ -10,4 +10,5 @@ use yii\helpers\Url;
     <li><?= Html::a(Icon::show('cubes') . 'Блоки обучения', Url::to(['/kr/block/admin'])) ?></li>
     <li><?= Html::a(Icon::show('user-graduate') . 'Тренеры и кураторы', Url::to(['/kr/curator/admin'])) ?></li>
     <li><?= Html::a(Icon::show('users') . 'Участники программы', Url::to(['/kr/student/admin'])) ?></li>
+    <li><?= Html::a(Icon::show('list') . 'Расписание и мероприятия', Url::to(['/kr/timetable/admin'])) ?></li>
 </ul>

@@ -126,7 +126,7 @@ if ($messagesUser>0){
             <?=Html::a('<div class="info-box mb-3">
             <span class="info-box-icon bg-danger elevation-1">'.Icon::show('stop').'</span>
             <div class="info-box-content">
-                <span class="info-box-text">Отказы</span>
+                <span class="info-box-text">Отмена сотрудником</span>
                 <span class="info-box-number">'.$orderStopCount.'</span>
             </div>
         </div>',Url::to(['/jk/order-stop'],true));
@@ -134,7 +134,7 @@ if ($messagesUser>0){
             <div class="card">
                 <div class="card-body">
                     <div class="chart">
-                        <h6>% отказов от общего числа заявок</h6>
+                        <h6>Отмена сотрудником</h6>
                         <canvas id="voted" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
                     </div>
                 </div>

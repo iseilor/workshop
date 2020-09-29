@@ -72,7 +72,7 @@ class TeamSearch extends Team
             ]
         );
 
-        $query->orderBy(new Expression('rand()'));
+        //$query->orderBy(new Expression('rand()'));
 
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'full_name', $this->full_name])

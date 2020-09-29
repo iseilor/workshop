@@ -776,6 +776,7 @@ class OrderController extends Controller
         switch ($newStatus->code) {
             case 'MANAGER_WAIT':
                 $order->sendManager();
+                $order->setNewStatus($newStatusCode);
                 break;
             case 'CURATOR_CHECK':
                 $order->sendCurator();
@@ -842,6 +843,7 @@ class OrderController extends Controller
                 'FAMILY_RENT',
                 'FAMILY_ADDRESS',
                 'FAMILY_DEAL',
+                'IS_DZO',
                 'FAMILY_LIST',
 
                 'MONEY_MONTH_PAY',
@@ -887,6 +889,7 @@ class OrderController extends Controller
                     . $order->family_rent : '',
                 $order->family_address,
                 $order->family_deal,
+                $order->isDZO(),
                 $order->getFamilyList(),
 
                 number_format($order->money_month_pay, 2, ',', ' '),

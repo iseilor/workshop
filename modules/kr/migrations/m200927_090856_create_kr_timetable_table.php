@@ -28,6 +28,9 @@ class m200927_090856_create_kr_timetable_table extends Migration
             'description'=>$this->text(),
             'img'=>$this->string(),
             'link'=>$this->string(),
+            'qr'=>$this->string(),
+            'block_id'=>$this->integer()->notNull(),
+            'groups'=>$this->string(),
             'weight'=>$this->integer()->notNull()
         ]);
 

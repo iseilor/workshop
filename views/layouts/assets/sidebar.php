@@ -140,16 +140,10 @@ if ($jkInstructionDoc) {
                                 ['label' => Icon::show('user-graduate', ['class' => 'nav-icon']) . '<p>Кураторы</p>', 'url' => ['/kr/curator/index']],
                                 ['label' => Icon::show('users', ['class' => 'nav-icon']) . '<p>Участники</p>', 'url' => ['/kr/student/index']],
 
-                                ['label' => Icon::show('microchip', ['class' => 'nav-icon']) . '<p>БТИ</p>', 'url' => ['/kr/']],
-                                ['label' => Icon::show('laptop', ['class' => 'nav-icon']) . '<p>IT</p>', 'url' => ['/kr/']],
-                                ['label' => Icon::show('briefcase', ['class' => 'nav-icon']) . '<p>BTB</p>', 'url' => ['/kr/']],
-                                ['label' => Icon::show('building', ['class' => 'nav-icon']) . '<p>B2C</p>', 'url' => ['/kr/']],
-                                [
-                                    'label' => Icon::show('youtube', ['class' => 'nav-icon', 'framework' => Icon::FAB])
-                                        . '<p>Видео <span class="right badge badge-danger">New</span></p>',
-                                    'url' => ['/kr/video/index'],
-                                ],
-
+                                ['label' => Icon::show('microchip', ['class' => 'nav-icon']) . '<p>БТИ</p>', 'url' => ['/kr/timetable/bti']],
+                                ['label' => Icon::show('laptop', ['class' => 'nav-icon']) . '<p>IT</p>', 'url' => ['/kr/timetable/it']],
+                                ['label' => Icon::show('briefcase', ['class' => 'nav-icon']) . '<p>B2B</p>', 'url' => ['/kr/timetable/b2b']],
+                                ['label' => Icon::show('building', ['class' => 'nav-icon']) . '<p>B2C</p>', 'url' => ['/kr/timetable/b2c']],
                             ],
                         ],
 
