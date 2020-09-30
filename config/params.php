@@ -112,21 +112,20 @@ return [
 
         //  Высшая лига (Кадровый резерв)
         'kr' => [
-            //'iconClass' => 'newspaper',
-            //'icon' => '<i class="fas fa-newspaper"></i>',
-            'curator'=>[
+            'curator' => [
                 'path' => 'files/kr/curator/',
-            ]
+            ],
+            'timetable' => [
+                'path' => 'files/kr/timetable/',
+            ],
         ],
-
 
         //  Star Talk
         'st' => [
-            'guest'=>[
+            'guest' => [
                 'path' => 'files/st/guest/',
-            ]
+            ],
         ],
-
 
         // Нештатные ситуации
         'ns' => [
@@ -151,8 +150,8 @@ return [
             ],
             // Параметры для денежных полей
             'clientOptionsPercent' => [
-                'max'=>100,
-                'min'=>0,
+                'max' => 100,
+                'min' => 0,
                 'rightAlign' => false,
                 'alias' => 'decimal',
                 'digits' => 2,

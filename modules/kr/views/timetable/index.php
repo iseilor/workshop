@@ -29,16 +29,26 @@ $this->params['breadcrumbs'][] = $this->title;
                     'class' => 'yii\grid\SerialColumn',
                 ],
                 'date',
-                'title',
+                [
+                    'attribute' => 'title',
+                    'content'=>function($data){
+                        $link= (isset($data->link) && $data->link) ?
+                            Html::a("Ссылка на трансляцию"."&nbsp;" . Icon::show('external-link-alt'),
+                                $data->link, ['target' => '_blank'])
+                            : '';
+                        $qr= (isset($data->link) && $data->link) ?
+                            $this->render('_qr', ['model' => $data])
+                            : '';
+                        return$data->title.'<br/>'.$link.'<br/>'.$qr;
+                    }
+                ],
                 'curator:ntext',
                 'groups',
                 [
-                    'attribute' => 'link',
+                    'label' => 'Подробнее',
                     'content'=>function($data){
-                        return (isset($data->link) && $data->link) ?
-                            Html::a("Ссылка"."&nbsp;" . Icon::show('external-link-alt'),
-                                $data->link, ['target' => '_blank'])
-                            : '';
+                        return (isset($data->description) && $data->description) ?
+                             $this->render('_modal', ['model' => $data]) : '';
                     }
                 ],
             ],

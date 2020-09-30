@@ -100,6 +100,7 @@ class TimetableController extends Controller
         $model->weight = Timetable::getMaxWeight() + 10;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $model->createQR();
             return $this->redirect(['admin']);
         }
 
@@ -122,6 +123,7 @@ class TimetableController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $model->createQR();
             return $this->redirect(['admin']);
         }
 

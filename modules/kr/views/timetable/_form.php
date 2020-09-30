@@ -2,6 +2,7 @@
 
 use app\modules\kr\models\Block;
 use kartik\icons\Icon;
+use vova07\imperavi\Widget;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
@@ -20,20 +21,31 @@ use yii\widgets\ActiveForm;
     <div class="card-body">
 
         <div class="row">
-            <div class="col-4">
+            <div class="col-3">
                 <?= $form->field($model, 'date')->textInput(['maxlength' => true]) ?>
                 <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
                 <?= $form->field($model, 'link')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'weight')->textInput() ?>
             </div>
-            <div class="col-4">
+            <div class="col-3">
                 <?= $form->field($model, 'block_id')->dropDownList(ArrayHelper::merge(['0' => 'Все'],
                     ArrayHelper::map(Block::find()->all(), 'id', 'title'))); ?>
                 <?= $form->field($model, 'groups')->textarea(['rows' => 3]) ?>
                 <?= $form->field($model, 'curator')->textarea(['rows' => 3]) ?>
             </div>
-            <div class="col-4">
-                <?= $form->field($model, 'weight')->textInput() ?>
-                <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
+            <div class="col-6">
+                <?= $form->field($model, 'description')->widget(
+                    Widget::class,
+                    [
+                        'settings' => [
+                            'lang' => 'ru',
+                            'minHeight' => 300,
+                            'plugins' => [
+                                'fullscreen',
+                            ],
+                        ],
+                    ]
+                ); ?>
             </div>
         </div>
     </div>

@@ -4,8 +4,11 @@ namespace app\modules\kr\models;
 
 use app\models\Model;
 use app\modules\kr\Module;
+use Da\QrCode\Contracts\ErrorCorrectionLevelInterface;
+use Da\QrCode\QrCode;
 use Yii;
 use yii\helpers\ArrayHelper;
+use yii\helpers\FileHelper;
 
 /**
  * This is the model class for table "kr_timetable".
@@ -42,9 +45,9 @@ class Timetable extends Model
     public function rules()
     {
         return [
-            [['title', 'date', 'curator', 'weight','block_id'], 'required'],
-            [['weight','block_id'], 'integer'],
-            [['description','groups'], 'string'],
+            [['title', 'date', 'curator', 'weight', 'block_id'], 'required'],
+            [['weight', 'block_id'], 'integer'],
+            [['description', 'groups'], 'string'],
             [['title', 'date', 'curator', 'img', 'link'], 'string', 'max' => 255],
         ];
     }
@@ -63,8 +66,8 @@ class Timetable extends Model
                 'description' => Module::t('timetable', 'Description'),
                 'img' => Module::t('timetable', 'Img'),
                 'link' => Module::t('timetable', 'Link'),
-                'block_id'=>Module::t('timetable', 'Block'),
-               'groups' =>Module::t('timetable', 'Groups'),
+                'block_id' => Module::t('timetable', 'Block'),
+                'groups' => Module::t('timetable', 'Groups'),
             ]
         );
     }
@@ -82,5 +85,26 @@ class Timetable extends Model
     public static function getMaxWeight()
     {
         return self::find()->max('weight');
+    }
+
+    // Создание QR-кода
+    public function createQR()
+    {
+        // Создаём директорию
+        $dir = Yii::$app->params['module']['kr']['timetable']['path'] . $this->id . '/';
+        FileHelper::createDirectory($dir, $mode = 0777, $recursive = true);
+
+        // Создаём QR-коды
+        if (isset($this->link) && $this->link != '') {
+            $qrCode = (new QrCode($this->link))
+                ->setSize(300)
+                ->setMargin(5)
+                ->useForegroundColor(84, 73, 158)
+                ->useLogo(Yii::getAlias('@webroot') . "/logo/rt_logo_350.jpg")
+                ->setErrorCorrectionLevel(ErrorCorrectionLevelInterface::HIGH)
+                ->setLogoWidth(100);
+            $qrCode->writeFile($dir  . 'link.png'); // writer defaults to PNG when none is specified
+        }
+
     }
 }
