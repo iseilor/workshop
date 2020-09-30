@@ -18,7 +18,7 @@ class TeamSearch extends Team
     {
         return [
             [['id', 'created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by', 'birth'], 'integer'],
-            [['name', 'full_name', 'filial', 'position', 'department', 'email', 'phone', 'address', 'photo', 'about'], 'safe'],
+            [['name', 'full_name', 'filial', 'position', 'department', 'email', 'phone', 'address', 'photo', 'about','weight'], 'safe'],
         ];
     }
 

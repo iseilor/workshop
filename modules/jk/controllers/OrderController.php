@@ -537,7 +537,8 @@ class OrderController extends Controller
     }
 
 
-    /** Проверка заявки куратором
+    /**
+     * Проверка заявки куратором
      *
      * @param $id Номер заявки
      *
@@ -603,6 +604,81 @@ class OrderController extends Controller
 
         return $this->render(
             'check',
+            [
+                'order' => $this->findModel($id),
+                'stage' => $orderStage,
+                'user' => User::findOne($this->findModel($id)->created_by),
+                'stages' => $stages,
+            ]
+        );
+    }
+
+    /**
+     * Оформление документов куратором
+     *
+     * @param $id Номер заявки
+     *
+     * @return string|\yii\web\Response
+     * @throws \yii\web\NotFoundHttpException
+     */
+    public function actionDoc($id)
+    {
+        $orderStage = new OrderStage();
+        $orderStage->order_id = $id;
+
+        if (isset(Yii::$app->request->post()['status_code'])) {
+            $statusCode = Yii::$app->request->post()['status_code'];
+            $orderStage->status_id = Status::findOne(['code' => $statusCode])->id;
+        }
+
+        if ($orderStage->load(Yii::$app->request->post()) && $orderStage->save()) {
+            $order = $this->findModel($id);
+            $order->status_id = $orderStage->status_id;
+            $order->save();
+
+            // В зависимости от нового статуса шлём разные письма сотруднику
+            $user = User::findOne($order->created_by);
+            $emailTemplate = '';
+            $emailTitle = '';
+
+            switch ($statusCode) {
+                case 'CURATOR_RETURN':
+                    $emailTemplate = 'check/userReturn';
+                    $emailTitle = 'Возвращено куратором на доработку';
+                    break;
+                case 'CURATOR_NO':
+                    $emailTemplate = 'check/userNo';
+                    $emailTitle = 'Отклонено куратором';
+                    break;
+                case 'FINISH':
+                    $emailTemplate = 'finish/user';
+                    $emailTitle = 'Заявка выполнена';
+                    break;
+
+            }
+            Yii::$app->mailer->compose(
+                '@app/modules/jk/mails/' . $emailTemplate,
+                [
+                    'user' => $user,
+                    'order' => $order,
+                    'stage' => $orderStage,
+                ]
+            )
+                ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
+                ->setTo($user->email)
+                ->setBcc(Yii::$app->params['supportEmail'])
+                ->setSubject($order->getEmailSubject($emailTitle))
+                ->send();
+
+            return $this->redirect(['index']);
+        }
+
+        // История движения заявки
+        $orderStageSearchModel = new OrderStageSearch();
+        $stages = $orderStageSearchModel->search(['OrderStageSearch' => ['order_id' => $id]]);
+
+        return $this->render(
+            'doc',
             [
                 'order' => $this->findModel($id),
                 'stage' => $orderStage,
@@ -763,34 +839,46 @@ class OrderController extends Controller
      */
     public function actionSetNewStatus($id)
     {
-        Yii::$app->session->setFlash('success', "Ваша заявка успешно отправлена");
-
-        // Сохраняем новый статус заявки
+        // Получаем новый статус заявки
         $newStatusCode = $_GET['new-status-code'];
         $newStatus = Status::findOne(['code' => $newStatusCode]);
         $order = Order::findOne($id);
         $order->status_id = $newStatus->id;
-        $order->save();
 
-        // В зависимости от нового статуса
-        switch ($newStatus->code) {
-            case 'MANAGER_WAIT':
-                $order->sendManager();
-                $order->setNewStatus($newStatusCode);
-                break;
-            case 'CURATOR_CHECK':
-                $order->sendCurator();
-                break;
+        if ($order->save()) {
+            Yii::$app->session->setFlash('success', "Ваша заявка успешно отправлена");
+
+            // В зависимости от нового статуса
+            switch ($newStatus->code) {
+                case 'MANAGER_WAIT':
+                    $order->sendManager();
+                    $order->setNewStatus($newStatusCode);
+                    break;
+                case 'CURATOR_CHECK':
+                    $order->sendCurator();
+                    break;
+                case 'DOC':
+                    $order->sendCuratorDoc();
+                    break;
+            }
+
+            // Сохраняем в историю движения заявки
+            $orderStage = new OrderStage();
+            $orderStage->order_id = $id;
+            $orderStage->status_id = $newStatus->id;
+            $orderStage->comment = $newStatus->title;
+            $orderStage->save();
+
+            return $this->redirect(['/jk/order/view/', 'id' => $id]);
+        } else {
+            $errors = '';
+            foreach ($order->errors as $error) {
+                $errors .= $error[0] . '<br/>';
+            }
+            Yii::$app->session->setFlash('danger', $errors);
+            return $this->redirect(['/jk/order/view/', 'id' => $id]);
         }
 
-        // Сохраняем в историю движения заявки
-        $orderStage = new OrderStage();
-        $orderStage->order_id = $id;
-        $orderStage->status_id = $newStatus->id;
-        $orderStage->comment = $newStatus->title;
-        $orderStage->save();
-
-        return $this->redirect(['/jk/order/view/', 'id' => $id]);
     }
 
     // Формирование заявления
@@ -861,7 +949,7 @@ class OrderController extends Controller
                 $user->tab_number,
                 $user->work_phone,
                 $user->email,
-                ($order->is_participate>0)?'участвовали':'не участвовали',
+                ($order->is_participate > 0) ? 'участвовали' : 'не участвовали',
 
                 // Проценты
                 $order->getPcRate(),
@@ -881,7 +969,7 @@ class OrderController extends Controller
                 $order->jp_new_area,
                 $order->jp_new_room_count,
                 (isset($order->is_new_building) && $order->is_new_building) ? 'новостройка' : 'вторичка',
-                (isset($order->jp_new_type))?Order::getJPTypeList()[$order->jp_new_type]:'квартира',
+                (isset($order->jp_new_type)) ? Order::getJPTypeList()[$order->jp_new_type] : 'квартира',
 
                 $order->family_own,
                 (isset($order->family_rent) && $order->family_rent)

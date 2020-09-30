@@ -927,6 +927,47 @@ class Order extends Model
     }
 
 
+    /**
+     * Отправляем заявку куратору на проверку, после того, как сотрудник приложил все необходимые документы
+     */
+    public function sendCuratorDoc()
+    {
+        // Сотрудник и куратор
+        $user = User::findOne($this->created_by);
+        $rf = Rf::findOne($user->filial_id);
+        $curator = User::findOne($rf->user_id);
+
+        // Отправляем письмо куратору
+        Yii::$app->mailer->compose(
+            '@app/modules/jk/mails/doc/curator',
+            [
+                'user' => $user,
+                'curator' => $curator,
+                'order' => $this,
+            ]
+        )
+            ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
+            ->setTo($curator->email)
+            ->setBcc(Yii::$app->params['supportEmail'])
+            ->setSubject($this->getEmailSubject('Оформление документов'))
+            ->send();
+
+        // Отправляем письмо сотруднику
+        Yii::$app->mailer->compose(
+            '@app/modules/jk/mails/doc/user',
+            [
+                'user' => $user,
+                'curator' => $curator,
+                'order' => $this,
+            ]
+        )
+            ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
+            ->setTo($user->email)
+            ->setBcc(Yii::$app->params['supportEmail'])
+            ->setSubject($this->getEmailSubject('Оформление документов'))
+            ->send();
+    }
+
     // Однотипный заголовок по всем письмам при работе с заявкой+
     public function getEmailSubject($title)
     {

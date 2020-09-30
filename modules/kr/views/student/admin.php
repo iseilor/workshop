@@ -55,7 +55,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     'format' => 'html',
                 ],
                 'total',
-                'created_at:datetime',
                 'updated_at:datetime',
                 'updatedUserLink:html',
                 //'description:ntext',

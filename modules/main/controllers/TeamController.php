@@ -37,6 +37,7 @@ class TeamController extends Controller
     {
         $searchModel = new TeamSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->setSort(['defaultOrder' => ['weight' => SORT_ASC]]);
 
         return $this->render(
             'index',
@@ -55,6 +56,7 @@ class TeamController extends Controller
     {
         $searchModel = new TeamSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        //$dataProvider->setSort(['defaultOrder' => ['weight' => SORT_ASC]]);
 
         return $this->render(
             'admin',

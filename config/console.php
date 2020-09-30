@@ -98,6 +98,11 @@ $config = [
     'params' => $params,
 
     'controllerMap' => [
+        'migrate-main' => [
+            'class' => 'yii\console\controllers\MigrateController',
+            'migrationPath' => '@app/modules/main/migrations',
+            'migrationTable' => 'migration_main',
+        ],
         'migrate-user' => [
             'class' => 'yii\console\controllers\MigrateController',
             'migrationPath' => '@app/modules/user/migrations',

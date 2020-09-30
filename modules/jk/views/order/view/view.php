@@ -29,7 +29,7 @@ $this->title .= ' ' . $model->status->label;
                         ['name' => Icon::show('female') . 'Супруг(а)', 'id' => 'spouse', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
                         ['name' => Icon::show('baby') . 'Дети', 'id' => 'child', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
                         ['name' => Icon::show('users') . 'Семья', 'id' => 'family', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
-                        ['name' => Icon::show('home') . 'Жилищная Программа', 'id' => 'house', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
+                        ['name' => Icon::show('home') . 'Жильё', 'id' => 'house', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
                         ['name' => Icon::show('file-invoice-dollar') . 'Ипотека', 'id' => 'ipoteka', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
                         ['name' => Icon::show('ruble-sign') . 'Финансы', 'id' => 'money', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
                         ['name' => Icon::show('tasks') . 'Согласования', 'id' => 'check', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
@@ -75,6 +75,12 @@ $this->title .= ' ' . $model->status->label;
                     <?php if (in_array($model->status_id,[Status::findOne(['code' => 'CURATOR_RETURN'])->id])): ?>
                         <?= $this->render('btn/restart', ['model' => $model]) ?>
                     <?php endif; ?>
+
+                    <!-- Приложить документы и отправить заяку уже после решения коммиссии-->
+                    <?php if (in_array($model->status_id,[Status::findOne(['code' => 'COMMISSION_YES'])->id])): ?>
+                        <?= $this->render('btn/doc', ['model' => $model]) ?>
+                    <?php endif; ?>
+
 
 
                     <div class="float-right">
