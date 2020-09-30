@@ -104,3 +104,27 @@ var donutChart = new Chart(donutChartCanvas, {
     data: donutData,
     options: donutOptions
 });
+
+// Отказы, сгруппированные по статусам --------------------------------------------------------------------------
+var donutChartCanvas = $('#stopGroupStatus').get(0).getContext('2d');
+var donutData = {
+    labels: Object.values(statuses),
+    datasets: [
+        {
+            data: Object.values(ordersStopGroupStatus),
+            backgroundColor: Object.values(statusColors),
+        }
+    ]
+};
+var donutOptions = {
+    maintainAspectRatio: false,
+    responsive: true,
+    legend: {
+        display: false,
+    }
+};
+var donutChart = new Chart(donutChartCanvas, {
+    type: 'doughnut',
+    data: donutData,
+    options: donutOptions
+});

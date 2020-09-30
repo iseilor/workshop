@@ -51,18 +51,27 @@ foreach ($statusColors as $key=>&$value) {
 $orderCount = Order::find()->access()->count();
 $orderStopCount = OrderStop::find()->access()->count();
 
+// Отказы сгруппированные по статусам заявки
+$ordersStopGroupStatus = OrderStop::find()
+    ->select(['COUNT(*) AS cnt','jk_stop.status_id'])
+    ->leftJoin('jk_stop', 'jk_stop.id = jk_order_stop.stop_id')
+    ->groupBy(['jk_stop.status_id'])
+    ->asarray()->all();
+$ordersStopGroupStatus = ArrayHelper::map($ordersStopGroupStatus, 'status_id', 'cnt');
+
 
 // Сообщения, ожидающие ответа от куратора
+/*
 $messagesGroup = Message::find()
     ->select(['max(id) as max','user_id','count(*) as cnt'])
     ->groupBy(['user_id'])
-    ->all();
+    ->all()->asarray();
 $userLastMessage = ArrayHelper::map($messagesGroup, 'user_id', 'max');
 $messagesUser = Message::find()->select('*')->WHERE(['in', 'id', $userLastMessage]) ->andWhere(['is_curator'=>false])->count();
 $messagesUserBadge = '';
 if ($messagesUser>0){
     $messagesUserBadge = Html::tag('span',$messagesUser,['class'=>'badge bg-danger']);
-}
+}*/
 ?>
 
     <div class="row">
@@ -140,6 +149,20 @@ if ($messagesUser>0){
                 </div>
             </div>
         </div>
+
+        <!-- Отказы сотрудников, сгруппированные по статусам -->
+        <div class="col-12 col-sm-6 col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="chart">
+                        <h6>Отказы сотрудников, сгруппированные по статусам</h6>
+                        <canvas id="stopGroupStatus" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
     </div>
 
     <section class="content d-none">
@@ -183,3 +206,6 @@ $this->registerJsVar('statusColors',$statusColors, yii\web\View::POS_HEAD);
 // Отказы
 $this->registerJsVar('orderCount', $orderCount, yii\web\View::POS_HEAD);
 $this->registerJsVar('orderStopCount', $orderStopCount, yii\web\View::POS_HEAD);
+
+// Отказы, сгруппированные по статусам
+$this->registerJsVar('ordersStopGroupStatus',$ordersStopGroupStatus, yii\web\View::POS_HEAD);
