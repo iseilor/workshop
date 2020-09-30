@@ -49,7 +49,7 @@ $dataProvider = new ActiveDataProvider([
             [
                 'class' => ActionColumn::class,
                 'controller' => '/jk/percent',
-                'template'=>'{update} {delete}',
+                'template'=>'{update}',
                 'buttons' => [
                     'update' => function ($url, $model, $key) {
                         return Html::a(Icon::show('calculator'), $url, [

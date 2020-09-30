@@ -49,6 +49,7 @@ $dataProvider = new ActiveDataProvider([
             [
                 'class' => ActionColumn::class,
                 'controller' => '/jk/order',
+                'template' => '{view} {update}',
             ],
         ],
     ]
