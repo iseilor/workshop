@@ -341,11 +341,19 @@ $temporaryRegistrationFileIsRequired = empty($passport->temporary_registration_f
 $script = <<< JS
 $(document).ready(function() {
     $('div.field-order-jp_room_count').addClass('required');
-    $('div.field-order-file_rent_form').addClass('d-none');
-    $('div.field-order-file_social_contract_form').addClass('d-none');
-    $("div.field-order-resident_type").addClass('d-none');
     $('div.field-order-jp_room_count').addClass('d-none');
     $('div.field-user-tab_number').addClass('required');
+    if ($('#order-resident_count').val() < 2) {
+        $("div.field-order-resident_type").addClass('d-none');
+    }
+    $('div.field-order-file_social_contract_form').addClass('required');
+    if ($('#order-resident_own_type').val() != 4) {
+        $('div.field-order-file_social_contract_form').addClass('d-none');
+    }
+    $('div.field-order-file_rent_form').addClass('required');
+    if ($('#order-resident_own_type').val() != 3) {
+        $('div.field-order-file_rent_form').addClass('d-none');
+    }
     
     $("#order-jp_room_count").inputmask({regex: "[0-9]+", rightAlign: false,});
     $("#order-resident_count").inputmask({regex: "[0-9]+", rightAlign: false,});
@@ -367,7 +375,10 @@ $(document).ready(function() {
         if ($("#order-resident_own_type").val() == 3) {
             $('div.field-order-file_rent_form').removeClass('d-none');
             $('div.field-order-file_rent_form').addClass('required');
-            $('#order-file_rent_form').attr('required', true);
+            if (!$('.field-order-file_rent_form label[for=exampleInputFile]').html()) {
+                $('#order-file_rent_form').attr('required', true);
+            }
+            
         } else {
             $('div.field-order-file_rent_form').addClass('d-none');
             $('div.field-order-file_rent_form').removeClass('required');
@@ -377,7 +388,10 @@ $(document).ready(function() {
         if ($("#order-resident_own_type").val() == 4) {
             $('div.field-order-file_social_contract_form').removeClass('d-none');
             $('div.field-order-file_social_contract_form').addClass('required');
-            $('#order-file_social_contract_form').attr('required', true);
+            if (!$('.field-order-file_social_contract_form label[for=exampleInputFile]').html()) {
+                $('#order-file_social_contract_form').attr('required', true);
+            }
+            
         } else {
             $('div.field-order-file_social_contract_form').addClass('d-none');
             $('div.field-order-file_social_contract_form').removeClass('required');

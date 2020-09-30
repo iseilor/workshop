@@ -186,7 +186,7 @@ class Order extends Model
                 /*'extensions' => 'pdf',*/
                 'maxSize' => '10000000',
             ],
-            [['resident_own_type'], 'integer'],
+            [['resident_own_type', 'resident_type'], 'integer'],
             //
             //            // Супруга
             //            [['is_spouse', 'spouse_fio', 'spouse_is_dzo', 'spouse_is_do', 'spouse_is_work'], 'safe'],
