@@ -426,9 +426,11 @@ $(document).ready(function() {
     });
     
     // Поле с заявлением о переводе показываем, когда включена галочка
-    if ((!$('.field-user-work_transferred_file').hasClass('d-none')) && $workTransferredFileIsRequired) {
+    if ((!$('.field-user-work_transferred_file').hasClass('d-none'))) {
         $('div.field-user-work_transferred_file').addClass('required');
-        $('#user-work_transferred_file').attr('required', true);
+        if (!$('.field-user-work_transferred_file label[for=exampleInputFile]').html()) {
+            $('#user-work_transferred_file').attr('required', true);
+        }
     }
     $('#user-work_is_transferred').on('click', function() {
         $('.field-user-work_transferred_file').toggleClass('d-none');
@@ -438,8 +440,8 @@ $(document).ready(function() {
             $('#user-work_transferred_file').attr('required', false);
         } else {
             $('div.field-user-work_transferred_file').removeClass('d-none');
-            if ($workTransferredFileIsRequired) {
-                $('div.field-user-work_transferred_file').addClass('required');
+            $('div.field-user-work_transferred_file').addClass('required');
+            if (!$('.field-user-work_transferred_file label[for=exampleInputFile]').html()) {
                 $('#user-work_transferred_file').attr('required', true);
             }
         }
@@ -449,14 +451,18 @@ $(document).ready(function() {
     // Поле с Справка из соц.защите показываем, когда включена галочка
     if (!$('.field-order-file_social_protection_form').hasClass('d-none')) {
         $('div.field-order-file_social_protection_form').addClass('required');
-        $('#order-file_social_protection_form').attr('required', true);
+        if (!$('.field-order-file_social_protection_form label[for=exampleInputFile]').html()) {
+            $('#order-file_social_protection_form').attr('required', true);
+        }
     }
     $('#order-is_poor').on('click', function() {
         $('.field-order-file_social_protection_form').toggleClass('d-none');
         if ($('.field-order-file_social_protection_form').hasClass('d-none')) {
             $('div.field-order-file_social_protection_form').addClass('d-none');
             $('div.field-order-file_social_protection_form').removeClass('required');
-            $('#order-file_social_protection_form').attr('required', false);
+            if (!$('.field-order-file_social_protection_form label[for=exampleInputFile]').html()) {
+                $('#order-file_social_protection_form').attr('required', false);
+            }
         } else {
             $('div.field-order-file_social_protection_form').removeClass('d-none');
             $('div.field-order-file_social_protection_form').addClass('required');
