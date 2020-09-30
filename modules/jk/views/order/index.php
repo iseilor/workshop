@@ -64,7 +64,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             // Кнопка только если в статусе ПРОВЕРКА КУРАТОРОМ
                         'class' => ActionColumn::class,
                         'controller' => '/jk/order',
-                        'template' => '{check} {commission} {view} {update} {delete}',
+                        'template' => '{check} {commission} {doc} {view} {update} {delete}',
                         'headerOptions' => ['style' => 'min-width: 170px;'],
                         'buttons' => [
                             'check' => function ($url, $model, $key) {
@@ -84,6 +84,20 @@ $this->params['breadcrumbs'][] = $this->title;
                                         'class' => 'btn btn-sm btn-success',
                                         'title' => 'Жилищная комиссия',
                                         'data-pjax' => '0',
+                                    ]);
+                                } else {
+                                    return '';
+                                }
+                            },
+
+                            // Оформление документов
+                            'doc' => function ($url, $model, $key) {
+                                if ($model->status->code == 'DOC') {
+                                    return Html::a(Icon::show('file-word'), $url, [
+                                        'class' => 'btn btn-sm bg-purple',
+                                        'title' => 'Оформление документов',
+                                        'data-pjax' => '0',
+                                        'style'=>'width: 35px;'
                                     ]);
                                 } else {
                                     return '';

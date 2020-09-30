@@ -35,7 +35,7 @@ use yii\widgets\DetailView;
                         [
                             'format' => 'raw',
                             'label' => 'Заявка',
-                            'value' => Html::a('№28 (Открыть заявку на просмотр в отдельном окне ' . Icon::show('external-link-alt').')',
+                            'value' => Html::a('№'.$model->id.' (Открыть заявку на просмотр в отдельном окне ' . Icon::show('external-link-alt').')',
                                 ['/jk/order/' . $model->id], ['target' => '_blank']),
                         ],
                         'created_at:datetime',
