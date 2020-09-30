@@ -59,6 +59,9 @@ use yii\web\UploadedFile;
  * @property double   money_month_pay
  * @property double   money_user_pay
  * @property string   other_income_file
+ * @property string   docs_egrn_file
+ * @property string   docs_loan_agreement_file
+ * @property string   docs_additional_agreement_file
  *
  * @property integer  $resident_own_type
  * @property boolean  $is_poor
@@ -135,6 +138,12 @@ class Order extends Model
     public $order_file_form;
 
     public $other_income_file_form;
+
+    public $docs_egrn_file_form;
+
+    public $docs_loan_agreement_file_form;
+
+    public $docs_additional_agreement_file_form;
 
     /**
      * @var mixed|null
@@ -313,6 +322,16 @@ class Order extends Model
                 'skipOnEmpty' => true,
             ],
 
+            // Вкладка Документы
+            [
+                [
+                    'docs_egrn_file_form',
+                ],
+                'file',
+                'skipOnEmpty' => true,
+                'maxSize' => '20048000',
+            ],
+
         ];
 
 
@@ -485,6 +504,10 @@ class Order extends Model
             'spravka_zp_file_form' => Module::t('order', 'Spravka ZP'),
             'is_do' => Module::t('order', 'Is DO'),
             'other_income_file_form' => Module::t('order', 'Other Income'),
+
+            'docs_egrn_file_form' => Module::t('order', 'Docs Egrn File'),
+            'docs_loan_agreement_file_form' => Module::t('order', 'Docs Loan Agreement File'),
+            'docs_additional_agreement_file_form' => Module::t('order', 'Docs Additional Agreement File'),
         ];
     }
 
@@ -545,6 +568,12 @@ class Order extends Model
             'jp_total_area' => 'В сумме также учитываются сделки по отчуждению жилых помещений, прошедшие в течение 5 лет от даты подачи заявления на Жилищную комиссию. Общая площадь считается по всем членам семьи с учетом доли собственности.',
             'jp_address' => '<strong>Пример:</strong><br/>
                 111112 г. Москва, ул. Нагатинская, д.2, стр.2, кв.2, 1 комната.',
+
+            'docs_egrn_file_form' => 'В поле вкладывает выписка/уведомление Управления федеральной регистрационной службы о наличии в Едином государственном реестре
+                прав на недвижимое имущество и сделок с ним (ЕГРН) прав собственности на жилые помещения и сделок с ними по всей территории РФ за последние 5 лет 
+                (с января соответствующего года по н.в.), предыдущие подаче заявления (утверждена ФЗ о государственной регистрации недвижимости от 13.07.2015 № 218-ФЗ). 
+                Кроме самой выписки в обязательном порядке в поле необходимо вложить: скан-копию запроса на ЕГРН и ЭЦП (при наличии). 
+                Если у Вас/супруги когда-либо изменялась фамилия, то в запросе на получение ЕГРН необходимо указать все фамилии.',
         ];
     }
 
@@ -601,6 +630,10 @@ class Order extends Model
             'spravka_zp_file',
             'order_file',
             'other_income_file',
+
+            'docs_egrn_file',
+            'docs_loan_agreement_file',
+            'docs_additional_agreement_file',
         ];
 
         // Сохраняем данные

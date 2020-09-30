@@ -79,7 +79,7 @@ $model->filling_step++;
                                         $tabs[] = ['name' => Icon::show('ruble-sign') . 'Финансы', 'id' => 'money', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''];
                                     }
                                     if ($model->filling_step >= 7) {
-                                        $tabs[] = ['name' => Icon::show('file-alt') . 'Согласия на обработку ПД', 'id' => 'agreement', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''];
+                                        $tabs[] = ['name' => Icon::show('file-alt') . 'Документы', 'id' => 'agreement', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''];
                                     }
 
 

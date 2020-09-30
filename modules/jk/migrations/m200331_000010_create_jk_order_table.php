@@ -137,7 +137,11 @@ class m200331_000010_create_jk_order_table extends Migration
 
                 'filling_step' => $this->integer(),         // Шаг заполнения формы
                 'resident_own_type'=> $this->integer(),
-                'is_poor'=>$this->boolean()
+                'is_poor'=>$this->boolean(),
+
+                'docs_egrn_file' => $this->text(),                  // ЕГРН по всем членам семьи за последние 5 лет
+                'docs_loan_agreement_file' => $this->text(),        // Договор займа (вложение)
+                'docs_additional_agreement_file' => $this->text(),  // Дополнительное соглашение к Трудовому договору (вложение)
             ],
             $tableOptions
         );

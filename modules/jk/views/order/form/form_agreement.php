@@ -78,6 +78,39 @@ $user = User::findOne(Yii::$app->user->identity->id);
     </div>
 </div>
 
+<div class="card card-solid card-secondary  ">
+    <div class="card-header with-border">
+        <h3 class="card-title">Документы</h3>
+    </div>
+    <div class="card-body">
+
+        <div class="row">
+            <div class="col-md-12">
+                <?= $form->field($model, 'docs_egrn_file_form', [
+                    'template' => getFileInputTemplate($model->docs_egrn_file,
+                        $model->attributeLabels()['docs_egrn_file_form'] . '.pdf'),
+                ])->fileInput(['class' => 'custom-file-input']) ?>
+            </div>
+        </div>
+        <div class="row loan <?= $field_zaim ?>">
+            <div class="col-md-12">
+                <?= $form->field($model, 'docs_loan_agreement_file_form', [
+                    'template' => getFileInputTemplate($model->docs_loan_agreement_file,
+                        $model->attributeLabels()['docs_loan_agreement_file_form'] . '.pdf'),
+                ])->fileInput(['class' => 'custom-file-input']) ?>
+            </div>
+        </div>
+        <div class="row additional <?= $field_percent ?>">
+            <div class="col-md-12">
+                <?= $form->field($model, 'docs_additional_agreement_file_form', [
+                    'template' => getFileInputTemplate($model->docs_additional_agreement_file,
+                        $model->attributeLabels()['docs_additional_agreement_file_form'] . '.pdf'),
+                ])->fileInput(['class' => 'custom-file-input']) ?>
+            </div>
+        </div>
+    </div>
+</div>
+
 <?php if ($model->filling_step == 7): ?>
     <div class="card card-solid card-secondary  ">
         <div class="card-body">
@@ -108,6 +141,15 @@ $(document).ready(function() {
     
     $('div.field-order-file_agree_personal_data_form').addClass('required');
    
+    $('#order-is_mortgage').on('change', function() {
+        if ($(this).val() == 0) {
+            $('.loan').removeClass('d-none');
+            $('.additional').addClass('d-none');
+        } else if ($(this).val() == 1) {
+            $('.loan').addClass('d-none');
+            $('.additional').removeClass('d-none');
+        }
+    });
 });
 JS;
 $this->registerJs($script, yii\web\View::POS_READY);
