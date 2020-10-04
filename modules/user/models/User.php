@@ -453,14 +453,14 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     // Возраст, кол-во полных лет
     public function getYears()
     {
-        return intdiv(mktime() - $this->birth_date, 31556926);
+        return intdiv(time() - $this->birth_date, 31556926);
     }
 
     // Получить стаж, кол-во полных лет
     public function getExperience()
     {
         if ($this->work_date) {
-            return intdiv(mktime() - $this->work_date, 31556926);
+            return intdiv(time() - $this->work_date, 31556926);
         } else {
             return false;
         }
@@ -486,7 +486,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     // Кол-во полных лет до пенсии
     public function getPensionYears()
     {
-        return intdiv(strtotime($this->getPensionDate()) - mktime(), 31556926);
+        return intdiv(strtotime($this->getPensionDate()) - time(), 31556926);
     }
 
     // Проверяем заполненность профиля, если нет, то просим дозаполнить
