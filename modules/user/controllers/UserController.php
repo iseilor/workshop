@@ -29,6 +29,8 @@ class UserController extends Controller
                 'PASSPORT_CODE',
                 'PASSPORT_REGISTRATION',
                 'DATE',
+                'FIO2'
+
             ],
             [
                 $user->fio,
@@ -39,6 +41,7 @@ class UserController extends Controller
                 $user->passport_code,
                 $user->passport_registration,
                 date('d.m.Y'),
+                $user->surname . ' ' . $user->initials
             ]
         );
         $fileUrl = '/files/user/' . $id . '/' . $id . '_pd_' . date('YmdHis') . '.docx';

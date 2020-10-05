@@ -24,7 +24,7 @@ class SpouseController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -172,6 +172,7 @@ class SpouseController extends Controller
                 'PASSPORT_CODE',
                 'PASSPORT_REGISTRATION',
                 'DATE',
+                'FIO2'
             ],
             [
                 $user->fio,
@@ -182,6 +183,7 @@ class SpouseController extends Controller
                 $user->passport_code,
                 $user->passport_registration,
                 date('d.m.Y'),
+                $user->getFioShortDocx()
             ]
         );
         $fileUrl = '/files/spouse/' . $id . '/spouse_' . $id . '_pd_' . date('YmdHis') . '.docx';

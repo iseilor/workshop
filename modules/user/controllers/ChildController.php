@@ -202,6 +202,7 @@ class ChildController extends Controller
                     'PASSPORT_CODE',
                     'PASSPORT_REGISTRATION',
                     'DATE',
+                    'FIO2'
                 ],
                 [
                     $child->fio,
@@ -212,6 +213,7 @@ class ChildController extends Controller
                     $child->passport_code,
                     $child->address_registration,
                     date('d.m.Y'),
+                    $user->surname . ' ' . $user->initials
                 ]
             );
         } else {

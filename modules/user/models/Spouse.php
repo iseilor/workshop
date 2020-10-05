@@ -301,4 +301,11 @@ class Spouse extends Model
         }
         return $this->save();
     }
+
+    // Получаем Иванова И.И. DOCX не воспринимает неразрывный пробел
+    public function getFioShortDocx()
+    {
+        $fio = explode(" ", $this->fio);
+        return $fio[0].' ' . mb_substr($fio[1], 0, 1) . '.' . mb_substr($fio[2], 0, 1) . '.';
+    }
 }
