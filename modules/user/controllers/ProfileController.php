@@ -67,7 +67,7 @@ class ProfileController extends Controller
 
         $experience='';
         if (isset($model->work_date)){
-            $experience = intdiv(mktime() - $model->work_date, 31556926);
+            $experience = intdiv(time() - $model->work_date, 31556926);
         }
 
         return $this->render(

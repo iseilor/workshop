@@ -228,7 +228,7 @@ class Agreement extends Model
             )
                 ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
                 ->setBcc(Yii::$app->params['supportEmail'])
-                ->setTo($user->email) // TODO: Пока отправляем самому же сотруднику, просто в письме обращение к руководителю
+                ->setTo($manager->email) // TODO: Пока отправляем самому же сотруднику, просто в письме обращение к руководителю
                 ->setSubject($order->getEmailSubject("Согласование руководителями"))
                 ->send();
         } else {

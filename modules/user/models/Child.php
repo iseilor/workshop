@@ -345,7 +345,7 @@ class Child extends Model
     // Возраст ребёнка
     public function getAge()
     {
-        return intdiv(mktime() - $this->date, 31556926);
+        return intdiv(time() - $this->date, 31556926);
     }
 
     // Короткая ссылка с иконкой на паспорт

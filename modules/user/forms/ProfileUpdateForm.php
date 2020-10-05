@@ -141,7 +141,7 @@ class ProfileUpdateForm extends Model
 
             // WORK
             $user->tab_number=$this->tab_number;
-            $user->work_date =  mktime() - $this->experience* 31556926; // Стаж
+            $user->work_date =  time() - $this->experience* 31556926; // Стаж
             $user->work_is_young = $this->work_is_young;
             $user->work_is_transferred = $this->work_is_transferred;
 
