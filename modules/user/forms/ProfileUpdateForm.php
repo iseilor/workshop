@@ -113,7 +113,7 @@ class ProfileUpdateForm extends Model
             [['photo'], 'file', 'extensions'=>'jpg, png'],
             [['photo'], 'file', 'maxSize'=>'2048000'],
 
-            [['work_is_young','work_is_transferred','work_transferred_file'], 'safe'],
+            [['work_is_young','work_is_transferred','work_transferred_file', 'tab_number'], 'safe'],
             [['work_transferred_file'], 'file', /*'extensions'=>'pdf'*/],
             [['work_transferred_file'], 'file', 'maxSize'=>'2048000'],
 
