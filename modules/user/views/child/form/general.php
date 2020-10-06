@@ -45,7 +45,7 @@ use yii\jui\DatePicker;
 <?php
 $script = <<< JS
 $(document).ready(function() {
-    $('#child-fio').inputmask({regex: "[А-Яа-я \-]{1,255}"});
+    $('#child-fio').inputmask({regex: "[А-Яа-яёЁ \-]{1,255}"});
     
     arr = $('#child-date').val().split(".");
     var dateChild = new Date(arr[2],arr[1] - 1, arr[0]);
