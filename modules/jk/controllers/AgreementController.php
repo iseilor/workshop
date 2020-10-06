@@ -8,6 +8,7 @@ use app\modules\jk\models\Order;
 use app\modules\jk\models\Status;
 use app\modules\user\models\User;
 use Yii;
+use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -29,7 +30,16 @@ class AgreementController extends Controller
                 'actions' => [
                     'delete' => ['POST'],
                 ],
+            ], 'access' => [
+                'class' => AccessControl::class,
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
             ],
+
         ];
     }
 
