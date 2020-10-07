@@ -251,7 +251,7 @@ class Order extends Model
 
 
             // Вкладка "Ипотека"
-            [['ipoteka_last_date', 'ipoteka_percent', 'zaim_sum', 'ipoteka_start_date'], 'safe'],
+            [['ipoteka_last_date', 'ipoteka_percent', 'zaim_sum', 'ipoteka_start_date', 'ipoteka_target'], 'safe'],
             [['ipoteka_last_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'ipoteka_last_date', 'skipOnEmpty' => true,],
             [['ipoteka_start_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'ipoteka_start_date', 'skipOnEmpty' => true,],
             [
