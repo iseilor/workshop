@@ -141,7 +141,8 @@ class Spouse extends Model
                 'file',
                 'skipOnEmpty' => true,
                 //'extensions' => 'pdf',
-                'maxSize' => '5000000',
+                //'maxSize' => '5000000',
+                'maxSize' => '62914560',
             ],
         ];
 
