@@ -184,7 +184,8 @@ class Order extends Model
                 'file',
                 'skipOnEmpty' => true,
                 /*'extensions' => 'pdf',*/
-                'maxSize' => '10000000',
+                //'maxSize' => '10000000',
+                'maxSize' => '62914560',
             ],
             [['resident_own_type', 'resident_type'], 'integer'],
             //
@@ -266,7 +267,8 @@ class Order extends Model
                 'file',
                 'skipOnEmpty' => true,
                 //                'extensions' => 'pdf, docx',
-                'maxSize' => '20048000',
+                //'maxSize' => '20048000',
+                'maxSize' => '62914560',
             ],
 
             [
@@ -302,7 +304,8 @@ class Order extends Model
                 'file',
                 'skipOnEmpty' => true,
                 //                'extensions' => 'pdf, docx',
-                'maxSize' => '20048000',
+                //'maxSize' => '20048000',
+                'maxSize' => '62914560',
             ],
 
             [['is_do'], 'safe'],
@@ -329,7 +332,8 @@ class Order extends Model
                 ],
                 'file',
                 'skipOnEmpty' => true,
-                'maxSize' => '20048000',
+                //'maxSize' => '20048000',
+                'maxSize' => '62914560',
             ],
 
         ];
