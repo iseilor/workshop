@@ -155,7 +155,8 @@ class Child extends Model
                 'file',
                 'skipOnEmpty' => true,
                 //'extensions' => 'pdf',
-                'maxSize' => '10000000',
+                //'maxSize' => '10000000',
+                'maxSize' => '62914560',
             ],
         ];
 
