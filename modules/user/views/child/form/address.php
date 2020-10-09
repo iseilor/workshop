@@ -5,12 +5,16 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 
 if ($spouse->id == null) {
+    $has_spouse = false;
+    $father_file = '';
     $items = [
         0 => 'Не совпадает',
         1 => 'Работника',
     ];
     $spouse_ar = '';
 } else {
+    $has_spouse = true;
+    $father_file = 'required';
     $items = [
         0 => 'Не совпадает',
         1 => 'Работника',
@@ -68,7 +72,8 @@ $params = [
 
 <?= $form->field($model, 'address_father_file_form', [
     'template' => getFileInputTemplate($model->address_father_file, 'Заявление от отца.pdf'),
-])->fileInput(['class' => 'custom-file-input'])->hint('Заявление составляются полностью от руки. 
+    'options' => ['class' => "$father_file"],
+])->fileInput(['class' => 'custom-file-input', 'required' => $has_spouse])->hint('Заявление составляются полностью от руки. 
     Если в свидетельстве у ребёнка не указан отец, то заявление от папы не нужно. '
     . Html::a(Icon::show('file-pdf', ['framework' => Icon::FAR]) . 'Образец заявления', Url::base().Url::to('/files/child/0-examples/example_address_child.docx'), ['target' => '_blank'])) ?>
 
@@ -86,8 +91,8 @@ $(document).ready(function() {
     $('#child-registration_file_form').attr('required', true);
     $('.field-child-address_mother_file_form').addClass('required');
     $('#child-address_mother_file_form').attr('required', true);
-    $('.field-child-address_father_file_form').addClass('required');
-    $('#child-address_father_file_form').attr('required', true);
+    //$('.field-child-address_father_file_form').addClass('required');
+    //$('#child-address_father_file_form').attr('required', true);
     
     $('#child-address_registration').val('');
     $('div.field-child-ejd_file_form').addClass('required');
