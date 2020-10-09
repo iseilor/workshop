@@ -120,6 +120,9 @@ class ChildController extends Controller
 
         $user = User::findOne($model->user_id);
         $spouse = Spouse::findOne(['user_id' => $user->id]);
+        if (!$spouse) {
+            $spouse = new Spouse();
+        }
         return $this->render('update', [
             'model' => $model,
             'user' => $user,
