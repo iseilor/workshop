@@ -68,6 +68,8 @@ AppAssetAdminLTE::register($this);
 
             <div class="content">
                 <div class="container-fluid">
+
+                    <?=var_dump($_SERVER)?>
                     <?= Alert::widget() ?>
                     <?= $content ?>
                 </div>
