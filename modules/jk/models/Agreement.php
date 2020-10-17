@@ -165,7 +165,7 @@ class Agreement extends Model
     {
         $manager = User::findOne($this->user_id);
         $user = User::findOne($this->created_by);
-        $order  = Order::findOne($this->order_id);
+        $order = Order::findOne($this->order_id);
 
         Yii::$app->mailer->compose(
             '@app/modules/jk/mails/manager/success',
@@ -187,7 +187,7 @@ class Agreement extends Model
     {
         $manager = User::findOne($this->user_id);
         $user = User::findOne($this->created_by);
-        $order  = Order::findOne($this->order_id);
+        $order = Order::findOne($this->order_id);
         Yii::$app->mailer->compose(
             '@app/modules/jk/mails/manager/danger',
             [
@@ -223,12 +223,12 @@ class Agreement extends Model
                     'user' => $user,
                     'manager' => $manager,
                     'agreement' => $agreement,
-                    'order'=>$order
+                    'order' => $order,
                 ]
             )
                 ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
                 ->setBcc(Yii::$app->params['supportEmail'])
-                ->setTo($manager->email) // TODO: Пока отправляем самому же сотруднику, просто в письме обращение к руководителю
+                ->setTo(YII_ENV_PROD ? $manager->email : $user->email) // В DEV-версии отправляем письмо самому сотруднику
                 ->setSubject($order->getEmailSubject("Согласование руководителями"))
                 ->send();
         } else {
