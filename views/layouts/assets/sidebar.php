@@ -28,7 +28,7 @@ if ($jkInstructionDoc) {
         <img src="<?= Yii::$app->homeUrl ?>logo/logo.png" alt='<?= Yii::$app->name; ?>' title='<?= Yii::$app->name; ?>'
              class="brand-image img-circle elevation-3"
              style="opacity: .8">
-        <span class="brand-text font-weight-light"><?=YII_ENV_PROD?'HR.CENTER.RT.RU':'DEV'?></span>
+        <span class="brand-text font-weight-light"><?= YII_ENV_PROD ? 'HR.CENTER.RT.RU' : 'DEV' ?></span>
     </a>
 
     <div class="sidebar">
@@ -46,11 +46,11 @@ if ($jkInstructionDoc) {
                 <div class="info">
                     <?php
                     // Если это куратора, то кабинет куратора, иначе просто кабинет сотрудника
-                    $curatorsAll=Rf::find()->all();
-                    $curators = ArrayHelper::map($curatorsAll,'id','user_id');
-                    if (in_array( Yii::$app->user->identity->id, $curators)) {
+                    $curatorsAll = Rf::find()->all();
+                    $curators = ArrayHelper::map($curatorsAll, 'id', 'user_id');
+                    if (in_array(Yii::$app->user->identity->id, $curators)) {
                         echo Html::a('Кабинет куратора', Yii::$app->homeUrl . 'jk/admin');
-                    }else{
+                    } else {
                         echo Html::a('Мой кабинет', Yii::$app->homeUrl . 'user/cabinet');
                     }
                     ?>
@@ -123,7 +123,10 @@ if ($jkInstructionDoc) {
                         ],
 
                         // Пенсионная программа
-                        ['label' =>  Icon::show('coins', ['class' => 'nav-icon']).Html::tag('p','Пенсионная программа'), 'url' => ['/pp/default/index']],
+                        [
+                            'label' => Icon::show('coins', ['class' => 'nav-icon']) . Html::tag('p', 'Пенсионная программа'),
+                            'url' => ['/pp/default/index'],
+                        ],
 
                         // Высшая лига (Кадровый резерв)
                         [
@@ -147,7 +150,7 @@ if ($jkInstructionDoc) {
                         ],
 
                         // Star Talk
-                        ['label' =>  Icon::show('star', ['class' => 'nav-icon']).Html::tag('p','Star Talk'), 'url' => ['/st/default/index']],
+                        ['label' => Icon::show('star', ['class' => 'nav-icon']) . Html::tag('p', 'Star Talk'), 'url' => ['/st/default/index']],
 
                         // О проекте
                         [
