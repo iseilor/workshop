@@ -163,7 +163,7 @@ class Order extends Model
     public function rules()
     {
         $rules = [
-            [['filling_step'], 'safe'],
+            [['filling_step', 'ipoteka_grafic'], 'safe'],
 
 
             // Общие параметры заявки
