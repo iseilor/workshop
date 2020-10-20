@@ -896,8 +896,7 @@ class Order extends Model
         $orderStage = new OrderStage();
         $orderStage->order_id = $this->id;
         $orderStage->status_id = $newStatus->id;
-        //$orderStage->comment = $newStatus->title;
-        $orderStage->comment = 'По решению Горшковой Л.А. заявка принудительно переведена в статус "Проверка куратором". https://ihelp.rt.ru/browse/HRCENTER-21';
+        $orderStage->comment = $newStatus->title;
         $orderStage->save();
 
         // Отправляем письмо куратору
