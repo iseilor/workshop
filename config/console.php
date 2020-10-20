@@ -59,6 +59,10 @@ $config = [
             'class' => 'app\modules\st\Module',
             'controllerNamespace' => 'app\modules\st\commands',
         ],
+        'jk' => [
+            'class' => 'app\modules\jk\Module',
+            'controllerNamespace' => 'app\modules\jk\commands',
+        ],
     ],
     'components' => [
         'ad' => [
