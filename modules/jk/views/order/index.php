@@ -64,9 +64,23 @@ $this->params['breadcrumbs'][] = $this->title;
                             // Кнопка только если в статусе ПРОВЕРКА КУРАТОРОМ
                         'class' => ActionColumn::class,
                         'controller' => '/jk/order',
-                        'template' => '{check} {commission} {doc} {view} {update} {delete}',
+                        'template' => '{2curator} {check} {commission} {doc} {view} {update} {delete}',
                         'headerOptions' => ['style' => 'min-width: 170px;'],
                         'buttons' => [
+                            // Отправить принудительно на проверку куратору
+                            '2curator' => function ($url, $model, $key) {
+                                if ($model->status->code == 'MANAGER_WAIT') {
+                                    return Html::a(Icon::show('user-check'), $url, [
+                                        'class' => 'btn btn-sm bg-purple',
+                                        'title' => 'На проверку куратору',
+                                        'data-pjax' => '0',
+                                        'style'=>'width: 35px;'
+                                    ]);
+                                } else {
+                                    return '';
+                                }
+                            },
+
                             'check' => function ($url, $model, $key) {
                                 if ($model->status->code == 'CURATOR_CHECK') {
                                     return Html::a(Icon::show('check'), $url, [

@@ -801,17 +801,11 @@ class OrderController extends Controller
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
     }
 
-    // Передаём заявку куратору на проверку
+    // Принудительно передаём заявку на проверку куратору
     public function action2curator($id)
     {
-        $order = Order::findOne($id);
-        $order->status_id = Status::findOne(['code' => 'MANAGER_WAIT'])->id;
-        $order->save();
-
-        Yii::$app->session->setFlash('success', "Начат процесс согласования вашей заявки на оказание материальной помощи<br/>
-        Вы будете получать email-уведомления, а также можете смотреть через личный кабинет, у кого из руководителей заявка в данный момент находится на согласовании");
-        return $this->redirect(['/jk/order/view/', 'id' => $id]);
-
+        $this->findModel($id)->sendCurator();
+        return $this->redirect(['index']);
     }
 
     public function actionPdAgreement($id)
