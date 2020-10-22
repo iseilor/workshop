@@ -1178,7 +1178,9 @@ class Order extends Model
             ->where(['<=', 'income_bottom', $monthlyPerMemberIncome])
             ->andWhere(['>=', 'income_top', $monthlyPerMemberIncome])
             ->one();
-
+        if (!$aidStandart) {
+            return 0;
+        }
         $lastCompanyDate = mktime(0, 0, 0, 12, 31, $this->companyYear - 1);
         // Считаем исходя из 365 дней в году
         $age = ($lastCompanyDate - $this->user->birth_date) / 60 / 60 / 24 / 365;
@@ -1237,6 +1239,9 @@ class Order extends Model
             ->where(['<=', 'income_bottom', $monthlyPerMemberIncome])
             ->andWhere(['>=', 'income_top', $monthlyPerMemberIncome])
             ->one();
+        if (!$aidStandart) {
+            return 0;
+        }
 
         return (integer) min($retRes, $aidStandart->compensation_years_zaim);
     }
