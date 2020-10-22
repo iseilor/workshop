@@ -110,4 +110,13 @@ return [
     'Docs Egrn File' => 'ЕГРН за 5 лет по всем членам семьи',
     'Docs Loan Agreement File' => 'Договор займа',
     'Docs Additional Agreement File' => 'ДС к Трудовому договору',
+
+    'Percent Compensation Period'       => 'Период оказания материальной помощи',
+    'Percent Compensation Term'         => 'Срок оказания материальной помощи',
+    'Percent Compensation Rate'         => 'Ставка компенсации процентов',
+    'Percent Compensation Max Value'    => 'Максимальная сумма компенсации процентов',
+    'Percent Compensation Max Per Year' => 'Максимальная сумма компенсации процентов в год',
+
+    'Loan Period'       => 'Период оказания материальной помощи',
+    'Loan Max Value'    => 'Максимальный размер займа',
 ];

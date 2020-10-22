@@ -66,6 +66,17 @@ use yii\web\UploadedFile;
  * @property integer  $resident_own_type
  * @property boolean  $is_poor
  *
+ * Компенсация %
+ * @property string     $pc_period          Период оказания МП
+ * @property integer    $pc_term            Срок оказания МП
+ * @property double     $pc_rate            Ставка компенсации %%
+ * @property integer    $pc_max_value       Максимальная сумма компенсации %% в целом по ДС
+ * @property integer    $pc_max_per_year    Максимальная сумма компенсации %% в год
+ *
+ * Займ
+ * @property integer    $loan_period     Срок оказания МП
+ * @property integer    $loan_max_val    Максимальный размер займа
+ *
  * @property integer  $filling_step
  *
  * @property User     $user
@@ -284,6 +295,37 @@ class Order extends Model
 
 
             // Вкладка "Финансы"
+            [['pc_period', 'pc_term', 'pc_rate', 'pc_max_value', 'pc_max_per_year', 'loan_period', 'loan_max_val',],
+                'safe',
+                'when' => function ($model) {
+                    return $model->filling_step >= 6;
+                },
+            ],
+            [['pc_term', 'pc_max_value', 'pc_max_per_year', 'loan_period', 'loan_max_val',],
+                'integer',
+                'when' => function ($model) {
+                    return $model->filling_step >= 6;
+                },
+            ],
+            [['pc_period', 'pc_term', 'pc_rate', 'pc_max_value', 'pc_max_per_year', 'loan_period', 'loan_max_val',],
+                'safe',
+                'when' => function ($model) {
+                    return $model->filling_step >= 6;
+                },
+            ],
+            [['pc_period',],
+                'string', 'max' => 100,
+                'when' => function ($model) {
+                    return $model->filling_step >= 6;
+                },
+            ],
+            [['pc_rate',],
+                'number',
+                'when' => function ($model) {
+                    return $model->filling_step >= 6;
+                },
+            ],
+
             [
                 ['money_summa_year', 'money_nalog_year', 'money_month_pay', 'money_user_pay',],
                 'required',
@@ -512,6 +554,15 @@ class Order extends Model
             'docs_egrn_file_form' => Module::t('order', 'Docs Egrn File'),
             'docs_loan_agreement_file_form' => Module::t('order', 'Docs Loan Agreement File'),
             'docs_additional_agreement_file_form' => Module::t('order', 'Docs Additional Agreement File'),
+
+            'pc_period'         => Module::t('order', 'Percent Compensation Period'),
+            'pc_term'           => Module::t('order', 'Percent Compensation Term'),
+            'pc_rate'           => Module::t('order', 'Percent Compensation Rate'),
+            'pc_max_value'      => Module::t('order', 'Percent Compensation Max Value'),
+            'pc_max_per_year'   => Module::t('order', 'Percent Compensation Max Per Year'),
+
+            'loan_period'   => Module::t('order', 'Loan Period'),
+            'loan_max_val'  => Module::t('order', 'Loan Max Value'),
         ];
     }
 
@@ -814,6 +865,7 @@ class Order extends Model
     // Предварительное сохранение
     public function beforeSave($insert)
     {
+
         if (parent::beforeSave($insert)) {
 
             // Сохраняем тип заявки
@@ -822,6 +874,12 @@ class Order extends Model
             } else {
                 $this->type = self::TYPE_ZAIM;
             }
+
+            // Сохраняем "расчетные" поля
+            if ($this->filling_step >= 6 && ($this->status_id == null || $this->status_id == 1) || $this->status_id == 7) {
+                $this->setCalculatedValues();
+            }
+            ;
             return true;
         }
         return false;
@@ -1107,7 +1165,7 @@ class Order extends Model
         $userRetirementYear = (integer)Yii::$app->formatter->asDate($this->user->retirementDate, 'php:Y');
         $retRes = $userRetirementYear - $this->companyYear;
 
-        return min(10, $ipotekaRes, $retRes);
+        return (integer) min(10, $ipotekaRes, $retRes);
 
     }
 
@@ -1143,13 +1201,15 @@ class Order extends Model
     {
         // Сумма уплаченных процентов (с января по ноябрь включительно)
         // Поле не нашел, необходимо уточнить у Лады
-        $paidPersents = 50000;
+        $paidPersents = $this->getAmountOfInterestPaid();
 
         // Вынести расчет коэффициента в отдельную функцию
-        $percentCoefficient = $this->corpNorm / ($this->jp_new_area - ($this->ipoteka_user / $this->jp_cost * $this->jp_new_area));
-        if ($percentCoefficient > 1) {
-            $percentCoefficient = 1;
-        }
+//        $percentCoefficient = $this->corpNorm / ($this->jp_new_area - ($this->ipoteka_user / $this->jp_cost * $this->jp_new_area));
+//        if ($percentCoefficient > 1) {
+//            $percentCoefficient = 1;
+//        }
+
+        $percentCoefficient = $this->getCorporateAreaNormFactor();
 
         if ($this->ipoteka_percent > 0) {
             $res = $paidPersents * ($this->pcRate / $this->ipoteka_percent) * $percentCoefficient;
@@ -1157,7 +1217,7 @@ class Order extends Model
             $res = 0;
         }
 
-        return round($res, -3);
+        return (integer) round($res, -3);
 
     }
     // *** *** *** *** *** ***
@@ -1178,7 +1238,7 @@ class Order extends Model
             ->andWhere(['>=', 'income_top', $monthlyPerMemberIncome])
             ->one();
 
-        return min($retRes, $aidStandart->compensation_years_zaim);
+        return (integer) min($retRes, $aidStandart->compensation_years_zaim);
     }
 
     // Максимальный размер займа
@@ -1215,17 +1275,60 @@ class Order extends Model
         //            $corpNormArea = $familyMembersCount * 20;
         //        }
 
-        //        $loanCoefficient = $corpNormArea / ($this->jp_new_area - $this->ipoteka_user * $this->jp_new_area / $this->jp_cost);
-        $loanCoefficient = $this->corpNorm / ($this->jp_new_area - $this->ipoteka_user * $this->jp_new_area / $this->jp_cost);
-        if ($loanCoefficient > 1) {
-            $loanCoefficient = 1;
-        }
+        $loanCoefficient = $this->getCorporateAreaNormFactor();
+        //$loanCoefficient = $this->corpNorm / ($this->jp_new_area - $this->ipoteka_user * $this->jp_new_area / $this->jp_cost);
+        //if ($loanCoefficient > 1) {
+        //    $loanCoefficient = 1;
+        //}
         //$maxLoanBySize = min($this->ipoteka_size, $this->jp_cost * $loanCoefficient);
+
         // В займе под "ПОТРЕБНОСТЬЮ" подразумечается не "Размер ипотеки, руб", а "Займ, руб"
         $maxLoanBySize = min($this->zaim_sum, $this->jp_cost * $loanCoefficient);
 
-        return round(min($loanLimit, $maxLoanByIncome, $maxLoanBySize), -3);
+        return (integer) round(min($loanLimit, $maxLoanByIncome, $maxLoanBySize), -3);
         //return round(min($maxLoanByIncome, $maxLoanBySize), -3);
+    }
+
+    private function getCorporateAreaNormFactor() {
+        if ($this->jp_cost == 0) {
+            return 0;
+        }
+        if (($this->jp_new_area - ($this->ipoteka_user / $this->jp_cost * $this->jp_new_area)) == 0) {
+            return 0;
+        }
+
+        $coefficient = $this->corpNorm / ($this->jp_new_area - ($this->ipoteka_user / $this->jp_cost * $this->jp_new_area));
+        if ($coefficient  > 1) {
+            $coefficient  = 1;
+        }
+
+        return $coefficient;
+    }
+
+    public function getAmountOfInterestPaid() {
+        if ($this->ipoteka_grafic == null || $this->ipoteka_grafic == '') {
+            return 0;
+        }
+
+        $percents = str_replace(',','.',str_replace(' ', '', $this->ipoteka_grafic));
+
+        return (float) $percents;
+    }
+
+    private function setCalculatedValues() {
+        switch ($this->type) {
+            case self::TYPE_PERCENT:
+                $this->pc_period = $this->getPcPeriod();
+                $this->pc_term = $this->getPcTerm();
+                $this->pc_rate = $this->getPcRate();
+                $this->pc_max_value = $this->getPcMaxVal();
+                $this->pc_max_per_year = $this->getPcMaxPerYear();
+                break;
+            case self::TYPE_ZAIM:
+                $this->loan_period = $this->getLoanPeriod();
+                $this->loan_max_val = $this->getLoanMaxVal();
+                break;
+        }
     }
 
 

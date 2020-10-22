@@ -142,6 +142,17 @@ class m200331_000010_create_jk_order_table extends Migration
                 'docs_egrn_file' => $this->text(),                  // ЕГРН по всем членам семьи за последние 5 лет
                 'docs_loan_agreement_file' => $this->text(),        // Договор займа (вложение)
                 'docs_additional_agreement_file' => $this->text(),  // Дополнительное соглашение к Трудовому договору (вложение)
+
+                // Компенсация %
+                'pc_period'         => $this->string(100),   // Период оказания МП
+                'pc_term'           => $this->tinyInteger(),        // Срок оказания МП
+                'pc_rate'           => $this->double(),             // Ставка компенсации %%
+                'pc_max_value'      => $this->integer(),            // Максимальная сумма компенсации %% в целом по ДС
+                'pc_max_per_year'   => $this->integer(),            // Максимальная сумма компенсации %% в год
+
+                // Займ
+                'loan_period'       => $this->tinyInteger(),    // Срок оказания МП
+                'loan_max_val'      => $this->integer(),        // Максимальный размер займа
             ],
             $tableOptions
         );
