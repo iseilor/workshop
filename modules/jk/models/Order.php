@@ -1128,6 +1128,9 @@ class Order extends Model
 
     public function getMonthlyPerMemberIncome()
     {
+        if (!$this->user || !$this->user->retirementDate) {
+            return 0;
+        }
         return ($this->money_summa_year - $this->money_nalog_year) / $this->user->familyMembersCount / 12;
     }
 
@@ -1162,6 +1165,9 @@ class Order extends Model
             $ipotekaRes = 0;
         }
 
+        if (!$this->user || !$this->user->retirementDate) {
+            return 0;
+        }
         $userRetirementYear = (integer)Yii::$app->formatter->asDate($this->user->retirementDate, 'php:Y');
         $retRes = $userRetirementYear - $this->companyYear;
 
@@ -1183,6 +1189,9 @@ class Order extends Model
         }
         $lastCompanyDate = mktime(0, 0, 0, 12, 31, $this->companyYear - 1);
         // Считаем исходя из 365 дней в году
+        if (!$this->user || !$this->user->birth_date) {
+            return 0;
+        }
         $age = ($lastCompanyDate - $this->user->birth_date) / 60 / 60 / 24 / 365;
 
         if ($age < 36) {
@@ -1230,6 +1239,9 @@ class Order extends Model
     // Срок оказания МП
     public function getLoanPeriod()
     {
+        if (!$this->user || !$this->user->retirementDate) {
+            return 0;
+        }
         $userRetirementYear = (integer)Yii::$app->formatter->asDate($this->user->retirementDate, 'php:Y');
         $retRes = $userRetirementYear - $this->companyYear;
 
@@ -1249,6 +1261,9 @@ class Order extends Model
     // Максимальный размер займа
     public function getLoanMaxVal()
     {
+        if (!$this->user || !$this->user->familyMembersCount) {
+            return 0;
+        }
         $familyMembersCount = $this->user->familyMembersCount;
         // А
         $rf = $this->user->rf;
