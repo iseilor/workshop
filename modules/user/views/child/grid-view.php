@@ -10,10 +10,14 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\Pjax;
 
+if (!isset($user)) {
+    $user = Yii::$app->user->identity;
+}
+
 ?>
     <p>
         <?= Html::a(Icon::show('plus') . Module::t('child', 'Create Child'),
-            ['/user/child/create'],
+            ['/user/child/create?userId='.$user->id],
             ['class' => 'btn btn-success', 'target' => '_blank']) ?>
         <?= Html::button(Icon::show('sync-alt') . 'Обновить информацию',
             ['class' => 'btn btn-primary', 'id' => 'btn-child-grid-view-update']) ?>

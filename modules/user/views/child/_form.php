@@ -70,6 +70,7 @@ use yii\widgets\ActiveForm;
                         ])->fileInput(['class' => 'custom-file-input']) */?>
                     </div>-->
                 </div>
+                <?= $form->field($model, 'user_id')->hiddenInput(['value' => $user->id]); ?>
             </div>
             <div class="card-footer">
                 <?= Html::submitButton(Icon::show('save') . Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>

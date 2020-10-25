@@ -56,6 +56,8 @@ use yii\web\UploadedFile;
  * @property int|null    $is_study
  * @property string|null $file_study
  * @property string|null $file_scholarship
+ *
+ * @property User $user
  */
 class Child extends Model
 {
@@ -278,7 +280,7 @@ class Child extends Model
     public function behaviors()
     {
         $parent_behaviors = parent::behaviors();
-        $parent_behaviors['BlameableBehavior']['attributes'][ActiveRecord::EVENT_BEFORE_INSERT][] = 'user_id';
+        //$parent_behaviors['BlameableBehavior']['attributes'][ActiveRecord::EVENT_BEFORE_INSERT][] = 'user_id';
         return $parent_behaviors;
     }
 
@@ -381,5 +383,9 @@ class Child extends Model
         } else {
             return false;
         }
+    }
+
+    public function getUser() {
+        return $this->hasOne(User::class, ['id' => 'user_id'])->one();
     }
 }

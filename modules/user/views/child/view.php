@@ -27,7 +27,6 @@ function childViewFieldFile($model, $field)
             ['target' => '_blank']) : '',
     ];
 }
-
 ?>
 <div class="row">
     <div class="col-md-12">
@@ -52,7 +51,7 @@ function childViewFieldFile($model, $field)
                         [
                             'attribute' => 'user_id',
                             'format' => 'raw',
-                            'value' => $model->getCreatedUserLink(),
+                            'value' => ($model->user ? $model->user->getInfoLink() : ""),
                         ],
                         'fio',
                         [

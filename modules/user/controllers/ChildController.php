@@ -74,7 +74,7 @@ class ChildController extends Controller
      *
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($userId)
     {
         $model = new Child();
         $model->gender = 0; // Пока по запросу Лады не собираем данные по полу. Но вообще это нужно будет потом
@@ -85,7 +85,8 @@ class ChildController extends Controller
         }
 
         // Данные по адресу берём из родителя
-        $user = User::findOne(Yii::$app->user->identity->id);
+        //$user = User::findOne(Yii::$app->user->identity->id);
+        $user = User::findOne($userId);
         $spouse = Spouse::findOne(['user_id' => $user->id]);
         if (!$spouse) {
             $spouse = new Spouse();
