@@ -6,19 +6,19 @@ use kartik\icons\Icon;
 use yii\helpers\Html;
 
 $spouse_is_work = 'd-none';
-if ($spose->type == 1 && $spose->is_work) {
+if ($spouse && $spouse->type == 1 && $spouse->is_work) {
     $spouse_is_work = '';
 }
 
 $spouse_is_do = 'd-none';
-if ($spose->is_do) {
+if ($spouse && $spouse->is_do) {
     $spouse_is_do = '';
 }
 ?>
 <div class="row">
     <div class="col-md-4">
-        <!--$form->field($spose, 'salary_file_form', [
-            'template' => getFileInputTemplate($spose->salary_file, 'Справка.pdf'),
+        <!--$form->field($spouse, 'salary_file_form', [
+            'template' => getFileInputTemplate($spouse->salary_file, 'Справка.pdf'),
         ])->fileInput(['class' => 'custom-file-input'])-->
         <!--$form->field($model, 'money_oklad')->widget(MaskedInput::class, ['clientOptions' => Yii::$app->params['widget']['MaskedInput']['clientOptionsMoney']])-->
         <?= $form->field($model, 'money_summa_year')->widget(MaskedInput::class, ['clientOptions' => Yii::$app->params['widget']['MaskedInput']['clientOptionsMoney']]) ?>
@@ -48,20 +48,23 @@ if ($spose->is_do) {
                 ])->fileInput(['class' => 'custom-file-input'])->hint($model->getAttributeHint('spravka_zp_file')) ?>
             </div>
 
-            <div class="col-md-4">
-                <h4 class="card-title">Супруг(а):</h4>
-                <div class="spouse-is-work <?= $spouse_is_work ?>">
-                    <?= $form->field($spose, 'ndfl2_file_form', [
-                        'template' => getFileInputTemplate($model->ndfl2_file, $model->attributeLabels()['ndfl2_file'] . '.pdf'),
-                        'options' => ['style' => 'margin-top:10%'],
-                    ])->fileInput(['class' => 'custom-file-input'])->hint($model->getAttributeHint('ndfl2_file')) ?>
+            <?php if($spouse): ?>
+                <div class="col-md-4">
+                    <h4 class="card-title">Супруг(а):</h4>
+                    <div class="spouse-is-work <?= $spouse_is_work ?>">
+                        <?= $form->field($spouse, 'ndfl2_file_form', [
+                            'template' => getFileInputTemplate($model->ndfl2_file, $model->attributeLabels()['ndfl2_file'] . '.pdf'),
+                            'options' => ['style' => 'margin-top:10%'],
+                        ])->fileInput(['class' => 'custom-file-input'])->hint($model->getAttributeHint('ndfl2_file')) ?>
+                    </div>
+                    <div class="spouse-is-do <?= $spouse_is_do ?>">
+                        <?= $form->field($spouse, 'salary_file_form', [
+                            'template' => getFileInputTemplate($spouse->salary_file, 'Справка.pdf'),
+                            ])->fileInput(['class' => 'custom-file-input']) ?>
+                    </div>
                 </div>
-                <div class="spouse-is-do <?= $spouse_is_do ?>">
-                    <?= $form->field($spose, 'salary_file_form', [
-                        'template' => getFileInputTemplate($spose->salary_file, 'Справка.pdf'),
-                        ])->fileInput(['class' => 'custom-file-input']) ?>
-                </div>
-            </div>
+            <?php endif; ?>
+
             <div class="col-md-4">
                 <?= $form->field($model, 'other_income_file_form', [
                     'template' => getFileInputTemplate($model->other_income_file, 'Документы о доходах.pdf'),

@@ -33,13 +33,13 @@ $user = User::findOne(Yii::$app->user->identity->id);
             </div>
         </div>
 
-        <?php if ($spose->type == 1): ?>
+        <?php if ($spouse && $spouse->type == 1): ?>
             <div class="row">
                 <div class="col-md-12">
                     <hr/>
-                    <h3><?= $spose->fio ?></h3>
-                    <?= $form->field($spose, 'personal_data_file_form', [
-                        'template' => getFileInputTemplate($spose->personal_data_file, $spose->attributeLabels()['personal_data_file'] . '.pdf'),
+                    <h3><?= $spouse->fio ?></h3>
+                    <?= $form->field($spouse, 'personal_data_file_form', [
+                        'template' => getFileInputTemplate($spouse->personal_data_file, $spouse->attributeLabels()['personal_data_file'] . '.pdf'),
                     ])->fileInput(['class' => 'custom-file-input']) ?>
                 </div>
             </div>

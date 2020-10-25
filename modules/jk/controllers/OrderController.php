@@ -162,12 +162,12 @@ class OrderController extends Controller
         $model->status_id = Status::findOne(['code' => 'NEW'])->id;
 
         if ($user) {
-            $spose = Spouse::findOne(['user_id' => $user->id]);
+            $spouse = Spouse::findOne(['user_id' => $user->id]);
             $passport = $user->passport;
         }
-        if (!$spose) {
-            $spose = new Spouse();
-        }
+//         if (!$spouse) {
+//             $spouse = new Spouse();
+//         }
 
         if (!$passport) {
             $passport = new Passport();
@@ -249,15 +249,19 @@ class OrderController extends Controller
         }
 
         if (isset(Yii::$app->request->post()['Spouse']) && is_array(Yii::$app->request->post()['Spouse'])) {
+            if (!$spouse) {
+                $spouse = new Spouse();
+            }
+
             if ($user) {
-                $spose->user_id = $user->id;
+                $spouse->user_id = $user->id;
             }
 
-            foreach (Yii::$app->request->post()['Spouse'] as $sposeKey => $sposeVal) {
-                $spose->$sposeKey = $sposeVal;
+            foreach (Yii::$app->request->post()['Spouse'] as $spouseKey => $spouseVal) {
+                $spouse->$spouseKey = $spouseVal;
             }
 
-            $spose->save();
+            $spouse->save();
 
         }
 
@@ -300,7 +304,7 @@ class OrderController extends Controller
             [
                 'model' => $model,
                 'usermd' => $user,
-                'spose' => $spose,
+                'spouse' => $spouse,
                 'passport' => $passport,
                 'mins' => $min,
                 //'spose' => $model,
@@ -322,16 +326,26 @@ class OrderController extends Controller
     {
         $model = $this->findModel($id);
         $min = Min::find()->orderBy('title')->all();
-        $user = User::findOne(Yii::$app->user->identity->getId());
+
+
+        //$user = User::findOne(Yii::$app->user->identity->getId());
+
+        $user = User::findOne($model->created_by);
+        if (!$user) {
+            $user = $user = User::findOne(Yii::$app->user->identity->getId());
+        }
+
+//         var_dump($user);
+//         die();
 
         if ($user) {
-            $spose = Spouse::findOne(['user_id' => $user->id]);
+            $spouse = Spouse::findOne(['user_id' => $user->id]);
             $passport = $user->passport;
         }
 
-        if (!$spose) {
-            $spose = new Spouse();
-        }
+//         if (!$spouse) {
+//             $spouse = new Spouse();
+//         }
 
         if (!$passport) {
             $passport = new Passport();
@@ -413,29 +427,32 @@ class OrderController extends Controller
         }
 
         if (isset(Yii::$app->request->post()['Spouse']) && is_array(Yii::$app->request->post()['Spouse'])) {
-            if ($user) {
-                $spose->user_id = $user->id;
+            if (!$spouse) {
+                $spouse = new Spouse();
             }
-            foreach (Yii::$app->request->post()['Spouse'] as $sposeKey => $sposeVal) {
-                switch ($sposeKey) {
+            if ($user) {
+                $spouse->user_id = $user->id;
+            }
+            foreach (Yii::$app->request->post()['Spouse'] as $spouseKey => $spouseVal) {
+                switch ($spouseKey) {
                     case 'personal_data_file_form':
-                        $sposePdFile = UploadedFile::getInstance($spose, 'personal_data_file_form');
-                        if ($sposePdFile) {
-                            $sposeFileDir = Yii::$app->params['module']['spouse']['filePath'] . $spose->id;
-                            $sposeFileName = 'spouse_' . $spose->id . '_personal_data_file_' . date('YmdHis') . '.' . $sposePdFile->extension;
-                            FileHelper::createDirectory($sposeFileDir, $mode = 0777, $recursive = true);
-                            $sposePdFile->saveAs($sposeFileDir . '/' . $sposeFileName);
-                            $spose->personal_data_file = $sposeFileName;
+                        $spousePdFile = UploadedFile::getInstance($spouse, 'personal_data_file_form');
+                        if ($spousePdFile) {
+                            $spouseFileDir = Yii::$app->params['module']['spouse']['filePath'] . $spouse->id;
+                            $spouseFileName = 'spouse_' . $spouse->id . '_personal_data_file_' . date('YmdHis') . '.' . $spousePdFile->extension;
+                            FileHelper::createDirectory($spouseFileDir, $mode = 0777, $recursive = true);
+                            $spousePdFile->saveAs($spouseFileDir . '/' . $spouseFileName);
+                            $spouse->personal_data_file = $spouseFileName;
                         }
                         break;
                     default:
-                        $spose->$sposeKey = $sposeVal;
+                        $spouse->$spouseKey = $spouseVal;
                 }
 
 
             }
 
-            $spose->save();
+            $spouse->save();
         }
 
         if ($user && isset(Yii::$app->request->post()['Child']) && is_array(Yii::$app->request->post()['Child'])) {
@@ -480,14 +497,15 @@ class OrderController extends Controller
             // Если не смогли сохранить заявку, откатываемся на 1 шаг
             $model->filling_step--;
         }
-
+// var_dump($min);
+// die();
 
         return $this->render(
             'update',
             [
                 'model' => $model,
                 'usermd' => $user,
-                'spose' => $spose,
+                'spouse' => $spouse,
                 'passport' => $passport,
                 'mins' => $min,
             ]

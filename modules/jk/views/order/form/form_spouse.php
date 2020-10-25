@@ -5,12 +5,13 @@ use app\modules\user\models\Spouse;
 /**
  *
  */
-echo $this->render('@app/modules/user/views/spouse/info');
+
+echo $this->render('@app/modules/user/views/spouse/info', ['spouse' => $spouse, 'user' => $usermd]);
 
 ?>
 <!--<div class="row">
     <div class="col-lg-4">
-        <?/*= $form->field($spose, 'type')->dropDownList(Spouse::getTypeList()); */?>
+        <?/*= $form->field($spouse, 'type')->dropDownList(Spouse::getTypeList()); */?>
     </div>
 
     <div class="col-lg-4">
@@ -28,20 +29,20 @@ echo $this->render('@app/modules/user/views/spouse/info');
     <div class="row">
         <div class="col-lg-4">
             <div class="type-1 type-2">
-                <?/*= $form->field($spose, 'fio')->textInput(['maxlength' => true, 'placeholder' => 'Иванова Анастасия Ивановна']) */?>
+                <?/*= $form->field($spouse, 'fio')->textInput(['maxlength' => true, 'placeholder' => 'Иванова Анастасия Ивановна']) */?>
             </div>
         </div>
 
         <div class="col-lg-4">
             <div class="type-1 type-2">
-                <?/*= $form->field($spose, 'gender')->dropDownList($spose->getGenderList(), ['prompt' => 'Выберите ...']); */?>
+                <?/*= $form->field($spouse, 'gender')->dropDownList($spouse->getGenderList(), ['prompt' => 'Выберите ...']); */?>
             </div>
         </div>
 
         <div class="col-lg-4">
             <div class="type-3">
-                <?/*= $form->field($spose, 'marriage_file_form', [
-                'template' => getFileInputTemplate($spose->marriage_file,  'Копия.pdf'),
+                <?/*= $form->field($spouse, 'marriage_file_form', [
+                'template' => getFileInputTemplate($spouse->marriage_file,  'Копия.pdf'),
                 ])->fileInput(['class' => 'custom-file-input']) */?>
             </div>
         </div>

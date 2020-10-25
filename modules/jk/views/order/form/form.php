@@ -113,7 +113,7 @@ $model->filling_step++;
                                                 <?= $this->render('form_' . $tab['id'], [
                                                     'model' => $model,
                                                     'usermd' => $usermd,
-                                                    'spose' => $spose,
+                                                    'spouse' => $spouse,
                                                     'passport' => $passport,
                                                     'form' => $form,
                                                     'field_percent' => $field_percent,

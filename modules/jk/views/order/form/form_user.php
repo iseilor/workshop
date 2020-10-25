@@ -28,12 +28,12 @@ $user = User::findOne(Yii::$app->user->identity->id);
         <div class="row">
             <?php Pjax::begin(['id' => 'user-info']);
             echo DetailView::widget([
-                'model' => $user,
+                'model' => $usermd,
                 'attributes' => [
                     'fio',
                     [
-                        'label' => $user->attributeLabels()['gender'],
-                        'value' => User::getGenderName($user->gender),
+                        'label' => $usermd->attributeLabels()['gender'],
+                        'value' => User::getGenderName($usermd->gender),
                     ],
                     'birth_date:date',
                     'position',
@@ -121,9 +121,9 @@ $user = User::findOne(Yii::$app->user->identity->id);
            </div>
             <div class="col-4">
                 <?php
-                $fromInYears = date("Y", $user->birth_date + 14 * 31556926);
+                $fromInYears = date("Y", $usermd->birth_date + 14 * 31556926);
                 $toInYears = date("Y");
-                $from = date("Y-m-d", $user->birth_date + 14 * 31556926);
+                $from = date("Y-m-d", $usermd->birth_date + 14 * 31556926);
                 ?>
                 <?= $form->field($passport, 'passport_date')->widget(
                     DatePicker::class,
@@ -222,7 +222,7 @@ $user = User::findOne(Yii::$app->user->identity->id);
                     'readonly' => $model->family_address == $passport->passport_registration,
                     'data-passport-address-fact' => $passport->passport_registration,
                 ])
-                    ->hint($user->attributeHints()['address_fact']); ?>
+                    ->hint($usermd->attributeHints()['address_fact']); ?>
             </div>
             <div class="col-4">
                 <?= $form->field($model, 'jp_type')->dropDownList($model->getJPTypeList(), ['prompt' => 'Выберите ...',
