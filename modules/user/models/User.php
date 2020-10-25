@@ -11,6 +11,7 @@ use yii\behaviors\TimestampBehavior;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\web\IdentityInterface;
+use yii\helpers\Url;
 
 /**
  * This is the model class for table "user".
@@ -682,5 +683,9 @@ retrun Html::img($userPhotoPath, ['title' => Yii::$app->user->identity->username
                 ['/user/' . $this->id]);
     }
 
+    public function  getInfoLink()
+    {
+        return Html::a($this->fio, Url::to(['/user/' . $this->id], true));
+    }
 
 }
