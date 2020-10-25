@@ -69,7 +69,7 @@ class SpouseController extends Controller
      *
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($userId)
     {
         $model = new Spouse();
 
@@ -79,7 +79,8 @@ class SpouseController extends Controller
         }
 
         // Ставим пол супруге на противоположные
-        $user = User::findOne(Yii::$app->user->identity->id);
+        //$user = User::findOne(Yii::$app->user->identity->id);
+        $user = User::findOne($userId);
         if ($user->gender == 1) {
             $model->gender = 0;
         } else {

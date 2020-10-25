@@ -243,7 +243,7 @@ class Spouse extends Model
     public function behaviors()
     {
         $parent_behaviors = parent::behaviors();
-        $parent_behaviors['BlameableBehavior']['attributes'][ActiveRecord::EVENT_BEFORE_INSERT][] = 'user_id';
+//        $parent_behaviors['BlameableBehavior']['attributes'][ActiveRecord::EVENT_BEFORE_INSERT][] = 'user_id';
         return $parent_behaviors;
     }
 
@@ -308,5 +308,10 @@ class Spouse extends Model
     {
         $fio = explode(" ", $this->fio);
         return $fio[0].' ' . mb_substr($fio[1], 0, 1) . '.' . mb_substr($fio[2], 0, 1) . '.';
+    }
+
+
+    public function getUser() {
+        return $this->hasOne(User::class, ['id' => 'user_id'])->one();
     }
 }

@@ -8,14 +8,23 @@ use yii\widgets\Pjax;
 
 // Ищем супругу. Если есть, то можно редактировать, если нет, то можно добавить
 // Обновить можно всегда
-$spouse = Spouse::find()->where(['user_id' => Yii::$app->user->identity->id])->one();
+// var_dump($spouse->type);
+// die();
+
+if (!isset($user)) {
+    $user = Yii::$app->user->identity;
+}
+
+if (!isset($spouse)) {
+     $spouse = Spouse::find()->where(['user_id' => $user->id])->one();
+}
 ?>
     <p>
         <?php if ($spouse): ?>
             <?= Html::a(Icon::show('edit') . 'Изменить информацию', ['/user/spouse/' . $spouse->id . '/update'],
                 ['class' => 'btn btn-warning', 'target' => '_blank']) ?>
         <?php else: ?>
-            <?= Html::a(Icon::show('plus') . 'Добавить информацию', ['/user/spouse/create'],
+            <?= Html::a(Icon::show('plus') . 'Добавить информацию', ['/user/spouse/create?userId='.$user->id],
                 ['class' => 'btn btn-success', 'target' => '_blank']) ?>
         <?php endif; ?>
         <?= Html::button(Icon::show('sync-alt') . 'Обновить информацию',

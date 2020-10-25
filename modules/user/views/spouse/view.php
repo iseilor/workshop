@@ -51,7 +51,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         [
                             'attribute' => 'user_id',
                             'format' => 'raw',
-                            'value' => $model->getCreatedUserLink(),
+                            'value' =>  ($model->user ? $model->user->getInfoLink() : ""),
                         ],
                         'fio',
                         [
