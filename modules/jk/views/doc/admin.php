@@ -36,6 +36,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= GridView::widget(
                     [
                         'dataProvider' => $dataProvider,
+                        'pager' => [
+                            'class' => 'app\widgets\LinkPager',
+                        ],
                         'columns' => [
                             ['class' => 'yii\grid\SerialColumn'],
                             [

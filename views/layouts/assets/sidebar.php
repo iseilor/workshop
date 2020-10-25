@@ -1,6 +1,5 @@
 <?php
 
-
 use app\components\menu\MenuActive;
 use app\modules\jk\models\Rf;
 use app\modules\main\Module;
@@ -10,12 +9,14 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 
 
+// Инструкция пользователя в левом sidebar
+// TODO: Как временное решение пока, немного некрасиво
 $jkInstructionURL = '/jk/doc';
 $jkInstructionTemplate = '<a href="{url}" class="nav-link" >{label}</a>';
 
 $jkInstructionDoc = \app\modules\jk\models\Doc::find()
-    ->where(['like', 'title', 'Инструкция пользователя%', false])
-    ->orderBy(['updated_at' => SORT_DESC])
+    ->where(['like', 'title', 'Инструкция%', false])
+    ->orderBy(['created_at' => SORT_DESC])
     ->one();
 if ($jkInstructionDoc) {
     $jkInstructionURL = $jkInstructionDoc->getFilePath();
@@ -87,8 +88,8 @@ if ($jkInstructionDoc) {
                             'options' => ['class' => 'nav-item has-treeview sidebar-jk'],
                             'items' => [
                                 [
-                                    'label' => Icon::show('file', ['class' => 'nav-icon'])
-                                        . Html::tag('p', \app\modules\jk\Module::t('doc', 'Instruction')),
+                                    'label' => Icon::show('file-alt', ['class' => 'nav-icon'])
+                                        . Html::tag('p', \app\modules\jk\Module::t('doc', 'Instruction').'<span class="right badge badge-success">info</span>'),
                                     'url' => [$jkInstructionURL],
                                     'options' => ['class' => 'nav-item has-treeview sidebar-jk-instruction',],
                                     'template' => $jkInstructionTemplate,
