@@ -2,6 +2,7 @@
 
 namespace app\modules\jk\models;
 
+use app\models\Query;
 use Yii;
 
 /**
@@ -9,7 +10,7 @@ use Yii;
  *
  * @see Order
  */
-class OrderQuery extends \yii\db\ActiveQuery
+class OrderQuery extends Query
 {
     /*public function active()
     {
