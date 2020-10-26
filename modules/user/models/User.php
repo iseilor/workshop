@@ -2,6 +2,7 @@
 
 namespace app\modules\user\models;
 
+use app\modules\admin\models\Mrf;
 use app\modules\admin\models\Retirement;
 use app\modules\jk\models\Rf;
 use app\modules\pulsar\models\Pulsar;
@@ -513,21 +514,6 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
         return $photoPath;
     }
 
-
-    /*
-    //
-    public function getAvatar(){
-        if(isset($this->photo)){
-$userPhoto = Yii::$app->user->identity->photo;
-$userPhotoPath = Yii::$app->homeUrl.Yii::$app->params['module']['user']['photo']['path'].$userPhoto;
-?>
-retrun Html::img($userPhotoPath, ['title' => Yii::$app->user->identity->username,'class'=>'img-circle elevation-2']) ?>
-}
-        }
-
-    }*/
-
-
     // Описание про пользователя
     public function getTooltip()
     {
@@ -544,7 +530,7 @@ retrun Html::img($userPhotoPath, ['title' => Yii::$app->user->identity->username
     // Связь с Пульсаром
     public function getPulsar()
     {
-        return $this->hasOne(Pulsar::className(), ['created_by' => 'id'])->where('created_at>=' . strtotime(date('d.m.Y')))
+        return $this->hasOne(Pulsar::class, ['created_by' => 'id'])->where('created_at>=' . strtotime(date('d.m.Y')))
             ->orderBy('created_at DESC');
     }
 
@@ -680,6 +666,11 @@ retrun Html::img($userPhotoPath, ['title' => Yii::$app->user->identity->username
         $img = Html::img($this->photoPath, ['class' => 'table-avatar']);
         return '<span style="float: left; margin-right: 0.5rem;">' . Html::a($img, ['/user/' . $this->id]) . '</span>' . Html::a($this->fio,
                 ['/user/' . $this->id]);
+    }
+
+    // Филиал сотрудника
+    public function getFilial(){
+        return $this->hasOne(Rf::class, ['id' => 'filial_id']);
     }
 
 

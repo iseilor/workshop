@@ -28,6 +28,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= Yii::$app->params['card']['header']['tools'] ?>
             </div>
             <div class="card-body">
+
+                <a href="order/excel" class="btn btn-success"><?=Icon::show('file-excel')?>Выгрузить реестр</a>
                 <?php
 
                 $gridColumns = [

@@ -22,6 +22,9 @@ use yii\helpers\Url;
 class Model extends ActiveRecord
 {
 
+    /**
+     * @return \app\modules\user\models\User
+     */
     public function getCreatedUser()
     {
         return $this->hasOne(User::class, ['id' => 'created_by']);
