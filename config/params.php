@@ -45,6 +45,7 @@ return [
     'module' => [
         'jk' => [
             'icon' => '<i class="fas fa-home"></i>',
+            'emails' => ['l_gorshkova@center.rt.ru'],
             'order' => [
                 'icon' => '<i class="fas fa-ruble-sign nav-icon"></i>',
                 'filePath' => 'files/jk/order/',

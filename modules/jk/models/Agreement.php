@@ -176,6 +176,7 @@ class Agreement extends Model
             ]
         )
             ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
+            ->setCc(Yii::$app->params['module']['jk']['emails'])
             ->setBcc(Yii::$app->params['supportEmail'])
             ->setTo($user->email)
             ->setSubject($order->getEmailSubject('Согласована ' . $manager->fio))
@@ -197,6 +198,7 @@ class Agreement extends Model
             ]
         )
             ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
+            ->setCc(Yii::$app->params['module']['jk']['emails'])
             ->setBcc(Yii::$app->params['supportEmail'])
             ->setTo($user->email)
             ->setSubject($order->getEmailSubject('НЕ Согласована ' . $manager->fio))
@@ -227,6 +229,7 @@ class Agreement extends Model
                 ]
             )
                 ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
+                ->setCc(Yii::$app->params['module']['jk']['emails'])
                 ->setBcc(Yii::$app->params['supportEmail'])
                 ->setTo(YII_ENV_PROD ? $manager->email : $user->email) // В DEV-версии отправляем письмо самому сотруднику
                 ->setSubject($order->getEmailSubject("Согласование руководителями"))
@@ -246,6 +249,7 @@ class Agreement extends Model
                 ]
             )
                 ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
+                ->setCc(Yii::$app->params['module']['jk']['emails'])
                 ->setBcc(Yii::$app->params['supportEmail'])
                 ->setTo($user->email)
                 ->setSubject($order->getEmailSubject("Согласование руководителями завершено"))
@@ -262,5 +266,4 @@ class Agreement extends Model
             $order->sendCurator();
         }
     }
-
 }
