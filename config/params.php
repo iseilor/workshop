@@ -6,8 +6,8 @@ return [
     'icon-framework' => Icon::FAS,
     'adminEmail' => '',
     'supportEmail' => ['aleksey.obedkin@rt.ru'],
-    'senderEmail' => 'hr.center@rt.ru',
-    'senderName' => 'HR.CENTER.RT.RU',
+    'senderEmail' => YII_ENV_PROD ? 'hr.center@rt.ru' : 'hr-test.center@rt.ru',
+    'senderName' => YII_ENV_PROD ? 'HR.CENTER.RT.RU' : 'HR-TEST.CENTER.RT.RU',
     'user.passwordResetTokenExpire' => 3600,
 
     //'bsDependencyEnabled' => false, // Для Kartic не грузим Bootstrap
