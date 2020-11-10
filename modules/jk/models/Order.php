@@ -1384,6 +1384,24 @@ class Order extends Model
                     ->send();
                 break;
 
+            // Было отправлено повторное напоминание руководителю
+            case 'MANAGER_WAIT_REPEAT':
+                Yii::$app->mailer->compose(
+                    '@app/modules/jk/mails/manager/manager_wait_user_repeat',
+                    [
+                        'user' => $user,
+                        'order' => $this,
+                        'manager'=>$manager
+                    ]
+                )
+                    ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
+                    ->setBcc(Yii::$app->params['supportEmail'])
+                    ->setTo($user->email)
+                    ->setSubject($this->getEmailSubject("Повторное напоминание руководителю"))
+                    ->send();
+                break;
+
         }
+
     }
 }

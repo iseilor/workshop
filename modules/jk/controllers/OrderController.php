@@ -1024,10 +1024,9 @@ class OrderController extends Controller
             $worksheet->getCell('I' . $rowNum)->setValue($order->createdUser->years);
             $worksheet->getCell('J' . $rowNum)->setValue($order->createdUser->gender ? 'М' : 'Ж');
             $worksheet->getCell('K' . $rowNum)->setValue($order->createdUser->pensionDate);
-            $worksheet->getCell('L' . $rowNum)->setValue(Yii::$app->formatter->format($order->createdUser->work_date,'date'));
+            $worksheet->getCell('L' . $rowNum)->setValue(Yii::$app->formatter->format($order->createdUser->work_date, 'date'));
             $worksheet->getCell('M' . $rowNum)->setValue(Yii::$app->formatter->format($order->created_at, 'date'));
             $worksheet->getCell('N' . $rowNum)->setValue($order->createdUser->experience);
-
 
             $rowNum++;
             $num++;
@@ -1038,5 +1037,21 @@ class OrderController extends Controller
         $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
         $writer->save(Yii::getAlias('@app') . '/web' . $fileUrl);
         return Yii::$app->response->sendFile(Yii::getAlias('@webroot') . $fileUrl);
+    }
+
+
+    /**
+     * AJAX-action
+     * Принудительная повторная отправка уведомления руководителю, у которогона данный момент находится заявка на согласовании
+     *
+     * @param $id Номер заявки
+     */
+    public function actionManager($id)
+    {
+        Agreement::sendEmailManager($id); // Отправляем письмо руководителю
+        $order = Order::findOne($id)->setNewStatus('MANAGER_WAIT_REPEAT');
+        $agreement = Agreement::find()->where(['order_id' => $id, 'approval_at' => null])->one();
+        $manager = User::findOne($agreement->user_id);
+        return 'Повторное email-уведомление о необходимости согласования заявки было направлено на имя: <strong>' . $manager->fio.'</strong>';
     }
 }
