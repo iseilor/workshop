@@ -17,6 +17,8 @@ use yii\widgets\Pjax;
 $this->title = $this->context->icon . ' ' . Module::t('module', 'Orders');
 $this->params['breadcrumbs'][] = $this->context->parent;
 $this->params['breadcrumbs'][] = $this->title;
+
+\app\modules\jk\assets\JkOrderAsset::register($this);
 ?>
 
 
@@ -28,6 +30,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= Yii::$app->params['card']['header']['tools'] ?>
             </div>
             <div class="card-body">
+
+                <a href="order/excel" class="btn btn-success"><?=Icon::show('file-excel')?>Выгрузить реестр</a>
                 <?php
 
                 $gridColumns = [
@@ -64,8 +68,8 @@ $this->params['breadcrumbs'][] = $this->title;
                             // Кнопка только если в статусе ПРОВЕРКА КУРАТОРОМ
                         'class' => ActionColumn::class,
                         'controller' => '/jk/order',
-                        'template' => '{2curator} {check} {commission} {doc} {view} {update} {delete}',
-                        'headerOptions' => ['style' => 'min-width: 170px;'],
+                        'template' => '{manager} {2curator} {check} {commission} {doc} {view} {update}  {delete}',
+                        'headerOptions' => ['style' => 'min-width: 210px;'],
                         'buttons' => [
                             // Отправить принудительно на проверку куратору
                             '2curator' => function ($url, $model, $key) {
@@ -75,6 +79,19 @@ $this->params['breadcrumbs'][] = $this->title;
                                         'title' => 'На проверку куратору',
                                         'data-pjax' => '0',
                                         'style'=>'width: 35px;'
+                                    ]);
+                                } else {
+                                    return '';
+                                }
+                            },
+
+                            // Кнопка повторной отправки письма руководителю, если заявка находится в статусе "Согласование руководителями"
+                            'manager' => function ($url, $model, $key) {
+                                if ($model->status->code == 'MANAGER_WAIT') {
+                                    return Html::a(Icon::show('envelope'), $url, [
+                                        'class' => 'btn btn-sm btn-warning btn-manager',
+                                        'title' => 'Отправить повторное уведомление руководителю',
+                                        'data-pjax' => '0',
                                     ]);
                                 } else {
                                     return '';
@@ -142,10 +159,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 ?>
             </div>
             <div class="card-footer">
-                <a class="btn btn-default float-right" href="/jk/zaim/create">Обновить таблицу</a>
+
             </div>
         </div>
     </div>
 </div>
 
+<?php
 
+
+//во вьюхе
+//$this->registerJsFile('path/to/myfile');

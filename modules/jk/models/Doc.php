@@ -49,7 +49,6 @@ class Doc extends Model
             [['description'], 'string'],
             [['title'], 'string', 'max' => 255],
             [['file'], 'file', 'extensions' => 'doc,docx,pdf,xls,xlsx', 'checkExtensionByMimeType' => false],
-            [['file'], 'file', 'maxSize' => '2048000'],
         ];
     }
 
@@ -65,7 +64,7 @@ class Doc extends Model
                 'description' => Module::t('doc', 'Description'),
                 'src' => Module::t('doc', 'Src'),
                 'file' => Module::t('doc', 'File'),
-                'filePathLink'=>Module::t('doc', 'File'),
+                'filePathLink' => Module::t('doc', 'File'),
                 'weight' => Module::t('doc', 'Weight'),
             ]
         );
@@ -118,17 +117,18 @@ class Doc extends Model
      */
     public function getFilePath()
     {
-        return '/'.Yii::$app->params['module']['jk']['doc']['filePath'] . $this->src;
+        return '/' . Yii::$app->params['module']['jk']['doc']['filePath'] . $this->src;
     }
 
     /**
      * Ссылка для скачивания файла
+     *
      * @return string
      * @throws \yii\base\InvalidConfigException
      */
     public function getFilePathLink()
     {
-        return Html::a(Icon::show('download') . Module::t('doc','Download'), [$this->getFilePath()], ['data-pjax' => 0,'id'=>'doc-'.$this->id]);
+        return Html::a(Icon::show('download') . Module::t('doc', 'Download'), [$this->getFilePath()], ['data-pjax' => 0, 'id' => 'doc-' . $this->id]);
 
     }
 }

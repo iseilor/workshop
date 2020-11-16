@@ -37,7 +37,8 @@
         "phpoffice/phpword": "^0.17.0",
         "kartik-v/yii2-export": "dev-master",
         "drnixx/yii2-jquery-migrate-asset": "^3.0",
-        "2amigos/qrcode-library": "~1.1"
+        "2amigos/qrcode-library": "~1.1",
+        "phpoffice/phpspreadsheet": "^1.15"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

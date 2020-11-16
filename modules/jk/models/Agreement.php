@@ -262,5 +262,4 @@ class Agreement extends Model
             $order->sendCurator();
         }
     }
-
 }

@@ -17,8 +17,12 @@ use app\modules\user\models\Passport;
 use app\modules\user\models\Spouse;
 use app\modules\user\models\User;
 use app\modules\user\models\UserChildSearch;
-use PhpOffice\PhpWord\TemplateProcessor;
+
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Yii;
+
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\helpers\FileHelper;
@@ -1005,5 +1009,67 @@ class OrderController extends Controller
         $fileUrl = '/files/jk/order/' . $id . '/JK_ORDER_' . $id . '_' . $user->surname . '_' . date('Y-m-d_ H-i-s') . '.docx';
         $templateProcessor->saveAs(Yii::getAlias('@app') . '/web' . $fileUrl);
         return Yii::$app->response->sendFile(Yii::getAlias('@webroot') . $fileUrl);
+    }
+
+    // Выгрузка реестра в XLSX-файл
+    public function actionExcel()
+    {
+
+        // Шаблон
+        $templatePath = Yii::getAlias('@app') . '/modules/jk/files/excel_example.xlsx';
+
+        // Сюда складываем все выгрузки
+        $dirPath = 'files/jk/excel/';
+        FileHelper::createDirectory($dirPath, $mode = 0777, $recursive = true);
+        $fileUrl = '/files/jk/excel/' . date('YmdHis') . '.xlsx';
+
+        // Работаем с активной вкладкой
+        $spreadsheet = IOFactory::load($templatePath);
+        $worksheet = $spreadsheet->getActiveSheet();
+
+        // Формируем данные
+        $orders = Order::find()->published()->all();
+        $rowNum = 6;
+        $num = 1;
+        foreach ($orders as $order) {
+            $worksheet->getCell('B' . $rowNum)->setValue($num);
+            $worksheet->getCell('C' . $rowNum)->setValue($order->createdUser->filial->title);
+            $worksheet->getCell('D' . $rowNum)->setValue($order->createdUser->tab_number);
+            $worksheet->getCell('E' . $rowNum)->setValue($order->createdUser->fio);
+            $worksheet->getCell('F' . $rowNum)->setValue($order->createdUser->work_department_full);
+            $worksheet->getCell('G' . $rowNum)->setValue($order->createdUser->position);
+            $worksheet->getCell('H' . $rowNum)->setValue(Yii::$app->formatter->format($order->createdUser->birth_date, 'date'));
+            $worksheet->getCell('I' . $rowNum)->setValue($order->createdUser->years);
+            $worksheet->getCell('J' . $rowNum)->setValue($order->createdUser->gender ? 'М' : 'Ж');
+            $worksheet->getCell('K' . $rowNum)->setValue($order->createdUser->pensionDate);
+            $worksheet->getCell('L' . $rowNum)->setValue(Yii::$app->formatter->format($order->createdUser->work_date, 'date'));
+            $worksheet->getCell('M' . $rowNum)->setValue(Yii::$app->formatter->format($order->created_at, 'date'));
+            $worksheet->getCell('N' . $rowNum)->setValue($order->createdUser->experience);
+
+            $rowNum++;
+            $num++;
+        }
+
+
+        // Сохраняем и выгружаем в браузер файл
+        $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+        $writer->save(Yii::getAlias('@app') . '/web' . $fileUrl);
+        return Yii::$app->response->sendFile(Yii::getAlias('@webroot') . $fileUrl);
+    }
+
+
+    /**
+     * AJAX-action
+     * Принудительная повторная отправка уведомления руководителю, у которогона данный момент находится заявка на согласовании
+     *
+     * @param $id Номер заявки
+     */
+    public function actionManager($id)
+    {
+        Agreement::sendEmailManager($id); // Отправляем письмо руководителю
+        $order = Order::findOne($id)->setNewStatus('MANAGER_WAIT_REPEAT');
+        $agreement = Agreement::find()->where(['order_id' => $id, 'approval_at' => null])->one();
+        $manager = User::findOne($agreement->user_id);
+        return 'Повторное email-уведомление о необходимости согласования заявки было направлено на имя: <strong>' . $manager->fio.'</strong>';
     }
 }

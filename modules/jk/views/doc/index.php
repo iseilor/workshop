@@ -16,6 +16,7 @@ echo ListView::widget(
             'tag' => 'div',
             'class' => 'row'
         ],
+
         'itemOptions' => [
             'tag' => 'div',
             'class' => 'col-md-6',
