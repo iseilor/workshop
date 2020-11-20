@@ -32,7 +32,7 @@ if ($field_percent == '') {
             <div class="col my-auto text-center">
                 +
             </div>
-            <div class="col my-auto text-center">
+            <div class="col text-center" style="margin-top: 2%">
                 <?= $form->field($model, 'ipoteka_size')->widget(MaskedInput::class, ['clientOptions' => Yii::$app->params['widget']['MaskedInput']['clientOptionsMoney']]); ?>
             </div>
             <div class="col my-auto text-center">
