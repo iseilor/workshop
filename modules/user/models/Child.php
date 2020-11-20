@@ -94,6 +94,8 @@ class Child extends Model
 
     public $file_scholarship_form;
 
+    public $other_child_files_form;
+
     /**
      * {@inheritdoc}
      */
@@ -152,7 +154,7 @@ class Child extends Model
                     'address_father_file_form',
                     'ejd_file_form',
                     'file_personal_form',
-
+                    'other_child_files_form',
                 ],
                 'file',
                 'skipOnEmpty' => true,
@@ -223,6 +225,7 @@ class Child extends Model
             'address_father_file_form' => Module::t('child', 'Address Father'),
             'ejd_file' => Module::t('child', 'Ejd'),
             'ejd_file_form' => Module::t('child', 'Ejd_file'),
+            'other_child_files_form' => Module::t('child', 'Other_child_files'),
 
             'file_address' => Module::t('child', 'File Address'),
 
@@ -327,6 +330,7 @@ class Child extends Model
             'address_father_file',
             'ejd_file',
             'file_personal',
+            'other_child_files',
         ];
 
         // Сохраняем данные

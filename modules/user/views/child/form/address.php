@@ -81,6 +81,10 @@ $params = [
     'template' => getFileInputTemplate($model->ejd_file, $model->attributeLabels()['ejd_file'] . '.pdf'),
 ])->fileInput(['class' => 'custom-file-input'])->hint($model->getAttributeHint('ejd_file_form')) ?>
 
+<?= $form->field($model, 'other_child_files_form', [
+    'template' => getFileInputTemplate($model->ejd_file, $model->attributeLabels()['other_child_files_form'] . '.pdf'),
+])->fileInput(['class' => 'custom-file-input']) ?>
+
 
 <?php
 $script = <<< JS

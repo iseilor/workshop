@@ -66,6 +66,7 @@ class m200405_183301_create_user_child_table extends Migration
             'address_mother_file'=>$this->string(),
             'address_father_file'=>$this->string(),
             'ejd_file'=>$this->string(),
+            'other_child_files'=>$this->string(),
 
             // Обработка персональных данных
             'file_personal'=>$this->string(),
