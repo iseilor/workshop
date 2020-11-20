@@ -23,7 +23,7 @@ $user = User::findOne(Yii::$app->user->identity->id);
 
         <div class="row">
             <div class="col-md-12">
-                <h3><?= Yii::$app->user->identity->fio ?></h3>
+                <h3><?= $usermd->fio ?></h3>
 
                 <?= $form->field($model, 'file_agree_personal_data_form', [
                     'template' => getFileInputTemplate($model->file_agree_personal_data,
