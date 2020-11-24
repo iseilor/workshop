@@ -5,11 +5,13 @@
 /* @var $content string */
 
 use app\assets\AppAssetAdminLTE;
+use app\modules\jk\models\Agreement;
 use app\widgets\Alert;
 use kartik\icons\Icon;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\Breadcrumbs;
 
 AppAssetAdminLTE::register($this);
@@ -69,6 +71,18 @@ AppAssetAdminLTE::register($this);
             <div class="content">
                 <div class="container-fluid">
                     <?= Alert::widget() ?>
+
+                    <!-- Согласования про жилищной программе -->
+                    <?php if (!Yii::$app->user->isGuest && Agreement::orderCount()>0): ?>
+                        <div class="alert alert-primary alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h5><i class="icon fas fa-check"></i> Согласования по Жилищной программе!</h5>
+                            Кол-во заявок сотрудников, требующие вашего согласования: <?=Agreement::orderCount()?>шт.
+                            <a href="<?=Url::home() . 'user/cabinet?&tab=check';?>" title="Согласование заявок">Перейти к согласованию</a>
+
+                        </div>
+                    <?php endif; ?>
+
                     <?= $content ?>
                 </div>
 

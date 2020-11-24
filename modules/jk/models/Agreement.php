@@ -262,4 +262,9 @@ class Agreement extends Model
             $order->sendCurator();
         }
     }
+
+    // Кол-во заявок на согласовании у авторизованного сотрудника
+    public static function orderCount(){
+        return Agreement::find()->where(['user_id' => Yii::$app->user->identity->id])->andWhere('receipt_at>0')->andWhere('approval_at is null')->count();
+    }
 }

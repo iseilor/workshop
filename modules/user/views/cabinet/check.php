@@ -46,7 +46,7 @@ echo GridView::widget([
             },
         ],
         [
-            'class' => SetColumn::className(),
+            'class' => SetColumn::class,
             'attribute' => 'approval',
             //'value' => 'approvalName',
             'name' => 'approvalName',

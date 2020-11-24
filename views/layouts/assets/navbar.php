@@ -1,5 +1,6 @@
 <?php
 
+use app\modules\jk\models\Agreement;
 use app\modules\main\Module;
 use kartik\icons\Icon;
 use yii\helpers\Html;
@@ -210,6 +211,17 @@ use yii\widgets\Menu;
                     уведомления</a>
             </div>
         </li>-->
+
+        <?php if (!Yii::$app->user->isGuest && Agreement::orderCount()>0): ?>
+            <li class="nav-item">
+                <a href="<?=Url::home() . 'user/cabinet?&tab=check';?>" class="nav-link" title="Согласование заявок">
+                    <i class="fas fa-check"></i>
+                    Согласования
+                    <span class="badge badge-primary"><?=Agreement::orderCount()?></span>
+                </a>
+            </li>
+        <?php endif; ?>
+
         <li class="nav-item dropdown">
             <?php if (Yii::$app->user->isGuest): ?>
                 <?php echo Html::a(
@@ -218,6 +230,7 @@ use yii\widgets\Menu;
                     ['class' => 'dropdown-item']
                 ); ?>
             <?php else: ?>
+
                 <a class="nav-link" data-toggle="dropdown" href="#">
                     <?= Icon::show('user')
                     . '<span class="d-none d-lg-inline-block">' . Yii::$app->user->identity->surname . ' '
