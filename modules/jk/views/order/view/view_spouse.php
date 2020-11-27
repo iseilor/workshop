@@ -13,28 +13,67 @@ use yii\widgets\Pjax;
 // Обновить можно всегда
 $spouse = Spouse::find()->where(['user_id' => $model->created_by])->one();
 
+$attr = [
+    [
+        'attribute' => 'type',
+        'value' => Spouse::getTypeList()[$spouse->type],
+    ],
+    'fio',
+    viewFieldFile($spouse, 'marriage_file', ['/' . Yii::$app->params['module']['spouse']['filePath'] . $spouse->id . '/' . $spouse->marriage_file]),
+    'passport_registration',
+    'passport_series',
+    'passport_number',
+    'passport_date:date',
+    'passport_department',
+    'passport_code',
+    viewFieldFile($spouse, 'passport_file', ['/' . Yii::$app->params['module']['spouse']['filePath'] . $spouse->id . '/' . $spouse->passport_file]),
+
+];
+if (isset($spouse->registration_file)) {
+    $attr[] = viewFieldFile($spouse, 'registration_file', ['/' . Yii::$app->params['module']['spouse']['filePath'] . $spouse->id . '/' . $spouse->registration_file]);
+}
+if (isset($spouse->edj_file)) {
+    $attr[] = viewFieldFile($spouse, 'edj_file', ['/' . Yii::$app->params['module']['spouse']['filePath'] . $spouse->id . '/' . $spouse->edj_file]);
+}
+$attr[] = [
+    'attribute' => 'is_work',
+    'value' => (isset($spouse->is_work) && $spouse->is_work) ? 'Да' : 'Нет',
+];
+if (isset($spouse->is_work) && $spouse->is_work) {
+    array_push($attr,
+        [
+            'attribute' => 'is_rtk',
+            'value' => (isset($spouse->is_rtk) && $spouse->is_rtk) ? 'Да' : 'Нет',
+        ],
+        [
+            'attribute' => 'is_do',
+            'value' => (isset($spouse->is_do) && $spouse->is_do) ? 'Да' : 'Нет',
+        ]
+    );
+} else {
+    array_push($attr,
+        viewFieldFile($spouse, 'work_file', ['/' . Yii::$app->params['module']['spouse']['filePath'] . $spouse->id . '/' . $spouse->work_file]),
+        viewFieldFile($spouse, 'unemployment_file', ['/' . Yii::$app->params['module']['spouse']['filePath'] . $spouse->id . '/' . $spouse->unemployment_file]),
+        viewFieldFile($spouse, 'explanatory_note_file', ['/' . Yii::$app->params['module']['spouse']['filePath'] . $spouse->id . '/' . $spouse->explanatory_note_file])
+    );
+}
 
 if ($spouse) {
     echo DetailView::widget([
         'model' => $spouse,
-        'attributes' => [
+        'attributes' => $attr/*[
             [
                 'attribute' => 'type',
                 'value' => Spouse::getTypeList()[$spouse->type],
             ],
             'fio',
-            [
-                'attribute' => 'gender',
-                'value' => Spouse::getGenderList()[$spouse->gender],
-            ],
-            'date:date',
             viewFieldFile($spouse, 'marriage_file', Yii::$app->params['module']['spouse']['filePath'] . $spouse->id . '/' . $spouse->marriage_file),
+            'passport_registration',
             'passport_series',
             'passport_number',
             'passport_date:date',
             'passport_department',
             'passport_code',
-            'passport_registration',
             viewFieldFile($spouse, 'passport_file', Yii::$app->params['module']['spouse']['filePath'] . $spouse->id . '/' . $spouse->passport_file),
             viewFieldFile($spouse, 'edj_file', Yii::$app->params['module']['spouse']['filePath'] . $spouse->id . '/' . $spouse->edj_file),
             viewFieldFile($spouse, 'registration_file', Yii::$app->params['module']['spouse']['filePath'] . $spouse->id . '/' . $spouse->registration_file),
@@ -59,7 +98,7 @@ if ($spouse) {
 
             viewFieldFile($spouse, 'personal_data_file', Yii::$app->params['module']['spouse']['filePath'] . $spouse->id . '/' . $spouse->personal_data_file),
 
-        ],
+        ],*/
     ]);
 } else {
     $data = [

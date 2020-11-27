@@ -27,6 +27,49 @@ function childViewFieldFile($model, $field)
             ['target' => '_blank']) : '',
     ];
 }
+
+$attr = [
+    [
+        'attribute' => 'user_id',
+        'format' => 'raw',
+        'value' => ($model->user ? $model->user->getInfoLink() : ""),
+    ],
+    'fio',
+    'date:date',
+    'birth_series',
+    'birth_number',
+    'birth_date:date',
+    'birth_department',
+    childViewFieldFile($model, 'birth_file'),
+    'address_registration',
+    childViewFieldFile($model,'registration_file'),
+    childViewFieldFile($model,'address_mother_file'),
+    childViewFieldFile($model,'address_father_file')
+];
+if ($model->ejd_file) {
+    $attr[] = childViewFieldFile($model,'ejd_file');
+}
+if ($model->passport_series) {
+    array_push($attr,
+        'passport_department',
+        'passport_series',
+        'passport_number',
+        'passport_date:date',
+        'passport_code',
+        childViewFieldFile($model,'passport_file')
+    );
+}
+$attr[] = [
+        'label' => 'Ребёнок студент',
+        'value'=> ($model->is_study)? 'Да' : 'Нет'
+];
+if ($model->is_study) $attr[] = childViewFieldFile($model,'file_study');
+$attr[] = [
+        'label' => 'Ребёнок инвалид',
+        'value'=> ($model->is_invalid)? 'Да' : 'Нет'
+];
+if ($model->is_invalid) $attr[] = childViewFieldFile($model,'file_invalid');
+$attr[] = childViewFieldFile($model,'other_child_files_form');
 ?>
 <div class="row">
     <div class="col-md-12">
@@ -45,7 +88,7 @@ function childViewFieldFile($model, $field)
                 </p>
                 <?= DetailView::widget([
                     'model' => $model,
-                    'attributes' => [
+                    'attributes' => $attr/*[
                         'id',
                         'created_at:datetime',
                         [
@@ -54,10 +97,6 @@ function childViewFieldFile($model, $field)
                             'value' => ($model->user ? $model->user->getInfoLink() : ""),
                         ],
                         'fio',
-                        [
-                            'attribute' => 'gender',
-                            'value' => Child::getGenderList()[$model->gender],
-                        ],
                         'date:date',
                         childViewFieldFile($model, 'passport_file'),
 
@@ -96,9 +135,23 @@ function childViewFieldFile($model, $field)
                         // Персональные данные
                         childViewFieldFile($model, 'file_personal'),
 
-                    ],
+                    ],*/
                 ]) ?>
             </div>
         </div>
     </div>
 </div>
+
+<?php
+$script = <<< JS
+$(document).ready(function() {
+    $('table#w0 tbody tr:eq(0)').before('<tr><th><h4><i class="fas fa-baby"></i> Общие данные</h4></th><td></td></tr>');
+    $('table#w0 tbody tr:eq(3)').after('<tr><th><h4><i class="fas fa-address-book"></i> Свидетельство о рождении</h4></th><td></td></tr>');
+    $('table#w0 tbody tr:eq(9)').after('<tr><th><h4><i class="fas fa-map-marker-alt"></i> Адрес</h4></th><td></td></tr>');
+    $('table#w0 tbody tr th:contains("Кем выдан")').parent().before('<tr><th><h4><i class="fas fa-address-card"></i> Паспортные данные</h4></th><td></td></tr>');
+    $('table#w0 tbody tr th:contains("Ребёнок студент")').parent().before('<tr><th><h4><i class="fas fa-user-graduate"></i> Студент</h4></th><td></td></tr>');
+    $('table#w0 tbody tr th:contains("Ребёнок инвалид")').parent().before('<tr><th><h4><i class="fas fa-wheelchair"></i> Инвалид</h4></th><td></td></tr>');
+    $('table#w0 tbody tr:last').before('<tr><th><h4>Прочее</h4></th><td></td></tr>');
+});
+JS;
+$this->registerJs($script, yii\web\View::POS_READY);

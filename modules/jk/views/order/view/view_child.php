@@ -24,12 +24,6 @@ $dataProvider->query->andWhere(['deleted_at' => null]);
                 return Url::to(['/user/child/' . $data->id]);
             },
         ],
-        [
-            'attribute'=>'gender',
-            'content'=>function($data){
-                return Child::getGenderList()[$data->gender];
-            }
-        ],
         'date:date',
         'age',
         'passportLink:html',
