@@ -733,7 +733,11 @@ class OrderController extends Controller
 
             switch ($statusCode) {
                 case 'COMMISSION_YES':
-                    $emailTemplate = 'commission_yes';
+                    if ($order->is_mortgage) {
+                        $emailTemplate = 'commission_yes_percent';
+                    } else {
+                        $emailTemplate = 'commission_yes_zaim';
+                    }
                     $emailTitle = 'Согласовано комиссией';
                     break;
                 case 'COMMISSION_NO':
