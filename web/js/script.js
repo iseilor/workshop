@@ -22,8 +22,17 @@ $(document).ready(function () {
                 localStorage.setItem('lastTab', $(e.target).attr('id'));
             });
             var lastTab = localStorage.getItem('lastTab');
+
+            // Берём последний активный
             if (lastTab) {
                 $('#'+lastTab).tab('show');
+            }
+
+            // Либо если в URL указан активный tab
+            var url = new URL(window.location.href);
+            var activeTab = url.searchParams.get("tab");
+            if (activeTab) {
+                $('#tab-'+activeTab).tab('show');
             }
         });
 
