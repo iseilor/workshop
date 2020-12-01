@@ -550,6 +550,7 @@ class Order extends Model
             'spravka_zp_file_form' => Module::t('order', 'Spravka ZP'),
             'is_do' => Module::t('order', 'Is DO'),
             'other_income_file_form' => Module::t('order', 'Other Income'),
+            'other_income_file' => Module::t('order', 'Other Income'),
 
             'docs_egrn_file_form' => Module::t('order', 'Docs Egrn File'),
             'docs_loan_agreement_file_form' => Module::t('order', 'Docs Loan Agreement File'),

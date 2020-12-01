@@ -212,6 +212,7 @@ class Spouse extends Model
             'personal_data_file_form' => Module::t('spouse', 'Personal Data'),
             'personal_data_file' => Module::t('spouse', 'Personal Data'),
             'ndfl2_file_form' => Module::t('spouse', '2 NDFL'),
+            'ndfl2_file' => Module::t('spouse', '2 NDFL'),
 
         ];
     }
