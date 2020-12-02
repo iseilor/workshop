@@ -39,8 +39,9 @@ $user = User::findOne(Yii::$app->user->identity->id);
                     <hr/>
                     <h3><?= $spouse->fio ?></h3>
                     <?= $form->field($spouse, 'personal_data_file_form', [
+                        'options'=> ['class' => 'required'],
                         'template' => getFileInputTemplate($spouse->personal_data_file, $spouse->attributeLabels()['personal_data_file'] . '.pdf'),
-                    ])->fileInput(['class' => 'custom-file-input']) ?>
+                    ])->fileInput(['class' => 'custom-file-input', 'required' => !$spouse->personal_data_file]) ?>
                 </div>
             </div>
         <?php endif; ?>
@@ -53,8 +54,9 @@ $user = User::findOne(Yii::$app->user->identity->id);
                             <hr/>
                             <h3><?= $child->fio ?></h3>
                             <?= $form->field($child, 'file_personal_form[' . $child->id . ']', [
+                                'options'=> ['class' => 'required'],
                                 'template' => getFileInputTemplate($child->file_personal, $child->attributeLabels()['file_personal'] . '.pdf'),
-                            ])->fileInput(['class' => 'custom-file-input']) ?>
+                            ])->fileInput(['class' => 'custom-file-input', 'required' => !$child->file_personal]) ?>
                         </div>
                     </div>
                 <?php endif; ?>
@@ -90,6 +92,7 @@ $user = User::findOne(Yii::$app->user->identity->id);
                     'template' => getFileInputTemplate($model->docs_egrn_file,
                         $model->attributeLabels()['docs_egrn_file_form'] . '.pdf'),
                 ])->fileInput(['class' => 'custom-file-input']) ?>
+                <?= $form->field($model, 'docs_egrn_file')->hiddenInput()->label(false) ?>
             </div>
         </div>
         <div class="row loan <?= $field_zaim ?>">
@@ -140,6 +143,8 @@ $script = <<< JS
 $(document).ready(function() {
     
     $('div.field-order-file_agree_personal_data_form').addClass('required');
+    $('div.field-order-order_file_form').addClass('required');
+    $('div.field-order-docs_egrn_file_form').addClass('required');
    
     $('#order-is_mortgage').on('change', function() {
         if ($(this).val() == 0) {

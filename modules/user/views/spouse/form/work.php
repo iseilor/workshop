@@ -19,6 +19,7 @@
 <?php
 $script = <<< JS
 $(document).ready(function() {
+    $('div.field-spouse-is_work').addClass('required');
     $('#spouse-is_work').on('change', function() {
         if ($(this).val()==1){
             $('.field-spouse-is_rtk,.field-spouse-is_do,.field-spouse-salary_file_form').removeClass('d-none');

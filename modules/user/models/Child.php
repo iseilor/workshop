@@ -102,7 +102,7 @@ class Child extends Model
     public function rules()
     {
         $rules = [
-            [['fio', 'date', 'address_registration'], 'required'],
+            [['fio', 'date', 'address_registration', 'address_matched'], 'required'],
             [['created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by', 'user_id', 'is_invalid', 'is_study'], 'integer'],
             [['fio'], 'string', 'max' => 255],
             // TODO: с этим не работает в FireFox
@@ -215,6 +215,7 @@ class Child extends Model
             'birth_file_form' => Module::t('child', 'Birth File'),
 
             // Адрес
+            'address_matched' => Module::t('child', 'Address Matched'),
             'address_registration' => Module::t('child', 'Address Registration'),
             'address_fact' => Module::t('child', 'Address Fact'),
             'registration_file' => Module::t('child', 'Registration File'),
@@ -391,5 +392,14 @@ class Child extends Model
 
     public function getUser() {
         return $this->hasOne(User::class, ['id' => 'user_id'])->one();
+    }
+
+    public static function getAddressMatchedList()
+    {
+        return [
+            0 => 'Не совпадает',
+            1 => 'Работника',
+            2 => 'Супруги(а)',
+        ];
     }
 }

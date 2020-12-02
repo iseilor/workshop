@@ -75,7 +75,8 @@ if ($field_percent == '') {
                         ]
                     ) ?>
 
-                <?= $form->field($model, 'ipoteka_target')->dropDownList($model->getIpotekaTargetList(), ['prompt' => 'Выберите ...']); ?>
+                <?= $form->field($model, 'ipoteka_target', ['options' => ['class' => 'form-group ' . ($zaim_required ? 'd-none' : 'required'),
+                'required' => ($zaim_required ? false : true),]])->dropDownList($model->getIpotekaTargetList(), ['prompt' => 'Выберите ...']); ?>
             </div>
 
             <div class="field-zaim <?= $field_zaim ?>">
@@ -90,7 +91,7 @@ if ($field_percent == '') {
             <div class="field-percent <?= $field_percent ?>">
                 <?= $form->field($model, 'ipoteka_file_dogovor_form', [
                     'template' => getFileInputTemplate($model->ipoteka_file_dogovor, $model->attributeLabels()['ipoteka_file_dogovor'] . '.pdf'),
-                ])->fileInput(['class' => 'custom-file-input', 'required' => ($percent_required && !isset($model->ipoteka_file_dogovor))]) ?>
+                ])->fileInput(['class' => 'custom-file-input', 'required' => ($percent_required && !$model->ipoteka_file_dogovor)]) ?>
 
                 <div class="form-group">
                     <?= Html::checkbox('early_payments', 0, ['label' => 'За период использования Ипотекой были произведены досрочные платежи?',
@@ -130,11 +131,13 @@ if ($field_percent == '') {
             <div class="field-zaim <?= $field_zaim ?>">
                 <?= $form->field($model, 'ipoteka_file_bank_approval_form', [
                     'template' => getFileInputTemplate($model->ipoteka_file_bank_approval, $model->attributeLabels()['ipoteka_file_bank_approval'] . '.pdf'),
-                ])->fileInput(['class' => 'custom-file-input', 'required' => ($zaim_required && !isset($model->ipoteka_file_bank_approval) && $model->ipoteka_size != 0)]) ?>
+                ])->fileInput(['class' => 'custom-file-input', 'required' => ($zaim_required && !$model->ipoteka_file_bank_approval && $model->ipoteka_size != 0)]) ?>
             </div>
         </div>
         <div class="col-md-4">
-            <?= $form->field($model, 'ipoteka_grafic', ['options' => ['class' => 'form-group ' . ($zaim_required ? 'd-none' : '')]])->textarea(['rows' => '15']); ?>
+            <?= $form->field($model, 'ipoteka_grafic', ['options' => ['class' => 'form-group ' . ($zaim_required ? 'd-none' : 'required'),
+                'required' => ($zaim_required ? false : true),]])
+                ->textarea(['rows' => '15']); ?>
         </div>
 
     </div>
@@ -168,7 +171,7 @@ if ($field_percent == '') {
 $script = <<< JS
 $(document).ready(function() {
     var arr = [
-                  '.field-order-ipoteka_file_dogovor_form',
+                  //'.field-order-ipoteka_file_dogovor_form',
                   '.field-order-ipoteka_file_grafic_now_form',
                   '.field-order-ipoteka_file_grafic_first_form',
                   '.field-order-ipoteka_file_refenance_form',
@@ -181,11 +184,12 @@ $(document).ready(function() {
     });
     
     $('div.field-order-jp_cost').addClass('required');
+    $('div.field-order-ipoteka_start_date').addClass('required');
     //$('div.field-order-ipoteka_target').addClass('required');
     $('div.field-order-ipoteka_size').addClass('required');
     $('div.field-order-ipoteka_user').addClass('required');
     $('div.field-order-ipoteka_last_date').addClass('required');
-    //$('div.field-order-ipoteka_file_dogovor_form').addClass('required');
+    $('div.field-order-ipoteka_file_dogovor_form').addClass('required');
     //$('div.field-order-ipoteka_file_grafic_now_form').addClass('required');
     //$('div.field-order-ipoteka_file_spravka_form').addClass('required');
     //$('div.field-order-ipoteka_file_grafic_first_form').addClass('required');
@@ -241,6 +245,9 @@ $(document).ready(function() {
             $('.field-order-zaim_sum').removeClass('required');
             
             $('.field-order-ipoteka_grafic').removeClass('d-none');
+            $('.field-order-ipoteka_grafic').attr('required', true);
+            
+            $('.field-order-ipoteka_target').attr('required', true);
             
             $('.second').removeClass('d-none');
             $('#order-ipoteka_file_bank_approval_form').attr('required', false);
@@ -250,6 +257,9 @@ $(document).ready(function() {
             $('.field-order-zaim_sum').addClass('required');
             
             $('.field-order-ipoteka_grafic').addClass('d-none');
+            $('.field-order-ipoteka_grafic').attr('required', false);
+            
+            $('.field-order-ipoteka_target').attr('required', false);
             
             if ($('#order-ipoteka_size').val() == 0) {
                 $('.second').addClass('d-none');

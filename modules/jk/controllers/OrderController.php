@@ -449,6 +449,26 @@ class OrderController extends Controller
                             $spouse->personal_data_file = $spouseFileName;
                         }
                         break;
+                    case 'ndfl2_file_form':
+                        $spouseNdfl2File = UploadedFile::getInstance($spouse, 'ndfl2_file_form');
+                        if ($spouseNdfl2File) {
+                            $spouseNdfl2FileDir = Yii::$app->params['module']['spouse']['filePath'] . $spouse->id;
+                            $spouseNdfl2FileName = 'spouse_' . $spouse->id . '_ndfl2_' . date('YmdHis') . '.' . $spouseNdfl2File->extension;
+                            FileHelper::createDirectory($spouseNdfl2FileDir, $mode = 0777, $recursive = true);
+                            $spouseNdfl2File->saveAs($spouseNdfl2FileDir . '/' . $spouseNdfl2FileName);
+                            $spouse->ndfl2_file = $spouseNdfl2FileName;
+                        }
+                        break;
+                    case 'salary_file_form':
+                        $spouseSalaryFile = UploadedFile::getInstance($spouse, 'salary_file_form');
+                        if ($spouseSalaryFile) {
+                            $spouseSalaryFileDir = Yii::$app->params['module']['spouse']['filePath'] . $spouse->id;
+                            $spouseSalaryFileName = 'spouse_' . $spouse->id . '_ndfl2_' . date('YmdHis') . '.' . $spouseSalaryFile->extension;
+                            FileHelper::createDirectory($spouseSalaryFileDir, $mode = 0777, $recursive = true);
+                            $spouseSalaryFile->saveAs($spouseSalaryFileDir . '/' . $spouseSalaryFileName);
+                            $spouse->salary_file = $spouseSalaryFileName;
+                        }
+                        break;
                     default:
                         $spouse->$spouseKey = $spouseVal;
                 }

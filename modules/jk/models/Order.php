@@ -230,6 +230,18 @@ class Order extends Model
                 ],
                 'safe',
             ],
+            [
+                ['resident_type'],
+                'required',
+                'when' => function ($model) {
+                    return $model->resident_count > 1;
+                },
+                'whenClient' => "function (attribute, value) {
+                    return $('#order-resident_count').val() > 1;
+                    
+                }",
+                'skipOnEmpty' => true,
+            ],
             [['jp_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'jp_date', 'skipOnEmpty' => true,],
             [['jp_dogovor_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'jp_dogovor_date', 'skipOnEmpty' => true,],
             [['jp_registration_date'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'jp_registration_date', 'skipOnEmpty' => true,],
@@ -280,6 +292,18 @@ class Order extends Model
                 //                'extensions' => 'pdf, docx',
                 //'maxSize' => '20048000',
                 'maxSize' => '62914560',
+            ],
+            [
+                ['ipoteka_start_date',],
+                'required',
+                'when' => function ($model) {
+                    return $model->is_mortgage == 1;
+                },
+                'whenClient' => "function (attribute, value) {
+                    return $('#order-is_mortgage').val() == 1;
+                    
+                }",
+                'skipOnEmpty' => true,
             ],
 
             [
@@ -353,7 +377,7 @@ class Order extends Model
             [['is_do'], 'safe'],
 
 
-            // Вкладка "Финансы"
+            // Вкладка Документы
             [
                 ['file_agree_personal_data_form',],
                 'required',
@@ -366,8 +390,30 @@ class Order extends Model
                 }",
                 'skipOnEmpty' => true,
             ],
-
-            // Вкладка Документы
+            [
+                ['order_file_form',],
+                'required',
+                'when' => function ($model) {
+                    return $model->filling_step >= 7 && !$model->order_file;
+                },
+                'whenClient' => "function (attribute, value) {
+                    return ($('#order-filling_step').val() >= 7) && (($('#order-order_file').val() === null) || ($('#order-order_file').val() === ''));
+                    
+                }",
+                'skipOnEmpty' => true,
+            ],
+            [
+                ['docs_egrn_file_form',],
+                'required',
+                'when' => function ($model) {
+                    return $model->filling_step >= 7 && !$model->docs_egrn_file;
+                },
+                'whenClient' => "function (attribute, value) {
+                    return ($('#order-filling_step').val() >= 7) && (($('#order-docs_egrn_file').val() === null) || ($('#order-docs_egrn_file').val() === ''));
+                    
+                }",
+                'skipOnEmpty' => true,
+            ],
             [
                 [
                     'docs_egrn_file_form',
@@ -603,14 +649,11 @@ class Order extends Model
             'money_user_pay' => 'После оказания помощи совокупные мои платежи, руб',
 
             'file_agree_personal_data_form' => 'Скачайте автоматически сформированный ' . Html::a(Icon::show('file-pdf') . 'бланк',
-                    Url::to(['/user/user/' . Yii::$app->user->identity->id . '/pd']))
+                    Url::to(['/user/user/' . $this->created_by . '/pd']))
                 . ', который нужно будет распечатать, подписать и прикрепить в поле',
 
             'order_file_form' => 'Вам необходимо скачать автоматически сформированное ' . Html::a(Icon::show('file-pdf') . 'Заявление',
                     Url::to(['/jk/order/' . $this->id . '/order'])) . ', которое нужно распечатать, подписать и прикрепить в данное поле',
-            'file_agree_personal_data_form' => 'Скачайте автоматически сформированный ' . Html::a(Icon::show('file-pdf') . 'бланк',
-                    Url::to(['/user/user/' . Yii::$app->user->identity->id . '/pd']))
-                . ', который нужно будет распечатать, подписать и прикрепить в поле',
 
             'jp_own_land_file_form' => 'Собственниками (арендаторами) земельного участка, на котором будет осуществляться строительство дома, и в последующем собственниками дома могут выступать работники/или члены его семьи.',
             'jp_project_house_file_form' => 'Разрабатывает кандидат или специализированная организация',

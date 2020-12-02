@@ -42,6 +42,7 @@ if ($spouse && $spouse->is_do) {
                 <?= $form->field($model, 'ndfl2_file_form', [
                     'template' => getFileInputTemplate($model->ndfl2_file, $model->attributeLabels()['ndfl2_file'] . '.pdf')
                 ])->fileInput(['class' => 'custom-file-input'])->hint($model->getAttributeHint('ndfl2_file')) ?>
+                <?= $form->field($model, 'ndfl2_file')->hiddenInput()->label(false) ?>
                 <?= $form->field($model, 'spravka_zp_file_form', [
                     'options' => ['class' => (!$model->is_do) ? 'd-none':''],
                     'template' => getFileInputTemplate($model->spravka_zp_file, $model->attributeLabels()['spravka_zp_file'] . '.pdf'),
@@ -53,9 +54,9 @@ if ($spouse && $spouse->is_do) {
                     <h4 class="card-title">Супруг(а):</h4>
                     <div class="spouse-is-work <?= $spouse_is_work ?>">
                         <?= $form->field($spouse, 'ndfl2_file_form', [
-                            'template' => getFileInputTemplate($model->ndfl2_file, $model->attributeLabels()['ndfl2_file'] . '.pdf'),
+                            'template' => getFileInputTemplate($spouse->ndfl2_file, $spouse->attributeLabels()['ndfl2_file'] . '.pdf'),
                             'options' => ['style' => 'margin-top:10%'],
-                        ])->fileInput(['class' => 'custom-file-input'])->hint($model->getAttributeHint('ndfl2_file')) ?>
+                        ])->fileInput(['class' => 'custom-file-input']) ?>
                     </div>
                     <div class="spouse-is-do <?= $spouse_is_do ?>">
                         <?= $form->field($spouse, 'salary_file_form', [
@@ -117,6 +118,10 @@ $(document).ready(function() {
     $('div.field-order-money_nalog_year').addClass('required');
     $('div.field-order-money_month_pay').addClass('required');
     $('div.field-order-money_user_pay').addClass('required');
+    $('div.field-order-ndfl2_file_form').addClass('required');
+    $('div.field-order-spravka_zp_file_form').addClass('required');
+    $('div.field-spouse-ndfl2_file_form').addClass('required');
+    $('div.field-spouse-salary_file_form').addClass('required');
     
     // Показываем поля загрузки справки, если сотрудник в ДО
     $('#order-is_do').on('click', function() {

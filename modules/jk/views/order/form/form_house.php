@@ -230,6 +230,9 @@ $(document).ready(function() {
     $('div.field-order-jp_new_area').addClass('required');
     $('div.field-order-jp_part').addClass('required');
     $('div.field-order-jp_date').addClass('required');
+    $('.field-order-jp_dogovor_buy_file_form').addClass('required');
+    $('.field-order-jp_egrp_file_form').addClass('required');
+    $('.field-order-jp_act_file_form').addClass('required');
     
     var constr_fields_map = new Map([
                       ['#order-jp_own_land_file_form', '.field-order-jp_own_land_file_form'],
@@ -273,12 +276,12 @@ $(document).ready(function() {
                     $('.new_building').removeClass('d-none');
                 }
                 if (!$('.field-order-jp_dogovor_buy_file_form label[for=exampleInputFile]').html()) {
-                    $('.field-order-jp_dogovor_buy_file_form').addClass('required');
+                    //$('.field-order-jp_dogovor_buy_file_form').addClass('required');
                     $('#order-jp_dogovor_buy_file_form').attr('required', true);
                 }
                 
                 if (!$('.field-order-jp_egrp_file_form label[for=exampleInputFile]').html()) {
-                    $('.field-order-jp_egrp_file_form').addClass('required');
+                    //$('.field-order-jp_egrp_file_form').addClass('required');
                     $('#order-jp_egrp_file_form').attr('required', true);
                 }
                 $('#order-jp_address').attr('required', true);
@@ -303,7 +306,7 @@ $(document).ready(function() {
             $('.field-order-jp_act_file_form').addClass('d-none');
             $('.field-order-jp_egrp_file_form').addClass('d-none');
             
-            $('.field-order-jp_egrp_file_form').removeClass('required');
+            //$('.field-order-jp_egrp_file_form').removeClass('required');
             $('#order-jp_egrp_file_form').attr('required', false);
         } else {
             $('.field-order-jp_act_file_form').removeClass('d-none');
@@ -311,7 +314,7 @@ $(document).ready(function() {
             $('.new_building').addClass('d-none');
             if (!$('.field-order-jp_egrp_file_form label[for=exampleInputFile]').html()) {
                 if ($('#order-is_mortgage').val() == 1) {
-                    $('.field-order-jp_egrp_file_form').addClass('required');
+                    //$('.field-order-jp_egrp_file_form').addClass('required');
                     $('#order-jp_egrp_file_form').attr('required', true);
                 }
             }

@@ -22,18 +22,9 @@ if ($spouse->id == null) {
     ];
     $spouse_ar = $spouse->passport_registration;
 }
+?>
 
-$params = [
-    'required' => true,
-    'class' => 'form-control',
-    'prompt' => 'Выберите вариант...',
-    'id' => 'address-matched'
-]; ?>
-
-<?= '<div class="form-group required", style="margin-bottom: 1rem;">'?>
-<?= Html::label('Адрес регистрации ребёнка совпадает с адресом регистрации:', 'address-matched') ?>
-<?= Html::dropDownList('matches',null, $items, $params) ?>
-<?= '</div>'?>
+<?= $form->field($model, 'address_matched')->dropDownList($model->getAddressMatchedList(), ['prompt' => 'Выберите ...', 'id' => 'address-matched']); ?>
 
 <?= $form->field($model, 'address_registration')
     ->textarea([
@@ -79,6 +70,10 @@ $params = [
 
 <?= $form->field($model, 'ejd_file_form', [
     'template' => getFileInputTemplate($model->ejd_file, $model->attributeLabels()['ejd_file'] . '.pdf'),
+    'options' => [
+        'class' => ($model->address_matched && $model->address_matched == 0) ? 'plug' : 'd-none',
+        'required' => ($model->address_matched && $model->address_matched == 0),
+    ]
 ])->fileInput(['class' => 'custom-file-input'])->hint($model->getAttributeHint('ejd_file_form')) ?>
 
 <?= $form->field($model, 'other_child_files_form', [
@@ -98,8 +93,18 @@ $(document).ready(function() {
     //$('.field-child-address_father_file_form').addClass('required');
     //$('#child-address_father_file_form').attr('required', true);
     
-    $('#child-address_registration').val('');
+    //$('#child-address_registration').val('');
     $('div.field-child-ejd_file_form').addClass('required');
+    if($('#address-matched').val() == 1) {
+        $('#child-address_registration').prop( "readonly", true );
+        $('#child-address_registration').val($('#child-address_registration').data('user-address-registration'));
+    } else if ($('#address-matched').val() == 2) {
+        $('#child-address_registration').prop( "readonly", true );
+        $('#child-address_registration').val($('#child-address_registration').data('spouse-address-registration'));
+    } else if ($('#address-matched').val() == 0) {
+        $('#child-address_registration').val('');
+        $('#child-address_registration').prop( "readonly", false );
+    }
     // Адрес регистрации ребёнка совпадает с адресом регистарции сотрудника или супруги(а)
     $('#address-matched').on('change', function() {
         if($('#address-matched').val() == 1) {
@@ -110,21 +115,23 @@ $(document).ready(function() {
             }
             $('#child-address_registration').prop( "readonly", true );
             $('#child-address_registration').val($('#child-address_registration').data('user-address-registration'));
-        } else if ($('#address-matched').val() == 2){
+        } else if ($('#address-matched').val() == 2) {
             if (!$('div.field-child-ejd_file_form').hasClass('d-none')) {
                 $('div.field-child-ejd_file_form').addClass('d-none');
-                $('#child-ejd_file_form').attr('required', false)
-                $('div.field-child-ejd_file_form').removeClass('required');
+                $('#child-ejd_file_form').attr('required', false);
             }
             $('#child-address_registration').prop( "readonly", true );
             $('#child-address_registration').val($('#child-address_registration').data('spouse-address-registration'));
-       } else {
+       } else if ($('#address-matched').val() == 0 && $('#address-matched').val() != '') {
             $('div.field-child-ejd_file_form').removeClass('d-none');
             $('#child-ejd_file_form').attr('required', true)
             $('div.field-child-ejd_file_form').addClass('required');
             
             $('#child-address_registration').val('');
             $('#child-address_registration').prop( "readonly", false );
+       } else if ($('#address-matched').val() == ''){
+            $('div.field-child-ejd_file_form').addClass('d-none');
+            $('#child-ejd_file_form').attr('required', false);
        }
     });
     

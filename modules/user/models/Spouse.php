@@ -114,7 +114,7 @@ class Spouse extends Model
 
             // Обязательные при наличии супруге
             [
-                ['fio', 'passport_series', 'passport_number', 'passport_date', 'passport_department', 'passport_code','passport_registration'],
+                ['fio', 'passport_series', 'passport_number', 'passport_date', 'passport_department', 'passport_code','passport_registration', 'is_work'],
                 'required',
                 'when' => function ($model) {
                     return $model->type == 1;

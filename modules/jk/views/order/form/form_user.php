@@ -240,7 +240,7 @@ $user = User::findOne(Yii::$app->user->identity->id);
         <div class="row">
             <div class="col-4">
                 <?= $form->field($model, 'jp_room_count',['options' => [
-                        'class' => $model->jp_type == 1 ? 'form-group d-none' : 'form-group'
+                        'class' => $model->jp_type == 1 || $model->jp_type == 3 ? 'form-group d-none' : 'form-group'
                 ]])->textInput(); ?>
 
                 <?= $form->field($model, 'resident_type')->dropDownList(Order::getResidentTypeList(),  ['prompt' => 'Выберите',]
@@ -341,8 +341,8 @@ $temporaryRegistrationFileIsRequired = empty($passport->temporary_registration_f
 $script = <<< JS
 $(document).ready(function() {
     $('div.field-order-jp_room_count').addClass('required');
-    $('div.field-order-jp_room_count').addClass('d-none');
     $('div.field-user-tab_number').addClass('required');
+    $('div.field-order-resident_type').addClass('required');
     if ($('#order-resident_count').val() < 2) {
         $("div.field-order-resident_type").addClass('d-none');
     }
