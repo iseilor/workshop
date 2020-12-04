@@ -27,7 +27,7 @@ function getFileInputTemplate($file, $fileName)
             <div class="custom-file">
             
                 {input}
-                <label class="custom-file-label" for="exampleInputFile">' . $fileName . '</label>
+                <label style="overflow: hidden" class="custom-file-label" for="exampleInputFile">' . $fileName . '</label>
             </div>
         </div>
         {hint}{error}';

@@ -88,12 +88,7 @@ $user = User::findOne(Yii::$app->user->identity->id);
         </div>
         <div class="row">
             <div class="col-4">
-            <?= $form->field($usermd, 'tab_number')->widget(MaskedInput::class, [
-                'mask' => '9[999999]',
-                'clientOptions' => [
-                    'clearIncomplete' => true
-                ]
-            ]) ?>
+            <?= $form->field($usermd, 'tab_number')?>
             </div>
             <div class="col-4">
                 <?= $form->field($model, 'is_do', ['options' => ['style' => 'margin-top:5%']])->checkbox()->hint($model->getAttributeHint('is_do')) ?>
@@ -200,7 +195,7 @@ $user = User::findOne(Yii::$app->user->identity->id);
             <div class="col-4">
                 <?= $form->field($passport, 'ejd_file', [
                     'template' => getFileInputTemplate($passport->ejd_file, $passport->attributeLabels()['ejd_file'] . '.pdf'),
-                ])->fileInput(['class' => 'custom-file-input']) ?>
+                ])->fileInput() ?>
             </div>
             <div class="col-4">
             </div>
@@ -355,6 +350,7 @@ $(document).ready(function() {
         $('div.field-order-file_rent_form').addClass('d-none');
     }
     
+    $('#user-tab_number').inputmask({regex: "[0-9,-]+", rightAlign: false,})
     $("#order-jp_room_count").inputmask({regex: "[0-9]+", rightAlign: false,});
     $("#order-resident_count").inputmask({regex: "[0-9]+", rightAlign: false,});
     $("#order-jp_area").inputmask('decimal', {rightAlign: false,});
