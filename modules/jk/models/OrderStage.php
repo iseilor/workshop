@@ -20,6 +20,13 @@ use yii\helpers\ArrayHelper;
  * @property string   $order_id
  * @property int      $status_id
  * @property string   $comment
+ * @property string   $comment2
+ *
+ * @property string   $field1
+ * @property string   $field2
+ * @property string   $field3
+ * @property string   $field4
+ * @property string   $field5
  */
 class OrderStage extends Model
 {
@@ -40,7 +47,8 @@ class OrderStage extends Model
         return [
             [['order_id', 'status_id', 'comment'], 'required'],
             [['created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by', 'status_id', 'order_id'], 'integer'],
-            [['comment'], 'string', 'max' => 255],
+            [['comment', 'comment2'], 'string', 'max' => 255],
+            [['field1', 'field2', 'field3', 'field4', 'field5'], 'safe'],
         ];
     }
 
@@ -56,8 +64,9 @@ class OrderStage extends Model
                 'order_id' => Module::t('order_stage', 'Order ID'),
                 'status_id' => Module::t('order_stage', 'Status ID'),
                 'comment' => Module::t('order_stage', 'Comment'),
-                'status.label'=>Module::t('order_stage', 'Status'),
-                'createdUserLink'=>Module::t('order_stage', 'User'),
+                'comment2' => Module::t('order_stage', 'Comment'),
+                'status.label' => Module::t('order_stage', 'Status'),
+                'createdUserLink' => Module::t('order_stage', 'User'),
             ]
         );
     }
