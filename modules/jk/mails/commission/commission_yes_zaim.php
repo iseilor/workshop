@@ -8,16 +8,18 @@ use yii\helpers\Url;
 
 /* @var $user app\modules\user\models\User */
 /* @var $order app\modules\jk\models\Order */
+/* @var $stage app\modules\jk\models\OrderStage */
 ?>
 
 <p>
     <strong>Уважаем<?= ($user->gender > 0) ? 'ый' : 'ая' ?>, <?= $user->fio ?>!</strong><br/>
     На портале <?= Html::a(Yii::$app->name, Url::home(true)); ?> по Вашей заявке на участие в Жилищной Программе принято положительное решение о
-    предоставлении Вам займа для приобретения постоянного жилья в размере <strong><?= $order->getLoanMaxVal() ?> руб.</strong>
-    сроком на <strong><?= $order->getLoanPeriod() ?> лет.</strong>
+    предоставлении Вам займа для приобретения постоянного жилья в размере <strong><?= $stage->field1 ?> руб.</strong>
+    сроком на <strong><?= $stage->field2 ?> лет.</strong>
 </p>
 
 <ul>
+    <li>Сообщение куратора: <?=$stage->comment?></li>
     <li>Заявка: <?= Html::a($order->id, Url::base(true) . Url::to('/jk/order/' . $order->id)) ?>
         от <?= Yii::$app->formatter->asDate($order->created_at) ?></li>
     <li>Вид материальной помощи: <?= $order->getTypeName() ?></li>
@@ -35,6 +37,7 @@ use yii\helpers\Url;
     </li>
     <li>запрос на получение выписки из ЕГРП по всем членам семьи (скан-копию);</li>
     <li>шаблон заявки (приложить шаблон)</li>
+    <li><?=$stage->comment2?></li>
 </ul>
 
 <p>Для информации:</p>

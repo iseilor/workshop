@@ -8,17 +8,20 @@ use yii\helpers\Url;
 
 /* @var $user app\modules\user\models\User */
 /* @var $order app\modules\jk\models\Order */
+/* @var $stage app\modules\jk\models\OrderStage */
 ?>
 
 <p>
     <strong>Уважаем<?=($user->gender>0)?'ый':'ая'?>, <?= $user->fio ?>!</strong><br/>
     На портале <?= Html::a(Yii::$app->name, Url::home(true)); ?> по Вашей заявке на участие в Жилищной Программе принято
     положительное решение в части оказания Вам помощи на приобретение жилья в виде компенсации процентов по ипотечному кредиту в размере
-    <?=$order->getPcRate()?>% на срок <?=$order->getPcTerm()?> лет (<?=$order->getPcPeriod()?>. Максимальная сумма
-    выплат в целом по ДС <?=$order->getPcMaxVal()?> руб. Максимальная сумма выплат в год <?=$order->getPcMaxPerYear()?> руб.
+    <?=$stage->field1?>% на срок <?=$stage->field2?> лет (<?=$stage->field3?>). Максимальная сумма
+    выплат в целом по ДС <strong><?=$stage->field4?> руб</strong>.
+    Максимальная сумма выплат в год <strong><?=$stage->field5?> руб.</strong>
 </p>
 
 <ul>
+    <li>Сообщение куратора: <?=$stage->comment?></li>
     <li>Заявка: <?= Html::a($order->id, Url::base(true) . Url::to('/jk/order/' . $order->id)) ?>
         от <?= Yii::$app->formatter->asDate($order->created_at) ?></li>
     <li>Вид материальной помощи: <?= $order->getTypeName() ?></li>
@@ -38,6 +41,7 @@ use yii\helpers\Url;
     <li>запрос на получение выписки из ЕГРП по всем членам семьи (скан-копию);</li>
     <li>актуальный график погашения кредита и процентов по кредиту (скан-копию);</li>
     <li>справка об уплаченных процентах за период январь-июнь т.г. (оригинал) (предоставляется в срок до 12.07.2021)</li>
+    <li><?=$stage->comment2?></li>
 </ul>
 <p>Для информации:</p>
 <ul>

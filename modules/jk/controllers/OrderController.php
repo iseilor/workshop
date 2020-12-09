@@ -169,9 +169,9 @@ class OrderController extends Controller
             $spouse = Spouse::findOne(['user_id' => $user->id]);
             $passport = $user->passport;
         }
-//         if (!$spouse) {
-//             $spouse = new Spouse();
-//         }
+        //         if (!$spouse) {
+        //             $spouse = new Spouse();
+        //         }
 
         if (!$passport) {
             $passport = new Passport();
@@ -339,17 +339,17 @@ class OrderController extends Controller
             $user = $user = User::findOne(Yii::$app->user->identity->getId());
         }
 
-//         var_dump($user);
-//         die();
+        //         var_dump($user);
+        //         die();
 
         if ($user) {
             $spouse = Spouse::findOne(['user_id' => $user->id]);
             $passport = $user->passport;
         }
 
-//         if (!$spouse) {
-//             $spouse = new Spouse();
-//         }
+        //         if (!$spouse) {
+        //             $spouse = new Spouse();
+        //         }
 
         if (!$passport) {
             $passport = new Passport();
@@ -521,8 +521,8 @@ class OrderController extends Controller
             // Если не смогли сохранить заявку, откатываемся на 1 шаг
             $model->filling_step--;
         }
-// var_dump($min);
-// die();
+        // var_dump($min);
+        // die();
 
         return $this->render(
             'update',
@@ -735,6 +735,9 @@ class OrderController extends Controller
     {
         $orderStage = new OrderStage();
         $orderStage->order_id = $id;
+        $order = Order::findOne($id);
+        $orderStage->field1 = $order->getLoanMaxVal();
+        $orderStage->field2 = $order->getLoanPeriod();
 
         if (isset(Yii::$app->request->post()['status_code'])) {
             $statusCode = Yii::$app->request->post()['status_code'];
@@ -774,7 +777,7 @@ class OrderController extends Controller
                 [
                     'user' => $user,
                     'order' => $order,
-                    'stage' => $orderStage,
+                    'stage' => $orderStage
                 ]
             )
                 ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
@@ -782,10 +785,8 @@ class OrderController extends Controller
                 ->setBcc(Yii::$app->params['supportEmail'])
                 ->setSubject("HR-портал / Жилищная Программа / Заявка №" . $order->id . " / " . $emailTitle . '.')
                 ->send();
-
             return $this->redirect(['index']);
         }
-
 
         return $this->render(
             'commission',
@@ -793,7 +794,6 @@ class OrderController extends Controller
                 'model' => $this->findModel($id),
                 'stage' => $orderStage,
                 'user' => User::findOne($this->findModel($id)->created_by),
-                //'stages' => $stages,
             ]
         );
     }
@@ -1094,6 +1094,6 @@ class OrderController extends Controller
         $order = Order::findOne($id)->setNewStatus('MANAGER_WAIT_REPEAT');
         $agreement = Agreement::find()->where(['order_id' => $id, 'approval_at' => null])->one();
         $manager = User::findOne($agreement->user_id);
-        return 'Повторное email-уведомление о необходимости согласования заявки было направлено на имя: <strong>' . $manager->fio.'</strong>';
+        return 'Повторное email-уведомление о необходимости согласования заявки было направлено на имя: <strong>' . $manager->fio . '</strong>';
     }
 }
