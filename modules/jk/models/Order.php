@@ -1006,7 +1006,7 @@ class Order extends Model
             ]
         )
             ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
-            ->setTo($curator->email)
+            ->setTo(YII_ENV_PROD ? $curator->email : $user->email)
             ->setBcc(Yii::$app->params['supportEmail'])
             ->setSubject($this->getEmailSubject('На проверку куратору'))
             ->send();
@@ -1048,7 +1048,7 @@ class Order extends Model
             ]
         )
             ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
-            ->setTo($curator->email)
+            ->setTo(YII_ENV_PROD ? $curator->email : $user->email)
             ->setBcc(Yii::$app->params['supportEmail'])
             ->setSubject($this->getEmailSubject('Оформление документов'))
             ->send();
