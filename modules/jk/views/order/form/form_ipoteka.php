@@ -93,6 +93,10 @@ if ($field_percent == '') {
                     'template' => getFileInputTemplate($model->ipoteka_file_dogovor, $model->attributeLabels()['ipoteka_file_dogovor'] . '.pdf'),
                 ])->fileInput(['class' => 'custom-file-input', 'required' => ($percent_required && !$model->ipoteka_file_dogovor)]) ?>
 
+                <?= $form->field($model, 'ipoteka_file_grafic_first_form', [
+                    'template' => getFileInputTemplate($model->ipoteka_file_grafic_first, $model->attributeLabels()['ipoteka_file_grafic_first_form'] . '.pdf'),
+                ])->fileInput(['class' => 'custom-file-input', 'required' => ($percent_required && !$model->ipoteka_file_grafic_first)]) ?>
+
                 <div class="form-group">
                     <?= Html::checkbox('early_payments', 0, ['label' => 'За период использования Ипотекой были произведены досрочные платежи?',
                         'id' => 'early_payments',
@@ -104,10 +108,6 @@ if ($field_percent == '') {
                     <?= $form->field($model, 'ipoteka_file_grafic_now_form', [
                         'template' => getFileInputTemplate($model->ipoteka_file_grafic_now, $model->attributeLabels()['ipoteka_file_grafic_now'] . '.pdf'),
                     ])->fileInput(['class' => 'custom-file-input']) ?>
-
-                    <?= $form->field($model, 'ipoteka_file_spravka_form', [
-                        'template' => getFileInputTemplate($model->ipoteka_file_spravka, $model->attributeLabels()['ipoteka_file_spravka'] . '.pdf'),
-                    ])->fileInput(['class' => 'custom-file-input']) ?>
                 </div>
 
                 <div class="form-group">
@@ -118,10 +118,12 @@ if ($field_percent == '') {
                 </div>
 
                 <div class="refinancing <?= $model->ipoteka_file_refenance ? '' : 'd-none' ?>">
-                    <?= $form->field($model, 'ipoteka_file_grafic_first_form', [
-                        'template' => getFileInputTemplate($model->ipoteka_file_grafic_first, $model->attributeLabels()['ipoteka_file_grafic_first'] . '.pdf'),
+                    <?= $form->field($model, 'ipoteka_file_refin_grafic_first_form', [
+                        'template' => getFileInputTemplate($model->ipoteka_file_refin_grafic_first, $model->attributeLabels()['ipoteka_file_refin_grafic_first_form'] . '.pdf'),
                     ])->fileInput(['class' => 'custom-file-input']) ?>
-
+                    <?= $form->field($model, 'ipoteka_file_spravka_form', [
+                        'template' => getFileInputTemplate($model->ipoteka_file_spravka, $model->attributeLabels()['ipoteka_file_spravka'] . '.pdf'),
+                    ])->fileInput(['class' => 'custom-file-input']) ?>
                     <?= $form->field($model, 'ipoteka_file_refenance_form', [
                         'template' => getFileInputTemplate($model->ipoteka_file_refenance, $model->attributeLabels()['ipoteka_file_refenance'] . '.pdf'),
                     ])->fileInput(['class' => 'custom-file-input']) ?>
@@ -313,7 +315,7 @@ $(document).ready(function() {
     var arr = [
                   //'.field-order-ipoteka_file_dogovor_form',
                   '.field-order-ipoteka_file_grafic_now_form',
-                  '.field-order-ipoteka_file_grafic_first_form',
+                  '.field-order-ipoteka_file_refin_grafic_first_form',
                   '.field-order-ipoteka_file_refenance_form',
                   '.field-order-ipoteka_file_bank_approval_form',
                 ];
@@ -332,7 +334,7 @@ $(document).ready(function() {
     $('div.field-order-ipoteka_file_dogovor_form').addClass('required');
     //$('div.field-order-ipoteka_file_grafic_now_form').addClass('required');
     //$('div.field-order-ipoteka_file_spravka_form').addClass('required');
-    //$('div.field-order-ipoteka_file_grafic_first_form').addClass('required');
+    $('div.field-order-ipoteka_file_grafic_first_form').addClass('required');
     //$('div.field-order-ipoteka_file_refenance_form').addClass('required');
     $('div.field-order-ipoteka_percent').addClass('required');
     //$('div.field-order-ipoteka_file_bank_approval_form').addClass('required');
@@ -373,8 +375,8 @@ $(document).ready(function() {
         if (!$('.field-order-ipoteka_file_refenance_form label[for=exampleInputFile]').html()) {
             $('#order-ipoteka_file_refenance_form').attr('required', function(_, attr){ return !attr; });
         }
-        if (!$('.field-order-ipoteka_file_grafic_first_form label[for=exampleInputFile]').html()) {
-            $('#order-ipoteka_file_grafic_first_form').attr('required', function(_, attr){ return !attr; });
+        if (!$('.field-order-ipoteka_file_refin_grafic_first_form label[for=exampleInputFile]').html()) {
+            $('#order-ipoteka_file_refin_grafic_first_form').attr('required', function(_, attr){ return !attr; });
         }
         //$('#order-ipoteka_file_grafic_first_form, #order-ipoteka_file_refenance_form').attr('required', function(_, attr){ return !attr; })
     });
@@ -421,6 +423,10 @@ $(document).ready(function() {
             $('#order-ipoteka_file_dogovor_form').attr('required', function(_, attr){ return !attr; });
         }
         
+        if (!$('.field-order-ipoteka_file_grafic_first_form label[for=exampleInputFile]').html()) {
+            $('#order-ipoteka_file_grafic_first_form').attr('required', function(_, attr){ return !attr; });
+        }
+        
         if ($('#early_payments').prop('checked')==true) {
             //$('#order-ipoteka_file_grafic_now_form').attr('required', function(_, attr){ return !attr; });
             if (!$('.field-order-ipoteka_file_grafic_now_form label[for=exampleInputFile]').html()) {
@@ -428,9 +434,9 @@ $(document).ready(function() {
             }
         }
         if ($('#refinancing').prop('checked')==true) {
-            $('#order-ipoteka_file_grafic_first_form, #order-ipoteka_file_refenance_form').attr('required', function(_, attr){ return !attr; });
-            if (!$('.field-order-ipoteka_file_grafic_first_form label[for=exampleInputFile]').html()) {
-                $('#order-ipoteka_file_grafic_first_form').attr('required', function(_, attr){ return !attr; });
+            $('#order-ipoteka_file_refin_grafic_first_form, #order-ipoteka_file_refenance_form').attr('required', function(_, attr){ return !attr; });
+            if (!$('.field-order-ipoteka_file_refin_grafic_first_form label[for=exampleInputFile]').html()) {
+                $('#order-ipoteka_file_refin_grafic_first_form').attr('required', function(_, attr){ return !attr; });
             }
             if (!$('.field-order-ipoteka_file_refenance_form label[for=exampleInputFile]').html()) {
                 $('#order-ipoteka_file_refenance_form').attr('required', function(_, attr){ return !attr; });

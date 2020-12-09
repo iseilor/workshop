@@ -144,7 +144,6 @@ $(document).ready(function() {
     
     $('div.field-order-file_agree_personal_data_form').addClass('required');
     $('div.field-order-order_file_form').addClass('required');
-    $('div.field-order-docs_egrn_file_form').addClass('required');
    
     $('#order-is_mortgage').on('change', function() {
         if ($(this).val() == 0) {

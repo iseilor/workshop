@@ -8,7 +8,6 @@ $spouse = Spouse::find()->where(['user_id' => $model->created_by])->one();
 $attr = [
     'money_summa_year:currency',
     'money_month_pay:currency',
-    'money_nalog_year:currency',
     'money_user_pay:currency',
     viewFieldFile($model, 'ndfl2_file', ['/' . Yii::$app->params['module']['jk']['order']['filePath'] . $model->id . '/' . $model->ndfl2_file]),
     viewFieldFile($model, 'spravka_zp_file', ['/' . Yii::$app->params['module']['jk']['order']['filePath'] . $model->id . '/' . $model->spravka_zp_file]),

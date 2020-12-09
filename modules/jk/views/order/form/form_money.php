@@ -22,7 +22,7 @@ if ($spouse && $spouse->is_do) {
         ])->fileInput(['class' => 'custom-file-input'])-->
         <!--$form->field($model, 'money_oklad')->widget(MaskedInput::class, ['clientOptions' => Yii::$app->params['widget']['MaskedInput']['clientOptionsMoney']])-->
         <?= $form->field($model, 'money_summa_year')->widget(MaskedInput::class, ['clientOptions' => Yii::$app->params['widget']['MaskedInput']['clientOptionsMoney']]) ?>
-        <?= $form->field($model, 'money_nalog_year')->widget(MaskedInput::class, ['clientOptions' => Yii::$app->params['widget']['MaskedInput']['clientOptionsMoney']]) ?>
+        <!--$form->field($model, 'money_nalog_year')->widget(MaskedInput::class, ['clientOptions' => Yii::$app->params['widget']['MaskedInput']['clientOptionsMoney']])-->
     </div>
     <div class="col-md-4">
         <?= $form->field($model, 'money_month_pay')->widget(MaskedInput::class, ['clientOptions' => Yii::$app->params['widget']['MaskedInput']['clientOptionsMoney']]) ?>
@@ -115,7 +115,7 @@ $(document).ready(function() {
     
     $('div.field-order-money_oklad').addClass('required');
     $('div.field-order-money_summa_year').addClass('required');
-    $('div.field-order-money_nalog_year').addClass('required');
+    //$('div.field-order-money_nalog_year').addClass('required');
     $('div.field-order-money_month_pay').addClass('required');
     $('div.field-order-money_user_pay').addClass('required');
     $('div.field-order-ndfl2_file_form').addClass('required');

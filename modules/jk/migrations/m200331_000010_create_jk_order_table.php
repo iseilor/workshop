@@ -117,12 +117,13 @@ class m200331_000010_create_jk_order_table extends Migration
                 'ipoteka_start_date' => $this->integer(), // Дата оформления ипотеки
 
                 // Ипотека.Файлы
-                'ipoteka_file_dogovor' => $this->string(),          // Договор ипотеки
-                'ipoteka_file_grafic_first' => $this->string(),     // Первоначальный График платежей
-                'ipoteka_file_grafic_now' => $this->string(),       // Акктуальный график платежей
-                'ipoteka_file_refenance' => $this->string(),        // Договор рефинансирования ипотеки
-                'ipoteka_file_spravka' => $this->string(),          // Справка из банка об актуальной ставке договора рефинансирования
-                'ipoteka_file_bank_approval' => $this->string(),    // Одобрение из банка
+                'ipoteka_file_dogovor' => $this->string(),              // Договор ипотеки
+                'ipoteka_file_grafic_first' => $this->string(),         // Первоначальный График платежей
+                'ipoteka_file_refin_grafic_first' => $this->string(),   // Первоначальный График платежей при рефинансировании
+                'ipoteka_file_grafic_now' => $this->string(),           // Акктуальный график платежей
+                'ipoteka_file_refenance' => $this->string(),            // Договор рефинансирования ипотеки
+                'ipoteka_file_spravka' => $this->string(),              // Справка из банка об актуальной ставке договора рефинансирования
+                'ipoteka_file_bank_approval' => $this->string(),        // Одобрение из банка
 
                 // Финансы
                 'money_oklad' => $this->double(),           // Оклад

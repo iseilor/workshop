@@ -45,6 +45,7 @@ use yii\web\UploadedFile;
  * @property string   ipoteka_file_dogovor
  * @property string   ipoteka_file_dogovor_form
  * @property string   ipoteka_file_grafic_first
+ * @property string   ipoteka_file_refin_grafic_first
  * @property string   ipoteka_file_grafic_now
  * @property string   ipoteka_file_refenance
  * @property string   ipoteka_file_spravka
@@ -131,6 +132,8 @@ class Order extends Model
     public $ipoteka_file_dogovor_form = '';
 
     public $ipoteka_file_grafic_first_form = '';
+
+    public $ipoteka_file_refin_grafic_first_form = '';
 
     public $ipoteka_file_grafic_now_form = '';
 
@@ -282,6 +285,7 @@ class Order extends Model
                 [
                     'ipoteka_file_dogovor_form',
                     'ipoteka_file_grafic_first_form',
+                    'ipoteka_file_refin_grafic_first_form',
                     'ipoteka_file_grafic_now_form',
                     'ipoteka_file_refenance_form',
                     'ipoteka_file_spravka_form',
@@ -351,7 +355,7 @@ class Order extends Model
             ],
 
             [
-                ['money_summa_year', 'money_nalog_year', 'money_month_pay', 'money_user_pay',],
+                ['money_summa_year', 'money_month_pay', 'money_user_pay',],
                 'required',
                 'when' => function ($model) {
                     return $model->filling_step >= 6;
@@ -398,18 +402,6 @@ class Order extends Model
                 },
                 'whenClient' => "function (attribute, value) {
                     return ($('#order-filling_step').val() >= 7) && (($('#order-order_file').val() === null) || ($('#order-order_file').val() === ''));
-                    
-                }",
-                'skipOnEmpty' => true,
-            ],
-            [
-                ['docs_egrn_file_form',],
-                'required',
-                'when' => function ($model) {
-                    return $model->filling_step >= 7 && !$model->docs_egrn_file;
-                },
-                'whenClient' => "function (attribute, value) {
-                    return ($('#order-filling_step').val() >= 7) && (($('#order-docs_egrn_file').val() === null) || ($('#order-docs_egrn_file').val() === ''));
                     
                 }",
                 'skipOnEmpty' => true,
@@ -573,6 +565,7 @@ class Order extends Model
 
             'ipoteka_file_dogovor_form' => Module::t('order', 'Ipoteka File Dogovor'),
             'ipoteka_file_grafic_first_form' => Module::t('order', 'Ipoteka File Grafic First'),
+            'ipoteka_file_refin_grafic_first_form' => Module::t('order', 'Ipoteka File Grafic First'),
             'ipoteka_file_grafic_now_form' => Module::t('order', 'Ipoteka File Grafic Now'),
             'ipoteka_file_refenance_form' => Module::t('order', 'Ipoteka File Refenance'),
             'ipoteka_file_spravka_form' => Module::t('order', 'Ipoteka File Spravka'),
@@ -721,6 +714,7 @@ class Order extends Model
 
             'ipoteka_file_dogovor',
             'ipoteka_file_grafic_first',
+            'ipoteka_file_refin_grafic_first',
             'ipoteka_file_grafic_now',
             'ipoteka_file_refenance',
             'ipoteka_file_spravka',
@@ -1143,7 +1137,7 @@ class Order extends Model
         $cnt = 1; // Сам сотрудник
         $spouseCnt = Spouse::find()->where(['user_id' => $this->created_by])->count();
         $childCnt = Child::find()->where(['user_id' => $this->created_by, 'deleted_at' => null])->count();
-        return ($this->money_summa_year - $this->money_nalog_year) / ($cnt + $spouseCnt + $childCnt) / 12;
+        return ($this->money_summa_year) / ($cnt + $spouseCnt + $childCnt) / 12;
     }
 
 
@@ -1176,7 +1170,7 @@ class Order extends Model
         if (!$this->user || !$this->user->retirementDate) {
             return 0;
         }
-        return ($this->money_summa_year - $this->money_nalog_year) / $this->user->familyMembersCount / 12;
+        return ($this->money_summa_year) / $this->user->familyMembersCount / 12;
     }
 
     public function getCorpNorm()
