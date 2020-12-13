@@ -195,7 +195,7 @@ $user = User::findOne(Yii::$app->user->identity->id);
             <div class="col-4">
                 <?= $form->field($passport, 'ejd_file', [
                     'template' => getFileInputTemplate($passport->ejd_file, $passport->attributeLabels()['ejd_file'] . '.pdf'),
-                ])->fileInput() ?>
+                ])->fileInput(['class' => 'custom-file-input']) ?>
             </div>
             <div class="col-4">
             </div>
