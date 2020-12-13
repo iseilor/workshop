@@ -36,6 +36,7 @@ $config = [
     ],
     'layout' => 'index',
     'language' => 'ru',
+    'sourceLanguage' => 'ru',
     'timeZone' => 'Europe/Moscow',
     'defaultRoute' => 'main/default/index',
     'aliases' => [
@@ -63,6 +64,11 @@ $config = [
         'pp' => ['class' => 'app\modules\pp\Module'],
     ],
     'components' => [
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+            'defaultRoles' => ['user'],
+        ],
+
         'ad' => [
             'class' => 'Edvlerblog\Adldap2\Adldap2Wrapper',
             'providers' => [

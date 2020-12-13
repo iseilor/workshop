@@ -5,6 +5,7 @@ namespace app\modules\admin\controllers;
 use app\modules\admin\models\Mrf;
 use app\modules\admin\models\MrfSearch;
 use Yii;
+use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -20,8 +21,17 @@ class MrfController extends Controller
     public function behaviors()
     {
         return [
+            'access'=>[
+                'class' => AccessControl::class,
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['admin']
+                    ],
+                ],
+            ],
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],

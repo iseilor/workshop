@@ -29,6 +29,7 @@ use yii\filters\VerbFilter;
 use yii\helpers\FileHelper;
 use yii\helpers\Url;
 use yii\web\Controller;
+use yii\web\HttpException;
 use yii\web\NotFoundHttpException;
 use yii\web\UploadedFile;
 
@@ -65,14 +66,29 @@ class OrderController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
-            'access' => [
+
+            /*'access' => [
                 'class' => AccessControl::class,
                 'rules' => [
-                    [
+                    [1c-bitrix2
                         'allow' => true,
                         'roles' => ['@'],
                     ],
                 ],
+            ],*/
+
+            //Доступ только для куратора РФ
+            'access' => [
+                'class' => AccessControl::class,
+                'only' => ['index', 'admin'],
+                'rules' => [
+                    [
+                        'actions' => ['index', 'admin'],
+                        'allow' => true,
+                        'roles' => ['curator_rf'],
+                    ],
+                ],
+
             ],
         ];
     }
@@ -122,15 +138,24 @@ class OrderController extends Controller
      *
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
+     * @throws \yii\web\HttpException
      */
     public function actionView($id)
     {
-        return $this->render(
-            'view/view',
-            [
-                'model' => $this->findModel($id),
-            ]
-        );
+        $model =$this->findModel($id);
+
+        // Доступ не ниже куратора, либо автор заявки
+        if (Yii::$app->user->can('curator_rf') || $model->created_by==Yii::$app->user->identity->getId()) {
+            return $this->render(
+                'view/view',
+                [
+                    'model' => $model,
+                ]
+            );
+        } else {
+            throw new HttpException(403, 'Доступ запрещён');
+        }
+
     }
 
     /**
@@ -330,27 +355,23 @@ class OrderController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+
+        // Доступ не ниже куратора, либо автор заявки
+        if (!(Yii::$app->user->can('curator_rf') || $model->created_by==Yii::$app->user->identity->getId())) {
+            throw new HttpException(403, 'Доступ запрещён');
+        }
+
         $min = Min::find()->orderBy('title')->all();
-
-
-        //$user = User::findOne(Yii::$app->user->identity->getId());
 
         $user = User::findOne($model->created_by);
         if (!$user) {
             $user = $user = User::findOne(Yii::$app->user->identity->getId());
         }
 
-        //         var_dump($user);
-        //         die();
-
         if ($user) {
             $spouse = Spouse::findOne(['user_id' => $user->id]);
             $passport = $user->passport;
         }
-
-        //         if (!$spouse) {
-        //             $spouse = new Spouse();
-        //         }
 
         if (!$passport) {
             $passport = new Passport();
@@ -778,7 +799,7 @@ class OrderController extends Controller
                 [
                     'user' => $user,
                     'order' => $order,
-                    'stage' => $orderStage
+                    'stage' => $orderStage,
                 ]
             )
                 ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])

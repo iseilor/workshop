@@ -14,19 +14,33 @@ class DefaultController extends Controller
     public function behaviors()
     {
         return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-            'access' => [
-                'class' => AccessControl::className(),
+
+            /*'access' => [
+                'class' => AccessControl::class,
                 'rules' => [
                     [
                         'allow' => true,
                         'roles' => ['@'],
                     ],
+                ],
+            ],*/
+
+            //Доступ только для админа
+            'access'=>[
+                'class' => AccessControl::class,
+                //'only' => ['index'],
+                'rules' => [
+                    [
+                        //'actions' => ['index'],
+                        'allow' => true,
+                        'roles' => ['admin']
+                    ],
+                ],
+            ],
+            'verbs' => [
+                'class' => VerbFilter::class,
+                'actions' => [
+                    'delete' => ['POST'],
                 ],
             ],
         ];

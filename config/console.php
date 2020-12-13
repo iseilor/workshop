@@ -65,6 +65,11 @@ $config = [
         ],
     ],
     'components' => [
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+            'defaultRoles' => ['user'],
+        ],
+
         'ad' => [
             'class' => 'Edvlerblog\Adldap2\Adldap2Wrapper',
             'providers' => [
