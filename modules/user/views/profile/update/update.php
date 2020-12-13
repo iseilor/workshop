@@ -23,9 +23,9 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php
         $tabs = [
             ['name' => Icon::show('user') . 'Общие данные', 'id' => 'general', 'tab-class' => 'active', 'selected' => 'true', 'tabs-class' => 'show active'],
-            ['name' => Icon::show('user-tie') . 'Сотрудник', 'id' => 'user', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
-            ['name' => Icon::show('address-card') . 'Паспорт', 'id' => 'passport', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
-            ['name' => Icon::show('id-card') . 'СНИЛС', 'id' => 'snils', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
+            //['name' => Icon::show('user-tie') . 'Сотрудник', 'id' => 'user', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
+            //['name' => Icon::show('address-card') . 'Паспорт', 'id' => 'passport', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
+            //['name' => Icon::show('id-card') . 'СНИЛС', 'id' => 'snils', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
             //['name' => Icon::show('baby') . 'Дети', 'id' => 'childs', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
         ];
         echo Html::ul($tabs, [
