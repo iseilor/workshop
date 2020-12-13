@@ -18,6 +18,7 @@ use app\modules\user\models\Spouse;
 use app\modules\user\models\User;
 use app\modules\user\models\UserChildSearch;
 
+use PhpOffice\PhpWord\TemplateProcessor;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
