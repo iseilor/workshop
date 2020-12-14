@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'area',
             [
                 'class' => ActionColumn::class,
-                'visible' => Yii::$app->user->can('curator_rf'),
+                'visible' => Yii::$app->user->can('curator_mrf'),
             ],
         ],
     ]); ?>

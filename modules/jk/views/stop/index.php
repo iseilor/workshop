@@ -64,7 +64,7 @@ $statuses = ArrayHelper::map($statuses, 'id', 'title');
                         ],
                         [
                             'class' => ActionColumn::class,
-                            'visible' => Yii::$app->user->can('curator_rf'),
+                            'visible' => Yii::$app->user->can('curator_mrf'),
                         ],
                     ],
                 ]); ?>

@@ -41,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'title',
             'description',
             ['class' => 'yii\grid\ActionColumn',
-             'visible' => Yii::$app->user->can('curator_rf')],
+             'visible' => Yii::$app->user->can('curator_mrf')],
         ],
     ]); ?>
 

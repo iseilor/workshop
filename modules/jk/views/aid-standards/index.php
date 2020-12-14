@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'compensation_years_percent',
             [
                 'class' => ActionColumn::class,
-                'visible' => Yii::$app->user->can('curator_rf'),
+                'visible' => Yii::$app->user->can('curator_mrf'),
             ],
         ],
     ]); ?>

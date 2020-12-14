@@ -67,7 +67,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'loan_max:currency',
                         [
                             'class' => ActionColumn::class,
-                            'visible' => Yii::$app->user->can('curator_rf'),
+                            'visible' => Yii::$app->user->can('curator_mrf'),
                         ],
                     ],
                 ]); ?>
