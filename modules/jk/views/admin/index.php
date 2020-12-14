@@ -165,7 +165,7 @@ if ($messagesUser>0){
 
     </div>
 
-    <section class="content d-none">
+    <section class="content">
         <div class="card card-primary">
             <div class="card-header">
                 <h3 class="card-title"><?= Icon::show('tools') ?>Панель администратора</h3>

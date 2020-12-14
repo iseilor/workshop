@@ -33,13 +33,10 @@ $this->params['breadcrumbs'][] = $this->title;
                             'title',
                             'min:decimal',
                             'description:ntext',
-                            //'created_at',
-                            //'created_by',
-                            //'updated_at',
-                            //'updated_by',
-                            //'deleted_at',
-                            //'deleted_by',
-                            ['class' => ActionColumn::className()],
+                            [
+                                    'class' => ActionColumn::class,
+                                    'visible' => Yii::$app->user->can('curator_rf'),
+                            ],
                         ],
                     ]
                 ); ?>

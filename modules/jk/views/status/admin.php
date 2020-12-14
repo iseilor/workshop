@@ -67,12 +67,9 @@ $this->params['breadcrumbs'][] = $this->title;
                             },
                         ],
                         'weight',
-                        //'created_at:datetime',
-                        //'createdUserLink:raw',
-                        //'updated_at:datetime',
-                        //'updatedUserLink:raw',
                         [
                             'class' => ActionColumn::class,
+                            'visible' => Yii::$app->user->can('curator_rf'),
                         ],
                     ],
                 ]); ?>

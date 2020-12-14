@@ -34,7 +34,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'skp',
             'skp_young',
             'compensation_years_percent',
-            ['class' => ActionColumn::className()],
+            [
+                'class' => ActionColumn::class,
+                'visible' => Yii::$app->user->can('curator_rf'),
+            ],
         ],
     ]); ?>
 

@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             [
-                'class' => LinkColumn::className(),
+                'class' => LinkColumn::class,
                 'attribute' => 'id',
             ],
             //'created_at',
@@ -40,13 +40,14 @@ $this->params['breadcrumbs'][] = $this->title;
             //'deleted_at',
             //'deleted_by',
             [
-                'class' => LinkColumn::className(),
+                'class' => LinkColumn::class,
                 'attribute' => 'title',
             ],
             'description:ntext',
 
             [
-                'class' => ActionColumn::className(),
+                'class' => ActionColumn::class,
+                'visible' => Yii::$app->user->can('curator_rf'),
             ],
         ],
     ]); ?>
