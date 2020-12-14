@@ -142,10 +142,10 @@ class OrderController extends Controller
      */
     public function actionView($id)
     {
-        $model =$this->findModel($id);
+        $model = $this->findModel($id);
 
         // Доступ не ниже куратора, либо автор заявки
-        if (Yii::$app->user->can('curator_rf') || $model->created_by==Yii::$app->user->identity->getId()) {
+        if (Yii::$app->user->can('curator_rf') || $model->created_by == Yii::$app->user->identity->getId()) {
             return $this->render(
                 'view/view',
                 [
@@ -357,7 +357,7 @@ class OrderController extends Controller
         $model = $this->findModel($id);
 
         // Доступ не ниже куратора, либо автор заявки
-        if (!(Yii::$app->user->can('curator_rf') || $model->created_by==Yii::$app->user->identity->getId())) {
+        if (!(Yii::$app->user->can('curator_rf') || $model->created_by == Yii::$app->user->identity->getId())) {
             throw new HttpException(403, 'Доступ запрещён');
         }
 
@@ -873,6 +873,27 @@ class OrderController extends Controller
     public function action2curator($id)
     {
         $this->findModel($id)->sendCurator();
+        return $this->redirect(['index']);
+    }
+
+    // Переводим в статус оформление документов
+    public function action2doc($id)
+    {
+        $newStatusCode = 'DOC';
+        $newStatus = Status::findOne(['code' => $newStatusCode]);
+        $order = Order::findOne($id);
+        $order->status_id = $newStatus->id;
+        $order->save();
+
+        // Сохраняем в историю движения заявки
+        $orderStage = new OrderStage();
+        $orderStage->order_id = $id;
+        $orderStage->status_id = $newStatus->id;
+        $orderStage->comment = $newStatus->title;
+        $orderStage->save();
+
+        // Письма куратору и сотруднику
+        $this->findModel($id)->sendCuratorDoc();
         return $this->redirect(['index']);
     }
 

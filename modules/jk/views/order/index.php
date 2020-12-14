@@ -68,15 +68,29 @@ $this->params['breadcrumbs'][] = $this->title;
                             // Кнопка только если в статусе ПРОВЕРКА КУРАТОРОМ
                         'class' => ActionColumn::class,
                         'controller' => '/jk/order',
-                        'template' => '{manager} {2curator} {check} {commission} {doc} {view} {update}  {delete}',
+                        'template' => '{manager} {2curator} {check} {commission} {doc} {2doc} {view} {update} {delete}',
                         'headerOptions' => ['style' => 'min-width: 210px;'],
                         'buttons' => [
-                            // Отправить принудительно на проверку куратору
+
+                                // Отправить принудительно на проверку куратору
                             '2curator' => function ($url, $model, $key) {
                                 if ($model->status->code == 'MANAGER_WAIT') {
                                     return Html::a(Icon::show('user-check'), $url, [
                                         'class' => 'btn btn-sm bg-purple',
                                         'title' => 'На проверку куратору',
+                                        'data-pjax' => '0',
+                                        'style'=>'width: 35px;'
+                                    ]);
+                                } else {
+                                    return '';
+                                }
+                            },
+
+                            '2doc' => function ($url, $model, $key) {
+                                if ($model->status->code == 'RESERVE') {
+                                    return Html::a(Icon::show('file-word'), $url, [
+                                        'class' => 'btn btn-sm bg-purple',
+                                        'title' => 'На оформление документов',
                                         'data-pjax' => '0',
                                         'style'=>'width: 35px;'
                                     ]);
