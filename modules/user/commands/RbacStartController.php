@@ -43,7 +43,7 @@ class RbacStartController extends Controller
 
         //Админы
         $role = $auth->getRole('admin');
-        $admins = [1, 101, 110, 126, 201];
+        $admins = [1, 101, 110, 126, 195, 201];
         foreach ($admins as $id) {
             $auth->revokeAll($id);
             $auth->assign($role, $id);
