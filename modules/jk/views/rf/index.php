@@ -13,9 +13,9 @@ use yii\widgets\Pjax;
 /* @var $searchModel app\modules\jk\models\RfSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Icon::show('sitemap').Module::t('rf', 'RFs');
-$this->params['breadcrumbs'][] = ['label' => Icon::show('home').'ЖК', 'url' => ['/jk/']];
-$this->params['breadcrumbs'][] = ['label' => Icon::show('tools').'Админка', 'url' => ['/jk/admin/']];
+$this->title = Icon::show('sitemap') . Module::t('rf', 'RFs');
+$this->params['breadcrumbs'][] = ['label' => Icon::show('home') . 'ЖК', 'url' => ['/jk/']];
+$this->params['breadcrumbs'][] = ['label' => Icon::show('tools') . 'Админка', 'url' => ['/jk/admin/']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -48,13 +48,13 @@ $this->params['breadcrumbs'][] = $this->title;
                             'attribute' => 'title',
                         ],
                         [
-                            'label'=>'Сотрудник',
-                            'value'=>'userCurator.fio',
+                            'label' => 'Сотрудник',
+                            'value' => 'userCurator.fio',
                             'class' => LinkColumn::class,
                             'url' => function ($data) {
-                                if (isset($data->user_id)){
-                                    return Url::to(['/user/'.$data->user_id], true);
-                                }else{
+                                if (isset($data->user_id)) {
+                                    return Url::to(['/user/' . $data->user_id], true);
+                                } else {
                                     return false;
                                 }
                             },
@@ -65,7 +65,10 @@ $this->params['breadcrumbs'][] = $this->title;
                         'coefficient:decimal',
                         'percent_max:currency',
                         'loan_max:currency',
-                        ['class' => ActionColumn::class],
+                        [
+                            'class' => ActionColumn::class,
+                            'visible' => Yii::$app->user->can('curator_mrf'),
+                        ],
                     ],
                 ]); ?>
 

@@ -40,7 +40,8 @@ $this->params['breadcrumbs'][] = $this->title;
             //'deleted_by',
             'title',
             'description',
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn',
+             'visible' => Yii::$app->user->can('curator_mrf')],
         ],
     ]); ?>
 
