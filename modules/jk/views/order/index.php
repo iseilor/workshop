@@ -68,7 +68,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             // Кнопка только если в статусе ПРОВЕРКА КУРАТОРОМ
                         'class' => ActionColumn::class,
                         'controller' => '/jk/order',
-                        'template' => '{manager} {2curator} {check} {commission} {doc} {view} {update}  {delete}',
+                        'template' => '{manager} {2curator} {check} {commission} {doc} {view} {update}  {delete} {unload}',
                         'headerOptions' => ['style' => 'min-width: 210px;'],
                         'buttons' => [
                             // Отправить принудительно на проверку куратору
@@ -133,6 +133,15 @@ $this->params['breadcrumbs'][] = $this->title;
                                 } else {
                                     return '';
                                 }
+                            },
+
+                            // Выгрузка документов
+                            'unload' => function ($url, $model, $key) {
+                                    return Html::a(Icon::show('file'), $url, [
+                                        'class' => 'btn btn-sm btn-success',
+                                        'title' => 'Выгрузить документы',
+                                        'data-pjax' => '0'
+                                    ]);
                             },
                         ],
                     ],

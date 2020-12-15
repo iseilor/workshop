@@ -475,7 +475,7 @@ class OrderController extends Controller
                         $spouseNdfl2File = UploadedFile::getInstance($spouse, 'ndfl2_file_form');
                         if ($spouseNdfl2File) {
                             $spouseNdfl2FileDir = Yii::$app->params['module']['spouse']['filePath'] . $spouse->id;
-                            $spouseNdfl2FileName = 'spouse_' . $spouse->id . '_ndfl2_' . date('YmdHis') . '.' . $spouseNdfl2File->extension;
+                            $spouseNdfl2FileName = 'spouse_' . $spouse->id . '_ndfl2_file_' . date('YmdHis') . '.' . $spouseNdfl2File->extension;
                             FileHelper::createDirectory($spouseNdfl2FileDir, $mode = 0777, $recursive = true);
                             $spouseNdfl2File->saveAs($spouseNdfl2FileDir . '/' . $spouseNdfl2FileName);
                             $spouse->ndfl2_file = $spouseNdfl2FileName;
@@ -485,7 +485,7 @@ class OrderController extends Controller
                         $spouseSalaryFile = UploadedFile::getInstance($spouse, 'salary_file_form');
                         if ($spouseSalaryFile) {
                             $spouseSalaryFileDir = Yii::$app->params['module']['spouse']['filePath'] . $spouse->id;
-                            $spouseSalaryFileName = 'spouse_' . $spouse->id . '_ndfl2_' . date('YmdHis') . '.' . $spouseSalaryFile->extension;
+                            $spouseSalaryFileName = 'spouse_' . $spouse->id . '_salary_file_' . date('YmdHis') . '.' . $spouseSalaryFile->extension;
                             FileHelper::createDirectory($spouseSalaryFileDir, $mode = 0777, $recursive = true);
                             $spouseSalaryFile->saveAs($spouseSalaryFileDir . '/' . $spouseSalaryFileName);
                             $spouse->salary_file = $spouseSalaryFileName;
@@ -1055,6 +1055,124 @@ class OrderController extends Controller
         $fileUrl = '/files/jk/order/' . $id . '/JK_ORDER_' . $id . '_' . $user->surname . '_' . date('Y-m-d_ H-i-s') . '.docx';
         $templateProcessor->saveAs(Yii::getAlias('@app') . '/web' . $fileUrl);
         return Yii::$app->response->sendFile(Yii::getAlias('@webroot') . $fileUrl);
+    }
+
+    // Выгрузка документов по заявке
+    public function actionUnload($id)
+    {
+        FileHelper::createDirectory('files/jk/order_archives', $mode = 0777, $recursive = true);
+
+        $zip = new \ZipArchive();
+        $zipUrl = '/files/jk/order_archives/zayavka_' . $id . '.zip';
+
+        if(!$zip->open(Yii::getAlias('@webroot') . $zipUrl, \ZIPARCHIVE::CREATE) === true) {
+            return false;
+        }
+
+        $order = Order::findOne($id);
+        $user = User::findOne($order->created_by);
+        $passport = $user->passport;
+
+        $spouse = Spouse::findOne(['user_id' => $user->id]);
+
+        $children = $user->children;
+
+        //список файлов в папке зяавки
+        $order_dir = '/files/jk/order/' . $id;
+        $order_files = scandir(Yii::getAlias('@webroot') . $order_dir);
+
+        //2 файла с названиями '.' и '..'
+        unset($order_files[0], $order_files[1]);
+
+        //для отсечения начала и конца названия файла, чтобы получить имя поля в базе
+        $order_regs = ['/jk_order_[\d]+_/', '/_[\d]+.[\w]+/'];
+
+        //файлы по заявке
+        foreach ($order_files as $file) {
+            //сохраняем расширение файла
+            preg_match('/.[\w]+$/', $file, $extension);
+            //имя поля в базе
+            $field = preg_replace($order_regs, '', $file);
+            switch (true) {
+                case isset($order->{$field}):
+                    $fileName = $order->attributeLabels()[$field . '_form'] . $extension[0];
+                    $value = $order->{$field};
+                    break;
+                case isset($user->{$field}):
+                    $fileName = $user->attributeLabels()[$field . '_form'] . $extension[0];
+                    $value = $user->{$field};
+                    break;
+                case isset($passport->{$field}):
+                    $fileName = $passport->attributeLabels()[$field . '_form'] . $extension[0];
+                    $value = $passport->{$field};
+                    break;
+                default:
+                    $value = '';
+            }
+            //условие, чтобы добавлять в архив только актуальные файлы
+            if ($value == $file) {
+                $zip->addFile(Yii::getAlias('@webroot') . $order_dir . '/' . $file, $fileName);
+            }
+        }
+        //файлы по супруге
+        if ($spouse) {
+            $spouse_dir = '/files/spouse/' . $spouse->id;
+            $spouse_files = scandir(Yii::getAlias('@webroot') . $spouse_dir);
+            unset($spouse_files[0], $spouse_files[1]);
+
+            $spouse_regs = ['/spouse_[\d]+_/', '/_[\d]+.[\w]+/'];
+            foreach ($spouse_files as $file) {
+                //сохраняем расширение файла
+                preg_match('/.[\w]+$/', $file, $extension);
+                //имя поля в базе
+                $field = preg_replace($spouse_regs, '', $file);
+                switch (true) {
+                    case isset($spouse->{$field}):
+                        $fileName = $spouse->attributeLabels()[$field . '_form'] . $extension[0];
+                        $value = $spouse->{$field};
+                        break;
+                    default:
+                        $value = '';
+                }
+                if ($value == $file) {
+                    $zip->addFile(Yii::getAlias('@webroot') . $spouse_dir . '/' . $file, $spouse->fio . '/' . $fileName);
+                }
+            }
+        }
+        //файлы по детям
+        if (!empty($children)) {
+            foreach ($children as $child) {
+                $child_dir = '/files/child/' . $child->id;
+                $child_files = scandir(Yii::getAlias('@webroot') . $child_dir);
+                unset($child_files[0], $child_files[1]);
+
+                $child_regs = ['/child_[\d]+_/', '/_[\d]+.[\w]+/'];
+                foreach ($child_files as $file) {
+                    //сохраняем расширение файла
+                    preg_match('/.[\w]+$/', $file, $extension);
+                    //имя поля в базе
+                    $field = preg_replace($child_regs, '', $file);
+                    switch (true) {
+                        case isset($child->{$field}):
+                            $fileName = $child->attributeLabels()[$field . '_form'] . $extension[0];
+                            $value = $child->{$field};
+                            break;
+                        default:
+                            $value = '';
+                    }
+                    if ($value == $file) {
+                        $zip->addFile(Yii::getAlias('@webroot') . $child_dir . '/' . $file, $child->fio . '/' . $fileName);
+                    }
+                }
+            }
+        }
+        $zip->close();
+
+        if(file_exists(Yii::getAlias('@webroot') . $zipUrl)) {
+            return Yii::$app->response->sendFile(Yii::getAlias('@webroot') . $zipUrl);
+        } else {
+            return $this->redirect(['index']);
+        }
     }
 
     // Выгрузка реестра в XLSX-файл

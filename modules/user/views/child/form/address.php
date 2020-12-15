@@ -77,7 +77,7 @@ if ($spouse->id == null) {
 ])->fileInput(['class' => 'custom-file-input'])->hint($model->getAttributeHint('ejd_file_form')) ?>
 
 <?= $form->field($model, 'other_child_files_form', [
-    'template' => getFileInputTemplate($model->ejd_file, $model->attributeLabels()['other_child_files_form'] . '.pdf'),
+    'template' => getFileInputTemplate($model->other_child_files, $model->attributeLabels()['other_child_files_form'] . '.pdf'),
 ])->fileInput(['class' => 'custom-file-input']) ?>
 
 
