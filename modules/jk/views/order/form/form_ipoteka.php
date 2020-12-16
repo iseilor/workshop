@@ -137,9 +137,15 @@ if ($field_percent == '') {
             </div>
         </div>
                 <div class="col-md-4">
-                    <?= $form->field($model, 'ipoteka_grafic')->hiddenInput()->label(false)->hint(false); ?>
-                    <div class="card card-solid card-secondary">
-                        <div id="grafic_proc" class="card-body">
+
+                    <div id="div-ipoteka-grafic" class="card card-solid card-secondary <?= $field_percent ?>">
+                        <div id="input-ipoteka-grafic" class="card-body <?= (isset($model->ipoteka_grafic) && $model->ipoteka_grafic != '') ? '' : 'd-none' ?>">
+                            <?= $form->field($model, 'ipoteka_grafic', ['options' => ['class' => 'form-group required']])
+                                ->textarea(['rows' => '11', 'readonly' => true])->hint(false); ?>
+                            <button id="clean-ipoteka-grafic" type="button" class="btn btn-success float-left">Изменить</button>
+                        </div>
+
+                        <div id="grafic_proc" class="card-body <?= (isset($model->ipoteka_grafic) && $model->ipoteka_grafic != '') ? 'd-none' : '' ?>">
 
                             <label>Сумма процентов по Ипотеке</label>
 
@@ -154,7 +160,8 @@ if ($field_percent == '') {
 
                             <div class="row">
                                 <div class="col my-auto text-left percent-date">
-                                    <input type="text" class="form-control" name="ipoteka_date0" required/>
+                                    <input type="text" class="form-control" name="ipoteka_date0"
+                                        <?= (!isset($model->ipoteka_grafic) && $percent_required) ? 'required' : '' ?>/>
                                 </div>
                                 <div class="col my-auto text-center">
                                     -
@@ -214,6 +221,29 @@ if ($field_percent == '') {
 $script = <<< JS
 $(document).ready(function() {
     {
+        $('#clean-ipoteka-grafic').on('click', function() {
+            $('#order-ipoteka_grafic').val("");
+            $('#input-ipoteka-grafic').addClass('d-none');
+            $('#grafic_proc').removeClass('d-none');
+            $('input[name="ipoteka_date0"]').attr('required', true);
+        });
+        
+        $('#order-is_mortgage').on('change', function() {
+            if ($('#order-is_mortgage').val() == 1) {
+                $('#div-ipoteka-grafic').removeClass('d-none');
+                if ($('#order-ipoteka_grafic').val() == "") {
+                    $('input[name="ipoteka_date0"]').attr('required', true);
+                    if ($('#grafic_proc .triggered:eq(0)').attr('hidden') != 'hidden') {
+                        $('.percent-summa input').attr('required', true);
+                    }
+                }
+            } else {
+                $('#div-ipoteka-grafic').addClass('d-none');
+                $('input[name="ipoteka_date0"]').attr('required', false);
+                $('.percent-summa input').attr('required', false);
+            }
+        });
+        
         var currentYear = new Date().getFullYear(),
             minDate = new Date(currentYear, 1 - 1, 1),
             maxDate = new Date(currentYear, minDate.getMonth() + 2, minDate.getDate() - 1);
@@ -308,6 +338,15 @@ $(document).ready(function() {
                     result += `\${result_date} - \${result_summa} руб\n`;
                     $('#order-ipoteka_grafic').val(result);
                 });
+                
+                $('#input-ipoteka-grafic').removeClass('d-none');
+                $('#grafic_proc').addClass('d-none');
+                $('input[name="ipoteka_date0"]').attr('required', false);
+                $('input[name="ipoteka_summa0"]').attr('readonly', true);
+                $('.percent-summa input').attr('required', false);
+                $('#grafic_proc .row .percent-date input').val("");
+                $('#grafic_proc .row .percent-summa input').val("");
+                $('#grafic_proc .triggered').attr('hidden', true);
             }
         });
     }
