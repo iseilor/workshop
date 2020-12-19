@@ -7,6 +7,7 @@ use app\modules\user\models\SpouseSearch;
 use app\modules\user\models\User;
 use PhpOffice\PhpWord\TemplateProcessor;
 use Yii;
+use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -23,6 +24,19 @@ class SpouseController extends Controller
     public function behaviors()
     {
         return [
+            //Доступ только для куратора РФ
+            'access' => [
+                'class' => AccessControl::class,
+                'only' => ['index', 'admin'],
+                'rules' => [
+                    [
+                        'actions' => ['index', 'admin'],
+                        'allow' => true,
+                        'roles' => ['admin'],
+                    ],
+                ],
+
+            ],
             'verbs' => [
                 'class' => VerbFilter::class,
                 'actions' => [

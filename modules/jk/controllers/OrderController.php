@@ -67,16 +67,6 @@ class OrderController extends Controller
                 ],
             ],
 
-            /*'access' => [
-                'class' => AccessControl::class,
-                'rules' => [
-                    [1c-bitrix2
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],*/
-
             //Доступ только для куратора РФ
             'access' => [
                 'class' => AccessControl::class,
