@@ -67,6 +67,17 @@ class OrderController extends Controller
                 ],
             ],
 
+            // Доступ только авторизованным пользователям
+            'access0' => [
+                'class' => AccessControl::class,
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ]
+                ],
+            ],
+
             //Доступ только для куратора РФ
             'access' => [
                 'class' => AccessControl::class,
@@ -78,7 +89,6 @@ class OrderController extends Controller
                         'roles' => ['curator_rf'],
                     ],
                 ],
-
             ],
         ];
     }
@@ -1076,7 +1086,7 @@ class OrderController extends Controller
         $zip = new \ZipArchive();
         $zipUrl = '/files/jk/order_archives/zayavka_' . $id . '.zip';
 
-        if(!$zip->open(Yii::getAlias('@webroot') . $zipUrl, \ZIPARCHIVE::CREATE) === true) {
+        if (!$zip->open(Yii::getAlias('@webroot') . $zipUrl, \ZIPARCHIVE::CREATE) === true) {
             return false;
         }
 
@@ -1179,7 +1189,7 @@ class OrderController extends Controller
         }
         $zip->close();
 
-        if(file_exists(Yii::getAlias('@webroot') . $zipUrl)) {
+        if (file_exists(Yii::getAlias('@webroot') . $zipUrl)) {
             return Yii::$app->response->sendFile(Yii::getAlias('@webroot') . $zipUrl);
         } else {
             return $this->redirect(['index']);
