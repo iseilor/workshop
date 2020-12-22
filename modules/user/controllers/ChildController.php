@@ -243,6 +243,7 @@ class ChildController extends Controller
                     'CHILD_DATE',
 
                     'DATE',
+                    'FIO2'
                 ],
 
                 [
@@ -264,6 +265,7 @@ class ChildController extends Controller
                     date('d.m.Y', $child->date),
 
                     date('d.m.Y'),
+                    $user->surname . ' ' . $user->initials
                 ]
             );
         }
