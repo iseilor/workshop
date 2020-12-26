@@ -74,7 +74,7 @@ class OrderController extends Controller
                     [
                         'allow' => true,
                         'roles' => ['@'],
-                    ]
+                    ],
                 ],
             ],
 
@@ -144,8 +144,14 @@ class OrderController extends Controller
     {
         $model = $this->findModel($id);
 
-        // Доступ не ниже куратора, либо автор заявки
-        if (Yii::$app->user->can('curator_rf') || $model->created_by == Yii::$app->user->identity->getId()) {
+        // Авто заявки и его руководители
+        $user_created = User::findOne($model->created_by);
+        $manager_list = $user_created->getManagerList();
+
+        // Доступ не ниже куратора, либо автор заявки, либо его руководители
+        if (Yii::$app->user->can('curator_rf') || $model->created_by == Yii::$app->user->identity->getId()
+            || in_array(Yii::$app->user->identity->getId(), $manager_list)
+        ) {
             return $this->render(
                 'view/view',
                 [
