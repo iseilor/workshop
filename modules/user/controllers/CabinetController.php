@@ -5,6 +5,7 @@ namespace app\modules\user\controllers;
 use app\modules\jk\models\AgreementSearch;
 use PhpOffice\PhpWord\TemplateProcessor;
 use Yii;
+use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -25,6 +26,15 @@ class CabinetController extends Controller
                 'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::class,
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
                 ],
             ],
         ];
