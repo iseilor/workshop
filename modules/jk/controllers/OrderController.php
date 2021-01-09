@@ -795,11 +795,12 @@ class OrderController extends Controller
                     $emailTemplate = 'commission_no';
                     $emailTitle = 'Не согласовано комиссией';
                     break;
-                case 'CURATOR_NO':
+                case 'RESERVE':
                     $emailTemplate = 'reserve';
                     $emailTitle = 'Заявка переведена в резерв';
                     break;
             }
+            $i = 10;
             Yii::$app->mailer->compose(
                 '@app/modules/jk/mails/commission/' . $emailTemplate,
                 [
