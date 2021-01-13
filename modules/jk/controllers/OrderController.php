@@ -800,7 +800,6 @@ class OrderController extends Controller
                     $emailTitle = 'Заявка переведена в резерв';
                     break;
             }
-            $i = 10;
             Yii::$app->mailer->compose(
                 '@app/modules/jk/mails/commission/' . $emailTemplate,
                 [
