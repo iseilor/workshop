@@ -141,7 +141,7 @@ class Rf extends Model
                 )
                     ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
                     ->setTo(Yii::$app->params['supportEmails'])
-                    //->setBcc('obedkinav@ya.ru')
+                    ->setBcc(Yii::$app->params['supportEmail'])
                     ->setSubject("HR-портал / Жилищная Программа / Смена куратора")
                     ->send();
             }
