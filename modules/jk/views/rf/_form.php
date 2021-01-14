@@ -60,7 +60,7 @@ use yii\widgets\ActiveForm;
                                 'options' => [
                                     'class' => 'form-control',
                                 ],
-                            ])->hint('Автодополняемое поле. Начните писать ФИО, и система автоматически загрузит все остальные данные по сотруднику');
+                            ])->hint('Автодополняемое поле. Начните писать ФИО (минимум 3 символа), и система автоматически загрузит все остальные данные по сотруднику');
                             ?>
                             <?= $form->field($model, 'user_id', ['options' => ['class' => 'd-none']])->hiddenInput() ?>
                             <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
@@ -94,8 +94,10 @@ $this->registerJs(
         $('#rf-user').bind('copy paste', function (e) {
             e.preventDefault();
         });
-        $('#rf-user').keypress(function() {
-              $('#rf-user_id').val('');
+        $('#rf-user').keyup(function() {
+              if(keycode != '13'){
+                $('#rf-user_id').val('');
+              }
               var keycode = (event.keyCode ? event.keyCode : event.which);
               if(keycode == '8' || keycode == '46'){
                 $('#rf-user').val('');

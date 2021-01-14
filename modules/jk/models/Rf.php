@@ -58,10 +58,10 @@ class Rf extends Model
             ['loan_max', 'compare', 'compareValue' => 0, 'operator' => '>', 'type' => 'number'],
 
             [
-                ['user','user_id'],
+                ['user', 'user_id'],
                 function () {
-                    if (!isset($this->user_id) || $this->user_id=='') {
-                        $this->addError('user', "Сотрудник обязательно должен быть выбрать из выпадающего списка");
+                    if (!isset($this->user_id) || $this->user_id == '') {
+                        $this->addError('user', "Сотрудник обязательно должен быть выбран из выпадающего списка");
                     }
                 },
             ],
@@ -106,5 +106,48 @@ class Rf extends Model
     public function getUserCurator()
     {
         return $this->hasOne(User::class, ['id' => 'user_id']);
+    }
+
+    // Меняем данные в таблице с ролями
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            if ($insert) {
+                //TODO: Пока сделано только для обновления существующих записей
+            } else {
+
+                // Смена роли в RBAC
+                $userOld = $this->getOldAttribute('user_id');
+                $userNew = $this->getAttribute('user_id');
+
+                $auth = Yii::$app->authManager;
+                if ($this->id == 13) {
+                    $role = $auth->getRole('curator_mrf');
+                } else {
+                    $role = $auth->getRole('curator_rf');
+                }
+                $auth->revokeAll($userOld);
+                $auth->assign($role, $userNew);
+
+                // Отправляем письмо о смене куратора
+                Yii::$app->mailer->compose(
+                    '@app/modules/admin/mails/curatorChange.php',
+                    [
+                        'filialName' => $this->title,
+                        'curatorOld' => User::findOne($userOld),
+                        'curatorNew' => User::findOne($userNew),
+                        'user' => User::findOne(Yii::$app->user->identity->getId()),
+                    ]
+                )
+                    ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
+                    ->setTo(Yii::$app->params['supportEmails'])
+                    //->setBcc('obedkinav@ya.ru')
+                    ->setSubject("HR-портал / Жилищная Программа / Смена куратора")
+                    ->send();
+            }
+            return true;
+        } else {
+            return false;
+        }
     }
 }
