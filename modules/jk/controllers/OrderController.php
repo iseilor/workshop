@@ -1056,7 +1056,7 @@ class OrderController extends Controller
                 $order->jp_address,
                 number_format($order->jp_cost, 2, ',', ' '),
                 $order->jp_new_area,
-                $order->jp_new_room_count,
+                (isset($order->jp_new_room_count) && $order->jp_new_room_count) ? $order->jp_new_room_count .'комнат(а/ы)' : '',
                 (isset($order->is_new_building) && $order->is_new_building) ? 'новостройка' : 'вторичка',
                 (isset($order->jp_new_type)) ? Order::getJPTypeList()[$order->jp_new_type] : 'квартира',
 
