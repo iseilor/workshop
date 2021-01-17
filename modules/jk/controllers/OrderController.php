@@ -1018,7 +1018,15 @@ class OrderController extends Controller
 
                 'FAMILY_OWN',
                 'FAMILY_RENT',
+
                 'FAMILY_ADDRESS',
+                'RESIDENT_OWN_TYPE',
+                'JP_ROOM_COUNT2',
+                'JP_TYPE2',
+                'JP_AREA2',
+                'RESIDENT_COUNT',
+                'RESIDENT_TYPE',
+
                 'FAMILY_DEAL',
                 'IS_DZO',
                 'FAMILY_LIST',
@@ -1064,7 +1072,16 @@ class OrderController extends Controller
                 (isset($order->family_rent) && $order->family_rent)
                     ? 'Я и члены моей семьи имеем следующие действующие договоры найма в жилых помещениях, относящихся к государственному или муниципальному жилищным фондам: '
                     . $order->family_rent : '',
+
                 $order->family_address,
+                mb_strtolower(Order::getResidentOwnTypeList()[$order->resident_own_type]),
+                $order->jp_room_count,
+                mb_strtolower(Order::getJPTypeList()[$order->jp_type]),
+                $order->jp_area,
+                $order->resident_count,
+                mb_strtolower(Order::getResidentTypeList()[$order->resident_type]),
+
+
                 $order->family_deal,
                 $order->isDZO(),
                 $order->getFamilyList(),
