@@ -8,7 +8,6 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-
 // Инструкция пользователя в левом sidebar
 // TODO: Как временное решение пока, немного некрасиво
 $jkInstructionURL = '/jk/doc';
@@ -135,7 +134,7 @@ if ($jkInstructionDoc) {
                                 . Html::tag('p', \app\modules\kr\Module::t('module', 'kr')
                                     . Icon::show('angle-left', ['class' => 'right'])),
                             'url' => ['#'],
-                            'options' => ['class' => 'nav-item has-treeview'],
+                            'options' => ['class' => 'nav-item has-treeview '.(YII_ENV_PROD ? 'd-none' : '')],
                             'items' => [
                                 ['label' => Icon::show('star', ['class' => 'nav-icon']) . '<p>Программа</p>', 'url' => ['/kr/default/index']],
                                 ['label' => Icon::show('info', ['class' => 'nav-icon']) . '<p>О программе</p>', 'url' => ['/kr/about/index']],

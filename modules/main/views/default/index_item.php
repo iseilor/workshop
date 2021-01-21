@@ -3,7 +3,7 @@
 
 use yii\helpers\Html; ?>
 
-<div class="col-xl-<?= $item['col'] ?>">
+<div class="<?=$item['class']?>">
     <a href="<?= $item['url'] ?>" class='small-box-footer'>
         <div class="small-box bg-gradient-<?= $item['bg'] ?>">
             <div class="inner">

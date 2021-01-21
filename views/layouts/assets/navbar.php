@@ -46,7 +46,7 @@ use yii\widgets\Menu;
             [
                 'label' => Icon::show('crown'),
                 'url' => ['/kr/default/index'],
-                'template' => '<a href="{url}" class="nav-link" title="Высшая лига">{label}</a>',
+                'template' => '<a href="{url}" class="nav-link '.(YII_ENV_PROD ? 'd-none' : '').'" title="Высшая лига">{label}</a>',
             ],
             [
                 'label' => Icon::show('star'),

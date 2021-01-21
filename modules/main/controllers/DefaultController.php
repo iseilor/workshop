@@ -62,7 +62,7 @@ class DefaultController extends Controller
 
         $list = [
             [
-                'col' => 3,
+                'class' => 'col-xl-3',
                 'bg' => 'primary',
                 'title' => 'Новости',
                 'description' => 'Всегда свежая информация',
@@ -70,7 +70,7 @@ class DefaultController extends Controller
                 'url' => Url::to('news'),
             ],
             [
-                'col' => 3,
+                'class' => 'col-xl-3',
                 'bg' => 'indigo',
                 'title' => Module::t('module', 'jk'),
                 'description' => 'Калькуляторы и заявки',
@@ -78,15 +78,16 @@ class DefaultController extends Controller
                 'url' => Url::to(['/jk/']),
             ],
             [
-                'col' => 3,
+                'class' => 'col-xl-3',
                 'bg' => 'indigo',
                 'title' => \app\modules\pp\Module::t('module', 'pp'),
                 'description' => 'Ваш вклад в своё будущее',
                 'icon' => Icon::show('coins'),
                 'url' => Url::to(['/pp/']),
             ],
+
             [
-                'col' => 3,
+                'class' => 'col-xl-3 '.(YII_ENV_PROD ? 'd-none' : ''),
                 'bg' => 'indigo',
                 'title' => \app\modules\kr\Module::t('module', 'kr'),
                 'description' => 'Кадровый резерв',
@@ -94,7 +95,7 @@ class DefaultController extends Controller
                 'url' => Url::to(['/kr/']),
             ],
             [
-                'col' => 3,
+                'class' => 'col-xl-3',
                 'bg' => 'fuchsia',
                 'title' => 'Star Talk',
                 'description' => 'Встречи с интересными людьми',
@@ -102,7 +103,7 @@ class DefaultController extends Controller
                 'url' => Url::to(['/st/default/index']),
             ],
             /*[
-                'col' => 3,
+                 'class' => 'col-xl-3',
                 'bg' => 'indigo',
                 'title' => 'Пульсар',
                 'description' => 'Мониторинг подразделения',
@@ -111,7 +112,7 @@ class DefaultController extends Controller
 
             ],
             [
-                 'col' => 3,
+                 'class' => 'col-xl-3',
                  'bg' => 'primary',
                  'title' => '<span class="curs">&nbsp;<span class="curs-1"><i class="fas fa-dollar-sign"></i> 66.90</span><span class="curs-2"><i class="fas fa-euro-sign"></i> 73.91</span><span class="curs-3"><i class="fas fa-gas-pump"></i> 49.91</span></span>',
                  'description' => '<span class="curs">&nbsp;<span class="curs-1">USD ЦБ</span><span class="curs-2">EURO ЦБ</span><span class="curs-3">Нефть</span></span>',
@@ -120,7 +121,7 @@ class DefaultController extends Controller
                  'link' => 'Курсы ЦБ РФ на ' . Yii::$app->formatter->asDate(new DateTime()),
              ],
              [
-                 'col' => 3,
+                  'class' => 'col-xl-3',
                  'bg' => 'primary',
                  'title' => '+5&degC',
                  'description' => '<i class="fas fa-wind"></i>2-3м/с | <i class="fas fa-tint"></i>78% | <i class="fas fa-tachometer-alt"></i>736ммрт.ст.
@@ -130,7 +131,7 @@ class DefaultController extends Controller
                  'link' => 'Москва, Румянцево, БЦ Comcity',
              ],*/
             [
-                'col' => 3,
+                'class' => 'col-xl-3',
                 'bg' => 'success',
                 'title' => '<span class="clock">
                                 <span class="hou">00</span><span class="del">:</span><span class="min">00</span><span class="del">:</span><span class="sec">00</span>
@@ -143,7 +144,7 @@ class DefaultController extends Controller
 
             /*
         [
-            'col' => 3,
+             'class' => 'col-xl-3',
             'bg' => 'indigo',
             'title' => 'Проекты',
             'description' => 'Задачи и отчёты',
@@ -152,7 +153,7 @@ class DefaultController extends Controller
             'link' => 'Перейти <i class="fas fa-arrow-circle-right"></i>',
         ],
         [
-            'col' => 3,
+           'class' => 'col-xl-3',
             'bg' => 'secondary',
             'title' => 'KPI',
             'description' => 'Ключевые показатели',
@@ -161,7 +162,7 @@ class DefaultController extends Controller
             'link' => 'Перейти <i class="fas fa-arrow-circle-right"></i>',
         ],
         [
-            'col' => 3,
+             'class' => 'col-xl-3',
             'bg' => 'secondary',
             'title' => 'ДМС',
             'description' => 'Медицинское страхование',
@@ -170,7 +171,7 @@ class DefaultController extends Controller
             'link' => 'Перейти <i class="fas fa-arrow-circle-right"></i>',
         ],
         [
-            'col' => 3,
+            'class' => 'col-xl-3',
             'bg' => 'secondary',
             'title' => 'Путёвки',
             'description' => 'Курорты и санатории',
@@ -179,7 +180,7 @@ class DefaultController extends Controller
             'link' => 'Перейти <i class="fas fa-arrow-circle-right"></i>',
         ],
         [
-            'col' => 3,
+             'class' => 'col-xl-3',
             'bg' => 'warning',
             'title' => 'Чат',
             'description' => 'Корпоративный чат',
@@ -188,7 +189,7 @@ class DefaultController extends Controller
             'link' => 'Перейти <i class="fas fa-arrow-circle-right"></i>',
         ],
         [
-            'col' => 3,
+            'class' => 'col-xl-3',
             'bg' => 'danger',
             'title' => 'Admin',
             'description' => 'Панель администратора',
@@ -198,7 +199,7 @@ class DefaultController extends Controller
         ],
 
         [
-            'col' => 3,
+            'class' => 'col-xl-3',
             'bg' => 'secondary',
             'title' => 'Аварии',
             'description' => 'Нештатные ситуации',
