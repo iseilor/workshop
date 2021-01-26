@@ -16,6 +16,7 @@ use yii\widgets\Menu;
         'options' => ['class' => 'navbar-nav'],
         'itemOptions' => ['class' => 'nav-item d-none d-sm-inline-block'],
         'linkTemplate' => '<a href="{url}" class="nav-link">{label}</a>',
+        //'submenuTemplate' => "\n<div class='dropdown-menu'>\n{items}\n</div>\n",
         'items' => [
             [
                 'label' => '<i class="fas fa-bars"></i>',
@@ -29,9 +30,14 @@ use yii\widgets\Menu;
                 'template' => '<a href="{url}" class="nav-link" title="Главная">{label}</a>',
             ],
             [
-                'label' => Icon::show('bullhorn'),
+                'label' => Icon::show('calendar-check'),
                 'url' => ['/news/default/index'],
                 'template' => '<a href="{url}" class="nav-link" title="Новости">{label}</a>',
+            ],
+            [
+                'label' => Icon::show('bullhorn'),
+                'url' => ['/news/default/index'],
+                'template' => '<a href="{url}" class="nav-link" title="Мероприятия">{label}</a>',
             ],
             [
                 'label' => Icon::show('home'),
@@ -46,7 +52,7 @@ use yii\widgets\Menu;
             [
                 'label' => Icon::show('crown'),
                 'url' => ['/kr/default/index'],
-                'template' => '<a href="{url}" class="nav-link '.(YII_ENV_PROD ? 'd-none' : '').'" title="Высшая лига">{label}</a>',
+                'template' => '<a href="{url}" class="nav-link " title="Высшая лига">{label}</a>',
             ],
             [
                 'label' => Icon::show('star'),
@@ -63,161 +69,44 @@ use yii\widgets\Menu;
                 'url' => ['/main/default/feedback'],
                 'template' => '<a href="{url}" class="nav-link" title="Обратная связь">{label}</a>',
             ],
+            [
+                'label' => Icon::show('vk', ['framework' => Icon::FAB]),
+                'url' => ['#'],
+                'options' => ['class' => 'nav-item dropdown'],
+                'template' => '<a href="{url}" class="nav-link text-primary"  data-toggle="dropdown" title="Группа ВКонтакте">{label}</a>
+                                <div class="dropdown-menu dropdown-social">
+                                    <div class="row justify-content-md-center">
+                                        <div class="col-12  text-center"><a href="#">Группа ВКонтакте "МРФ Центр"</a></div>
+                                         <div class="col-6  text-center">' . Html::img('@web/img/qr/vk.png', ['title' => 'Группа ВКонтакте']) . '</div>
+                                        <div class="col-6  text-center">' . Html::img('@web/img/qr/vk_qr.png', ['title' => 'Группа ВКонтакте']) . '</div>
+                                    </div>
+                               </div>',
+            ],
+            [
+                'label' => Icon::show('instagram', ['framework' => Icon::FAB]),
+                'url' => ['#'],
+                'options' => ['class' => 'nav-item dropdown'],
+                'template' => '<a href="{url}" class="nav-link text-pink"  data-toggle="dropdown" title="">{label}</a>
+                                <div class="dropdown-menu dropdown-social">
+                                    <div class="row justify-content-md-center">
+                                        <div class="col-12  text-center"><a href="#">Инстаграм Джо-Джо</a></div>
+                                         <div class="col-6 text-center">' . Html::img('@web/img/qr/inst.png', ['title' => 'Инстаграм Джо-Джо']) . '</div>
+                                        <div class="col-6 text-center">' . Html::img('@web/img/qr/inst_qr.png', ['title' => 'Инстаграм Джо-Джо']) . '</div>
+                                    </div>
+                               </div>',
+            ],
         ],
     ]);
     ?>
 
-    <!-- SEARCH FORM -->
-    <!--<form class="form-inline ml-3">
-        <div class="input-group input-group-sm">
-            <input class="form-control form-control-navbar" type="search"
-                   placeholder="Поиск" aria-label="Search">
-            <div class="input-group-append">
-                <button class="btn btn-navbar" type="submit">
-                    <i class="fas fa-search"></i>
-                </button>
-            </div>
-        </div>
-    </form>-->
-
     <ul class="navbar-nav ml-auto">
-        <!--// TODO: Потом это обязательно тоже сделаем-->
-        <!--<li class="nav-item dropdown">
-            <a class="nav-link" data-toggle="dropdown" href="#">
-                <i class="far fa-heart"></i>
-                <span class="badge badge-info navbar-badge">1</span>
-            </a>
-            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                <a href="#" class="dropdown-item">
 
-                    <div class="media">
-                        <div class="media-body">
-                            <h3 class="dropdown-item-title">
-                                Пульсар
-                                <span class="float-right text-sm text-danger"><i
-                                            class="fas fa-star"></i></span>
-                            </h3>
-                            <p class="text-sm">Не забудьте заполнить сегодня пульсар</p>
-                            <p class="text-sm text-muted"><i
-                                        class="far fa-clock mr-1"></i> 1
-                                час назад</p>
-                        </div>
-                    </div>
-
-                </a>
-                <div class="dropdown-divider"></div>
-            </div>
-        </li>
-        <li class="nav-item dropdown">
-            <a class="nav-link" data-toggle="dropdown" href="#">
-                <i class="far fa-comments"></i>
-                <span class="badge badge-danger navbar-badge">3</span>
-            </a>
-            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                <a href="#" class="dropdown-item">
-
-                    <div class="media">
-                        <img src="<?= Yii::$app->homeUrl ?>img/user1-128x128.jpg"
-                             alt="User Avatar"
-                             class="img-size-50 mr-3 img-circle">
-                        <div class="media-body">
-                            <h3 class="dropdown-item-title">
-                                Алексей Воронин
-                                <span class="float-right text-sm text-danger"><i
-                                            class="fas fa-star"></i></span>
-                            </h3>
-                            <p class="text-sm">Перезвони мне
-                                пожалуйста...</p>
-                            <p class="text-sm text-muted"><i
-                                        class="far fa-clock mr-1"></i> 4
-                                часа назад</p>
-                        </div>
-                    </div>
-
-                </a>
-                <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">
-
-                    <div class="media">
-                        <img src="<?= Yii::$app->homeUrl ?>img/user8-128x128.jpg"
-                             alt="User Avatar"
-                             class="img-size-50 img-circle mr-3">
-                        <div class="media-body">
-                            <h3 class="dropdown-item-title">
-                                Сергей Гузин
-                                <span class="float-right text-sm text-muted"><i
-                                            class="fas fa-star"></i></span>
-                            </h3>
-                            <p class="text-sm">Пошлите на обед</p>
-                            <p class="text-sm text-muted"><i
-                                        class="far fa-clock mr-1"></i> 4
-                                часа назад</p>
-                        </div>
-                    </div>
-
-                </a>
-                <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">
-
-                    <div class="media">
-                        <img src="<?= Yii::$app->homeUrl ?>img/user3-128x128.jpg"
-                             alt="User Avatar"
-                             class="img-size-50 img-circle mr-3">
-                        <div class="media-body">
-                            <h3 class="dropdown-item-title">
-                                Лада Горшкова
-                                <span class="float-right text-sm text-warning"><i
-                                            class="fas fa-star"></i></span>
-                            </h3>
-                            <p class="text-sm">Встреча перенесена на
-                                13:00</p>
-                            <p class="text-sm text-muted"><i
-                                        class="far fa-clock mr-1"></i> 4
-                                часа назад</p>
-                        </div>
-                    </div>
-
-                </a>
-                <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item dropdown-footer">Смотреть
-                    все сообщения</a>
-            </div>
-        </li>
-        <li class="nav-item dropdown">
-            <a class="nav-link" data-toggle="dropdown" href="#">
-                <i class="far fa-bell"></i>
-                <span class="badge badge-warning navbar-badge">15</span>
-            </a>
-            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                <span class="dropdown-header">15 Уведомлений</span>
-                <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">
-                    <i class="fas fa-envelope mr-2"></i> 4 сообщения
-                    <span class="float-right text-muted text-sm">3 минуты назад</span>
-                </a>
-                <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">
-                    <i class="fas fa-users mr-2"></i> 8 коллег
-                    <span class="float-right text-muted text-sm">12 часов назад</span>
-                </a>
-                <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">
-                    <i class="fas fa-file mr-2"></i> 3 отчёта
-                    <span class="float-right text-muted text-sm">2 дня назад</span>
-                </a>
-                <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item dropdown-footer">Смотреть
-                    все
-                    уведомления</a>
-            </div>
-        </li>-->
-
-        <?php if (!Yii::$app->user->isGuest && Agreement::orderCount()>0): ?>
+        <?php if (!Yii::$app->user->isGuest && Agreement::orderCount() > 0): ?>
             <li class="nav-item">
-                <a href="<?=Url::home() . 'user/cabinet?&tab=check';?>" class="nav-link" title="Согласование заявок">
+                <a href="<?= Url::home() . 'user/cabinet?&tab=check'; ?>" class="nav-link" title="Согласование заявок">
                     <i class="fas fa-check"></i>
                     Согласования
-                    <span class="badge badge-primary"><?=Agreement::orderCount()?></span>
+                    <span class="badge badge-primary"><?= Agreement::orderCount() ?></span>
                 </a>
             </li>
         <?php endif; ?>

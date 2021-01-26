@@ -80,6 +80,25 @@ if ($jkInstructionDoc) {
                             'url' => ['/news/default/index'],
                         ],
 
+                        // Мероприятия
+                        [
+                            'label' => Icon::show('calendar-check', ['class' => 'nav-icon'])
+                                . Html::tag('p', Module::t('module', 'Мероприятия')
+                                    . Icon::show('angle-left', ['class' => 'right'])),
+                            'url' => ['#'],
+                            'options' => ['class' => 'nav-item has-treeview'],
+                            'items' => [
+                                [
+                                    'label' => Icon::show('calendar-alt', ['class' => 'nav-icon']) . Module::t('module', 'События'),
+                                    'url' => ['#'],
+                                ],
+                                [
+                                    'label' => Icon::show('trophy', ['class' => 'nav-icon']) . Module::t('module', 'Конкурсы'),
+                                    'url' => ['#'],
+                                ],
+                            ],
+                        ],
+
                         // Star Talk
                         ['label' => Icon::show('star', ['class' => 'nav-icon']) . Html::tag('p', 'Star Talk'), 'url' => ['/st/default/index']],
 
