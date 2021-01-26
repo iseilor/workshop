@@ -76,7 +76,7 @@ use yii\widgets\Menu;
                 'template' => '<a href="{url}" class="nav-link text-primary"  data-toggle="dropdown" title="Группа ВКонтакте">{label}</a>
                                 <div class="dropdown-menu dropdown-social">
                                     <div class="row justify-content-md-center">
-                                        <div class="col-12  text-center"><a href="#">Группа ВКонтакте "МРФ Центр"</a></div>
+                                        <div class="col-12  text-center"><a href="#">Группа в ВКонтакте "Твой МРФ Центр"</a></div>
                                          <div class="col-6  text-center">' . Html::img('@web/img/qr/vk.png', ['title' => 'Группа ВКонтакте']) . '</div>
                                         <div class="col-6  text-center">' . Html::img('@web/img/qr/vk_qr.png', ['title' => 'Группа ВКонтакте']) . '</div>
                                     </div>
