@@ -79,16 +79,49 @@ if ($jkInstructionDoc) {
                             'label' => Icon::show(Yii::$app->params['module']['news']['iconClass'], ['class' => 'nav-icon']) . ' <p>Новости</p>',
                             'url' => ['/news/default/index'],
                         ],
+
+                        // Star Talk
+                        ['label' => Icon::show('star', ['class' => 'nav-icon']) . Html::tag('p', 'Star Talk'), 'url' => ['/st/default/index']],
+
+                        // Высшая лига (Кадровый резерв)
+                        [
+                            'label' => Icon::show('crown', ['class' => 'nav-icon'])
+                                . Html::tag('p', \app\modules\kr\Module::t('module', 'kr')
+                                    . Icon::show('angle-left', ['class' => 'right'])),
+                            'url' => ['#'],
+                            'options' => ['class' => 'nav-item has-treeview'],
+                            'items' => [
+                                ['label' => Icon::show('star', ['class' => 'nav-icon']) . '<p>Программа</p>', 'url' => ['/kr/default/index']],
+                                ['label' => Icon::show('info', ['class' => 'nav-icon']) . '<p>О программе</p>', 'url' => ['/kr/about/index']],
+                                ['label' => Icon::show('list', ['class' => 'nav-icon']) . '<p>Расписание</p>', 'url' => ['/kr/timetable/index']],
+                                ['label' => Icon::show('user-graduate', ['class' => 'nav-icon']) . '<p>Кураторы</p>', 'url' => ['/kr/curator/index']],
+                                ['label' => Icon::show('users', ['class' => 'nav-icon']) . '<p>Участники</p>', 'url' => ['/kr/student/index']],
+
+                                ['label' => Icon::show('microchip', ['class' => 'nav-icon']) . '<p>БТИ</p>', 'url' => ['/kr/timetable/bti']],
+                                ['label' => Icon::show('laptop', ['class' => 'nav-icon']) . '<p>IT</p>', 'url' => ['/kr/timetable/it']],
+                                ['label' => Icon::show('briefcase', ['class' => 'nav-icon']) . '<p>B2B</p>', 'url' => ['/kr/timetable/b2b']],
+                                ['label' => Icon::show('building', ['class' => 'nav-icon']) . '<p>B2C</p>', 'url' => ['/kr/timetable/b2c']],
+                            ],
+                        ],
+
+                        // Пенсионная программа
+                        [
+                            'label' => Icon::show('coins', ['class' => 'nav-icon']) . Html::tag('p', 'Пенсионная программа'),
+                            'url' => ['/pp/default/index'],
+                        ],
+
+                        // Жилищная программа
                         [
                             'label' => Icon::show('home', ['class' => 'nav-icon'])
-                                . Html::tag('p', \app\modules\jk\Module::t('module', 'jk')
+                                . Html::tag('p', 'Жилищная программа'
                                     . Icon::show('angle-left', ['class' => 'right'])),
                             'url' => ['#'],
                             'options' => ['class' => 'nav-item has-treeview sidebar-jk'],
                             'items' => [
                                 [
                                     'label' => Icon::show('file-alt', ['class' => 'nav-icon'])
-                                        . Html::tag('p', \app\modules\jk\Module::t('doc', 'Instruction').'<span class="right badge badge-success">info</span>'),
+                                        . Html::tag('p',
+                                            \app\modules\jk\Module::t('doc', 'Instruction') . '<span class="right badge badge-success">info</span>'),
                                     'url' => [$jkInstructionURL],
                                     'options' => ['class' => 'nav-item has-treeview sidebar-jk-instruction',],
                                     'template' => $jkInstructionTemplate,
@@ -122,35 +155,13 @@ if ($jkInstructionDoc) {
                             ],
                         ],
 
-                        // Пенсионная программа
+
+                        // Workshop
                         [
-                            'label' => Icon::show('coins', ['class' => 'nav-icon']) . Html::tag('p', 'Пенсионная программа'),
-                            'url' => ['/pp/default/index'],
+                            'label' => Icon::show('briefcase', ['class' => 'nav-icon']) . Html::tag('p', 'Workshop'),
+                            'url' => Url::to('https://workshop.center.rt.ru'),
+                            'template' => '<a href="{url}" target="_blank" class="nav-link" >{label}</a>',
                         ],
-
-                        // Высшая лига (Кадровый резерв)
-                        [
-                            'label' => Icon::show('crown', ['class' => 'nav-icon'])
-                                . Html::tag('p', \app\modules\kr\Module::t('module', 'kr')
-                                    . Icon::show('angle-left', ['class' => 'right'])),
-                            'url' => ['#'],
-                            'options' => ['class' => 'nav-item has-treeview '.(YII_ENV_PROD ? 'd-none' : '')],
-                            'items' => [
-                                ['label' => Icon::show('star', ['class' => 'nav-icon']) . '<p>Программа</p>', 'url' => ['/kr/default/index']],
-                                ['label' => Icon::show('info', ['class' => 'nav-icon']) . '<p>О программе</p>', 'url' => ['/kr/about/index']],
-                                ['label' => Icon::show('list', ['class' => 'nav-icon']) . '<p>Расписание</p>', 'url' => ['/kr/timetable/index']],
-                                ['label' => Icon::show('user-graduate', ['class' => 'nav-icon']) . '<p>Кураторы</p>', 'url' => ['/kr/curator/index']],
-                                ['label' => Icon::show('users', ['class' => 'nav-icon']) . '<p>Участники</p>', 'url' => ['/kr/student/index']],
-
-                                ['label' => Icon::show('microchip', ['class' => 'nav-icon']) . '<p>БТИ</p>', 'url' => ['/kr/timetable/bti']],
-                                ['label' => Icon::show('laptop', ['class' => 'nav-icon']) . '<p>IT</p>', 'url' => ['/kr/timetable/it']],
-                                ['label' => Icon::show('briefcase', ['class' => 'nav-icon']) . '<p>B2B</p>', 'url' => ['/kr/timetable/b2b']],
-                                ['label' => Icon::show('building', ['class' => 'nav-icon']) . '<p>B2C</p>', 'url' => ['/kr/timetable/b2c']],
-                            ],
-                        ],
-
-                        // Star Talk
-                        ['label' => Icon::show('star', ['class' => 'nav-icon']) . Html::tag('p', 'Star Talk'), 'url' => ['/st/default/index']],
 
                         // О проекте
                         [
