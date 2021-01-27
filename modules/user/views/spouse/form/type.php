@@ -5,6 +5,12 @@ use app\modules\user\models\Spouse;
 ?>
 <?= $form->field($model, 'type')->dropDownList(Spouse::getTypeList()); ?>
 
+<div class="row <?= (isset($model->type) && $model->type == 1) ? 'type-1' : 'type-1 d-none' ?>">
+    <?= $form->field($model, 'agreement_ppd')->checkbox(
+        ["template" => "<div class='checkbox'>\n{beginLabel}\n{input}\n{labelTitle}\n{endLabel}\n{hint}\n{error}\n</div>"]
+    ) ?>
+</div>
+
 <?php
 $script = <<< JS
 $(document).ready(function() {

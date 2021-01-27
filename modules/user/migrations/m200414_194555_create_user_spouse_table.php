@@ -33,6 +33,7 @@ class m200414_194555_create_user_spouse_table extends Migration
             'gender'=> $this->boolean(),                    // Пол
             'date'=> $this->integer(),                      // Дата рождения
             'marriage_file'=>$this->string(),               // Свидетельство о заключении/расторжения брака / копию решения суда
+            'agreement_ppd'=>$this->boolean(),              // Согласие на обработку персональных данных
 
             // Паспорт
             'passport_series'=>$this->string(),

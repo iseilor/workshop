@@ -28,6 +28,7 @@ use yii\web\UploadedFile;
  * @property int      $status_id
  *
  * @property boolean  $is_participate
+ * @property boolean  $agreement_ppd
  * @property boolean  $is_mortgage
  * @property int      $type
  * @property string   $order_file
@@ -181,7 +182,8 @@ class Order extends Model
 
 
             // Общие параметры заявки
-            [['is_participate'], 'required'],
+            [['is_participate', 'agreement_ppd'], 'required'],
+            ['agreement_ppd', 'compare', 'compareValue' => 1, 'operator' => '==', 'message'=>'Необходимо принять согласие на обработку ПД'],
             //            [['percent_id', 'zaim_id'], 'safe'],
             //            [['file_agree_personal_data_form'], 'safe'],
             //            [['file_agree_personal_data_form'], 'file', 'extensions' => 'pdf, docx', 'maxSize' => '10000000'],
@@ -451,6 +453,7 @@ class Order extends Model
             'is_mortgage' => Module::t('order', 'Is Mortgage'),
             'mortgage_file' => Module::t('module', 'Mortgage File'),
             'is_participate' => Module::t('order', 'Is Participate'),
+            'agreement_ppd' => Module::t('order', 'Agreement PPD'),
             'participateLabel' => Module::t('module', 'Is Participate'),
             'type' => Module::t('order', 'Type'),
             'typeName' => Module::t('order', 'Type'),

@@ -28,6 +28,7 @@ use yii\web\UploadedFile;
  * @property string      $fio
  * @property int         $gender
  * @property int         $date
+ * @property boolean     $agreement_ppd
  *
  * @property string      $birth_series
  * @property string      $birth_number
@@ -102,7 +103,8 @@ class Child extends Model
     public function rules()
     {
         $rules = [
-            [['fio', 'date', 'address_registration', 'address_matched'], 'required'],
+            [['fio', 'date', 'address_registration', 'address_matched', 'agreement_ppd'], 'required'],
+            ['agreement_ppd', 'compare', 'compareValue' => 1, 'operator' => '==', 'message'=>'Необходимо принять согласие на обработку ПД'],
             [['created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by', 'user_id', 'is_invalid', 'is_study'], 'integer'],
             [['fio'], 'string', 'max' => 255],
             // TODO: с этим не работает в FireFox
@@ -193,6 +195,7 @@ class Child extends Model
             'gender' => Module::t('child', 'Gender'),
             'date' => Module::t('child', 'Date'),
             'age' => Module::t('child', 'Age'),
+            'agreement_ppd' => Module::t('child', 'Agreement PPD'),
 
             // Паспорт
             'passport_series' => Module::t('child', 'Passport Series'),

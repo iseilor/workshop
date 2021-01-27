@@ -34,6 +34,7 @@ use yii\web\UploadedFile;
  * @property string|null $passport_registration
  * @property string|null $address_fact
  * @property string|null $passport_file
+ * @property boolean     $agreement_ppd
  *
  * @property string|null $personal_data_file
  * @property string|null $edj
@@ -114,7 +115,7 @@ class Spouse extends Model
 
             // Обязательные при наличии супруге
             [
-                ['fio', 'passport_series', 'passport_number', 'passport_date', 'passport_department', 'passport_code','passport_registration', 'is_work'],
+                ['fio', 'passport_series', 'passport_number', 'passport_date', 'passport_department', 'passport_code','passport_registration', 'is_work', 'agreement_ppd'],
                 'required',
                 'when' => function ($model) {
                     return $model->type == 1;
@@ -122,6 +123,14 @@ class Spouse extends Model
                 'whenClient' => "function (attribute, value) {
                     return $('#spouse-type').val() == 1;
                 }",
+            ],
+            ['agreement_ppd', 'compare', 'compareValue' => 1, 'operator' => '==', 'message'=>'Необходимо принять согласие на обработку ПД',
+                'when' => function ($model) {
+                    return $model->type == 1;
+                },
+                'whenClient' => "function (attribute, value) {
+                    return $('#spouse-type').val() == 1;
+                }"
             ],
 
             // Файлы
@@ -175,6 +184,7 @@ class Spouse extends Model
             'date' => Module::t('spouse', 'Date'),
             'marriage_file' => Module::t('spouse', 'Marriage File'),
             'marriage_file_form' => Module::t('spouse', 'Marriage File'),
+            'agreement_ppd' => Module::t('spouse', 'Agreement PPD'),
 
             // Адрес
             'registration_file' => Module::t('spouse', 'Registration'),

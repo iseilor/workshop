@@ -31,6 +31,7 @@ class m200405_183301_create_user_child_table extends Migration
             'fio'=> $this->string() . ' NOT NULL',
             'gender'=> $this->boolean() . ' NOT NULL',
             'date'=> $this->integer() . ' NOT NULL',
+            'agreement_ppd'=>$this->boolean(),              // Согласие на обработку персональных данных
 
             // Пасспорт
             'passport_series'=>$this->string(),

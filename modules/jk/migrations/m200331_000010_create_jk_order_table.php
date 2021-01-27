@@ -48,6 +48,7 @@ class m200331_000010_create_jk_order_table extends Migration
                 'is_participate' => $this->boolean(),           // Ранее участвовали
                 'type' => $this->integer()->notNull(),          // Тип заявки
                 'order_file'=>$this->string(),                  // Сформированное заявление
+                'agreement_ppd'=>$this->boolean(),              // Согласие на обработку персональных данных
 
                 // Семья
                 'social_id' => $this->integer(),                // Социальная категория

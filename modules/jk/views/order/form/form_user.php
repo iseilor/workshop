@@ -49,6 +49,13 @@ $user = User::findOne(Yii::$app->user->identity->id);
 
 
         <div class="row">
+            <div class="col-6">
+                <?= $form->field($model, 'agreement_ppd')->checkbox(
+                    ["template" => "<div class='checkbox'>\n{beginLabel}\n{input}\n{labelTitle}\n{endLabel}\n{hint}\n{error}\n</div>"]
+                ) ?>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-4">
                 <?= $form->field($usermd, 'work_is_young')->checkbox(
                     ["template" => "<div class='checkbox'>\n{beginLabel}\n{input}\n{labelTitle}\n{endLabel}\n{hint}\n{error}\n</div>"]
