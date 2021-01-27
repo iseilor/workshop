@@ -59,16 +59,20 @@ if ($model->passport_series) {
         childViewFieldFile($model,'passport_file')
     );
 }
-$attr[] = [
+if ($model->is_study) {
+    $attr[] = [
         'label' => 'Ребёнок студент',
-        'value'=> ($model->is_study)? 'Да' : 'Нет'
-];
+        'value' => 'Да'
+    ];
+}
 if ($model->is_study) $attr[] = childViewFieldFile($model,'file_study');
-$attr[] = [
+if ($model->is_invalid) {
+    $attr[] = [
         'label' => 'Ребёнок инвалид',
-        'value'=> ($model->is_invalid)? 'Да' : 'Нет'
-];
-if ($model->is_invalid) $attr[] = childViewFieldFile($model,'file_invalid');
+        'value' => 'Да'
+    ];
+    $attr[] = childViewFieldFile($model, 'file_invalid');
+}
 $attr[] = childViewFieldFile($model,'other_child_files_form');
 ?>
 <div class="row">
@@ -149,8 +153,8 @@ $(document).ready(function() {
     $('table#w0 tbody tr:eq(3)').after('<tr><th><h4><i class="fas fa-address-book"></i> Свидетельство о рождении</h4></th><td></td></tr>');
     $('table#w0 tbody tr:eq(9)').after('<tr><th><h4><i class="fas fa-map-marker-alt"></i> Адрес</h4></th><td></td></tr>');
     $('table#w0 tbody tr th:contains("Кем выдан")').parent().before('<tr><th><h4><i class="fas fa-address-card"></i> Паспортные данные</h4></th><td></td></tr>');
-    $('table#w0 tbody tr th:contains("Ребёнок студент")').parent().before('<tr><th><h4><i class="fas fa-user-graduate"></i> Студент</h4></th><td></td></tr>');
-    $('table#w0 tbody tr th:contains("Ребёнок инвалид")').parent().before('<tr><th><h4><i class="fas fa-wheelchair"></i> Инвалид</h4></th><td></td></tr>');
+    //$('table#w0 tbody tr th:contains("Ребёнок студент")').parent().before('<tr><th><h4><i class="fas fa-user-graduate"></i> Студент</h4></th><td></td></tr>');
+    //$('table#w0 tbody tr th:contains("Ребёнок инвалид")').parent().before('<tr><th><h4><i class="fas fa-wheelchair"></i> Инвалид</h4></th><td></td></tr>');
     $('table#w0 tbody tr:last').before('<tr><th><h4>Прочее</h4></th><td></td></tr>');
 });
 JS;
