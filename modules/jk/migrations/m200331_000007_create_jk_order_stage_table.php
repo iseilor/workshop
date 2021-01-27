@@ -32,8 +32,9 @@ class m200331_000007_create_jk_order_stage_table extends Migration
                 'deleted_by' => $this->integer(),
                 'order_id' => $this->integer()->notNull(),
                 'status_id' => $this->integer()->notNull(),
-                'comment' => $this->string()->notNull(),
-                'comment2' => $this->string(), // В частности у куратора 2 поля с комментариями
+
+                'comment' => $this->text()->notNull(),
+                'comment2' => $this->text(), // В частности у куратора 2 поля с комментариями
 
                 // Чтобы не приумножать сущности сделаем универсальные 5 полей
                 'field1' => $this->string(),
