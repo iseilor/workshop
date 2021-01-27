@@ -34,64 +34,58 @@ $this->params['breadcrumbs'][] = $this->title;
                     ]) ?>
                 </p>
 
-                <?= DetailView::widget([
-                    'model' => $model,
-                    'attributes' => [
-                        'id',
-                        'created_at:datetime',
-                        [
-                            'attribute' => 'created_by',
-                            'format' => 'raw',
-                            'value' => $model->getCreatedUserLink(),
-                        ],
+                <?php
+                    $attr = [
                         [
                             'attribute' => 'type',
                             'value' => Spouse::getTypeList()[$model->type],
                         ],
-                        [
-                            'attribute' => 'user_id',
-                            'format' => 'raw',
-                            'value' =>  ($model->user ? $model->user->getInfoLink() : ""),
-                        ],
                         'fio',
-                        [
-                            'attribute' => 'gender',
-                            'value' => Spouse::getGenderList()[$model->gender],
-                        ],
-                        'date:date',
-                        viewFieldFile($model, 'marriage_file', Yii::$app->params['module']['spouse']['filePath'] . $model->id . '/' . $model->marriage_file),
+                        viewFieldFile($model, 'marriage_file', ['/' . Yii::$app->params['module']['spouse']['filePath'] . $model->id . '/' . $model->marriage_file]),
+                        'passport_registration',
                         'passport_series',
                         'passport_number',
                         'passport_date:date',
                         'passport_department',
                         'passport_code',
-                        'passport_registration',
-                        'address_fact',
-                        viewFieldFile($model, 'passport_file', Yii::$app->params['module']['spouse']['filePath'] . $model->id . '/' . $model->passport_file),
-                        viewFieldFile($model, 'edj_file', Yii::$app->params['module']['spouse']['filePath'] . $model->id . '/' . $model->edj_file),
-                        viewFieldFile($model, 'registration_file', Yii::$app->params['module']['spouse']['filePath'] . $model->id . '/' . $model->registration_file),
+                        viewFieldFile($model, 'passport_file', ['/' . Yii::$app->params['module']['spouse']['filePath'] . $model->id . '/' . $model->passport_file]),
 
-                        [
-                            'attribute' => 'is_work',
-                            'value' => (isset($model->is_work) && $model->is_work) ? 'Да' : 'Нет',
-                        ],
-                        [
-                            'attribute' => 'is_rtk',
-                            'value' => (isset($model->is_rtk) && $model->is_rtk) ? 'Да' : 'Нет',
-                        ],
-                        [
-                            'attribute' => 'is_do',
-                            'value' => (isset($model->is_do) && $model->is_do) ? 'Да' : 'Нет',
-                        ],
+                    ];
+                    if (isset($model->registration_file)) {
+                        $attr[] = viewFieldFile($model, 'registration_file', ['/' . Yii::$app->params['module']['spouse']['filePath'] . $model->id . '/' . $model->registration_file]);
+                    }
+                    if (isset($model->edj_file)) {
+                        $attr[] = viewFieldFile($model, 'edj_file', ['/' . Yii::$app->params['module']['spouse']['filePath'] . $model->id . '/' . $model->edj_file]);
+                    }
+                    $attr[] = [
+                        'attribute' => 'is_work',
+                        'value' => (isset($model->is_work) && $model->is_work) ? 'Да' : 'Нет',
+                    ];
+                    if (isset($model->is_work) && $model->is_work) {
+                        if (isset($model->is_rtk) && $model->is_rtk) {
+                                $attr[] = [
+                                    'attribute' => 'is_rtk',
+                                    'value' => 'Да'
+                                ];
+                            }
+                        if (isset($model->is_do) && $model->is_do) {
+                            $attr[] = [
+                                'attribute' => 'is_do',
+                                'value' => (isset($model->is_do) && $model->is_do) ? 'Да' : 'Нет',
+                            ];
+                        }
+                    } else {
+                        array_push($attr,
+                            viewFieldFile($model, 'work_file', ['/' . Yii::$app->params['module']['spouse']['filePath'] . $model->id . '/' . $model->work_file]),
+                            viewFieldFile($model, 'unemployment_file', ['/' . Yii::$app->params['module']['spouse']['filePath'] . $model->id . '/' . $model->unemployment_file]),
+                            viewFieldFile($model, 'explanatory_note_file', ['/' . Yii::$app->params['module']['spouse']['filePath'] . $model->id . '/' . $model->explanatory_note_file])
+                        );
+                    }
+                ?>
 
-                        viewFieldFile($model, 'explanatory_note_file', Yii::$app->params['module']['spouse']['filePath'] . $model->id . '/' . $model->explanatory_note_file),
-                        viewFieldFile($model, 'work_file', Yii::$app->params['module']['spouse']['filePath'] . $model->id . '/' . $model->work_file),
-                        viewFieldFile($model, 'unemployment_file', Yii::$app->params['module']['spouse']['filePath'] . $model->id . '/' . $model->unemployment_file),
-                        viewFieldFile($model, 'salary_file', Yii::$app->params['module']['spouse']['filePath'] . $model->id . '/' . $model->salary_file),
-
-                        viewFieldFile($model, 'personal_data_file', Yii::$app->params['module']['spouse']['filePath'] . $model->id . '/' . $model->personal_data_file),
-
-                    ],
+                <?= DetailView::widget([
+                    'model' => $model,
+                    'attributes' => $attr
                 ]) ?>
             </div>
         </div>

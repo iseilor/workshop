@@ -42,16 +42,18 @@ if ($spouse) {
         'value' => (isset($spouse->is_work) && $spouse->is_work) ? 'Да' : 'Нет',
     ];
     if (isset($spouse->is_work) && $spouse->is_work) {
-        array_push($attr,
-            [
+        if (isset($model->is_rtk) && $model->is_rtk) {
+            $attr[] = [
                 'attribute' => 'is_rtk',
-                'value' => (isset($spouse->is_rtk) && $spouse->is_rtk) ? 'Да' : 'Нет',
-            ],
-            [
+                'value' => 'Да'
+            ];
+        }
+        if (isset($model->is_do) && $model->is_do) {
+            $attr[] = [
                 'attribute' => 'is_do',
-                'value' => (isset($spouse->is_do) && $spouse->is_do) ? 'Да' : 'Нет',
-            ]
-        );
+                'value' => (isset($model->is_do) && $model->is_do) ? 'Да' : 'Нет',
+            ];
+        }
     } else {
         array_push($attr,
             viewFieldFile($spouse, 'work_file', ['/' . Yii::$app->params['module']['spouse']['filePath'] . $spouse->id . '/' . $spouse->work_file]),
