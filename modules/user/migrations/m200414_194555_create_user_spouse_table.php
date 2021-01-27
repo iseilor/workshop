@@ -64,7 +64,7 @@ class m200414_194555_create_user_spouse_table extends Migration
 
         ], $tableOptions);
 
-        $this->execute(file_get_contents(__DIR__ . '/../sql/user_spouse-local.sql'));
+        //$this->execute(file_get_contents(__DIR__ . '/../sql/user_spouse-local.sql'));
     }
 
     /**
