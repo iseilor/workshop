@@ -252,6 +252,7 @@ $user = User::findOne(Yii::$app->user->identity->id);
                 <?= $form->field($model, 'file_social_contract_form', [
                     'template' => getFileInputTemplate($model->file_social_contract, $model->attributeLabels()['file_social_contract'] . '.pdf'),
                 ])->fileInput(['class' => 'custom-file-input']) ?>
+                <?= $form->field($model, 'id')->hiddenInput()->label(false) ?>
             </div>
         </div>
     </div>
@@ -329,6 +330,7 @@ $user = User::findOne(Yii::$app->user->identity->id);
 <!--    </p>-->
 
 <?php
+$addressSaveUrl = Url::base(true).Url::to('/jk/order/addressupdate');
 // Динамическое управление "обязательностью" полей с файлами
 $workTransferredFileIsRequired = empty($usermd->work_transferred_file) ? 'true' : 'false';
 $temporaryRegistrationFileIsRequired = empty($passport->temporary_registration_file) ? 'true' : 'false';
@@ -498,6 +500,21 @@ $(document).ready(function() {
        }
     });
     
+    $('#passport-passport_registration').on('change', function() {
+        var currentAddress = $('#passport-passport_registration').val(),
+            orderId = $('#order-id').val();
+        
+        if (currentAddress && currentAddress !== '' && orderId && orderId !== '') {
+        $.ajax({
+                  url: '$addressSaveUrl',
+                  data: {address: currentAddress,
+                         id: orderId},
+                  error: function () {
+                      alert('Ошибка: не удалось сменить адрес регистрации')
+                  }
+             });
+        }
+    });
 });
 JS;
 $this->registerJs($script, yii\web\View::POS_READY);

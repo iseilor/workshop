@@ -1280,4 +1280,19 @@ class OrderController extends Controller
         $manager = User::findOne($agreement->user_id);
         return 'Повторное email-уведомление о необходимости согласования заявки было направлено на имя: <strong>' . $manager->fio . '</strong>';
     }
+
+    public function actionAddressupdate($address, $id)
+    {
+        $order = $this->findModel($id);
+        $user = User::findOne($order->created_by);
+        if (!$user) {
+            $user = $user = User::findOne(Yii::$app->user->identity->getId());
+        }
+
+        $passport = $user->passport;
+        if ($passport) {
+            $user->passport_registration = $address;
+            $user->update();
+        }
+    }
 }
