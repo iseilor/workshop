@@ -6,6 +6,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\DetailView;
 use yii\widgets\Pjax;
+use app\modules\jk\models\Status;
 
 use yii\jui\DatePicker;
 use yii\widgets\MaskedInput;
@@ -80,39 +81,41 @@ $user = User::findOne(Yii::$app->user->identity->id);
     </div>
 </div>
 
-<div class="card card-solid card-secondary  ">
-    <div class="card-header with-border">
-        <h3 class="card-title">Документы</h3>
-    </div>
-    <div class="card-body">
+<?php if (in_array($model->status_id,[Status::findOne(['code' => 'COMMISSION_YES'])->id])): ?>
+    <div class="card card-solid card-secondary  ">
+        <div class="card-header with-border">
+            <h3 class="card-title">Документы</h3>
+        </div>
+        <div class="card-body">
 
-        <div class="row">
-            <div class="col-md-12">
-                <?= $form->field($model, 'docs_egrn_file_form', [
-                    'template' => getFileInputTemplate($model->docs_egrn_file,
-                        $model->attributeLabels()['docs_egrn_file_form'] . '.pdf'),
-                ])->fileInput(['class' => 'custom-file-input']) ?>
-                <?= $form->field($model, 'docs_egrn_file')->hiddenInput()->label(false) ?>
+            <div class="row">
+                <div class="col-md-12">
+                    <?= $form->field($model, 'docs_egrn_file_form', [
+                        'template' => getFileInputTemplate($model->docs_egrn_file,
+                            $model->attributeLabels()['docs_egrn_file_form'] . '.pdf'),
+                    ])->fileInput(['class' => 'custom-file-input']) ?>
+                    <?= $form->field($model, 'docs_egrn_file')->hiddenInput()->label(false) ?>
+                </div>
             </div>
-        </div>
-        <div class="row loan <?= $field_zaim ?>">
-            <div class="col-md-12">
-                <?= $form->field($model, 'docs_loan_agreement_file_form', [
-                    'template' => getFileInputTemplate($model->docs_loan_agreement_file,
-                        $model->attributeLabels()['docs_loan_agreement_file_form'] . '.pdf'),
-                ])->fileInput(['class' => 'custom-file-input']) ?>
+            <div class="row loan <?= $field_zaim ?>">
+                <div class="col-md-12">
+                    <?= $form->field($model, 'docs_loan_agreement_file_form', [
+                        'template' => getFileInputTemplate($model->docs_loan_agreement_file,
+                            $model->attributeLabels()['docs_loan_agreement_file_form'] . '.pdf'),
+                    ])->fileInput(['class' => 'custom-file-input']) ?>
+                </div>
             </div>
-        </div>
-        <div class="row additional <?= $field_percent ?>">
-            <div class="col-md-12">
-                <?= $form->field($model, 'docs_additional_agreement_file_form', [
-                    'template' => getFileInputTemplate($model->docs_additional_agreement_file,
-                        $model->attributeLabels()['docs_additional_agreement_file_form'] . '.pdf'),
-                ])->fileInput(['class' => 'custom-file-input']) ?>
+            <div class="row additional <?= $field_percent ?>">
+                <div class="col-md-12">
+                    <?= $form->field($model, 'docs_additional_agreement_file_form', [
+                        'template' => getFileInputTemplate($model->docs_additional_agreement_file,
+                            $model->attributeLabels()['docs_additional_agreement_file_form'] . '.pdf'),
+                    ])->fileInput(['class' => 'custom-file-input']) ?>
+                </div>
             </div>
         </div>
     </div>
-</div>
+<?php endif; ?>
 
 <?php if ($model->filling_step == 7): ?>
     <div class="card card-solid card-secondary  ">
