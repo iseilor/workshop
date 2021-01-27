@@ -1,6 +1,6 @@
 <?php
 
-if ($_SERVER['SERVER_ADDR'] == '192.168.1.37' && $_SERVER['SERVER_NAME'] == 'hr.center.rt.ru') {
+if ($_SERVER['SERVER_ADDR'] == '192.168.1.37' && $_SERVER['SERVER_NAME'] == 'hr0.center.rt.ru') {
     defined('YII_DEBUG') or define('YII_DEBUG', false);
     defined('YII_ENV') or define('YII_ENV', 'prod');
 } else {
