@@ -165,11 +165,11 @@ if ($jkInstructionDoc) {
                                         . Html::tag('p', \app\modules\jk\Module::t('faq', 'FAQ')),
                                     'url' => ['/jk/faq/index'],
                                 ],
-                                [
+                                /*[
                                     'label' => Icon::show('youtube', ['framework' => Icon::FAB, 'class' => 'nav-icon'])
                                         . '<p>Видео <span class="right badge badge-danger">New</span></p>',
                                     'url' => ['/jk/video/index'],
-                                ]
+                                ]*/
                                 /*['label' => '<i class="fas fa-user nav-icon"></i> <p>Написать куратору</p>', 'url' => ['/jk/curator/index']],*/
                             ],
                         ],
