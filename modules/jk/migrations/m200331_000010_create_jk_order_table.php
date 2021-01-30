@@ -159,7 +159,7 @@ class m200331_000010_create_jk_order_table extends Migration
             $tableOptions
         );
 
-        //$this->execute(file_get_contents(__DIR__ . '/../sql/jk_order.sql'));
+        $this->execute(file_get_contents(__DIR__ . '/../sql/jk_order.sql'));
     }
 
 
