@@ -896,6 +896,12 @@ class Order extends Model
         return $this->hasOne(Social::class, ['id' => 'social_id']);
     }
 
+    // Область приобритаемого жилья
+    public function getMin()
+    {
+        return $this->hasOne(Min::class, ['id' => 'district_id']);
+    }
+
     // Типы заявок
     public static function getTypesArray()
     {

@@ -1061,7 +1061,7 @@ class OrderController extends Controller
                 number_format($order->ipoteka_user, 2, ',', ' '),
                 $order->getIpotekaYearCount(),
 
-                $order->jp_address,
+                ($order->is_mortgage)?$order->jp_address:$order->min->title,
                 number_format($order->jp_cost, 2, ',', ' '),
                 $order->jp_new_area,
                 (isset($order->jp_new_room_count) && $order->jp_new_room_count) ? $order->jp_new_room_count .' комнат(а/ы)' : '',
@@ -1107,7 +1107,7 @@ class OrderController extends Controller
         FileHelper::createDirectory('files/jk/order_archives', $mode = 0777, $recursive = true);
 
         $zip = new \ZipArchive();
-        $zipUrl = '/files/jk/order_archives/zayavka_' . $id . '.zip';
+        $zipUrl = '/files/jk/order_archives/order_' . $id . '.zip';
 
         if (!$zip->open(Yii::getAlias('@webroot') . $zipUrl, \ZIPARCHIVE::CREATE) === true) {
             return false;
