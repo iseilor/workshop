@@ -1229,7 +1229,7 @@ class OrderController extends Controller
         // Сюда складываем все выгрузки
         $dirPath = 'files/jk/excel/';
         FileHelper::createDirectory($dirPath, $mode = 0777, $recursive = true);
-        $fileUrl = '/files/jk/excel/' . date('YmdHis') . '.xlsx';
+        $fileUrl = '/files/jk/excel/orders_' . date('YmdHis') . '.xlsx';
 
         // Работаем с активной вкладкой
         $spreadsheet = IOFactory::load($templatePath);
@@ -1237,22 +1237,33 @@ class OrderController extends Controller
 
         // Формируем данные
         $orders = Order::find()->published()->all();
-        $rowNum = 6;
+        $rowNum = 8;
         $num = 1;
         foreach ($orders as $order) {
-            $worksheet->getCell('B' . $rowNum)->setValue($num);
-            $worksheet->getCell('C' . $rowNum)->setValue($order->createdUser->filial->title);
-            $worksheet->getCell('D' . $rowNum)->setValue($order->createdUser->tab_number);
-            $worksheet->getCell('E' . $rowNum)->setValue($order->createdUser->fio);
-            $worksheet->getCell('F' . $rowNum)->setValue($order->createdUser->work_department_full);
-            $worksheet->getCell('G' . $rowNum)->setValue($order->createdUser->position);
-            $worksheet->getCell('H' . $rowNum)->setValue(Yii::$app->formatter->format($order->createdUser->birth_date, 'date'));
-            $worksheet->getCell('I' . $rowNum)->setValue($order->createdUser->years);
-            $worksheet->getCell('J' . $rowNum)->setValue($order->createdUser->gender ? 'М' : 'Ж');
-            $worksheet->getCell('K' . $rowNum)->setValue($order->createdUser->pensionDate);
-            $worksheet->getCell('L' . $rowNum)->setValue(Yii::$app->formatter->format($order->createdUser->work_date, 'date'));
-            $worksheet->getCell('M' . $rowNum)->setValue(Yii::$app->formatter->format($order->created_at, 'date'));
-            $worksheet->getCell('N' . $rowNum)->setValue($order->createdUser->experience);
+            $worksheet->getCell('A' . $rowNum)->setValue($num);
+            $worksheet->getCell('B' . $rowNum)->setValue($order->createdUser->filial->title);
+            $worksheet->getCell('C' . $rowNum)->setValue($order->createdUser->tab_number);
+            $worksheet->getCell('D' . $rowNum)->setValue($order->createdUser->fio);
+            $worksheet->getCell('E' . $rowNum)->setValue($order->createdUser->work_department_full);
+            $worksheet->getCell('F' . $rowNum)->setValue($order->createdUser->position);
+            $worksheet->getCell('G' . $rowNum)->setValue(Yii::$app->formatter->format($order->createdUser->birth_date, 'date'));
+            $worksheet->getCell('H' . $rowNum)->setValue($order->createdUser->years);
+            $worksheet->getCell('I' . $rowNum)->setValue($order->createdUser->gender ? 'М' : 'Ж');
+            $worksheet->getCell('J' . $rowNum)->setValue($order->createdUser->pensionDate);
+            $worksheet->getCell('K' . $rowNum)->setValue(Yii::$app->formatter->format($order->createdUser->work_date, 'date'));
+            $worksheet->getCell('L' . $rowNum)->setValue(Yii::$app->formatter->format($order->created_at, 'date'));
+            $worksheet->getCell('M' . $rowNum)->setValue($order->createdUser->experience);
+            $worksheet->getCell('N' . $rowNum)->setValue($order->createdUser->experiencePoints);
+            $worksheet->getCell('O' . $rowNum)->setValue('Нет');
+            $worksheet->getCell('P' . $rowNum)->setValue(0);
+            $worksheet->getCell('Q' . $rowNum)->setValue('Нет');
+
+            $worksheet->getCell('R' . $rowNum)->setValue('TODO'); // Молодой работник
+            $worksheet->getCell('S' . $rowNum)->setValue('TODO'); // Баллы за молодого
+
+            $worksheet->getCell('T' . $rowNum)->setValue($order->resident_count); // Кол-во членов семьи
+            $worksheet->getCell('U' . $rowNum)->setValue($order->createdUser->spouseType);
+
 
             $rowNum++;
             $num++;

@@ -468,6 +468,23 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
         }
     }
 
+    // Кол-во баллов за стаж
+    public function getExperiencePoints()
+    {
+        $experience = $this->getExperience();
+        if ($experience >= 10) {
+            $points = 3;
+        } elseif ($experience >= 5) {
+            $points = 2;
+        } elseif ($experience >= 3) {
+            $points = 1;
+        } elseif ($experience >= 1) {
+            $points = 0;
+        } else {
+            $points = 'error';
+        }
+        return $points;
+    }
 
     // Дата выхода на пенсию
     public function getPensionDate()
@@ -622,7 +639,17 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
 
     public function getSpouse()
     {
-        return $this->hasOne(Spouse::class, ['user_id' => 'id'])->andWhere(['deleted_at' => null]);
+        return $this->hasOne(Spouse::class, ['user_id' => 'id'])->andWhere(['deleted_at' => null])->one();
+    }
+
+    // Наличие супруги (Да/Нет/Разведен(а))
+    public function getSpouseType(){
+        $spouse = $this->getSpouse();
+        if ($spouse){
+           return $spouse->type;
+        }else{
+            return 'Нет';
+        }
     }
 
     public function getChildren()
@@ -669,12 +696,14 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
                 ['/user/' . $this->id]);
     }
 
-    public function  getInfoLink()
+    public function getInfoLink()
     {
         return Html::a($this->fio, Url::to(['/user/' . $this->id], true));
     }
+
     // Филиал сотрудника
-    public function getFilial(){
+    public function getFilial()
+    {
         return $this->hasOne(Rf::class, ['id' => 'filial_id']);
     }
 
