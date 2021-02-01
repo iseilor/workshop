@@ -232,7 +232,7 @@ $(document).ready(function() {
     $('div.field-order-jp_date').addClass('required');
     $('.field-order-jp_dogovor_buy_file_form').addClass('required');
     $('.field-order-jp_egrp_file_form').addClass('required');
-    $('.field-order-jp_act_file_form').addClass('required');
+    //$('.field-order-jp_act_file_form').addClass('required');
     
     var constr_fields_map = new Map([
                       ['#order-jp_own_land_file_form', '.field-order-jp_own_land_file_form'],
