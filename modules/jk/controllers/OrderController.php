@@ -1079,8 +1079,7 @@ class OrderController extends Controller
                 mb_strtolower(Order::getJPTypeList()[$order->jp_type]),
                 $order->jp_area,
                 $order->resident_count,
-                mb_strtolower(Order::getResidentTypeList()[$order->resident_type]),
-
+                (isset($order->resident_type) && $order->resident_type && $order->resident_count>1)?'('.mb_strtolower(Order::getResidentTypeList()[$order->resident_type]).')':'',
 
                 $order->family_deal,
                 $order->isDZO(),
