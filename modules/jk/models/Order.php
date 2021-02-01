@@ -69,15 +69,15 @@ use yii\web\UploadedFile;
  * @property boolean  $is_poor
  *
  * Компенсация %
- * @property string     $pc_period          Период оказания МП
- * @property integer    $pc_term            Срок оказания МП
- * @property double     $pc_rate            Ставка компенсации %%
- * @property integer    $pc_max_value       Максимальная сумма компенсации %% в целом по ДС
- * @property integer    $pc_max_per_year    Максимальная сумма компенсации %% в год
+ * @property string   $pc_period          Период оказания МП
+ * @property integer  $pc_term            Срок оказания МП
+ * @property double   $pc_rate            Ставка компенсации %%
+ * @property integer  $pc_max_value       Максимальная сумма компенсации %% в целом по ДС
+ * @property integer  $pc_max_per_year    Максимальная сумма компенсации %% в год
  *
  * Займ
- * @property integer    $loan_period     Срок оказания МП
- * @property integer    $loan_max_val    Максимальный размер займа
+ * @property integer  $loan_period        Срок оказания МП
+ * @property integer  $loan_max_val       Максимальный размер займа
  *
  * @property integer  $filling_step
  *
@@ -183,7 +183,7 @@ class Order extends Model
 
             // Общие параметры заявки
             [['is_participate', 'agreement_ppd'], 'required'],
-            ['agreement_ppd', 'compare', 'compareValue' => 1, 'operator' => '==', 'message'=>'Необходимо принять согласие на обработку ПД'],
+            ['agreement_ppd', 'compare', 'compareValue' => 1, 'operator' => '==', 'message' => 'Необходимо принять согласие на обработку ПД'],
             //            [['percent_id', 'zaim_id'], 'safe'],
             //            [['file_agree_personal_data_form'], 'safe'],
             //            [['file_agree_personal_data_form'], 'file', 'extensions' => 'pdf, docx', 'maxSize' => '10000000'],
@@ -325,31 +325,37 @@ class Order extends Model
 
 
             // Вкладка "Финансы"
-            [['pc_period', 'pc_term', 'pc_rate', 'pc_max_value', 'pc_max_per_year', 'loan_period', 'loan_max_val',],
+            [
+                ['pc_period', 'pc_term', 'pc_rate', 'pc_max_value', 'pc_max_per_year', 'loan_period', 'loan_max_val',],
                 'safe',
                 'when' => function ($model) {
                     return $model->filling_step >= 6;
                 },
             ],
-            [['pc_term', 'pc_max_value', 'pc_max_per_year', 'loan_period', 'loan_max_val',],
+            [
+                ['pc_term', 'pc_max_value', 'pc_max_per_year', 'loan_period', 'loan_max_val',],
                 'integer',
                 'when' => function ($model) {
                     return $model->filling_step >= 6;
                 },
             ],
-            [['pc_period', 'pc_term', 'pc_rate', 'pc_max_value', 'pc_max_per_year', 'loan_period', 'loan_max_val',],
+            [
+                ['pc_period', 'pc_term', 'pc_rate', 'pc_max_value', 'pc_max_per_year', 'loan_period', 'loan_max_val',],
                 'safe',
                 'when' => function ($model) {
                     return $model->filling_step >= 6;
                 },
             ],
-            [['pc_period',],
-                'string', 'max' => 100,
+            [
+                ['pc_period',],
+                'string',
+                'max' => 100,
                 'when' => function ($model) {
                     return $model->filling_step >= 6;
                 },
             ],
-            [['pc_rate',],
+            [
+                ['pc_rate',],
                 'number',
                 'when' => function ($model) {
                     return $model->filling_step >= 6;
@@ -598,14 +604,14 @@ class Order extends Model
             'docs_loan_agreement_file_form' => Module::t('order', 'Docs Loan Agreement File'),
             'docs_additional_agreement_file_form' => Module::t('order', 'Docs Additional Agreement File'),
 
-            'pc_period'         => Module::t('order', 'Percent Compensation Period'),
-            'pc_term'           => Module::t('order', 'Percent Compensation Term'),
-            'pc_rate'           => Module::t('order', 'Percent Compensation Rate'),
-            'pc_max_value'      => Module::t('order', 'Percent Compensation Max Value'),
-            'pc_max_per_year'   => Module::t('order', 'Percent Compensation Max Per Year'),
+            'pc_period' => Module::t('order', 'Percent Compensation Period'),
+            'pc_term' => Module::t('order', 'Percent Compensation Term'),
+            'pc_rate' => Module::t('order', 'Percent Compensation Rate'),
+            'pc_max_value' => Module::t('order', 'Percent Compensation Max Value'),
+            'pc_max_per_year' => Module::t('order', 'Percent Compensation Max Per Year'),
 
-            'loan_period'   => Module::t('order', 'Loan Period'),
-            'loan_max_val'  => Module::t('order', 'Loan Max Value'),
+            'loan_period' => Module::t('order', 'Loan Period'),
+            'loan_max_val' => Module::t('order', 'Loan Max Value'),
         ];
     }
 
@@ -648,7 +654,8 @@ class Order extends Model
                     Url::to(['/user/user/' . $this->created_by . '/pd']))
                 . ', который нужно будет распечатать, подписать и прикрепить в поле',
 
-            'order_file_form' => 'Вам необходимо скачать автоматически сформированное ' . Html::a(Icon::show('file-pdf') . 'Заявление',
+            'order_file_form' => 'Вам необходимо обязательно сохранить все введенные вами данные, а затем скачать автоматически сформированное '
+                . Html::a(Icon::show('file-pdf') . 'Заявление',
                     Url::to(['/jk/order/' . $this->id . '/order'])) . ', которое нужно распечатать, подписать и прикрепить в данное поле',
 
             'jp_own_land_file_form' => 'Собственниками (арендаторами) земельного участка, на котором будет осуществляться строительство дома, и в последующем собственниками дома могут выступать работники/или члены его семьи.',
@@ -889,6 +896,12 @@ class Order extends Model
         return $this->hasOne(Social::class, ['id' => 'social_id']);
     }
 
+    // Область приобритаемого жилья
+    public function getMin()
+    {
+        return $this->hasOne(Min::class, ['id' => 'district_id']);
+    }
+
     // Типы заявок
     public static function getTypesArray()
     {
@@ -920,8 +933,7 @@ class Order extends Model
             // Сохраняем "расчетные" поля
             if ($this->filling_step >= 6 && ($this->status_id == null || $this->status_id == 1) || $this->status_id == 7) {
                 $this->setCalculatedValues();
-            }
-            ;
+            };
             return true;
         }
         return false;
@@ -1213,7 +1225,7 @@ class Order extends Model
         $userRetirementYear = (integer)Yii::$app->formatter->asDate($this->user->retirementDate, 'php:Y');
         $retRes = $userRetirementYear - $this->companyYear;
 
-        return (integer) min(10, $ipotekaRes, $retRes);
+        return (integer)min(10, $ipotekaRes, $retRes);
 
     }
 
@@ -1257,10 +1269,10 @@ class Order extends Model
         $paidPersents = $this->getAmountOfInterestPaid();
 
         // Вынести расчет коэффициента в отдельную функцию
-//        $percentCoefficient = $this->corpNorm / ($this->jp_new_area - ($this->ipoteka_user / $this->jp_cost * $this->jp_new_area));
-//        if ($percentCoefficient > 1) {
-//            $percentCoefficient = 1;
-//        }
+        //        $percentCoefficient = $this->corpNorm / ($this->jp_new_area - ($this->ipoteka_user / $this->jp_cost * $this->jp_new_area));
+        //        if ($percentCoefficient > 1) {
+        //            $percentCoefficient = 1;
+        //        }
 
         $percentCoefficient = $this->getCorporateAreaNormFactor();
 
@@ -1270,7 +1282,7 @@ class Order extends Model
             $res = 0;
         }
 
-        return (integer) round($res, -3);
+        return (integer)round($res, -3);
 
     }
     // *** *** *** *** *** ***
@@ -1297,7 +1309,7 @@ class Order extends Model
             return 0;
         }
 
-        return (integer) min($retRes, $aidStandart->compensation_years_zaim);
+        return (integer)min($retRes, $aidStandart->compensation_years_zaim);
     }
 
     // Максимальный размер займа
@@ -1347,11 +1359,12 @@ class Order extends Model
         // В займе под "ПОТРЕБНОСТЬЮ" подразумечается не "Размер ипотеки, руб", а "Займ, руб"
         $maxLoanBySize = min($this->zaim_sum, $this->jp_cost * $loanCoefficient);
 
-        return (integer) round(min($loanLimit, $maxLoanByIncome, $maxLoanBySize), -3);
+        return (integer)round(min($loanLimit, $maxLoanByIncome, $maxLoanBySize), -3);
         //return round(min($maxLoanByIncome, $maxLoanBySize), -3);
     }
 
-    private function getCorporateAreaNormFactor() {
+    private function getCorporateAreaNormFactor()
+    {
         if ($this->jp_cost == 0) {
             return 0;
         }
@@ -1360,24 +1373,26 @@ class Order extends Model
         }
 
         $coefficient = $this->corpNorm / ($this->jp_new_area - ($this->ipoteka_user / $this->jp_cost * $this->jp_new_area));
-        if ($coefficient  > 1) {
-            $coefficient  = 1;
+        if ($coefficient > 1) {
+            $coefficient = 1;
         }
 
         return $coefficient;
     }
 
-    public function getAmountOfInterestPaid() {
+    public function getAmountOfInterestPaid()
+    {
         if ($this->ipoteka_grafic == null || $this->ipoteka_grafic == '') {
             return 0;
         }
 
-        $percents = str_replace(',','.',str_replace(' ', '', $this->ipoteka_grafic));
+        $percents = str_replace(',', '.', str_replace(' ', '', $this->ipoteka_grafic));
 
-        return (float) $percents;
+        return (float)$percents;
     }
 
-    private function setCalculatedValues() {
+    private function setCalculatedValues()
+    {
         switch ($this->type) {
             case self::TYPE_PERCENT:
                 $this->pc_period = $this->getPcPeriod();
@@ -1396,9 +1411,11 @@ class Order extends Model
 
     /**
      * Устанавливаем новый статус для заявки
+     *
      * @param $newStatusCode код нового статуса
      */
-    public function setNewStatus($newStatusCode){
+    public function setNewStatus($newStatusCode)
+    {
 
         // Сотрудник, создавший заявку
         $user = User::findOne($this->created_by);
@@ -1408,7 +1425,7 @@ class Order extends Model
         $manager = User::findOne($agreement->user_id);
 
         switch ($newStatusCode) {
-             // Согласование руководителями
+            // Согласование руководителями
             case 'MANAGER_WAIT':
                 // Письмо сотруднику
                 Yii::$app->mailer->compose(
@@ -1416,7 +1433,7 @@ class Order extends Model
                     [
                         'user' => $user,
                         'order' => $this,
-                        'manager'=>$manager
+                        'manager' => $manager,
                     ]
                 )
                     ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
@@ -1433,7 +1450,7 @@ class Order extends Model
                     [
                         'user' => $user,
                         'order' => $this,
-                        'manager'=>$manager
+                        'manager' => $manager,
                     ]
                 )
                     ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])

@@ -204,7 +204,7 @@ class Spouse extends Model
             'passport_file_form' => Module::t('spouse', 'Passport File'),
 
 
-            // Трудойстрйство
+            // Трудоeстрйство
             'is_work' => Module::t('spouse', 'Is Work'),
             'is_rtk' => Module::t('spouse', 'Is Rtk'),
             'is_do' => Module::t('spouse', 'Is Do'),

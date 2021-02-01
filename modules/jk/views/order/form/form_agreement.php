@@ -15,8 +15,14 @@ use app\modules\jk\models\Order;
 $user = User::findOne(Yii::$app->user->identity->id);
 ?>
 
+<div class="alert alert-info alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <h5><i class="icon fas fa-info"></i> Информация</h5>
+    Прежде чем приступить к автоматическому формированию заявлений, вам необходимо обязательно сохранить все введенные вами данные
+</div>
 
-<div class="card card-solid card-secondary  ">
+
+<div class="card card-solid card-secondary">
     <div class="card-header with-border">
         <h3 class="card-title">Обработка персональных данных</h3>
     </div>
