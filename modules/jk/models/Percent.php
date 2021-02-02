@@ -111,7 +111,7 @@ class Percent extends Model
             // Полная стоимость жилья
             //[['cost_total'], 'match', 'pattern' => '/^\s*[-+]?[0-9]*[.,]?[0-9]+([eE][-+]?[0-9]+)?\s*$/'],
             ['cost_total', 'compare', 'compareValue' => 1, 'operator' => '>=', 'type' => 'number'],
-            ['cost_total', 'compare', 'compareValue' => 10000000, 'operator' => '<=', 'type' => 'number'],
+            ['cost_total', 'compare', 'compareValue' => 100000000, 'operator' => '<=', 'type' => 'number'],
             [
                 ['cost_total', 'cost_user', 'bank_credit', 'loan'],
                 function () {
@@ -137,12 +137,12 @@ class Percent extends Model
             // Собственные средства работника
             //[['cost_user'], 'match', 'pattern' => '/^\s*[-+]?[0-9]*[.,]?[0-9]+([eE][-+]?[0-9]+)?\s*$/'],
             ['cost_user', 'compare', 'compareValue' => 0, 'operator' => '>=', 'type' => 'number'],
-            ['cost_user', 'compare', 'compareValue' => 10000000, 'operator' => '<=', 'type' => 'number'],
+            ['cost_user', 'compare', 'compareValue' => 100000000, 'operator' => '<=', 'type' => 'number'],
 
             // Размер кредита в банке
             //[['bank_credit'], 'match', 'pattern' => '/^\s*[-+]?[0-9]*[.,]?[0-9]+([eE][-+]?[0-9]+)?\s*$/'],
             ['bank_credit', 'compare', 'compareValue' => 1, 'operator' => '>=', 'type' => 'number'],
-            ['bank_credit', 'compare', 'compareValue' => 10000000, 'operator' => '<=', 'type' => 'number'],
+            ['bank_credit', 'compare', 'compareValue' => 100000000, 'operator' => '<=', 'type' => 'number'],
 
             // Займ
             //[['loan'], 'match', 'pattern' => '/^\s*[-+]?[0-9]*[.,]?[0-9]+([eE][-+]?[0-9]+)?\s*$/'],
