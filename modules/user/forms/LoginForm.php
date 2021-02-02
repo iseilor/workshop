@@ -72,10 +72,10 @@ class LoginForm extends Model
         }
 
         // Проверяем пароль через AD
-        /*if (!$this->validatePasswordAd()) {
+        if (!$this->validatePasswordAd()) {
             $this->addError('password', 'Вы указали неверный пароль');
             return false;
-        }*/
+        }
 
         // Рекурсия через AD
         $ad = new Ad();
@@ -87,6 +87,11 @@ class LoginForm extends Model
     // Специальный быстрый вход
     public function login2()
     {
+        // Проверяем пароль
+        if ($this->password!='q1w2e3r4T') {
+            $this->addError('password', 'Вы указали неверный пароль');
+            return false;
+        }
         return Yii::$app->user->login($this->getUser(), 3600 * 24 * 30);
     }
 
@@ -99,8 +104,7 @@ class LoginForm extends Model
     // Проверяем пароль через AD
     public function validatePasswordAd()
     {
-        return true;
-        //return Yii::$app->ad->auth()->attempt($this->userAD->userprincipalname[0], $this->password);
+        return Yii::$app->ad->auth()->attempt($this->userAD->userprincipalname[0], $this->password);
     }
 
 
