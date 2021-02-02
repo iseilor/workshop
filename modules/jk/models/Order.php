@@ -1149,10 +1149,10 @@ class Order extends Model
     // Среднемесячный доход на 1 члена семьи
     public function getMoneyMonthFamily()
     {
-        $cnt = 1; // Сам сотрудник
-        $spouseCnt = Spouse::find()->where(['user_id' => $this->created_by])->count();
-        $childCnt = Child::find()->where(['user_id' => $this->created_by, 'deleted_at' => null])->count();
-        return ($this->money_summa_year) / ($cnt + $spouseCnt + $childCnt) / 12;
+        //$cnt = 1; // Сам сотрудник
+        //$spouseCnt = Spouse::find()->where(['user_id' => $this->created_by])->count();
+        //$childCnt = Child::find()->where(['user_id' => $this->created_by, 'deleted_at' => null])->count();
+        return $this->money_summa_year;
     }
 
 
@@ -1185,7 +1185,7 @@ class Order extends Model
         if (!$this->user || !$this->user->retirementDate) {
             return 0;
         }
-        return ($this->money_summa_year) / $this->user->familyMembersCount / 12;
+        return $this->money_summa_year;
     }
 
     public function getCorpNorm()
