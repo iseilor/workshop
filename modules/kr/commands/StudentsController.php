@@ -15,11 +15,14 @@ class StudentsController extends Controller
         echo 'index';
     }
 
+    public function actionTest(){
+        echo 'test';
+    }
 
     /**
      * Массовое добавление участников программы
      * При запуске нужно отключить KRAsset::register(Yii::$app->view);
-     * Отлючить: TimestampBehavior
+     * Отключить: TimestampBehavior
      *
      */
     public function actionCreate()
