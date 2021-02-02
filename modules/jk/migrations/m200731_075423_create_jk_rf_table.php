@@ -38,6 +38,8 @@ class m200731_075423_create_jk_rf_table extends Migration
                 'coefficient'=>$this->double()->notNull(),
                 'percent_max'=>$this->double()->notNull(),
                 'loan_max'=>$this->double()->notNull(),
+
+                'header'=>$this->text()->notNull() // На имя кого пишется заявление
             ],
             $tableOptions
         );

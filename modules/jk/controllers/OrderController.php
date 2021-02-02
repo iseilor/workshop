@@ -985,9 +985,13 @@ class OrderController extends Controller
         $filePath = Yii::getAlias('@app') . '/modules/jk/files/' . $file;
         $templateProcessor = new TemplateProcessor($filePath);
 
+        // Региональный филиал
+        $rf = Rf::findOne($user->filial_id);
+
         // Переменные в шаблоне
         $templateProcessor->setValue(
             [
+                'HEADER', // Заявление на имя
                 'FIO',
                 'FIO_SHORT',
 
@@ -1038,6 +1042,7 @@ class OrderController extends Controller
                 'DATE',
             ],
             [
+                $rf->header,
                 $user->fio,
                 $user->getFioShortDocx(),
 

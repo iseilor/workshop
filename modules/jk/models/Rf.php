@@ -26,6 +26,8 @@ use Yii;
  * @property float    $coefficient
  * @property float    $percent_max
  * @property float    $loan_max
+ * @property string   $header
+ *
  */
 class Rf extends Model
 {
@@ -46,7 +48,7 @@ class Rf extends Model
     public function rules()
     {
         return [
-            [['title', 'description', 'user', 'email', 'phone', 'address', 'coefficient', 'percent_max', 'loan_max'], 'required'],
+            [['title', 'description', 'user', 'email', 'phone', 'address', 'coefficient', 'percent_max', 'loan_max', 'header'], 'required'],
             [['created_at', 'created_by', 'updated_at', 'updated_by', 'deleted_at', 'deleted_by', 'user_id'], 'integer'],
             [['description'], 'string'],
             [['coefficient', 'percent_max', 'loan_max'], 'number'],
@@ -91,6 +93,7 @@ class Rf extends Model
             'coefficient' => Module::t('rf', 'Coefficient'),
             'percent_max' => Module::t('rf', 'Percent Max'),
             'loan_max' => Module::t('rf', 'Loan Max'),
+            'header' => Module::t('rf', 'Header'),
         ];
     }
 

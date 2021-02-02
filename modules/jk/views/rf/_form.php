@@ -26,7 +26,8 @@ use yii\widgets\ActiveForm;
                         <div class="col-md-4">
 
                             <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
-                            <?= $form->field($model, 'description')->textarea(['rows' => 10]) ?>
+                            <?= $form->field($model, 'description')->textarea(['rows' => 3]) ?>
+                            <?= $form->field($model, 'header')->textarea(['rows' => 6]) ?>
                         </div>
                         <div class="col-md-4">
 
