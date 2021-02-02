@@ -46,7 +46,7 @@ class Ad
             $user->position = $userAD->title[0];
             $user->work_department = $userAD->department[0];
             $user->work_department_full = $userAD->extensionattribute2[0];
-            $user->work_phone = $userAD->telephonenumber[0];
+            $user->work_phone = (isset($userAD->telephonenumber[0]))?$userAD->telephonenumber[0]:'';
             $user->work_address = $userAD->extensionattribute11[0];
             $user->department_id = 1;
             $user->role_id = 0;
