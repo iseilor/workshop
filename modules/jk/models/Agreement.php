@@ -141,9 +141,9 @@ class Agreement extends Model
         $managerList = $userOrder->getManagerList(); // Получить цепочку согласования
         foreach ($managerList as $item) {
 
-            // Строим цепочку до Кима
+            // Строим цепочку до Кима или до директора РФ (не включительно)
             $manager = User::findOne($item);
-            if ($manager->fio == 'Ким Дмитрий Матвеевич') {
+            if (in_array($manager->id, [105, 183, 109, 180, 165, 174, 190, 124, 162, 193, 177, 171, 168])) {
                 break;
             }
 
@@ -264,7 +264,9 @@ class Agreement extends Model
     }
 
     // Кол-во заявок на согласовании у авторизованного сотрудника
-    public static function orderCount(){
-        return Agreement::find()->where(['user_id' => Yii::$app->user->identity->id])->andWhere('receipt_at>0')->andWhere('approval_at is null')->count();
+    public static function orderCount()
+    {
+        return Agreement::find()->where(['user_id' => Yii::$app->user->identity->id])->andWhere('receipt_at>0')->andWhere('approval_at is null')
+            ->count();
     }
 }
