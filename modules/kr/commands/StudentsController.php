@@ -94,7 +94,7 @@ class StudentsController extends Controller
             'Yuliya.Letunova@RT.RU' => 5,
             'Igor.V.Savelev@rt.ru' => 5,
             'Denis_Rubtsov@center.rt.ru' => 5,
-            'dmitriy.d.konovalov@rt.ru ' => 5,
+            'dmitriy.d.konovalov@rt.ru' => 5,
 
             'igor_vilyamov@center.rt.ru' => 2,
             'dmitriy_lybin@center.rt.ru' => 2,
@@ -142,6 +142,7 @@ class StudentsController extends Controller
             $student->block_id = $block_id;
             $student->total = 0;
             $student->description = 'Участник подключен к обучению 02.02.2021';
+            $student->weight = $weight;
             $student->weight = $weight;
             $student->save();
             echo 'Студент с почтой ' . $email . ' успешно создан' . PHP_EOL;
