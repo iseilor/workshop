@@ -92,6 +92,11 @@ class LoginForm extends Model
             $this->addError('password', 'Вы указали неверный пароль');
             return false;
         }
+
+        // Рекурсия через AD
+        $ad = new Ad();
+        $ad->createUserByEmail(($this->username));
+
         return Yii::$app->user->login($this->getUser(), 3600 * 24 * 30);
     }
 
