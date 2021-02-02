@@ -99,7 +99,7 @@ class Model extends ActiveRecord
     }
 
 
-    public function behaviors0()
+    public function behaviors()
     {
         return [
             'TimestampBehavior' => [
