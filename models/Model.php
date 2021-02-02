@@ -99,10 +99,10 @@ class Model extends ActiveRecord
     }
 
 
-    public function behaviors()
+    public function behaviors0()
     {
         return [
-            /*'TimestampBehavior' => [
+            'TimestampBehavior' => [
                 'class' => TimestampBehavior::class,
                 'attributes' => [
                     ActiveRecord::EVENT_BEFORE_INSERT => ['created_at'],
@@ -111,7 +111,7 @@ class Model extends ActiveRecord
                 'value' => function () {
                     return date('U');
                 },
-            ],*/
+            ],
             'BlameableBehavior' => [
                 'class' => BlameableBehavior::class,
                 'attributes' => [

@@ -21,8 +21,9 @@ class StudentsController extends Controller
 
     /**
      * Массовое добавление участников программы
-     * При запуске нужно отключить KRAsset::register(Yii::$app->view);
-     * Отключить: TimestampBehavior
+     * При запуске нужно отключить
+     *  - KRAsset::register(Yii::$app->view);
+     *  - Отключить: TimestampBehavior
      *
      */
     public function actionCreate()
@@ -135,12 +136,12 @@ class StudentsController extends Controller
             $ad->createUserByEmail($email);
 
             $student = new Student();
-            $student->created_at = 1601235080;
+            $student->created_at = 1612224000;
             $student->created_by = 101;
             $student->user_id = User::findByUsername($email)->id;
             $student->block_id = $block_id;
             $student->total = 0;
-            $student->description = 'Участник подключен к обучению 28.09.2020';
+            $student->description = 'Участник подключен к обучению 02.02.2021';
             $student->weight = $weight;
             $student->save();
             echo 'Студент с почтой ' . $email . ' успешно создан' . PHP_EOL;
