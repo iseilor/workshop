@@ -83,6 +83,8 @@ AppAssetAdminLTE::register($this);
                         </div>
                     <?php endif; ?>
 
+                    <?php echo $_SERVER["HTTP_USER_AGENT"]?>
+
                     <?php if (strpos($_SERVER["HTTP_USER_AGENT"], "MSIE") !== false):?>
                         <div class="alert alert-danger alert-dismissible">
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
