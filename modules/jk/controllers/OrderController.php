@@ -1047,7 +1047,7 @@ class OrderController extends Controller
                 $user->getFioShortDocx(),
 
                 $user->position,
-                $user->work_department,
+                $user->work_department_full,
                 $user->tab_number,
                 $user->work_phone,
                 $user->email,
