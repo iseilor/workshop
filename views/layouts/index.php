@@ -83,7 +83,18 @@ AppAssetAdminLTE::register($this);
                         </div>
                     <?php endif; ?>
 
-                    <?= $content ?>
+                    <?php if (strpos($_SERVER["HTTP_USER_AGENT"], "MSIE") !== false):?>
+                        <div class="alert alert-danger alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h5><i class="icon fas fa-ban"></i> Внимание!</h5>
+                            Для корректной работы портала используйте пожалуйста другой браузер, например:
+                            <a href="https://www.google.com/intl/ru_ru/chrome/" target="_blank">Google Chrome</a> или
+                            <a href="https://www.mozilla.org/ru/firefox/new/" target="_blank">Mozilla Firefox</a>
+                        </div>
+                    <?php else:?>
+                        <?= $content ?>
+                    <?php endif; ?>
+
                 </div>
 
                 <div class="right-bottom-side-bar">
