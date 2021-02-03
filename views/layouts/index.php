@@ -83,9 +83,9 @@ AppAssetAdminLTE::register($this);
                         </div>
                     <?php endif; ?>
 
-                    <?php echo $_SERVER["HTTP_USER_AGENT"]?>
-
-                    <?php if (strpos($_SERVER["HTTP_USER_AGENT"], "MSIE") !== false):?>
+                    <?php if (strpos($_SERVER["HTTP_USER_AGENT"], "MSIE") !== false
+                    || strpos($_SERVER["HTTP_USER_AGENT"], "Trident") !== false
+                    ):?>
                         <div class="alert alert-danger alert-dismissible">
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                             <h5><i class="icon fas fa-ban"></i> Внимание!</h5>
