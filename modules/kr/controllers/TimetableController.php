@@ -37,7 +37,7 @@ class TimetableController extends Controller
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['index','bti','it','b2b','b2c'],
+                        'actions' => ['index','bti','it','b2b','b2c','b2g'],
                     ],
                 ],
             ],
@@ -59,6 +59,7 @@ class TimetableController extends Controller
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'subTitle'=>''
         ]);
     }
 
@@ -181,9 +182,11 @@ class TimetableController extends Controller
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'subTitle'=>'БТИ'
         ]);
     }
 
+    // IT
     public function actionIt()
     {
         $searchModel = new TimetableSearch();
@@ -194,9 +197,11 @@ class TimetableController extends Controller
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'subTitle'=>'ИТ'
         ]);
     }
 
+    // B2B
     public function actionB2b()
     {
         $searchModel = new TimetableSearch();
@@ -207,9 +212,11 @@ class TimetableController extends Controller
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'subTitle'=>'B2B'
         ]);
     }
 
+    // B2C
     public function actionB2c()
     {
         $searchModel = new TimetableSearch();
@@ -220,6 +227,22 @@ class TimetableController extends Controller
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'subTitle'=>'B2C'
+        ]);
+    }
+
+    // B2G
+    public function actionB2g()
+    {
+        $searchModel = new TimetableSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->setSort(['defaultOrder' => ['weight' => SORT_ASC]]);
+        $dataProvider->query->andWhere(['block_id'=>5]);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'subTitle'=>'B2G'
         ]);
     }
 }

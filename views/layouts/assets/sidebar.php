@@ -120,6 +120,7 @@ if ($jkInstructionDoc) {
                                 ['label' => Icon::show('laptop', ['class' => 'nav-icon']) . '<p>IT</p>', 'url' => ['/kr/timetable/it']],
                                 ['label' => Icon::show('briefcase', ['class' => 'nav-icon']) . '<p>B2B</p>', 'url' => ['/kr/timetable/b2b']],
                                 ['label' => Icon::show('building', ['class' => 'nav-icon']) . '<p>B2C</p>', 'url' => ['/kr/timetable/b2c']],
+                                ['label' => Icon::show('flag', ['class' => 'nav-icon']) . '<p>B2G</p>', 'url' => ['/kr/timetable/b2g']],
                             ],
                         ],
 

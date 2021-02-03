@@ -12,6 +12,7 @@ use yii\widgets\Pjax;
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\kr\models\TimetableSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $subtitle string */
 
 $this->title = Icon::show('list') . Module::t('timetable', 'Timetables');
 $this->params['breadcrumbs'][] = ['label' => Icon::show('users') . Module::t('module', 'kr'), 'url' => ['/kr/default/index']];
