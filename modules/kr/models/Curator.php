@@ -48,10 +48,11 @@ class Curator extends Model
     public function rules()
     {
         return [
-            [['fio', 'position', 'description', 'phone', 'email', 'weight', 'block_id','img'], 'required'],
+            [['fio', 'position', 'description', 'weight', 'block_id','img'], 'required'],
             [['weight', 'block_id'], 'integer'],
             ['email', 'email'],
-            [['description', 'email'], 'string'],
+            [['description'], 'string'],
+            [[ 'email'], 'email'],
             [['fio', 'position', 'phone', 'img'], 'string', 'max' => 255],
             [['img_form'], 'file', 'extensions' => 'jpg,png', 'checkExtensionByMimeType' => false],
             [['img_form'], 'file', 'maxSize' => '2097152'],
