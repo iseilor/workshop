@@ -19,9 +19,13 @@ use yii\helpers\Url;
                 <p class="text-muted text-sm d-none"><b><?= $model->fio; ?></b> / <?= $model->fio; ?></p>
                 <hr/>
                 <ul class="ml-4 mb-1 fa-ul text-muted">
-                    <li class="small"><span class="fa-li"><i class="fas fa-lg fa-envelope"></i></span> Email: <?= Html::mailto($model->email,
-                            $model->email, ['target' => '_blank']) ?></li>
-                    <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Телефон: <?= $model->phone ?></li>
+                    <?php if (isset($model->email) && $model->email): ?>
+                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-envelope"></i></span> Email: <?= Html::mailto($model->email,
+                                $model->email, ['target' => '_blank']) ?></li>
+                    <?php endif; ?>
+                    <?php if (isset($model->phone) && $model->phone): ?>
+                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Телефон: <?= $model->phone ?></li>
+                    <?php endif; ?>
                 </ul>
             </div>
             <div class="col-5 text-center">

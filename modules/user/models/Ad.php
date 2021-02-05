@@ -61,7 +61,7 @@ class Ad
             }
 
             // ФИО разбивка
-            $fio = explode(" ", $userAD->cn[0]);
+            $fio = explode(" ", $userAD->Displayname[0]);
             $user->surname = $fio[0];
             $user->name = $fio[1];
             $user->patronymic = $fio[2];
