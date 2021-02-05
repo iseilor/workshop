@@ -1162,6 +1162,29 @@ class OrderController extends Controller
                 $zip->addFile(Yii::getAlias('@webroot') . $order_dir . '/' . $file, $fileName);
             }
         }
+        //файлы по работнику
+        $user_dir = '/files/user/' . $user->id;
+        $user_files = scandir(Yii::getAlias('@webroot') . $user_dir);
+        unset($user_files[0], $user_files[1]);
+        $user_regs = ['/[\d]+_/', '/_[\d]+.[\w]+/'];
+        foreach ($user_files as $file) {
+            //сохраняем расширение файла
+            preg_match('/.[\w]+$/', $file, $extension);
+            //имя поля в базе
+            $field = preg_replace($user_regs, '', $file) . '_file';
+            switch (true) {
+                case isset($user->{$field}) && $user->{$field} == $file:
+                    $fileName = $user->attributeLabels()[$field] . $extension[0];
+                    $zip->addFile(Yii::getAlias('@webroot') . $user_dir . '/' . $file, $user->fio . '/' . $fileName);
+                    break;
+
+                case isset($user->work_transferred_file) && $file == $user->work_transferred_file:
+                    //$fileName = $user->attributeLabels()['work_transferred_file'] . $extension[0];
+                    $zip->addFile(Yii::getAlias('@webroot') . $user_dir . '/' . $file, $user->fio . '/' . $file);
+                    break;
+
+            }
+        }
         //файлы по супруге
         if ($spouse) {
             $spouse_dir = '/files/spouse/' . $spouse->id;
