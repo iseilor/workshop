@@ -979,6 +979,7 @@ class OrderController extends Controller
 
         // В зависимости от типа заявки выбираем шаблон заявления (займ или проценты)
         $file = 'percent.docx';
+
         if ($order->type == 2) {
             $file = 'zaim.docx';
         }
@@ -987,6 +988,12 @@ class OrderController extends Controller
 
         // Региональный филиал
         $rf = Rf::findOne($user->filial_id);
+
+        // Ипотека
+        $ipoteka = '';
+        if (isset($order->ipoteka_size) && $order->ipoteka_size > 0) {
+            $ipoteka = '2. Планируемые условия кредита на улучшение жилищных условий: размер ' . number_format($order->ipoteka_size, 2, ',', ' ') . ' руб., срок ' . $order->getIpotekaYearCount() . ' лет, процентная ставка по кредиту ' . $order->ipoteka_percent . '% годовых.' . PHP_EOL;
+        }
 
         // Переменные в шаблоне
         $templateProcessor->setValue(
@@ -1002,16 +1009,21 @@ class OrderController extends Controller
                 'EMAIL',
                 'IS_PARTICIPATE',
 
+                // Проценты
                 'PERCENT_PERCENT',
                 'PERCENT_YEAR',
 
+                // Займ
                 'ZAIM_COUNT',
                 'ZAIM_YEAR',
 
+                // Ипотека
+                'IPOTEKA',
                 'IPOTEKA_SIZE',
                 'IPOTEKA_PERCENT',
                 'IPOTEKA_USER',
                 'IPOTEKA_YEAR',
+
 
                 'JP_ADDRESS',
                 'JP_COST',
@@ -1061,15 +1073,17 @@ class OrderController extends Controller
                 number_format($order->getLoanMaxVal(), 0, ',', ' '),
                 $order->getLoanPeriod(),
 
+                // Ипотека
+                $ipoteka,
                 number_format($order->ipoteka_size, 2, ',', ' '),
                 $order->ipoteka_percent,
                 number_format($order->ipoteka_user, 2, ',', ' '),
                 $order->getIpotekaYearCount(),
 
-                ($order->is_mortgage)?$order->jp_address:$order->min->title,
+                ($order->is_mortgage) ? $order->jp_address : $order->min->title,
                 number_format($order->jp_cost, 2, ',', ' '),
                 $order->jp_new_area,
-                (isset($order->jp_new_room_count) && $order->jp_new_room_count) ? $order->jp_new_room_count .' комнат(а/ы)' : '',
+                (isset($order->jp_new_room_count) && $order->jp_new_room_count) ? $order->jp_new_room_count . ' комнат(а/ы)' : '',
                 (isset($order->is_new_building) && $order->is_new_building) ? 'новостройка' : 'вторичка',
                 (isset($order->jp_new_type)) ? Order::getJPTypeList()[$order->jp_new_type] : 'квартира',
 
@@ -1084,7 +1098,7 @@ class OrderController extends Controller
                 mb_strtolower(Order::getJPTypeList()[$order->jp_type]),
                 $order->jp_area,
                 $order->resident_count,
-                (isset($order->resident_type) && $order->resident_type && $order->resident_count>1)?'('.mb_strtolower(Order::getResidentTypeList()[$order->resident_type]).')':'',
+                (isset($order->resident_type) && $order->resident_type && $order->resident_count > 1) ? '(' . mb_strtolower(Order::getResidentTypeList()[$order->resident_type]) . ')' : '',
 
                 $order->family_deal,
                 $order->isDZO(),
