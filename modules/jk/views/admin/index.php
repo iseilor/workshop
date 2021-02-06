@@ -180,10 +180,7 @@ if ($messagesUser>0){
             <div class="card-body">
                 <div class="row">
                     <?php $dataProvider = new ActiveDataProvider([
-                        'query' => \app\modules\jk\models\Rf::find(),
-                        'pagination' => [
-                            'pageSize' => 20,
-                        ],
+                        'query' => \app\modules\jk\models\Rf::find()
                     ]);
                     echo GridView::widget([
                         'dataProvider' => $dataProvider,
