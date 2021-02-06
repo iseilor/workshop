@@ -4,6 +4,7 @@ namespace app\modules\jk\models;
 
 use app\models\Model;
 use app\modules\jk\Module;
+use app\modules\user\models\Child;
 use app\modules\user\models\User;
 use Yii;
 
@@ -152,5 +153,15 @@ class Rf extends Model
         } else {
             return false;
         }
+    }
+
+    // Кол-во заявок в данном РФ\МРФ
+    public function getOrderCount(){
+        $users = User::find()->select('id')->where(['filial_id' => $this->id])->asArray()->all();
+        $userIds = [];
+        foreach ($users as $user) {
+            $userIds[]=(int)$user['id'];
+        }
+        return Order::find()->where(['in','created_by',$userIds])->count();
     }
 }
