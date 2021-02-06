@@ -190,8 +190,19 @@ if ($messagesUser>0){
                                 'label' => 'РФ / МРФ'
                             ],
                             [
+                                'attribute' => 'percentCount',
+                                'label' => 'Калькулятор процентов',
+                                'contentOptions' => ['class' => 'text-center'],
+                            ],
+                            [
+                                'attribute' => 'zaimCount',
+                                'label' => 'Калькулятор займов',
+                                'contentOptions' => ['class' => 'text-center'],
+                            ],
+                            [
                                 'attribute' => 'orderCount',
-                                'label' => 'Кол-во заявок'
+                                'label' => 'Общее кол-во заявок',
+                                'contentOptions' => ['class' => 'text-center'],
                             ],
                         ]
 

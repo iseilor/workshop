@@ -164,4 +164,23 @@ class Rf extends Model
         }
         return Order::find()->where(['in','created_by',$userIds])->count();
     }
+
+    public function getPercentCount(){
+        $users = User::find()->select('id')->where(['filial_id' => $this->id])->asArray()->all();
+        $userIds = [];
+        foreach ($users as $user) {
+            $userIds[]=(int)$user['id'];
+        }
+        return Percent::find()->where(['in','created_by',$userIds])->count();
+    }
+
+    // Кол-во заявок в данном РФ\МРФ
+    public function getZaimCount(){
+        $users = User::find()->select('id')->where(['filial_id' => $this->id])->asArray()->all();
+        $userIds = [];
+        foreach ($users as $user) {
+            $userIds[]=(int)$user['id'];
+        }
+        return Zaim::find()->where(['in','created_by',$userIds])->count();
+    }
 }
