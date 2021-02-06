@@ -202,7 +202,7 @@ if ($messagesUser>0){
                 </div>
             </div>
             <div class="card-footer">
-                Данные актуальны на <?= date('d.m.Y h:i:s') ?>
+                Данные актуальны на <?= date('d.m.Y H:i:s') ?>
             </div>
         </div>
     </section>
