@@ -19,65 +19,67 @@ function filePath($model, $attr)
 $attr = [
     'family_own:ntext',
     'family_deal:ntext',
-    'jp_total_area',
-    [
+    'jp_total_area'
+];
+if (isset($model->jp_new_type)) {
+    $attr[] = [
         'label' => 'Тип жилого помещения',
         'value' => $model->getJpTypeList()[$model->jp_new_type]
-    ]
-];
-if ($model->jp_new_type == 2) {
-    $attr[] = [
-        'label' => 'Количество комнат',
-        'value' => $model->jp_new_room_count
     ];
-} elseif ($model->jp_new_type == 1 && $model->under_construction && $model->is_mortgage == 0) {
-    array_push($attr,
-        [
-            'attribute' => 'jp_own_land_file',
-            'format' => 'raw',
-            'value' => filePath($model, 'jp_own_land_file'),
-        ],
-        [
-            'attribute' => 'jp_grad_plane_file',
-            'format' => 'raw',
-            'value' => filePath($model, 'jp_grad_plane_file'),
-        ],
-        [
-            'attribute' => 'jp_scheme_plane_org_file',
-            'format' => 'raw',
-            'value' => filePath($model, 'jp_scheme_plane_org_file'),
-        ],
-        [
-            'attribute' => 'jp_building_permit_file',
-            'format' => 'raw',
-            'value' => filePath($model, 'jp_building_permit_file'),
-        ],
-        [
-            'attribute' => 'jp_project_house_file',
-            'format' => 'raw',
-            'value' => filePath($model, 'jp_project_house_file'),
-        ],
-        [
-            'attribute' => 'jp_construction_estimate_file',
-            'format' => 'raw',
-            'value' => filePath($model, 'jp_construction_estimate_file'),
-        ],
-        [
-            'attribute' => 'jp_time_grafic_build_file',
-            'format' => 'raw',
-            'value' => filePath($model, 'jp_time_grafic_build_file'),
-        ],
-        [
-            'attribute' => 'jp_photo_file',
-            'format' => 'raw',
-            'value' => filePath($model, 'jp_photo_file'),
-        ],
-        [
-            'attribute' => 'jp_template_report_file',
-            'format' => 'raw',
-            'value' => filePath($model, 'jp_template_report_file'),
-        ]
-    );
+    if ($model->jp_new_type == 2) {
+        $attr[] = [
+            'label' => 'Количество комнат',
+            'value' => $model->jp_new_room_count
+        ];
+    } elseif ($model->jp_new_type == 1 && $model->under_construction && $model->is_mortgage == 0) {
+        array_push($attr,
+            [
+                'attribute' => 'jp_own_land_file',
+                'format' => 'raw',
+                'value' => filePath($model, 'jp_own_land_file'),
+            ],
+            [
+                'attribute' => 'jp_grad_plane_file',
+                'format' => 'raw',
+                'value' => filePath($model, 'jp_grad_plane_file'),
+            ],
+            [
+                'attribute' => 'jp_scheme_plane_org_file',
+                'format' => 'raw',
+                'value' => filePath($model, 'jp_scheme_plane_org_file'),
+            ],
+            [
+                'attribute' => 'jp_building_permit_file',
+                'format' => 'raw',
+                'value' => filePath($model, 'jp_building_permit_file'),
+            ],
+            [
+                'attribute' => 'jp_project_house_file',
+                'format' => 'raw',
+                'value' => filePath($model, 'jp_project_house_file'),
+            ],
+            [
+                'attribute' => 'jp_construction_estimate_file',
+                'format' => 'raw',
+                'value' => filePath($model, 'jp_construction_estimate_file'),
+            ],
+            [
+                'attribute' => 'jp_time_grafic_build_file',
+                'format' => 'raw',
+                'value' => filePath($model, 'jp_time_grafic_build_file'),
+            ],
+            [
+                'attribute' => 'jp_photo_file',
+                'format' => 'raw',
+                'value' => filePath($model, 'jp_photo_file'),
+            ],
+            [
+                'attribute' => 'jp_template_report_file',
+                'format' => 'raw',
+                'value' => filePath($model, 'jp_template_report_file'),
+            ]
+        );
+    }
 }
 
 array_push($attr,
