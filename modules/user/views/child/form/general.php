@@ -89,15 +89,20 @@ $(document).ready(function() {
                       ['#child-passport_date', '.field-child-passport_date'],
                       ['#child-passport_department', '.field-child-passport_department'],
                       ['#child-passport_code', '.field-child-passport_code'],
-                      ['#child-passport_file_form', '.field-child-passport_file_form'],
+                      //['#child-passport_file_form', '.field-child-passport_file_form'],
                     ]);
         
         if (dateDiffYear>=14){
+            $('.field-child-passport_file_form').addClass('required');
+            if (!$('.field-child-passport_file_form label[for=exampleInputFile]').html()) {
+                $('#child-passport_file_form').attr('required', true);
+            }
             for (let pair of arr.entries()) {
               $(`\${pair[1]}`).addClass('required');
               $(`\${pair[0]}`).attr('required', true);
             }
         } else {
+            $('#child-passport_file_form').attr('required', false);
             for (let pair of arr.entries()) {
               $(`\${pair[1]}`).removeClass('required');
               $(`\${pair[0]}`).attr('required', false);

@@ -64,7 +64,7 @@ if ($spouse->id == null) {
 <?= $form->field($model, 'address_father_file_form', [
     'template' => getFileInputTemplate($model->address_father_file, 'Заявление от отца.pdf'),
     'options' => ['class' => "$father_file"],
-])->fileInput(['class' => 'custom-file-input', 'required' => $has_spouse])->hint('Заявление составляются полностью от руки. 
+])->fileInput(['class' => 'custom-file-input', 'required' => $has_spouse && !isset($model->address_father_file)])->hint('Заявление составляются полностью от руки. 
     Если в свидетельстве у ребёнка не указан отец, то заявление от папы не нужно. '
     . Html::a(Icon::show('file-pdf', ['framework' => Icon::FAR]) . 'Образец заявления', Url::base().Url::to('/files/child/0-examples/example_address_child.docx'), ['target' => '_blank'])) ?>
 
@@ -85,11 +85,13 @@ if ($spouse->id == null) {
 $script = <<< JS
 $(document).ready(function() {
     $('.field-child-registration_file_form').addClass('required');
-    $('#child-registration_file_form').attr('required', true);
-    $('.field-child-registration_file_form').addClass('required');
-    $('#child-registration_file_form').attr('required', true);
+    if (!$('.field-child-registration_file_form label[for=exampleInputFile]').html()) {
+        $('#child-registration_file_form').attr('required', true);
+    }
     $('.field-child-address_mother_file_form').addClass('required');
-    $('#child-address_mother_file_form').attr('required', true);
+    if (!$('.field-child-address_mother_file_form label[for=exampleInputFile]').html()) {
+        $('#child-address_mother_file_form').attr('required', true);
+    }
     //$('.field-child-address_father_file_form').addClass('required');
     //$('#child-address_father_file_form').attr('required', true);
     
@@ -124,7 +126,9 @@ $(document).ready(function() {
             $('#child-address_registration').val($('#child-address_registration').data('spouse-address-registration'));
        } else if ($('#address-matched').val() == 0 && $('#address-matched').val() != '') {
             $('div.field-child-ejd_file_form').removeClass('d-none');
-            $('#child-ejd_file_form').attr('required', true)
+            if (!$('.field-child-ejd_file_form label[for=exampleInputFile]').html()) {
+                $('#child-ejd_file_form').attr('required', true);
+            }
             $('div.field-child-ejd_file_form').addClass('required');
             
             $('#child-address_registration').val('');

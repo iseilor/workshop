@@ -56,7 +56,7 @@ $d_none2 = (isset($model->type) && $model->type == 2) ? '' : 'd-none';
                         <?/*= $this->render('form/personal', ['model' => $model, 'form' => $form]) */?>
                     </div>-->
                 </div>
-                <?= $form->field($model, 'user_id')->hiddenInput(['value' => $user->id]); ?>
+                <?= $form->field($model, 'user_id')->hiddenInput(['value' => $user->id])->label(false); ?>
             </div>
             <div class="card-footer type-1 type-2 <?= $d_none0 ?>">
                 <?= Html::submitButton(Icon::show('save') . Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
