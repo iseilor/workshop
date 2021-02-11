@@ -32,6 +32,7 @@ $this->title .= ' ' . $model->status->label;
                         ['name' => Icon::show('home') . 'Жильё', 'id' => 'house', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
                         ['name' => Icon::show('file-invoice-dollar') . 'Ипотека', 'id' => 'ipoteka', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
                         ['name' => Icon::show('ruble-sign') . 'Финансы', 'id' => 'money', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
+                        ['name' => Icon::show('check') . 'Документы', 'id' => 'agreement', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
                         ['name' => Icon::show('tasks') . 'Согласования', 'id' => 'check', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
                         ['name' => Icon::show('history') . 'История', 'id' => 'history', 'tab-class' => '', 'selected' => 'false', 'tabs-class' => ''],
                     ];
