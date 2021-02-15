@@ -20,6 +20,10 @@ class m200824_094353_update_user_child_table extends Migration
                 ALTER TABLE {{%user_child}} ALTER COLUMN address_fact SET DEFAULT '';
                 ALTER TABLE {{%user_child}} ALTER COLUMN birth_code SET DEFAULT '';";
         $this->execute($sql);
+
+        $this->execute(file_get_contents(__DIR__ . '/../sql/user_child.sql'));
+
+
     }
 
     /**
