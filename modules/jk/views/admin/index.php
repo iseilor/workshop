@@ -5,10 +5,12 @@ use app\modules\jk\models\Message;
 use app\modules\jk\models\Order;
 use app\modules\jk\models\OrderStop;
 use app\modules\jk\models\Percent;
+use app\modules\jk\models\Rf;
 use app\modules\jk\models\Status;
 use app\modules\jk\models\Zaim;
 use app\modules\jk\Module;
 use app\modules\nsi\models\Color;
+use app\modules\user\models\User;
 use kartik\icons\Icon;
 use yii\console\widgets\Table;
 use yii\data\ActiveDataProvider;
@@ -61,6 +63,35 @@ $ordersStopGroupStatus = OrderStop::find()
     ->groupBy(['jk_stop.status_id'])
     ->asarray()->all();
 $ordersStopGroupStatus = ArrayHelper::map($ordersStopGroupStatus, 'status_id', 'cnt');
+
+
+// Данные для таблицы
+$data = [];
+$rfs = Rf::find()->select('id,title')->asArray()->all();
+foreach ($rfs as $rf) {
+    $users = User::find()->select('id')->where(['filial_id' => $rf['id']])->asArray()->all();
+    $userIds = [];
+    foreach ($users as $user) {
+        $userIds[] = (int)$user['id'];
+    }
+    $data[$rf['id']] = [
+        'rf' => $rf['title'],
+        'percent' => Percent::find()->where(['in', 'created_by', $userIds])->count(),
+        'zaim' => Zaim::find()->where(['in', 'created_by', $userIds])->count(),
+        'orderPercent' => Order::find()->where(['in', 'created_by', $userIds])->andWhere(['is_mortgage' => 1])->count(),
+        'orderZaim' => Order::find()->where(['in', 'created_by', $userIds])->andWhere(['or', ['is_mortgage' => 0], ['is_mortgage' => null]])->count(),
+        'orderAll' => Order::find()->where(['in', 'created_by', $userIds])->count(),
+    ];
+    foreach ([1, 2, 5, 9] as $statusId) {
+        $data[$rf['id']]['orderPercent_' . $statusId] = Order::find()->where(['in', 'created_by', $userIds])->andWhere(['is_mortgage' => 1])
+            ->andWhere(['status_id' => $statusId])->count();
+        $data[$rf['id']]['orderZaim_' . $statusId] = Order::find()->where(['in', 'created_by', $userIds])->andWhere([
+            'or',
+            ['is_mortgage' => 0],
+            ['is_mortgage' => null],
+        ])->andWhere(['status_id' => $statusId])->count();
+    }
+}
 
 
 // Сообщения, ожидающие ответа от куратора
@@ -179,39 +210,87 @@ if ($messagesUser>0){
             </div>
             <div class="card-body">
                 <div class="row">
-                    <?php $dataProvider = new ActiveDataProvider([
-                        'query' => \app\modules\jk\models\Rf::find()
-                    ]);
-                    echo GridView::widget([
-                        'dataProvider' => $dataProvider,
-                        'columns' => [
-                            [
-                                'attribute' => 'title',
-                                'label' => 'РФ / МРФ'
-                            ],
-                            [
-                                'attribute' => 'percentCount',
-                                'label' => 'Калькулятор процентов',
-                                'contentOptions' => ['class' => 'text-center'],
-                            ],
-                            [
-                                'attribute' => 'zaimCount',
-                                'label' => 'Калькулятор займов',
-                                'contentOptions' => ['class' => 'text-center'],
-                            ],
-                            [
-                                'attribute' => 'orderCount',
-                                'label' => 'Общее кол-во заявок',
-                                'contentOptions' => ['class' => 'text-center'],
-                            ],
-                        ]
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th rowspan="3" class="text-center">РФ / МРФ</th>
+                            <th colspan="2" class="text-center">Калькуляторы</th>
+                            <th colspan="21" class="text-center">Заявки</th>
+                        </tr>
+                        <tr>
+                            <th class="rotate" rowspan="2">
+                                <div>Компенсация %</div>
+                            </th>
+                            <th class="rotate" rowspan="2">
+                                <div>Займ</div>
+                            </th>
+                            <th colspan="5" class="text-center">Компенсация %</th>
+                            <th colspan="5" class="text-center">Займ</th>
+                            <th rowspan="2" class="rotate">
+                                <div>Всего</div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="rotate">
+                                <div>Новая заявка</div>
+                            </th>
+                            <th class="rotate">
+                                <div>Согласование руководителями</div>
+                            </th>
+                            <th class="rotate">
+                                <div>Проверка куратором</div>
+                            </th>
+                            <th class="rotate">
+                                <div>Согласование комиссией</div>
+                            </th>
+                            <th class="rotate">
+                                <div>Всего<br/></div>
+                            </th>
+                            <th class="rotate">
+                                <div>Новая заявка</div>
+                            </th>
+                            <th class="rotate">
+                                <div>Согласование руководителями</div>
+                            </th>
+                            <th class="rotate">
+                                <div>Проверка куратором</div>
+                            </th>
+                            <th class="rotate">
+                                <div>Согласование комиссией</div>
+                            </th>
+                            <th class="rotate">
+                                <div>Всего<br/></div>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody class="text-center">
+                        <?php foreach ($data as $row): ?>
+                            <tr>
+                                <td class="text-left"><?= $row['rf'] ?></td>
+                                <td class="table-warning"><?= $row['percent'] ?></td>
+                                <td class="table-warning"><?= $row['zaim'] ?></td>
+                                <td><?= $row['orderPercent_1'] ?></td>
+                                <td><?= $row['orderPercent_2'] ?></td>
+                                <td><?= $row['orderPercent_5'] ?></td>
+                                <td><?= $row['orderPercent_9'] ?>
+                                <td class="table-warning"><?= $row['orderPercent'] ?></td>
+                                <td><?= $row['orderZaim_1'] ?></td>
+                                <td><?= $row['orderZaim_2'] ?></td>
+                                <td><?= $row['orderZaim_5'] ?></td>
+                                <td><?= $row['orderZaim_9'] ?>
+                                <td class="table-warning"><?= $row['orderZaim'] ?></td>
+                                <td class="table-success"><?= $row['orderAll'] ?></td>
+                            </tr>
+                        <?php endforeach; ?>
 
-                    ]); ?>
+                        </tbody>
+                    </table>
                 </div>
             </div>
-            <div class="card-footer">
-                Данные актуальны на <?= date('d.m.Y H:i:s') ?>
-            </div>
+        </div>
+        <div class="card-footer">
+            Данные актуальны на <?= date('d.m.Y H:i:s') ?>
+        </div>
         </div>
     </section>
 
