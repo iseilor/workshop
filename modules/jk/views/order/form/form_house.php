@@ -87,7 +87,7 @@ $jp_date_max = date("Y");
                         'options' => ['class' => 'form-control inputmask-date'],
                         'clientOptions' => [
                             'changeMonth' => true,
-                            'yearRange' => "2000:$jp_date_max",
+                            'yearRange' => "2000:2050",
                             'changeYear' => true,
                             'onClose' => new \yii\web\JsExpression("
                             function(dateText, inst) {
@@ -100,9 +100,7 @@ $jp_date_max = date("Y");
                                     selected = new Date();
                                 }
                                 
-                                if (selected.getTime() > now) {
-                                    $('#order-jp_date' ).datepicker( 'setDate', now );
-                                }
+                 
                              }"),
                             'required' => ($is_new_building == '' && $model->is_mortgage == 1),
                         ],

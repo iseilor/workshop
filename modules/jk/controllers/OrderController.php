@@ -992,7 +992,9 @@ class OrderController extends Controller
         // Ипотека
         $ipoteka = '';
         if (isset($order->ipoteka_size) && $order->ipoteka_size > 0) {
-            $ipoteka = '2. Планируемые условия кредита на улучшение жилищных условий: размер ' . number_format($order->ipoteka_size, 2, ',', ' ') . ' руб., срок ' . $order->getIpotekaYearCount() . ' лет, процентная ставка по кредиту ' . $order->ipoteka_percent . '% годовых.' . PHP_EOL;
+            $ipoteka = '2. Планируемые условия кредита на улучшение жилищных условий: размер ' . number_format($order->ipoteka_size, 2, ',', ' ')
+                . ' руб., срок ' . $order->getIpotekaYearCount() . ' лет, процентная ставка по кредиту ' . $order->ipoteka_percent . '% годовых.'
+                . PHP_EOL;
         }
 
         // Переменные в шаблоне
@@ -1098,7 +1100,8 @@ class OrderController extends Controller
                 mb_strtolower(Order::getJPTypeList()[$order->jp_type]),
                 $order->jp_area,
                 $order->resident_count,
-                (isset($order->resident_type) && $order->resident_type && $order->resident_count > 1) ? '(' . mb_strtolower(Order::getResidentTypeList()[$order->resident_type]) . ')' : '',
+                (isset($order->resident_type) && $order->resident_type && $order->resident_count > 1) ? '('
+                    . mb_strtolower(Order::getResidentTypeList()[$order->resident_type]) . ')' : '',
 
                 $order->family_deal,
                 $order->isDZO(),
@@ -1280,6 +1283,7 @@ class OrderController extends Controller
         $orders = Order::find()->published()->all();
         $rowNum = 8;
         $num = 1;
+
         foreach ($orders as $order) {
             $worksheet->getCell('A' . $rowNum)->setValue($num);
             $worksheet->getCell('B' . $rowNum)->setValue($order->createdUser->filial->title);
@@ -1298,16 +1302,45 @@ class OrderController extends Controller
             $worksheet->getCell('O' . $rowNum)->setValue('Нет');
             $worksheet->getCell('P' . $rowNum)->setValue(0);
             $worksheet->getCell('Q' . $rowNum)->setValue('Нет');
-
             $worksheet->getCell('R' . $rowNum)->setValue('TODO'); // Молодой работник
             $worksheet->getCell('S' . $rowNum)->setValue('TODO'); // Баллы за молодого
-
             $worksheet->getCell('T' . $rowNum)->setValue($order->resident_count); // Кол-во членов семьи
-            $worksheet->getCell('U' . $rowNum)->setValue($order->createdUser->spouseType);
+
+            // Супруга
+            $spouseType = $order->createdUser->spouseType;   // Наличие супруги
+            $spouseDO = '';
+            $spouseWork = '';
+            if ($spouse = $order->createdUser->spouse) {
+                if ($spouseType == 'Да') {
+                    $spouseDO = (isset($spouse->is_do) && $spouse->is_do) ? 'Да' : 'Нет';
+                    $spouseWork = (isset($spouse->is_work) && $spouse->is_work) ? 'Да' : 'Нет';
+                }
+            }
+            $worksheet->getCell('U' . $rowNum)->setValue($spouseType);  // Наличие супруги
+            $worksheet->getCell('V' . $rowNum)->setValue($spouseDO);    // Супруга в ДО
+            $worksheet->getCell('W' . $rowNum)->setValue($spouseWork);  // Супруга официально работает
+            $worksheet->getCell('X' . $rowNum)->setValue('TODO'); // Баллы за семейное положение
+
+            // Дети
+            $worksheet->getCell('Y' . $rowNum)->setValue('TODO');
+            $worksheet->getCell('Z' . $rowNum)->setValue('TODO');
+            $worksheet->getCell('AA' . $rowNum)->setValue($order->createdUser->childsCount);    // Всего детей
+
+            // Доходы
+            $worksheet->getCell('AC' . $rowNum)->setValue(Yii::$app->formatter->asCurrency($order->money_summa_year));
+            $worksheet->getCell('AD' . $rowNum)->setValue(''); // Должностной оклад брать из 12
+
+            // Собственность в наличии
+            $worksheet->getCell('AG' . $rowNum)->setValue($order->family_own);
+            $worksheet->getCell('AH' . $rowNum)->setValue($order->jp_total_area);
+            $worksheet->getCell('AI' . $rowNum)->setValue($order->jp_part);
+            $worksheet->getCell('AJ' . $rowNum)->setValue($order->is_mortgage);
 
 
             $rowNum++;
             $num++;
+
+            //break;
         }
 
 

@@ -643,18 +643,31 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     }
 
     // Наличие супруги (Да/Нет/Разведен(а))
-    public function getSpouseType(){
+    public function getSpouseType()
+    {
         $spouse = $this->getSpouse();
-        if ($spouse){
-           return $spouse->type;
-        }else{
+        if ($spouse) {
+            return Spouse::getTypeList()[$spouse->type];
+        } else {
             return 'Нет';
         }
     }
 
+    // Дети
     public function getChildren()
     {
         return Child::find()->where(['user_id' => $this->id])->andWhere(['deleted_at' => null])->all();
+    }
+
+    // Кол-во детей
+    public function getChildsCount()
+    {
+        $childs = $this->children;
+        $childsCount = 0;
+        if ($childs) {
+            $childsCount = count($childs);
+        }
+        return $childsCount;
     }
 
     public function getRetirementDate()
@@ -706,6 +719,5 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return $this->hasOne(Rf::class, ['id' => 'filial_id']);
     }
-
 
 }
