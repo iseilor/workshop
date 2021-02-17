@@ -195,6 +195,7 @@ class Zaim extends Model
         $this->area_total = str_replace(",", ".", $this->area_total);
         $this->area_buy = str_replace(",", ".", $this->area_buy);
         $this->cost_total = str_replace(",", ".", $this->cost_total);
+        $this->family_income = str_replace(",", ".", $this->family_income);
         return parent::beforeValidate();
     }
 
