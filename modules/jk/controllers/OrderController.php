@@ -1130,7 +1130,7 @@ class OrderController extends Controller
         $zip = new \ZipArchive();
         $zipUrl = '/files/jk/order_archives/order_' . $id . '.zip';
 
-        if (!$zip->open(Yii::getAlias('@webroot') . $zipUrl, \ZIPARCHIVE::CREATE) === true) {
+        if (!$zip->open(Yii::getAlias('@webroot') . $zipUrl, \ZipArchive::OVERWRITE | \ZipArchive::CREATE) === true) {
             return false;
         }
 
