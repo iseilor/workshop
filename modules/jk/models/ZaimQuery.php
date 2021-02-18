@@ -3,13 +3,15 @@
 namespace app\modules\jk\models;
 
 use Yii;
+use app\models\Query;
 
 /**
  * This is the ActiveQuery class for [[Zaim]].
  *
  * @see Zaim
  */
-class ZaimQuery extends \yii\db\ActiveQuery
+class ZaimQuery extends Query
+
 {
     /*public function active()
     {

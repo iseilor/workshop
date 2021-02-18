@@ -40,7 +40,7 @@ class ZaimSearch extends Zaim
      */
     public function search($params)
     {
-        $query = Zaim::find();
+        $query = Zaim::find()->published();
 
         // add conditions that should always apply here
 

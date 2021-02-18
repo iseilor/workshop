@@ -13,9 +13,9 @@ use yii\widgets\Pjax;
 /* @var $searchModel app\modules\jk\models\PercentSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Icon::show('percent').Module::t('module', 'Percents');
-$this->params['breadcrumbs'][] = ['label' => Icon::show('home').'ЖК', 'url' => ['/jk']];
-$this->params['breadcrumbs'][] =['label' => Icon::show('tools').'Админка', 'url' => ['/jk/admin']];
+$this->title = Icon::show('percent') . Module::t('module', 'Percents');
+$this->params['breadcrumbs'][] = ['label' => Icon::show('home') . 'ЖК', 'url' => ['/jk']];
+$this->params['breadcrumbs'][] = ['label' => Icon::show('tools') . 'Админка', 'url' => ['/jk/admin']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -45,8 +45,11 @@ $this->params['breadcrumbs'][] = $this->title;
                             'attribute' => 'id',
                         ],
                         'created_at:datetime',
-                        'createdUserLabel:html',
-
+                        [
+                            'label' => 'Сотрудник',
+                            'format' => 'html',
+                            'attribute' => 'createdUserLabel',
+                        ],
                         //'date_birth',
                         //'gender',
                         //'experience',

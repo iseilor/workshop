@@ -2,6 +2,7 @@
 
 namespace app\modules\jk\models;
 
+use app\models\Query;
 use Yii;
 
 /**
@@ -9,7 +10,7 @@ use Yii;
  *
  * @see Percent
  */
-class PercentQuery extends \yii\db\ActiveQuery
+class PercentQuery extends Query
 {
 
     /*public function active()

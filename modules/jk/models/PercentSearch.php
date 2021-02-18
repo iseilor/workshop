@@ -40,7 +40,7 @@ class PercentSearch extends Percent
      */
     public function search($params)
     {
-        $query = Percent::find();
+        $query = Percent::find()->published();
 
         // add conditions that should always apply here
 
