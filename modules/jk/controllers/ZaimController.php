@@ -85,7 +85,7 @@ class ZaimController extends Controller
     {
         $model = new Zaim();
 
-        // Пользователья
+        // Пользователи
         $user = User::findOne(Yii::$app->user->identity->getId());
         $model->date_birth = $user->birth_date;
         $model->gender = $user->gender;

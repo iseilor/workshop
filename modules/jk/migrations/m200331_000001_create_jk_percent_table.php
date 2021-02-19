@@ -27,7 +27,7 @@ class m200331_000001_create_jk_percent_table extends Migration
             'created_by' => Schema::TYPE_INTEGER . ' NOT NULL',
             'updated_at' => Schema::TYPE_DATETIME,
             'updated_by' => Schema::TYPE_INTEGER,
-            'deleted_at' => Schema::TYPE_DATETIME,
+            'deleted_at' => Schema::TYPE_INTEGER,
             'deleted_by' => Schema::TYPE_INTEGER,
 
             'date_birth' => Schema::TYPE_INTEGER . ' NOT NULL',
