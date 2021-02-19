@@ -116,7 +116,7 @@ class Child extends Model
             [
                 'date',
                 function () {
-                    if ($this->date > 0 && time() - $this->date > 14 * 356 * 24 * 60 * 60) {
+                    if ($this->date > 0 && time() - $this->date > 14 * 365 * 24 * 60 * 60) {
                         $passport_attrs = ['passport_series', 'passport_number', 'passport_date', 'passport_department', 'passport_code'];
                         foreach ($passport_attrs as $passport_attr) {
                             if ($this->{$passport_attr} == '') {
