@@ -315,10 +315,15 @@ class Spouse extends Model
     }
 
     // Получаем Иванова И.И. DOCX не воспринимает неразрывный пробел
+    // Но есть случаи, когда без отчетства (ЖП-2021, кореянка жена)
     public function getFioShortDocx()
     {
         $fio = explode(" ", $this->fio);
-        return $fio[0].' ' . mb_substr($fio[1], 0, 1) . '.' . mb_substr($fio[2], 0, 1) . '.';
+        $result =  $fio[0].' ' . mb_substr($fio[1], 0, 1).'.';
+        if (isset($fio[2])){
+            $result .=mb_substr($fio[2], 0, 1) . '.';
+        }
+        return $result;
     }
 
 
