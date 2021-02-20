@@ -954,6 +954,7 @@ class Order extends Model
             'ipoteka_user',
             'ipoteka_size',
             'zaim_sum',
+            'jp_new_area',
         ];
         foreach ($fields as $field) {
             $this->{$field} = str_replace(",", ".", $this->{$field});
