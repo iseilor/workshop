@@ -9,6 +9,14 @@ use yii\widgets\DetailView;
 $user = $model->createdUser;
 $passport = $user->passport;
 
+$passportNumber = $user->passport_number;
+$passportNumberLength = mb_strlen($passportNumber);
+if ($passportNumberLength < 6) {
+    for ($i = 0; $i < 6 - $passportNumberLength; $i++) {
+        $passportNumber = '0' . $passportNumber;
+    }
+}
+
 $attr = [
     [
         'label' => 'ID сотрудника',
@@ -33,7 +41,7 @@ $attr = [
         'label' => 'Паспорт',
         'format' => 'raw',
         'value' =>
-            $user->passport_series . ' ' . $user->passport_number . '; ' .
+            $user->passport_series . ' ' . $passportNumber . '; ' .
             'Выдан: ' . $user->passport_department . '; ' .
             'Код подразделения: ' . $user->passport_code . '; ' .
             'Дата выдачи: ' . date('d.m.Y',$user->passport_date) . '; ' .

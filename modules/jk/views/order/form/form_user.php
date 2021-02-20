@@ -522,6 +522,21 @@ $(document).ready(function() {
              });
         }
     });
+    
+    (function setPassportNumber(){
+        passportNumberValue = $('#passport-passport_number').attr('value');
+        passportNumberLength = String($('#passport-passport_number').attr('value')).length;
+        
+        if (passportNumberLength < 6) {
+            $('#passport-passport_number').attr('value', '0' + passportNumberValue);
+            return setPassportNumber();
+        }
+        else {
+            $('#passport-passport_number').val(passportNumberValue);
+            return 1;
+        }
+    }());
+    
 });
 JS;
 $this->registerJs($script, yii\web\View::POS_READY);
