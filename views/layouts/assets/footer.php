@@ -7,7 +7,10 @@ use yii\helpers\Html;use yii\helpers\Url;
     <div class="float-right d-none d-sm-inline">
         От IT для людей с  <span style="color:red;"><?=Icon::show('heart')?></span>
     </div>
-    Москва &copy; 2021 | ПАО Ростелеком | МРФ Центр
+    Москва &copy; 2021, ПАО Ростелеком МРФ Центр |
+    Тех.поддержка:
+    <a href="tel:+74959800148" title="Горячая линия" target="_blank"><?=Icon::show('phone')?> 8 (495) 980-01-48</a>
+    <a href="mailto: skit@rt.ru" title="Почта support" target="_blank"><?=Icon::show('envelope')?>skit@rt.ru</a>
 
 </footer>
 
