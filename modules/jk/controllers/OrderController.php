@@ -640,7 +640,6 @@ class OrderController extends Controller
                     $emailTemplate = 'userReturn';
                     $emailTitle = 'Возвращено куратором на доработку';
                     break;
-
                 case 'CURATOR_YES':
                 case 'COMMISSION_WAIT':
                     $emailTemplate = 'userYes';
@@ -810,7 +809,7 @@ class OrderController extends Controller
                 ]
             )
                 ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
-                ->setTo($user->email)
+                ->setTo(YII_ENV_PROD ? $user->email : User::findOne(Yii::$app->user->identity->getId())->email)
                 ->setBcc(Yii::$app->params['supportEmail'])
                 ->setSubject("HR-портал / Жилищная Программа / Заявка №" . $order->id . " / " . $emailTitle . '.')
                 ->send();
