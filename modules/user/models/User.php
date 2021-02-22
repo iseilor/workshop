@@ -720,4 +720,8 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
         return $this->hasOne(Rf::class, ['id' => 'filial_id']);
     }
 
+    // Полностью ФИО
+    public function getFIO(){
+        return  $this->surname . " " . $this->name." ".$this->patronymic;
+    }
 }
