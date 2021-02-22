@@ -806,7 +806,7 @@ class OrderController extends Controller
                     'user' => $user,
                     'order' => $order,
                     'stage' => $orderStage,
-                    'filial'=> $user->getFilial()
+                    'filial'=> Rf::findOne($user->filial_id)
                 ]
             )
                 ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
