@@ -12,14 +12,20 @@ $this->params['breadcrumbs'][] = ['label' => '<i class="nav-icon fas fa-home"></
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="order-create">
+    <div class="alert alert-danger alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <h5><i class="icon fas fa-ban"></i> Внимание!</h5>
+        Приём новых заявок для участия в "Жилищной программе-2021" завершён.<br/>
+        Работа с уже поданными заявками возможна через личный кабинет сотрудника (слева сверху ссылка "Мой кабинет")
+    </div>
 
-    <?= $this->render('form/form', [
+     <!--$this->render('form/form', [
         'model' => $model,
         'usermd' => $usermd,
         'spouse' => $spouse,
         'passport' => $passport,
         'mins' => $mins,
         //'userChildDataProvider'=>$userChildDataProvider
-    ]) ?>
+    ])-->
 
 </div>

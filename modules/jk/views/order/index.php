@@ -45,6 +45,22 @@ $this->params['breadcrumbs'][] = $this->title;
                     'created_at:datetime',
                     'createdUserLabel:html',
                     [
+                        'label' => 'Дата рождения',
+                        'attribute' => 'createdUser.birth_date',
+                        'format' => 'date'
+                    ],
+                    [
+                        'label' => 'Стаж',
+                        'attribute' => 'createdUser.work_date',
+                        'format' => 'date'
+                    ],
+                    [
+                        'label' => 'На 1 члена семьи',
+                        'attribute' => 'money_summa_year',
+                        'format' => 'currency'
+                    ],
+
+                    [
                         'filter' => \app\modules\jk\models\Order::getTypesArray(),
                         'attribute' => 'type',
                         'value' => 'typeName',
@@ -187,9 +203,3 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 </div>
-
-<?php
-
-
-//во вьюхе
-//$this->registerJsFile('path/to/myfile');
