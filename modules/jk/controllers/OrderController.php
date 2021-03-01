@@ -1295,7 +1295,7 @@ class OrderController extends Controller
             $worksheet->getCell('H' . $rowNum)->setValue($order->createdUser->years);
             $worksheet->getCell('I' . $rowNum)->setValue($order->createdUser->gender ? 'М' : 'Ж');
             $worksheet->getCell('J' . $rowNum)->setValue($order->createdUser->pensionDate);
-            $worksheet->getCell('K' . $rowNum)->setValue(Yii::$app->formatter->format($order->createdUser->work_date, 'date'));
+            $worksheet->getCell('K' . $rowNum)->setValue(''); // Дата приёма на работу
             $worksheet->getCell('L' . $rowNum)->setValue(Yii::$app->formatter->format($order->created_at, 'date'));
             $worksheet->getCell('M' . $rowNum)->setValue($order->createdUser->experience);
             $worksheet->getCell('N' . $rowNum)->setValue($order->createdUser->experiencePoints);
