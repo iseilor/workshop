@@ -1336,11 +1336,40 @@ class OrderController extends Controller
             $worksheet->getCell('AI' . $rowNum)->setValue($order->jp_part);
             $worksheet->getCell('AJ' . $rowNum)->setValue($order->is_mortgage);
 
+            //
+            $worksheet->getCell('AL' . $rowNum)->setValue('TODO'); // Соц.найм
+            $worksheet->getCell('AM' . $rowNum)->setValue('TODO'); // Условия проживания
+            $worksheet->getCell('AN' . $rowNum)->setValue(Order::getResidentOwnTypeList()[$order->resident_own_type]); // Вид проживания
+
+            $worksheet->getCell('AO' . $rowNum)->setValue('TODO'); // Соц.найм
+            $worksheet->getCell('AP' . $rowNum)->setValue('TODO'); // Соц.найм
+            $worksheet->getCell('AQ' . $rowNum)->setValue($order->getCorpNorm()); // Корпоративная норма площади
+
+            // Сведения о  жилом помещении, приобретаемом с помощью Общества
+            $worksheet->getCell('AR' . $rowNum)->setValue($order->jp_new_area);     // Общая площадь
+            $worksheet->getCell('AS' . $rowNum)->setValue(Yii::$app->formatter->asCurrency($order->jp_cost));       // Стоимость
+            $worksheet->getCell('AT' . $rowNum)->setValue(Yii::$app->formatter->asCurrency($order->ipoteka_user));  // Собственные средства работника, тыс. руб.
+            $worksheet->getCell('AU' . $rowNum)->setValue(round($order->getCorporateAreaNormFactor(),3));  // Коэффициент учета корпоративной нормы площади
+
+            $worksheet->getCell('AV' . $rowNum)->setValue(($order->ipoteka_size>0)?Yii::$app->formatter->asCurrency($order->ipoteka_size):''); // Сумма имеющейся ипотеки
+            $worksheet->getCell('AW' . $rowNum)->setValue($order->ipoteka_percent);   // Ставка по имеющейся ипотеке
+
+            $worksheet->getCell('AX' . $rowNum)->setValue($order->getLoanMaxVal());     // Размер займа
+            $worksheet->getCell('AY' . $rowNum)->setValue($order->getLoanPeriod());     // Срок возврата, лет
+            $worksheet->getCell('AZ' . $rowNum)->setValue($order->getPcRate());         // Ставка компенсации %
+            $worksheet->getCell('BA' . $rowNum)->setValue($order->getPcTerm());         // Срок выплаты компенсации
+
+            $worksheet->getCell('BD' . $rowNum)->setValue($order->createdUser->work_address);         // Адрес рабочего места
+            $worksheet->getCell('BF' . $rowNum)->setValue(Yii::$app->formatter->asCurrency($order->getPcMaxVal()));         // Максимальная сумма компенсации процентов в год (расчетная)
+            $worksheet->getCell('BG' . $rowNum)->setValue ((isset($order->createdUser->is_do) && $order->createdUser->is_do) ? 'Да' : 'Нет'); // Декретный отпуск
+
+            $worksheet->getCell('BI' . $rowNum)->setValue(Yii::$app->formatter->format($order->ipoteka_last_date, 'date')); // Срок закрытия кредитного договора
+            //$worksheet->getCell('BJ' . $rowNum)->setValue(Order::getIpotekaTargetName($order->id)); //
 
             $rowNum++;
             $num++;
 
-            //break;
+
         }
 
 

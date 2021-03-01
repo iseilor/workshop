@@ -93,7 +93,11 @@ class OrderSearch extends Order
         // Только заявки филиала куратора
         // TODO: При переходе на RBAC избавиться от данного условия
         $query->leftJoin('user', 'user.id = jk_order.created_by');
-        $query->andWhere('user.filial_id=' . Yii::$app->user->identity->filial_id);
+
+        // Для админов нет фильтров по филиалу
+        if (!Yii::$app->user->can('admin')){
+            $query->andWhere('user.filial_id=' . Yii::$app->user->identity->filial_id);
+        }
 
         return $dataProvider;
     }

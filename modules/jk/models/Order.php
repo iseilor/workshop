@@ -843,7 +843,7 @@ class Order extends Model
         ];
     }
 
-    // Расшифровака типа собственности
+    // Расшифровка типа собственности
     public static function getJPOwnName($id = null)
     {
         if ($id) {
@@ -1189,6 +1189,7 @@ class Order extends Model
         return $this->money_summa_year;
     }
 
+    // Корпоративная норма площади
     public function getCorpNorm()
     {
         $familyMembersCount = $this->user->familyMembersCount;
@@ -1300,7 +1301,7 @@ class Order extends Model
         $userRetirementYear = (integer)Yii::$app->formatter->asDate($this->user->retirementDate, 'php:Y');
         $retRes = $userRetirementYear - $this->companyYear;
 
-        // Ежемесячный доход на члета семьи
+        // Ежемесячный доход на члена семьи
         $monthlyPerMemberIncome = $this->getMonthlyPerMemberIncome();
         $aidStandart = AidStandards::find()
             ->where(['<=', 'income_bottom', $monthlyPerMemberIncome])
@@ -1364,7 +1365,7 @@ class Order extends Model
         //return round(min($maxLoanByIncome, $maxLoanBySize), -3);
     }
 
-    private function getCorporateAreaNormFactor()
+    public function getCorporateAreaNormFactor()
     {
         if ($this->jp_cost == 0) {
             return 0;

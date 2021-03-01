@@ -682,7 +682,13 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
                 break;
         }
         if ($rt) {
-            $rtDate = new \DateTime("@$this->birth_date");
+            try {
+                $_SESSION['user']=$this;
+                $rtDate = new \DateTime("@$this->birth_date");
+            } catch (ErrorException $e) {
+                Yii::warning("Деление на ноль.");
+            }
+
             $rtDate->modify("+$rt->age years");
             return $rtDate->getTimestamp();
         }
