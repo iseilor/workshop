@@ -170,17 +170,10 @@ class OrderController extends Controller
      *
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate2()
     {
         // Смотрим, заполнины ли все поля у пользователя в профиле
         $user = User::findOne(Yii::$app->user->identity->getId());
-        //        if (!$user->isPassport()) {
-        //            Yii::$app->session->setFlash('warning', "Чтобы приступить к оформлению заявки на участие в Жилищной Кампании,
-        //            вам необходимо заполнить все данные по вашему паспорту ");
-        //            return $this->redirect(['/user/profile/update']);
-        //        }
-
-
         // Ищем незавершенные заявки и перенаправляем на их редактирование
         if ($user) {
             $unfilledOrder = \app\modules\jk\models\Order::find()
@@ -336,7 +329,7 @@ class OrderController extends Controller
         }
 
         return $this->render(
-            'create',
+            'create2',
             [
                 'model' => $model,
                 'usermd' => $user,
@@ -349,7 +342,14 @@ class OrderController extends Controller
         );
     }
 
-    /**
+    public function actionCreate()
+    {
+        return $this->render(
+            'create'
+        );
+    }
+
+        /**
      * Updates an existing Order model.
      * If update is successful, the browser will be redirected to the 'view' page.
      *
