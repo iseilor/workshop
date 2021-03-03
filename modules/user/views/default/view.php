@@ -61,6 +61,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     'fio',
                     'position',
                     'email:email',
+                    'birth_date:date',
+                    'work_date:date',
                     'work_phone',
                     'work_department_full',
                     'work_address'
