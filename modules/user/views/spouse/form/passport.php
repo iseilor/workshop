@@ -68,16 +68,21 @@ $(document).ready(function() {
     arr.forEach(function(item, i, arr) {
       $(item).addClass('required');
     });
+    $('#spouse-passport_code').attr('required', true);
     
     $('#foreigner-passport').on('change', function() {
         if ($('#foreigner-passport').prop('checked') == true) {
             $('#spouse-passport_series').inputmask({ mask: ""});
             $('#spouse-passport_number').inputmask({ mask: ""});
             $('#spouse-passport_code').inputmask({ mask: ""});
+            $('.field-spouse-passport_code').removeClass('required');
+            $('#spouse-passport_code').attr('required', false);
         } else {
             $('#spouse-passport_series').inputmask({ mask: "9999"});
             $('#spouse-passport_number').inputmask({ mask: "999999"});
             $('#spouse-passport_code').inputmask({ mask: "999-999"});
+            $('.field-spouse-passport_code').addClass('required');
+            $('#spouse-passport_code').attr('required', true);
         }
     });
     

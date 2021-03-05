@@ -47,10 +47,15 @@ $this->params['breadcrumbs'][] = $this->title;
                         'passport_number',
                         'passport_date:date',
                         'passport_department',
-                        'passport_code',
                         viewFieldFile($model, 'passport_file', ['/jk/order/' . $model->id . '/acs-ctrl?model=spouse&field=passport_file']),
 
                     ];
+                    if (isset($model->passport_code) && $model->passport_code != '') {
+                        $attr[] = [
+                            'attribute' => 'passport_code',
+                            'value' => $model->passport_code
+                        ];
+                    }
                     if (isset($model->registration_file)) {
                         $attr[] = viewFieldFile($model, 'registration_file', ['/jk/order/' . $model->id . '/acs-ctrl?model=spouse&field=registration_file']);
                     }

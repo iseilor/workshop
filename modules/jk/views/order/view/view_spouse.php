@@ -27,10 +27,15 @@ if ($spouse) {
         'passport_number',
         'passport_date:date',
         'passport_department',
-        'passport_code',
         viewFieldFile($spouse, 'passport_file', ['/jk/order/' . $spouse->id . '/acs-ctrl?model=spouse&field=passport_file']),
 
     ];
+    if (isset($spouse->passport_code) && $spouse->passport_code != '') {
+        $attr[] = [
+            'attribute' => 'passport_code',
+            'value' => $spouse->passport_code
+        ];
+    }
     if (isset($spouse->registration_file)) {
         $attr[] = viewFieldFile($spouse, 'registration_file', ['/jk/order/' . $spouse->id . '/acs-ctrl?model=spouse&field=registration_file']);
     }
