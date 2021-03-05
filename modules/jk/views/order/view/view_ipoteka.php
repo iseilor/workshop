@@ -19,7 +19,7 @@ if ($model->is_mortgage == 0) {
             'format' => 'raw',
             'value' => ($model->ipoteka_file_bank_approval) ? Html::a(
                 Icon::show('file-pdf') . $model->attributeLabels()['ipoteka_file_bank_approval'],
-                Url::to(['/' . Yii::$app->params['module']['jk']['order']['filePath'] . $model->id . '/' . $model->ipoteka_file_bank_approval]),
+                Url::to(['/jk/order/' . $model->id . '/acs-ctrl?model=order&field=ipoteka_file_bank_approval']),
                 ['target' => '_blank']) : '',
         ]
     );
@@ -36,7 +36,7 @@ if ($model->is_mortgage == 0) {
             'format' => 'raw',
             'value' => ($model->ipoteka_file_dogovor) ? Html::a(
                 Icon::show('file-pdf') . $model->attributeLabels()['ipoteka_file_dogovor'],
-                Url::to(['/' . Yii::$app->params['module']['jk']['order']['filePath'] . $model->id . '/' . $model->ipoteka_file_dogovor]),
+                Url::to(['/jk/order/' . $model->id . '/acs-ctrl?model=order&field=ipoteka_file_dogovor']),
                 ['target' => '_blank']) : '',
         ],
     'ipoteka_grafic:ntext'
@@ -47,7 +47,7 @@ if ($model->is_mortgage == 0) {
             'format' => 'raw',
             'value' => ($model->ipoteka_file_grafic_now) ? Html::a(
                 Icon::show('file-pdf') . $model->attributeLabels()['ipoteka_file_grafic_now'],
-                Url::to(['/' . Yii::$app->params['module']['jk']['order']['filePath'] . $model->id . '/' . $model->ipoteka_file_grafic_now]),
+                Url::to(['/jk/order/' . $model->id . '/acs-ctrl?model=order&field=ipoteka_file_grafic_now']),
                 ['target' => '_blank']) : '',
         ];
     }
@@ -57,7 +57,7 @@ if ($model->is_mortgage == 0) {
             'format' => 'raw',
             'value' => ($model->ipoteka_file_spravka) ? Html::a(
                 Icon::show('file-pdf') . $model->attributeLabels()['ipoteka_file_spravka'],
-                Url::to(['/' . Yii::$app->params['module']['jk']['order']['filePath'] . $model->id . '/' . $model->ipoteka_file_spravka]),
+                Url::to(['/jk/order/' . $model->id . '/acs-ctrl?model=order&field=ipoteka_file_spravka']),
                 ['target' => '_blank']) : '',
         ];
     }
@@ -67,7 +67,7 @@ if ($model->is_mortgage == 0) {
             'format' => 'raw',
             'value' => ($model->ipoteka_file_grafic_first) ? Html::a(
                 Icon::show('file-pdf') . $model->attributeLabels()['ipoteka_file_grafic_first'],
-                Url::to(['/' . Yii::$app->params['module']['jk']['order']['filePath'] . $model->id . '/' . $model->ipoteka_file_grafic_first]),
+                Url::to(['/jk/order/' . $model->id . '/acs-ctrl?model=order&field=ipoteka_file_grafic_first']),
                 ['target' => '_blank']) : '',
         ];
     }
@@ -77,7 +77,7 @@ if ($model->is_mortgage == 0) {
             'format' => 'raw',
             'value' => ($model->ipoteka_file_refenance) ? Html::a(
                 Icon::show('file-pdf') . $model->attributeLabels()['ipoteka_file_refenance'],
-                Url::to(['/' . Yii::$app->params['module']['jk']['order']['filePath'] . $model->id . '/' . $model->ipoteka_file_refenance]),
+                Url::to(['/jk/order/' . $model->id . '/acs-ctrl?model=order&field=ipoteka_file_refenance']),
                 ['target' => '_blank']) : '',
         ];
     }

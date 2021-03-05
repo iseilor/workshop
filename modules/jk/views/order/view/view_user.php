@@ -48,7 +48,8 @@ $attr = [
             'Адрес регистрации: ' . $user->passport_registration . ';<br/>' .
             Html::a(
                 Icon::show('file-pdf') . $user->attributeLabels()['passport_file'],
-                Url::to(['/' . Yii::$app->params['module']['user']['path'] . $user->id . '/' . $user->passport_file]),
+                //Url::to(['/' . Yii::$app->params['module']['user']['path'] . $user->id . '/' . $user->passport_file]),
+                Url::to(['/jk/order/' . $user->id . '/acs-ctrl?model=user&field=passport_file']),
                 ['target' => '_blank']),
     ],
     [
@@ -71,7 +72,8 @@ if ($user->work_is_transferred) {
         'format' => 'raw',
         'value' => ($user->work_transferred_file) ? Html::a(
             Icon::show('file-pdf') . $user->attributeLabels()['work_transferred_file'],
-            Url::to(['/' . Yii::$app->params['module']['user']['path'] . $user->id . '/' . $user->work_transferred_file]),
+            //Url::to(['/' . Yii::$app->params['module']['user']['path'] . $user->id . '/' . $user->work_transferred_file]),
+            Url::to(['/jk/order/' . $user->id . '/acs-ctrl?model=user&field=work_transferred_file']),
             ['target' => '_blank']) : '',
     ];
 }
@@ -85,7 +87,8 @@ if ($model->is_poor) {
         'format' => 'raw',
         'value' => ($model->file_social_protection) ? Html::a(
             Icon::show('file-pdf') . $model->attributeLabels()['file_social_protection'],
-            Url::to(['/' . Yii::$app->params['module']['jk']['order']['filePath'] . $model->id . '/' . $model->file_social_protection]),
+            //Url::to(['/' . Yii::$app->params['module']['jk']['order']['filePath'] . $model->id . '/' . $model->file_social_protection]),
+            Url::to(['/jk/order/' . $model->id . '/acs-ctrl?model=order&field=file_social_protection']),
             ['target' => '_blank']) : '',
     ];
 }
@@ -103,7 +106,8 @@ if ($passport->ejd_file) {
         'format' => 'raw',
         'value' => ($passport->ejd_file) ? Html::a(
             Icon::show('file-pdf') . $passport->attributeLabels()['ejd_file'],
-            Url::to(['/' . Yii::$app->params['module']['user']['path'] . $user->id . '/' . $passport->ejd_file]),
+            //Url::to(['/' . Yii::$app->params['module']['user']['path'] . $user->id . '/' . $passport->ejd_file]),
+            Url::to(['/jk/order/' . $user->id . '/acs-ctrl?model=user&field=ejd_file']),
             ['target' => '_blank']) : '',
     ];
 }
@@ -117,7 +121,8 @@ if ($passport->is_temporary_registered) {
         'format' => 'raw',
         'value' => ($passport->temporary_registration_file) ? Html::a(
             Icon::show('file-pdf') . $passport->attributeLabels()['temporary_registration_file'],
-            Url::to(['/' . Yii::$app->params['module']['user']['path'] . $user->id . '/' . $passport->temporary_registration_file]),
+            //Url::to(['/' . Yii::$app->params['module']['user']['path'] . $user->id . '/' . $passport->temporary_registration_file]),
+            Url::to(['/jk/order/' . $user->id . '/acs-ctrl?model=user&field=temporary_registration_file']),
             ['target' => '_blank']) : '',
     ];
 }
@@ -145,7 +150,8 @@ if ($model->resident_own_type == 3) {
         'format' => 'raw',
         'value' => ($model->file_rent) ? Html::a(
             Icon::show('file-pdf') . $model->attributeLabels()['file_rent'],
-            Url::to(['/' . Yii::$app->params['module']['jk']['order']['filePath'] . $model->id . '/' . $model->file_rent]),
+            //Url::to(['/' . Yii::$app->params['module']['jk']['order']['filePath'] . $model->id . '/' . $model->file_rent]),
+            Url::to(['/jk/order/' . $model->id . '/acs-ctrl?model=order&field=file_rent']),
             ['target' => '_blank']) : '',
     ];
 } elseif ($model->resident_own_type == 4) {
@@ -154,7 +160,8 @@ if ($model->resident_own_type == 3) {
         'format' => 'raw',
         'value' => ($model->file_social_contract) ? Html::a(
             Icon::show('file-pdf') . $model->attributeLabels()['file_social_contract'],
-            Url::to(['/' . Yii::$app->params['module']['jk']['order']['filePath'] . $model->id . '/' . $model->file_social_contract]),
+            //Url::to(['/' . Yii::$app->params['module']['jk']['order']['filePath'] . $model->id . '/' . $model->file_social_contract]),
+            Url::to(['/jk/order/' . $model->id . '/acs-ctrl?model=order&field=file_social_contract']),
             ['target' => '_blank']) : '',
     ];//viewFieldFile($model, 'file_social_contract', Yii::$app->params['module']['jk']['order']['filePath'] . $model->id . '/' . $model->file_social_contract);
 }
