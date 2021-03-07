@@ -12,7 +12,7 @@ function filePath($model, $attr)
 {
     return ($model->{$attr}) ? Html::a(
         Icon::show('file-pdf') . $model->attributeLabels()[$attr],
-        Url::to(['/' . Yii::$app->params['module']['jk']['order']['filePath'] . $model->id . '/' . $model->{$attr}]),
+        Url::to(['/jk/order/' . $model->id . '/acs-ctrl?model=order&field=' . $attr]),
         ['target' => '_blank']) : '';
 }
 

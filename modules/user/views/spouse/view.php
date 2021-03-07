@@ -41,21 +41,26 @@ $this->params['breadcrumbs'][] = $this->title;
                             'value' => Spouse::getTypeList()[$model->type],
                         ],
                         'fio',
-                        viewFieldFile($model, 'marriage_file', ['/' . Yii::$app->params['module']['spouse']['filePath'] . $model->id . '/' . $model->marriage_file]),
+                        viewFieldFile($model, 'marriage_file', ['/jk/order/' . $model->id . '/acs-ctrl?model=spouse&field=marriage_file']),
                         'passport_registration',
                         'passport_series',
                         'passport_number',
                         'passport_date:date',
                         'passport_department',
-                        'passport_code',
-                        viewFieldFile($model, 'passport_file', ['/' . Yii::$app->params['module']['spouse']['filePath'] . $model->id . '/' . $model->passport_file]),
+                        viewFieldFile($model, 'passport_file', ['/jk/order/' . $model->id . '/acs-ctrl?model=spouse&field=passport_file']),
 
                     ];
+                    if (isset($model->passport_code) && $model->passport_code != '') {
+                        $attr[] = [
+                            'attribute' => 'passport_code',
+                            'value' => $model->passport_code
+                        ];
+                    }
                     if (isset($model->registration_file)) {
-                        $attr[] = viewFieldFile($model, 'registration_file', ['/' . Yii::$app->params['module']['spouse']['filePath'] . $model->id . '/' . $model->registration_file]);
+                        $attr[] = viewFieldFile($model, 'registration_file', ['/jk/order/' . $model->id . '/acs-ctrl?model=spouse&field=registration_file']);
                     }
                     if (isset($model->edj_file)) {
-                        $attr[] = viewFieldFile($model, 'edj_file', ['/' . Yii::$app->params['module']['spouse']['filePath'] . $model->id . '/' . $model->edj_file]);
+                        $attr[] = viewFieldFile($model, 'edj_file', ['/jk/order/' . $model->id . '/acs-ctrl?model=spouse&field=edj_file']);
                     }
                     $attr[] = [
                         'attribute' => 'is_work',
@@ -76,9 +81,9 @@ $this->params['breadcrumbs'][] = $this->title;
                         }
                     } else {
                         array_push($attr,
-                            viewFieldFile($model, 'work_file', ['/' . Yii::$app->params['module']['spouse']['filePath'] . $model->id . '/' . $model->work_file]),
-                            viewFieldFile($model, 'unemployment_file', ['/' . Yii::$app->params['module']['spouse']['filePath'] . $model->id . '/' . $model->unemployment_file]),
-                            viewFieldFile($model, 'explanatory_note_file', ['/' . Yii::$app->params['module']['spouse']['filePath'] . $model->id . '/' . $model->explanatory_note_file])
+                            viewFieldFile($model, 'work_file', ['/jk/order/' . $model->id . '/acs-ctrl?model=spouse&field=work_file']),
+                            viewFieldFile($model, 'unemployment_file', ['/jk/order/' . $model->id . '/acs-ctrl?model=spouse&field=unemployment_file']),
+                            viewFieldFile($model, 'explanatory_note_file', ['/jk/order/' . $model->id . '/acs-ctrl?model=spouse&field=explanatory_note_file'])
                         );
                     }
                 ?>

@@ -9,14 +9,14 @@ $attr = [
     'money_summa_year:currency',
     'money_month_pay:currency',
     'money_user_pay:currency',
-    viewFieldFile($model, 'ndfl2_file', ['/' . Yii::$app->params['module']['jk']['order']['filePath'] . $model->id . '/' . $model->ndfl2_file]),
-    viewFieldFile($model, 'spravka_zp_file', ['/' . Yii::$app->params['module']['jk']['order']['filePath'] . $model->id . '/' . $model->spravka_zp_file]),
-    viewFieldFile($model, 'other_income_file', ['/' . Yii::$app->params['module']['jk']['order']['filePath'] . $model->id . '/' . $model->other_income_file]),
+    viewFieldFile($model, 'ndfl2_file', ['/jk/order/' . $model->id . '/acs-ctrl?model=order&field=ndfl2_file']),
+    viewFieldFile($model, 'spravka_zp_file', ['/jk/order/' . $model->id . '/acs-ctrl?model=order&field=spravka_zp_file']),
+    viewFieldFile($model, 'other_income_file', ['/jk/order/' . $model->id . '/acs-ctrl?model=order&field=other_income_file']),
 ];
 if ($spouse) {
     array_push($attr,
-        viewFieldFile($spouse, 'ndfl2_file', ['/' . Yii::$app->params['module']['spouse']['filePath'] . $spouse->id . '/' . $spouse->ndfl2_file]),
-        viewFieldFile($spouse, 'salary_file', ['/' . Yii::$app->params['module']['spouse']['filePath'] . $spouse->id . '/' . $spouse->salary_file])
+        viewFieldFile($spouse, 'ndfl2_file', ['/jk/order/' . $spouse->id . '/acs-ctrl?model=spouse&field=ndfl2_file']),
+        viewFieldFile($spouse, 'salary_file', ['/jk/order/' . $spouse->id . '/acs-ctrl?model=spouse&field=salary_file'])
     );
 }
 ?>

@@ -270,3 +270,9 @@ class Agreement extends Model
             ->count();
     }
 }
+
+
+
+
+
+

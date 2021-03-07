@@ -18,7 +18,7 @@ if ($model->file_agree_personal_data) {
         'format' => 'raw',
         'value' => Html::a(
             Icon::show('file-pdf') . $model->attributeLabels()['file_agree_personal_data_form'],
-            Url::to(['/' . Yii::$app->params['module']['jk']['order']['filePath'] . $model->id . '/' . $model->file_agree_personal_data]),
+            Url::to(['/jk/order/' . $model->id . '/acs-ctrl?model=order&field=file_agree_personal_data']),
             ['target' => '_blank']),
     ];
 }
@@ -29,7 +29,7 @@ if ($spouse && $spouse->type == 1) {
             'format' => 'raw',
             'value' => Html::a(
                 Icon::show('file-pdf') . $spouse->attributeLabels()['personal_data_file'],
-                Url::to(['/' . Yii::$app->params['module']['spouse']['filePath'] . $spouse->id . '/' . $spouse->personal_data_file]),
+                Url::to(['/jk/order/' . $spouse->id . '/acs-ctrl?model=spouse&field=personal_data_file']),
                 ['target' => '_blank']),
         ];
     }
@@ -43,7 +43,7 @@ if (is_array($user->children) && count($user->children) > 0) {
                     'format' => 'raw',
                     'value' => Html::a(
                         Icon::show('file-pdf') . $child->attributeLabels()['file_personal'],
-                        Url::to(['/' . Yii::$app->params['module']['child']['filePath'] . $child->id . '/' . $child->file_personal]),
+                        Url::to(['/jk/order/' . $child->id . '/acs-ctrl?model=child&field=file_personal']),
                         ['target' => '_blank']),
                 ];
             }
@@ -56,7 +56,7 @@ if ($model->order_file) {
         'format' => 'raw',
         'value' => Html::a(
             Icon::show('file-pdf') . $model->attributeLabels()['order_file_form'],
-            Url::to(['/' . Yii::$app->params['module']['jk']['order']['filePath'] . $model->id . '/' . $model->order_file]),
+            Url::to(['/jk/order/' . $model->id . '/acs-ctrl?model=order&field=order_file']),
             ['target' => '_blank']),
     ];
 }
@@ -67,7 +67,7 @@ if (in_array($model->status_id,[Status::findOne(['code' => 'COMMISSION_YES'])->i
             'format' => 'raw',
             'value' => Html::a(
                 Icon::show('file-pdf') . $model->attributeLabels()['docs_egrn_file_form'],
-                Url::to(['/' . Yii::$app->params['module']['jk']['order']['filePath'] . $model->id . '/' . $model->docs_egrn_file]),
+                Url::to(['/jk/order/' . $model->id . '/acs-ctrl?model=order&field=docs_egrn_file']),
                 ['target' => '_blank']),
         ];
     }
@@ -77,7 +77,7 @@ if (in_array($model->status_id,[Status::findOne(['code' => 'COMMISSION_YES'])->i
             'format' => 'raw',
             'value' => Html::a(
                 Icon::show('file-pdf') . $model->attributeLabels()['docs_loan_agreement_file_form'],
-                Url::to(['/' . Yii::$app->params['module']['jk']['order']['filePath'] . $model->id . '/' . $model->docs_loan_agreement_file]),
+                Url::to(['/jk/order/' . $model->id . '/acs-ctrl?model=order&field=docs_loan_agreement_file']),
                 ['target' => '_blank']),
         ];
     }
@@ -87,7 +87,7 @@ if (in_array($model->status_id,[Status::findOne(['code' => 'COMMISSION_YES'])->i
             'format' => 'raw',
             'value' => Html::a(
                 Icon::show('file-pdf') . $model->attributeLabels()['docs_additional_agreement_file_form'],
-                Url::to(['/' . Yii::$app->params['module']['jk']['order']['filePath'] . $model->id . '/' . $model->docs_additional_agreement_file]),
+                Url::to(['/jk/order/' . $model->id . '/acs-ctrl?model=order&field=docs_additional_agreement_file']),
                 ['target' => '_blank']),
         ];
     }

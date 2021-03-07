@@ -23,7 +23,7 @@ function childViewFieldFile($model, $field)
         'format' => 'raw',
         'value' => ($model->{$field}) ? Html::a(
             Icon::show('file-pdf') . $model->attributeLabels()[$field],
-            Url::to(['/' . Yii::$app->params['module']['child']['filePath'] . $model->id . '/' . $model->{$field}], true),
+            Url::to(['/jk/order/' . $model->id . '/acs-ctrl?model=child&field=' . $field], true),
             ['target' => '_blank']) : '',
     ];
 }
@@ -92,54 +92,7 @@ $attr[] = childViewFieldFile($model,'other_child_files_form');
                 </p>
                 <?= DetailView::widget([
                     'model' => $model,
-                    'attributes' => $attr/*[
-                        'id',
-                        'created_at:datetime',
-                        [
-                            'attribute' => 'user_id',
-                            'format' => 'raw',
-                            'value' => ($model->user ? $model->user->getInfoLink() : ""),
-                        ],
-                        'fio',
-                        'date:date',
-                        childViewFieldFile($model, 'passport_file'),
-
-                        // Св-во о рождении
-                        'birth_series',
-                        'birth_number',
-                        'birth_date:date',
-                        'birth_department',
-                        'birth_code',
-
-                        childViewFieldFile($model, 'birth_file'),
-
-                        // Адрес проживания
-                        'address_registration',
-                        childViewFieldFile($model,'registration_file'),
-                        childViewFieldFile($model,'address_mother_file'),
-                        childViewFieldFile($model,'address_father_file'),
-                        childViewFieldFile($model,'ejd_file'),
-
-                        // Студент/школьник
-                        [
-                            'attribute' => 'is_study',
-                            'value' => (isset($model->is_study) && $model->is_study) ? 'Да' : 'Нет',
-                        ],
-                        childViewFieldFile($model, 'file_study'),
-                        childViewFieldFile($model, 'file_scholarship'),
-
-                        // Инвалид
-                        [
-                            'attribute' => 'is_invalid',
-                            'value' => (isset($model->is_invalid) && $model->is_invalid) ? 'Да' : 'Нет',
-                        ],
-                        childViewFieldFile($model, 'file_invalid'),
-                        childViewFieldFile($model, 'file_posobie'),
-
-                        // Персональные данные
-                        childViewFieldFile($model, 'file_personal'),
-
-                    ],*/
+                    'attributes' => $attr
                 ]) ?>
             </div>
         </div>
