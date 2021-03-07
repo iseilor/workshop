@@ -34,7 +34,10 @@ class m200419_221519_create_jk_order_agreement_table extends Migration
             'approval'=>$this->integer(),                   // Согласовано или нет
             'comment'=>$this->text(),                       // Комментарий при согласовании
         ], $tableOptions);
+
+        $this->execute(file_get_contents(__DIR__ . '/../sql/jk_order_agreement.sql'));
     }
+
 
     /**
      * {@inheritdoc}

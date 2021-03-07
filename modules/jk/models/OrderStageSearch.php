@@ -67,7 +67,7 @@ class OrderStageSearch extends OrderStage
             'status_id' => $this->status_id,
         ]);
 
-        $query->andFilterWhere(['like', 'order_id', $this->order_id])
+        $query->andFilterWhere(['=', 'order_id', $this->order_id])
             ->andFilterWhere(['like', 'comment', $this->comment]);
 
         return $dataProvider;

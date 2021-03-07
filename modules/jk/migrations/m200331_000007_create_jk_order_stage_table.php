@@ -45,6 +45,7 @@ class m200331_000007_create_jk_order_stage_table extends Migration
             ],
             $tableOptions
         );
+        $this->execute(file_get_contents(__DIR__ . '/../sql/jk_order_stage.sql'));
     }
 
     /**
