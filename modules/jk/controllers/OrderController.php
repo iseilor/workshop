@@ -953,11 +953,13 @@ class OrderController extends Controller
             }
 
             // Сохраняем в историю движения заявки
-            $orderStage = new OrderStage();
-            $orderStage->order_id = $id;
-            $orderStage->status_id = $newStatus->id;
-            $orderStage->comment = $newStatus->title;
-            $orderStage->save();
+            if ($newStatus->code!='CURATOR_CHECK'){
+                $orderStage = new OrderStage();
+                $orderStage->order_id = $id;
+                $orderStage->status_id = $newStatus->id;
+                $orderStage->comment = $newStatus->title;
+                $orderStage->save();
+            }
 
             return $this->redirect(['/jk/order/view/', 'id' => $id]);
         } else {
