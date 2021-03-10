@@ -82,7 +82,7 @@ foreach ($rfs as $rf) {
         'orderZaim' => Order::find()->where(['in', 'created_by', $userIds])->andWhere(['or', ['is_mortgage' => 0], ['is_mortgage' => null]])->count(),
         'orderAll' => Order::find()->where(['in', 'created_by', $userIds])->count(),
     ];
-    foreach ([1, 2, 5, 9] as $statusId) {
+    foreach ([1, 2, 5, 7, 9,15] as $statusId) {
         $data[$rf['id']]['orderPercent_' . $statusId] = Order::find()->where(['in', 'created_by', $userIds])->andWhere(['is_mortgage' => 1])
             ->andWhere(['status_id' => $statusId])->count();
         $data[$rf['id']]['orderZaim_' . $statusId] = Order::find()->where(['in', 'created_by', $userIds])->andWhere([
@@ -224,8 +224,8 @@ if ($messagesUser>0){
                             <th class="rotate" rowspan="2">
                                 <div>Займ</div>
                             </th>
-                            <th colspan="5" class="text-center">Компенсация %</th>
-                            <th colspan="5" class="text-center">Займ</th>
+                            <th colspan="7" class="text-center">Компенсация %</th>
+                            <th colspan="7" class="text-center">Займ</th>
                             <th rowspan="2" class="rotate">
                                 <div>Всего</div>
                             </th>
@@ -241,7 +241,13 @@ if ($messagesUser>0){
                                 <div>Проверка куратором</div>
                             </th>
                             <th class="rotate">
+                                <div>Возврат куратором</div>
+                            </th>
+                            <th class="rotate">
                                 <div>Согласование комиссией</div>
+                            </th>
+                            <th class="rotate">
+                                <div>Отменено инициатором</div>
                             </th>
                             <th class="rotate">
                                 <div>Всего<br/></div>
@@ -256,7 +262,13 @@ if ($messagesUser>0){
                                 <div>Проверка куратором</div>
                             </th>
                             <th class="rotate">
+                                <div>Возврат куратором</div>
+                            </th>
+                            <th class="rotate">
                                 <div>Согласование комиссией</div>
+                            </th>
+                            <th class="rotate">
+                                <div>Отменено инициатором</div>
                             </th>
                             <th class="rotate">
                                 <div>Всего<br/></div>
@@ -267,17 +279,21 @@ if ($messagesUser>0){
                         <?php foreach ($data as $row): ?>
                             <tr>
                                 <td class="text-left"><?= $row['rf'] ?></td>
-                                <td class="table-warning"><?= $row['percent'] ?></td>
-                                <td class="table-warning"><?= $row['zaim'] ?></td>
+                                <td class="table-info"><?= $row['percent'] ?></td>
+                                <td class="table-info"><?= $row['zaim'] ?></td>
                                 <td><?= $row['orderPercent_1'] ?></td>
                                 <td><?= $row['orderPercent_2'] ?></td>
                                 <td><?= $row['orderPercent_5'] ?></td>
-                                <td><?= $row['orderPercent_9'] ?>
+                                <td><?= $row['orderPercent_7'] ?></td>
+                                <td><?= $row['orderPercent_9'] ?></td>
+                                <td><?= $row['orderPercent_15'] ?></td>
                                 <td class="table-warning"><?= $row['orderPercent'] ?></td>
                                 <td><?= $row['orderZaim_1'] ?></td>
                                 <td><?= $row['orderZaim_2'] ?></td>
                                 <td><?= $row['orderZaim_5'] ?></td>
-                                <td><?= $row['orderZaim_9'] ?>
+                                <td><?= $row['orderZaim_7'] ?></td>
+                                <td><?= $row['orderZaim_9'] ?></td>
+                                <td><?= $row['orderZaim_15'] ?></td>
                                 <td class="table-warning"><?= $row['orderZaim'] ?></td>
                                 <td class="table-success"><?= $row['orderAll'] ?></td>
                             </tr>
