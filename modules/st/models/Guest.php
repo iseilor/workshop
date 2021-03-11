@@ -64,7 +64,6 @@ class Guest extends Model
                     'curator_id',
                     'guest_fio',
                     'guest_category',
-                    'guest_photo',
                     'date',
                     'title',
                     'annotation',
