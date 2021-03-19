@@ -1283,7 +1283,12 @@ class OrderController extends Controller
         $worksheet = $spreadsheet->getActiveSheet();
 
         // Формируем данные
-        $orders = Order::find()->published()->all();
+        if (Yii::$app->user->can('admin')){
+            $orders = Order::find()->published()->all();
+        }else{
+            $orders = Order::find()->access()->published()->all();
+        }
+
         $rowNum = 8;
         $num = 1;
 
