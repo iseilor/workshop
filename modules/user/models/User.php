@@ -54,8 +54,8 @@ use yii\helpers\Url;
  *
  * PASSPORT -------------------------------------------------------
  * @property Passport    $passport
- * @property int         $passport_series
- * @property int         $passport_number
+ * @property string         $passport_series
+ * @property string        $passport_number
  * @property int         $passport_date
  * @property string      $passport_code
  * @property string      $passport_department

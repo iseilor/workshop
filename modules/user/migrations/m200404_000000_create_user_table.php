@@ -63,8 +63,8 @@ class m200404_000000_create_user_table extends Migration
             'work_address' => $this->string(),
 
             // PASSPORT
-            'passport_series' => $this->integer(),
-            'passport_number' => $this->integer(),
+            'passport_series' => $this->string(),
+            'passport_number' => $this->string(),
             'passport_date' => $this->integer(),
             'passport_code' => $this->string(),
             'passport_department' => $this->string(),

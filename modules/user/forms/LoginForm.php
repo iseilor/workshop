@@ -94,8 +94,9 @@ class LoginForm extends Model
         }
 
         // Рекурсия через AD
-        $ad = new Ad();
+        /*$ad = new Ad();
         $ad->createUserByEmail(($this->username));
+        */
 
         return Yii::$app->user->login($this->getUser(), 3600 * 24 * 30);
     }
