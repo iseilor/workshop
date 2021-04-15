@@ -1,7 +1,9 @@
 <?php
 
+use app\components\grid\LinkColumn;
 use app\modules\kr\models\Block;
 use app\modules\kr\Module;
+use kartik\export\ExportMenu;
 use kartik\icons\Icon;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
@@ -25,33 +27,46 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="card-body">
 
-        <?php Pjax::begin(); ?>
 
-        <?= GridView::widget([
-            'dataProvider' => $dataProvider,
-            'filterModel' => $searchModel,
-            'pager' => [
-                'class' => 'app\widgets\LinkPager',
+        <?php
+
+        $gridColumns = [
+            ['class' => 'yii\grid\SerialColumn'],
+            'user.photoFioLabel:html',
+            'total',
+            [
+                'filter' => ArrayHelper::map(Block::find()->all(), 'id', 'title'),
+                'attribute' => 'blockTitle',
+                'value' => 'block.badge',
+                'format' => 'html',
             ],
-            'tableOptions' => [
-                'class' => 'table table-striped projects',
-                'style' => 'margin-bottom: 0'
-            ],
-            'columns' => [
-                ['class' => 'yii\grid\SerialColumn'],
-                'user.photoFioLabel:html',
-                'total',
-                [
-                    'filter' => ArrayHelper::map(Block::find()->all(), 'id', 'title'),
-                    'attribute' => 'blockTitle',
-                    'value' => 'block.badge',
-                    'format' => 'html',
+
+        ];
+        echo ExportMenu::widget(
+            [
+                'dataProvider' => $dataProvider,
+                'columns' => $gridColumns,
+            ]
+        );
+
+        Pjax::begin(['timeout' => false]);
+        echo \kartik\grid\GridView::widget(
+            [
+                'dataProvider' => $dataProvider,
+                'filterModel' => $searchModel,
+                'columns' => $gridColumns,
+                'tableOptions' => [
+                    'class' => 'table table-striped projects',
+                    'style' => 'margin-bottom: 0',
                 ],
-                //'created_at:date'
-            ],
-        ]); ?>
+                'pager' => [
+                    'class' => 'app\widgets\LinkPager',
+                ],
+            ]
+        );
+        Pjax::end();
+        ?>
 
-        <?php Pjax::end(); ?>
 
     </div>
 </div>

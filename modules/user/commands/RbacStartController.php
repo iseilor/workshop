@@ -1,5 +1,10 @@
 <?php
-
+/***
+ * Команды в консоли:
+ * php yii migrate --migrationsPath=@yii/rbac/migrations
+ * php yii user/rbac-start/init
+ * php yii user/rbac-start/set
+ */
 namespace app\modules\user\commands;
 
 use Yii;
