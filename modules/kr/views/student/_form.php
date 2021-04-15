@@ -2,6 +2,7 @@
 
 use kartik\icons\Icon;
 use vova07\imperavi\Widget;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -18,22 +19,25 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
     <div class="card-body">
-
-
-        <?= $form->field($model, 'total')->textInput(['maxlength' => true]) ?>
-        <?= $form->field($model, 'description')->widget(
-            Widget::class,
-            [
-                'settings' => [
-                    'lang' => 'ru',
-                    'minHeight' => 200,
-                    'plugins' => [
-                        'clips',
-                        'fullscreen',
-                    ],
-                ],
-            ]
-        ); ?>
+        <div class="row">
+            <div class="col-6"><?= $form->field($model, 'total')->textInput(['maxlength' => true]) ?></div>
+            <div class="col-6"><?= $form->field($model, 'block_id')->dropDownList(ArrayHelper::map(\app\modules\kr\models\Block::find()->all(), 'id', 'title')); ?></div>
+            <div class="col-12">
+                <?= $form->field($model, 'description')->widget(
+                    Widget::class,
+                    [
+                        'settings' => [
+                            'lang' => 'ru',
+                            'minHeight' => 200,
+                            'plugins' => [
+                                'clips',
+                                'fullscreen',
+                            ],
+                        ],
+                    ]
+                ); ?>
+            </div>
+        </div>
 
         <div class="card-footer">
             <?= Html::submitButton(Icon::show('save') . Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
