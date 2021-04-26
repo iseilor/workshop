@@ -84,7 +84,7 @@ $jp_date_max = date("Y");
                     [
                         'language' => 'ru',
                         'dateFormat' => 'dd.MM.yyyy',
-                        'options' => ['class' => 'form-control inputmask-date'],
+                        'options' => ['class' => 'form-control inputmask-date', 'required' => ($is_new_building == '' && $model->is_mortgage == 1)],
                         'clientOptions' => [
                             'changeMonth' => true,
                             'yearRange' => "2000:2050",
@@ -99,10 +99,7 @@ $jp_date_max = date("Y");
                                 } else {
                                     selected = new Date();
                                 }
-                                
-                 
-                             }"),
-                            'required' => ($is_new_building == '' && $model->is_mortgage == 1),
+                             }")
                         ],
                     ]
                 ) ?>
@@ -250,6 +247,7 @@ $(document).ready(function() {
             
             if ($('#order-is_new_building').prop('checked')==true && $('#order-is_mortgage').val() == 0) {
                 $('.new_building').addClass('d-none');
+                $('#order-jp_date').attr('required', false);
             }
             
             if ($('#order-under_construction').prop('checked')==true && $('#order-is_mortgage').val() == 0){
@@ -272,6 +270,7 @@ $(document).ready(function() {
             if ($('#order-is_mortgage').val() == 1) {
                 if ($('#order-is_new_building').prop('checked')==true){
                     $('.new_building').removeClass('d-none');
+                    $('#order-jp_date').attr('required', true);
                 }
                 if (!$('.field-order-jp_dogovor_buy_file_form label[for=exampleInputFile]').html()) {
                     //$('.field-order-jp_dogovor_buy_file_form').addClass('required');
@@ -300,6 +299,7 @@ $(document).ready(function() {
         if ($(this).prop('checked')==true){
             if ($('#order-is_mortgage').val() == 1) {
                 $('.new_building').removeClass('d-none');
+                $('#order-jp_date').attr('required', true);
             }
             $('.field-order-jp_act_file_form').addClass('d-none');
             $('.field-order-jp_egrp_file_form').addClass('d-none');
@@ -307,6 +307,9 @@ $(document).ready(function() {
             //$('.field-order-jp_egrp_file_form').removeClass('required');
             $('#order-jp_egrp_file_form').attr('required', false);
         } else {
+            if ($('#order-is_mortgage').val() == 1) {
+                $('#order-jp_date').attr('required', false);
+            }
             $('.field-order-jp_act_file_form').removeClass('d-none');
             $('.field-order-jp_egrp_file_form').removeClass('d-none');
             $('.new_building').addClass('d-none');
