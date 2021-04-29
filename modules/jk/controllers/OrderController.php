@@ -1272,7 +1272,7 @@ class OrderController extends Controller
     {
 
         // Шаблон
-        $templatePath = Yii::getAlias('@app') . '/modules/jk/files/excel_example.xlsx';
+        $templatePath = Yii::getAlias('@app') . '/modules/jk/files/orders.xlsx';
 
         // Сюда складываем все выгрузки
         $dirPath = 'files/jk/excel/';
@@ -1292,7 +1292,7 @@ class OrderController extends Controller
 
         // Категория работинка
 
-        $rowNum = 8;
+        $rowNum = 4;
         $num = 1;
 
         foreach ($orders as $order) {
