@@ -47,6 +47,8 @@ class m200331_000008_create_jk_zaim_table extends Migration
             'compensation_years'=> $this->integer()->notNull(),
 
         ], $tableOptions);
+
+        $this->execute(file_get_contents(__DIR__ . '/../sql/jk_zaim.sql'));
     }
 
     /**

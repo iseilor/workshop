@@ -670,6 +670,36 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
         return $childsCount;
     }
 
+    // Кол-во детей-инвалидов
+    public function getChildsInvalidCount()
+    {
+        return Child::find()->where(['user_id' => $this->id])->andWhere(['deleted_at' => null])->andWhere(['is_invalid' => 1])->count();
+    }
+
+    // Кол-во детей-студентов и школьников
+    public function getChildsStudyCount()
+    {
+        return Child::find()->where(['user_id' => $this->id])->andWhere(['deleted_at' => null])->andWhere(['is_study' => 1])->count();
+    }
+
+    // Баллы за семейное положение: 1 - наличие семьи, 2 - родитель одиночка
+    public function getFamilyPoint(){
+        $point = 0;
+
+        // Наличии семьи
+        if ($this->getFamilyMembersCount()>1){
+            $point = 1;
+
+            // Родитель одиночка
+            if (!$this->getSpouse()){
+                $point = 2;
+            }
+        }
+        return $point;
+    }
+
+
+
     public function getRetirementDate()
     {
         $rt = null;
@@ -696,6 +726,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
         return false;
     }
 
+    // Кол-во членов семьи
     public function getFamilyMembersCount()
     {
         $members = 1;

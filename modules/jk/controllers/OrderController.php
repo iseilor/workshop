@@ -2,6 +2,7 @@
 
 namespace app\modules\jk\controllers;
 
+use PhpOffice\PhpWord\Element\AbstractElement;
 use yii\helpers\ArrayHelper;
 use app\modules\jk\models\Agreement;
 use app\modules\jk\models\Min;
@@ -1289,11 +1290,13 @@ class OrderController extends Controller
             $orders = Order::find()->access()->published()->all();
         }
 
+        // Категория работинка
+
         $rowNum = 8;
         $num = 1;
 
         foreach ($orders as $order) {
-            $worksheet->getCell('A' . $rowNum)->setValue($num);
+            $worksheet->getCell('A' . $rowNum)->setValue($num.' / '.$order->id);
             $worksheet->getCell('B' . $rowNum)->setValue($order->createdUser->filial->title);
             $worksheet->getCell('C' . $rowNum)->setValue($order->createdUser->tab_number);
             $worksheet->getCell('D' . $rowNum)->setValue($order->createdUser->fio);
@@ -1303,21 +1306,21 @@ class OrderController extends Controller
             $worksheet->getCell('H' . $rowNum)->setValue($order->createdUser->years);
             $worksheet->getCell('I' . $rowNum)->setValue($order->createdUser->gender ? 'М' : 'Ж');
             $worksheet->getCell('J' . $rowNum)->setValue($order->createdUser->pensionDate);
-            $worksheet->getCell('K' . $rowNum)->setValue(''); // Дата приёма на работу
+            $worksheet->getCell('K' . $rowNum)->setValue('Брать из R12'); // Дата приёма на работу
             $worksheet->getCell('L' . $rowNum)->setValue(Yii::$app->formatter->format($order->created_at, 'date'));
             $worksheet->getCell('M' . $rowNum)->setValue($order->createdUser->experience);
             $worksheet->getCell('N' . $rowNum)->setValue($order->createdUser->experiencePoints);
             $worksheet->getCell('O' . $rowNum)->setValue('Нет');
             $worksheet->getCell('P' . $rowNum)->setValue(0);
             $worksheet->getCell('Q' . $rowNum)->setValue('Нет');
-            $worksheet->getCell('R' . $rowNum)->setValue('TODO'); // Молодой работник
-            $worksheet->getCell('S' . $rowNum)->setValue('TODO'); // Баллы за молодого
-            $worksheet->getCell('T' . $rowNum)->setValue($order->resident_count); // Кол-во членов семьи
+            $worksheet->getCell('R' . $rowNum)->setValue($order->getCategoryUser()); // Молодой работник
+            $worksheet->getCell('S' . $rowNum)->setValue($order->getCategoryUser()!='Нет'?'1':0); // Баллы за молодого
+            $worksheet->getCell('T' . $rowNum)->setValue($order->createdUser->familyMembersCount); // Кол-во членов семьи
 
             // Супруга
             $spouseType = $order->createdUser->spouseType;   // Наличие супруги
-            $spouseDO = '';
-            $spouseWork = '';
+            $spouseDO = 'Нет';
+            $spouseWork = 'Нет';
             if ($spouse = $order->createdUser->spouse) {
                 if ($spouseType == 'Да') {
                     $spouseDO = (isset($spouse->is_do) && $spouse->is_do) ? 'Да' : 'Нет';
@@ -1327,30 +1330,35 @@ class OrderController extends Controller
             $worksheet->getCell('U' . $rowNum)->setValue($spouseType);  // Наличие супруги
             $worksheet->getCell('V' . $rowNum)->setValue($spouseDO);    // Супруга в ДО
             $worksheet->getCell('W' . $rowNum)->setValue($spouseWork);  // Супруга официально работает
-            $worksheet->getCell('X' . $rowNum)->setValue('TODO'); // Баллы за семейное положение
+            $worksheet->getCell('X' . $rowNum)->setValue($order->createdUser->getFamilyPoint()); // Баллы за семейное положение
 
             // Дети
-            $worksheet->getCell('Y' . $rowNum)->setValue('TODO');
-            $worksheet->getCell('Z' . $rowNum)->setValue('TODO');
+            $worksheet->getCell('Y' . $rowNum)->setValue($order->createdUser->getChildsInvalidCount()); // Кол-во детей инвалидов
+            $worksheet->getCell('Z' . $rowNum)->setValue($order->createdUser->getChildsStudyCount()); // Кол-во детей студентов и школьников
             $worksheet->getCell('AA' . $rowNum)->setValue($order->createdUser->childsCount);    // Всего детей
+            $worksheet->getCell('AB' . $rowNum)->setValue($order->createdUser->childsCount);    // Баллы за наличие детей
 
             // Доходы
             $worksheet->getCell('AC' . $rowNum)->setValue(Yii::$app->formatter->asCurrency($order->money_summa_year));
-            $worksheet->getCell('AD' . $rowNum)->setValue(''); // Должностной оклад брать из 12
+            $worksheet->getCell('AD' . $rowNum)->setValue('Брать из R12');          // Должностной оклад брать из 12
+            $worksheet->getCell('AD' . $rowNum)->setValue('Брать из R12');          // Должностной оклад брать из 12
+            $worksheet->getCell('AE' . $rowNum)->setValue($order->moneyPoint);             // Баллы (доход на 1 члена семьи)
+            $worksheet->getCell('AF' . $rowNum)->setValue(Yii::$app->formatter->asCurrency($order->money_month_pay));        // Максимальная сумма ежемесячного платежа
 
             // Собственность в наличии
             $worksheet->getCell('AG' . $rowNum)->setValue($order->family_own);
             $worksheet->getCell('AH' . $rowNum)->setValue($order->jp_total_area);
-            $worksheet->getCell('AI' . $rowNum)->setValue($order->jp_part);
-            $worksheet->getCell('AJ' . $rowNum)->setValue($order->is_mortgage);
+            $worksheet->getCell('AI' . $rowNum)->setValue($order->jp_part?:'0'); // Доля в собственности
+            $worksheet->getCell('AJ' . $rowNum)->setValue($order->is_mortgage); // Наличие ипотеки
+            $worksheet->getCell('AK' . $rowNum)->setValue($order->JPPoint); // Баллы (наличие ЖП в собственности)
 
-            //
-            $worksheet->getCell('AL' . $rowNum)->setValue('TODO'); // Соц.найм
-            $worksheet->getCell('AM' . $rowNum)->setValue('TODO'); // Условия проживания
+            // Условия проживания
+            $worksheet->getCell('AL' . $rowNum)->setValue('Нет'); // Соц.найм
+            $worksheet->getCell('AM' . $rowNum)->setValue($order->accommodations); // Условия проживания
             $worksheet->getCell('AN' . $rowNum)->setValue(Order::getResidentOwnTypeList()[$order->resident_own_type]); // Вид проживания
 
-            $worksheet->getCell('AO' . $rowNum)->setValue('TODO'); // Соц.найм
-            $worksheet->getCell('AP' . $rowNum)->setValue('TODO'); // Соц.найм
+            $worksheet->getCell('AO' . $rowNum)->setValue($order->resident_own_type); // Баллы (условия проживания)
+            $worksheet->getCell('AP' . $rowNum)->setValue('Нет'); // Прочее
             $worksheet->getCell('AQ' . $rowNum)->setValue($order->getCorpNorm()); // Корпоративная норма площади
 
             // Сведения о  жилом помещении, приобретаемом с помощью Общества
@@ -1362,17 +1370,26 @@ class OrderController extends Controller
             $worksheet->getCell('AV' . $rowNum)->setValue(($order->ipoteka_size>0)?Yii::$app->formatter->asCurrency($order->ipoteka_size):''); // Сумма имеющейся ипотеки
             $worksheet->getCell('AW' . $rowNum)->setValue($order->ipoteka_percent);   // Ставка по имеющейся ипотеке
 
-            $worksheet->getCell('AX' . $rowNum)->setValue($order->getLoanMaxVal());     // Размер займа
+            $worksheet->getCell('AX' . $rowNum)->setValue(Yii::$app->formatter->asCurrency($order->getLoanMaxVal()));     // Размер займа
             $worksheet->getCell('AY' . $rowNum)->setValue($order->getLoanPeriod());     // Срок возврата, лет
             $worksheet->getCell('AZ' . $rowNum)->setValue($order->getPcRate());         // Ставка компенсации %
             $worksheet->getCell('BA' . $rowNum)->setValue($order->getPcTerm());         // Срок выплаты компенсации
+            $worksheet->getCell('BB' . $rowNum)->setValue('=AO'.$rowNum.'+AK'.$rowNum.'+AE'.$rowNum.'+AB'.$rowNum.'+X'.$rowNum.'+S'.$rowNum.'+P'.$rowNum.'+N'.$rowNum);         // Срок выплаты
+            $worksheet->getCell('BC' . $rowNum)->setValue($order->ipoteka_grafic);         // Сумма процентов по графику платежей
+
+            $worksheet->getCell('BE' . $rowNum)->setValue(($order->ipoteka_percent)?round($order->corpNorm*$order->pcRate/$order->ipoteka_percent,3):'0'); // Итоговый коээфициент
+
 
             $worksheet->getCell('BD' . $rowNum)->setValue($order->createdUser->work_address);         // Адрес рабочего места
             $worksheet->getCell('BF' . $rowNum)->setValue(Yii::$app->formatter->asCurrency($order->getPcMaxVal()));         // Максимальная сумма компенсации процентов в год (расчетная)
             $worksheet->getCell('BG' . $rowNum)->setValue ((isset($order->createdUser->is_do) && $order->createdUser->is_do) ? 'Да' : 'Нет'); // Декретный отпуск
+            $worksheet->getCell('BH' . $rowNum)->setValue ('Брать из R12');
 
             $worksheet->getCell('BI' . $rowNum)->setValue(Yii::$app->formatter->format($order->ipoteka_last_date, 'date')); // Срок закрытия кредитного договора
-            //$worksheet->getCell('BJ' . $rowNum)->setValue(Order::getIpotekaTargetName($order->id)); //
+            $worksheet->getCell('BJ' . $rowNum)->setValue(($order->ipoteka_target && $order->ipoteka_target<3)?Order::getIpotekaTargetList()[$order->ipoteka_target]:'Нет'); // Цель КД
+
+            $worksheet->getCell('BL' . $rowNum)->setValue ('Не указано'); // Расстояние до ЖП
+            $worksheet->getCell('BK' . $rowNum)->setValue ('Не указано'); // Расстояние до ЖП
 
             $rowNum++;
             $num++;

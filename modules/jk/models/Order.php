@@ -18,70 +18,70 @@ use yii\web\UploadedFile;
 /**
  * This is the model class for table "jk_order".
  *
- * @property int      $id
- * @property int      $created_at
- * @property int      $created_by
+ * @property int $id
+ * @property int $created_at
+ * @property int $created_by
  * @property int|null $updated_at
  * @property int|null $updated_by
  * @property int|null $deleted_at
  * @property int|null $deleted_by
- * @property int      $status_id
+ * @property int $status_id
  *
- * @property boolean  $is_participate
- * @property boolean  $agreement_ppd
- * @property boolean  $is_mortgage
- * @property int      $type
- * @property string   $order_file
+ * @property boolean $is_participate
+ * @property boolean $agreement_ppd
+ * @property boolean $is_mortgage
+ * @property int $type
+ * @property string $order_file
  *
- * @property int      $salarys
- * @property int      $jp_type
- * @property int      $jp_own
+ * @property int $salarys
+ * @property int $jp_type
+ * @property int $jp_own
  *
- * @property string   file_family_big
- * @property string   file_social_protection
- * @property string   file_rent
- * @property string   file_social_contract
+ * @property string file_family_big
+ * @property string file_social_protection
+ * @property string file_rent
+ * @property string file_social_contract
  *
- * @property double   ipoteka_percent
- * @property string   ipoteka_file_dogovor
- * @property string   ipoteka_file_dogovor_form
- * @property string   ipoteka_file_grafic_first
- * @property string   ipoteka_file_refin_grafic_first
- * @property string   ipoteka_file_grafic_now
- * @property string   ipoteka_file_refenance
- * @property string   ipoteka_file_spravka
- * @property string   ipoteka_file_bank_approval
+ * @property double ipoteka_percent
+ * @property string ipoteka_file_dogovor
+ * @property string ipoteka_file_dogovor_form
+ * @property string ipoteka_file_grafic_first
+ * @property string ipoteka_file_refin_grafic_first
+ * @property string ipoteka_file_grafic_now
+ * @property string ipoteka_file_refenance
+ * @property string ipoteka_file_spravka
+ * @property string ipoteka_file_bank_approval
  *
- * @property double   money_oklad
- * @property string   ndfl2_file
- * @property boolean  is_do
- * @property string   spravka_zp_file
- * @property double   money_summa_year
- * @property double   money_nalog_year
- * @property double   money_month_pay
- * @property double   money_user_pay
- * @property string   other_income_file
- * @property string   docs_egrn_file
- * @property string   docs_loan_agreement_file
- * @property string   docs_additional_agreement_file
+ * @property double money_oklad
+ * @property string ndfl2_file
+ * @property boolean is_do
+ * @property string spravka_zp_file
+ * @property double money_summa_year
+ * @property double money_nalog_year
+ * @property double money_month_pay
+ * @property double money_user_pay
+ * @property string other_income_file
+ * @property string docs_egrn_file
+ * @property string docs_loan_agreement_file
+ * @property string docs_additional_agreement_file
  *
- * @property integer  $resident_own_type
- * @property boolean  $is_poor
+ * @property integer $resident_own_type
+ * @property boolean $is_poor
  *
  * Компенсация %
- * @property string   $pc_period          Период оказания МП
- * @property integer  $pc_term            Срок оказания МП
- * @property double   $pc_rate            Ставка компенсации %%
- * @property integer  $pc_max_value       Максимальная сумма компенсации %% в целом по ДС
- * @property integer  $pc_max_per_year    Максимальная сумма компенсации %% в год
+ * @property string $pc_period          Период оказания МП
+ * @property integer $pc_term            Срок оказания МП
+ * @property double $pc_rate            Ставка компенсации %%
+ * @property integer $pc_max_value       Максимальная сумма компенсации %% в целом по ДС
+ * @property integer $pc_max_per_year    Максимальная сумма компенсации %% в год
  *
  * Займ
- * @property integer  $loan_period        Срок оказания МП
- * @property integer  $loan_max_val       Максимальный размер займа
+ * @property integer $loan_period        Срок оказания МП
+ * @property integer $loan_max_val       Максимальный размер займа
  *
- * @property integer  $filling_step
+ * @property integer $filling_step
  *
- * @property User     $user
+ * @property User $user
  */
 class Order extends Model
 {
@@ -650,13 +650,17 @@ class Order extends Model
             'money_month_pay' => 'После оказания помощи совокупные среднемесячные платежи моей семьи по всем обязательствам, руб',
             'money_user_pay' => 'После оказания помощи совокупные мои платежи, руб',
 
-            'file_agree_personal_data_form' => 'Скачайте автоматически сформированный ' . Html::a(Icon::show('file-pdf') . 'бланк',
-                    Url::to(['/user/user/' . $this->created_by . '/pd']))
+            'file_agree_personal_data_form' => 'Скачайте автоматически сформированный ' . Html::a(
+                    Icon::show('file-pdf') . 'бланк',
+                    Url::to(['/user/user/' . $this->created_by . '/pd'])
+                )
                 . ', который нужно будет распечатать, подписать и прикрепить в поле',
 
             'order_file_form' => 'Вам необходимо обязательно сохранить все введенные вами данные, а затем скачать автоматически сформированное '
-                . Html::a(Icon::show('file-pdf') . 'Заявление',
-                    Url::to(['/jk/order/' . $this->id . '/order'])) . ', которое нужно распечатать, подписать и прикрепить в данное поле',
+                . Html::a(
+                    Icon::show('file-pdf') . 'Заявление',
+                    Url::to(['/jk/order/' . $this->id . '/order'])
+                ) . ', которое нужно распечатать, подписать и прикрепить в данное поле',
 
             'jp_own_land_file_form' => 'Собственниками (арендаторами) земельного участка, на котором будет осуществляться строительство дома, и в последующем собственниками дома могут выступать работники/или члены его семьи.',
             'jp_project_house_file_form' => 'Разрабатывает кандидат или специализированная организация',
@@ -692,7 +696,6 @@ class Order extends Model
     // Загрузка файлов
     public function upload()
     {
-
         // Создаём директорию для хранения файлов файлов
         $pathDir = Yii::$app->params['module']['jk']['order']['filePath'] . $this->id;
         FileHelper::createDirectory($pathDir, $mode = 0777, $recursive = true);
@@ -920,9 +923,7 @@ class Order extends Model
     // Предварительное сохранение
     public function beforeSave($insert)
     {
-
         if (parent::beforeSave($insert)) {
-
             // Сохраняем тип заявки
             if ($this->is_mortgage) {
                 $this->type = self::TYPE_PERCENT;
@@ -1094,7 +1095,6 @@ class Order extends Model
     // Получаем читабельный список семьи. Нужен при формировании заявления
     public function getFamilyList()
     {
-
         $list = '';
         $user = User::findOne($this->created_by);
 
@@ -1162,7 +1162,6 @@ class Order extends Model
     {
         if (isset($this->ipoteka_start_date) && isset($this->ipoteka_last_date)) {
             return intval(($this->ipoteka_last_date - $this->ipoteka_start_date) / (60 * 60 * 24 * 365));
-
         } else {
             return false;
         }
@@ -1228,7 +1227,6 @@ class Order extends Model
         $retRes = $userRetirementYear - $this->companyYear;
 
         return (integer)min(10, $ipotekaRes, $retRes);
-
     }
 
     // Ставка компенсации %%
@@ -1285,7 +1283,6 @@ class Order extends Model
         }
 
         return (integer)round($res, -3);
-
     }
     // *** *** *** *** *** ***
 
@@ -1418,7 +1415,6 @@ class Order extends Model
      */
     public function setNewStatus($newStatusCode)
     {
-
         // Сотрудник, создавший заявку
         $user = User::findOne($this->created_by);
 
@@ -1461,8 +1457,112 @@ class Order extends Model
                     ->setSubject($this->getEmailSubject("Повторное напоминание руководителю"))
                     ->send();
                 break;
-
         }
-
     }
+
+    // Возвращаем категорию автора заявки: Молодой работник, переведённый работник и т.д.
+    public function getCategoryUser()
+    {
+        $user = User::findOne($this->created_by);
+        $category = [];
+        if ($user->work_is_young) {
+            $category[] = 'Молодой работник';
+        }
+        if ($user->work_is_transferred) {
+            $category[] = 'Переведённый работник';
+        }
+        if ($this->is_poor) {
+            $category[] = 'Малоимущий работник';
+        }
+        if (count($category)) {
+            return implode(', ', $category);
+        } else {
+            return 'Нет';
+        }
+    }
+
+    // Баллы (доход на 1 члена семьи)
+    /*до 15 000 руб. - 5 баллов,
+        15 001-25 000 - 4 балла,
+        25 001-35 000 руб. - 3 балла,
+        35 001-55 000 руб. - 2 балла,
+        55 001-75 000 руб. - 1 балл,
+        более 75 000  руб. - 0 баллов*/
+    public function getMoneyPoint()
+    {
+        $point = 0;
+        if ($this->money_summa_year) {
+            if ($this->money_summa_year <= 15000) {
+                $point = 5;
+            } elseif ($this->money_summa_year <= 25000) {
+                $point = 4;
+            } elseif ($this->money_summa_year <= 35000) {
+                $point = 3;
+            } elseif ($this->money_summa_year <= 55000) {
+                $point = 2;
+            } elseif ($this->money_summa_year <= 75000) {
+                $point = 1;
+            }
+        }
+        return $point;
+    }
+
+    // Максимальная сумма ежемесячного платежа (руб.)*
+
+    /**
+     * формула: (среднемес.доход на 1 чл.семьи - прожиточный минимум (по проживанию))* кол-во чл.семьи
+     */
+    public function getMaxMoneyMonth()
+    {
+        $max = 0;
+        // TODO: Посчитать пока не можем, т.к. нет нигде привязки к регионам
+        return $max;
+    }
+
+    // Баллы (наличие ЖП в собственности)
+
+    /**
+     * Больше корпоративной нормы - 0 баллов,
+     * Меньше корпоративной нормы (без обременения) -  1 балл,
+     * Под залогом у банка - 2 балла,
+     * Отсутствие ЖП (доли в ЖП) в собственности - 3 балла
+     */
+    public function getJPPoint()
+    {
+        if ($this->jp_total_area > $this->getCorpNorm()) {
+            return 0;
+        }
+        if ($this->jp_total_area > 0) {
+            return 1;
+        } else {
+            return 3;
+        }
+    }
+
+    // Текущие условия проижвания семьи
+    public function getAccommodations()
+    {
+        return $this->family_address . ', ' .
+            mb_strtolower(Order::getResidentOwnTypeList()[$this->resident_own_type]) . ', кол-во комнат: ' .
+            $this->jp_room_count . ', собственность: ' .
+            mb_strtolower(Order::getJPTypeList()[$this->jp_type]) . ' ' .
+            $this->jp_area . 'м2, проживающих: ' .
+            $this->resident_count;
+    }
+
+
+    // живет отдельно с семьей - 1 балл, живет с родными
+    // аренда (при наличии собственной ЖП - 2 балла,
+    // аренда / аренда при наличии доли в собственной ЖП - 3 балла,
+    // коммуналка (общежитие)/ не соответствует нормам - 4 балла
+    public function getAccommodationsPoint()
+    {
+        return $this->family_address . ', ' .
+            mb_strtolower(Order::getResidentOwnTypeList()[$this->resident_own_type]) . ', кол-во комнат: ' .
+            $this->jp_room_count . ', собственность: ' .
+            mb_strtolower(Order::getJPTypeList()[$this->jp_type]) . ' ' .
+            $this->jp_area . 'м2, проживающих: ' .
+            $this->resident_count;
+    }
+
 }
