@@ -32,6 +32,9 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="card-body">
 
                 <a href="order/excel" class="btn btn-success"><?=Icon::show('file-excel')?>Выгрузить реестр</a>
+
+                <a href="order/excel2" class="btn btn-success d-none"><?=Icon::show('file-excel')?>Выгрузить реестр-2</a>
+
                 <?php
 
                 $gridColumns = [

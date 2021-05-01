@@ -30,6 +30,8 @@ class m200412_084008_create_jk_order_stop_table extends Migration
             'stop_id' => $this->integer()->notNull(),
             'comment' => $this->text()->notNull(),
         ], $tableOptions);
+
+        $this->execute(file_get_contents(__DIR__ . '/../sql/jk_order_stop.sql'));
     }
 
     /**
