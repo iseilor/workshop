@@ -1321,10 +1321,12 @@ class OrderController extends Controller
             $spouseType = $order->createdUser->spouseType;   // Наличие супруги
             $spouseDO = 'Нет';
             $spouseWork = 'Нет';
+            $spouseRtk = 'Нет';
             if ($spouse = $order->createdUser->spouse) {
                 if ($spouseType == 'Да') {
                     $spouseDO = (isset($spouse->is_do) && $spouse->is_do) ? 'Да' : 'Нет';
                     $spouseWork = (isset($spouse->is_work) && $spouse->is_work) ? 'Да' : 'Нет';
+                    $spouseRtk = (isset($spouse->is_rtk) && $spouse->is_rtk) ? 'Да' : 'Нет';
                 }
             }
             $worksheet->getCell('U' . $rowNum)->setValue($spouseType);  // Наличие супруги
@@ -1390,6 +1392,26 @@ class OrderController extends Controller
 
             $worksheet->getCell('BL' . $rowNum)->setValue ('Не указано'); // Расстояние до ЖП
             $worksheet->getCell('BK' . $rowNum)->setValue ('Не указано'); // Расстояние до ЖП
+
+            // Супруга
+            $worksheet->getCell('BQ' . $rowNum)->setValue ($spouseType); // Наличие
+            if ($spouse = $order->createdUser->spouse) {
+                if ($spouseType == 'Да') {
+                    $worksheet->getCell('BR' . $rowNum)->setValue ($spouse->fio); // ФИО
+                    $worksheet->getCell('BS' . $rowNum)->setValue ('Нет'); // Наличие временной регистрации
+                    $worksheet->getCell('BT' . $rowNum)->setValue ('Да'); // Совпадает с адресом регистрации работника
+                    $worksheet->getCell('BU' . $rowNum)->setValue ($spouse->passport_registration); // Адрес регистрации
+                    $worksheet->getCell('BV' . $rowNum)->setValue ('Нет'); // Иностранец
+                    $worksheet->getCell('BW' . $rowNum)->setValue ($spouse->passport_series); // Серия
+                    $worksheet->getCell('BX' . $rowNum)->setValue ($spouse->passport_number); // Номер
+                    $worksheet->getCell('BY' . $rowNum)->setValue ($spouse->passport_date); // Дата выдачи
+                    $worksheet->getCell('BZ' . $rowNum)->setValue ($spouse->passport_department); // Кем выдан
+                    $worksheet->getCell('CA' . $rowNum)->setValue ($spouse->passport_code); // Код подразделения
+                    $worksheet->getCell('CB' . $rowNum)->setValue ($spouseWork); // Официально работает
+                    $worksheet->getCell('CC' . $rowNum)->setValue ($spouseRtk); // Работает в обществе
+                    $worksheet->getCell('CD' . $rowNum)->setValue ($spouseDO); // Находится в декретном отпуске
+                }
+            }
 
             $rowNum++;
             $num++;
