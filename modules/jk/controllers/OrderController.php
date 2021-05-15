@@ -351,7 +351,7 @@ class OrderController extends Controller
         );
     }
 
-        /**
+    /**
      * Updates an existing Order model.
      * If update is successful, the browser will be redirected to the 'view' page.
      *
@@ -807,7 +807,7 @@ class OrderController extends Controller
                     'user' => $user,
                     'order' => $order,
                     'stage' => $orderStage,
-                    'filial'=> Rf::findOne($user->filial_id)
+                    'filial' => Rf::findOne($user->filial_id)
                 ]
             )
                 ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
@@ -954,7 +954,7 @@ class OrderController extends Controller
             }
 
             // Сохраняем в историю движения заявки
-            if ($newStatus->code!='CURATOR_CHECK'){
+            if ($newStatus->code != 'CURATOR_CHECK') {
                 $orderStage = new OrderStage();
                 $orderStage->order_id = $id;
                 $orderStage->status_id = $newStatus->id;
@@ -1284,9 +1284,9 @@ class OrderController extends Controller
         $worksheet = $spreadsheet->getActiveSheet();
 
         // Формируем данные
-        if (Yii::$app->user->can('admin')){
+        if (Yii::$app->user->can('admin')) {
             $orders = Order::find()->published()->all();
-        }else{
+        } else {
             $orders = Order::find()->access()->published()->all();
         }
 
@@ -1296,7 +1296,7 @@ class OrderController extends Controller
         $num = 1;
 
         foreach ($orders as $order) {
-            $worksheet->getCell('A' . $rowNum)->setValue($num.' / '.$order->id);
+            $worksheet->getCell('A' . $rowNum)->setValue($num . ' / ' . $order->id);
             $worksheet->getCell('B' . $rowNum)->setValue($order->createdUser->filial->title);
             $worksheet->getCell('C' . $rowNum)->setValue($order->createdUser->tab_number);
             $worksheet->getCell('D' . $rowNum)->setValue($order->createdUser->fio);
@@ -1314,7 +1314,7 @@ class OrderController extends Controller
             $worksheet->getCell('P' . $rowNum)->setValue(0);
             $worksheet->getCell('Q' . $rowNum)->setValue('Нет');
             $worksheet->getCell('R' . $rowNum)->setValue($order->getCategoryUser()); // Молодой работник
-            $worksheet->getCell('S' . $rowNum)->setValue($order->getCategoryUser()!='Нет'?'1':0); // Баллы за молодого
+            $worksheet->getCell('S' . $rowNum)->setValue($order->getCategoryUser() != 'Нет' ? '1' : 0); // Баллы за молодого
             $worksheet->getCell('T' . $rowNum)->setValue($order->createdUser->familyMembersCount); // Кол-во членов семьи
 
             // Супруга
@@ -1350,7 +1350,7 @@ class OrderController extends Controller
             // Собственность в наличии
             $worksheet->getCell('AG' . $rowNum)->setValue($order->family_own);
             $worksheet->getCell('AH' . $rowNum)->setValue($order->jp_total_area);
-            $worksheet->getCell('AI' . $rowNum)->setValue($order->jp_part?:'0'); // Доля в собственности
+            $worksheet->getCell('AI' . $rowNum)->setValue($order->jp_part ?: '0'); // Доля в собственности
             $worksheet->getCell('AJ' . $rowNum)->setValue($order->is_mortgage); // Наличие ипотеки
             $worksheet->getCell('AK' . $rowNum)->setValue($order->JPPoint); // Баллы (наличие ЖП в собственности)
 
@@ -1367,51 +1367,120 @@ class OrderController extends Controller
             $worksheet->getCell('AR' . $rowNum)->setValue($order->jp_new_area);     // Общая площадь
             $worksheet->getCell('AS' . $rowNum)->setValue(Yii::$app->formatter->asCurrency($order->jp_cost));       // Стоимость
             $worksheet->getCell('AT' . $rowNum)->setValue(Yii::$app->formatter->asCurrency($order->ipoteka_user));  // Собственные средства работника, тыс. руб.
-            $worksheet->getCell('AU' . $rowNum)->setValue(round($order->getCorporateAreaNormFactor(),3));  // Коэффициент учета корпоративной нормы площади
+            $worksheet->getCell('AU' . $rowNum)->setValue(round($order->getCorporateAreaNormFactor(), 3));  // Коэффициент учета корпоративной нормы площади
 
-            $worksheet->getCell('AV' . $rowNum)->setValue(($order->ipoteka_size>0)?Yii::$app->formatter->asCurrency($order->ipoteka_size):''); // Сумма имеющейся ипотеки
+            $worksheet->getCell('AV' . $rowNum)->setValue(($order->ipoteka_size > 0) ? Yii::$app->formatter->asCurrency($order->ipoteka_size) : ''); // Сумма имеющейся ипотеки
             $worksheet->getCell('AW' . $rowNum)->setValue($order->ipoteka_percent);   // Ставка по имеющейся ипотеке
 
             $worksheet->getCell('AX' . $rowNum)->setValue(Yii::$app->formatter->asCurrency($order->getLoanMaxVal()));     // Размер займа
             $worksheet->getCell('AY' . $rowNum)->setValue($order->getLoanPeriod());     // Срок возврата, лет
             $worksheet->getCell('AZ' . $rowNum)->setValue($order->getPcRate());         // Ставка компенсации %
             $worksheet->getCell('BA' . $rowNum)->setValue($order->getPcTerm());         // Срок выплаты компенсации
-            $worksheet->getCell('BB' . $rowNum)->setValue('=AO'.$rowNum.'+AK'.$rowNum.'+AE'.$rowNum.'+AB'.$rowNum.'+X'.$rowNum.'+S'.$rowNum.'+P'.$rowNum.'+N'.$rowNum);         // Срок выплаты
+            $worksheet->getCell('BB' . $rowNum)->setValue('=AO' . $rowNum . '+AK' . $rowNum . '+AE' . $rowNum . '+AB' . $rowNum . '+X' . $rowNum . '+S' . $rowNum . '+P' . $rowNum . '+N' . $rowNum);         // Срок выплаты
             $worksheet->getCell('BC' . $rowNum)->setValue($order->ipoteka_grafic);         // Сумма процентов по графику платежей
 
-            $worksheet->getCell('BE' . $rowNum)->setValue(($order->ipoteka_percent)?round($order->corpNorm*$order->pcRate/$order->ipoteka_percent,3):'0'); // Итоговый коээфициент
+            $worksheet->getCell('BE' . $rowNum)->setValue(($order->ipoteka_percent) ? round($order->corpNorm * $order->pcRate / $order->ipoteka_percent, 3) : '0'); // Итоговый коээфициент
 
 
             $worksheet->getCell('BD' . $rowNum)->setValue($order->createdUser->work_address);         // Адрес рабочего места
             $worksheet->getCell('BF' . $rowNum)->setValue(Yii::$app->formatter->asCurrency($order->getPcMaxVal()));         // Максимальная сумма компенсации процентов в год (расчетная)
-            $worksheet->getCell('BG' . $rowNum)->setValue ((isset($order->createdUser->is_do) && $order->createdUser->is_do) ? 'Да' : 'Нет'); // Декретный отпуск
-            $worksheet->getCell('BH' . $rowNum)->setValue ('Брать из R12');
+            $worksheet->getCell('BG' . $rowNum)->setValue((isset($order->createdUser->is_do) && $order->createdUser->is_do) ? 'Да' : 'Нет'); // Декретный отпуск
+            $worksheet->getCell('BH' . $rowNum)->setValue('Брать из R12');
 
             $worksheet->getCell('BI' . $rowNum)->setValue(Yii::$app->formatter->format($order->ipoteka_last_date, 'date')); // Срок закрытия кредитного договора
-            $worksheet->getCell('BJ' . $rowNum)->setValue(($order->ipoteka_target && $order->ipoteka_target<3)?Order::getIpotekaTargetList()[$order->ipoteka_target]:'Нет'); // Цель КД
+            $worksheet->getCell('BJ' . $rowNum)->setValue(($order->ipoteka_target && $order->ipoteka_target < 3) ? Order::getIpotekaTargetList()[$order->ipoteka_target] : 'Нет'); // Цель КД
 
-            $worksheet->getCell('BL' . $rowNum)->setValue ('Не указано'); // Расстояние до ЖП
-            $worksheet->getCell('BK' . $rowNum)->setValue ('Не указано'); // Расстояние до ЖП
+            $worksheet->getCell('BL' . $rowNum)->setValue('Не указано'); // Расстояние до ЖП
+            $worksheet->getCell('BK' . $rowNum)->setValue('Не указано'); // Расстояние до ЖП
 
             // Супруга
-            $worksheet->getCell('BQ' . $rowNum)->setValue ($spouseType); // Наличие
+            $worksheet->getCell('BQ' . $rowNum)->setValue($spouseType); // Наличие
             if ($spouse = $order->createdUser->spouse) {
                 if ($spouseType == 'Да') {
-                    $worksheet->getCell('BR' . $rowNum)->setValue ($spouse->fio); // ФИО
-                    $worksheet->getCell('BS' . $rowNum)->setValue ('Нет'); // Наличие временной регистрации
-                    $worksheet->getCell('BT' . $rowNum)->setValue ('Да'); // Совпадает с адресом регистрации работника
-                    $worksheet->getCell('BU' . $rowNum)->setValue ($spouse->passport_registration); // Адрес регистрации
-                    $worksheet->getCell('BV' . $rowNum)->setValue ('Нет'); // Иностранец
-                    $worksheet->getCell('BW' . $rowNum)->setValue ($spouse->passport_series); // Серия
-                    $worksheet->getCell('BX' . $rowNum)->setValue ($spouse->passport_number); // Номер
-                    $worksheet->getCell('BY' . $rowNum)->setValue ($spouse->passport_date); // Дата выдачи
-                    $worksheet->getCell('BZ' . $rowNum)->setValue ($spouse->passport_department); // Кем выдан
-                    $worksheet->getCell('CA' . $rowNum)->setValue ($spouse->passport_code); // Код подразделения
-                    $worksheet->getCell('CB' . $rowNum)->setValue ($spouseWork); // Официально работает
-                    $worksheet->getCell('CC' . $rowNum)->setValue ($spouseRtk); // Работает в обществе
-                    $worksheet->getCell('CD' . $rowNum)->setValue ($spouseDO); // Находится в декретном отпуске
+                    $worksheet->getCell('BR' . $rowNum)->setValue($spouse->fio); // ФИО
+                    $worksheet->getCell('BS' . $rowNum)->setValue('Нет'); // Наличие временной регистрации
+                    $worksheet->getCell('BT' . $rowNum)->setValue('Да'); // Совпадает с адресом регистрации работника
+                    $worksheet->getCell('BU' . $rowNum)->setValue($spouse->passport_registration); // Адрес регистрации
+                    $worksheet->getCell('BV' . $rowNum)->setValue('Нет'); // Иностранец
+                    $worksheet->getCell('BW' . $rowNum)->setValue($spouse->passport_series); // Серия
+                    $worksheet->getCell('BX' . $rowNum)->setValue($spouse->passport_number); // Номер
+                    $worksheet->getCell('BY' . $rowNum)->setValue(Yii::$app->formatter->format($spouse->passport_date, 'date')); // Дата выдачи
+                    $worksheet->getCell('BZ' . $rowNum)->setValue($spouse->passport_department); // Кем выдан
+                    $worksheet->getCell('CA' . $rowNum)->setValue($spouse->passport_code); // Код подразделения
+                    $worksheet->getCell('CB' . $rowNum)->setValue($spouseWork); // Официально работает
+                    $worksheet->getCell('CC' . $rowNum)->setValue($spouseRtk); // Работает в обществе
+                    $worksheet->getCell('CD' . $rowNum)->setValue($spouseDO); // Находится в декретном отпуске
                 }
             }
+
+            // Дети
+            $childs = $order->createdUser->getChildren();
+
+            // Ребёнок 1
+            if (count($childs)>0) {
+                $child = $childs[0];
+                $worksheet->getCell('CE' . $rowNum)->setValue($child->fio); // ФИО
+                $worksheet->getCell('CF' . $rowNum)->setValue(Yii::$app->formatter->format($child->date, 'date')); // Дата рождения
+                $worksheet->getCell('CG' . $rowNum)->setValue('Нет'); // Иностранец
+                $worksheet->getCell('CH' . $rowNum)->setValue($child->birth_series); // Серия
+                $worksheet->getCell('CI' . $rowNum)->setValue($child->birth_number); // Номер
+                $worksheet->getCell('CJ' . $rowNum)->setValue(Yii::$app->formatter->format($child->birth_date, 'date')); // Дата выдачи
+                $worksheet->getCell('CK' . $rowNum)->setValue($child->birth_department); // Подразделение выдачи
+                $worksheet->getCell('CL' . $rowNum)->setValue('Сотрудника'); // Адрес регистрации совпадает
+                $worksheet->getCell('CM' . $rowNum)->setValue($child->address_registration); // Адрес регистрации
+                $worksheet->getCell('CN' . $rowNum)->setValue($child->passport_series); // Серия
+                $worksheet->getCell('CO' . $rowNum)->setValue($child->passport_number); // Номер
+                $worksheet->getCell('CP' . $rowNum)->setValue(Yii::$app->formatter->format($child->passport_date, 'date')); // Дата выдачи
+                $worksheet->getCell('CQ' . $rowNum)->setValue($child->passport_department); // Кем выдан
+                $worksheet->getCell('CR' . $rowNum)->setValue($child->passport_code); // Код подразделения
+                $worksheet->getCell('CS' . $rowNum)->setValue((isset($child->is_study) && $child->is_study) ? 'Да' : 'Нет'); // Ребёнок-студент
+                $worksheet->getCell('CT' . $rowNum)->setValue((isset($child->is_invalid) && $child->is_invalid) ? 'Да' : 'Нет'); // Ребёнок-инвалид
+            }
+
+            // Ребёнок 2
+            if (count($childs)>1) {
+                $child = $childs[1];
+                $worksheet->getCell('CU' . $rowNum)->setValue($child->fio); // ФИО
+                $worksheet->getCell('CV' . $rowNum)->setValue(Yii::$app->formatter->format($child->date, 'date')); // Дата рождения
+                $worksheet->getCell('CW' . $rowNum)->setValue('Нет'); // Иностранец
+                $worksheet->getCell('CX' . $rowNum)->setValue($child->birth_series); // Серия
+                $worksheet->getCell('CY' . $rowNum)->setValue($child->birth_number); // Номер
+                $worksheet->getCell('CZ' . $rowNum)->setValue(Yii::$app->formatter->format($child->birth_date, 'date')); // Дата выдачи
+                $worksheet->getCell('DA' . $rowNum)->setValue($child->birth_department); // Подразделение выдачи
+                $worksheet->getCell('DB' . $rowNum)->setValue('Сотрудника'); // Адрес регистрации совпадает
+                $worksheet->getCell('DC' . $rowNum)->setValue($child->address_registration); // Адрес регистрации
+                $worksheet->getCell('DD' . $rowNum)->setValue($child->passport_series); // Серия
+                $worksheet->getCell('DE' . $rowNum)->setValue($child->passport_number); // Номер
+                $worksheet->getCell('DF' . $rowNum)->setValue(Yii::$app->formatter->format($child->passport_date, 'date')); // Дата выдачи
+                $worksheet->getCell('DG' . $rowNum)->setValue($child->passport_department); // Кем выдан
+                $worksheet->getCell('DH' . $rowNum)->setValue($child->passport_code); // Код подразделения
+                $worksheet->getCell('DI' . $rowNum)->setValue((isset($child->is_study) && $child->is_study) ? 'Да' : 'Нет'); // Ребёнок-студент
+                $worksheet->getCell('DJ' . $rowNum)->setValue((isset($child->is_invalid) && $child->is_invalid) ? 'Да' : 'Нет'); // Ребёнок-инвалид
+            }
+
+            // Ребёнок 3
+            if (count($childs)>2) {
+                $child = $childs[2];
+                $worksheet->getCell('DK' . $rowNum)->setValue($child->fio); // ФИО
+                $worksheet->getCell('DL' . $rowNum)->setValue(Yii::$app->formatter->format($child->date, 'date')); // Дата рождения
+                $worksheet->getCell('DM' . $rowNum)->setValue('Нет'); // Иностранец
+                $worksheet->getCell('DN' . $rowNum)->setValue($child->birth_series); // Серия
+                $worksheet->getCell('DO' . $rowNum)->setValue($child->birth_number); // Номер
+                $worksheet->getCell('DP' . $rowNum)->setValue(Yii::$app->formatter->format($child->birth_date, 'date')); // Дата выдачи
+                $worksheet->getCell('DQ' . $rowNum)->setValue($child->birth_department); // Подразделение выдачи
+                $worksheet->getCell('DR' . $rowNum)->setValue('Сотрудника'); // Адрес регистрации совпадает
+                $worksheet->getCell('DS' . $rowNum)->setValue($child->address_registration); // Адрес регистрации
+                $worksheet->getCell('DT' . $rowNum)->setValue($child->passport_series); // Серия
+                $worksheet->getCell('DU' . $rowNum)->setValue($child->passport_number); // Номер
+                $worksheet->getCell('DV' . $rowNum)->setValue(Yii::$app->formatter->format($child->passport_date, 'date')); // Дата выдачи
+                $worksheet->getCell('DW' . $rowNum)->setValue($child->passport_department); // Кем выдан
+                $worksheet->getCell('DX' . $rowNum)->setValue($child->passport_code); // Код подразделения
+                $worksheet->getCell('DY' . $rowNum)->setValue((isset($child->is_study) && $child->is_study) ? 'Да' : 'Нет'); // Ребёнок-студент
+                $worksheet->getCell('DZ' . $rowNum)->setValue((isset($child->is_invalid) && $child->is_invalid) ? 'Да' : 'Нет'); // Ребёнок-инвалид
+            }
+
+
+
 
             $rowNum++;
             $num++;
@@ -1443,9 +1512,9 @@ class OrderController extends Controller
         $worksheet = $spreadsheet->getActiveSheet();
 
         // Формируем данные
-        if (Yii::$app->user->can('admin')){
+        if (Yii::$app->user->can('admin')) {
             $orders = Order::find()->published()->all();
-        }else{
+        } else {
             $orders = Order::find()->access()->published()->all();
         }
 
@@ -1467,10 +1536,10 @@ class OrderController extends Controller
             $worksheet->getCell('I' . $rowNum)->setValue($order->createdUser->work_address);
             $worksheet->getCell('J' . $rowNum)->setValue($order->createdUser->experience);
             $worksheet->getCell('K' . $rowNum)->setValue('Да');
-            $worksheet->getCell('L' . $rowNum)->setValue($order->createdUser->work_is_young?'Да':'Нет');
-            $worksheet->getCell('M' . $rowNum)->setValue($order->createdUser->work_is_transferred?'Да':'Нет');
+            $worksheet->getCell('L' . $rowNum)->setValue($order->createdUser->work_is_young ? 'Да' : 'Нет');
+            $worksheet->getCell('M' . $rowNum)->setValue($order->createdUser->work_is_transferred ? 'Да' : 'Нет');
             $worksheet->getCell('N' . $rowNum)->setValue('Нет');
-            $worksheet->getCell('O' . $rowNum)->setValue($order->is_poor?'Да':'Нет');
+            $worksheet->getCell('O' . $rowNum)->setValue($order->is_poor ? 'Да' : 'Нет');
 
 
             /*
@@ -1596,7 +1665,7 @@ class OrderController extends Controller
     {
         $params = Yii::$app->request->queryParams;
 
-        switch($params['model']) {
+        switch ($params['model']) {
             case 'order':
                 $order = $this->findModel($id);
                 $createdUser = $order->createdUser;
@@ -1632,7 +1701,7 @@ class OrderController extends Controller
             if (file_exists($file)) {
                 header('Content-Description: File Transfer');
                 header('Content-Type: application/octet-stream');
-                header('Content-Disposition: attachment; filename='.basename($file));
+                header('Content-Disposition: attachment; filename=' . basename($file));
                 header('Content-Transfer-Encoding: binary');
                 header('Expires: 0');
                 header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
