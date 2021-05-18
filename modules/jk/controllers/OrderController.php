@@ -811,7 +811,9 @@ class OrderController extends Controller
                 ]
             )
                 ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
-                ->setTo(YII_ENV_PROD ? $user->email : User::findOne(Yii::$app->user->identity->getId())->email)
+                // 18.05.2021 Рыбаков: независимо от PROD и TEST шлём письмо сотруднику, а не тестировщику
+                //->setTo(YII_ENV_PROD ? $user->email : User::findOne(Yii::$app->user->identity->getId())->email)
+                ->setTo($user->email)
                 ->setBcc(Yii::$app->params['supportEmail'])
                 ->setSubject("HR-портал / Жилищная Программа / Заявка №" . $order->id . " / " . $emailTitle . '.')
                 ->send();
