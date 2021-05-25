@@ -11,8 +11,10 @@ use app\modules\jk\models\Status;
 use yii\jui\DatePicker;
 use yii\widgets\MaskedInput;
 use app\modules\jk\models\Order;
+use yii\helpers\ArrayHelper;
 
 $user = User::findOne(Yii::$app->user->identity->id);
+$statuses = ['COMMISSION_YES', 'DOC', 'FINISH'];
 ?>
 
 <div class="alert alert-info alert-dismissible">
@@ -87,7 +89,7 @@ $user = User::findOne(Yii::$app->user->identity->id);
     </div>
 </div>
 
-<?php if (in_array($model->status_id,[Status::findOne(['code' => 'COMMISSION_YES'])->id])): ?>
+<?php if (in_array($model->status_id, ArrayHelper::getColumn(Status::find()->where(['in','code', $statuses])->all(), 'id'))): ?>
     <div class="card card-solid card-secondary  ">
         <div class="card-header with-border">
             <h3 class="card-title">Документы</h3>
