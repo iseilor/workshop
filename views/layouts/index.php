@@ -41,6 +41,7 @@ AppAssetAdminLTE::register($this);
         <?= $this->render('assets/sidebar'); ?>
 
         <div class="content-wrapper">
+
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
@@ -72,7 +73,6 @@ AppAssetAdminLTE::register($this);
                     <?= Alert::widget() ?>
 
                     <!-- Согласования про жилищной программе -->
-					
                     <?php if (!Yii::$app->user->isGuest && Agreement::orderCount()>0): ?>
                         <div class="alert alert-primary alert-dismissible">
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
